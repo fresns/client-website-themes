@@ -1,0 +1,29 @@
+{
+    "unikey": "ThemeFrame",
+    "name": "Theme Frame",
+    "description": "Fresns theme framework to showcase web-side functionality and interaction flow.",
+    "author": "Fresns",
+    "authorLink": "https://fresns.org",
+    "version": "2.0.0-alpha.5",
+    "functions": true,
+    "functionKeys": [
+        {
+            "itemKey": "fs_theme_is_email",
+            "itemType": "boolean",
+            "itemTag": "themes",
+            "isMultilingual": false
+        },
+        {
+            "itemKey": "fs_theme_is_sms",
+            "itemType": "boolean",
+            "itemTag": "themes",
+            "isMultilingual": false
+        },
+        {
+            "itemKey": "fs_theme_notifies",
+            "itemType": "array",
+            "itemTag": "themes",
+            "isMultilingual": false
+        }
+    ]
+}

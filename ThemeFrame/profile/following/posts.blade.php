@@ -1,0 +1,18 @@
+@extends('profile.profile')
+
+@section('list')
+    {{-- List --}}
+    <article class="py-4">
+        @foreach($posts as $post)
+            @component('components.post.list', compact('post'))@endcomponent
+            @if (! $loop->last)
+                <hr>
+            @endif
+        @endforeach
+    </article>
+
+    {{-- Pagination --}}
+    <div class="my-3">
+        {{ $posts->links() }}
+    </div>
+@endsection
