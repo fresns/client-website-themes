@@ -50,25 +50,6 @@ window.fs_lang = function (key, replace = {}) {
     return translation;
 }
 
-// lbs
-window.onError = function (error) {
-    switch (error.code) {
-        case 1:
-            window.tips(fs_lang('errorRejection'), 403);
-            break;
-        case 2:
-            window.tips(fs_lang('errorNoInfo'), 403);
-            break;
-        case 3:
-            window.tips(fs_lang('errorTimeout'), 403);
-            break;
-        case 4:
-            window.tips(fs_lang('errorUnknown'), 403);
-            break;
-    }
-    $("#nearby-posts").empty()
-}
-
 // tips
 window.tips = function (message, code = 200) {
     let html =
