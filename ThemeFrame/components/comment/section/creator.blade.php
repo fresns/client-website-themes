@@ -96,13 +96,24 @@
                 </div>
             @endif
 
+            {{-- IP Location --}}
+            @if (fs_api_config('account_ip_location_status'))
+                <span class="text-secondary ms-3">
+                    <i class="bi bi-geo"></i>
+                    @if ($ipLocation)
+                        {{ fs_lang('ipLocation').$ipLocation }}
+                    @else
+                        {{ fs_lang('errorIp') }}
+                    @endif
+                </span>
+            @endif
+
             {{-- Commenter Location --}}
             @if ($location['isLbs'])
-                <a href="{{ fs_route(route('fresns.post.location', [
-                    'mapId' => $location['mapId'],
-                    'mapLng' => $location['latitude'],
-                    'mapLat' => $location['longitude'],
-                ])) }}" class="link-secondary ms-2"><i class="bi bi-geo-alt-fill"></i>{{ $location['poi'] }}</a>
+                <a href="{{ fs_route(route('fresns.comment.location', [
+                    'cid' => $cid,
+                    'type' => 'posts',
+                ])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
             @endif
         </div>
     </div>

@@ -36,12 +36,14 @@
     {{-- Comment Author Information --}}
     <section class="content-creator order-0">
         @component('components.comment.section.creator', [
+            'cid' => $comment['cid'],
             'creator' => $comment['creator'],
             'isAnonymous' => $comment['isAnonymous'],
             'createTime' => $comment['createTime'],
             'createTimeFormat' => $comment['createTimeFormat'],
             'editTime' => $comment['editTime'],
             'editTimeFormat' => $comment['editTimeFormat'],
+            'ipLocation' => $post['ipLocation'],
             'location' => $comment['location'],
             'replyToUser' => $comment['replyToUser'],
         ])@endcomponent

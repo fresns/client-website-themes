@@ -36,12 +36,14 @@
     {{-- Post Author Information --}}
     <section class="content-creator order-0">
         @component('components.post.section.creator', [
+            'pid' => $post['pid'],
             'creator' => $post['creator'],
             'isAnonymous' => $post['isAnonymous'],
             'createTime' => $post['createTime'],
             'createTimeFormat' => $post['createTimeFormat'],
             'editTime' => $post['editTime'],
             'editTimeFormat' => $post['editTimeFormat'],
+            'ipLocation' => $post['ipLocation'],
             'location' => $post['location']
         ])@endcomponent
     </section>
