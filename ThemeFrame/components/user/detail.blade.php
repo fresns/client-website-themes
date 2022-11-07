@@ -43,6 +43,15 @@
     @endif
 </section>
 
+@if ($followersYouFollow)
+    <section class="text-center my-3">
+        @foreach($followersYouFollow as $friend)
+            <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $friend['fsid']])) }}">{{ $friend['nickname'] }}</a>@if (! $loop->last), @endif
+        @endforeach
+        {{ fs_lang('userFollowersYouKnow') }}
+    </section>
+@endif
+
 <section class="d-flex justify-content-center overflow-hidden mb-4">
     {{-- Like --}}
     @if ($user['interactive']['likeSetting'])
@@ -82,8 +91,8 @@
 
     {{-- Follow Status --}}
     @if ($user['interactive']['followMeStatus'] && $user['interactive']['followStatus'])
-        <span class="badge rounded-pill bg-secondary mt-1">{{ fs_lang('userFollowMutual') }}</span>
+        <span class="badge rounded-pill bg-secondary m-1">{{ fs_lang('userFollowMutual') }}</span>
     @elseif ($user['interactive']['followMeStatus'])
-        <span class="badge rounded-pill bg-secondary mt-1">{{ fs_lang('userFollowMe') }}</span>
+        <span class="badge rounded-pill bg-secondary m-1">{{ fs_lang('userFollowMe') }}</span>
     @endif
 </section>

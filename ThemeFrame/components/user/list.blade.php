@@ -39,7 +39,7 @@
             @if ($user['operations']['diversifyImages'])
                 <div class="user-icon d-flex flex-wrap flex-lg-nowrap overflow-hidden my-2 my-lg-0">
                     @foreach($user['operations']['diversifyImages'] as $icon)
-                        <img src="{{ $icon['icon'] }}" alt="{{ $icon['name'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $icon['name'] }}">
+                        <img src="{{ $icon['imageUrl'] }}" alt="{{ $icon['name'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $icon['name'] }}">
                     @endforeach
                 </div>
             @endif
@@ -90,9 +90,9 @@
 
             {{-- Follow Status --}}
             @if ($user['interactive']['followMeStatus'] && $user['interactive']['followStatus'])
-                <span class="badge rounded-pill bg-secondary mt-1">{{ fs_lang('userFollowMutual') }}</span>
+                <span class="badge rounded-pill bg-secondary m-1">{{ fs_lang('userFollowMutual') }}</span>
             @elseif ($user['interactive']['followMeStatus'])
-                <span class="badge rounded-pill bg-secondary mt-1">{{ fs_lang('userFollowMe') }}</span>
+                <span class="badge rounded-pill bg-secondary m-1">{{ fs_lang('userFollowMe') }}</span>
             @endif
         </footer>
     </div>
