@@ -1,6 +1,14 @@
 @extends('commons.fresns')
 
-@section('title', fs_db_config('menu_location_posts'))
+@php
+    $title = $archive['location']['poi'] ? $archive['location']['poi'].' - ' : '';
+@endphp
+
+@if ($type == 'posts')
+    @section('title', $title.fs_db_config('menu_location_posts'))
+@else
+    @section('title', $title.fs_db_config('menu_location_comments'))
+@endif
 
 @section('content')
     <main class="container-fluid">
@@ -12,19 +20,46 @@
 
             {{-- Middle Content --}}
             <div class="col-sm-6">
-                {{-- Post List --}}
+                {{-- Location Info --}}
+                <div class="alert alert-primary" role="alert">
+                    <i class="bi bi-geo-alt-fill"></i> {{ $archive['location']['poi'] ?? $archive['location']['latitude'].' / '.$archive['location']['longitude'] }}
+                </div>
+
+                {{-- List --}}
                 <article class="card clearfix">
-                    @foreach($posts as $post)
-                        @component('components.post.list', compact('post'))@endcomponent
-                        @if (! $loop->last)
-                            <hr>
-                        @endif
-                    @endforeach
+                    @if ($type == 'posts')
+                        {{-- Post List --}}
+                        @foreach($posts as $post)
+                            @component('components.post.list', compact('post'))@endcomponent
+                            @if (! $loop->last)
+                                <hr>
+                            @endif
+                        @endforeach
+                    @else
+                        {{-- Comment List --}}
+                        @foreach($comments as $comment)
+                            @component('components.comment.list', [
+                                'detailLink' => true,
+                                'sectionPost' => true,
+                                'sectionPreviews' => false,
+                                'sectionCreatorLiked' => false,
+                                'comment' => $comment,
+                            ])@endcomponent
+
+                            @if (! $loop->last)
+                                <hr>
+                            @endif
+                        @endforeach
+                    @endif
                 </article>
 
                 {{-- Pagination --}}
                 <div class="my-3">
-                    {{ $posts->links() }}
+                    @if ($type == 'posts')
+                        {{ $posts->links() }}
+                    @else
+                        {{ $comments->links() }}
+                    @endif
                 </div>
             </div>
 
