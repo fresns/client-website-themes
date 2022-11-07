@@ -24,7 +24,7 @@
             @endif
         @endif
         @if ($user['roleIconDisplay'] && $user['roleIcon'])
-            <img src="{{ $user['roleIcon'] }}" alt="Main Role" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['roleName'] }}">
+            <img src="{{ $user['roleIcon'] }}" alt="{{ $user['roleName'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['roleName'] }}">
         @endif
         @if ($user['roleNameDisplay'])
             <span class="badge text-bg-secondary">{{ $user['roleName'] }}</span>
@@ -35,9 +35,9 @@
 
     {{-- User Attachment Icons --}}
     @if ($user['operations']['diversifyImages'])
-        <div class="user-icon d-flex flex-wrap flex-lg-nowrap">
+        <div class="text-center">
             @foreach($user['operations']['diversifyImages'] as $icon)
-                <img src="{{ $icon['imageUrl'] }}" alt="{{ $icon['name'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $icon['name'] }}">
+                <img src="{{ $icon['imageUrl'] }}" alt="{{ $icon['name'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $icon['name'] }}" style="height:2rem">
             @endforeach
         </div>
     @endif

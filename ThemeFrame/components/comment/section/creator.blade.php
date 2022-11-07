@@ -36,7 +36,7 @@
                     </a>
                     <div class="user-role d-flex">
                         @if ($creator['roleIconDisplay'])
-                            <div class="user-role-icon"><img src="{{ $creator['roleIcon'] }}" alt="Main Role" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $creator['roleName'] }}"></div>
+                            <div class="user-role-icon"><img src="{{ $creator['roleIcon'] }}" alt="{{ $creator['roleName'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $creator['roleName'] }}"></div>
                         @endif
                         @if ($creator['roleNameDisplay'])
                             <div class="user-role-name"><span class="badge rounded-pill">{{ $creator['roleName'] }}</span></div>

@@ -9,7 +9,7 @@
             <section class="d-flex">
                 {{ $group['gname'] }}
                 @if ($group['recommend'])
-                    <img src="/assets/themes/ThemeFrame/images/icon-recommend.png" class="list-recommend" alt="Group Recommend">
+                    <img src="/assets/themes/ThemeFrame/images/icon-recommend.png" class="list-recommend" alt="{{ fs_lang('contentRecommend') }}">
                 @endif
             </section>
 
