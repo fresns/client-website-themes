@@ -93,7 +93,11 @@
             </p>
 
             @if ($notify['content'])
-                <a href="#" class="text-decoration-none text-secondary fs-6 mt-2">{{ $notify['content'] }}</a>
+                @if ($notify['actionCid'])
+                    <a href="{{ fs_route(route('fresns.comment.detail', ['cid' => $notify['actionCid']])) }}" class="text-decoration-none text-secondary fs-6 mt-2">{{ $notify['content'] }}</a>
+                @else
+                    <span class="text-secondary fs-6 mt-2">{{ $notify['content'] }}</span>
+                @endif
             @endif
         </section>
 
