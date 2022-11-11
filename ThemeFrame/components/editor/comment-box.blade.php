@@ -6,7 +6,7 @@
             <button type="button" class="btn-close"></button>
         </div>
         <div class="card-body">
-            <form method="post" class="form-comment-box" action="{{ route('fresns.api.editor.quick.publish', ['type' => 'comment']) }}" enctype="multipart/form-data">
+            <form class="form-comment-box" action="{{ route('fresns.api.editor.quick.publish', ['type' => 'comment']) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="editor-content">
                     <input type="hidden" name="commentPid" value="{{ $pid ?? "" }}">

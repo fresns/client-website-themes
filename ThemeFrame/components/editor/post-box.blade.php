@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <div class="fresns-editor fresns-editor-box">
-                    <form method="post" action="{{ fs_route(route('fresns.editor.quick.publish', ['type' => 'post'])) }}" multiple="true" enctype="multipart/form-data">
+                    <form class="form-post-box" action="{{ route('fresns.api.editor.quick.publish', ['type' => 'post']) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <input type="hidden" name="postGid" value="{{ fs_api_config('post_editor_group') ? $group ? $group['gid'] : '' : '' }}">
                         @if(fs_api_config('post_editor_group'))

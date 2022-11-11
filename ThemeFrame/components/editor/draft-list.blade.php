@@ -42,7 +42,7 @@
                         <a class="btn btn-outline-primary btn-sm" href="{{ fs_route(route('fresns.editor.edit', ['type' => $type, 'draftId' => $draft['id']])) }}" role="button">{{ fs_lang('edit') }}</a>
                         <a class="btn btn-link link-danger text-decoration-none api-request-link" href="#" data-method="DELETE" data-id="{{ $draft['id'] }}" data-action="{{ route('fresns.api.editor.delete', ['type' => 'post', 'draftId' => $draft['id']]) }}">{{ fs_lang('delete') }}</a>
                     @elseif ($draft['state'] == 2)
-                        <a class="btn btn-outline-success btn-sm web-request-link" href="#" data-method="PATCH" data-action="{{ fs_route(route('fresns.editor.recall', ['type' => $type, 'draftId' => $draft['id']])) }}">{{ fs_lang('recall') }}</a>
+                        <a class="btn btn-outline-success btn-sm api-request-link" href="#" data-method="PATCH" data-action="{{ route('fresns.api.editor.recall', ['type' => $type, 'draftId' => $draft['id']]) }}">{{ fs_lang('recall') }}</a>
                     @endif
                 </td>
             </tr>

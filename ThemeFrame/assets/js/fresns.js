@@ -463,6 +463,37 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         btn.children('.spinner-border').removeClass('d-none');
     });
 
+    // post box
+    $(".form-post-box").submit(function(e) {
+        e.preventDefault();
+        let form = $(this),
+            data = new FormData($(this)[0]),
+            btn = $(this).find('button[type="submit"]'),
+            actionUrl = $(this).attr('action');
+
+        $.ajax({
+            type: "POST",
+            url: actionUrl,
+            data: data, // serializes the form's elements.
+            processData: false,
+            cache: false,
+            contentType: false,
+            success: function (res) {
+                tips(res.message, res.code);
+                if (res.code != 0 || res.code == 38200) {
+                    window.tips(res.message);
+                    return
+                }
+                window.location.reload();
+            },
+            complete: function (e) {
+                btn.prop('disabled', false);
+                btn.find('.spinner-border').remove();
+            }
+        });
+    });
+
+    // comment box
     $(".form-comment-box").submit(function(e) {
         e.preventDefault();
         let form = $(this),
@@ -479,7 +510,13 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             cache: false,
             contentType: false,
             success: function (res) {
-                tips(res.message, res.code)
+                tips(res.message, res.code);
+                if (res.code == 38200) {
+                    window.tips(res.message);
+                    btn.prop('disabled', false);
+                    btn.find('.spinner-border').remove();
+                    return
+                }
                 if (fresnsReply.prev().find('.cm-count').length === 1) {
                     if (res.code === 0) {
                         let oldCount = fresnsReply.prev().find('.cm-count').text()
@@ -686,10 +723,15 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             data,
             success: function(res){
                 if (res.code === 0) {
-                    if ($("#"+ id).next().prop("nodeName") === "HR") {
-                        $("#"+ id).next().remove()
+                    if (id) {
+                        if ($("#"+ id).next().prop("nodeName") === "HR") {
+                            $("#"+ id).next().remove()
+                        }
+                        $("#"+ id).remove()
+                    } else {
+                        tips(res.message, res.code)
+                        window.location.reload();
                     }
-                    $("#"+ id).remove()
                 } else {
                     tips(res.message, res.code)
                 }
