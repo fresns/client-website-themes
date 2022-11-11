@@ -6,12 +6,11 @@
             <button type="button" class="btn-close"></button>
         </div>
         <div class="card-body">
-            <form method="post" class="form-comment-box" data-login-url="{{ fs_user()->check() ? '' : fs_route(route('fresns.account.login')) }}" action="{{ route('fresns.api.editor.direct.publish') }}" enctype="multipart/form-data">
+            <form method="post" class="form-comment-box" data-login-url="{{ fs_user()->check() ? '' : fs_route(route('fresns.account.login')) }}" action="{{ route('fresns.api.editor.quick.publish', ['type' => 'comment']) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="editor-content">
-                    <input type="hidden" name="type" value="{{ $type }}">
-                    <input type="hidden" name="commentCid" value="{{ $cid ?? "" }}">
                     <input type="hidden" name="commentPid" value="{{ $pid ?? "" }}">
+                    <input type="hidden" name="commentCid" value="{{ $cid ?? "" }}">
                     <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="content" rows="3" placeholder="{{ fs_lang('editorContent') }}"></textarea>
                     @if(fs_api_config('comment_editor_image'))
                         <div class="input-group mt-2">
@@ -21,9 +20,12 @@
                     @endif
                     <hr>
                     <div class="d-flex bd-highlight align-items-center">
+                        {{-- comment button --}}
                         <div class="bd-highlight me-auto">
                             <button type="submit" class="btn btn-success">{{ fs_api_config('publish_comment_name') }}</button>
                         </div>
+
+                        {{-- anonymous checkbox --}}
                         @if(fs_api_config('comment_editor_anonymous'))
                             <div class="bd-highlight">
                                 <div class="form-check">

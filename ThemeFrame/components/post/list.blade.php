@@ -283,8 +283,7 @@
         {{-- Comment reply box --}}
         @component('components.editor.comment-box', [
             'nickname' => $post['creator']['nickname'],
-            'type' => 'comment',
-            'pid' => $post['pid']
+            'pid' => $post['pid'],
         ])@endcomponent
     </section>
 </div>

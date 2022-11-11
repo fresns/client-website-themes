@@ -55,7 +55,6 @@
     {{-- Quick Post Box --}}
     @if (fs_user()->check())
         @component('components.editor.post-box', [
-            'type' => 'post',
             'group' => $group ?? null
         ])@endcomponent
     @endif

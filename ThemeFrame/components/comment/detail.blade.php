@@ -194,7 +194,6 @@
         {{-- Reply Box --}}
         @component('components.editor.comment-box', [
             'nickname' => $comment['creator']['nickname'],
-            'type' => 'comment',
             'pid' => $comment['post']['pid'],
             'cid' => $comment['cid'],
             'show' => true,
