@@ -119,6 +119,15 @@
                             @endif
                         </a>
 
+                        @if (fs_api_config('conversation_status'))
+                            <a href="{{ fs_route(route('fresns.message.index')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
+                                <i class="bi bi-envelope"></i>
+                                @if($userPanel['conversations']['unreadMessages'] > 0)
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ $userPanel['conversations']['unreadMessages'] }}</span>
+                                @endif
+                            </a>
+                        @endif
+
                         <div class="dropdown">
                             <button class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-caret-down-fill"></i></button>
                             <ul class="dropdown-menu dropdown-menu-end">
