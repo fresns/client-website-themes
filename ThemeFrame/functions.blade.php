@@ -46,39 +46,39 @@
 
                     {{-- Does the message page display --}}
                     <div class="row mb-4">
-                        <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['notifyConfig'] }}</label>
+                        <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['notificationConfig'] }}</label>
                         <div class="col-lg-10 mt-2">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="notify_systems" name="fs_theme_notifies[]" value="systems" {{ in_array('systems', $themeParams['fs_theme_notifies']['value'] ?? []) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="notify_systems">{{ $lang['notify_systems'] }}</label>
+                                <input class="form-check-input" type="checkbox" id="notification_systems" name="fs_theme_notifications[]" value="systems" {{ in_array('systems', $themeParams['fs_theme_notifications']['value'] ?? []) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="notification_systems">{{ $lang['notification_systems'] }}</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="notify_recommends" name="fs_theme_notifies[]" value="recommends" {{ in_array('recommends', $themeParams['fs_theme_notifies']['value'] ?? []) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="notify_recommends">{{ $lang['notify_recommends'] }}</label>
+                                <input class="form-check-input" type="checkbox" id="notification_recommends" name="fs_theme_notifications[]" value="recommends" {{ in_array('recommends', $themeParams['fs_theme_notifications']['value'] ?? []) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="notification_recommends">{{ $lang['notification_recommends'] }}</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="notify_likes" name="fs_theme_notifies[]" value="likes" {{ in_array('likes', $themeParams['fs_theme_notifies']['value'] ?? []) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="notify_likes">{{ $lang['notify_likes'] }}</label>
+                                <input class="form-check-input" type="checkbox" id="notification_likes" name="fs_theme_notifications[]" value="likes" {{ in_array('likes', $themeParams['fs_theme_notifications']['value'] ?? []) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="notification_likes">{{ $lang['notification_likes'] }}</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="notify_dislikes" name="fs_theme_notifies[]" value="dislikes" {{ in_array('dislikes', $themeParams['fs_theme_notifies']['value'] ?? []) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="notify_dislikes">{{ $lang['notify_dislikes'] }}</label>
+                                <input class="form-check-input" type="checkbox" id="notification_dislikes" name="fs_theme_notifications[]" value="dislikes" {{ in_array('dislikes', $themeParams['fs_theme_notifications']['value'] ?? []) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="notification_dislikes">{{ $lang['notification_dislikes'] }}</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="notify_follows" name="fs_theme_notifies[]" value="follows" {{ in_array('follows', $themeParams['fs_theme_notifies']['value'] ?? []) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="notify_follows">{{ $lang['notify_follows'] }}</label>
+                                <input class="form-check-input" type="checkbox" id="notification_follows" name="fs_theme_notifications[]" value="follows" {{ in_array('follows', $themeParams['fs_theme_notifications']['value'] ?? []) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="notification_follows">{{ $lang['notification_follows'] }}</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="notify_blocks" name="fs_theme_notifies[]" value="blocks" {{ in_array('blocks', $themeParams['fs_theme_notifies']['value'] ?? []) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="notify_blocks">{{ $lang['notify_blocks'] }}</label>
+                                <input class="form-check-input" type="checkbox" id="notification_blocks" name="fs_theme_notifications[]" value="blocks" {{ in_array('blocks', $themeParams['fs_theme_notifications']['value'] ?? []) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="notification_blocks">{{ $lang['notification_blocks'] }}</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="notify_mentions" name="fs_theme_notifies[]" value="mentions" {{ in_array('mentions', $themeParams['fs_theme_notifies']['value'] ?? []) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="notify_mentions">{{ $lang['notify_mentions'] }}</label>
+                                <input class="form-check-input" type="checkbox" id="notification_mentions" name="fs_theme_notifications[]" value="mentions" {{ in_array('mentions', $themeParams['fs_theme_notifications']['value'] ?? []) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="notification_mentions">{{ $lang['notification_mentions'] }}</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="checkbox" id="notify_comments" name="fs_theme_notifies[]" value="comments" {{ in_array('comments', $themeParams['fs_theme_notifies']['value'] ?? []) ? 'checked' : '' }}>
-                                <label class="form-check-label" for="notify_comments">{{ $lang['notify_comments'] }}</label>
+                                <input class="form-check-input" type="checkbox" id="notification_comments" name="fs_theme_notifications[]" value="comments" {{ in_array('comments', $themeParams['fs_theme_notifications']['value'] ?? []) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="notification_comments">{{ $lang['notification_comments'] }}</label>
                             </div>
                         </div>
                     </div>

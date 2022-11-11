@@ -868,21 +868,21 @@ header .navbar {
     margin-top: 0.4rem;
 }
 
-/* dialog */
-.dialog-avatar {
+/* conversation */
+.conversation-avatar {
     width: 4rem;
     height: 4rem;
 }
-.dialog-user-verified {
+.conversation-user-verified {
     width: 1.2rem;
     height: 1.2rem;
     margin-top: -0.2rem;
 }
-.dialog-user-name {
+.conversation-user-name {
     font-size: 0.8rem;
     font-weight: 400;
 }
-.dialog-brief {
+.conversation-brief {
     font-size: 0.88rem;
     line-height: 1.3;
     color: #495057;

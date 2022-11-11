@@ -112,10 +112,10 @@
 
                         <button type="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" data-bs-toggle="modal" data-bs-target="#createModal"><i class="bi bi-plus-lg"></i></button>
 
-                        <a href="{{ fs_route(route('fresns.message.notify', ['types' => 1])) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
+                        <a href="{{ fs_route(route('fresns.message.notifications')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
                             <i class="bi bi-bell"></i>
-                            @if(array_sum($userPanel['notifyUnread']) > 0)
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ array_sum($userPanel['notifyUnread']) }}</span>
+                            @if(array_sum($userPanel['unreadNotifications']) > 0)
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ array_sum($userPanel['unreadNotifications']) }}</span>
                             @endif
                         </a>
 
@@ -124,23 +124,23 @@
                             <ul class="dropdown-menu dropdown-menu-end">
                                 <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.index')) }}"><i class="bi bi-person-fill"></i> {{ fs_api_config('menu_account') }}</a></li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ fs_route(route('fresns.message.notify', ['types' => 1])) }}">
+                                    <a class="dropdown-item" href="{{ fs_route(route('fresns.message.notifications')) }}">
                                         <i class="bi bi-bell"></i>
-                                        {{ fs_api_config('menu_notifies') }}
+                                        {{ fs_api_config('menu_notifications') }}
 
-                                        @if(array_sum($userPanel['notifyUnread']) > 0)
-                                            <span class="badge bg-danger">{{ array_sum($userPanel['notifyUnread']) }}</span>
+                                        @if(array_sum($userPanel['unreadNotifications']) > 0)
+                                            <span class="badge bg-danger">{{ array_sum($userPanel['unreadNotifications']) }}</span>
                                         @endif
                                     </a>
                                 </li>
-                                @if (fs_api_config('dialog_status'))
+                                @if (fs_api_config('conversation_status'))
                                     <li>
                                         <a class="dropdown-item" href="{{ fs_route(route('fresns.message.index')) }}">
                                             <i class="bi bi-envelope"></i>
-                                            {{ fs_db_config('menu_dialogs') }}
+                                            {{ fs_db_config('menu_conversations') }}
 
-                                            @if($userPanel['dialogUnread']['messages'] > 0)
-                                                <span class="badge bg-danger">{{ $userPanel['dialogUnread']['messages'] }}</span>
+                                            @if($userPanel['conversations']['unreadMessages'] > 0)
+                                                <span class="badge bg-danger">{{ $userPanel['conversations']['unreadMessages'] }}</span>
                                             @endif
                                         </a>
                                     </li>

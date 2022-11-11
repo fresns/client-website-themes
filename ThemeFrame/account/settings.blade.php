@@ -131,27 +131,27 @@
 
                         {{-- Preference Settings --}}
                         <div class="tab-pane fade" id="preference" role="tabpanel" aria-labelledby="preference-tab">
-                            {{-- Dialog --}}
+                            {{-- conversation --}}
                             <div class="input-group mb-3">
-                                <span class="input-group-text">{{ fs_api_config('menu_dialogs') }}</span>
-                                <span class="form-control" id="select-dialogLimit">
-                                    @if(fs_user('detail.dialogLimit') == 1)
+                                <span class="input-group-text">{{ fs_api_config('menu_conversations') }}</span>
+                                <span class="form-control" id="select-conversationLimit">
+                                    @if(fs_user('detail.conversationLimit') == 1)
                                         {{ fs_lang('settingAllowAll') }}
-                                    @elseif(fs_user('detail.dialogLimit') == 2)
+                                    @elseif(fs_user('detail.conversationLimit') == 2)
                                         {{ fs_lang('settingAllowMyFollow') }}
-                                    @elseif(fs_user('detail.dialogLimit') == 3)
+                                    @elseif(fs_user('detail.conversationLimit') == 3)
                                         {{ fs_lang('settingAllowMyFollowAndVerified') }}
-                                    @elseif(fs_user('detail.dialogLimit') == 4)
+                                    @elseif(fs_user('detail.conversationLimit') == 4)
                                         {{ fs_lang('settingAllowNotAll') }}
                                     @endif
                                 </span>
                                 <button class="btn btn-outline-secondary"
-                                    data-lable="{{ fs_api_config('menu_dialogs') }}"
+                                    data-lable="{{ fs_api_config('menu_conversations') }}"
                                     data-type="select"
                                     data-option='[{"id":1,"text":"{{ fs_lang('settingAllowAll') }}"},{"id":2,"text":"{{ fs_lang('settingAllowMyFollow') }}"},{"id":3,"text":"{{ fs_lang('settingAllowMyFollowAndVerified') }}"},{"id":4,"text":"{{ fs_lang('settingAllowNotAll') }}"}]'
-                                    data-name="dialogLimit"
+                                    data-name="conversationLimit"
                                     data-action="{{ route('fresns.api.user.edit') }}"
-                                    data-value="{{ fs_user('detail.dialogLimit') }}"
+                                    data-value="{{ fs_user('detail.conversationLimit') }}"
                                     type="button" data-bs-toggle="modal" data-bs-target="#editModal">
                                     {{ fs_lang('modify') }}
                                 </button>

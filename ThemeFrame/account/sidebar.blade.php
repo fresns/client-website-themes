@@ -11,23 +11,23 @@
         </a>
 
         {{-- Messages --}}
-        <a href="{{ fs_route(route('fresns.message.notify', ['types' => 1])) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.message.notify') ? 'active' : '' }}">
-            <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-notifies.png" width="36" height="36">
-            {{ fs_api_config('menu_notifies') }}
+        <a href="{{ fs_route(route('fresns.message.notifications')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.message.notifications') ? 'active' : '' }}">
+            <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-notifications.png" width="36" height="36">
+            {{ fs_api_config('menu_notifications') }}
 
-            @if(array_sum($userPanel['notifyUnread']) > 0)
-                <span class="badge bg-danger">{{ array_sum($userPanel['notifyUnread']) }}</span>
+            @if(array_sum($userPanel['unreadNotifications']) > 0)
+                <span class="badge bg-danger">{{ array_sum($userPanel['unreadNotifications']) }}</span>
             @endif
         </a>
 
-        {{-- Dialogs --}}
-        @if (fs_api_config('dialog_status'))
-            <a href="{{ fs_route(route('fresns.message.index')) }}" class="list-group-item list-group-item-action {{ Route::is(['fresns.message.index', 'fresns.message.dialog']) ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-dialog.png" width="36" height="36">
-                {{ fs_db_config('menu_dialogs') }}
+        {{-- Conversations --}}
+        @if (fs_api_config('conversation_status'))
+            <a href="{{ fs_route(route('fresns.message.index')) }}" class="list-group-item list-group-item-action {{ Route::is(['fresns.message.index', 'fresns.message.conversation']) ? 'active' : '' }}">
+                <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-conversations.png" width="36" height="36">
+                {{ fs_db_config('menu_conversations') }}
 
-                @if($userPanel['dialogUnread']['messages'] > 0)
-                    <span class="badge bg-danger">{{ $userPanel['dialogUnread']['messages'] }}</span>
+                @if($userPanel['conversations']['unreadMessages'] > 0)
+                    <span class="badge bg-danger">{{ $userPanel['conversations']['unreadMessages'] }}</span>
                 @endif
             </a>
         @endif
