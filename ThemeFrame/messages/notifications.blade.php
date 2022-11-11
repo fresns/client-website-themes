@@ -137,12 +137,12 @@
                             {{-- Mark all as read --}}
                             @if ($notifications->isNotEmpty() && $types)
                                 <li class="list-group-item d-flex justify-content-center align-items-center pb-3">
-                                    <form action="{{ route('fresns.api.message.mark.as.read', ['type' => 'notification']) }}" method="put">
+                                    <form class="api-request-form" action="{{ route('fresns.api.message.mark.as.read', ['type' => 'notification']) }}" method="put">
                                         @csrf
                                         <input type="hidden" name="type" value="all"/>
                                         <input type="hidden" name="notificationType" value="{{ $types }}"/>
                                         <input type="hidden" name="notificationIds" value=""/>
-                                        <button class="btn btn-success btn-sm api-request-form" type="button">{{ fs_lang('notificationMarkAllAsRead') }}</button>
+                                        <button class="btn btn-success btn-sm" type="submit">{{ fs_lang('notificationMarkAllAsRead') }}</button>
                                     </form>
                                 </li>
                             @endif

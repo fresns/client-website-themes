@@ -320,7 +320,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
     // init
     setTimeoutToastHide();
 
-    // editor at
+    // editor at and hashtag
     $(".fresns-content").atwho({
         at: "@",
         displayTpl: "<li><img src='${image}' height='20' width='20'/> ${nickname} <small class='text-muted'>@${name}</small></li>",
@@ -348,7 +348,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         }
     });
 
-    // comment box
+    // jquery extend
     $.fn.extend({
         insertAtCaret: function(myValue){
             var $t=$(this)[0];
@@ -468,11 +468,6 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             btn = $(this).find('button[type="submit"]'),
             actionUrl = $(this).attr('action'),
             fresnsReply = $(this).parent().parent();
-
-        if (form.data('login-url')) {
-            window.location.href = form.data('login-url')
-            return
-        }
 
         $.ajax({
             type: "POST",
@@ -705,13 +700,10 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
     });
 
     // api request form
-    $(document).on('click', '.api-request-form', function (e) {
+    $(".api-request-form").submit(function(e) {
         e.preventDefault();
-        let obj = $(this);
-        obj.prop('disabled', true);
-        obj.prepend('<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> ')
-
-        let form = obj.parent('form');
+        let form = $(this),
+            btn = $(this).find('button[type="submit"]');
 
         const url = form.attr('action'),
             type = form.attr('method') || 'POST',
@@ -721,17 +713,19 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             url,
             type,
             data,
-            success: function(res){
+            success: function (res) {
                 tips(res.message, res.code);
                 if (res.code != 0) {
+                    window.tips(res.message);
                     return
                 }
+                window.location.reload();
             },
             complete: function (e) {
-                obj.prop('disabled', false);
-                obj.find('.spinner-border').remove();
+                btn.prop('disabled', false);
+                btn.find('.spinner-border').remove();
             }
-        })
+        });
     });
 
     // User Settings
@@ -1188,6 +1182,67 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     )
                 }
 
+            },
+            error:function(e) {
+                window.tips(e.responseJSON.message, e.status)
+            },
+        });
+    });
+
+    // Send File Message
+    $('.sendFile').on('change', function (e) {
+        let formData = new FormData(),
+            uploadAction = $(this).data('upload-action'),
+            token = $('meta[name="csrf-token"]').attr('content'),
+            obj = $(this),
+            type = obj.data('type'),
+            usageType = obj.data('usagetype'),
+            tableName = obj.data('tablename'),
+            tableColumn = obj.data('tablecolumn'),
+            tableKey = obj.data('tablekey'),
+            uploadMode = obj.data('uploadmode'),
+            sendAction = $(this).data('send-action'),
+            sendUidOrUsername = $(this).data('send-uidorusername');
+
+        $('.send-file-btn').prop('disabled', true);
+        $('.send-file-btn').prepend('<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> ');
+
+        formData.append('file', obj[0].files[0]);
+        formData.append('_token', token);
+        formData.append('type', type);
+        formData.append('usageType', usageType);
+        formData.append('tableName', tableName);
+        formData.append('tableColumn', tableColumn);
+        formData.append('tableKey', tableKey);
+        formData.append('uploadMode', uploadMode);
+
+        $.ajax({
+            url: uploadAction,
+            type:"POST",
+            cache:false,
+            data:formData,
+            processData:false,
+            contentType:false,
+            success:function(res){
+                if (res.code !== 0) {
+                    window.tips(res.message);
+                    return
+                }
+
+                if(res.data.fid){
+                    let data = {"uidOrUsername":sendUidOrUsername,"fid":res.data.fid};
+                    window.buildAjaxAndSubmit(
+                        sendAction,
+                        data,
+                        function (res){
+                            window.tips(res.message)
+                            window.location.reload();
+                        },
+                        function (e){
+                            window.tips(e.responseJSON.message)
+                        }
+                    )
+                }
             },
             error:function(e) {
                 window.tips(e.responseJSON.message, e.status)
