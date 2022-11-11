@@ -64,8 +64,8 @@
 {{-- Documents --}}
 @if ($files['documents'])
     @foreach($files['documents'] as $document)
-        <button type="button" class="btn doc-box" data-fid="{{ $document['fid'] }}" data-bs-toggle="modal" data-bs-target="#downloadModal-{{ $document['fid'] }}">
-            <div class="doc-icon">
+        <button type="button" class="btn document-box fresns-file-users" data-fid="{{ $document['fid'] }}" data-bs-toggle="modal" data-bs-target="#downloadModal-{{ $document['fid'] }}">
+            <div class="document-icon">
                 @if ($document['extension'] == 'doc' || $document['extension'] == 'docx' || $document['extension'] == 'pages')
                     <i class="bi bi-file-earmark-word"></i>
                 @elseif ($document['extension'] == 'xls' || $document['extension'] == 'xlsx' || $document['extension'] == 'numbers')
@@ -88,7 +88,7 @@
                     <i class="bi bi-file-earmark"></i>
                 @endif
             </div>
-            <div class="doc-name text-nowrap overflow-hidden">{{ $document['name'] }}</div>
+            <div class="document-name text-nowrap overflow-hidden">{{ $document['name'] }}</div>
         </button>
 
         {{-- Document Modal --}}
@@ -101,7 +101,7 @@
                     </div>
                     <div class="modal-body">
                         <p class="text-danger">{{ fs_lang('contentDocumentInfo') }}</p>
-                        <p class="text-center text-info doc-icon-fs">
+                        <p class="text-center text-info document-icon-fs">
                             @if ($document['extension'] == 'doc' || $document['extension'] == 'docx' || $document['extension'] == 'pages')
                                 <i class="bi bi-file-earmark-word"></i>
                             @elseif ($document['extension'] == 'xls' || $document['extension'] == 'xlsx' || $document['extension'] == 'numbers')
@@ -131,11 +131,11 @@
                             {{ $createTime }}
                         </p>
                         <p class="text-center">
-                            <a href="{{ route('fresns.api.content.file.link', ['fid' => $document['fid'], 'type' => 'post', 'fsid' => $pid]) }}" data-name="{{ $document['name'] }}" data-mime="{{ $document['mime'] }}" class="btn btn-outline-success fresns-download" role="button">{{ fs_lang('contentFileDownload') }}</a>
+                            <a href="{{ route('fresns.api.content.file.link', ['fid' => $document['fid'], 'type' => 'post', 'fsid' => $pid]) }}" data-name="{{ $document['name'] }}" data-mime="{{ $document['mime'] }}" class="btn btn-outline-success fresns-file-download" role="button">{{ fs_lang('contentFileDownload') }}</a>
                         </p>
                     </div>
 
-                    {{-- Download User --}}
+                    {{-- Download Users --}}
                     <hr class="dropdown-divider">
                     <div class="modal-body">
                         <p class="text-center">{{ fs_lang('contentFileDownloader') }}</p>

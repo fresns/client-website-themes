@@ -26,8 +26,8 @@
 
 {{-- Document --}}
 @if ($file['type'] == 4)
-    <a href="{{ route('fresns.api.content.file.link', ['fid' => $file['fid'], 'type' => 'conversation', 'fsid' => $messageId]) }}" data-name="{{ $file['name'] }}" data-mime="{{ $file['mime'] }}" class="btn doc-box fresns-download" role="button">
-        <span class="doc-icon">
+    <a href="{{ route('fresns.api.content.file.link', ['fid' => $file['fid'], 'type' => 'conversation', 'fsid' => $messageId]) }}" data-name="{{ $file['name'] }}" data-mime="{{ $file['mime'] }}" class="btn document-box fresns-file-download" role="button">
+        <span class="document-icon">
             @if ($file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'pages')
                 <i class="bi bi-file-earmark-word"></i>
             @elseif ($file['extension'] == 'xls' || $file['extension'] == 'xlsx' || $file['extension'] == 'numbers')
@@ -50,6 +50,6 @@
                 <i class="bi bi-file-earmark"></i>
             @endif
         </span>
-        <span class="doc-name text-nowrap overflow-hidden mx-3">{{ $file['name'] }}</span>
+        <span class="document-name text-nowrap overflow-hidden mx-3">{{ $file['name'] }}</span>
     </a>
 @endif

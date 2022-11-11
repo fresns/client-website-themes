@@ -320,6 +320,31 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
     // init
     setTimeoutToastHide();
 
+    // jquery extend
+    $.fn.extend({
+        insertAtCaret: function(myValue){
+            var $t=$(this)[0];
+            if (document.selection) {
+                this.focus();
+                sel = document.selection.createRange();
+                sel.text = myValue;
+                this.focus();
+            } else if ($t.selectionStart || $t.selectionStart == '0') {
+                var startPos = $t.selectionStart;
+                var endPos = $t.selectionEnd;
+                var scrollTop = $t.scrollTop;
+                $t.value = $t.value.substring(0, startPos) + myValue + $t.value.substring(endPos, $t.value.length);
+                this.focus();
+                $t.selectionStart = startPos + myValue.length;
+                $t.selectionEnd = startPos + myValue.length;
+                $t.scrollTop = scrollTop;
+            } else {
+                this.value += myValue;
+                this.focus();
+            }
+        }
+    });
+
     // editor at and hashtag
     $(".fresns-content").atwho({
         at: "@",
@@ -348,31 +373,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         }
     });
 
-    // jquery extend
-    $.fn.extend({
-        insertAtCaret: function(myValue){
-            var $t=$(this)[0];
-            if (document.selection) {
-                this.focus();
-                sel = document.selection.createRange();
-                sel.text = myValue;
-                this.focus();
-            } else if ($t.selectionStart || $t.selectionStart == '0') {
-                var startPos = $t.selectionStart;
-                var endPos = $t.selectionEnd;
-                var scrollTop = $t.scrollTop;
-                $t.value = $t.value.substring(0, startPos) + myValue + $t.value.substring(endPos, $t.value.length);
-                this.focus();
-                $t.selectionStart = startPos + myValue.length;
-                $t.selectionEnd = startPos + myValue.length;
-                $t.scrollTop = scrollTop;
-            } else {
-                this.value += myValue;
-                this.focus();
-            }
-        }
-    });
-
+    // comment box
     $('.fresns-trigger-reply').on('click', function (){
         var fresnsReply = $(this).parent().next();
         showReply(fresnsReply)
@@ -383,7 +384,8 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         showReply(fresnsReply)
     })
 
-    $('.doc-box').on('click', function () {
+    // file download and users
+    $('.fresns-file-users').on('click', function () {
         var fid = $(this).data('fid')
         if (!fid) {
             window.tips(fs_lang('errorNoInfo'))
@@ -426,7 +428,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         })
     })
 
-    $('.fresns-download').on('click', function (e) {
+    $('.fresns-file-download').on('click', function (e) {
         e.preventDefault();
         var name = $(this).data('name')
         var mime = $(this).data('mime')

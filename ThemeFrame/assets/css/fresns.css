@@ -427,8 +427,8 @@ header .navbar {
     padding-bottom: 0.4rem;
 }
 
-/* File Doc */
-.doc-box {
+/* File Document */
+.document-box {
     width: 100%;
     display: flex;
     align-items: center;
@@ -438,10 +438,10 @@ header .navbar {
     margin: 0.5rem 0;
     padding: 0rem;
 }
-.doc-box:hover {
+.document-box:hover {
     background-color: #dee2e6;
 }
-.doc-box .doc-icon {
+.document-box .document-icon {
     background-color: #f57f59;
     border-top-left-radius: 0.2rem;
     border-bottom-left-radius: 0.2rem;
@@ -449,10 +449,10 @@ header .navbar {
     font-size: 1.2rem;
     padding: 0.5rem 1rem;
 }
-.doc-box .doc-name {
+.document-box .document-name {
     margin-left: 0.75rem;
 }
-.doc-icon-fs {
+.document-icon-fs {
     font-size: 5rem;
 }
 .file-download-user img {
