@@ -7,8 +7,9 @@
         <div class="row mt-5 pt-5 m-auto" style="max-width:500px;">
             <h1 class="h3 my-3 fw-normal text-center">{{ fs_lang('accountRegister') }}</h1>
 
-            {{-- Enable Registration --}}
             @if (fs_api_config('site_public_status'))
+                {{-- Open Registration --}}
+
                 {{-- Quick Login --}}
                 @if (fs_api_config('account_connect_services'))
                     <div class="card mx-2 p-0">
@@ -183,7 +184,7 @@
             @else
                 {{-- Close Registration --}}
                 <div class="alert alert-danger" role="alert">
-                    {{ fs_lang('accountRegisterError') }}
+                    {{ fs_code_message(34201) }}
                 </div>
                 <div class="mt-3 text-center">
                     <a class="btn btn-lg btn-outline-success" href="{{ fs_route(route('fresns.account.login')) }}" role="button">{{ fs_lang('accountLogin') }}</a>

@@ -6,7 +6,7 @@
                 @if ($creator['decorate'])
                     <img src="{{ $creator['decorate'] }}" alt="Avatar Decorate" class="user-decorate">
                 @endif
-                <img src="{{ $creator['avatar'] }}" alt="Avatar" class="user-avatar rounded-circle">
+                <img src="{{ $creator['avatar'] }}" alt="{{ $creator['username'] }}" class="user-avatar rounded-circle">
             </a>
         </div>
         <div class="flex-grow-1">
@@ -54,7 +54,7 @@
                 @endif
 
                 {{-- IP Location --}}
-                @if (fs_api_config('account_ip_location_status'))
+                @if (fs_api_config('account_ip_location_status') && current_lang_tag() == 'zh-Hans')
                     <span class="text-secondary ms-3">
                         <i class="bi bi-geo"></i>
                         @if ($ipLocation)
@@ -79,7 +79,7 @@
     {{-- Anonymous Author --}}
     <div class="d-flex">
         <div class="flex-shrink-0">
-            <img src="{{ $creator['avatar'] }}" alt="Anonymous Avatar" class="user-avatar rounded-circle">
+            <img src="{{ $creator['avatar'] }}" alt="{{ fs_lang('contentCreatorAnonymous') }}" class="user-avatar rounded-circle">
         </div>
         <div class="flex-grow-1">
             <div class="user-primary d-lg-flex">
@@ -97,7 +97,7 @@
                 @endif
 
                 {{-- IP Location --}}
-                @if (fs_api_config('account_ip_location_status'))
+                @if (fs_api_config('account_ip_location_status') && current_lang_tag() == 'zh-Hans')
                     <span class="text-secondary ms-3">
                         <i class="bi bi-geo"></i>
                         @if ($ipLocation)
@@ -122,7 +122,7 @@
     {{-- Deactivate Author --}}
     <div class="d-flex">
         <div class="flex-shrink-0">
-            <img src="{{ $creator['avatar'] }}" alt="Avatars of deactivated accounts" class="user-avatar rounded-circle">
+            <img src="{{ fs_api_config('deactivate_avatar') }}" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="user-avatar rounded-circle">
         </div>
         <div class="flex-grow-1">
             <div class="user-primary d-lg-flex">
@@ -140,7 +140,7 @@
                 @endif
 
                 {{-- IP Location --}}
-                @if (fs_api_config('account_ip_location_status'))
+                @if (fs_api_config('account_ip_location_status') && current_lang_tag() == 'zh-Hans')
                     <span class="text-secondary ms-3">
                         <i class="bi bi-geo"></i>
                         @if ($ipLocation)

@@ -18,7 +18,7 @@
             <div class="toast-header">
                 <img src="/static/images/icon.png" width="20px" height="20px" class="rounded me-2" alt="Fresns">
                 <strong class="me-auto">Fresns</strong>
-                @if (session('code'))
+                @if (session('code') != 0)
                     <small>{{ session('code') }}</small>
                 @endif
 

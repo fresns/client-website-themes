@@ -3,7 +3,7 @@
     <section class="flex-shrink-0">
         <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $user['fsid']])) }}">
             @if ($user['decorate'])
-                <img src="{{ $user['decorate'] }}" alt="Decorate" class="user-decorate">
+                <img src="{{ $user['decorate'] }}" alt="Avatar Decorate" class="user-decorate">
             @endif
             <img src="{{ $user['avatar'] }}" alt="{{ $user['nickname'] }}" class="user-avatar rounded-circle">
         </a>

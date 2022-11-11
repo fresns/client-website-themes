@@ -116,7 +116,7 @@
                         </div>
 
                         {{-- Forgot your password? --}}
-                        <div class="mt-2 text-center"><a href="{{ fs_route(route('fresns.account.resetPassword')) }}">{{ fs_lang('passwordForgot') }}?</a></div>
+                        <div class="mt-2 text-center"><a href="{{ fs_route(route('fresns.account.reset.password')) }}">{{ fs_lang('passwordForgot') }}?</a></div>
 
                         {{-- Login or Register --}}
                         <div class="clearfix mt-4">

@@ -144,10 +144,11 @@
                 <div class="modal-body">
                     <form class="mt-2" method="post" id="upload-form" multiple="true" enctype="multipart/form-data">
                         <input type="hidden" name="usageType" @if($type === 'post') value="7" @elseif($type === "comment") value="8" @endif>
+                        <input type="hidden" name="tableName" @if($type === 'post') value="post_logs" @elseif($type === "comment") value="comment_logs" @endif>
+                        <input type="hidden" name="tableColumn" value="id">
                         <input type="hidden" name="tableId" value="{{ $draft['detail']['id'] ?? '' }}">
                         <input type="hidden" name="uploadMode" value="file">
                         <input type="hidden" name="type">
-                        <input type="hidden" name="tableName" @if($type === 'post') value="post_logs" @elseif($type === "comment") value="comment_logs" @endif>
                         <input class="form-control" type="file" id="formFile">
                         <label class="form-label mt-3 ms-1 text-secondary text-break fs-7 d-block">{{ fs_lang('editorUploadExtensions') }}: <span id="extensions"></span></label>
                         <label class="form-label mt-1 ms-1 text-secondary text-break fs-7 d-block">{{ fs_lang('editorUploadMaxSize') }}: <span id="maxSize"></span> MB</label>
