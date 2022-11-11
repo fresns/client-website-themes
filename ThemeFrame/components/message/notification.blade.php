@@ -102,48 +102,50 @@
         </section>
 
         {{-- Content of the trigger notification --}}
-        @switch($notification['actionObject'])
-            @case(2)
-                <div class="content-group mt-2">
-                    <a href="{{ fs_route(route('fresns.group.detail', ['gid' => $notification['actionInfo']['gid']])) }}" class="badge rounded-pill text-decoration-none">
-                        @if ($notification['actionInfo']['cover'])
-                            <img src="{{ $notification['actionInfo']['cover'] }}" alt="$notification['actionInfo']['gname']" class="rounded">
+        @if ($notification['actionInfo'])
+            @switch($notification['actionObject'])
+                @case(2)
+                    <div class="content-group mt-2">
+                        <a href="{{ fs_route(route('fresns.group.detail', ['gid' => $notification['actionInfo']['gid']])) }}" class="badge rounded-pill text-decoration-none">
+                            @if ($notification['actionInfo']['cover'])
+                                <img src="{{ $notification['actionInfo']['cover'] }}" alt="$notification['actionInfo']['gname']" class="rounded">
+                            @endif
+                            {{ $notification['actionInfo']['gname'] }}
+                        </a>
+                    </div>
+                @break
+
+                @case(3)
+                    <a href="{{ fs_route(route('fresns.hashtag.detail', ['hid' => $notification['actionInfo']['hid']])) }}" class="text-decoration-none text-secondary mt-2"><span class="badge text-bg-primary">{{ $notification['actionInfo']['hname'] }}</span></a>
+                @break
+
+                @case(4)
+                    <section class="comment-post mt-2 position-relative">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" class="rounded"></div>
+                            <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit($notification['actionInfo']['content'], 80) }}</div>
+                        </div>
+                        @if ($notification['actionInfo']['group'])
+                            <div class="comment-post-group border-top text-secondary">{{ $notification['actionInfo']['group']['gname'] }}</div>
                         @endif
-                        {{ $notification['actionInfo']['gname'] }}
-                    </a>
-                </div>
-            @break
+                        <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $notification['actionInfo']['pid']])) }}" class="text-decoration-none stretched-link"></a>
+                    </section>
+                @break
 
-            @case(3)
-                <a href="{{ fs_route(route('fresns.hashtag.detail', ['hid' => $notification['actionInfo']['hid']])) }}" class="text-decoration-none text-secondary mt-2"><span class="badge text-bg-primary">{{ $notification['actionInfo']['hname'] }}</span></a>
-            @break
+                @case(5)
+                    <section class="comment-post mt-2 position-relative">
+                        <div class="d-flex">
+                            <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" class="rounded"></div>
+                            <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit($notification['actionInfo']['content'], 80) }}</div>
+                        </div>
+                        <a href="{{ fs_route(route('fresns.comment.detail', ['cid' => $notification['actionInfo']['cid']])) }}" class="text-decoration-none stretched-link"></a>
+                    </section>
+                @break
 
-            @case(4)
-                <section class="comment-post mt-2 position-relative">
-                    <div class="d-flex">
-                        <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" class="rounded"></div>
-                        <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit($notification['actionInfo']['content'], 80) }}</div>
-                    </div>
-                    @if ($notification['actionInfo']['group'])
-                        <div class="comment-post-group border-top text-secondary">{{ $notification['actionInfo']['group']['gname'] }}</div>
-                    @endif
-                    <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $notification['actionInfo']['pid']])) }}" class="text-decoration-none stretched-link"></a>
-                </section>
-            @break
+                @default
 
-            @case(5)
-                <section class="comment-post mt-2 position-relative">
-                    <div class="d-flex">
-                        <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" class="rounded"></div>
-                        <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit($notification['actionInfo']['content'], 80) }}</div>
-                    </div>
-                    <a href="{{ fs_route(route('fresns.comment.detail', ['cid' => $notification['actionInfo']['cid']])) }}" class="text-decoration-none stretched-link"></a>
-                </section>
-            @break
-
-            @default
-
-            @break
-        @endswitch
+                @break
+            @endswitch
+        @endif
     </div>
 </li>
