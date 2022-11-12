@@ -81,7 +81,7 @@
             @if ($comment['isMarkdown'])
                 {!! Str::markdown($comment['content']) !!}
             @else
-                {!! nl2br($comment['content']) !!}
+                {!! nl2br(e($comment['content'])) !!}
             @endif
         </div>
     </section>
