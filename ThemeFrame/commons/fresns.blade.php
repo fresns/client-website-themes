@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-icons.css">
     <link rel="stylesheet" href="/static/css/select2.min.css">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v=46187dccd52da6dc">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.css?v=46187dccd52da6dc">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=46187dccd52da6dc">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v=581c98c24147b4a6">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.css?v=581c98c24147b4a6">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=581c98c24147b4a6">
     @stack('style')
     @if (fs_db_config('website_stat_position') === 'head')
         {!! fs_db_config('website_stat_position') !!}
@@ -78,9 +78,9 @@
     <script src="/static/js/iframeResizer.min.js"></script>
     <script src="/static/js/fresns-iframe.js"></script>
     <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js"></script>
-    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=46187dccd52da6dc"></script>
-    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=46187dccd52da6dc"></script>
-    <script src="/assets/themes/ThemeFrame/js/fresns.js?v=46187dccd52da6dc"></script>
+    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=581c98c24147b4a6"></script>
+    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=581c98c24147b4a6"></script>
+    <script src="/assets/themes/ThemeFrame/js/fresns.js?v=581c98c24147b4a6"></script>
     <script>
         $(function () {
             window.hashtag_show = {{ fs_api_config('hashtag_show') }}
