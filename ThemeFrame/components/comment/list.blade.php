@@ -76,7 +76,7 @@
             @if ($comment['isMarkdown'])
                 {!! Str::markdown($comment['content']) !!}
             @else
-                {!! nl2br(e($comment['content'])) !!}
+                {!! nl2br($comment['content']) !!}
             @endif
 
             {{-- Detail Page Link --}}

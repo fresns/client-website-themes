@@ -82,7 +82,7 @@
             @if ($post['isMarkdown'])
                 {!! Str::markdown($post['content']) !!}
             @else
-                {!! nl2br(e($post['content'])) !!}
+                {!! nl2br($post['content']) !!}
             @endif
 
             {{-- Detail Page Link --}}
