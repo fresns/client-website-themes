@@ -29,12 +29,12 @@ $(function () {
         var type = form.find("input[name='type']:checked").val();
         // reset-password cannot find send code type
         if (!type) {
-            form = form.parent()
+            form = form.parent();
             type = form.find("input[name='type']:checked").val();
         }
         // account login by code, cannot find send code type
         if (!type) {
-            form = form.parent()
+            form = form.parent();
             type = form.find("input[name='type']:checked").val();
         }
         var countryCode = form.find("select[name='countryCode']").val();
@@ -44,19 +44,19 @@ $(function () {
         if (type === 'email') {
             account = form.find("input[name='email']").val();
             if (!account) {
-                window.tips(fs_lang('email') + ': ' + fs_lang('errorEmpty'))
-                return
+                window.tips(fs_lang('email') + ': ' + fs_lang('errorEmpty'));
+                return;
             }
             data = { type: type, useType: useType, templateId: templateId, account: account };
         } else if (type === 'sms' || type === 'phone') {
             // login page, cannot send sms verify code.
             // if change blade value, cannot login.
             // force change the type to sms
-            type = 'sms'
+            type = 'sms';
             account = form.find("input[name='phone']").val();
             if (!account) {
-                window.tips(fs_lang('phone') + ': ' + fs_lang('errorEmpty'))
-                return
+                window.tips(fs_lang('phone') + ': ' + fs_lang('errorEmpty'));
+                return;
             }
             data = { type: type, useType: useType, templateId: templateId, account: account, countryCode: countryCode };
         }
@@ -69,8 +69,8 @@ $(function () {
             },
             success: function (res) {
                 if (res.code !== 0) {
-                    window.tips(res.message)
-                    return
+                    window.tips(res.message);
+                    return;
                 }
             },
             complete: function () {
