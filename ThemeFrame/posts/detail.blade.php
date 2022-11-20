@@ -1,8 +1,8 @@
 @extends('commons.fresns')
 
-@section('title', $items['title'] ?? $post['title'] ?? Str::limit(strip_tags($post['content']), 40, ''))
+@section('title', $items['title'] ?? $post['title'] ?? Str::limit(strip_tags($post['content']), 40))
 @section('keywords', $items['keywords'])
-@section('description', $items['description'] ?? Str::limit(strip_tags($post['content']), 140, ''))
+@section('description', $items['description'] ?? Str::limit(strip_tags($post['content']), 140))
 
 @section('content')
     <main class="container-fluid">
@@ -14,7 +14,7 @@
 
             {{-- Middle Content --}}
             <div class="col-sm-6">
-                <div class="card shadow-sm mb-3">
+                <div class="card shadow-sm mb-4">
                     @component('components.post.detail', compact('post'))@endcomponent
                 </div>
 
@@ -23,6 +23,22 @@
                         <h5 class="mb-0">{{ fs_db_config('comment_name') }}</h5>
                     </div>
 
+                    {{-- Sticky Comment List --}}
+                    @if ($stickies)
+                        <div class="card-body bg-primary bg-opacity-10 mb-4">
+                            @foreach($stickies as $sticky)
+                                @component('components.comment.sticky', [
+                                    'detailLink' => true,
+                                    'sectionPost' => false,
+                                    'sectionPreviews' => true,
+                                    'sectionCreatorLiked' => true,
+                                    'sticky' => $sticky,
+                                ])@endcomponent
+                            @endforeach
+                        </div>
+                    @endif
+
+                    {{-- Comment List --}}
                     @foreach($comments as $comment)
                         @component('components.comment.list', [
                             'detailLink' => true,
@@ -36,6 +52,11 @@
                             <hr>
                         @endif
                     @endforeach
+
+                    {{-- Pagination --}}
+                    <div class="my-3">
+                        {{ $comments->links() }}
+                    </div>
                 </article>
             </div>
 
