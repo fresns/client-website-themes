@@ -80,7 +80,7 @@
                         <button type="button" id="post-box-not-select-group" class="btn btn-outline-secondary btn-sm mb-2 modal-close" data-bs-target="#createModal" data-bs-toggle="modal" aria-label="Close">{{ fs_lang('editorNoGroup') }} {{ fs_api_config('group_name') }}</button>
                         {{-- Group Categories --}}
                         @foreach($groupCategories as $groupCategory)
-                            <button class="nav-link group-categories" data-page-size=5 data-page=1  data-action="{{ route('fresns.api.group.list', ['gid' => $groupCategory['gid']]) }}" id="v-pills-{{ $groupCategory['gid'] }}-post-box-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ $groupCategory['gid'] }}-post-box" type="button" role="tab" aria-controls="v-pills-{{ $groupCategory['gid'] }}-post-box" aria-selected="false">
+                            <button class="nav-link group-categories" data-page-size=15 data-page=1  data-action="{{ route('fresns.api.group.list', ['gid' => $groupCategory['gid']]) }}" id="v-pills-{{ $groupCategory['gid'] }}-post-box-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ $groupCategory['gid'] }}-post-box" type="button" role="tab" aria-controls="v-pills-{{ $groupCategory['gid'] }}-post-box" aria-selected="false">
                                 @if ($groupCategory['cover'])
                                     <img src="{{ $groupCategory['cover'] }}" height="20">
                                 @endif
@@ -113,7 +113,7 @@
             $('#createModal .editor-group .selected-group').text(gname);
             $("#createModal input[name='postGid']").val(gid);
         }
-        function boxAjaxGetGroupList(action, pageSize = 10, page = 1){
+        function boxAjaxGetGroupList(action, pageSize = 15, page = 1){
             let html= '';
             $('#post-box-fresns-group .tab-pane.fade.active.show .list-group-addmore').empty().append("{{ fs_lang('loading') }}");
 
