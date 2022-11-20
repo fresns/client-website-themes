@@ -89,7 +89,9 @@
                                 <button class="btn btn-outline-secondary"
                                     data-lable="{{ fs_api_config('user_bio_name') }}"
                                     data-type="textarea"
-                                    data-input-tips="fresns-content"
+                                    @if (fs_api_config('bio_support_mention') || fs_api_config('bio_support_hashtag'))
+                                        data-input-tips="fresns-content"
+                                    @endif
                                     data-name="bio"
                                     data-action="{{ route('fresns.api.user.edit') }}"
                                     data-value="{{ fs_user('detail.bio') }}"
