@@ -1,8 +1,8 @@
 @extends('commons.fresns')
 
-@section('title', $items['title'] ?? Str::limit(strip_tags($comment['content']), 40, ''))
+@section('title', $items['title'] ?? Str::limit(strip_tags($comment['content']), 40))
 @section('keywords', $items['keywords'])
-@section('description', $items['description'] ?? Str::limit(strip_tags($comment['content']), 140, ''))
+@section('description', $items['description'] ?? Str::limit(strip_tags($comment['content']), 140))
 
 @section('content')
     <main class="container-fluid">

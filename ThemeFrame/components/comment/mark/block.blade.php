@@ -6,6 +6,7 @@
     @if ($interactive['blockStatus'])
         <a class="dropdown-item py-2 text-success fs-mark" data-interactive-active="{{ $interactive['blockStatus'] }}" data-bi="bi-bookmark-x" data-name="{{ $interactive['blockName'] }}" href="javascript:void(0)">
             <i class="bi bi-bookmark-x-fill"></i>
+            <span class="show-text">{{ $interactive['blockName'] }}</span>
             @if (fs_api_config('comment_blocker_count'))
                 <span class="show-count">{{ $count }}</span>
             @endif
@@ -13,6 +14,7 @@
     @else
         <a class="dropdown-item py-2 fs-mark" data-bi="bi-bookmark-x-fill" data-name="{{ $interactive['blockName'] }}" href="javascript:void(0)">
             <i class="bi bi-bookmark-x"></i>
+            <span class="show-text">{{ $interactive['blockName'] }}</span>
             @if (fs_api_config('comment_blocker_count'))
                 <span class="show-count">{{ $count }}</span>
             @endif
