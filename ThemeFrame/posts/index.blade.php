@@ -14,6 +14,13 @@
 
             {{-- Middle Content --}}
             <div class="col-sm-6">
+                {{-- Sticky Post List --}}
+                <div class="list-group mb-4">
+                    @foreach($stickies as $sticky)
+                        @component('components.post.sticky', compact('sticky'))@endcomponent
+                    @endforeach
+                </div>
+
                 {{-- Post List --}}
                 <article class="card clearfix">
                     @foreach($posts as $post)
