@@ -67,11 +67,15 @@
     {{-- Footer --}}
     @include('commons.footer')
 
+    {{-- User Auth --}}
+    @include('commons.user-auth')
+
     {{-- Stat Code --}}
     @if (fs_db_config('website_stat_code') === 'body')
         <div style="display:none;">{!! fs_db_config('website_stat_code') !!}</div>
     @endif
 
+    <script src="/static/js/base64.js"></script>
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/bootstrap.bundle.min.js"></script>
     <script src="/static/js/select2.min.js"></script>

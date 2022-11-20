@@ -52,7 +52,8 @@ window.fs_lang = function (key, replace = {}) {
 
 // tips
 window.tips = function (message, code = 200) {
-    let html = `<div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:9999">
+    let html = `
+        <div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:9999">
             <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
                     <img src="/static/images/icon.png" width="20px" height="20px" class="rounded me-2" alt="Fresns">
@@ -163,6 +164,49 @@ function showReply(fresnsReply) {
         fresnsReply.show();
     }
 }
+
+// at and hashtag
+function atwho() {
+    $('.fresns-content')
+    .atwho({
+        at: '@',
+        displayTpl:
+            "<li><img src='${image}' height='20' width='20'/> ${nickname} <small class='text-muted'>@${name}</small></li>",
+        callbacks: {
+            remoteFilter: function (query, callback) {
+                if (query) {
+                    $.get(
+                        '/api/engine/input-tips',
+                        { type: 'user', key: query },
+                        function (data) {
+                            callback(data);
+                        },
+                        'json'
+                    );
+                }
+            },
+        },
+    })
+    .atwho({
+        at: '#',
+        displayTpl: '<li> ${name} </li>',
+        insertTpl: window.hashtag_show == 2 ? '${atwho-at}${name}${atwho-at}' : '${atwho-at}${name}',
+        callbacks: {
+            remoteFilter: function (query, callback) {
+                if (query) {
+                    $.get(
+                        '/api/engine/input-tips',
+                        { type: 'hashtag', key: query },
+                        function (data) {
+                            callback(data);
+                        },
+                        'json'
+                    );
+                }
+            },
+        },
+    });
+};
 
 // progress
 window.progress = {
@@ -300,14 +344,17 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
 };
 
 (function ($) {
+    // tip toast time
+    setTimeoutToastHide();
+
+    // at and hashtag
+    atwho();
+
     // image zoom
     $('.zoom-image').on('click', function () {
         $('#imageZoom img').attr('src', $(this).data('zoom-src'));
         $('#imageZoom').modal('show');
     });
-
-    // init
-    setTimeoutToastHide();
 
     // jquery extend
     $.fn.extend({
@@ -333,47 +380,6 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             }
         },
     });
-
-    // editor at and hashtag
-    $('.fresns-content')
-        .atwho({
-            at: '@',
-            displayTpl:
-                "<li><img src='${image}' height='20' width='20'/> ${nickname} <small class='text-muted'>@${name}</small></li>",
-            callbacks: {
-                remoteFilter: function (query, callback) {
-                    if (query) {
-                        $.get(
-                            '/api/engine/input-tips',
-                            { type: 'user', key: query },
-                            function (data) {
-                                callback(data);
-                            },
-                            'json'
-                        );
-                    }
-                },
-            },
-        })
-        .atwho({
-            at: '#',
-            displayTpl: '<li> ${name} </li>',
-            insertTpl: window.hashtag_show == 2 ? '${atwho-at}${name}${atwho-at}' : '${atwho-at}${name}',
-            callbacks: {
-                remoteFilter: function (query, callback) {
-                    if (query) {
-                        $.get(
-                            '/api/engine/input-tips',
-                            { type: 'hashtag', key: query },
-                            function (data) {
-                                callback(data);
-                            },
-                            'json'
-                        );
-                    }
-                },
-            },
-        });
 
     // comment box
     $('.fresns-trigger-reply').on('click', function () {
@@ -823,6 +829,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             name = button.data('name'),
             desc = button.data('desc') ?? '',
             type = button.data('type'),
+            inputTips = button.data('input-tips'),
             option = button.data('option'),
             action = button.data('action'),
             email = button.data('email') ?? '',
@@ -839,15 +846,10 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         let html = '';
         switch (type) {
             case 'select':
-                html =
-                    `
+                html = `
                 <div class="input-group has-validation">
-                    <label class="input-group-text">` +
-                    lable +
-                    `</label>
-                    <select class="form-select" name="` +
-                    name +
-                    `">`;
+                    <label class="input-group-text border-end-rounded-0">` + lable + `</label>
+                    <select class="form-select" name="` + name + `">`;
                 $(option).each(function (k, v) {
                     let selected = value == v.id ? 'selected' : '';
                     html += `<option ` + selected + ` value="` + v.id + `">` + v.text + `</option>`;
@@ -857,297 +859,206 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                 </div>`;
                 break;
             case 'textarea':
-                html =
-                    `
+                html = `
                 <div class="input-group has-validation">
-                    <span class="input-group-text">` +
-                    lable +
-                    `</span>
-                    <textarea class="form-control" name="` +
-                    name +
-                    `" rows="3">` +
-                    value +
-                    `</textarea>
+                    <span class="input-group-text border-end-rounded-0">` + lable + `</span>
+                    <textarea class="form-control ` + inputTips + `" name="` + name + `" rows="3">` + value + `</textarea>
                 </div>`;
                 break;
             case 'date':
-                html =
-                    `
+                html = `
                 <div class="input-group has-validation">
-                    <span class="input-group-text">` +
-                    lable +
-                    `</span>
-                    <input type="date" class="form-control" name="` +
-                    name +
-                    `" value="` +
-                    value +
-                    `" required>
+                    <span class="input-group-text border-end-rounded-0">` + lable + `</span>
+                    <input type="date" class="form-control" name="` + name + `" value="` + value + `" required>
                 </div>`;
                 break;
             default:
                 if (name === 'editPhone' && !value) {
                     let smsCodes = button.data('sms-codes'),
                         defaultSmsCode = button.data('default-sms-code');
-                    html =
-                        `
+                    html = `
                     <div class="input-group has-validation mb-3">
-                        <span class="input-group-text">` +
-                        lable +
-                        `</span>
+                        <span class="input-group-text border-end-rounded-0">` + lable + `</span>
                         <select class="form-select" name="editCountryCode">
                             <option disabled>Country Calling Codes</option>`;
-                    $(smsCodes).each(function (k, v) {
-                        let selected = v == defaultSmsCode ? 'selected' : '';
-                        html += `<option ` + selected + ` value="` + v + `">` + v + `</option>`;
-                    });
-                    html +=
-                        `
+                            $(smsCodes).each(function (k, v) {
+                                let selected = v == defaultSmsCode ? 'selected' : '';
+                                html += `<option ` + selected + ` value="` + v + `">` + v + `</option>`;
+                            });
+                    html += `
                         </select>
-                        <input type="text" class="form-control w-50" name="` +
-                        name +
-                        `" value="" required>
+                        <input type="text" class="form-control w-50" name="` + name + `" value="" required>
                         <input type="hidden" name="codeType" value="sms">
                     </div>
                     <div class="input-group has-validation">
-                        <span class="input-group-text">${fs_lang('verifyCode')}</span>
-                        <input type="text" class="form-control" name="newVerifyCode" required>
-                        <button data-type="sms" data-use-type="3" data-template-id="4" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)"  class="btn btn-outline-secondary send-verify-code" type="button">${fs_lang(
-                            'sendVerifyCode'
-                        )}</button>
+                        <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
+                        <input type="text" class="form-control border-end-rounded-0" name="newVerifyCode" required>
+                        <button data-type="sms" data-use-type="3" data-template-id="4" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)"  class="btn btn-outline-secondary send-verify-code" type="button">
+                            ${fs_lang('sendVerifyCode')}
+                        </button>
                     </div>`;
                 } else if (name === 'editEmail' && !value) {
-                    html =
-                        `
+                    html = `
                     <div class="input-group has-validation mb-3">
-                        <span class="input-group-text">` +
-                        lable +
-                        `</span>
-                        <input type="text" class="form-control" name="` +
-                        name +
-                        `" value="" required>
+                        <span class="input-group-text border-end-rounded-0">` + lable + `</span>
+                        <input type="text" class="form-control border-end-rounded-0" name="` + name + `" value="" required>
                         <input type="hidden" name="codeType" value="email">
                     </div>
                     <div class="input-group has-validation">
-                        <span class="input-group-text">${fs_lang('verifyCode')}</span>
-                        <input type="text" class="form-control" name="newVerifyCode">
-                        <button data-type="email" data-use-type="3" data-template-id="4" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary send-verify-code" type="button">${fs_lang(
-                            'sendVerifyCode'
-                        )}</button>
+                        <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
+                        <input type="text" class="form-control border-end-rounded-0" name="newVerifyCode">
+                        <button data-type="email" data-use-type="3" data-template-id="4" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary send-verify-code" type="button">
+                            ${fs_lang('sendVerifyCode')}
+                        </button>
                     </div>`;
                 } else if (name === 'editPhone' && value) {
                     let smsCodes = button.data('sms-codes'),
                         defaultSmsCode = button.data('default-sms-code');
-                    html =
-                        `
-                    <div class="form-text mb-3 text-center">` +
-                        desc +
-                        `</div>
+                    html = `
+                    <div class="form-text mb-3 text-center">` + desc + `</div>
                     <div class="input-group has-validation mb-3">
-                        <span class="input-group-text">` +
-                        lable +
-                        `</span>
-                        <input class="form-control" type="text" placeholder="` +
-                        value +
-                        `" value="` +
-                        value +
-                        `" disabled>
-                        <button data-type="sms" data-use-type="4" data-template-id="4" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)"  class="btn btn-outline-secondary send-verify-code" type="button">${fs_lang(
-                            'sendVerifyCode'
-                        )}</button>
+                        <span class="input-group-text border-end-rounded-0">` + lable + `</span>
+                        <input class="form-control border-end-rounded-0" type="text" placeholder="` + value + `" value="` + value + `" disabled>
+                        <button data-type="sms" data-use-type="4" data-template-id="4" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)"  class="btn btn-outline-secondary send-verify-code" type="button">
+                            ${fs_lang('sendVerifyCode')}
+                        </button>
                     </div>
                     <div class="input-group has-validation mb-3">
-                        <span class="input-group-text">${fs_lang('verifyCode')}</span>
-                        <input type="text" class="form-control" name="verifyCode">
-                        <button class="btn btn-outline-secondary" data-code-type="sms" data-action="/api/engine/account/verify-identity" type="button" onclick="accountVerification(this)">${fs_lang(
-                            'check'
-                        )}</button>
+                        <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
+                        <input type="text" class="form-control border-end-rounded-0" name="verifyCode">
+                        <button class="btn btn-outline-secondary" data-code-type="sms" data-action="/api/engine/account/verify-identity" type="button" onclick="accountVerification(this)">
+                            ${fs_lang('check')}
+                        </button>
                     </div>
                     <div class="input-group has-validation mb-3 d-none">
-                        <span class="input-group-text">${fs_lang('newPhone')}</span>
+                        <span class="input-group-text border-end-rounded-0">${fs_lang('newPhone')}</span>
                         <select class="form-select" name="editCountryCode">
                             <option disabled>Country Calling Codes</option>`;
-                    $(smsCodes).each(function (k, v) {
-                        let selected = v == defaultSmsCode ? 'selected' : '';
-                        html += `<option ` + selected + ` value="` + v + `">` + v + `</option>`;
-                    });
-                    html +=
-                        `</select>
-                        <input type="text" class="form-control w-50" required name="` +
-                        name +
-                        `" value="">
+                            $(smsCodes).each(function (k, v) {
+                                let selected = v == defaultSmsCode ? 'selected' : '';
+                                html += `<option ` + selected + ` value="` + v + `">` + v + `</option>`;
+                            });
+                    html += `
+                        </select>
+                        <input type="text" class="form-control w-50" required name="` + name + `" value="">
                     </div>
                     <div class="input-group has-validation d-none">
-                        <span class="input-group-text">${fs_lang('newVerifyCode')}</span>
-                        <input type="text" class="form-control" name="newVerifyCode">
+                        <span class="input-group-text border-end-rounded-0">${fs_lang('newVerifyCode')}</span>
+                        <input type="text" class="form-control border-end-rounded-0" name="newVerifyCode">
                         <input type="hidden" name="codeType" value="sms">
                         <button data-type="sms" data-use-type="1" data-template-id="3" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)"  class="btn btn-outline-secondary send-verify-code" type="button">${fs_lang(
                             'sendVerifyCode'
                         )}</button>
                     </div>`;
                 } else if (name === 'editEmail') {
-                    html =
-                        `
-                    <div class="form-text has-validation mb-3 text-center">` +
-                        desc +
-                        `</div>
+                    html = `
+                    <div class="form-text has-validation mb-3 text-center">` + desc + `</div>
                     <div class="input-group mb-3">
-                        <span class="input-group-text">` +
-                        lable +
-                        `</span>
-                        <input class="form-control" type="text" placeholder="` +
-                        value +
-                        `" value="` +
-                        value +
-                        `" disabled>
-                        <button data-type="email" data-use-type="4" data-template-id="4" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)"  class="btn btn-outline-secondary send-verify-code" type="button">${fs_lang(
-                            'sendVerifyCode'
-                        )}</button>
+                        <span class="input-group-text border-end-rounded-0">` + lable + `</span>
+                        <input class="form-control border-end-rounded-0" type="text" placeholder="` + value + `" value="` + value + `" disabled>
+                        <button data-type="email" data-use-type="4" data-template-id="4" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)"  class="btn btn-outline-secondary send-verify-code" type="button">
+                            ${fs_lang('sendVerifyCode')}
+                        </button>
                     </div>
                     <div class="input-group has-validation mb-3">
-                        <span class="input-group-text">${fs_lang('verifyCode')}</span>
-                        <input type="text" class="form-control" name="verifyCode">
-                        <button class="btn btn-outline-secondary" required data-code-type="email" data-action="/api/engine/account/verify-identity" type="button" onclick="accountVerification(this)">${fs_lang(
-                            'check'
-                        )}</button>
+                        <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
+                        <input type="text" class="form-control border-end-rounded-0" name="verifyCode">
+                        <button class="btn btn-outline-secondary" required data-code-type="email" data-action="/api/engine/account/verify-identity" type="button" onclick="accountVerification(this)">
+                            ${fs_lang('check')}
+                        </button>
                     </div>
                     <div class="input-group has-validation mb-3 d-none">
-                        <span class="input-group-text">${fs_lang('newEmail')}</span>
-                        <input type="text" class="form-control" required name="` +
-                        name +
-                        `" value="">
+                        <span class="input-group-text border-end-rounded-0">${fs_lang('newEmail')}</span>
+                        <input type="text" class="form-control" required name="` + name + `" value="">
                     </div>
                     <div class="input-group d-none">
-                        <span class="input-group-text">${fs_lang('newVerifyCode')}</span>
-                        <input type="text" class="form-control" name="newVerifyCode">
+                        <span class="input-group-text border-end-rounded-0">${fs_lang('newVerifyCode')}</span>
+                        <input type="text" class="form-control border-end-rounded-0" name="newVerifyCode">
                         <input type="hidden" name="codeType" value="email">
-                        <button data-type="email" data-use-type="1" data-template-id="3" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)"  class="btn btn-outline-secondary send-verify-code" type="button">${fs_lang(
-                            'sendVerifyCode'
-                        )}</button>
+                        <button data-type="email" data-use-type="1" data-template-id="3" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)"  class="btn btn-outline-secondary send-verify-code" type="button">
+                            ${fs_lang('sendVerifyCode')}
+                        </button>
                     </div>`;
                 } else if (name === 'editPassword' || name === 'editWalletPassword') {
                     html = `
                     <div class="input-group mb-3 mt-2">
-                        <span class="input-group-text">${fs_lang('settingType')}</span>
+                        <span class="input-group-text border-end-rounded-0">${fs_lang('settingType')}</span>
                         <div class="form-control">`;
-                    if (value) {
-                        html +=
-                            `
+                        if (value) {
+                            html += `
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="` +
-                            name +
-                            `_mode" id="password_to_edit" value="password_to_` +
-                            name +
-                            `" data-bs-toggle="collapse" data-bs-target="#password_to_edit:not(.show)" aria-expanded="true" checked>
+                                <input class="form-check-input" type="radio" name="` + name + `_mode" id="password_to_edit" value="password_to_` + name + `" data-bs-toggle="collapse" data-bs-target="#password_to_edit:not(.show)" aria-expanded="true" checked>
                                 <label class="form-check-label" for="password_to_edit">${fs_lang('password')}</label>
                             </div>`;
-                    }
-                    html +=
-                        `
+                        }
+                    html += `
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="` +
-                        name +
-                        `_mode" id="email_to_edit" value="email_to_` +
-                        name +
-                        `" data-bs-toggle="collapse" data-bs-target="#email_to_edit:not(.show)" aria-expanded="${
-                            value ? 'false' : 'true'
-                        }" ${value ? '' : 'checked'}>
-                                <label class="form-check-label" for="email_to_edit">${fs_lang(
-                                    'emailVerifyCode'
-                                )}</label>
+                                <input class="form-check-input" type="radio" name="` + name + `_mode" id="email_to_edit" value="email_to_` + name + `" data-bs-toggle="collapse" data-bs-target="#email_to_edit:not(.show)" aria-expanded="${value ? 'false' : 'true'}" ${value ? '' : 'checked'}>
+                                <label class="form-check-label" for="email_to_edit">${fs_lang('emailVerifyCode')}</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="` +
-                        name +
-                        `_mode" id="phone_to_edit" value="phone_to_` +
-                        name +
-                        `" data-bs-toggle="collapse" data-bs-target="#phone_to_edit:not(.show)" aria-expanded="false">
+                                <input class="form-check-input" type="radio" name="` + name + `_mode" id="phone_to_edit" value="phone_to_` + name + `" data-bs-toggle="collapse" data-bs-target="#phone_to_edit:not(.show)" aria-expanded="false">
                                 <label class="form-check-label" for="phone_to_edit">${fs_lang('smsVerifyCode')}</label>
                             </div>
                         </div>
                     </div>
                     <div id="edit_password_mode">
-                        <div class="collapse ${
-                            value ? 'show' : ''
-                        }" id="password_to_edit" aria-labelledby="password_to_edit" data-bs-parent="#edit_password_mode">
+                        <div class="collapse ${ value ? 'show' : '' }" id="password_to_edit" aria-labelledby="password_to_edit" data-bs-parent="#edit_password_mode">
                             <div class="input-group mb-3">
-                                <span class="input-group-text">${fs_lang('passwordCurrent')}</span>
-                                <input type="hidden" class="form-control" name="edit_type" value="` +
-                        name +
-                        `">
-                                <input type="password" class="form-control" name="now_` +
-                        name +
-                        `">
+                                <span class="input-group-text border-end-rounded-0">${fs_lang('passwordCurrent')}</span>
+                                <input type="hidden" class="form-control" name="edit_type" value="` + name + `">
+                                <input type="password" class="form-control" name="now_` + name + `">
                             </div>
                         </div>
-                        <div class="collapse ${
-                            !value ? 'show' : ''
-                        }" id="email_to_edit" aria-labelledby="email_to_edit" data-bs-parent="#edit_password_mode">
+                        <div class="collapse ${ !value ? 'show' : '' }" id="email_to_edit" aria-labelledby="email_to_edit" data-bs-parent="#edit_password_mode">
                             <div class="input-group mb-3">
-                                <span class="input-group-text">${fs_lang('email')}</span>
-                                <input class="form-control" type="text" placeholder="` +
-                        email +
-                        `" value="` +
-                        email +
-                        `" disabled>
+                                <span class="input-group-text border-end-rounded-0">${fs_lang('email')}</span>
+                                <input class="form-control" type="text" placeholder="` + email + `" value="` + email + `" disabled>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text">${fs_lang('verifyCode')}</span>
+                                <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
                                 <input type="text" class="form-control" name="email_verifyCode">
-                                <button data-type="email" data-use-type="4" data-template-id="5" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)"  class="btn btn-outline-secondary send-verify-code" type="button">${fs_lang(
-                                    'sendVerifyCode'
-                                )}</button>
+                                <button data-type="email" data-use-type="4" data-template-id="5" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)"  class="btn btn-outline-secondary send-verify-code" type="button">
+                                    ${fs_lang('sendVerifyCode')}
+                                </button>
                             </div>
                         </div>
                         <div class="collapse" id="phone_to_edit" aria-labelledby="phone_to_edit" data-bs-parent="#edit_password_mode">
                             <div class="input-group mb-3">
-                                <span class="input-group-text">${fs_lang('phone')}</span>
-                                <input class="form-control" type="text" placeholder="` +
-                        phone +
-                        `" value="` +
-                        phone +
-                        `" disabled>
+                                <span class="input-group-text border-end-rounded-0">${fs_lang('phone')}</span>
+                                <input class="form-control" type="text" placeholder="` + phone + `" value="` + phone + `" disabled>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text">${fs_lang('verifyCode')}</span>
+                                <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
                                 <input type="text" class="form-control" name="phone_verifyCode">
-                                <button data-type="sms" data-use-type="4" data-template-id="5" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)"  class="btn btn-outline-secondary send-verify-code" type="button">${fs_lang(
-                                    'sendVerifyCode'
-                                )}</button>
+                                <button data-type="sms" data-use-type="4" data-template-id="5" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)"  class="btn btn-outline-secondary send-verify-code" type="button">
+                                    ${fs_lang('sendVerifyCode')}
+                                </button>
                             </div>
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text">${fs_lang('passwordNew')}</span>
-                            <input type="password" class="form-control" name="new_` +
-                        name +
-                        `">
+                            <span class="input-group-text border-end-rounded-0">${fs_lang('passwordNew')}</span>
+                            <input type="password" class="form-control" name="new_` + name + `">
                         </div>
                         <div class="input-group mb-3">
-                            <span class="input-group-text">${fs_lang('passwordAgain')}</span>
-                            <input type="password" class="form-control" name="new_` +
-                        name +
-                        `_confirmation">
+                            <span class="input-group-text border-end-rounded-0">${fs_lang('passwordAgain')}</span>
+                            <input type="password" class="form-control" name="new_` + name + `_confirmation">
                         </div>
                     </div>`;
                 } else {
-                    html =
-                        `
+                    html = `
                     <div class="input-group has-validation">
-                        <span class="input-group-text">` +
-                        lable +
-                        `</span>
-                        <input type="text" class="form-control" name="` +
-                        name +
-                        `" value="` +
-                        value +
-                        `" required>
+                        <span class="input-group-text border-end-rounded-0">` + lable + `</span>
+                        <input type="text" class="form-control" name="` + name + `" value="` + value + `" required>
                     </div>
-                    <div class="form-text">` +
-                        desc +
-                        `</div>`;
+                    <div class="form-text">` + desc + `</div>`;
                 }
                 break;
         }
         $(this).find('.modal-body').empty().html(html);
+
+        // at and hashtag
+        atwho();
     });
 
     $("#accordionCodeAccount button[type='submit']").on('click', function (e) {
@@ -1246,12 +1157,12 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                             form.find('.modal-body .invalid-feedback').length
                                 ? form.find('.modal-body .invalid-feedback').text(fs_lang('settingCheckError'))
                                 : form
-                                      .find('.modal-body')
-                                      .append(
-                                          `<div class="invalid-feedback d-block">${fs_lang(
-                                              'Please verify first'
-                                          )}</div>`
-                                      );
+                                    .find('.modal-body')
+                                    .append(
+                                        `<div class="invalid-feedback d-block">${fs_lang(
+                                            'Please verify first'
+                                        )}</div>`
+                                    );
                         } else if ($(v).next().length) {
                             $(v)
                                 .parent()
@@ -1493,7 +1404,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
 $(document).ready(function () {
     var parse_url = /^(?:([A-Za-z]+):)?(\/{0,3})([0-9.\-A-Za-z]+)(?::(\d+))?(?:\/([^?#]*))?(?:\?([^#]*))?(?:#(.*))?$/;
     var location_href = window.location.href.replace(parse_url, '$3');
-    $('.markdown a:not(:has(img)),.markdown a').hover(function () {
+    $('.content-article a:not(:has(img)),.content-article a').hover(function () {
         var this_href = $(this).attr('href');
         var replace_href = this_href.replace(parse_url, '$3');
         if (this_href != replace_href && location_href != replace_href) $(this).attr('target', '_blank');

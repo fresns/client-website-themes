@@ -2,10 +2,6 @@
 
 @section('title', fs_api_config('menu_account_login'))
 
-@push('script')
-<script src="/static/js/base64.js"></script>
-@endpush
-
 @section('content')
     <div class="container-fluid">
         <div class="row my-5 pt-5 m-auto" style="max-width:500px;">
