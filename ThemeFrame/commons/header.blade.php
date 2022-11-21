@@ -90,16 +90,16 @@
 
                         <a href="{{ fs_route(route('fresns.message.notifications')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
                             <i class="bi bi-bell"></i>
-                            @if(array_sum($userPanel['unreadNotifications']) > 0)
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ array_sum($userPanel['unreadNotifications']) }}</span>
+                            @if(array_sum(fs_user_panel('unreadNotifications')) > 0)
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ array_sum(fs_user_panel('unreadNotifications')) }}</span>
                             @endif
                         </a>
 
                         @if (fs_api_config('conversation_status'))
                             <a href="{{ fs_route(route('fresns.message.index')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
                                 <i class="bi bi-envelope"></i>
-                                @if($userPanel['conversations']['unreadMessages'] > 0)
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ $userPanel['conversations']['unreadMessages'] }}</span>
+                                @if(fs_user_panel('conversations.unreadMessages') > 0)
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ fs_user_panel('conversations.unreadMessages') }}</span>
                                 @endif
                             </a>
                         @endif
@@ -113,8 +113,8 @@
                                         <i class="bi bi-bell"></i>
                                         {{ fs_api_config('menu_notifications') }}
 
-                                        @if(array_sum($userPanel['unreadNotifications']) > 0)
-                                            <span class="badge bg-danger">{{ array_sum($userPanel['unreadNotifications']) }}</span>
+                                        @if(array_sum(fs_user_panel('unreadNotifications')) > 0)
+                                            <span class="badge bg-danger">{{ array_sum(fs_user_panel('unreadNotifications')) }}</span>
                                         @endif
                                     </a>
                                 </li>
@@ -124,8 +124,8 @@
                                             <i class="bi bi-envelope"></i>
                                             {{ fs_db_config('menu_conversations') }}
 
-                                            @if($userPanel['conversations']['unreadMessages'] > 0)
-                                                <span class="badge bg-danger">{{ $userPanel['conversations']['unreadMessages'] }}</span>
+                                            @if(fs_user_panel('conversations.unreadMessages') > 0)
+                                                <span class="badge bg-danger">{{ fs_user_panel('conversations.unreadMessages') }}</span>
                                             @endif
                                         </a>
                                     </li>
@@ -135,8 +135,8 @@
                                         <i class="bi bi-file-earmark-text"></i>
                                         {{ fs_api_config('menu_editor_drafts') }}
 
-                                        @if(array_sum($userPanel['draftCount']) > 0)
-                                            <span class="badge bg-primary">{{ array_sum($userPanel['draftCount']) }}</span>
+                                        @if(array_sum(fs_user_panel('draftCount')) > 0)
+                                            <span class="badge bg-primary">{{ array_sum(fs_user_panel('draftCount')) }}</span>
                                         @endif
                                     </a>
                                 </li>

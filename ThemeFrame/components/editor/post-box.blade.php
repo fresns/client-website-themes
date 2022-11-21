@@ -38,7 +38,7 @@
                             @if(fs_api_config('post_editor_image'))
                                 <div class="input-group mt-2">
                                     <label class="input-group-text" for="file">{{ fs_lang('editorImages') }}</label>
-                                    <input type="file" class="form-control" accept="{{ $userPanel['fileAccept']['images'] ?? null }}" name="file" id="file">
+                                    <input type="file" class="form-control" accept="{{ fs_user_panel('fileAccept.images') ?? null }}" name="file" id="file">
                                 </div>
                             @endif
                             {{-- Attachment Status --}}
@@ -79,7 +79,7 @@
                     <div class="nav flex-column nav-pills me-3" id="v-pills-post-box-tab" role="tablist" aria-orientation="vertical">
                         <button type="button" id="post-box-not-select-group" class="btn btn-outline-secondary btn-sm mb-2 modal-close" data-bs-target="#createModal" data-bs-toggle="modal" aria-label="Close">{{ fs_lang('editorNoGroup') }} {{ fs_api_config('group_name') }}</button>
                         {{-- Group Categories --}}
-                        @foreach($groupCategories as $groupCategory)
+                        @foreach(fs_groups('categories') as $groupCategory)
                             <button class="nav-link group-categories" data-page-size=15 data-page=1  data-action="{{ route('fresns.api.group.list', ['gid' => $groupCategory['gid']]) }}" id="v-pills-{{ $groupCategory['gid'] }}-post-box-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ $groupCategory['gid'] }}-post-box" type="button" role="tab" aria-controls="v-pills-{{ $groupCategory['gid'] }}-post-box" aria-selected="false">
                                 @if ($groupCategory['cover'])
                                     <img src="{{ $groupCategory['cover'] }}" height="20">
@@ -91,7 +91,7 @@
 
                     <div class="tab-content" id="v-pills-post-box-tabContent" style="width:70%;">
                         {{-- Group List --}}
-                        @foreach($groupCategories as $groupCategory)
+                        @foreach(fs_groups('categories') as $groupCategory)
                             <div class="tab-pane fade" id="v-pills-{{ $groupCategory['gid'] }}-post-box" role="tabpanel" aria-labelledby="v-pills-{{ $groupCategory['gid'] }}-post-box-tab">
                                 <div class="list-group"></div>
                                 <div class="list-group-addmore text-center my-3"></div>

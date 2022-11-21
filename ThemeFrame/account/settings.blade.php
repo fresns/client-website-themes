@@ -40,7 +40,7 @@
                                             id="uploadAvatar"
                                             name="uploadAvatar"
                                             hidden="hidden"
-                                            accept="{{ $userPanel['fileAccept']['images'] }}"
+                                            accept="{{ fs_user_panel('fileAccept.images') }}"
                                             data-upload-action="{{ route('fresns.api.upload.file') }}"
                                             data-edit-action="{{ route('fresns.api.user.edit') }}"
                                             data-type="image"

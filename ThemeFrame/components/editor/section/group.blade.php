@@ -23,7 +23,7 @@
                     <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         <button type="button" id="not-select-group" class="btn btn-outline-secondary btn-sm mb-2 modal-close" data-bs-dismiss="modal" aria-label="Close">{{ fs_lang('editorNoGroup') }} {{ fs_api_config('group_name') }}</button>
                         {{-- Group Categories --}}
-                        @foreach($groupCategories as $groupCategory)
+                        @foreach(fs_groups('categories') as $groupCategory)
                             <button class="nav-link group-categories" data-page-size=15 data-page=1 data-action="{{ route('fresns.api.group.list', ['gid' => $groupCategory['gid']]) }}" id="v-pills-{{ $groupCategory['gid'] }}-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ $groupCategory['gid'] }}" type="button" role="tab" aria-controls="v-pills-{{ $groupCategory['gid'] }}" aria-selected="false">
                                 @if ($groupCategory['cover'])
                                     <img src="{{ $groupCategory['cover'] }}" height="20">
@@ -35,7 +35,7 @@
 
                     <div class="tab-content" id="v-pills-tabContent" style="width:70%;">
                         {{-- Group List --}}
-                        @foreach($groupCategories as $groupCategory)
+                        @foreach(fs_groups('categories') as $groupCategory)
                             <div class="tab-pane fade" id="v-pills-{{ $groupCategory['gid'] }}" role="tabpanel" aria-labelledby="v-pills-{{ $groupCategory['gid'] }}-tab">
                                 <div class="list-group"></div>
                                 <div class="list-group-addmore text-center my-3"></div>

@@ -15,7 +15,7 @@
                         <li><label class="dropdown-item" for="messageImage" style="cursor:pointer;"><i class="bi bi-image"></i> {{ fs_lang('image') }}</label></li>
                         <input id="messageImage" class="sendFile" hidden="hidden" type="file"
                             name="messageImage"
-                            accept="{{ $userPanel['fileAccept']['images'] }}"
+                            accept="{{ fs_user_panel('fileAccept.images') }}"
                             data-upload-action="{{ route('fresns.api.upload.file') }}"
                             data-type="image"
                             data-usagetype="6"
@@ -31,7 +31,7 @@
                         <li><label class="dropdown-item" for="messageVideo" style="cursor:pointer;"><i class="bi bi-film"></i> {{ fs_lang('video') }}</label></li>
                         <input id="messageVideo" class="sendFile" hidden="hidden" type="file"
                             name="messageVideo"
-                            accept="{{ $userPanel['fileAccept']['videos'] }}"
+                            accept="{{ fs_user_panel('fileAccept.videos') }}"
                             data-upload-action="{{ route('fresns.api.upload.file') }}"
                             data-type="video"
                             data-usagetype="6"
@@ -47,7 +47,7 @@
                         <li><label class="dropdown-item" for="messageAudio" style="cursor:pointer;"><i class="bi bi-music-note-beamed"></i> {{ fs_lang('audio') }}</label></li>
                         <input id="messageAudio" class="sendFile" hidden="hidden" type="file"
                             name="messageAudio"
-                            accept="{{ $userPanel['fileAccept']['audios'] }}"
+                            accept="{{ fs_user_panel('fileAccept.audios') }}"
                             data-upload-action="{{ route('fresns.api.upload.file') }}"
                             data-type="audio"
                             data-usagetype="6"
@@ -63,7 +63,7 @@
                         <li><label class="dropdown-item" for="messageDocument" style="cursor:pointer;"><i class="bi bi-file-earmark-text"></i> {{ fs_lang('document') }}</label></li>
                         <input id="messageDocument" class="sendFile" hidden="hidden" type="file"
                             name="messageDocument"
-                            accept="{{ $userPanel['fileAccept']['documents'] }}"
+                            accept="{{ fs_user_panel('fileAccept.documents') }}"
                             data-upload-action="{{ route('fresns.api.upload.file') }}"
                             data-type="document"
                             data-usagetype="6"

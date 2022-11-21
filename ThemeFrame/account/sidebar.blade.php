@@ -15,8 +15,8 @@
             <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-notifications.png" width="36" height="36">
             {{ fs_api_config('menu_notifications') }}
 
-            @if(array_sum($userPanel['unreadNotifications']) > 0)
-                <span class="badge bg-danger">{{ array_sum($userPanel['unreadNotifications']) }}</span>
+            @if(array_sum(fs_user_panel('unreadNotifications')) > 0)
+                <span class="badge bg-danger">{{ array_sum(fs_user_panel('unreadNotifications')) }}</span>
             @endif
         </a>
 
@@ -26,8 +26,8 @@
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-conversations.png" width="36" height="36">
                 {{ fs_db_config('menu_conversations') }}
 
-                @if($userPanel['conversations']['unreadMessages'] > 0)
-                    <span class="badge bg-danger">{{ $userPanel['conversations']['unreadMessages'] }}</span>
+                @if(fs_user_panel('conversations.unreadMessages') > 0)
+                    <span class="badge bg-danger">{{ fs_user_panel('conversations.unreadMessages') }}</span>
                 @endif
             </a>
         @endif
@@ -37,8 +37,8 @@
             <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-drafts.png" width="36" height="36">
             {{ fs_api_config('menu_editor_drafts') }}
 
-            @if(array_sum($userPanel['draftCount']) > 0)
-                <span class="badge bg-primary">{{ array_sum($userPanel['draftCount']) }}</span>
+            @if(array_sum(fs_user_panel('draftCount')) > 0)
+                <span class="badge bg-primary">{{ array_sum(fs_user_panel('draftCount')) }}</span>
             @endif
         </a>
 

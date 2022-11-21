@@ -21,8 +21,8 @@
                                 <a class="nav-link @if($type == 'posts') active @endif" href="{{ fs_route(route('fresns.editor.drafts', ['type' => 'posts'])) }}">
                                     {{ fs_api_config('post_name') }}
 
-                                    @if($userPanel['draftCount']['posts'] > 0)
-                                        <span class="badge bg-danger">{{ $userPanel['draftCount']['posts'] }}</span>
+                                    @if(fs_user_panel('draftCount.posts') > 0)
+                                        <span class="badge bg-danger">{{ fs_user_panel('draftCount.posts') }}</span>
                                     @endif
                                 </a>
                             </li>
@@ -31,8 +31,8 @@
                                 <a class="nav-link @if($type == 'comments') active @endif" href="{{ fs_route(route('fresns.editor.drafts', ['type' => 'comments'])) }}">
                                     {{ fs_api_config('comment_name') }}
 
-                                    @if($userPanel['draftCount']['comments'] > 0)
-                                        <span class="badge bg-danger">{{ $userPanel['draftCount']['comments'] }}</span>
+                                    @if(fs_user_panel('draftCount.comments') > 0)
+                                        <span class="badge bg-danger">{{ fs_user_panel('draftCount.comments') }}</span>
                                     @endif
                                 </a>
                             </li>

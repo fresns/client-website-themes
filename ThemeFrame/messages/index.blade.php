@@ -18,9 +18,9 @@
                         <div class="col mb-3">
                             <a href="{{ fs_route(route('fresns.message.notifications', ['types' => 1])) }}" class="btn btn-outline-secondary position-relative w-100" role="button">
                                 {{ fs_api_config('menu_notifications_systems') }}
-                                @if($userPanel['unreadNotifications']['systems'] > 0)
-                                    <span class="badge bg-danger">{{ $userPanel['unreadNotifications']['systems'] }}</span>
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ $userPanel['unreadNotifications']['systems'] }}</span>
+                                @if(fs_user_panel('unreadNotifications.systems') > 0)
+                                    <span class="badge bg-danger">{{ fs_user_panel('unreadNotifications.systems') }}</span>
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ fs_user_panel('unreadNotifications.systems') }}</span>
                                 @endif
                             </a>
                         </div>
@@ -31,8 +31,8 @@
                         <div class="col mb-3">
                             <a href="{{ fs_route(route('fresns.message.notifications', ['types' => 2])) }}" class="btn btn-outline-secondary position-relative w-100" role="button">
                                 {{ fs_api_config('menu_notifications_recommends') }}
-                                @if($userPanel['unreadNotifications']['recommends'] > 0)
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ $userPanel['unreadNotifications']['recommends'] }}</span>
+                                @if(fs_user_panel('unreadNotifications.recommends') > 0)
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ fs_user_panel('unreadNotifications.recommends') }}</span>
                                 @endif
                             </a>
                         </div>
@@ -43,8 +43,8 @@
                         <div class="col mb-3">
                             <a href="{{ fs_route(route('fresns.message.notifications', ['types' => 3])) }}" class="btn btn-outline-secondary position-relative w-100" role="button">
                                 {{ fs_api_config('menu_notifications_likes') }}
-                                @if($userPanel['unreadNotifications']['likes'] > 0)
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{$userPanel['unreadNotifications']['likes']}}</span>
+                                @if(fs_user_panel('unreadNotifications.likes') > 0)
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{fs_user_panel('unreadNotifications.likes')}}</span>
                                 @endif
                             </a>
                         </div>
@@ -55,8 +55,8 @@
                         <div class="col mb-3">
                             <a href="{{ fs_route(route('fresns.message.notifications', ['types' => 4])) }}" class="btn btn-outline-secondary position-relative w-100" role="button">
                                 {{ fs_api_config('menu_notifications_dislikes') }}
-                                @if($userPanel['unreadNotifications']['dislikes'] > 0)
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{$userPanel['unreadNotifications']['dislikes']}}</span>
+                                @if(fs_user_panel('unreadNotifications.dislikes') > 0)
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{fs_user_panel('unreadNotifications.dislikes')}}</span>
                                 @endif
                             </a>
                         </div>
@@ -67,8 +67,8 @@
                         <div class="col mb-3">
                             <a href="{{ fs_route(route('fresns.message.notifications', ['types' => 5])) }}" class="btn btn-outline-secondary position-relative w-100" role="button">
                                 {{ fs_api_config('menu_notifications_follows') }}
-                                @if($userPanel['unreadNotifications']['follows'] > 0)
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{$userPanel['unreadNotifications']['follows']}}</span>
+                                @if(fs_user_panel('unreadNotifications.follows') > 0)
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{fs_user_panel('unreadNotifications.follows')}}</span>
                                 @endif
                             </a>
                         </div>
@@ -79,8 +79,8 @@
                         <div class="col mb-3">
                             <a href="{{ fs_route(route('fresns.message.notifications', ['types' => 6])) }}" class="btn btn-outline-secondary position-relative w-100" role="button">
                                 {{ fs_api_config('menu_notifications_blocks') }}
-                                @if($userPanel['unreadNotifications']['blocks'] > 0)
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{$userPanel['unreadNotifications']['blocks']}}</span>
+                                @if(fs_user_panel('unreadNotifications.blocks') > 0)
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{fs_user_panel('unreadNotifications.blocks')}}</span>
                                 @endif
                             </a>
                         </div>
@@ -91,8 +91,8 @@
                         <div class="col mb-3">
                             <a href="{{ fs_route(route('fresns.message.notifications', ['types' => 6])) }}" class="btn btn-outline-secondary position-relative w-100" role="button">
                                 {{ fs_api_config('menu_notifications_mentions') }}
-                                @if($userPanel['unreadNotifications']['mentions'] > 0)
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{$userPanel['unreadNotifications']['mentions']}}</span>
+                                @if(fs_user_panel('unreadNotifications.mentions') > 0)
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{fs_user_panel('unreadNotifications.mentions')}}</span>
                                 @endif
                             </a>
                         </div>
@@ -103,8 +103,8 @@
                         <div class="col mb-3">
                             <a href="{{ fs_route(route('fresns.message.notifications', ['types' => 6])) }}" class="btn btn-outline-secondary position-relative w-100" role="button">
                                 {{ fs_api_config('menu_notifications_comments') }}
-                                @if($userPanel['unreadNotifications']['comments'] > 0)
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{$userPanel['unreadNotifications']['comments']}}</span>
+                                @if(fs_user_panel('unreadNotifications.comments') > 0)
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{fs_user_panel('unreadNotifications.comments')}}</span>
                                 @endif
                             </a>
                         </div>
