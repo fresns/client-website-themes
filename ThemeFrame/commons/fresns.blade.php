@@ -80,7 +80,7 @@
     <script src="/static/js/bootstrap.bundle.min.js"></script>
     <script src="/static/js/select2.min.js"></script>
     <script src="/static/js/iframeResizer.min.js"></script>
-    <script src="/static/js/fresns-iframe.js"></script>
+    <script src="/assets/plugins/FresnsEngine/js/fresns-iframe.js"></script>
     <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js"></script>
     <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=581c98c24147b4a6"></script>
     <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=581c98c24147b4a6"></script>
