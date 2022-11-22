@@ -2,6 +2,12 @@
 
 @section('title', $code)
 
+@php
+    use App\Helpers\ConfigHelper;
+
+    $email = ConfigHelper::fresnsConfigByItemKey('site_email');
+@endphp
+
 @section('content')
     <main class="container-fluid">
         <div class="row mt-5 pt-5">
@@ -9,8 +15,11 @@
                 <div class="card-body p-5">
                     <h3 class="card-title">Fresns {{ $code }}</h3>
                     <p>{{ $message }}</p>
+                    <p>Administrator Email: <a href="mailto:{{ $email }}">{{ $email }}</a></p>
 
-                    <a class="btn btn-outline-success btn-sm mt-4 clear-cookie" href="#" data-method="DELETE" data-action="{{ route('panel.clear.web.cookie') }}">Clear Cookie</a>
+                    @if ($code == 31505 || $code == 31603)
+                        <a class="btn btn-outline-success btn-sm mt-4 clear-cookie" href="#" data-method="DELETE" data-action="{{ route('panel.clear.web.cookie') }}">Clear Cookie</a>
+                    @endif
                 </div>
             </div>
         </div>
