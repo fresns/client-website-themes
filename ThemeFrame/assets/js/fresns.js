@@ -1527,3 +1527,34 @@ $(document).ready(function () {
         });
     }
 });
+
+// fresns extensions callback
+window.onmessage = function (event) {
+    let data;
+
+    try {
+        data = JSON.parse(event.data)
+    } catch (error) {
+    }
+
+    if (data.code != 0) {
+        if (data.message) {
+            window.tips(data.message);
+        }
+        return
+    }
+
+    switch(data.postMessageKey) {
+        case "fresnsJoin":
+            apiData = data.data;
+            if (apiData.sessionToken.token) {
+                Cookies.set('fs_aid', apiData.detail.aid)
+                Cookies.set('fs_aid_token', apiData.sessionToken.token, { expires: apiData.sessionToken.expiredDays })
+            }
+        break;
+    }
+
+    if (data.windowClose) {
+        window.location.refresh()
+    }
+};
