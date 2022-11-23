@@ -1536,7 +1536,7 @@ window.onmessage = function (event) {
         data = JSON.parse(event.data);
     } catch (error) {}
 
-    if (! data) {
+    if (!data) {
         return;
     }
 
