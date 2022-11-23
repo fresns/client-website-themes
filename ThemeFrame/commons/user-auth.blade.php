@@ -1,5 +1,5 @@
 @if (fs_account()->check())
-    {{-- 登录后：选择用户 Modal --}}
+    {{-- After login: Select user --}}
     <div class="modal fade" id="userAuth" data-bs-backdrop="static" tabindex="-1"  aria-hidden="true" aria-labelledby="userAuthModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    {{-- 登录后：选择用户-输入密码 Modal --}}
+    {{-- After login: select user - enter password --}}
     <div class="modal fade" id="userPwdLogin" aria-hidden="true" aria-labelledby="userPwdLoginLabel" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content" id="user-password-auth">
