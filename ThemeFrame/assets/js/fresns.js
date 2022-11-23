@@ -1536,6 +1536,10 @@ window.onmessage = function (event) {
         data = JSON.parse(event.data);
     } catch (error) {}
 
+    if (! data) {
+        return;
+    }
+
     if (data.code != 0) {
         if (data.message) {
             window.tips(data.message);
