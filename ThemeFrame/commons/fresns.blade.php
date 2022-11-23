@@ -79,6 +79,7 @@
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/bootstrap.bundle.min.js"></script>
     <script src="/static/js/select2.min.js"></script>
+    <script src="/static/js/js.cookie.min.js"></script>
     <script src="/static/js/iframeResizer.min.js"></script>
     <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v=f72f73db450864a8" }}"></script>
     <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js"></script>

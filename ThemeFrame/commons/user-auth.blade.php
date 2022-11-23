@@ -28,11 +28,9 @@
                     </div>
                 </div>
 
-                @if (Route::is('fresns.account.login') || Route::is('fresns.account.register') || Route::is('fresns.account.reset.password'))
-                    <div class="modal-footer">
-                        <a class="btn btn-danger" role="button" href="{{ fs_route(route('fresns.account.logout')) }}"><i class="bi bi-power"></i> {{ fs_lang('accountLogout') }}</a>
-                    </div>
-                @endif
+                <div class="modal-footer">
+                    <a class="btn btn-danger" role="button" href="{{ fs_route(route('fresns.account.logout')) }}"><i class="bi bi-power"></i> {{ fs_lang('accountLogout') }}</a>
+                </div>
             </div>
         </div>
     </div>
@@ -75,27 +73,25 @@
 @endif
 
 @push('script')
-    @if (Route::is('fresns.account.login') || Route::is('fresns.account.register') || Route::is('fresns.account.reset.password'))
-        @if (fs_account()->check() && fs_user()->guest())
-            <script>
-                $(function () {
-                    var userCount = "{{ count(fs_account('detail.users')) }}";
+    @if (fs_account()->check() && fs_user()->guest())
+        <script>
+            $(function () {
+                var userCount = "{{ count(fs_account('detail.users')) }}";
 
-                    switch (Number(userCount)) {
-                        default:
-                            new bootstrap.Modal('#userAuth').show();
-                        break;
-                        case 1:
-                            var hasPassword = "{{ fs_account('detail.users.0.hasPassword') }}" || true;
-                            if (hasPassword == "true") {
-                                new bootstrap.Modal('#userPwdLogin').show()
-                            } else {
-                                $("#uid-{{ fs_account('detail.users.0.uid') }} button").click()
-                            }
-                        break;
-                    }
-                })
-            </script>
-        @endif
+                switch (Number(userCount)) {
+                    default:
+                        new bootstrap.Modal('#userAuth').show();
+                    break;
+                    case 1:
+                        var hasPassword = "{{ fs_account('detail.users.0.hasPassword') }}" || true;
+                        if (hasPassword == "true") {
+                            new bootstrap.Modal('#userPwdLogin').show()
+                        } else {
+                            $("#uid-{{ fs_account('detail.users.0.uid') }} button").click()
+                        }
+                    break;
+                }
+            })
+        </script>
     @endif
 @endpush
