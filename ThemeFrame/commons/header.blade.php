@@ -104,10 +104,14 @@
                             </a>
                         @endif
 
+                        {{-- User Menus --}}
                         <div class="dropdown">
                             <button class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-caret-down-fill"></i></button>
                             <ul class="dropdown-menu dropdown-menu-end">
+                                {{-- User Home --}}
                                 <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.index')) }}"><i class="bi bi-person-fill"></i> {{ fs_api_config('menu_account') }}</a></li>
+
+                                {{-- Notifications --}}
                                 <li>
                                     <a class="dropdown-item" href="{{ fs_route(route('fresns.message.notifications')) }}">
                                         <i class="bi bi-bell"></i>
@@ -118,6 +122,8 @@
                                         @endif
                                     </a>
                                 </li>
+
+                                {{-- Conversations --}}
                                 @if (fs_api_config('conversation_status'))
                                     <li>
                                         <a class="dropdown-item" href="{{ fs_route(route('fresns.message.index')) }}">
@@ -130,6 +136,8 @@
                                         </a>
                                     </li>
                                 @endif
+
+                                {{-- Drafts --}}
                                 <li>
                                     <a class="dropdown-item" href="{{ fs_route(route('fresns.editor.drafts', ['type' => 'posts'])) }}">
                                         <i class="bi bi-file-earmark-text"></i>
@@ -140,18 +148,32 @@
                                         @endif
                                     </a>
                                 </li>
-                                <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.wallet')) }}"><i class="bi bi-wallet"></i> {{ fs_api_config('menu_account_wallet') }}</a></li>
+
+                                {{-- Wallet --}}
+                                @if (fs_api_config('wallet_status'))
+                                    <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.wallet')) }}"><i class="bi bi-wallet"></i> {{ fs_api_config('menu_account_wallet') }}</a></li>
+                                @endif
+
+                                {{-- List of users belonging to the current account --}}
                                 @if (count(fs_account('detail.users')) > 1)
                                     <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.users')) }}"><i class="bi bi-people"></i> {{ fs_api_config('menu_account_users') }}</a></li>
                                 @endif
+
+                                {{-- Settings Page --}}
                                 <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.settings')) }}"><i class="bi bi-gear"></i> {{ fs_api_config('menu_account_settings') }}</a></li>
                                 <li><hr class="dropdown-divider"></li>
+
+                                {{-- Switching Languages --}}
                                 @if (fs_api_config('language_status'))
                                     <li><a class="dropdown-item" href="#translate" data-bs-toggle="modal"><i class="bi bi-translate"></i> {{ fs_lang('optionLanguage') }}</a></li>
                                 @endif
+
+                                {{-- Switching Users --}}
                                 @if (count(fs_account('detail.users')) > 1)
                                     <li><a class="dropdown-item" href="#userAuth" id="switch-user" data-bs-toggle="modal"><i class="bi bi-people"></i> {{ fs_lang('optionUser') }}</a></li>
                                 @endif
+
+                                {{-- Logout --}}
                                 <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.logout')) }}"><i class="bi bi-power"></i> {{ fs_lang('accountLogout') }}</a></li>
                             </ul>
                         </div>

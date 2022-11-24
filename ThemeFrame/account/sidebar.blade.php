@@ -43,10 +43,12 @@
         </a>
 
         {{-- Wallet --}}
-        <a href="{{ fs_route(route('fresns.account.wallet')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.account.wallet') ? 'active' : '' }}">
-            <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-wallet.png" width="36" height="36">
-            {{ fs_api_config('menu_account_wallet') }}
-        </a>
+        @if (fs_api_config('wallet_status'))
+            <a href="{{ fs_route(route('fresns.account.wallet')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.account.wallet') ? 'active' : '' }}">
+                <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-wallet.png" width="36" height="36">
+                {{ fs_api_config('menu_account_wallet') }}
+            </a>
+        @endif
 
         {{-- List of users belonging to the current account --}}
         @if (count(fs_account('detail.users')) > 1)
