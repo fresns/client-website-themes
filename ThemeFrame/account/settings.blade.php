@@ -15,7 +15,7 @@
                 {{-- Recall Delete Account --}}
                 @if (fs_account('detail.waitDelete'))
                     <div class="alert alert-danger" role="alert">
-                        <h4 class="alert-heading">{{ fs_lang('contentCreatorDeactivate') }}</h4>
+                        <h4 class="alert-heading">{{ fs_lang('accountWaitDelete') }}</h4>
                         <p>{{ fs_lang('executionDate') }}: {{ fs_account('detail.waitDeleteDateTime') }}</p>
                         <hr>
                         <form class="api-request-form" action="{{ route('fresns.api.account.recall.delete') }}" method="post">
@@ -411,7 +411,7 @@
                                 <div>
                                     {!! Str::markdown(fs_api_config('account_delete')) !!}
                                 </div>
-                                @if (! fs_account('detail.waitDelete'))
+                                @if (! fs_account('detail.waitDelete') && fs_api_config('delete_account_type') != 1)
                                     <hr>
                                     <form class="api-request-form" action="{{ route('fresns.api.account.apply.delete') }}" method="post">
                                         @csrf
