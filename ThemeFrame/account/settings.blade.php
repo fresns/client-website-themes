@@ -12,6 +12,19 @@
 
             {{-- Account Content --}}
             <div class="col-sm-6">
+                {{-- Recall Delete Account --}}
+                @if (fs_account('detail.waitDelete'))
+                    <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading">{{ fs_lang('contentCreatorDeactivate') }}</h4>
+                        <p>{{ fs_lang('executionDate') }}: {{ fs_account('detail.waitDeleteDateTime') }}</p>
+                        <hr>
+                        <form class="api-request-form" action="{{ route('fresns.api.account.recall.delete') }}" method="post">
+                            @csrf
+                            <button class="btn btn-outline-danger" type="submit">{{ fs_lang('accountRecallDelete') }}</button>
+                        </form>
+                    </div>
+                @endif
+
                 {{-- Settings --}}
                 <div class="card">
                     <div class="card-header">
@@ -25,6 +38,11 @@
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="account-tab" data-bs-toggle="tab" data-bs-target="#account" type="button" role="tab" aria-controls="account" aria-selected="false">{{ fs_lang('settingAccount') }}</button>
                             </li>
+                            @if (fs_api_config('account_delete_status'))
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="accountDelete-tab" data-bs-toggle="tab" data-bs-target="#accountDelete" type="button" role="tab" aria-controls="accountDelete" aria-selected="false">{{ fs_lang('accountDelete') }}</button>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                     <div class="card-body tab-content" id="myTabContent">
@@ -386,6 +404,82 @@
                                 </div>
                             @endif
                         </div>
+
+                        {{-- Delete Account --}}
+                        @if (fs_api_config('account_delete_status'))
+                            <div class="tab-pane fade" id="accountDelete" role="tabpanel" aria-labelledby="accountDelete-tab">
+                                <div>
+                                    {!! Str::markdown(fs_api_config('account_delete')) !!}
+                                </div>
+                                @if (! fs_account('detail.waitDelete'))
+                                    <hr>
+                                    <form class="api-request-form" action="{{ route('fresns.api.account.apply.delete') }}" method="post">
+                                        @csrf
+                                        <div class="card">
+                                            <div class="card-header">{{ fs_lang('accountApplyDelete') }}</div>
+                                            <div class="card-body">
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text border-end-rounded-0">{{ fs_lang('type') }}</span>
+                                                    <div class="form-control">
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input collapse show" type="radio" name="codeType" id="email_to_edit" value="email" data-bs-toggle="collapse" data-bs-target="#email_to_edit:not(.show)" aria-expanded="true" checked>
+                                                            <label class="form-check-label" for="email_to_edit">{{ fs_lang('emailVerifyCode') }}</label>
+                                                        </div>
+                                                        <div class="form-check form-check-inline">
+                                                            <input class="form-check-input collapse show collapsed" type="radio" name="codeType" id="phone_to_edit" value="sms" data-bs-toggle="collapse" data-bs-target="#phone_to_edit:not(.show)" aria-expanded="false">
+                                                            <label class="form-check-label" for="phone_to_edit">{{ fs_lang('smsVerifyCode') }}</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div id="apply_delete_mode">
+                                                    <div class="collapse show" id="email_to_edit" aria-labelledby="email_to_edit" data-bs-parent="#apply_delete_mode">
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text border-end-rounded-0">{{ fs_lang('email') }}</span>
+                                                            <input class="form-control" type="text" placeholder="{{ fs_account('detail.email') }}" value="{{ fs_account('detail.email') }}" disabled>
+                                                            <button class="btn btn-outline-secondary send-verify-code"
+                                                                data-type="email"
+                                                                data-use-type="4"
+                                                                data-template-id="8"
+                                                                data-action="{{ route('fresns.api.send.verify.code') }}"
+                                                                onclick="sendVerifyCode(this)"
+                                                                @empty(fs_account('detail.email')) disabled @endempty
+                                                                type="button">
+                                                                {{ fs_lang('sendVerifyCode') }}
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                    <div class="collapse" id="phone_to_edit" aria-labelledby="phone_to_edit" data-bs-parent="#apply_delete_mode">
+                                                        <div class="input-group mb-3">
+                                                            <span class="input-group-text border-end-rounded-0">{{ fs_lang('phone') }}</span>
+                                                            <input class="form-control" type="text" placeholder="{{ fs_account('detail.phone') }}" value="{{ fs_account('detail.phone') }}" disabled>
+                                                            <button class="btn btn-outline-secondary send-verify-code"
+                                                                data-type="sms"
+                                                                data-use-type="4"
+                                                                data-template-id="8"
+                                                                data-action="{{ route('fresns.api.send.verify.code') }}"
+                                                                onclick="sendVerifyCode(this)"
+                                                                @empty(fs_account('detail.phone')) disabled @endempty
+                                                                type="button">
+                                                                {{ fs_lang('sendVerifyCode') }}
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text border-end-rounded-0">{{ fs_lang('verifyCode') }}</span>
+                                                    <input type="text" class="form-control" name="verifyCode">
+                                                </div>
+
+                                                {{-- button --}}
+                                                <div class="text-center">
+                                                    <button class="btn btn-outline-danger" type="submit">{{ fs_lang('submit') }}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                @endif
+                            </div>
+                        @endif
                     </div>
                 </div>
                 {{-- End of setting --}}
