@@ -176,8 +176,7 @@ function atwho() {
     $('.fresns-content')
         .atwho({
             at: '@',
-            displayTpl:
-                "<li><img src='${image}' height='20' width='20'/> ${nickname} <small class='text-muted'>@${name}</small></li>",
+            displayTpl: '<li><img src="${image}" height="20" width="20"/> ${nickname} <small class="text-muted">@${name}</small></li>',
             callbacks: {
                 remoteFilter: function (query, callback) {
                     if (query) {
@@ -196,7 +195,7 @@ function atwho() {
         .atwho({
             at: '#',
             displayTpl: '<li> ${name} </li>',
-            insertTpl: window.hashtag_show == 2 ? '${atwho-at}${name}${atwho-at}' : '${atwho-at}${name}',
+            insertTpl: window.hashtag_show == 1 ? '${atwho-at}${name}' : '${atwho-at}${name}${atwho-at}',
             callbacks: {
                 remoteFilter: function (query, callback) {
                     if (query) {

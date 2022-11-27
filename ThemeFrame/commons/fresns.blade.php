@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Fresns" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title'){{ Route::is(['fresns.home']) ? '' : ' - '.fs_api_config('site_name') }}</title>
+    <title>@yield('title') - {{ fs_api_config('site_name') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="keywords" content="@yield('keywords')" />
     <meta name="description" content="@yield('description')" />
@@ -81,8 +81,11 @@
     <script src="/static/js/select2.min.js"></script>
     <script src="/static/js/js.cookie.min.js"></script>
     <script src="/static/js/iframeResizer.min.js"></script>
+    <script>
+        window.hashtag_show = {{ fs_api_config('hashtag_show') }}
+    </script>
     <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v=f72f73db450864a8" }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js"></script>
+    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v=f72f73db450864a8"></script>
     <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=f72f73db450864a8"></script>
     <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=f72f73db450864a8"></script>
     <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=f72f73db450864a8"></script>
