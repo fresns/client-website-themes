@@ -20,12 +20,19 @@
 
                 {{-- Post List --}}
                 <article class="card clearfix">
-                    @foreach($posts as $post)
-                        @component('components.post.list', compact('post'))@endcomponent
-                        @if (! $loop->last)
-                            <hr>
-                        @endif
-                    @endforeach
+                    {{-- Check Perm --}}
+                    @if($group['mode'] == 2 && ! $group['interactive']['followStatus'])
+                        <div class="text-center py-5 text-danger">
+                            <i class="bi bi-info-circle"></i> {{ fs_code_message('37103') }}
+                        </div>
+                    @else
+                        @foreach($posts as $post)
+                            @component('components.post.list', compact('post'))@endcomponent
+                            @if (! $loop->last)
+                                <hr>
+                            @endif
+                        @endforeach
+                    @endif
                 </article>
 
                 {{-- Pagination --}}

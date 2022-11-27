@@ -52,13 +52,19 @@ window.fs_lang = function (key, replace = {}) {
 
 // tips
 window.tips = function (message, code = 200) {
+    if (code != 0) {
+        apiCode = code;
+    } else {
+        apiCode = '';
+    }
+
     let html = `
         <div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:9999">
             <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
                     <img src="/static/images/icon.png" width="20px" height="20px" class="rounded me-2" alt="Fresns">
                     <strong class="me-auto">Fresns</strong>
-                    <small>${code}</small>
+                    <small>${apiCode}</small>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
                 <div class="toast-body">${message}</div>
@@ -171,7 +177,7 @@ function atwho() {
         .atwho({
             at: '@',
             displayTpl:
-                "<li><img src='${image}' height='20' width='20'/> ${nickname} <small class='text-muted'>@${name}</small></li>",
+                '<li><img src="${image}" height="20" width="20"/> ${nickname} <small class="text-muted">@${name}</small></li>',
             callbacks: {
                 remoteFilter: function (query, callback) {
                     if (query) {
@@ -190,7 +196,7 @@ function atwho() {
         .atwho({
             at: '#',
             displayTpl: '<li> ${name} </li>',
-            insertTpl: window.hashtag_show == 2 ? '${atwho-at}${name}${atwho-at}' : '${atwho-at}${name}',
+            insertTpl: window.hashtag_show == 1 ? '${atwho-at}${name}' : '${atwho-at}${name}${atwho-at}',
             callbacks: {
                 remoteFilter: function (query, callback) {
                     if (query) {

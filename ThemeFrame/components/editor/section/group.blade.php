@@ -63,7 +63,10 @@
         }
 
         function ajaxGetGroupList(action, pageSize = 10, page = 1){
-            let html= '';
+            let html = '';
+
+            $('#v-pills-tabContent .tab-pane .list-group').append('<div class="text-center mt-4"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+
             $('#fresns-group .tab-pane.fade.active.show .list-group-addmore').empty().append("{{ fs_lang('loading') }}");
 
             $.get(action + "?page=" + page + "&pageSize=" + pageSize, function (data){

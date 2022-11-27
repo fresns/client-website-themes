@@ -250,6 +250,9 @@ header .navbar {
     word-break: break-word;
     font-size: 15px;
 }
+.content-article img {
+    max-width: 100%;
+}
 .content-article ul li {
     margin-bottom: 0.4rem;
 }

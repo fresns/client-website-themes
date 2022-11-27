@@ -114,7 +114,10 @@
             $("#createModal input[name='postGid']").val(gid);
         }
         function boxAjaxGetGroupList(action, pageSize = 15, page = 1){
-            let html= '';
+            let html = '';
+
+            $('#v-pills-post-box-tabContent .tab-pane .list-group').append('<div class="text-center mt-4"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+
             $('#post-box-fresns-group .tab-pane.fade.active.show .list-group-addmore').empty().append("{{ fs_lang('loading') }}");
 
             $.get(action + "?page=" + page + "&pageSize=" + pageSize, function (data){
