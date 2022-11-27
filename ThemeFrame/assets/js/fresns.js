@@ -176,7 +176,8 @@ function atwho() {
     $('.fresns-content')
         .atwho({
             at: '@',
-            displayTpl: '<li><img src="${image}" height="20" width="20"/> ${nickname} <small class="text-muted">@${name}</small></li>',
+            displayTpl:
+                '<li><img src="${image}" height="20" width="20"/> ${nickname} <small class="text-muted">@${name}</small></li>',
             callbacks: {
                 remoteFilter: function (query, callback) {
                     if (query) {
