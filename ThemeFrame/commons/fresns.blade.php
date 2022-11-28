@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-icons.css">
     <link rel="stylesheet" href="/static/css/select2.min.css">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v=f72f73db450864a8">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v=f72f73db450864a8">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=f72f73db450864a8">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v=5e5b9dad315e555d">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v=5e5b9dad315e555d">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=5e5b9dad315e555d">
     @stack('style')
     @if (fs_db_config('website_stat_position') === 'head')
         {!! fs_db_config('website_stat_position') !!}
@@ -84,12 +84,12 @@
     <script>
         window.hashtag_show = {{ fs_api_config('hashtag_show') }}
     </script>
-    <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v=f72f73db450864a8" }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v=f72f73db450864a8"></script>
-    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=f72f73db450864a8"></script>
-    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=f72f73db450864a8"></script>
-    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=f72f73db450864a8"></script>
-    <script src="/assets/themes/ThemeFrame/js/fresns.js?v=f72f73db450864a8"></script>
+    <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v=5e5b9dad315e555d" }}"></script>
+    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v=5e5b9dad315e555d"></script>
+    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=5e5b9dad315e555d"></script>
+    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=5e5b9dad315e555d"></script>
+    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=5e5b9dad315e555d"></script>
+    <script src="/assets/themes/ThemeFrame/js/fresns.js?v=5e5b9dad315e555d"></script>
     <script>
         $(function () {
             window.hashtag_show = {{ fs_api_config('hashtag_show') }}
