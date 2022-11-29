@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v=5e5b9dad315e555d">
     <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=5e5b9dad315e555d">
     @stack('style')
-    @if (fs_db_config('website_stat_position') === 'head')
-        {!! fs_db_config('website_stat_position') !!}
+    @if (fs_db_config('website_stat_position') == 'head')
+        {!! fs_db_config('website_stat_code') !!}
     @endif
 </head>
 
@@ -71,10 +71,9 @@
     @include('commons.user-auth')
 
     {{-- Stat Code --}}
-    @if (fs_db_config('website_stat_code') === 'body')
+    @if (fs_db_config('website_stat_position') == 'body')
         <div style="display:none;">{!! fs_db_config('website_stat_code') !!}</div>
     @endif
-
     <script src="/static/js/base64.js"></script>
     <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/bootstrap.bundle.min.js"></script>
@@ -90,11 +89,6 @@
     <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=5e5b9dad315e555d"></script>
     <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=5e5b9dad315e555d"></script>
     <script src="/assets/themes/ThemeFrame/js/fresns.js?v=5e5b9dad315e555d"></script>
-    <script>
-        $(function () {
-            window.hashtag_show = {{ fs_api_config('hashtag_show') }}
-        })
-    </script>
     @stack('script')
 </body>
 

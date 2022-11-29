@@ -215,11 +215,11 @@
     @endif
 
     {{-- Comment Preview Information --}}
-    @if ($sectionPreviews && $comment['commentPreviews'])
-        @component('components.comment.section.comment-previews', [
+    @if ($sectionPreview && $comment['subComments'])
+        @component('components.comment.section.preview', [
             'cid' => $comment['cid'],
             'commentCount' => $comment['commentCount'],
-            'commentPreviews' => $comment['commentPreviews'],
+            'subComments' => $comment['subComments'],
         ])@endcomponent
     @endif
 

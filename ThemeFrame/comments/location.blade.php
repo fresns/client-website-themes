@@ -33,7 +33,7 @@
                             @component('components.comment.list', [
                                 'detailLink' => true,
                                 'sectionPost' => true,
-                                'sectionPreviews' => false,
+                                'sectionPreview' => false,
                                 'sectionCreatorLiked' => false,
                                 'comment' => $comment,
                             ])@endcomponent
