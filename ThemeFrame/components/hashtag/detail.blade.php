@@ -16,37 +16,37 @@
 
             <section class="list-btn ms-auto">
                 {{-- Like --}}
-                @if ($hashtag['interactive']['likeSetting'])
+                @if ($hashtag['interaction']['likeSetting'])
                     @component('components.hashtag.mark.like', [
                         'hid' => $hashtag['hid'],
-                        'interactive' => $hashtag['interactive'],
+                        'interaction' => $hashtag['interaction'],
                         'count' => $hashtag['likeCount'],
                     ])@endcomponent
                 @endif
 
                 {{-- Dislike --}}
-                @if ($hashtag['interactive']['dislikeSetting'])
+                @if ($hashtag['interaction']['dislikeSetting'])
                     @component('components.hashtag.mark.dislike', [
                         'hid' => $hashtag['hid'],
-                        'interactive' => $hashtag['interactive'],
+                        'interaction' => $hashtag['interaction'],
                         'count' => $hashtag['dislikeCount'],
                     ])@endcomponent
                 @endif
 
                 {{-- Follow --}}
-                @if ($hashtag['interactive']['followSetting'])
+                @if ($hashtag['interaction']['followSetting'])
                     @component('components.hashtag.mark.follow', [
                         'hid' => $hashtag['hid'],
-                        'interactive' => $hashtag['interactive'],
+                        'interaction' => $hashtag['interaction'],
                         'count' => $hashtag['followCount'],
                     ])@endcomponent
                 @endif
 
                 {{-- Block --}}
-                @if ($hashtag['interactive']['blockSetting'])
+                @if ($hashtag['interaction']['blockSetting'])
                     @component('components.hashtag.mark.block', [
                         'hid' => $hashtag['hid'],
-                        'interactive' => $hashtag['interactive'],
+                        'interaction' => $hashtag['interaction'],
                         'count' => $hashtag['blockCount'],
                     ])@endcomponent
                 @endif

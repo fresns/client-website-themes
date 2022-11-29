@@ -21,7 +21,7 @@
                 {{-- Post List --}}
                 <article class="card clearfix">
                     {{-- Check Perm --}}
-                    @if($group['mode'] == 2 && ! $group['interactive']['followStatus'])
+                    @if($group['mode'] == 2 && ! $group['interaction']['followStatus'])
                         <div class="text-center py-5 text-danger">
                             <i class="bi bi-info-circle"></i> {{ fs_code_message('37103') }}
                         </div>

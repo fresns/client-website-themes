@@ -562,10 +562,10 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
 
         const url = form.attr('action'),
             body = form.serialize(),
-            interactiveType = form.find('input[name="interactiveType"]').val(),
+            interactionType = form.find('input[name="interactionType"]').val(),
             count = obj.find('.show-count').text(),
             iconActive = obj.data('icon-active'),
-            interactiveActive = obj.data('interactive-active') || 0,
+            interactionActive = obj.data('interaction-active') || 0,
             text = obj.find('.show-text'),
             bi = obj.data('bi'),
             icon = obj.data('icon');
@@ -579,15 +579,15 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     return;
                 }
 
-                if (interactiveActive) {
-                    obj.data('interactive-active', 0);
+                if (interactionActive) {
+                    obj.data('interaction-active', 0);
                 } else {
-                    obj.data('interactive-active', 1);
+                    obj.data('interaction-active', 1);
                 }
 
                 if (iconActive) {
-                    obj.find('img').attr('src', interactiveActive == 0 ? iconActive : icon);
-                    if (interactiveActive) {
+                    obj.find('img').attr('src', interactionActive == 0 ? iconActive : icon);
+                    if (interactionActive) {
                         obj.removeClass('btn-active');
                     } else {
                         obj.addClass('btn-active');
@@ -595,7 +595,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                 }
 
                 if (count) {
-                    if (interactiveActive) {
+                    if (interactionActive) {
                         obj.find('.show-count').text(parseInt(count) - 1);
                     } else {
                         obj.find('.show-count').text(parseInt(count) + 1);
@@ -603,9 +603,9 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                 }
 
                 if (text) {
-                    const isFollowOrBlock = interactiveType === 'follow' || interactiveType === 'block';
+                    const isFollowOrBlock = interactionType === 'follow' || interactionType === 'block';
 
-                    if (isFollowOrBlock && interactiveActive) {
+                    if (isFollowOrBlock && interactionActive) {
                         obj.find('.show-text').text(obj.data('name'));
                     } else {
                         obj.find('.show-text').text('√ ' + obj.data('name'));
@@ -613,7 +613,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                 }
                 if (bi) {
                     obj.find('i').removeClass();
-                    if (interactiveActive) {
+                    if (interactionActive) {
                         if (bi.indexOf('-fill') > 0) {
                             obj.find('i').addClass('bi ' + bi.slice(0, -5));
                         } else {
@@ -629,9 +629,9 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                             : obj.addClass('text-success');
                     }
                 }
-                interactiveType === 'like' ? obj.addClass('btn-pre') : obj.removeClass('btn-pre');
+                interactionType === 'like' ? obj.addClass('btn-pre') : obj.removeClass('btn-pre');
 
-                if (interactiveType == 'like') {
+                if (interactionType == 'like') {
                     let formObj = form.parent().find('form')[1];
                     let likeOrDislikeObj;
                     if (formObj && formObj !== form[0]) {
@@ -639,13 +639,13 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     } else {
                         likeOrDislikeObj = $(form.parent().parent().find('form')[1]).find('.fs-mark');
                     }
-                    const likeOrDislikeObjInteractiveActivate = likeOrDislikeObj.data('interactive-active') || 0;
+                    const likeOrDislikeObjInteractionActivate = likeOrDislikeObj.data('interaction-active') || 0;
                     const likeOrDislikeObjCount = likeOrDislikeObj.find('.show-count').text();
 
                     if (likeOrDislikeObjCount) {
-                        if (likeOrDislikeObjInteractiveActivate) {
+                        if (likeOrDislikeObjInteractionActivate) {
                             likeOrDislikeObj.find('.show-count').text(parseInt(likeOrDislikeObjCount) - 1);
-                            likeOrDislikeObj.data('interactive-active', 0);
+                            likeOrDislikeObj.data('interaction-active', 0);
                         }
                     }
 
@@ -664,12 +664,12 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                         const likeOrDislikeObjIconActive = likeOrDislikeObj.data('icon-active');
                         const likeOrDislikeObjIcon = likeOrDislikeObj.data('icon');
 
-                        if (likeOrDislikeObjIconActive && likeOrDislikeObjInteractiveActivate) {
+                        if (likeOrDislikeObjIconActive && likeOrDislikeObjInteractionActivate) {
                             likeOrDislikeObj
                                 .find('img')
                                 .attr(
                                     'src',
-                                    likeOrDislikeObjInteractiveActivate == 0
+                                    likeOrDislikeObjInteractionActivate == 0
                                         ? likeOrDislikeObjIconActive
                                         : likeOrDislikeObjIcon
                                 );
@@ -678,7 +678,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                                 : likeOrDislikeObj.removeClass('text-success');
                         }
                     }
-                } else if (interactiveType == 'dislike') {
+                } else if (interactionType == 'dislike') {
                     let formObj = form.parent().find('form')[0];
                     let likeOrDislikeObj;
                     if (formObj && formObj !== form[0]) {
@@ -686,13 +686,13 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     } else {
                         likeOrDislikeObj = $(form.parent().parent().find('form')[0]).find('.fs-mark');
                     }
-                    const likeOrDislikeObjInteractiveActivate = likeOrDislikeObj.data('interactive-active') || 0;
+                    const likeOrDislikeObjInteractionActivate = likeOrDislikeObj.data('interaction-active') || 0;
                     const likeOrDislikeObjCount = likeOrDislikeObj.find('.show-count').text();
 
                     if (likeOrDislikeObjCount) {
-                        if (likeOrDislikeObjInteractiveActivate) {
+                        if (likeOrDislikeObjInteractionActivate) {
                             likeOrDislikeObj.find('.show-count').text(parseInt(likeOrDislikeObjCount) - 1);
-                            likeOrDislikeObj.data('interactive-active', 0);
+                            likeOrDislikeObj.data('interaction-active', 0);
                         }
                     }
 
@@ -711,12 +711,12 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                         const likeOrDislikeObjIconActive = likeOrDislikeObj.data('icon-active');
                         const likeOrDislikeObjIcon = likeOrDislikeObj.data('icon');
 
-                        if (likeOrDislikeObjIconActive && likeOrDislikeObjInteractiveActivate) {
+                        if (likeOrDislikeObjIconActive && likeOrDislikeObjInteractionActivate) {
                             likeOrDislikeObj
                                 .find('img')
                                 .attr(
                                     'src',
-                                    likeOrDislikeObjInteractiveActivate == 0
+                                    likeOrDislikeObjInteractionActivate == 0
                                         ? likeOrDislikeObjIconActive
                                         : likeOrDislikeObjIcon
                                 );

@@ -20,22 +20,22 @@
     @endif
 
     {{-- Follow --}}
-    @if ($interactive['followSetting'])
+    @if ($interaction['followSetting'])
         <li>
             @component('components.post.mark.follow', [
                 'pid' => $pid,
-                'interactive' => $interactive,
+                'interaction' => $interaction,
                 'count' => $followCount,
             ])@endcomponent
         </li>
     @endif
 
     {{-- Block --}}
-    @if ($interactive['blockSetting'])
+    @if ($interaction['blockSetting'])
         <li>
             @component('components.post.mark.block', [
                 'pid' => $pid,
-                'interactive' => $interactive,
+                'interaction' => $interaction,
                 'count' => $blockCount,
             ])@endcomponent
         </li>

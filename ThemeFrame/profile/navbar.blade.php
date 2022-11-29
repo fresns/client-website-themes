@@ -13,7 +13,7 @@
         </li>
     @endif
 
-    {{-- interactive --}}
+    {{-- interaction --}}
     @if (fs_api_config('user_likers') && fs_api_config('user_dislikers') && fs_api_config('user_followers') && fs_api_config('user_blockers'))
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle {{ Route::is([
