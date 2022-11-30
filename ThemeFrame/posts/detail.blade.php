@@ -24,15 +24,15 @@
                     </div>
 
                     {{-- Sticky Comment List --}}
-                    @if ($stickies)
+                    @if (fs_sticky_comments($post['pid']))
                         <div class="card-body bg-primary bg-opacity-10 mb-4">
-                            @foreach($stickies as $sticky)
+                            @foreach(fs_sticky_comments($post['pid']) as $sticky)
                                 @component('components.comment.sticky', [
+                                    'sticky' => $sticky,
                                     'detailLink' => true,
                                     'sectionPost' => false,
                                     'sectionPreview' => true,
                                     'sectionCreatorLiked' => true,
-                                    'sticky' => $sticky,
                                 ])@endcomponent
                             @endforeach
                         </div>
@@ -41,11 +41,11 @@
                     {{-- Comment List --}}
                     @foreach($comments as $comment)
                         @component('components.comment.list', [
+                            'comment' => $comment,
                             'detailLink' => true,
                             'sectionPost' => false,
                             'sectionPreview' => true,
                             'sectionCreatorLiked' => true,
-                            'comment' => $comment,
                         ])@endcomponent
 
                         @if (! $loop->last)

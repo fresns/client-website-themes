@@ -15,9 +15,9 @@
             {{-- Middle Content --}}
             <div class="col-sm-6">
                 {{-- Sticky Post List --}}
-                @if ($stickies)
+                @if (fs_sticky_posts())
                     <div class="list-group mb-4">
-                        @foreach($stickies as $sticky)
+                        @foreach(fs_sticky_posts() as $sticky)
                             @component('components.post.sticky', compact('sticky'))@endcomponent
                         @endforeach
                     </div>

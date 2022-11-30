@@ -18,6 +18,15 @@
                     @component('components.group.detail', compact('group'))@endcomponent
                 </div>
 
+                {{-- Sticky Post List --}}
+                @if (fs_sticky_posts($group['gid']))
+                    <div class="list-group mb-4">
+                        @foreach(fs_sticky_posts($group['gid']) as $sticky)
+                            @component('components.post.sticky', compact('sticky'))@endcomponent
+                        @endforeach
+                    </div>
+                @endif
+
                 {{-- Post List --}}
                 <article class="card clearfix">
                     {{-- Check Perm --}}
