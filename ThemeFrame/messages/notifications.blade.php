@@ -131,7 +131,7 @@
                         <ul class="list-group list-group-flush">
                             {{-- No Notification --}}
                             @if ($notifications->isEmpty())
-                                <li class="list-group-item text-center my-5 text-muted fs-7"><i class="bi bi-chat-square"></i> {{ fs_lang('notificationEmpty') }}</li>
+                                <li class="list-group-item text-center my-5 text-muted fs-7"><i class="bi bi-chat-square"></i> {{ fs_lang('listEmpty') }}</li>
                             @endif
 
                             {{-- Mark all as read --}}

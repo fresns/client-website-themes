@@ -38,6 +38,11 @@
                         </div>
                     @endif
 
+                    {{-- Empty List --}}
+                    @if ($comments->isEmpty())
+                        <div class="text-center my-5 text-muted fs-7"><i class="bi bi-chat-square-text"></i> {{ fs_lang('listEmpty') }}</div>
+                    @endif
+
                     {{-- Comment List --}}
                     @foreach($comments as $comment)
                         @component('components.comment.list', [
