@@ -25,11 +25,11 @@
 
                     @foreach($comments as $comment)
                         @component('components.comment.list', [
+                            'comment' => $comment,
                             'detailLink' => false,
                             'sectionPost' => false,
-                            'sectionPreviews' => false,
+                            'sectionPreview' => false,
                             'sectionCreatorLiked' => true,
-                            'comment' => $comment,
                         ])@endcomponent
 
                         @if (! $loop->last)

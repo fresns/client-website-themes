@@ -18,10 +18,19 @@
                     @component('components.group.detail', compact('group'))@endcomponent
                 </div>
 
+                {{-- Sticky Post List --}}
+                @if (fs_sticky_posts($group['gid']))
+                    <div class="list-group mb-4">
+                        @foreach(fs_sticky_posts($group['gid']) as $sticky)
+                            @component('components.post.sticky', compact('sticky'))@endcomponent
+                        @endforeach
+                    </div>
+                @endif
+
                 {{-- Post List --}}
                 <article class="card clearfix">
                     {{-- Check Perm --}}
-                    @if($group['mode'] == 2 && ! $group['interactive']['followStatus'])
+                    @if($group['mode'] == 2 && ! $group['interaction']['followStatus'])
                         <div class="text-center py-5 text-danger">
                             <i class="bi bi-info-circle"></i> {{ fs_code_message('37103') }}
                         </div>

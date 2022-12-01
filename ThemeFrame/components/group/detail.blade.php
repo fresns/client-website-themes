@@ -15,40 +15,40 @@
 
             <section class="list-btn ms-auto">
                 {{-- Like --}}
-                @if ($group['interactive']['likeSetting'])
+                @if ($group['interaction']['likeSetting'])
                     @component('components.group.mark.like', [
                         'gid' => $group['gid'],
-                        'interactive' => $group['interactive'],
+                        'interaction' => $group['interaction'],
                         'count' => $group['likeCount'],
                     ])@endcomponent
                 @endif
 
                 {{-- Dislike --}}
-                @if ($group['interactive']['dislikeSetting'])
+                @if ($group['interaction']['dislikeSetting'])
                     @component('components.group.mark.dislike', [
                         'gid' => $group['gid'],
-                        'interactive' => $group['interactive'],
+                        'interaction' => $group['interaction'],
                         'count' => $group['dislikeCount'],
                     ])@endcomponent
                 @endif
 
                 {{-- Follow --}}
-                @if ($group['interactive']['followSetting'])
+                @if ($group['interaction']['followSetting'])
                     @component('components.group.mark.follow', [
                         'gid' => $group['gid'],
                         'gname' => $group['gname'],
                         'followType' => $group['followType'],
                         'followUrl' => $group['followUrl'],
-                        'interactive' => $group['interactive'],
+                        'interaction' => $group['interaction'],
                         'count' => $group['followCount'],
                     ])@endcomponent
                 @endif
 
                 {{-- Block --}}
-                @if ($group['interactive']['blockSetting'])
+                @if ($group['interaction']['blockSetting'])
                     @component('components.group.mark.block', [
                         'gid' => $group['gid'],
-                        'interactive' => $group['interactive'],
+                        'interaction' => $group['interaction'],
                         'count' => $group['blockCount'],
                     ])@endcomponent
                 @endif

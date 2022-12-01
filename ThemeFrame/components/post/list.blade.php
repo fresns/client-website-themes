@@ -207,11 +207,11 @@
     <section class="interaction order-5 mt-3 px-3">
         <div class="d-flex">
             {{-- Like --}}
-            @if ($post['interactive']['likeSetting'])
+            @if ($post['interaction']['likeSetting'])
                 <div class="interaction-box">
                     @component('components.post.mark.like', [
                         'pid' => $post['pid'],
-                        'interactive' => $post['interactive'],
+                        'interaction' => $post['interaction'],
                         'count' => $post['likeCount'],
                         'icon' => $iconLike,
                     ])@endcomponent
@@ -219,11 +219,11 @@
             @endif
 
             {{-- Dislike --}}
-            @if ($post['interactive']['dislikeSetting'])
+            @if ($post['interaction']['dislikeSetting'])
                 <div class="interaction-box">
                     @component('components.post.mark.dislike', [
                         'pid' => $post['pid'],
-                        'interactive' => $post['interactive'],
+                        'interaction' => $post['interaction'],
                         'count' => $post['dislikeCount'],
                         'icon' => $iconDislike,
                     ])@endcomponent
@@ -272,7 +272,7 @@
                     'pid' => $post['pid'],
                     'uid' => $post['creator']['uid'],
                     'editStatus' => $post['editStatus'],
-                    'interactive' => $post['interactive'],
+                    'interaction' => $post['interaction'],
                     'followCount' => $post['followCount'],
                     'blockCount' => $post['blockCount'],
                     'manages' => $post['manages'],

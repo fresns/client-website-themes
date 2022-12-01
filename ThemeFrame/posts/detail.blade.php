@@ -24,28 +24,33 @@
                     </div>
 
                     {{-- Sticky Comment List --}}
-                    @if ($stickies)
+                    @if (fs_sticky_comments($post['pid']))
                         <div class="card-body bg-primary bg-opacity-10 mb-4">
-                            @foreach($stickies as $sticky)
+                            @foreach(fs_sticky_comments($post['pid']) as $sticky)
                                 @component('components.comment.sticky', [
+                                    'sticky' => $sticky,
                                     'detailLink' => true,
                                     'sectionPost' => false,
-                                    'sectionPreviews' => true,
+                                    'sectionPreview' => true,
                                     'sectionCreatorLiked' => true,
-                                    'sticky' => $sticky,
                                 ])@endcomponent
                             @endforeach
                         </div>
                     @endif
 
+                    {{-- Empty List --}}
+                    @if ($comments->isEmpty())
+                        <div class="text-center my-5 text-muted fs-7"><i class="bi bi-chat-square-text"></i> {{ fs_lang('listEmpty') }}</div>
+                    @endif
+
                     {{-- Comment List --}}
                     @foreach($comments as $comment)
                         @component('components.comment.list', [
+                            'comment' => $comment,
                             'detailLink' => true,
                             'sectionPost' => false,
-                            'sectionPreviews' => true,
+                            'sectionPreview' => true,
                             'sectionCreatorLiked' => true,
-                            'comment' => $comment,
                         ])@endcomponent
 
                         @if (! $loop->last)

@@ -62,45 +62,45 @@
     @endif
 
     {{-- Like --}}
-    @if ($user['interactive']['likeSetting'])
+    @if ($user['interaction']['likeSetting'])
         @component('components.user.mark.like', [
             'uid' => $user['uid'],
-            'interactive' => $user['interactive'],
+            'interaction' => $user['interaction'],
             'count' => $user['stats']['likeMeCount']
         ])@endcomponent
     @endif
 
     {{-- Dislike --}}
-    @if ($user['interactive']['dislikeSetting'])
+    @if ($user['interaction']['dislikeSetting'])
         @component('components.user.mark.dislike', [
             'uid' => $user['uid'],
-            'interactive' => $user['interactive'],
+            'interaction' => $user['interaction'],
             'count' => $user['stats']['dislikeMeCount']
         ])@endcomponent
     @endif
 
     {{-- Follow --}}
-    @if ($user['interactive']['followSetting'])
+    @if ($user['interaction']['followSetting'])
         @component('components.user.mark.follow', [
             'uid' => $user['uid'],
-            'interactive' => $user['interactive'],
+            'interaction' => $user['interaction'],
             'count' => $user['stats']['followMeCount']
         ])@endcomponent
     @endif
 
     {{-- Block --}}
-    @if ($user['interactive']['blockSetting'])
+    @if ($user['interaction']['blockSetting'])
         @component('components.user.mark.block', [
             'uid' => $user['uid'],
-            'interactive' => $user['interactive'],
+            'interaction' => $user['interaction'],
             'count' => $user['stats']['blockMeCount']
         ])@endcomponent
     @endif
 
     {{-- Follow Status --}}
-    @if ($user['interactive']['followMeStatus'] && $user['interactive']['followStatus'])
+    @if ($user['interaction']['followMeStatus'] && $user['interaction']['followStatus'])
         <span class="badge rounded-pill bg-secondary m-1">{{ fs_lang('userFollowMutual') }}</span>
-    @elseif ($user['interactive']['followMeStatus'])
+    @elseif ($user['interaction']['followMeStatus'])
         <span class="badge rounded-pill bg-secondary m-1">{{ fs_lang('userFollowMe') }}</span>
     @endif
 </section>

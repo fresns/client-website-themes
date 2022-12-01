@@ -126,11 +126,11 @@
     <section class="interaction order-5 mt-3 mx-3">
         <div class="d-flex">
             {{-- Like --}}
-            @if ($sticky['interactive']['likeSetting'])
+            @if ($sticky['interaction']['likeSetting'])
                 <div class="interaction-box">
                     @component('components.comment.mark.like', [
                         'cid' => $sticky['cid'],
-                        'interactive' => $sticky['interactive'],
+                        'interaction' => $sticky['interaction'],
                         'count' => $sticky['likeCount'],
                         'icon' => $iconLike,
                     ])@endcomponent
@@ -138,11 +138,11 @@
             @endif
 
             {{-- Dislike --}}
-            @if ($sticky['interactive']['dislikeSetting'])
+            @if ($sticky['interaction']['dislikeSetting'])
                 <div class="interaction-box">
                     @component('components.comment.mark.dislike', [
                         'cid' => $sticky['cid'],
-                        'interactive' => $sticky['interactive'],
+                        'interaction' => $sticky['interaction'],
                         'count' => $sticky['dislikeCount'],
                         'icon' => $iconDislike,
                     ])@endcomponent
@@ -191,7 +191,7 @@
                     'cid' => $sticky['cid'],
                     'uid' => $sticky['creator']['uid'],
                     'editStatus' => $sticky['editStatus'],
-                    'interactive' => $sticky['interactive'],
+                    'interaction' => $sticky['interaction'],
                     'followCount' => $sticky['followCount'],
                     'blockCount' => $sticky['blockCount'],
                     'manages' => $sticky['manages'],
@@ -208,7 +208,7 @@
     </section>
 
     {{-- Post Author Likes Status --}}
-    @if ($sectionCreatorLiked && $sticky['interactive']['postCreatorLikeStatus'])
+    @if ($sectionCreatorLiked && $sticky['interaction']['postCreatorLikeStatus'])
         <div class="post-creator-liked order-5 mt-2 mx-3">
             <span class="author-badge p-1">{{ fs_lang('contentCreatorLiked') }}</span>
         </div>
