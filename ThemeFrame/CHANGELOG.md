@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.0.0-Beta.4 (2022-12-01)
+
+- Fix statistics code parameter error
+- `commentPreviews` parameter name changed to `subComments`
+- `interactive` parameter name changed to `interaction`
+- Change the top content function to `fs_sticky_posts` and `fs_sticky_comments`.
+- Fix comment like button state
+
+
 ## 2.0.0-Beta.3 (2022-11-28)
 
 - Group detail page shows prompt text when no right to view
