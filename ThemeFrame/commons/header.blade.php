@@ -14,7 +14,7 @@
                             <a class="nav-link {{ Route::is('fresns.portal') ? 'active' : '' }}
                                 @if (request()->url() == rtrim(fs_route(route('fresns.home')), '/') && fs_db_config('default_homepage') == 'portal') active @endif"
                                 href="{{ fs_route(route('fresns.portal')) }}">
-                                {{fs_db_config('menu_portal_name')}}
+                                {{ fs_db_config('menu_portal_name') }}
                             </a>
                         </li>
                     @endif
@@ -25,7 +25,7 @@
                             <a class="nav-link {{ Route::is(['fresns.user.*', 'fresns.follow.user.*']) ? 'active' : '' }}
                                 @if (request()->url() == rtrim(fs_route(route('fresns.home')), '/') && fs_db_config('default_homepage') == 'user') active @endif"
                                 href="{{ fs_route(route('fresns.user.index')) }}">
-                                {{fs_db_config('menu_user_name')}}
+                                {{ fs_db_config('menu_user_name') }}
                             </a>
                         </li>
                     @endif
@@ -36,7 +36,7 @@
                             <a class="nav-link {{ Route::is(['fresns.group.*', 'fresns.follow.group.*']) ? 'active' : '' }}
                                 @if (request()->url() == rtrim(fs_route(route('fresns.home')), '/') && fs_db_config('default_homepage') == 'group') active @endif"
                                 href="{{ fs_route(route('fresns.group.index')) }}">
-                                {{fs_db_config('menu_group_name')}}
+                                {{ fs_db_config('menu_group_name') }}
                             </a>
                         </li>
                     @endif
@@ -47,7 +47,7 @@
                             <a class="nav-link {{ Route::is(['fresns.hashtag.*', 'fresns.follow.hashtag.*']) ? 'active' : '' }}
                                 @if (request()->url() == rtrim(fs_route(route('fresns.home')), '/') && fs_db_config('default_homepage') == 'hashtag') active @endif"
                                 href="{{ fs_route(route('fresns.hashtag.index')) }}">
-                                {{fs_db_config('menu_hashtag_name')}}
+                                {{ fs_db_config('menu_hashtag_name') }}
                             </a>
                         </li>
                     @endif
@@ -58,7 +58,7 @@
                             <a class="nav-link {{ Route::is(['fresns.post.*', 'fresns.follow.all.posts']) ? 'active' : '' }}
                                 @if (request()->url() == rtrim(fs_route(route('fresns.home')), '/') && fs_db_config('default_homepage') == 'post') active @endif"
                                 href="{{ fs_route(route('fresns.post.index')) }}">
-                                {{fs_db_config('menu_post_name')}}
+                                {{ fs_db_config('menu_post_name') }}
                             </a>
                         </li>
                     @endif
@@ -69,7 +69,7 @@
                             <a class="nav-link {{ Route::is(['fresns.comment.*', 'fresns.follow.all.comments']) ? 'active' : '' }}
                                 @if (request()->url() == rtrim(fs_route(route('fresns.home')), '/') && fs_db_config('default_homepage') == 'comment') active @endif"
                                 href="{{ fs_route(route('fresns.comment.index')) }}">
-                                {{fs_db_config('menu_comment_name')}}
+                                {{ fs_db_config('menu_comment_name') }}
                             </a>
                         </li>
                     @endif
@@ -229,31 +229,3 @@
         </div>
     </nav>
 </header>
-
-@if (fs_api_config('language_status'))
-    {{-- Switching Languages --}}
-    <div class="modal fade" id="translate" tabindex="-1" aria-labelledby="translateModal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">{{ fs_lang('optionLanguage') }}</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <ul class="list-group list-group-flush">
-                        @foreach(fs_api_config('language_menus') as $lang)
-                            @if ($lang['isEnable'])
-                                <a class="list-group-item list-group-item-action @if (current_lang_tag() == $lang['langTag']) active @endif" hreflang="{{ $lang['langTag'] }}" href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL($lang['langTag'], null, [], true) }}">
-                                    {{ $lang['langName'] }}
-                                    @if ($lang['areaName'])
-                                        {{ '('.$lang['areaName'].')' }}
-                                    @endif
-                                </a>
-                            @endif
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-@endif
