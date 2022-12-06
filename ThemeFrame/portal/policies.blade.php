@@ -3,9 +3,9 @@
 @section('title', fs_lang('accountPolicies'))
 
 @section('content')
-    <div class="portal">
-        <div class="d-flex align-items-start">
-            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+    <main class="container">
+        <div class="d-flex align-items-start mt-5 pt-5">
+            <div class="nav flex-column nav-pills w-25" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <div class="d-flex justify-content-between mx-3 mt-3">
                     <h1 class="fs-5">{{ fs_lang('accountPolicies') }}</h1>
                 </div>
@@ -49,5 +49,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 @endsection
