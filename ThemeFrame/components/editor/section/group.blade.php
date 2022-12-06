@@ -36,7 +36,7 @@
                     <div class="tab-content" id="v-pills-tabContent" style="width:70%;">
                         {{-- Group List --}}
                         @foreach(fs_groups('categories') as $groupCategory)
-                            <div class="tab-pane fade" id="v-pills-{{ $groupCategory['gid'] }}" role="tabpanel" aria-labelledby="v-pills-{{ $groupCategory['gid'] }}-tab">
+                            <div class="tab-pane fade" id="v-pills-{{ $groupCategory['gid'] }}" role="tabpanel" aria-labelledby="v-pills-{{ $groupCategory['gid'] }}-tab" tabindex="0">
                                 <div class="list-group"></div>
                                 <div class="list-group-addmore text-center my-3"></div>
                             </div>
