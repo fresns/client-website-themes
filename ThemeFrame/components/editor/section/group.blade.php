@@ -24,7 +24,7 @@
                         <button type="button" id="not-select-group" class="btn btn-outline-secondary btn-sm mb-2 modal-close" data-bs-dismiss="modal" aria-label="Close">{{ fs_lang('editorNoGroup') }} {{ fs_api_config('group_name') }}</button>
                         {{-- Group Categories --}}
                         @foreach(fs_groups('categories') as $groupCategory)
-                            <button class="nav-link group-categories" data-page-size=15 data-page=1 data-action="{{ route('fresns.api.sub.groups', ['gid' => $groupCategory['gid']]) }}" id="v-pills-{{ $groupCategory['gid'] }}-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ $groupCategory['gid'] }}" type="button" role="tab" aria-controls="v-pills-{{ $groupCategory['gid'] }}" aria-selected="false">
+                            <button class="nav-link group-categories" data-page-size="15" data-page="1" data-action="{{ route('fresns.api.sub.groups', ['gid' => $groupCategory['gid']]) }}" id="v-pills-{{ $groupCategory['gid'] }}-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ $groupCategory['gid'] }}" type="button" role="tab" aria-controls="v-pills-{{ $groupCategory['gid'] }}" aria-selected="false">
                                 @if ($groupCategory['cover'])
                                     <img src="{{ $groupCategory['cover'] }}" height="20">
                                 @endif
@@ -35,12 +35,10 @@
 
                     <div class="tab-content" id="v-pills-tabContent" style="width:70%;">
                         {{-- Group List --}}
-                        @foreach(fs_groups('categories') as $groupCategory)
-                            <div class="tab-pane fade" id="v-pills-{{ $groupCategory['gid'] }}" role="tabpanel" aria-labelledby="v-pills-{{ $groupCategory['gid'] }}-tab" tabindex="0">
-                                <div class="list-group"></div>
-                                <div class="list-group-addmore text-center my-3"></div>
-                            </div>
-                        @endforeach
+                        <div id="fresns-editor-groups">
+                            <div class="list-group"></div>
+                            <div class="list-group-addmore text-center my-3 fs-7"></div>
+                        </div>
                     </div>
                 </div>
                 {{-- Group Body End --}}
@@ -62,12 +60,12 @@
             $(".fresns-editor input[name='postGid']").val(gid);
         }
 
-        function ajaxGetGroupList(action, pageSize = 10, page = 1){
+        function ajaxGetGroupList(action, pageSize = 15, page = 1){
             let html = '';
 
-            $('#v-pills-tabContent .tab-pane .list-group').append('<div class="text-center mt-4"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+            $('#fresns-editor-groups .list-group').append('<div class="text-center mt-4 group-spinners"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>');
 
-            $('#fresns-group .tab-pane.fade.active.show .list-group-addmore').empty().append("{{ fs_lang('loading') }}");
+            $('#fresns-editor-groups .list-group-addmore').empty().append("{{ fs_lang('loading') }}");
 
             $.get(action + "?page=" + page + "&pageSize=" + pageSize, function (data){
                 let lists = data.list
@@ -88,12 +86,13 @@
                     });
                 }
 
-                $('#fresns-group .tab-pane.fade.active.show .list-group').append(html);
+                $('#fresns-editor-groups .list-group .group-spinners').remove();
+                $('#fresns-editor-groups .list-group').append(html);
 
-                $('#fresns-group .tab-pane.fade.active.show .list-group-addmore').empty();
+                $('#fresns-editor-groups .list-group-addmore').empty();
                 if (data.paginate.currentPage < data.paginate.lastPage) {
                     let addMoreHtml = `<a href="javascript:void(0)"  class="add-more" onclick="ajaxGetGroupList('${action}', ${pageSize}, ${page})">{{ fs_lang('clickToLoadMore') }}</a>`;
-                    $('#fresns-group .tab-pane.fade.active.show .list-group-addmore').append(addMoreHtml);
+                    $('#fresns-editor-groups .list-group-addmore').append(addMoreHtml);
                 }
 
                 $("#fresns-group .group-categories").each(function (){

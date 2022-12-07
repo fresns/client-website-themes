@@ -80,7 +80,7 @@
                         <button type="button" id="post-box-not-select-group" class="btn btn-outline-secondary btn-sm mb-2 modal-close" data-bs-target="#createModal" data-bs-toggle="modal" aria-label="Close">{{ fs_lang('editorNoGroup') }} {{ fs_api_config('group_name') }}</button>
                         {{-- Group Categories --}}
                         @foreach(fs_groups('categories') as $groupCategory)
-                            <button class="nav-link group-categories" data-page-size=15 data-page=1  data-action="{{ route('fresns.api.sub.groups', ['gid' => $groupCategory['gid']]) }}" id="v-pills-{{ $groupCategory['gid'] }}-post-box-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ $groupCategory['gid'] }}-post-box" type="button" role="tab" aria-controls="v-pills-{{ $groupCategory['gid'] }}-post-box" aria-selected="false">
+                            <button class="nav-link group-categories" data-page-size="15" data-page="1" data-action="{{ route('fresns.api.sub.groups', ['gid' => $groupCategory['gid']]) }}" id="v-pills-{{ $groupCategory['gid'] }}-post-box-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ $groupCategory['gid'] }}-post-box" type="button" role="tab" aria-controls="v-pills-{{ $groupCategory['gid'] }}-post-box" aria-selected="false">
                                 @if ($groupCategory['cover'])
                                     <img src="{{ $groupCategory['cover'] }}" height="20">
                                 @endif
@@ -91,12 +91,10 @@
 
                     <div class="tab-content" id="v-pills-post-box-tabContent" style="width:70%;">
                         {{-- Group List --}}
-                        @foreach(fs_groups('categories') as $groupCategory)
-                            <div class="tab-pane fade" id="v-pills-{{ $groupCategory['gid'] }}-post-box" role="tabpanel" aria-labelledby="v-pills-{{ $groupCategory['gid'] }}-post-box-tab" tabindex="0">
-                                <div class="list-group"></div>
-                                <div class="list-group-addmore text-center my-3"></div>
-                            </div>
-                        @endforeach
+                        <div id="fresns-post-box-groups">
+                            <div class="list-group"></div>
+                            <div class="list-group-addmore text-center my-3 fs-7"></div>
+                        </div>
                     </div>
                 </div>
                 {{-- Group Body End --}}
@@ -113,12 +111,13 @@
             $('#createModal .editor-group .selected-group').text(gname);
             $("#createModal input[name='postGid']").val(gid);
         }
+
         function boxAjaxGetGroupList(action, pageSize = 15, page = 1){
             let html = '';
 
-            $('#v-pills-post-box-tabContent .tab-pane .list-group').append('<div class="text-center mt-4"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+            $('#fresns-post-box-groups .list-group').append('<div class="text-center mt-4 group-spinners"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>');
 
-            $('#post-box-fresns-group .tab-pane.fade.active.show .list-group-addmore').empty().append("{{ fs_lang('loading') }}");
+            $('#fresns-post-box-groups .list-group-addmore').empty().append("{{ fs_lang('loading') }}");
 
             $.get(action + "?page=" + page + "&pageSize=" + pageSize, function (data){
                 let lists = data.list
@@ -134,18 +133,19 @@
                 }
 
                 if (data.paginate.currentPage === 1){
-                    $('#post-box-fresns-group .list-group').each(function (){
+                    $('#fresns-post-box-groups .list-group').each(function (){
                         $(this).empty();
                         $(this).next().empty();
                     });
                 }
 
-                $('#post-box-fresns-group .tab-pane.fade.active.show .list-group').append(html);
+                $('#fresns-post-box-groups .list-group .group-spinners').remove();
+                $('#fresns-post-box-groups .list-group').append(html);
 
-                $('#post-box-fresns-group .tab-pane.fade.active.show .list-group-addmore').empty();
+                $('#fresns-post-box-groups .list-group-addmore').empty();
                 if (data.paginate.currentPage < data.paginate.lastPage) {
                     let addMoreHtml = `<a href="javascript:void(0)"  class="add-more" onclick="boxAjaxGetGroupList('${action}', ${pageSize}, ${page})">{{ fs_lang('clickToLoadMore') }}</a>`;
-                    $('#post-box-fresns-group .tab-pane.fade.active.show .list-group-addmore').append(addMoreHtml);
+                    $('#fresns-post-box-groups .list-group-addmore').append(addMoreHtml);
                 }
 
                 $("#post-box-fresns-group .group-categories").each(function (){
