@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_db_config('menu-follow-posts'))
+@section('title', fs_db_config('menu_follow_posts'))
 
 @section('content')
     <main class="container-fluid">

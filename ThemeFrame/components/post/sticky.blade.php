@@ -13,6 +13,7 @@
 @endif
 
 <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $sticky['pid']])) }}" class="list-group-item list-group-item-action">
+    <i class="bi bi-arrow-up-square-fill me-1" style="color: #F40;"></i>
     @if ($title)
         <img src="{{ $title['imageUrl'] }}" alt="{{ $title['name'] }}" style="height: 24px">
     @endif

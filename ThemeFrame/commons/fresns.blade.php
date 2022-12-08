@@ -67,6 +67,34 @@
     {{-- Footer --}}
     @include('commons.footer')
 
+    {{-- Switching Languages Modal --}}
+    @if (fs_api_config('language_status'))
+        <div class="modal fade" id="translate" tabindex="-1" aria-labelledby="translateModal" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">{{ fs_lang('optionLanguage') }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <ul class="list-group list-group-flush">
+                            @foreach(fs_api_config('language_menus') as $lang)
+                                @if ($lang['isEnable'])
+                                    <a class="list-group-item list-group-item-action @if (current_lang_tag() == $lang['langTag']) active @endif" hreflang="{{ $lang['langTag'] }}" href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL($lang['langTag'], null, [], true) }}">
+                                        {{ $lang['langName'] }}
+                                        @if ($lang['areaName'])
+                                            {{ '('.$lang['areaName'].')' }}
+                                        @endif
+                                    </a>
+                                @endif
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     {{-- User Auth --}}
     @include('commons.user-auth')
 

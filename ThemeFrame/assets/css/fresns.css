@@ -288,12 +288,14 @@ header .navbar {
 
 .content-files video {
     width: 100%;
+    max-height: 300px;
     padding-right: 0.4rem;
     padding-bottom: 0.4rem;
 }
 @media (min-width: 992px) {
     .content-files video {
         width: 50%;
+        max-height: 300px;
         padding-right: 0.4rem;
         padding-bottom: 0.4rem;
     }
@@ -414,6 +416,9 @@ header .navbar {
 .file-image-1 .image-box {
     max-width: 60%;
     padding-right: 0.4rem;
+}
+.file-image-1 .image-box img {
+    max-height: 400px;
 }
 .file-image-2 .image-box {
     max-width: 50%;
