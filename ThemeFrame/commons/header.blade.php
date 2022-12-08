@@ -77,6 +77,7 @@
 
                 {{-- search --}}
                 <form class="me-3 my-4 my-lg-0" action="{{ fs_route(route('fresns.search.index')) }}" method="get">
+                    <input type="hidden" name="searchType" value="post"/>
                     <input class="form-control" name="searchKey" value="{{ request('searchKey') }}" placeholder="{{ fs_lang('search') }} Fresns" aria-label="Search">
                 </form>
 
