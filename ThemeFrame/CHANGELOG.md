@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.0.0-Beta.5 (2022-12-08)
+
+- Private mode view file move directory `portal/private.blade.php`
+- Add policy terms page `portal/policies.blade.php`
+- Fix the problem of group selection list loading failure when publishing
+
+
 ## 2.0.0-Beta.4 (2022-12-01)
 
 - Fix statistics code parameter error
