@@ -123,7 +123,7 @@
                     <section class="comment-post mt-2 position-relative">
                         <div class="d-flex">
                             <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" class="rounded"></div>
-                            <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit($notification['actionInfo']['content'], 80) }}</div>
+                            <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit(strip_tags($notification['actionInfo']['content']), 80) }}</div>
                         </div>
                         @if ($notification['actionInfo']['group'])
                             <div class="comment-post-group border-top text-secondary">{{ $notification['actionInfo']['group']['gname'] }}</div>
@@ -136,7 +136,7 @@
                     <section class="comment-post mt-2 position-relative">
                         <div class="d-flex">
                             <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" class="rounded"></div>
-                            <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit($notification['actionInfo']['content'], 80) }}</div>
+                            <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit(strip_tags($notification['actionInfo']['content']), 80) }}</div>
                         </div>
                         <a href="{{ fs_route(route('fresns.comment.detail', ['cid' => $notification['actionInfo']['cid']])) }}" class="text-decoration-none stretched-link"></a>
                     </section>
