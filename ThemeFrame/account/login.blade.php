@@ -45,6 +45,7 @@
                 <div class="tab-pane fade show active" id="nav-PasswordAccount" role="tabpanel" aria-labelledby="nav-PasswordAccount-tab">
                     <form id="accordionPasswordAccount" class="py-3" method="post" novalidate action="{{ route('fresns.api.account.login') }}" onsubmit="var passwordInput = document.querySelector('#nav-PasswordAccount > form > div.form-floating > input'); passwordInput.value = Base64.encode(passwordInput.value)">
                         @csrf
+                        <input type="hidden" name="redirectURL" value="{{ request()->get('redirectURL') }}">
                         {{-- Account Select --}}
                         <div class="input-group mb-3 mt-2">
                             <span class="input-group-text" id="basic-addon1">{{ fs_lang('accountType') }}</span>
@@ -145,6 +146,7 @@
                 <div class="tab-pane fade" id="nav-CodeAccount" role="tabpanel" aria-labelledby="nav-CodeAccount-tab">
                     <form  id="accordionCodeAccount" novalidate class="py-3" method="post" action="{{ route('fresns.api.account.login') }}">
                         @csrf
+                        <input type="hidden" name="redirectURL" value="{{ request()->get('redirectURL') }}">
                         {{-- Account --}}
                         @if (fs_api_config('fs_theme_is_email') && fs_api_config('fs_theme_is_sms'))
                             <div class="input-group mb-3 mt-2">

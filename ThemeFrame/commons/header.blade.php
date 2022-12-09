@@ -180,7 +180,7 @@
                         </div>
                     @else
                         {{-- Not logged in --}}
-                        <a class="btn btn-outline-success me-3" href="{{ fs_route(route('fresns.account.login')) }}" role="button">{{ fs_lang('accountLogin') }}</a>
+                        <a class="btn btn-outline-success me-3" href="{{ fs_route(route('fresns.account.login', ['redirectURL' => request()->fullUrl()])) }}" role="button">{{ fs_lang('accountLogin') }}</a>
 
                         @if (fs_api_config('site_public_status'))
                             @if (fs_api_config('site_public_service'))
@@ -194,7 +194,7 @@
                                     {{ fs_lang('accountRegister') }}
                                 </button>
                             @else
-                                <a class="btn btn-success me-3" href="{{ fs_route(route('fresns.account.register')) }}" role="button">{{ fs_lang('accountRegister') }}</a>
+                                <a class="btn btn-success me-3" href="{{ fs_route(route('fresns.account.register', ['redirectURL' => request()->fullUrl()])) }}" role="button">{{ fs_lang('accountRegister') }}</a>
                             @endif
                         @endif
 

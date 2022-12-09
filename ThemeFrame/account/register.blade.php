@@ -36,6 +36,7 @@
                 {{-- Register --}}
                 <form class="py-3" id="accordionCodeAccount" method="post" novalidate action="{{ route("fresns.api.account.register") }}">
                     @csrf
+                    <input type="hidden" name="redirectURL" value="{{ request()->get('redirectURL') }}">
                     {{-- Register Type Switch --}}
                     @if (fs_api_config('site_register_email') && fs_api_config('site_register_phone'))
                         <div class="input-group mb-3 mt-2">
