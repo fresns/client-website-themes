@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_api_config('menu_account_wallet'))
+@section('title', fs_db_config('menu_account_wallet'))
 
 @section('content')
     <main class="container-fluid">

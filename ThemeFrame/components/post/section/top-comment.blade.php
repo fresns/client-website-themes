@@ -2,7 +2,7 @@
     {{-- Title --}}
     <div class="clearfix">
         <span class="badge bg-warning text-dark fs-7">{{ fs_lang('contentTopComment') }}</span>
-        <span class="float-end text-secondary">{{ $topComment['likeCount'] }} {{ fs_api_config('like_post_name') }}</span>
+        <span class="float-end text-secondary">{{ $topComment['likeCount'] }} {{ fs_db_config('like_post_name') }}</span>
     </div>
 
     {{-- Content --}}

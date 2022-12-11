@@ -56,7 +56,7 @@
         </header>
 
         <section class="badge-bg-info">
-            <span class="badge rounded-pill">{{ $group['postCount'] }} {{ fs_api_config('post_name') }}</span>
+            <span class="badge rounded-pill">{{ $group['postCount'] }} {{ fs_db_config('post_name') }}</span>
             <span class="badge rounded-pill">{{ $group['postDigestCount'] }} {{ fs_lang('contentDigest') }}</span>
         </section>
 

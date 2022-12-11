@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_api_config('menu_editor_drafts'))
+@section('title', fs_db_config('menu_editor_drafts'))
 
 @section('content')
     <main class="container-fluid">
@@ -19,7 +19,7 @@
                             {{-- posts --}}
                             <li class="nav-item">
                                 <a class="nav-link @if($type == 'posts') active @endif" href="{{ fs_route(route('fresns.editor.drafts', ['type' => 'posts'])) }}">
-                                    {{ fs_api_config('post_name') }}
+                                    {{ fs_db_config('post_name') }}
 
                                     @if(fs_user_panel('draftCount.posts') > 0)
                                         <span class="badge bg-danger">{{ fs_user_panel('draftCount.posts') }}</span>
@@ -29,7 +29,7 @@
                             {{-- comments --}}
                             <li class="nav-item">
                                 <a class="nav-link @if($type == 'comments') active @endif" href="{{ fs_route(route('fresns.editor.drafts', ['type' => 'comments'])) }}">
-                                    {{ fs_api_config('comment_name') }}
+                                    {{ fs_db_config('comment_name') }}
 
                                     @if(fs_user_panel('draftCount.comments') > 0)
                                         <span class="badge bg-danger">{{ fs_user_panel('draftCount.comments') }}</span>

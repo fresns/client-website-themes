@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_api_config('menu_account_register'))
+@section('title', fs_db_config('menu_account_register'))
 
 @section('content')
     <div class="container-fluid">
@@ -119,7 +119,7 @@
 
                     {{-- Nickname --}}
                     <div class="input-group mb-3">
-                        <span class="input-group-text">{{ fs_api_config('user_nickname_name') }}</span>
+                        <span class="input-group-text">{{ fs_db_config('user_nickname_name') }}</span>
                         <input type="text" class="form-control" name="nickname" value="{{ old('nickname') }}" required>
                     </div>
 

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Fresns" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title') - {{ fs_api_config('site_name') }}</title>
+    <title>@yield('title') - {{ fs_db_config('site_name') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="keywords" content="@yield('keywords')" />
     <meta name="description" content="@yield('description')" />

@@ -25,7 +25,7 @@
                 </article>
 
                 {{-- Pagination --}}
-                @if (fs_api_config('menu_user_query_state') != 1)
+                @if (fs_db_config('menu_user_query_state') != 1)
                     <div class="my-3">
                         {{ $users->links() }}
                     </div>

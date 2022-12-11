@@ -1,13 +1,13 @@
 @extends('commons.fresns')
 
-@section('title', fs_api_config('menu_account_reset_password'))
+@section('title', fs_db_config('menu_account_reset_password'))
 
 @section('content')
     <div class="container-fluid">
         <div class="row mt-5 pt-5 m-auto" style="max-width:500px;">
             <h1 class="h3 my-3 fw-normal text-center">{{ fs_lang('accountReset') }}</h1>
 
-            @if (! fs_api_config('fs_theme_is_email') && ! fs_api_config('fs_theme_is_sms'))
+            @if (! fs_db_config('fs_theme_is_email') && ! fs_db_config('fs_theme_is_sms'))
                 {{-- Email and SMS not enabled --}}
                 <div class="alert alert-danger" role="alert">
                     {{ fs_lang('errorUnavailable') }}
@@ -16,12 +16,12 @@
                 <form class="py-3" id="accordionCodeAccount" method="post" action="{{ route("fresns.api.account.reset.password")  }}">
                     @csrf
                     {{-- Type Switch --}}
-                    @if (fs_api_config('fs_theme_is_email') && fs_api_config('fs_theme_is_sms'))
+                    @if (fs_db_config('fs_theme_is_email') && fs_db_config('fs_theme_is_sms'))
                         <div class="input-group mb-3 mt-2">
                             <span class="input-group-text">{{ fs_lang('accountType') }}</span>
                             <div class="form-control">
                                 {{-- E-Mail --}}
-                                @if (fs_api_config('fs_theme_is_email'))
+                                @if (fs_db_config('fs_theme_is_email'))
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="type" id="code_account_email" value="email" data-bs-toggle="collapse" data-bs-target="#code_account_email:not(.show)" aria-expanded="@if (empty(old('type')) || old('type') == 'email') true @else false @endif" aria-controls="code_account_email" @if (empty(old('type')) || old('type') == 'email') checked @endif>
                                         <label class="form-check-label" for="code_account_email">{{ fs_lang('email') }}</label>
@@ -29,7 +29,7 @@
                                 @endif
 
                                 {{-- Phone --}}
-                                @if (fs_api_config('fs_theme_is_sms'))
+                                @if (fs_db_config('fs_theme_is_sms'))
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="type" id="code_account_phone" value="phone" data-bs-toggle="collapse" data-bs-target="#code_account_phone:not(.show)" aria-expanded="@if (old('type') == 'phone') true @else false @endif" aria-controls="code_account_phone" @if (old('type') == 'phone') checked @endif>
                                         <label class="form-check-label" for="code_account_phone">{{ fs_lang('phone') }}</label>
@@ -43,7 +43,7 @@
                     <input type="hidden" name="useType" value="2">
                     <input type="hidden" name="templateId" value="5">
                     {{-- E-Mail --}}
-                    @if (fs_api_config('fs_theme_is_email'))
+                    @if (fs_db_config('fs_theme_is_email'))
                         <div class="collapse @if (empty(old('type')) || old('type') == 'email') show @endif" id="code_account_email" aria-labelledby="code_account_email" data-bs-parent="#accordionCodeAccount">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('email') }}</span>
@@ -56,8 +56,8 @@
                     @endif
 
                     {{-- Cell Phone Number --}}
-                    @if (fs_api_config('fs_theme_is_sms'))
-                        <div class="collapse @if (old('type') == 'phone' || ! fs_api_config('fs_theme_is_email')) show @endif" id="code_account_phone" aria-labelledby="code_account_phone" data-bs-parent="#accordionCodeAccount">
+                    @if (fs_db_config('fs_theme_is_sms'))
+                        <div class="collapse @if (old('type') == 'phone' || ! fs_db_config('fs_theme_is_email')) show @endif" id="code_account_phone" aria-labelledby="code_account_phone" data-bs-parent="#accordionCodeAccount">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('phone') }}</span>
                                 @if (count(fs_api_config('send_sms_supported_codes')) > 1)

@@ -110,13 +110,13 @@
                             <button class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-caret-down-fill"></i></button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 {{-- User Home --}}
-                                <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.index')) }}"><i class="bi bi-person-fill"></i> {{ fs_api_config('menu_account') }}</a></li>
+                                <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.index')) }}"><i class="bi bi-person-fill"></i> {{ fs_db_config('menu_account') }}</a></li>
 
                                 {{-- Notifications --}}
                                 <li>
                                     <a class="dropdown-item" href="{{ fs_route(route('fresns.message.notifications')) }}">
                                         <i class="bi bi-bell"></i>
-                                        {{ fs_api_config('menu_notifications') }}
+                                        {{ fs_db_config('menu_notifications') }}
 
                                         @if(array_sum(fs_user_panel('unreadNotifications')) > 0)
                                             <span class="badge bg-danger">{{ array_sum(fs_user_panel('unreadNotifications')) }}</span>
@@ -142,7 +142,7 @@
                                 <li>
                                     <a class="dropdown-item" href="{{ fs_route(route('fresns.editor.drafts', ['type' => 'posts'])) }}">
                                         <i class="bi bi-file-earmark-text"></i>
-                                        {{ fs_api_config('menu_editor_drafts') }}
+                                        {{ fs_db_config('menu_editor_drafts') }}
 
                                         @if(array_sum(fs_user_panel('draftCount')) > 0)
                                             <span class="badge bg-primary">{{ array_sum(fs_user_panel('draftCount')) }}</span>
@@ -152,16 +152,16 @@
 
                                 {{-- Wallet --}}
                                 @if (fs_api_config('wallet_status'))
-                                    <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.wallet')) }}"><i class="bi bi-wallet"></i> {{ fs_api_config('menu_account_wallet') }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.wallet')) }}"><i class="bi bi-wallet"></i> {{ fs_db_config('menu_account_wallet') }}</a></li>
                                 @endif
 
                                 {{-- List of users belonging to the current account --}}
                                 @if (count(fs_account('detail.users')) > 1)
-                                    <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.users')) }}"><i class="bi bi-people"></i> {{ fs_api_config('menu_account_users') }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.users')) }}"><i class="bi bi-people"></i> {{ fs_db_config('menu_account_users') }}</a></li>
                                 @endif
 
                                 {{-- Settings Page --}}
-                                <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.settings')) }}"><i class="bi bi-gear"></i> {{ fs_api_config('menu_account_settings') }}</a></li>
+                                <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.settings')) }}"><i class="bi bi-gear"></i> {{ fs_db_config('menu_account_settings') }}</a></li>
                                 <li><hr class="dropdown-divider"></li>
 
                                 {{-- Switching Languages --}}
