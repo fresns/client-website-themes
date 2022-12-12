@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ fs_api_config('publish_post_name') }} <a href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}" class="fs-7">{{ fs_lang('editorFullFunctions') }}</a></h5>
+                <h5 class="modal-title">{{ fs_db_config('publish_post_name') }} <a href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}" class="fs-7">{{ fs_lang('editorFullFunctions') }}</a></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -15,7 +15,7 @@
                             <div class="editor-group shadow-sm">
                                 <div class="d-grid">
                                     <button class="rounded-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center p-2" style="background-color: aliceblue;" type="button" data-bs-toggle="modal" data-bs-target="#post-box-fresns-group">
-                                        <span class="py-2 ms-1" id="post-box-group"><i class="bi bi-archive-fill me-2"></i><span class="selected-group">@if($group) {{ $group['gname'] }} @else {{ fs_api_config('group_name') }}: {{ fs_lang('editorNoChooseGroup') }} @endif</span></span>
+                                        <span class="py-2 ms-1" id="post-box-group"><i class="bi bi-archive-fill me-2"></i><span class="selected-group">@if($group) {{ $group['gname'] }} @else {{ fs_db_config('group_name') }}: {{ fs_lang('editorNoChooseGroup') }} @endif</span></span>
                                         <span class="py-2"><i class="bi bi-chevron-right"></i></span>
                                     </button>
                                 </div>
@@ -45,7 +45,7 @@
                             <hr>
                             <div class="d-flex bd-highlight align-items-center">
                                 <div class="bd-highlight me-auto">
-                                    <button type="submit" class="btn btn-success btn-lg">{{ fs_api_config('publish_post_name') }}</button>
+                                    <button type="submit" class="btn btn-success btn-lg">{{ fs_db_config('publish_post_name') }}</button>
                                 </div>
                                 @if(fs_api_config('post_editor_anonymous'))
                                     <div class="bd-highlight">
@@ -70,14 +70,14 @@
     <div class="modal-dialog modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ fs_api_config('group_name') }}</h5>
+                <h5 class="modal-title">{{ fs_db_config('group_name') }}</h5>
                 <button type="button" class="btn-close" data-bs-target="#createModal" data-bs-toggle="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 {{-- Group Body --}}
                 <div class="d-flex align-items-start">
                     <div class="nav flex-column nav-pills me-3" id="v-pills-post-box-tab" role="tablist" aria-orientation="vertical">
-                        <button type="button" id="post-box-not-select-group" class="btn btn-outline-secondary btn-sm mb-2 modal-close" data-bs-target="#createModal" data-bs-toggle="modal" aria-label="Close">{{ fs_lang('editorNoGroup') }} {{ fs_api_config('group_name') }}</button>
+                        <button type="button" id="post-box-not-select-group" class="btn btn-outline-secondary btn-sm mb-2 modal-close" data-bs-target="#createModal" data-bs-toggle="modal" aria-label="Close">{{ fs_lang('editorNoGroup') }} {{ fs_db_config('group_name') }}</button>
                         {{-- Group Categories --}}
                         @foreach(fs_groups('categories') as $groupCategory)
                             <button class="nav-link group-categories" data-page-size="15" data-page="1" data-action="{{ route('fresns.api.sub.groups', ['gid' => $groupCategory['gid']]) }}" id="v-pills-{{ $groupCategory['gid'] }}-post-box-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ $groupCategory['gid'] }}-post-box" type="button" role="tab" aria-controls="v-pills-{{ $groupCategory['gid'] }}-post-box" aria-selected="false">

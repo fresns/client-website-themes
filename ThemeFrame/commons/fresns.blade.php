@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Fresns" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title') - {{ fs_api_config('site_name') }}</title>
+    <title>@yield('title') - {{ fs_db_config('site_name') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="keywords" content="@yield('keywords')" />
     <meta name="description" content="@yield('description')" />
@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-icons.css">
     <link rel="stylesheet" href="/static/css/select2.min.css">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v=fc02f78c44f2ccbe">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v=fc02f78c44f2ccbe">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=fc02f78c44f2ccbe">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v=9cd80f062b708d6b">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v=9cd80f062b708d6b">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=9cd80f062b708d6b">
     @stack('style')
     @if (fs_db_config('website_stat_position') == 'head')
         {!! fs_db_config('website_stat_code') !!}
@@ -111,12 +111,12 @@
     <script>
         window.hashtag_show = {{ fs_api_config('hashtag_show') }}
     </script>
-    <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v=fc02f78c44f2ccbe" }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v=fc02f78c44f2ccbe"></script>
-    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=fc02f78c44f2ccbe"></script>
-    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=fc02f78c44f2ccbe"></script>
-    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=fc02f78c44f2ccbe"></script>
-    <script src="/assets/themes/ThemeFrame/js/fresns.js?v=fc02f78c44f2ccbe"></script>
+    <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v=9cd80f062b708d6b" }}"></script>
+    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v=9cd80f062b708d6b"></script>
+    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=9cd80f062b708d6b"></script>
+    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=9cd80f062b708d6b"></script>
+    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=9cd80f062b708d6b"></script>
+    <script src="/assets/themes/ThemeFrame/js/fresns.js?v=9cd80f062b708d6b"></script>
     @stack('script')
 </body>
 

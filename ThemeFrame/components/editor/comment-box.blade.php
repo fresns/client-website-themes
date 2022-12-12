@@ -2,7 +2,7 @@
 @if (fs_user()->check())
     <div class="card order-5 mt-3 fresns-reply @if(empty($show)) hide @else show @endif" @if(empty($show)) style="display: none" @endif>
         <div class="card-header d-flex">
-            <div class="flex-grow-1">{{ fs_api_config('publish_comment_name') }} {{ $nickname }}</div>
+            <div class="flex-grow-1">{{ fs_db_config('publish_comment_name') }} {{ $nickname }}</div>
             <button type="button" class="btn-close"></button>
         </div>
         <div class="card-body">
@@ -22,7 +22,7 @@
                     <div class="d-flex bd-highlight align-items-center">
                         {{-- comment button --}}
                         <div class="bd-highlight me-auto">
-                            <button type="submit" class="btn btn-success">{{ fs_api_config('publish_comment_name') }}</button>
+                            <button type="submit" class="btn btn-success">{{ fs_db_config('publish_comment_name') }}</button>
                         </div>
 
                         {{-- anonymous checkbox --}}
@@ -42,7 +42,7 @@
 @else
     <div class="card order-5 mt-3 fresns-reply @if(empty($show)) hide @else show @endif" @if(empty($show)) style="display: none" @endif>
         <div class="card-header d-flex">
-            <div class="flex-grow-1">{{ fs_api_config('publish_comment_name') }} {{ $nickname }}</div>
+            <div class="flex-grow-1">{{ fs_db_config('publish_comment_name') }} {{ $nickname }}</div>
             <button type="button" class="btn-close"></button>
         </div>
         <div class="card-body py-5 text-center">

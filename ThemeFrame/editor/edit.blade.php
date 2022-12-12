@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_api_config('menu_editor_functions'))
+@section('title', fs_db_config('menu_editor_functions'))
 
 @section('content')
     <div class="container-fluid">
@@ -122,10 +122,10 @@
                 <div class="editor-submit d-grid">
                     <button type="submit" class="btn btn-success btn-lg my-5 mx-3">
                         @if ($type == 'post')
-                            {{ fs_api_config('publish_post_name') }}
+                            {{ fs_db_config('publish_post_name') }}
                         @endif
                         @if ($type == 'comment')
-                            {{ fs_api_config('publish_comment_name') }}
+                            {{ fs_db_config('publish_comment_name') }}
                         @endif
                     </button>
                 </div>

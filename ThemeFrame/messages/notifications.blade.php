@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_api_config('menu_notifications'))
+@section('title', fs_db_config('menu_notifications'))
 
 @section('content')
     <main class="container-fluid">
@@ -20,7 +20,7 @@
                                 {{-- all notifications --}}
                                 <li class="nav-item">
                                     <a class="nav-link @if(empty($types)) active @endif" href="{{ fs_route(route('fresns.message.notifications')) }}">
-                                        {{ fs_api_config('menu_notifications_all') }}
+                                        {{ fs_db_config('menu_notifications_all') }}
                                         @if(array_sum(fs_user_panel('unreadNotifications')) > 0)
                                             <span class="badge bg-danger">{{ array_sum(fs_user_panel('unreadNotifications')) }}</span>
                                         @endif
@@ -31,7 +31,7 @@
                                 @if(in_array('systems', fs_db_config('fs_theme_notifications', [])))
                                     <li class="nav-item">
                                         <a class="nav-link @if($types == 1) active @endif" href="{{ fs_route(route('fresns.message.notifications', ['types' => 1])) }}">
-                                            {{ fs_api_config('menu_notifications_systems') }}
+                                            {{ fs_db_config('menu_notifications_systems') }}
                                             @if(fs_user_panel('unreadNotifications.systems') > 0)
                                                 <span class="badge bg-danger">{{ fs_user_panel('unreadNotifications.systems') }}</span>
                                             @endif
@@ -43,7 +43,7 @@
                                 @if(in_array('recommends', fs_db_config('fs_theme_notifications', [])))
                                     <li class="nav-item">
                                         <a class="nav-link @if($types == 2) active @endif" href="{{ fs_route(route('fresns.message.notifications', ['types' => 2])) }}">
-                                            {{ fs_api_config('menu_notifications_recommends') }}
+                                            {{ fs_db_config('menu_notifications_recommends') }}
                                             @if(fs_user_panel('unreadNotifications.recommends') > 0)
                                                 <span class="badge bg-danger">{{ fs_user_panel('unreadNotifications.recommends') }}</span>
                                             @endif
@@ -55,7 +55,7 @@
                                 @if(in_array('likes', fs_db_config('fs_theme_notifications', [])))
                                     <li class="nav-item">
                                         <a class="nav-link @if($types == 3) active @endif" href="{{ fs_route(route('fresns.message.notifications', ['types' => 3])) }}">
-                                            {{ fs_api_config('menu_notifications_likes') }}
+                                            {{ fs_db_config('menu_notifications_likes') }}
                                             @if(fs_user_panel('unreadNotifications.likes') > 0)
                                                 <span class="badge bg-danger">{{ fs_user_panel('unreadNotifications.likes') }}</span>
                                             @endif
@@ -67,7 +67,7 @@
                                 @if(in_array('dislikes', fs_db_config('fs_theme_notifications', [])))
                                     <li class="nav-item">
                                         <a class="nav-link @if($types == 4) active @endif" href="{{ fs_route(route('fresns.message.notifications', ['types' => 4])) }}">
-                                            {{ fs_api_config('menu_notifications_dislikes') }}
+                                            {{ fs_db_config('menu_notifications_dislikes') }}
                                             @if(fs_user_panel('unreadNotifications.dislikes') > 0)
                                                 <span class="badge bg-danger">{{ fs_user_panel('unreadNotifications.dislikes') }}</span>
                                             @endif
@@ -79,7 +79,7 @@
                                 @if(in_array('follows', fs_db_config('fs_theme_notifications', [])))
                                     <li class="nav-item">
                                         <a class="nav-link @if($types == 5) active @endif" href="{{ fs_route(route('fresns.message.notifications', ['types' => 5])) }}">
-                                            {{ fs_api_config('menu_notifications_follows') }}
+                                            {{ fs_db_config('menu_notifications_follows') }}
                                             @if(fs_user_panel('unreadNotifications.follows') > 0)
                                                 <span class="badge bg-danger">{{ fs_user_panel('unreadNotifications.follows') }}</span>
                                             @endif
@@ -91,7 +91,7 @@
                                 @if(in_array('blocks', fs_db_config('fs_theme_notifications', [])))
                                     <li class="nav-item">
                                         <a class="nav-link @if($types == 6) active @endif" href="{{ fs_route(route('fresns.message.notifications', ['types' => 6])) }}">
-                                            {{ fs_api_config('menu_notifications_blocks') }}
+                                            {{ fs_db_config('menu_notifications_blocks') }}
                                             @if(fs_user_panel('unreadNotifications.blocks') > 0)
                                                 <span class="badge bg-danger">{{ fs_user_panel('unreadNotifications.blocks') }}</span>
                                             @endif
@@ -103,7 +103,7 @@
                                 @if(in_array('mentions', fs_db_config('fs_theme_notifications', [])))
                                     <li class="nav-item">
                                         <a class="nav-link @if($types == 7) active @endif" href="{{ fs_route(route('fresns.message.notifications', ['types' => 7])) }}">
-                                            {{ fs_api_config('menu_notifications_mentions') }}
+                                            {{ fs_db_config('menu_notifications_mentions') }}
                                             @if(fs_user_panel('unreadNotifications.mentions') > 0)
                                                 <span class="badge bg-danger">{{ fs_user_panel('unreadNotifications.mentions') }}</span>
                                             @endif
@@ -115,7 +115,7 @@
                                 @if(in_array('comments', fs_db_config('fs_theme_notifications', [])))
                                     <li class="nav-item">
                                         <a class="nav-link @if($types == 8) active @endif" href="{{ fs_route(route('fresns.message.notifications', ['types' => 8])) }}">
-                                            {{ fs_api_config('menu_notifications_comments') }}
+                                            {{ fs_db_config('menu_notifications_comments') }}
                                             @if(fs_user_panel('unreadNotifications.comments') > 0)
                                                 <span class="badge bg-danger">{{ fs_user_panel('unreadNotifications.comments') }}</span>
                                             @endif

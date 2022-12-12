@@ -69,19 +69,19 @@
 
                     @switch($notification['actionObject'])
                         @case(2)
-                            : {{ fs_api_config('group_name') }}
+                            : {{ fs_db_config('group_name') }}
                         @break
 
                         @case(3)
-                            : {{ fs_api_config('hashtag_name') }}
+                            : {{ fs_db_config('hashtag_name') }}
                         @break
 
                         @case(4)
-                            : {{ fs_api_config('post_name') }}
+                            : {{ fs_db_config('post_name') }}
                         @break
 
                         @case(5)
-                            : {{ fs_api_config('comment_name') }}
+                            : {{ fs_db_config('comment_name') }}
                         @break
 
                         @default

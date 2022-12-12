@@ -13,7 +13,7 @@
             <img src="{{ $creator['avatar'] }}" alt="{{ fs_lang('contentCreatorAnonymous') }}" class="user-avatar rounded-circle">
         @elseif ($creator['deactivate'])
             {{-- Deactivate Author --}}
-            <img src="{{ fs_api_config('deactivate_avatar') }}" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="user-avatar rounded-circle">
+            <img src="{{ fs_db_config('deactivate_avatar') }}" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="user-avatar rounded-circle">
         @endif
     </div>
     <div class="flex-grow-1">
@@ -47,7 +47,7 @@
                 {{-- Post Author --}}
                 @if ($creator['isPostCreator'])
                     <div>
-                        <span class="author-badge" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ fs_api_config('post_name').': '.fs_lang('contentCreator') }}">
+                        <span class="author-badge" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ fs_db_config('post_name').': '.fs_lang('contentCreator') }}">
                             {{ fs_lang('contentCreator') }}
                         </span>
                     </div>
@@ -85,7 +85,7 @@
             {{-- Commenter Reply User --}}
             @if ($replyToUser)
                 <div class="text-success ms-2">
-                    {{ fs_api_config('publish_comment_name') }}
+                    {{ fs_db_config('publish_comment_name') }}
                     @if (! $replyToUser['deactivate'] && $replyToUser['fsid'])
                         <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $replyToUser['fsid']])) }}">{{ '@' . $replyToUser['nickname'] }}</a>
                     @elseif (! $replyToUser['deactivate'] && empty($replyToUser['fsid']))
@@ -97,7 +97,7 @@
             @endif
 
             {{-- IP Location --}}
-            @if (fs_api_config('account_ip_location_status') && current_lang_tag() == 'zh-Hans')
+            @if (fs_db_config('account_ip_location_status') && current_lang_tag() == 'zh-Hans')
                 <span class="text-secondary ms-3">
                     <i class="bi bi-geo"></i>
                     @if ($ipLocation)

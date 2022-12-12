@@ -3,14 +3,22 @@
 All notable changes to this project will be documented in this file.
 
 
-## 2.0.0-Beta.5 (2022-12-08)
+## 2.0.0-beta.6 (2022-12-12)
+
+- Add `redirectURL` parameter to the registration and login links
+- Fix user auth modal box id
+- Fix cookies configuration name
+- Changed the name of configuration item from fs_api_config to fs_db_config
+
+
+## 2.0.0-beta.5 (2022-12-08)
 
 - Private mode view file move directory `portal/private.blade.php`
 - Add policy terms page `portal/policies.blade.php`
 - Fix the problem of group selection list loading failure when publishing
 
 
-## 2.0.0-Beta.4 (2022-12-01)
+## 2.0.0-beta.4 (2022-12-01)
 
 - Fix statistics code parameter error
 - `commentPreviews` parameter name changed to `subComments`
@@ -19,7 +27,7 @@ All notable changes to this project will be documented in this file.
 - Fix comment like button state
 
 
-## 2.0.0-Beta.3 (2022-11-28)
+## 2.0.0-beta.3 (2022-11-28)
 
 - Group detail page shows prompt text when no right to view
 - Hide display if wallet is not enabled in user menu
@@ -29,12 +37,12 @@ All notable changes to this project will be documented in this file.
 - Fix input-tips topic # number completion
 
 
-## 2.0.0-Beta.2 (2022-11-23)
+## 2.0.0-beta.2 (2022-11-23)
 
 - Add fresnsJoin listener
 - Global selectable user switching
 
 
-## 2.0.0-Beta.1 (2022-11-22)
+## 2.0.0-beta.1 (2022-11-22)
 
 - Adaptation to Fresns 2.x

@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_api_config('menu_account_users'))
+@section('title', fs_db_config('menu_account_users'))
 
 @section('content')
     <main class="container-fluid">
@@ -14,7 +14,7 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-header">
-                        {{ fs_api_config('user_name') }}
+                        {{ fs_db_config('user_name') }}
                         @if ($multiUserStatus)
                             <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                                 data-lang-tag="{{ current_lang_tag() }}"
@@ -23,7 +23,7 @@
                                 data-post-message-key="fresnsConnect"
                                 data-aid="{{ fs_account('detail.aid') }}"
                                 data-uid="{{ fs_user('detail.uid') }}"
-                                data-title="{{ fs_api_config('user_name') }}"
+                                data-title="{{ fs_db_config('user_name') }}"
                                 data-url="{{ fs_api_config('multi_user_service') }}">
                                 <i class="bi bi-people-fill"></i>
                                 {{ fs_lang('setting') }}

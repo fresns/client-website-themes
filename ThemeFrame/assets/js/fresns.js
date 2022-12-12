@@ -909,7 +909,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                         <span class="input-group-text border-end-rounded-0">` +
                         lable +
                         `</span>
-                        <select class="form-select" name="editCountryCode">
+                        <select class="form-select border-end-rounded-0" name="editCountryCode">
                             <option disabled>Country Calling Codes</option>`;
                     $(smsCodes).each(function (k, v) {
                         let selected = v == defaultSmsCode ? 'selected' : '';
@@ -979,7 +979,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     </div>
                     <div class="input-group has-validation mb-3 d-none">
                         <span class="input-group-text border-end-rounded-0">${fs_lang('newPhone')}</span>
-                        <select class="form-select" name="editCountryCode">
+                        <select class="form-select border-end-rounded-0" name="editCountryCode">
                             <option disabled>Country Calling Codes</option>`;
                     $(smsCodes).each(function (k, v) {
                         let selected = v == defaultSmsCode ? 'selected' : '';
@@ -1217,7 +1217,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
 
                 if (res.code == 0) {
                     setTimeout(function () {
-                        window.location.href = res.data.prev_url || '/account/login';
+                        window.location.href = res.data.redirectURL || '/account/login';
                     }, 1000);
                 }
             },

@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_api_config('menu_account_settings'))
+@section('title', fs_db_config('menu_account_settings'))
 
 @section('content')
     <main class="container-fluid">
@@ -73,15 +73,15 @@
                             </div>
                             {{-- User Number --}}
                             <div class="input-group mb-3">
-                                <span class="input-group-text">{{ fs_api_config('user_uid_name') }}</span>
+                                <span class="input-group-text">{{ fs_db_config('user_uid_name') }}</span>
                                 <span class="form-control">{{ fs_user('detail.uid') }}</span>
                             </div>
                             {{-- Nickname --}}
                             <div class="input-group mb-3">
-                                <span class="input-group-text">{{ fs_api_config('user_nickname_name') }}</span>
+                                <span class="input-group-text">{{ fs_db_config('user_nickname_name') }}</span>
                                 <span class="form-control" id="input-nickname">{{ fs_user('detail.nickname') }}</span>
                                 <button class="btn btn-outline-secondary"
-                                    data-lable="{{ fs_api_config('user_nickname_name') }}"
+                                    data-lable="{{ fs_db_config('user_nickname_name') }}"
                                     data-desc="{{ fs_lang('settingIntervalDays') }}: {{ fs_api_config('nickname_edit') }} {{ fs_lang('modifierDays') }} | {{ fs_lang('settingLastTime') }}: {{ fs_user('detail.lastEditNickname') }}"
                                     data-name="nickname"
                                     data-action="{{ route('fresns.api.user.edit') }}"
@@ -90,10 +90,10 @@
                             </div>
                             {{-- Username --}}
                             <div class="input-group mb-3">
-                                <span class="input-group-text">{{ fs_api_config('user_username_name') }}</span>
+                                <span class="input-group-text">{{ fs_db_config('user_username_name') }}</span>
                                 <span class="form-control" id="input-username">{{ fs_user('detail.username') }}</span>
                                 <button class="btn btn-outline-secondary"
-                                    data-lable="{{ fs_api_config('user_username_name') }}"
+                                    data-lable="{{ fs_db_config('user_username_name') }}"
                                     data-desc="{{ fs_lang('settingIntervalDays') }}: {{ fs_api_config('username_edit') }} {{ fs_lang('modifierDays') }} | {{ fs_lang('settingLastTime') }}: {{ fs_user('detail.lastEditUsername') }}<br>{{ fs_lang('modifierLength') }}: {{ fs_api_config('username_min') }} - {{ fs_api_config('username_max') }}<br>{{ fs_lang('settingNameWarning') }}"
                                     data-name="username"
                                     data-action="{{ route('fresns.api.user.edit') }}"
@@ -102,10 +102,10 @@
                             </div>
                             {{-- Bio --}}
                             <div class="input-group mb-3">
-                                <span class="input-group-text">{{ fs_api_config('user_bio_name') }}</span>
+                                <span class="input-group-text">{{ fs_db_config('user_bio_name') }}</span>
                                 <span class="form-control" id="textarea-bio">{{ fs_user('detail.bio') }}</span>
                                 <button class="btn btn-outline-secondary"
-                                    data-lable="{{ fs_api_config('user_bio_name') }}"
+                                    data-lable="{{ fs_db_config('user_bio_name') }}"
                                     data-type="textarea"
                                     @if (fs_api_config('bio_support_mention') || fs_api_config('bio_support_hashtag'))
                                         data-input-tips="fresns-content"
@@ -154,7 +154,7 @@
                         <div class="tab-pane fade" id="preference" role="tabpanel" aria-labelledby="preference-tab">
                             {{-- conversation --}}
                             <div class="input-group mb-3">
-                                <span class="input-group-text">{{ fs_api_config('menu_conversations') }}</span>
+                                <span class="input-group-text">{{ fs_db_config('menu_conversations') }}</span>
                                 <span class="form-control" id="select-conversationLimit">
                                     @if(fs_user('detail.conversationLimit') == 1)
                                         {{ fs_lang('settingAllowAll') }}
@@ -167,7 +167,7 @@
                                     @endif
                                 </span>
                                 <button class="btn btn-outline-secondary"
-                                    data-lable="{{ fs_api_config('menu_conversations') }}"
+                                    data-lable="{{ fs_db_config('menu_conversations') }}"
                                     data-type="select"
                                     data-option='[{"id":1,"text":"{{ fs_lang('settingAllowAll') }}"},{"id":2,"text":"{{ fs_lang('settingAllowMyFollow') }}"},{"id":3,"text":"{{ fs_lang('settingAllowMyFollowAndVerified') }}"},{"id":4,"text":"{{ fs_lang('settingAllowNotAll') }}"}]'
                                     data-name="conversationLimit"
@@ -179,7 +179,7 @@
                             </div>
                             {{-- Comment --}}
                             <div class="input-group mb-3">
-                                <span class="input-group-text">{{ fs_api_config('comment_name') }}</span>
+                                <span class="input-group-text">{{ fs_db_config('comment_name') }}</span>
                                 <span class="form-control" id="select-commentLimit">
                                     @if(fs_user('detail.commentLimit') == 1)
                                         {{ fs_lang('settingAllowAll') }}
@@ -192,7 +192,7 @@
                                     @endif
                                 </span>
                                 <button class="btn btn-outline-secondary"
-                                    data-lable="{{ fs_api_config('comment_name') }}"
+                                    data-lable="{{ fs_db_config('comment_name') }}"
                                     data-type="select"
                                     data-option='[{"id":1,"text":"{{ fs_lang('settingAllowAll') }}"},{"id":2,"text":"{{ fs_lang('settingAllowMyFollow') }}"},{"id":3,"text":"{{ fs_lang('settingAllowMyFollowAndVerified') }}"},{"id":4,"text":"{{ fs_lang('settingAllowNotAll') }}"}]'
                                     data-name="commentLimit"

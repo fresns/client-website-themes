@@ -12,7 +12,7 @@
                     <img src="/assets/themes/ThemeFrame/images/icon-recommend.png" class="list-recommend ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Recommend" alt="Recommend">
                 @endif
                 <div class="badge-bg-info ms-2">
-                    <span class="badge rounded-pill">{{ $group['postCount'] }} {{ fs_api_config('post_name') }}</span>
+                    <span class="badge rounded-pill">{{ $group['postCount'] }} {{ fs_db_config('post_name') }}</span>
                     <span class="badge rounded-pill">{{ $group['postDigestCount'] }} {{ fs_lang('contentDigest') }}</span>
                 </div>
             </section>

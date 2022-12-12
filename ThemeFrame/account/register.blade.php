@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_api_config('menu_account_register'))
+@section('title', fs_db_config('menu_account_register'))
 
 @section('content')
     <div class="container-fluid">
@@ -36,6 +36,7 @@
                 {{-- Register --}}
                 <form class="py-3" id="accordionCodeAccount" method="post" novalidate action="{{ route("fresns.api.account.register") }}">
                     @csrf
+                    <input type="hidden" name="redirectURL" value="{{ request()->get('redirectURL') }}">
                     {{-- Register Type Switch --}}
                     @if (fs_api_config('site_register_email') && fs_api_config('site_register_phone'))
                         <div class="input-group mb-3 mt-2">
@@ -118,7 +119,7 @@
 
                     {{-- Nickname --}}
                     <div class="input-group mb-3">
-                        <span class="input-group-text">{{ fs_api_config('user_nickname_name') }}</span>
+                        <span class="input-group-text">{{ fs_db_config('user_nickname_name') }}</span>
                         <input type="text" class="form-control" name="nickname" value="{{ old('nickname') }}" required>
                     </div>
 
@@ -164,8 +165,8 @@
                         @if (fs_api_config('account_privacy_status'))
                             <a class="badge rounded-pill bg-success link-light text-decoration-none" data-bs-toggle="modal" href="#privacyModal">{{ fs_lang('accountPoliciesPrivacy') }}</a>
                         @endif
-                        @if (fs_api_config('account_cookie_status'))
-                            <a class="badge rounded-pill bg-success link-light text-decoration-none" data-bs-toggle="modal" href="#cookieModal">{{ fs_lang('accountPoliciesCookie') }}</a>
+                        @if (fs_api_config('account_cookies_status'))
+                            <a class="badge rounded-pill bg-success link-light text-decoration-none" data-bs-toggle="modal" href="#cookieModal">{{ fs_lang('accountPoliciesCookies') }}</a>
                         @endif
                     </label>
 
@@ -234,16 +235,16 @@
     @endif
 
     {{-- Cookie Modal --}}
-    @if (fs_api_config('account_cookie_status'))
+    @if (fs_api_config('account_cookies_status'))
         <div class="modal fade" id="cookieModal" tabindex="-1" aria-labelledby="cookieModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="cookieModalLabel">{{ fs_lang('accountPoliciesCookie') }}</h5>
+                        <h5 class="modal-title" id="cookieModalLabel">{{ fs_lang('accountPoliciesCookies') }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        {!! Str::markdown(fs_api_config('account_cookie')) !!}
+                        {!! Str::markdown(fs_api_config('account_cookies')) !!}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ fs_lang('close') }}</button>

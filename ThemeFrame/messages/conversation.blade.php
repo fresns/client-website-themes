@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_api_config('menu_conversations').' - '.$conversation['user']['nickname'])
+@section('title', fs_db_config('menu_conversations').' - '.$conversation['user']['nickname'])
 
 @section('content')
     <main class="container-fluid">
@@ -16,7 +16,7 @@
                     {{-- User who conversation to me --}}
                     <div class="card-header">
                         @if ($conversation['userIsDeactivate'])
-                            <img src="{{ fs_api_config('deactivate_avatar') }}" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="rounded-circle conversation-avatar">
+                            <img src="{{ fs_db_config('deactivate_avatar') }}" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="rounded-circle conversation-avatar">
                             {{ fs_lang('contentCreatorDeactivate') }}
                         @else
                             <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $conversation['user']['fsid']])) }}" target="_blank" class="text-decoration-none">

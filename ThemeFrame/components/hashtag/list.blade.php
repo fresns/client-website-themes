@@ -9,7 +9,7 @@
             <section class="d-flex">
                 <a href="{{ fs_route(route('fresns.hashtag.detail', ['hid' => $hashtag['hid']])) }}" class="text-nowrap overflow-hidden list-name">{{ $hashtag['hname'] }}</a>
                 <div class="badge-bg-info ms-2">
-                    <span class="badge rounded-pill">{{ $hashtag['postCount'] }} {{ fs_api_config('post_name') }}</span>
+                    <span class="badge rounded-pill">{{ $hashtag['postCount'] }} {{ fs_db_config('post_name') }}</span>
                     <span class="badge rounded-pill">{{ $hashtag['postDigestCount'] }} {{ fs_lang('contentDigest') }}</span>
                 </div>
             </section>

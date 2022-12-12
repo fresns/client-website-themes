@@ -1,5 +1,5 @@
 <footer class="container-fluid pt-4 my-4 text-center text-muted border-top">
-    <p class="mb-1">Copyright &copy; {{fs_api_config('site_copyright_years')}} {{fs_api_config('site_copyright')}}. All Rights Reserved</p>
+    <p class="mb-1">Copyright &copy; {{fs_db_config('site_copyright_years')}} {{fs_db_config('site_copyright')}}. All Rights Reserved</p>
 
     <p class="mb-1" style="font-size:15px;">
         @if (fs_db_config('site_china_mode'))

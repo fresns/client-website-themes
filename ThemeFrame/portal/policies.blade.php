@@ -19,7 +19,7 @@
                 @endif
 
                 @if (fs_api_config('account_cookies_status'))
-                    <button class="nav-link text-start rounded-0 py-3" id="v-pills-cookies-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cookies" type="button" role="tab" aria-controls="v-pills-cookies" aria-selected="false">{{ fs_lang('accountPoliciescookies') }}</button>
+                    <button class="nav-link text-start rounded-0 py-3" id="v-pills-cookies-tab" data-bs-toggle="pill" data-bs-target="#v-pills-cookies" type="button" role="tab" aria-controls="v-pills-cookies" aria-selected="false">{{ fs_lang('accountPoliciesCookies') }}</button>
                 @endif
 
                 @if (fs_api_config('account_delete_status'))

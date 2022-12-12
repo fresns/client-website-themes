@@ -280,7 +280,7 @@
                 <div class="modal-body">
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon1">@</span>
-                        <input type="text" list="memberLists" class="form-control" id="atUser" placeholder="{{ fs_api_config('user_name_name') }} {{ fs_lang('modifierOr') }} {{ fs_api_config('user_nickname_name') }}">
+                        <input type="text" list="memberLists" class="form-control" id="atUser" placeholder="{{ fs_db_config('user_name_name') }} {{ fs_lang('modifierOr') }} {{ fs_db_config('user_nickname_name') }}">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2" data-bs-dismiss="modal" aria-label="Close">✓</button>
                     </div>
                     <datalist id="memberLists">
@@ -301,7 +301,7 @@
                 <div class="modal-body">
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon1">#</span>
-                        <input type="text" list="hashtagLists" id="atHashtag" class="form-control" placeholder="{{ fs_api_config('hashtag_name') }}">
+                        <input type="text" list="hashtagLists" id="atHashtag" class="form-control" placeholder="{{ fs_db_config('hashtag_name') }}">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2" data-bs-dismiss="modal" aria-label="Close">✓</button>
                     </div>
                     <datalist id="hashtagLists">

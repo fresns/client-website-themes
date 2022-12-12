@@ -14,7 +14,7 @@
                                 <img src="{{ $item['avatar'] }}" class="auth-avatar rounded-circle">
                                 <div class="auth-nickname mt-2">{{ $item['nickname'] }}</div>
                                 <div class="text-secondary">{{ '@' . $item['username'] }}</div>
-                                <form action="{{ route('fresns.api.user.auth') }}" id="#uid-{{ $item['uid'] }}" method="post">
+                                <form action="{{ route('fresns.api.user.auth') }}" id="uid-{{ $item['uid'] }}" method="post">
                                     @csrf
                                     <input type="hidden" name="uidOrUsername" value="{{ $item['uid'] }}">
                                     @if ($item['hasPassword'])
