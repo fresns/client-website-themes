@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.0.0-beta.6 (2022-12-12)
+
+- Add `redirectURL` parameter to the registration and login links
+- Fix user auth modal box id
+- Fix cookies configuration name
+- Changed the name of configuration item from fs_api_config to fs_db_config
+
+
 ## 2.0.0-beta.5 (2022-12-08)
 
 - Private mode view file move directory `portal/private.blade.php`

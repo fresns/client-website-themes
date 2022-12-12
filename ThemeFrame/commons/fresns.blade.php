@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-icons.css">
     <link rel="stylesheet" href="/static/css/select2.min.css">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v=e64ea5edadb56af4">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v=e64ea5edadb56af4">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=e64ea5edadb56af4">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v=9cd80f062b708d6b">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v=9cd80f062b708d6b">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=9cd80f062b708d6b">
     @stack('style')
     @if (fs_db_config('website_stat_position') == 'head')
         {!! fs_db_config('website_stat_code') !!}
@@ -111,12 +111,12 @@
     <script>
         window.hashtag_show = {{ fs_api_config('hashtag_show') }}
     </script>
-    <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v=e64ea5edadb56af4" }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v=e64ea5edadb56af4"></script>
-    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=e64ea5edadb56af4"></script>
-    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=e64ea5edadb56af4"></script>
-    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=e64ea5edadb56af4"></script>
-    <script src="/assets/themes/ThemeFrame/js/fresns.js?v=e64ea5edadb56af4"></script>
+    <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v=9cd80f062b708d6b" }}"></script>
+    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v=9cd80f062b708d6b"></script>
+    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=9cd80f062b708d6b"></script>
+    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=9cd80f062b708d6b"></script>
+    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=9cd80f062b708d6b"></script>
+    <script src="/assets/themes/ThemeFrame/js/fresns.js?v=9cd80f062b708d6b"></script>
     @stack('script')
 </body>
 
