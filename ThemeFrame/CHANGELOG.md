@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.0.0-beta.7 (2022-12-13)
+
+- The group details page shows the list of group administrators
+
+
 ## 2.0.0-beta.6 (2022-12-12)
 
 - Add `redirectURL` parameter to the registration and login links
