@@ -88,7 +88,7 @@
     </section>
 
     {{-- Post permission information --}}
-    @if ($post['isAllow'])
+    @if (! $post['isAllow'])
         <section class="post-allow order-2">
             <div class="post-allow-static"></div>
             <div class="text-center">
