@@ -7,7 +7,7 @@
         <div class="row mt-5 pt-5">
             <div class="card mx-auto" style="max-width:800px;">
                 <div class="card-body p-5">
-                    <h3 class="card-title">Fresns Private</h3>
+                    <h3 class="card-title">{{ fs_db_config('site_name') }}</h3>
                     <p>{{ fs_lang('private') }}</p>
 
                     {{-- Login --}}
