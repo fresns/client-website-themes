@@ -190,11 +190,11 @@ header .navbar {
 .profile-avatar {
     width: 4.4rem;
     height: 4.4rem;
-    margin: 1rem;
+    margin: 2.2rem;
 }
 .profile-decorate {
-    width: 4.4rem;
-    height: 4.4rem;
+    width: 8.8rem;
+    height: 8.8rem;
     position: absolute;
 }
 .profile-nickname h1 {
