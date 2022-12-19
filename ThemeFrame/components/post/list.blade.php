@@ -195,7 +195,7 @@
         </section>
     @endif
 
-    {{-- Post Preview Comments --}}
+    {{-- Preview Comments --}}
     @if ($post['previewComments'])
         @component('components.post.section.preview-comment', [
             'pid' => $post['pid'],
@@ -287,4 +287,15 @@
             'pid' => $post['pid'],
         ])@endcomponent
     </section>
+
+    {{-- Preview Like Users --}}
+    @if ($post['previewLikeUsers'])
+        @component('components.post.section.preview-user', [
+            'name' => $post['interaction']['likeName'],
+            'status' => $post['interaction']['likeStatus'],
+            'count' => $post['likeCount'],
+            'icon' => $iconLike,
+            'previewLikeUsers' => $post['previewLikeUsers'],
+        ])@endcomponent
+    @endif
 </div>
