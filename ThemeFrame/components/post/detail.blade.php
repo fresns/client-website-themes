@@ -186,14 +186,6 @@
         </section>
     @endif
 
-    {{-- Post Top Comment --}}
-    @if ($post['topComment'])
-        @component('components.post.section.top-comment', [
-            'pid' => $post['pid'],
-            'topComment' => $post['topComment'],
-        ])@endcomponent
-    @endif
-
     {{-- Interaction Function --}}
     <section class="interaction order-5 mt-3 px-3">
         <div class="d-flex">

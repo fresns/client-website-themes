@@ -195,11 +195,12 @@
         </section>
     @endif
 
-    {{-- Post Top Comment --}}
-    @if ($post['topComment'])
-        @component('components.post.section.top-comment', [
+    {{-- Post Preview Comments --}}
+    @if ($post['previewComments'])
+        @component('components.post.section.preview-comment', [
             'pid' => $post['pid'],
-            'topComment' => $post['topComment'],
+            'commentCount' => $post['commentCount'],
+            'previewComments' => $post['previewComments'],
         ])@endcomponent
     @endif
 
