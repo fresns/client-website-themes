@@ -4,7 +4,7 @@
             @if ($comment['isAnonymous'])
                 <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>
             @else
-                <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['creator']['fsid']])) }}" class="content-link">{{ $comment['creator']['nickname'] }}</a>
+                <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['creator']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['creator']['nickname'] }}</a>
             @endif
 
             @if ($comment['creator']['isPostCreator'])

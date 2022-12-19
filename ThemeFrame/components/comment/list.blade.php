@@ -202,7 +202,7 @@
         {{-- Reply Box --}}
         @component('components.editor.comment-box', [
             'nickname' => $comment['creator']['nickname'],
-            'pid' => $comment['post']['pid'],
+            'pid' => $comment['pid'],
             'cid' => $comment['cid'],
         ])@endcomponent
     </section>
