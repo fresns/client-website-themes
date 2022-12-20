@@ -15,6 +15,9 @@
     @endif
 
     @foreach($previewLikeUsers as $user)
+        @if (fs_user('detail.uid') == $user['uid'])
+            @continue
+        @endif
         {{ $user['nickname'] }}@if (! $loop->last),@endif
     @endforeach
 
