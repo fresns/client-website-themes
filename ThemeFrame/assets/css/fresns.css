@@ -250,6 +250,9 @@ header .navbar {
     word-break: break-word;
     font-size: 15px;
 }
+.content-article blockquote p {
+    margin-bottom: 0;
+}
 .content-article img {
     max-width: 100%;
 }
