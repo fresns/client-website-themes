@@ -13,7 +13,7 @@
                             <div class="col-sm-3 d-flex flex-column align-items-center">
                                 <img src="{{ $item['avatar'] }}" class="auth-avatar rounded-circle">
                                 <div class="auth-nickname mt-2">{{ $item['nickname'] }}</div>
-                                <div class="text-secondary">{{ '@' . $item['username'] }}</div>
+                                <div class="text-secondary">{{ '@'.$item['fsid'] }}</div>
                                 <form action="{{ route('fresns.api.user.auth') }}" id="uid-{{ $item['uid'] }}" method="post">
                                     @csrf
                                     <input type="hidden" name="uidOrUsername" value="{{ $item['uid'] }}">

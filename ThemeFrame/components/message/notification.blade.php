@@ -28,7 +28,7 @@
                         </div>
                     @endif
 
-                    <div class="user-name text-secondary">{{ '@' . $notification['actionUser']['username'] }}</div>
+                    <div class="user-name text-secondary">{{ '@'.$notification['actionUser']['fsid'] }}</div>
                 </a>
             </div>
         @endif

@@ -31,7 +31,7 @@
             <span class="badge text-bg-secondary">{{ $user['roleName'] }}</span>
         @endif
     </div>
-    <div class="mb-2 text-secondary">{{ '@' . $user['username'] }}</div>
+    <div class="mb-2 text-secondary">{{ '@'.$user['fsid'] }}</div>
     <p class="fs-7 text-secondary">{{ $user['bio'] }}</p>
 
     {{-- User Attachment Icons --}}
