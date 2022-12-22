@@ -15,7 +15,7 @@
                 <div class="card">
                     <div class="card-header">
                         {{ fs_db_config('user_name') }}
-                        @if ($multiUserStatus)
+                        @if (fs_user_panel('multiUser.status'))
                             <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                                 data-lang-tag="{{ current_lang_tag() }}"
                                 data-type="account"
@@ -24,7 +24,7 @@
                                 data-aid="{{ fs_account('detail.aid') }}"
                                 data-uid="{{ fs_user('detail.uid') }}"
                                 data-title="{{ fs_db_config('user_name') }}"
-                                data-url="{{ fs_api_config('multi_user_service') }}">
+                                data-url="{{ fs_user_panel('multiUser.service') }}">
                                 <i class="bi bi-people-fill"></i>
                                 {{ fs_lang('setting') }}
                             </button>
