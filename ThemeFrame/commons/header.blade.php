@@ -156,7 +156,7 @@
                                 @endif
 
                                 {{-- List of users belonging to the current account --}}
-                                @if (count(fs_account('detail.users')) > 1)
+                                @if (fs_user_panel('multiUser.status') || count(fs_account('detail.users')) > 1)
                                     <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.users')) }}"><i class="bi bi-people"></i> {{ fs_db_config('menu_account_users') }}</a></li>
                                 @endif
 
