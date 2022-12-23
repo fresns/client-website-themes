@@ -22,7 +22,7 @@
                             <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $conversation['user']['fsid']])) }}" target="_blank" class="text-decoration-none">
                                 <img src="{{ $conversation['user']['avatar'] }}" alt="{{ $conversation['user']['nickname'] }}" class="rounded-circle conversation-avatar">
                                 <span class="ms-2 fs-5">{{ $conversation['user']['nickname'] }}</span>
-                                <span class="ms-2 conversation-user-name text-secondary">{{ '@'.$conversation['user']['username'] }}</span>
+                                <span class="ms-2 conversation-user-name text-secondary">{{ '@'.$conversation['user']['fsid'] }}</span>
                             </a>
                         @endif
                     </div>

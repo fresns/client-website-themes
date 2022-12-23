@@ -4,7 +4,7 @@
             @if ($comment['isAnonymous'])
                 <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>
             @else
-                <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['creator']['fsid']])) }}" class="content-link">{{ $comment['creator']['nickname'] }}</a>
+                <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['creator']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['creator']['nickname'] }}</a>
             @endif
 
             @if ($comment['creator']['isPostCreator'])
@@ -13,7 +13,7 @@
 
             @if ($comment['replyToUser'])
                 @if ($comment['replyToUser']['nickname'])
-                    {{ fs_db_config('publish_comment_name') }} <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToUser']['fsid']])) }}" class="content-link">{{ $comment['replyToUser']['nickname'] }}</a>
+                    {{ fs_db_config('publish_comment_name') }} <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToUser']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['replyToUser']['nickname'] }}</a>
                 @else
                     {{ fs_db_config('publish_comment_name') }} <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>
                 @endif

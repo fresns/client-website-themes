@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-icons.css">
     <link rel="stylesheet" href="/static/css/select2.min.css">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v=8a3a08a001f6d333">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v=8a3a08a001f6d333">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=8a3a08a001f6d333">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v=c2b26e1a373f8f8a">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v=c2b26e1a373f8f8a">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=c2b26e1a373f8f8a">
     @stack('style')
     @if (fs_db_config('website_stat_position') == 'head')
         {!! fs_db_config('website_stat_code') !!}
@@ -109,14 +109,30 @@
     <script src="/static/js/js.cookie.min.js"></script>
     <script src="/static/js/iframeResizer.min.js"></script>
     <script>
-        window.hashtag_show = {{ fs_api_config('hashtag_show') }}
+        window.hashtag_show = {{ fs_api_config('hashtag_show') }};
+
+        // video play
+        var videos = document.getElementsByTagName('video'); 
+        for (var i = videos.length - 1; i >= 0; i--) {
+            (function(){
+                var p = i;
+                videos[p].addEventListener('play',function(){
+                    pauseAll(p);
+                })
+            })()
+        };
+        function pauseAll(index){
+            for (var j = videos.length - 1; j >= 0; j--) {
+                if (j!=index) videos[j].pause();
+            }
+        };
     </script>
-    <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v=8a3a08a001f6d333" }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v=8a3a08a001f6d333"></script>
-    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=8a3a08a001f6d333"></script>
-    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=8a3a08a001f6d333"></script>
-    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=8a3a08a001f6d333"></script>
-    <script src="/assets/themes/ThemeFrame/js/fresns.js?v=8a3a08a001f6d333"></script>
+    <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v=c2b26e1a373f8f8a" }}"></script>
+    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v=c2b26e1a373f8f8a"></script>
+    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=c2b26e1a373f8f8a"></script>
+    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=c2b26e1a373f8f8a"></script>
+    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=c2b26e1a373f8f8a"></script>
+    <script src="/assets/themes/ThemeFrame/js/fresns.js?v=c2b26e1a373f8f8a"></script>
     @stack('script')
 </body>
 

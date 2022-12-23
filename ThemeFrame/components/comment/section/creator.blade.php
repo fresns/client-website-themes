@@ -32,7 +32,7 @@
                                 @endif
                             </div>
                         @endif
-                        <div class="user-name text-secondary">{{ '@' . $creator['username'] }}</div>
+                        <div class="user-name text-secondary">{{ '@'.$creator['fsid'] }}</div>
                     </a>
                     <div class="user-role d-flex">
                         @if ($creator['roleIconDisplay'])
@@ -87,7 +87,7 @@
                 <div class="text-success ms-2">
                     {{ fs_db_config('publish_comment_name') }}
                     @if (! $replyToUser['deactivate'] && $replyToUser['fsid'])
-                        <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $replyToUser['fsid']])) }}">{{ '@' . $replyToUser['nickname'] }}</a>
+                        <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $replyToUser['fsid']])) }}">{{ '@'.$replyToUser['fsid'] }}</a>
                     @elseif (! $replyToUser['deactivate'] && empty($replyToUser['fsid']))
                         <span class="text-muted">{{ fs_lang('contentCreatorAnonymous') }}</span>
                     @elseif ($replyToUser['deactivate'])

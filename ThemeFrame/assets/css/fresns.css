@@ -190,11 +190,11 @@ header .navbar {
 .profile-avatar {
     width: 4.4rem;
     height: 4.4rem;
-    margin: 1rem;
+    margin: 2.2rem;
 }
 .profile-decorate {
-    width: 4.4rem;
-    height: 4.4rem;
+    width: 8.8rem;
+    height: 8.8rem;
     position: absolute;
 }
 .profile-nickname h1 {
@@ -249,6 +249,9 @@ header .navbar {
     border-left: 4px solid #999;
     word-break: break-word;
     font-size: 15px;
+}
+.content-article blockquote p {
+    margin-bottom: 0;
 }
 .content-article img {
     max-width: 100%;

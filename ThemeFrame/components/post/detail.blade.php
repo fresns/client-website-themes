@@ -88,7 +88,7 @@
     </section>
 
     {{-- Post permission information --}}
-    @if ($post['isAllow'])
+    @if (! $post['isAllow'])
         <section class="post-allow order-2">
             <div class="post-allow-static"></div>
             <div class="text-center">
@@ -184,14 +184,6 @@
                 </div>
             @endif
         </section>
-    @endif
-
-    {{-- Post Top Comment --}}
-    @if ($post['topComment'])
-        @component('components.post.section.top-comment', [
-            'pid' => $post['pid'],
-            'topComment' => $post['topComment'],
-        ])@endcomponent
     @endif
 
     {{-- Interaction Function --}}

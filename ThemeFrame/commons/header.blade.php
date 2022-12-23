@@ -78,7 +78,7 @@
                 {{-- search --}}
                 <form class="me-3 my-4 my-lg-0" action="{{ fs_route(route('fresns.search.index')) }}" method="get">
                     <input type="hidden" name="searchType" value="post"/>
-                    <input class="form-control" name="searchKey" value="{{ request('searchKey') }}" placeholder="{{ fs_lang('search') }} Fresns" aria-label="Search">
+                    <input class="form-control" name="searchKey" value="{{ request('searchKey') }}" placeholder="{{ fs_lang('search') }}" aria-label="Search">
                 </form>
 
                 {{-- Login Status --}}
@@ -156,7 +156,7 @@
                                 @endif
 
                                 {{-- List of users belonging to the current account --}}
-                                @if (count(fs_account('detail.users')) > 1)
+                                @if (fs_user_panel('multiUser.status') || count(fs_account('detail.users')) > 1)
                                     <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.users')) }}"><i class="bi bi-people"></i> {{ fs_db_config('menu_account_users') }}</a></li>
                                 @endif
 

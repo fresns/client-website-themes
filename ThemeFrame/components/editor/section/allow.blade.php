@@ -1,4 +1,4 @@
-@if ($allow['isAllow'] ?? false)
+@if (! $allow['isAllow'] ?? false)
     <ul class="list-group mt-3">
         <li class="list-group-item list-group-item-warning d-flex justify-content-between align-items-center">
             <div class="bd-highlight">{{ fs_lang('editorAllowTitle') }}:</div>

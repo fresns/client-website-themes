@@ -97,7 +97,7 @@
     </section>
 
     {{-- Post permission information --}}
-    @if ($post['isAllow'])
+    @if (! $post['isAllow'])
         <section class="post-allow order-2">
             <div class="post-allow-static"></div>
             <div class="text-center">
@@ -195,11 +195,12 @@
         </section>
     @endif
 
-    {{-- Post Top Comment --}}
-    @if ($post['topComment'])
-        @component('components.post.section.top-comment', [
+    {{-- Preview Comments --}}
+    @if ($post['previewComments'])
+        @component('components.post.section.preview-comment', [
             'pid' => $post['pid'],
-            'topComment' => $post['topComment'],
+            'commentCount' => $post['commentCount'],
+            'previewComments' => $post['previewComments'],
         ])@endcomponent
     @endif
 
@@ -286,4 +287,15 @@
             'pid' => $post['pid'],
         ])@endcomponent
     </section>
+
+    {{-- Preview Like Users --}}
+    @if ($post['previewLikeUsers'])
+        @component('components.post.section.preview-user', [
+            'name' => $post['interaction']['likeName'],
+            'status' => $post['interaction']['likeStatus'],
+            'count' => $post['likeCount'],
+            'icon' => $iconLike,
+            'previewLikeUsers' => $post['previewLikeUsers'],
+        ])@endcomponent
+    @endif
 </div>

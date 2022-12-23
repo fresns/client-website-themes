@@ -21,7 +21,7 @@
                         @endif
                     @endif
 
-                    <span class="conversation-user-name text-secondary">{{ '@' . $conversation['user']['username'] }}</span>
+                    <span class="conversation-user-name text-secondary">{{ '@'.$conversation['user']['fsid'] }}</span>
                 @endif
             </h5>
             <small class="text-muted pt-1">{{ $conversation['latestMessage']['datetimeFormat'] }}</small>

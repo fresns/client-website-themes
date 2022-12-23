@@ -30,8 +30,6 @@
                                 @component('components.comment.sticky', [
                                     'sticky' => $sticky,
                                     'detailLink' => true,
-                                    'sectionPost' => false,
-                                    'sectionPreview' => true,
                                     'sectionCreatorLiked' => true,
                                 ])@endcomponent
                             @endforeach
@@ -48,8 +46,6 @@
                         @component('components.comment.list', [
                             'comment' => $comment,
                             'detailLink' => true,
-                            'sectionPost' => false,
-                            'sectionPreview' => true,
                             'sectionCreatorLiked' => true,
                         ])@endcomponent
 

@@ -202,7 +202,7 @@
         {{-- Reply Box --}}
         @component('components.editor.comment-box', [
             'nickname' => $comment['creator']['nickname'],
-            'pid' => $comment['post']['pid'],
+            'pid' => $comment['pid'],
             'cid' => $comment['cid'],
         ])@endcomponent
     </section>
@@ -215,7 +215,7 @@
     @endif
 
     {{-- Comment Preview Information --}}
-    @if ($sectionPreview && $comment['subComments'])
+    @if ($comment['subComments'])
         @component('components.comment.section.preview', [
             'cid' => $comment['cid'],
             'commentCount' => $comment['commentCount'],
@@ -224,7 +224,7 @@
     @endif
 
     {{-- Main post preview content --}}
-    @if ($sectionPost)
+    @if ($comment['post'])
         @component('components.comment.section.post', [
             'post' => $comment['post'],
         ])@endcomponent

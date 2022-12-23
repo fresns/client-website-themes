@@ -23,7 +23,7 @@
                                 @endif
                             </div>
                         @endif
-                        <div class="user-name text-secondary">{{ '@' . $creator['username'] }}</div>
+                        <div class="user-name text-secondary">{{ '@'.$creator['fsid'] }}</div>
                     </a>
                     <div class="user-role d-flex">
                         @if ($creator['roleIconDisplay'])

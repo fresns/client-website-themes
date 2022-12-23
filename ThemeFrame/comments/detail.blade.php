@@ -27,8 +27,6 @@
                         @component('components.comment.list', [
                             'comment' => $comment,
                             'detailLink' => false,
-                            'sectionPost' => false,
-                            'sectionPreview' => false,
                             'sectionCreatorLiked' => true,
                         ])@endcomponent
 
