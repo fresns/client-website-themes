@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.0.0-beta.8 (2022-12-24)
+
+- Posts `isAllow` parameter adjustment
+- Remove Fresns text from search box and private mode pages
+- Post parameter `topComment` changed to `previewComments` and changed to list
+- Page can only play one video at a time
+
+
 ## 2.0.0-beta.7 (2022-12-13)
 
 - The group details page shows the list of group administrators
