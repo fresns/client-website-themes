@@ -78,7 +78,7 @@
         </div>
 
         {{-- Full Text --}}
-        <div class="content-article">
+        <div class="content-article text-break">
             @if ($post['isMarkdown'])
                 {!! Str::markdown($post['content']) !!}
             @else

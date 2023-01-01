@@ -72,7 +72,7 @@
         </div>
 
         {{-- Full Text --}}
-        <div class="content-article">
+        <div class="content-article text-break">
             @if ($comment['isMarkdown'])
                 {!! Str::markdown($comment['content']) !!}
             @else
