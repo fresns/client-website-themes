@@ -45,8 +45,8 @@
 
     {{-- Image Zoom Modal --}}
     <div class="modal fade image-zoom" id="imageZoom" tabindex="-1" aria-labelledby="imageZoomLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="mx-auto image-box">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="text-center">
                 <img class="img-fluid">
             </div>
         </div>
