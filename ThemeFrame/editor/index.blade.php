@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <div class="fresns-editor">
             {{-- Tip: Publish Permissions --}}
-            @if ($config['publish']['limit']['status'])
+            @if ($config['publish']['limit']['status'] && $config['publish']['limit']['isInTime'])
                 @component('components.editor.tip.publish', [
                     'config' => $config['publish'],
                 ])@endcomponent

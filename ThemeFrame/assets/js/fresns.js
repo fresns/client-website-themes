@@ -62,8 +62,8 @@ window.tips = function (message, code = 200) {
         <div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:9999">
             <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
-                    <img src="/static/images/icon.png" width="20px" height="20px" class="rounded me-2" alt="Fresns">
-                    <strong class="me-auto">Fresns</strong>
+                    <img src="/static/images/icon.png" width="20px" height="20px" class="rounded me-2">
+                    <strong class="me-auto">Tip</strong>
                     <small>${apiCode}</small>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
