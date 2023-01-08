@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-icons.css">
     <link rel="stylesheet" href="/static/css/select2.min.css">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v=c2b26e1a373f8f8a">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v=c2b26e1a373f8f8a">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=c2b26e1a373f8f8a">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v=9c26d1a06118c93e">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v=9c26d1a06118c93e">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=9c26d1a06118c93e">
     @stack('style')
     @if (fs_db_config('website_stat_position') == 'head')
         {!! fs_db_config('website_stat_code') !!}
@@ -127,12 +127,12 @@
             }
         };
     </script>
-    <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v=c2b26e1a373f8f8a" }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v=c2b26e1a373f8f8a"></script>
-    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=c2b26e1a373f8f8a"></script>
-    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=c2b26e1a373f8f8a"></script>
-    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=c2b26e1a373f8f8a"></script>
-    <script src="/assets/themes/ThemeFrame/js/fresns.js?v=c2b26e1a373f8f8a"></script>
+    <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v=9c26d1a06118c93e" }}"></script>
+    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v=9c26d1a06118c93e"></script>
+    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=9c26d1a06118c93e"></script>
+    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=9c26d1a06118c93e"></script>
+    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=9c26d1a06118c93e"></script>
+    <script src="/assets/themes/ThemeFrame/js/fresns.js?v=9c26d1a06118c93e"></script>
     @stack('script')
 </body>
 

@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.0.0 (2023-01-09)
+
+- Official Version
+
+
 ## 2.0.0-beta.8 (2022-12-24)
 
 - Posts `isAllow` parameter adjustment
