@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.0.1 (2023-01-11)
+
+- Fix the style of image centering and text line feed
+
+
 ## 2.0.0 (2023-01-09)
 
 - Official Version
