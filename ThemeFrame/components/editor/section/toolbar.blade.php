@@ -20,7 +20,7 @@
                 <div class="tab-content p-2" id="sticker">
                     @foreach($stickers as $sticker)
                         <div class="tab-pane fade @if ($loop->first) show active @endif" id="sticker-{{ $loop->index }}" role="tabpanel" aria-labelledby="sticker-{{ $loop->index }}-tab">
-                            @foreach($sticker['stickers'] as $value)
+                            @foreach($sticker['stickers'] ?? [] as $value)
                                 <a class="fresns-sticker btn btn-outline-secondary rounded-0 border-0" href="javascript:;" value="{{ $value['code'] }}" title="{{ $value['code'] }}" >
                                     <img src="{{ $value['image'] }}" alt="{{ $value['code'] }}" title="{{ $value['code'] }}">
                                 </a>
