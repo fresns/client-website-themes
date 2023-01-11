@@ -1,6 +1,6 @@
 <section class="comment-preview mt-3 mx-3 position-relative d-flex flex-column">
     @foreach($subComments as $comment)
-        <div class="mb-2">
+        <div class="text-break mb-2">
             @if ($comment['isAnonymous'])
                 <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>
             @else

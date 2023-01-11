@@ -11,7 +11,7 @@
         </div>
 
         {{-- Content --}}
-        <div class="mt-2">
+        <div class="text-break mt-2">
             <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $topComment['creator']['fsid']])) }}" class="fresns_link">{{ $topComment['creator']['nickname'] }}</a>:
             <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $pid])) }}" class="text-decoration-none link-dark stretched-link">{{ $topComment['content'] }}</a>
         </div>
@@ -28,7 +28,7 @@
 @else
     <section class="comment-preview mt-3 mx-3 position-relative d-flex flex-column">
         @foreach($previewComments as $comment)
-            <div class="mb-2">
+            <div class="text-break mb-2">
                 @if ($comment['isAnonymous'])
                     <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>
                 @else
