@@ -28,7 +28,7 @@
         </div>
 
         {{-- Message --}}
-        <div class="conversation-brief mt-1">
+        <div class="conversation-brief text-break mt-1">
             @if ($conversation['latestMessage']['type'] == 1)
                 {{ $conversation['latestMessage']['message'] }}
             @else

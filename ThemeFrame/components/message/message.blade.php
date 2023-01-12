@@ -23,7 +23,7 @@
             <img src="{{ $message['user']['avatar'] }}" alt="{{ $message['user']['nickname'] }}" class="conversation-avatar rounded-circle">
         </div>
         <div class="text-start">
-            <p class="bg-secondary bg-gradient text-white rounded p-2 mb-0">
+            <p class="bg-secondary bg-gradient bg-opacity-25 text-break rounded p-2 mb-0">
                 @if ($message['type'] == 1)
                     {{ $message['content'] }}
                 @else
