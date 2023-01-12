@@ -30,22 +30,22 @@
             <div class="tab-content border-start ps-lg-5 pb-5 account-settings" id="v-pills-tabContent">
                 {{-- terms --}}
                 <div class="tab-pane fade show active" id="v-pills-terms" role="tabpanel" aria-labelledby="v-pills-terms-tab" tabindex="0">
-                    {!! Str::markdown(fs_api_config('account_terms')) !!}
+                    {!! fs_api_config('account_terms') ? Str::markdown(fs_api_config('account_terms')) : '' !!}
                 </div>
 
                 {{-- privacy --}}
                 <div class="tab-pane fade" id="v-pills-privacy" role="tabpanel" aria-labelledby="v-pills-privacy-tab" tabindex="0">
-                    {!! Str::markdown(fs_api_config('account_privacy')) !!}
+                    {!! fs_api_config('account_privacy') ? Str::markdown(fs_api_config('account_privacy')) : '' !!}
                 </div>
 
                 {{-- cookies --}}
                 <div class="tab-pane fade" id="v-pills-cookies" role="tabpanel" aria-labelledby="v-pills-cookies-tab" tabindex="0">
-                    {!! Str::markdown(fs_api_config('account_cookies')) !!}
+                    {!! fs_api_config('account_cookies') ? Str::markdown(fs_api_config('account_cookies')) : '' !!}
                 </div>
 
                 {{-- delete account --}}
                 <div class="tab-pane fade" id="v-pills-delete" role="tabpanel" aria-labelledby="v-pills-delete-tab" tabindex="0">
-                    {!! Str::markdown(fs_api_config('account_delete')) !!}
+                    {!! fs_api_config('account_delete') ? Str::markdown(fs_api_config('account_delete')) : '' !!}
                 </div>
             </div>
         </div>

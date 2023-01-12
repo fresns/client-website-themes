@@ -409,7 +409,7 @@
                         @if (fs_api_config('account_delete_status'))
                             <div class="tab-pane fade" id="accountDelete" role="tabpanel" aria-labelledby="accountDelete-tab">
                                 <div>
-                                    {!! Str::markdown(fs_api_config('account_delete')) !!}
+                                    {!! fs_api_config('account_delete') ? Str::markdown(fs_api_config('account_delete')) : '' !!}
                                 </div>
                                 @if (! fs_account('detail.waitDelete') && fs_api_config('delete_account_type') != 1)
                                     <hr>
