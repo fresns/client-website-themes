@@ -32,7 +32,7 @@
         @endif
     </div>
     <div class="mb-2 text-secondary">{{ '@'.$user['fsid'] }}</div>
-    <p class="fs-7 text-secondary">{{ $user['bio'] }}</p>
+    <p class="fs-7 text-secondary px-4">{!! $user['bioHtml'] !!}</p>
 
     {{-- User Attachment Icons --}}
     @if ($user['operations']['diversifyImages'])
