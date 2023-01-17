@@ -12,7 +12,7 @@
     </article>
 
     {{-- Pagination --}}
-    <div class="my-3">
+    <div class="my-3 table-responsive">
         {{ $users->links() }}
     </div>
 @endsection

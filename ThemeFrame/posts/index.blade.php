@@ -35,7 +35,7 @@
 
                 {{-- Pagination --}}
                 @if (fs_db_config('menu_post_query_state') != 1)
-                    <div class="my-3">
+                    <div class="my-3 table-responsive">
                         {{ $posts->links() }}
                     </div>
                 @endif

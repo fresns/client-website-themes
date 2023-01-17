@@ -26,7 +26,7 @@
 
                 {{-- Pagination --}}
                 @if (fs_db_config('menu_hashtag_list_query_state') != 1)
-                    <div class="my-3">
+                    <div class="my-3 table-responsive">
                         {{ $hashtags->links() }}
                     </div>
                 @endif

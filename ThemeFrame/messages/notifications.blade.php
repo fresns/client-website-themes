@@ -153,7 +153,7 @@
                             @endforeach
                         </ul>
 
-                        <div class="my-3">
+                        <div class="my-3 table-responsive">
                             {{ $notifications->links() }}
                         </div>
                     </div>
