@@ -128,7 +128,7 @@
 
                     {{-- Notifications --}}
                     <div class="card-body">
-                        <ul class="list-group list-group-flush">
+                        <ul class="list-group list-group-flush" id="notifications">
                             {{-- No Notification --}}
                             @if ($notifications->isEmpty())
                                 <li class="list-group-item text-center my-5 text-muted fs-7"><i class="bi bi-chat-square"></i> {{ fs_lang('listEmpty') }}</li>
@@ -137,7 +137,7 @@
                             {{-- Mark all as read --}}
                             @if ($notifications->isNotEmpty() && $types)
                                 <li class="list-group-item d-flex justify-content-center align-items-center pb-3">
-                                    <form class="api-request-form" action="{{ route('fresns.api.message.mark.as.read', ['type' => 'notification')) }}" method="put">
+                                    <form class="api-request-form" action="{{ route('fresns.api.message.mark.as.read', ['type' => 'notification']) }}" method="put">
                                         @csrf
                                         <input type="hidden" name="type" value="all"/>
                                         <input type="hidden" name="notificationType" value="{{ $types }}"/>
@@ -153,7 +153,7 @@
                             @endforeach
                         </ul>
 
-                        <div class="my-3">
+                        <div class="my-3 table-responsive">
                             {{ $notifications->links() }}
                         </div>
                     </div>
@@ -162,3 +162,50 @@
         </div>
     </main>
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function () {
+            $('#notifications > li').click(function (event) {
+                event.preventDefault();
+
+                const id = $(this).data('id');
+                const type = $(this).data('type');
+
+                if (!id || !type) {
+                    return;
+                }
+
+                let targetUrl = $(event.target).attr('href');
+                let tagName = $(event.target).prop('tagName');
+                if (tagName == 'IMG' || tagName == 'DIV') {
+                    tagName = 'A';
+                    targetUrl = $(event.target).parent().attr('href');
+                }
+
+                console.log(id, type, targetUrl, tagName);
+
+                $.ajax({
+                    url: "{{ route('fresns.api.message.mark.as.read', ['type' => 'notification']) }}",
+                    type: "PUT",
+                    data: {
+                        type: "choose",
+                        notificationType: type,
+                        notificationIds: id
+                    },
+                    success: (resp) => {
+                        if (resp.code != 0) {
+                            tips(resp.message, resp.code);
+                        }
+
+                        if (targetUrl) {
+                            window.location.href = targetUrl;
+                        }
+
+                        $(this).find('#badge-' + id).remove();
+                    },
+                });
+            });
+        });
+    </script>
+@endpush

@@ -1,7 +1,7 @@
-<li class="list-group-item d-flex justify-content-start align-items-center">
+<li class="list-group-item d-flex justify-content-start align-items-center" @if (! $notification['readStatus']) data-id="{{ $notification['id'] }}" data-type="{{ $notification['type'] }}" @endif>
     {{-- Read Status --}}
     @if(! $notification['readStatus'])
-        <span class="p-1 bg-danger border border-light rounded-circle"></span>
+        <span class="p-1 bg-danger border border-light rounded-circle" id="badge-{{ $notification['id'] }}"></span>
     @endif
 
     {{-- User Avatar --}}

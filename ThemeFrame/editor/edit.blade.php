@@ -350,19 +350,19 @@
             $("#ajax-upload").on('click', function (event){
                 event.preventDefault();
                 let obj = $(this),
-                    maxSize = 0,
+                    maxSize = $("#maxSize").text() || 0,
                     form = new FormData(document.getElementById("upload-form"))
 
                 let files = $('#formFile').prop('files');
 
                 for (let i = 0; i < files.length; i++) {
+                    if (files[i].size > maxSize  * 1024 * 1024) {
+                        alert("{{ fs_lang('editorUploadMaxSize') }}: " + $("#maxSize").text() + "MB");
+                        return;
+                    }
+
                     form.append('files[]', files[i])
                     maxSize += files[i].size;
-                }
-
-                if (maxSize > $("#maxSize").text() * 1024 * 1024) {
-                    alert("{{ fs_lang('editorUploadMaxSize') }}: " + $("#maxSize").text() + "MB");
-                    return;
                 }
 
                 if (obj.is(":disabled")) {
@@ -381,7 +381,7 @@
 
                 $.ajax({
                     url: "{{ route('fresns.api.editor.upload.file') }}",
-                    type:"POST",
+                    type: "POST",
                     data: form,
                     timeout: 600000,
                     processData: false,
