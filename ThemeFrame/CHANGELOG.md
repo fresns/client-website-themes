@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.1.0 (2023-01-18)
+
+- Added 404 page
+- Compatible with markdown parsing when policy terms are empty
+- Compatibility data error when expression is empty
+- Fixed content text-break
+- Add alt attribute to image files
+- Notification messages are set to read when clicked
+
+
 ## 2.0.1 (2023-01-11)
 
 - Fix the style of image centering and text line feed
