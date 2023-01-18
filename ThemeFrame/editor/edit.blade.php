@@ -381,7 +381,7 @@
 
                 $.ajax({
                     url: "{{ route('fresns.api.editor.upload.file') }}",
-                    type:"POST",
+                    type: "POST",
                     data: form,
                     timeout: 600000,
                     processData: false,
