@@ -17,7 +17,6 @@
                     @if (fs_api_config('site_private_status') && fs_api_config('site_private_service'))
                         <p class="mt-4">
                             <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                data-lang-tag="{{ current_lang_tag() }}"
                                 data-type="account"
                                 data-scene="join"
                                 data-post-message-key="fresnsJoin"

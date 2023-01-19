@@ -46,7 +46,6 @@
         @foreach($manages as $plugin)
             <li>
                 <a class="dropdown-item py-2" data-bs-toggle="modal" href="#fresnsModal"
-                    data-lang-tag="{{ current_lang_tag() }}"
                     data-type="comment"
                     data-scene="manage"
                     data-post-message-key="fresnsCommentManage"

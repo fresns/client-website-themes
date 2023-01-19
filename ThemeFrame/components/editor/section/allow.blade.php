@@ -4,7 +4,6 @@
             <div class="bd-highlight">{{ fs_lang('editorAllowTitle') }}:</div>
             <div class="bd-highlight">
                 <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                    data-lang-tag="{{ current_lang_tag() }}"
                     data-type="editor"
                     data-scene="{{ $type.'Editor' }}"
                     data-post-message-key="fresnsEditorAllow"

@@ -103,7 +103,6 @@
             <div class="text-center">
                 <p class="text-secondary mb-2">{{ fs_lang('contentAllowInfo') }} {{ $post['allowProportion'] }}%</p>
                 <button type="button" class="btn btn-outline-info btn-lg w-50" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                    data-lang-tag="{{ current_lang_tag() }}"
                     data-type="post"
                     data-scene="postAllowBtn"
                     data-post-message-key="fresnsPostUserList"
@@ -179,7 +178,6 @@
             @if ($post['isUserList'])
                 <div class="content-user-list">
                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                        data-lang-tag="{{ current_lang_tag() }}"
                         data-type="post"
                         data-scene="postUserList"
                         data-post-message-key="fresnsPostUserList"

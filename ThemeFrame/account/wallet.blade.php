@@ -22,7 +22,6 @@
                                 @foreach(fs_account('items.walletRecharges') as $item)
                                     <li>
                                         <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                            data-lang-tag="{{ current_lang_tag() }}"
                                             data-type="account"
                                             data-scene="walletRecharge"
                                             data-post-message-key="fresnsWalletRecharge"
@@ -47,7 +46,6 @@
                                 @foreach(fs_account('items.walletWithdraws') as $item)
                                     <li>
                                         <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                            data-lang-tag="{{ current_lang_tag() }}"
                                             data-type="account"
                                             data-scene="walletWithdraw"
                                             data-post-message-key="fresnsWalletWithdraw"

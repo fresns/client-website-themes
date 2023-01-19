@@ -48,10 +48,9 @@
             </button>
         @else
             <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                data-lang-tag="{{ current_lang_tag() }}"
-                data-post-message-key="fresnsEditorUpload"
                 data-type="editor"
                 data-scene="{{ $type.'Editor' }}"
+                data-post-message-key="fresnsEditorUpload"
                 @if ($type == 'post')
                     data-plid="{{ $plid }}"
                 @else
@@ -85,10 +84,9 @@
             </button>
         @else
             <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                data-lang-tag="{{ current_lang_tag() }}"
-                data-post-message-key="fresnsEditorUpload"
                 data-type="editor"
                 data-scene="{{ $type.'Editor' }}"
+                data-post-message-key="fresnsEditorUpload"
                 @if ($type == 'post')
                     data-plid="{{ $plid }}"
                 @else
@@ -122,10 +120,9 @@
             </button>
         @else
             <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                data-lang-tag="{{ current_lang_tag() }}"
-                data-post-message-key="fresnsEditorUpload"
                 data-type="editor"
                 data-scene="{{ $type.'Editor' }}"
+                data-post-message-key="fresnsEditorUpload"
                 @if ($type == 'post')
                     data-plid="{{ $plid }}"
                 @else
@@ -158,10 +155,9 @@
             </button>
         @else
             <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                data-lang-tag="{{ current_lang_tag() }}"
-                data-post-message-key="fresnsEditorUpload"
                 data-type="editor"
                 data-scene="{{ $type.'Editor' }}"
+                data-post-message-key="fresnsEditorUpload"
                 @if ($type == 'post')
                     data-plid="{{ $plid }}"
                 @else
@@ -213,10 +209,9 @@
         @foreach($config['extend']['list'] as $extend)
             @if ($extend['editorToolbar'])
                 <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                    data-lang-tag="{{ current_lang_tag() }}"
-                    data-post-message-key="fresnsEditorExtension"
                     data-type="editor"
                     data-scene="{{ $type.'Editor' }}"
+                    data-post-message-key="fresnsEditorExtension"
                     @if ($type == 'post')
                         data-plid="{{ $plid }}"
                     @else
@@ -249,10 +244,9 @@
                     @if (! $extend['editorToolbar'])
                         <li>
                             <a class="dropdown-item" role="button" data-bs-toggle="modal" href="#fresnsModal"
-                                data-lang-tag="{{ current_lang_tag() }}"
-                                data-post-message-key="fresnsEditorExtension"
                                 data-type="editor"
                                 data-scene="{{ $type.'Editor' }}"
+                                data-post-message-key="fresnsEditorExtension"
                                 @if ($type == 'post')
                                     data-plid="{{ $plid }}"
                                 @else

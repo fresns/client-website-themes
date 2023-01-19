@@ -360,7 +360,6 @@
                                                         @if($item['connectId'] === intval($service['code']))
                                                             {{ $item['nickname'] }}
                                                             <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                                                data-lang-tag="{{ current_lang_tag() }}"
                                                                 data-type="account"
                                                                 data-scene="connect"
                                                                 data-post-message-key="fresnsConnect"
@@ -372,7 +371,6 @@
                                                             </button>
                                                         @else
                                                             <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                                                data-lang-tag="{{ current_lang_tag() }}"
                                                                 data-type="account"
                                                                 data-scene="connect"
                                                                 data-post-message-key="fresnsConnect"
@@ -386,7 +384,6 @@
                                                     @endforeach
                                                 @else
                                                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                                        data-lang-tag="{{ current_lang_tag() }}"
                                                         data-type="account"
                                                         data-scene="connect"
                                                         data-post-message-key="fresnsConnect"
