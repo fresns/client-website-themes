@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.1.1 (2023-01-20)
+
+- Remove useless language tag parameters of the plugin framework
+- Optimize editor options style
+
+
 ## 2.1.0 (2023-01-18)
 
 - Added 404 page
