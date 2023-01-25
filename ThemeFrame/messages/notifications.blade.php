@@ -171,10 +171,7 @@
 
                 const id = $(this).data('id');
                 const type = $(this).data('type');
-
-                if (!id || !type) {
-                    return;
-                }
+                const status = $(this).data('status');
 
                 let targetUrl = $(event.target).attr('href');
                 let tagName = $(event.target).prop('tagName');
@@ -184,6 +181,13 @@
                 }
 
                 console.log(id, type, targetUrl, tagName);
+
+                if (status) {
+                    if(targetUrl) {
+                        window.location.href = targetUrl;
+                    }
+                    return;
+                }
 
                 $.ajax({
                     url: "{{ route('fresns.api.message.mark.as.read', ['type' => 'notification']) }}",
