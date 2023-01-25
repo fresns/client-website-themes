@@ -128,15 +128,15 @@
 
                     {{-- Notifications --}}
                     <div class="card-body">
-                        <ul class="list-group list-group-flush" id="notifications">
+                        @if ($notifications->isEmpty())
                             {{-- No Notification --}}
-                            @if ($notifications->isEmpty())
-                                <li class="list-group-item text-center my-5 text-muted fs-7"><i class="bi bi-chat-square"></i> {{ fs_lang('listEmpty') }}</li>
-                            @endif
-
+                            <div class="text-center my-5 text-muted fs-7">
+                                <i class="bi bi-chat-square"></i> {{ fs_lang('listEmpty') }}
+                            </div>
+                        @else
                             {{-- Mark all as read --}}
-                            @if ($notifications->isNotEmpty() && $types)
-                                <li class="list-group-item d-flex justify-content-center align-items-center pb-3">
+                            @if ($types)
+                                <div class="border-bottom text-center py-3">
                                     <form class="api-request-form" action="{{ route('fresns.api.message.mark.as.read', ['type' => 'notification']) }}" method="put">
                                         @csrf
                                         <input type="hidden" name="type" value="all"/>
@@ -144,18 +144,21 @@
                                         <input type="hidden" name="notificationIds" value=""/>
                                         <button class="btn btn-success btn-sm" type="submit">{{ fs_lang('notificationMarkAllAsRead') }}</button>
                                     </form>
-                                </li>
+                                </div>
                             @endif
 
                             {{-- Notification List --}}
-                            @foreach($notifications as $notification)
-                                @component('components.message.notification', compact('notification'))@endcomponent
-                            @endforeach
-                        </ul>
+                            <ul class="list-group list-group-flush border-bottom" id="notifications">
+                                @foreach($notifications as $notification)
+                                    @component('components.message.notification', compact('notification'))@endcomponent
+                                @endforeach
+                            </ul>
 
-                        <div class="my-3 table-responsive">
-                            {{ $notifications->links() }}
-                        </div>
+                            {{-- Notification Pagination --}}
+                            <div class="my-3 table-responsive">
+                                {{ $notifications->links() }}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
