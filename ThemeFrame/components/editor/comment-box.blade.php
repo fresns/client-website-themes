@@ -29,8 +29,8 @@
                         @if(fs_api_config('comment_editor_anonymous'))
                             <div class="bd-highlight">
                                 <div class="form-check">
-                                    <input class="form-check-input" name="anonymous" type="checkbox" value="1" id="anonymous">
-                                    <label class="form-check-label" for="anonymous">{{ fs_lang('editorAnonymous') }}</label>
+                                    <input class="form-check-input" name="isAnonymous" type="checkbox" value="1" id="isAnonymous">
+                                    <label class="form-check-label" for="isAnonymous">{{ fs_lang('editorAnonymous') }}</label>
                                 </div>
                             </div>
                         @endif
