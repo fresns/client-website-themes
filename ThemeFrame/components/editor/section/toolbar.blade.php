@@ -10,14 +10,14 @@
             </button>
             {{-- Sticker List --}}
             <div class="dropdown-menu rounded-0 pt-0" aria-labelledby="stickers">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <ul class="nav nav-tabs" role="tablist">
                     @foreach(fs_stickers() as $sticker)
                         <li class="nav-item" role="presentation">
                             <button class="nav-link @if ($loop->first) active @endif" id="sticker-{{ $loop->index }}-tab" data-bs-toggle="tab" data-bs-target="#sticker-{{ $loop->index }}" type="button" role="tab" aria-controls="sticker-{{ $loop->index }}" aria-selected="{{ $loop->first }}">{{ $sticker['name'] }}</button>
                         </li>
                     @endforeach
                 </ul>
-                <div class="tab-content p-2" id="sticker">
+                <div class="tab-content p-2 fs-sticker">
                     @foreach(fs_stickers() as $sticker)
                         <div class="tab-pane fade @if ($loop->first) show active @endif" id="sticker-{{ $loop->index }}" role="tabpanel" aria-labelledby="sticker-{{ $loop->index }}-tab">
                             @foreach($sticker['stickers'] ?? [] as $value)

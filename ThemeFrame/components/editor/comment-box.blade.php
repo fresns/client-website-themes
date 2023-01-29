@@ -3,6 +3,7 @@
     @php
         $cid = $cid ?? '';
     @endphp
+
     <div class="card order-5 mt-3 fresns-reply @if(empty($show)) hide @else show @endif" @if(empty($show)) style="display: none" @endif>
         <div class="card-header d-flex">
             <div class="flex-grow-1">{{ fs_db_config('publish_comment_name') }} {{ $nickname }}</div>
@@ -17,6 +18,7 @@
 
                     <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="{{ 'quick-publish-comment-content'.$pid.$cid }}" rows="3" placeholder="{{ fs_lang('editorContent') }}"></textarea>
 
+                    {{-- Stickers and Upload file --}}
                     <div class="d-flex mt-2">
                         @if (fs_api_config('comment_editor_sticker'))
                             <div class="me-2">
@@ -25,16 +27,16 @@
                                 </button>
                                 {{-- Sticker List --}}
                                 <div class="dropdown-menu pt-0" aria-labelledby="stickers">
-                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                    <ul class="nav nav-tabs" role="tablist">
                                         @foreach(fs_stickers() as $sticker)
                                             <li class="nav-item" role="presentation">
-                                                <button class="nav-link @if ($loop->first) active @endif" id="sticker-{{ $loop->index }}-tab" data-bs-toggle="tab" data-bs-target="#sticker-{{ $loop->index }}" type="button" role="tab" aria-controls="sticker-{{ $loop->index }}" aria-selected="{{ $loop->first }}">{{ $sticker['name'] }}</button>
+                                                <button class="nav-link @if ($loop->first) active @endif" id="{{ $pid.$cid }}sticker-{{ $loop->index }}-tab" data-bs-toggle="tab" data-bs-target="#{{ $pid.$cid }}sticker-{{ $loop->index }}" type="button" role="tab" aria-controls="{{ $pid.$cid }}sticker-{{ $loop->index }}" aria-selected="{{ $loop->first }}">{{ $sticker['name'] }}</button>
                                             </li>
                                         @endforeach
                                     </ul>
-                                    <div class="tab-content p-2" id="sticker">
+                                    <div class="tab-content p-2 fs-sticker">
                                         @foreach(fs_stickers() as $sticker)
-                                            <div class="tab-pane fade @if ($loop->first) show active @endif" id="sticker-{{ $loop->index }}" role="tabpanel" aria-labelledby="sticker-{{ $loop->index }}-tab">
+                                            <div class="tab-pane fade @if ($loop->first) show active @endif" id="{{ $pid.$cid }}sticker-{{ $loop->index }}" role="tabpanel" aria-labelledby="{{ $pid.$cid }}sticker-{{ $loop->index }}-tab">
                                                 @foreach($sticker['stickers'] ?? [] as $value)
                                                     <a class="{{ 'fresns-comment-sticker'.$pid.$cid }} btn btn-outline-secondary border-0" href="javascript:;" value="{{ $value['code'] }}" title="{{ $value['code'] }}" >
                                                         <img src="{{ $value['image'] }}" alt="{{ $value['code'] }}" title="{{ $value['code'] }}">
@@ -55,6 +57,7 @@
                             </div>
                         @endif
                     </div>
+
                     <hr>
                     <div class="d-flex bd-highlight align-items-center">
                         {{-- comment button --}}
