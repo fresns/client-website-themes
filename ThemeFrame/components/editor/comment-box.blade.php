@@ -1,5 +1,8 @@
 {{-- Reply Box --}}
 @if (fs_user()->check())
+    @php
+        $cid = $cid ?? '';
+    @endphp
     <div class="card order-5 mt-3 fresns-reply @if(empty($show)) hide @else show @endif" @if(empty($show)) style="display: none" @endif>
         <div class="card-header d-flex">
             <div class="flex-grow-1">{{ fs_db_config('publish_comment_name') }} {{ $nickname }}</div>
@@ -9,15 +12,49 @@
             <form class="form-comment-box" action="{{ route('fresns.api.editor.quick.publish', ['type' => 'comment']) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="editor-content">
-                    <input type="hidden" name="commentPid" value="{{ $pid ?? "" }}">
-                    <input type="hidden" name="commentCid" value="{{ $cid ?? "" }}">
-                    <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="content" rows="3" placeholder="{{ fs_lang('editorContent') }}"></textarea>
-                    @if(fs_api_config('comment_editor_image'))
-                        <div class="input-group mt-2">
-                            <label class="input-group-text" for="file">{{ fs_lang('editorImages') }}</label>
-                            <input type="file" class="form-control" accept="{{ fs_user_panel('fileAccept.images') }}" name="file" id="file">
-                        </div>
-                    @endif
+                    <input type="hidden" name="commentPid" value="{{ $pid }}">
+                    <input type="hidden" name="commentCid" value="{{ $cid }}">
+
+                    <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="{{ 'quick-publish-comment-content'.$pid.$cid }}" rows="3" placeholder="{{ fs_lang('editorContent') }}"></textarea>
+
+                    <div class="d-flex mt-2">
+                        @if (fs_api_config('comment_editor_sticker'))
+                            <div class="me-2">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                    <i class="bi bi-emoji-smile"></i>
+                                </button>
+                                {{-- Sticker List --}}
+                                <div class="dropdown-menu pt-0" aria-labelledby="stickers">
+                                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                        @foreach(fs_stickers() as $sticker)
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link @if ($loop->first) active @endif" id="sticker-{{ $loop->index }}-tab" data-bs-toggle="tab" data-bs-target="#sticker-{{ $loop->index }}" type="button" role="tab" aria-controls="sticker-{{ $loop->index }}" aria-selected="{{ $loop->first }}">{{ $sticker['name'] }}</button>
+                                            </li>
+                                        @endforeach
+                                    </ul>
+                                    <div class="tab-content p-2" id="sticker">
+                                        @foreach(fs_stickers() as $sticker)
+                                            <div class="tab-pane fade @if ($loop->first) show active @endif" id="sticker-{{ $loop->index }}" role="tabpanel" aria-labelledby="sticker-{{ $loop->index }}-tab">
+                                                @foreach($sticker['stickers'] ?? [] as $value)
+                                                    <a class="{{ 'fresns-comment-sticker'.$pid.$cid }} btn btn-outline-secondary border-0" href="javascript:;" value="{{ $value['code'] }}" title="{{ $value['code'] }}" >
+                                                        <img src="{{ $value['image'] }}" alt="{{ $value['code'] }}" title="{{ $value['code'] }}">
+                                                    </a>
+                                                @endforeach
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                {{-- Sticker List End --}}
+                            </div>
+                        @endif
+
+                        @if(fs_api_config('comment_editor_image'))
+                            <div class="input-group">
+                                <label class="input-group-text" for="file">{{ fs_lang('editorImages') }}</label>
+                                <input type="file" class="form-control" accept="{{ fs_user_panel('fileAccept.images') }}" name="file" id="file">
+                            </div>
+                        @endif
+                    </div>
                     <hr>
                     <div class="d-flex bd-highlight align-items-center">
                         {{-- comment button --}}
@@ -67,3 +104,11 @@
         </div>
     </div>
 @endif
+
+@push('script')
+    <script>
+        $("{{ '.fresns-comment-sticker'.$pid.$cid }}").on('click',function (){
+            $("{{ '#quick-publish-comment-content'.$pid.$cid }}").trigger('click').insertAtCaret("[" + $(this).attr('value') + "]");
+        });
+    </script>
+@endpush

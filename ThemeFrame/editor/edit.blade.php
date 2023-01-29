@@ -39,7 +39,6 @@
                     'plid' => $plid,
                     'clid' => $clid,
                     'config' => $config['editor']['toolbar'],
-                    'stickers' => $stickers,
                     'uploadInfo' => $uploadInfo,
                 ])@endcomponent
 

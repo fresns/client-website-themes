@@ -27,7 +27,6 @@
                 'clid' => null,
                 'config' => $config['editor']['toolbar'],
                 'uploadInfo' => $uploadInfo,
-                'stickers' => [],
             ])@endcomponent
 
             {{-- Content Start --}}
