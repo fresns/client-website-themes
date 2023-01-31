@@ -1555,15 +1555,31 @@ window.onmessage = function (event) {
 
     switch (data.postMessageKey) {
         case 'fresnsJoin':
-            apiData = data.data;
-            if (apiData.sessionToken.token) {
-                Cookies.set('fs_aid', apiData.detail.aid);
-                Cookies.set('fs_aid_token', apiData.sessionToken.token, { expires: apiData.sessionToken.expiredDays });
-            }
-            break;
+            let params = new URLSearchParams(window.location.search.slice(1));
+
+            $.ajax({
+                url: '/api/engine/account/connect-login',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    apiData: data,
+                    redirectURL: params.get('redirectURL'),
+                },
+                success: function(res) {
+                    if (res.code !== 0) {
+                        return window.tips(res.message);
+                    }
+
+                    if (res.data.redirectURL) {
+                        window.location.href = res.data.redirectURL
+                        return
+                    }
+                }
+            });
+        break;
     }
 
     if (data.windowClose) {
-        window.location.refresh();
+        $('#fresnsModal').modal('hide');
     }
 };
