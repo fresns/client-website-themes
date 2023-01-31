@@ -1565,18 +1565,18 @@ window.onmessage = function (event) {
                     apiData: data,
                     redirectURL: params.get('redirectURL'),
                 },
-                success: function(res) {
+                success: function (res) {
                     if (res.code !== 0) {
                         return window.tips(res.message);
                     }
 
                     if (res.data.redirectURL) {
-                        window.location.href = res.data.redirectURL
-                        return
+                        window.location.href = res.data.redirectURL;
+                        return;
                     }
-                }
+                },
             });
-        break;
+            break;
     }
 
     if (data.windowClose) {
