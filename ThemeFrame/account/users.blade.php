@@ -17,9 +17,8 @@
                         {{ fs_db_config('user_name') }}
                         @if (fs_user_panel('multiUser.status'))
                             <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                data-lang-tag="{{ current_lang_tag() }}"
                                 data-type="account"
-                                data-scene=""
+                                data-scene="users"
                                 data-post-message-key="fresnsConnect"
                                 data-aid="{{ fs_account('detail.aid') }}"
                                 data-uid="{{ fs_user('detail.uid') }}"

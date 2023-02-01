@@ -39,7 +39,6 @@
                     'plid' => $plid,
                     'clid' => $clid,
                     'config' => $config['editor']['toolbar'],
-                    'stickers' => $stickers,
                     'uploadInfo' => $uploadInfo,
                 ])@endcomponent
 
@@ -96,7 +95,7 @@
                     <hr>
 
                     {{-- Location and Anonymous Start --}}
-                    <div class="d-flex bd-highlight align-items-center">
+                    <div class="d-flex justify-content-between">
                         {{-- Location --}}
                         @if ($config['editor']['features']['location']['status'] && $config['editor']['features']['location']['maps'])
                             @component('components.editor.section.location', [

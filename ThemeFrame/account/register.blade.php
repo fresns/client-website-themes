@@ -17,7 +17,6 @@
                         <div class="card-body">
                             @foreach(fs_api_config('account_connect_services') as $item)
                                 <a class="btn btn-outline-primary mx-2" data-bs-toggle="modal" href="#fresnsModal"
-                                    data-lang-tag="{{ current_lang_tag() }}"
                                     data-type="account"
                                     data-scene="join"
                                     data-post-message-key="fresnsJoin"

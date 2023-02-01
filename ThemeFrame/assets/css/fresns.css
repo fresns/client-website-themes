@@ -28,9 +28,6 @@ body {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
-.fresns-sticker img {
-    zoom: 0.5;
-}
 .portal {
     margin-top: 88px;
 }
@@ -692,22 +689,23 @@ header .navbar {
     margin-top: -0.2rem;
 }
 
-.fresns-editor .editor-toolbar .stickers .dropdown-menu {
+.fresns-editor .editor-content {
+    background-color: #fff;
+}
+
+/* stickers */
+.stickers .dropdown-menu {
     width: 90%;
 }
 @media (min-width: 992px) {
-    .fresns-editor .editor-toolbar .stickers .dropdown-menu {
+    .stickers .dropdown-menu {
         width: 40%;
     }
 }
-
-.fresns-editor .editor-toolbar #sticker img {
+.fs-sticker img {
     margin: 0.2rem;
+    zoom: 0.5;
     cursor: pointer;
-}
-
-.fresns-editor .editor-content {
-    background-color: #fff;
 }
 
 /* file */

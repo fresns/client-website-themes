@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-icons.css">
     <link rel="stylesheet" href="/static/css/select2.min.css">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v=0c500ace9c4cd745">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v=0c500ace9c4cd745">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=0c500ace9c4cd745">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v=478e8a54af7fd56d">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v=478e8a54af7fd56d">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=478e8a54af7fd56d">
     @stack('style')
     @if (fs_db_config('website_stat_position') == 'head')
         {!! fs_db_config('website_stat_code') !!}
@@ -109,7 +109,9 @@
     <script src="/static/js/js.cookie.min.js"></script>
     <script src="/static/js/iframeResizer.min.js"></script>
     <script>
-        window.hashtag_show = {{ fs_api_config('hashtag_show') }};
+        window.siteName = "{{ fs_db_config('site_name') }}";
+        window.langTag = "{{ current_lang_tag() }}";
+        window.hashtagShow = {{ fs_api_config('hashtag_show') }};
 
         // video play
         var videos = document.getElementsByTagName('video'); 
@@ -127,12 +129,12 @@
             }
         };
     </script>
-    <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v=0c500ace9c4cd745" }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v=0c500ace9c4cd745"></script>
-    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=0c500ace9c4cd745"></script>
-    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=0c500ace9c4cd745"></script>
-    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=0c500ace9c4cd745"></script>
-    <script src="/assets/themes/ThemeFrame/js/fresns.js?v=0c500ace9c4cd745"></script>
+    <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v=478e8a54af7fd56d" }}"></script>
+    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v=478e8a54af7fd56d"></script>
+    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=478e8a54af7fd56d"></script>
+    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=478e8a54af7fd56d"></script>
+    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=478e8a54af7fd56d"></script>
+    <script src="/assets/themes/ThemeFrame/js/fresns.js?v=478e8a54af7fd56d"></script>
     @stack('script')
 </body>
 

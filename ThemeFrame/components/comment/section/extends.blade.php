@@ -8,7 +8,6 @@
             {{-- Page Type --}}
             @if ($extend['accessUrl'])
                 <a class="text-decoration-none stretched-link" data-bs-toggle="modal" href="#fresnsModal"
-                    data-lang-tag="{{ current_lang_tag() }}"
                     data-type="comment"
                     data-scene="extendBox"
                     data-post-message-key="fresnsCommentExtendBox"
@@ -55,7 +54,6 @@
 
             @if ($extend['accessUrl'])
                 <a class="text-decoration-none stretched-link" data-bs-toggle="modal" href="#fresnsModal"
-                    data-lang-tag="{{ current_lang_tag() }}"
                     data-type="comment"
                     data-scene="extendBox"
                     data-post-message-key="fresnsCommentExtendBox"

@@ -18,7 +18,6 @@
                             @foreach($items['manages'] as $plugin)
                                 <li>
                                     <a class="dropdown-item" data-bs-toggle="modal" href="#fresnsModal"
-                                        data-lang-tag="{{ current_lang_tag() }}"
                                         data-type="profile"
                                         data-scene="manage"
                                         data-post-message-key="fresnsPostManage"

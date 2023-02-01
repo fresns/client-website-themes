@@ -33,14 +33,50 @@
                                     <hr>
                                 </div>
                             @endif
+
                             {{-- Content --}}
-                            <textarea class="form-control rounded-0 border-0 fresns-content" name="content" rows="10" placeholder="{{ fs_lang('editorContent') }}"></textarea>
-                            @if(fs_api_config('post_editor_image'))
-                                <div class="input-group mt-2">
-                                    <label class="input-group-text" for="file">{{ fs_lang('editorImages') }}</label>
-                                    <input type="file" class="form-control" accept="{{ fs_user_panel('fileAccept.images') ?? null }}" name="file" id="file">
-                                </div>
-                            @endif
+                            <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="quick-publish-post-content" rows="10" placeholder="{{ fs_lang('editorContent') }}"></textarea>
+
+                            {{-- Stickers and Upload file --}}
+                            <div class="d-flex mt-2">
+                                @if (fs_api_config('post_editor_sticker'))
+                                    <div class="me-2">
+                                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
+                                            <i class="bi bi-emoji-smile"></i>
+                                        </button>
+                                        {{-- Sticker List --}}
+                                        <div class="dropdown-menu pt-0" aria-labelledby="stickers">
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                @foreach(fs_stickers() as $sticker)
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link @if ($loop->first) active @endif" id="quick-sticker-{{ $loop->index }}-tab" data-bs-toggle="tab" data-bs-target="#quick-sticker-{{ $loop->index }}" type="button" role="tab" aria-controls="quick-sticker-{{ $loop->index }}" aria-selected="{{ $loop->first }}">{{ $sticker['name'] }}</button>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                            <div class="tab-content p-2 fs-sticker">
+                                                @foreach(fs_stickers() as $sticker)
+                                                    <div class="tab-pane fade @if ($loop->first) show active @endif" id="quick-sticker-{{ $loop->index }}" role="tabpanel" aria-labelledby="quick-sticker-{{ $loop->index }}-tab">
+                                                        @foreach($sticker['stickers'] ?? [] as $value)
+                                                            <a class="fresns-post-sticker btn btn-outline-secondary border-0" href="javascript:;" value="{{ $value['code'] }}" title="{{ $value['code'] }}" >
+                                                                <img src="{{ $value['image'] }}" alt="{{ $value['code'] }}" title="{{ $value['code'] }}">
+                                                            </a>
+                                                        @endforeach
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                        {{-- Sticker List End --}}
+                                    </div>
+                                @endif
+
+                                @if(fs_api_config('post_editor_image'))
+                                    <div class="input-group">
+                                        <label class="input-group-text" for="file">{{ fs_lang('editorImages') }}</label>
+                                        <input type="file" class="form-control" accept="{{ fs_user_panel('fileAccept.images') ?? null }}" name="file" id="file">
+                                    </div>
+                                @endif
+                            </div>
+
                             {{-- Attachment Status --}}
                             <hr>
                             <div class="d-flex bd-highlight align-items-center">
@@ -50,8 +86,8 @@
                                 @if(fs_api_config('post_editor_anonymous'))
                                     <div class="bd-highlight">
                                         <div class="form-check">
-                                            <input class="form-check-input" name="anonymous" type="checkbox" value="1" id="anonymous">
-                                            <label class="form-check-label" for="anonymous">{{ fs_lang('editorAnonymous') }}</label>
+                                            <input class="form-check-input" name="isAnonymous" type="checkbox" value="1" id="isAnonymous">
+                                            <label class="form-check-label" for="isAnonymous">{{ fs_lang('editorAnonymous') }}</label>
                                         </div>
                                     </div>
                                 @endif
@@ -105,6 +141,10 @@
 
 @push('script')
     <script>
+        $(".fresns-post-sticker").on('click',function (){
+            $("#quick-publish-post-content").trigger('click').insertAtCaret("[" + $(this).attr('value') + "]");
+        });
+
         function postBoxSelectGroup(obj) {
             var gid = $(obj).data('gid');
             var gname = $(obj).text();

@@ -24,7 +24,6 @@
     @if (! $interaction['followStatus'])
         <form class="float-start me-2">
             <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                data-lang-tag="{{ current_lang_tag() }}"
                 data-type="group"
                 data-scene="follow"
                 data-post-message-key="fresnsFollow"

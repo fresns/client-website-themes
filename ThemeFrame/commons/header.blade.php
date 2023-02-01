@@ -185,7 +185,6 @@
                         @if (fs_api_config('site_public_status'))
                             @if (fs_api_config('site_public_service'))
                                 <button class="btn btn-success me-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                    data-lang-tag="{{ current_lang_tag() }}"
                                     data-type="account"
                                     data-scene="join"
                                     data-post-message-key="fresnsJoin"

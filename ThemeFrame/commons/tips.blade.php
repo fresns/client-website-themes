@@ -21,6 +21,19 @@
             </div>
             <div class="toast-body">
                 {!! session('failure') !!}
+
+                @if (session('code') == 36104)
+                    <div class="mt-2 pt-2 border-top">
+                        <kbd>{{ fs_db_config('menu_account_settings') }}->{{ fs_lang('settingAccount') }}</kbd>
+                        <a class="btn btn-primary btn-sm" href="{{ fs_route(route('fresns.account.settings')).'#account-tab' }}" role="button">{{ fs_lang('setting') }}</a>
+                    </div>
+                @endif
+
+                @if (session('code') == 38200)
+                    <div class="mt-2 pt-2 border-top">
+                        <a class="btn btn-primary btn-sm" href="{{ fs_route(route('fresns.editor.drafts', ['type' => 'posts'])) }}" role="button">{{ fs_lang('view') }}</a>
+                    </div>
+                @endif
             </div>
         </div>
     </div>

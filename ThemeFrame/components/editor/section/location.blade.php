@@ -7,7 +7,6 @@
             @foreach($config['maps'] as $map)
                 <li>
                     <a class="dropdown-item" role="button" data-bs-toggle="modal" href="#fresnsModal"
-                        data-lang-tag="{{ current_lang_tag() }}"
                         data-type="editor"
                         data-scene="{{ $type.'Editor' }}"
                         data-post-message-key="fresnsLocation"
@@ -23,7 +22,6 @@
 @else
     @foreach($config['maps'] as $map)
         <button class="btn btn-outline-dark btn-sm" type="button" id="location" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-            data-lang-tag="{{ current_lang_tag() }}"
             data-type="editor"
             data-scene="{{ $type.'Editor' }}"
             data-post-message-key="fresnsLocation"
