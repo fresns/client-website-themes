@@ -59,7 +59,7 @@ window.tips = function (message, code = 200) {
     }
 
     if (window.langTag) {
-        langTag = '/'+window.langTag;
+        langTag = '/' + window.langTag;
     } else {
         langTag = '';
     }
@@ -70,8 +70,7 @@ window.tips = function (message, code = 200) {
         siteName = 'Tip';
     }
 
-    let html = 
-        `<div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:9999">
+    let html = `<div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:9999">
             <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
                     <img src="/static/images/icon.png" width="20px" height="20px" class="rounded me-2">
@@ -80,21 +79,23 @@ window.tips = function (message, code = 200) {
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
                 <div class="toast-body">
-                    ${message}`
+                    ${message}`;
 
-                    if (code == 36104) {
-                        html += 
-                        `<div class="mt-2 pt-2 border-top">
-                            <a class="btn btn-primary btn-sm" href="${langTag}/account/settings#account-tab" role="button">${fs_lang('settingAccount')}</a>
-                        </div>`
-                    }
-                    if (code == 38200) {
-                        html += 
-                        `<div class="mt-2 pt-2 border-top">
-                            <a class="btn btn-primary btn-sm" href="${langTag}/editor/drafts/posts" role="button">${fs_lang('view')}</a>
-                        </div>`
-                    }
-        html += `</div>
+    if (code == 36104) {
+        html += `<div class="mt-2 pt-2 border-top">
+                            <a class="btn btn-primary btn-sm" href="${langTag}/account/settings#account-tab" role="button">${fs_lang(
+            'settingAccount'
+        )}</a>
+                        </div>`;
+    }
+    if (code == 38200) {
+        html += `<div class="mt-2 pt-2 border-top">
+                            <a class="btn btn-primary btn-sm" href="${langTag}/editor/drafts/posts" role="button">${fs_lang(
+            'view'
+        )}</a>
+                        </div>`;
+    }
+    html += `</div>
             </div>
         </div>`;
 
@@ -208,7 +209,8 @@ function atwho() {
     $('.fresns-content')
         .atwho({
             at: '@',
-            displayTpl: '<li><img src="${image}" height="20" width="20"/> ${nickname} <small class="text-muted">@${name}</small></li>',
+            displayTpl:
+                '<li><img src="${image}" height="20" width="20"/> ${nickname} <small class="text-muted">@${name}</small></li>',
             callbacks: {
                 remoteFilter: function (query, callback) {
                     if (query) {
