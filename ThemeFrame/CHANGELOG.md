@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.2.0 (2023-02-01)
+
+- Fix read notifications not being clickable
+- change the anonymous parameter to isAnonymous
+- Use the `fs_stickers()` function to handle the list of emoticons
+- Add emoji options to the quick post and comment fields
+- Optimise logic for listening to connected logins
+- Optimise code parsing for hint
+- Show settings link if you don't have permission to post
+
+
 ## 2.1.1 (2023-01-20)
 
 - Remove useless language tag parameters of the plugin framework
