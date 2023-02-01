@@ -52,12 +52,6 @@ window.fs_lang = function (key, replace = {}) {
 
 // tips
 window.tips = function (message, code = 200) {
-    if (code == 0 || code == 200) {
-        apiCode = '';
-    } else {
-        apiCode = code;
-    }
-
     if (window.langTag) {
         langTag = '/' + window.langTag;
     } else {
@@ -70,39 +64,41 @@ window.tips = function (message, code = 200) {
         siteName = 'Tip';
     }
 
-    let html = `<div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:9999">
-            <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                <div class="toast-header">
-                    <img src="/static/images/icon.png" width="20px" height="20px" class="rounded me-2">
-                    <strong class="me-auto">${siteName}</strong>
-                    <small>${apiCode}</small>
-                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                </div>
-                <div class="toast-body">
-                    ${message}`;
+    if (code == 0 || code == 200) {
+        apiCode = '';
+    } else {
+        apiCode = code;
+    }
 
     if (code == 36104) {
-        html += `<div class="mt-2 pt-2 border-top">
-                            <a class="btn btn-primary btn-sm" href="${langTag}/account/settings#account-tab" role="button">${fs_lang(
-            'settingAccount'
-        )}</a>
-                        </div>`;
+        apiMessage = `${message}
+            <div class="mt-2 pt-2 border-top">
+                <a class="btn btn-primary btn-sm" href="${langTag}/account/settings#account-tab" role="button">${fs_lang('settingAccount')}</a>
+            </div>`;
+    } else if (code == 38200) {
+        apiMessage = `${message}
+            <div class="mt-2 pt-2 border-top">
+                <a class="btn btn-primary btn-sm" href="${langTag}/editor/drafts/posts" role="button">${fs_lang('view')}</a>
+            </div>`;
+    } else {
+        apiMessage = message;
     }
-    if (code == 38200) {
-        html += `<div class="mt-2 pt-2 border-top">
-                            <a class="btn btn-primary btn-sm" href="${langTag}/editor/drafts/posts" role="button">${fs_lang(
-            'view'
-        )}</a>
-                        </div>`;
-    }
-    html += `</div>
+
+    let html = `<div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:9999">
+        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="/static/images/icon.png" width="20px" height="20px" class="rounded me-2">
+                <strong class="me-auto">${siteName}</strong>
+                <small>${apiCode}</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
-        </div>`;
+            <div class="toast-body">${apiMessage}</div>
+        </div>
+    </div>`;
 
     $('div.fresns-tips').prepend(html);
 
-    if (code == 36104 || code == 38200) {
-    } else {
+    if (code == 0) {
         setTimeoutToastHide();
     }
 };
