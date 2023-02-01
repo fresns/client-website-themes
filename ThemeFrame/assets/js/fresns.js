@@ -52,26 +52,58 @@ window.fs_lang = function (key, replace = {}) {
 
 // tips
 window.tips = function (message, code = 200) {
-    if (code != 0) {
-        apiCode = code;
-    } else {
+    if (code == 0 || code == 200) {
         apiCode = '';
+    } else {
+        apiCode = code;
     }
 
-    let html = `
-        <div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:9999">
+    if (window.langTag) {
+        langTag = '/'+window.langTag;
+    } else {
+        langTag = '';
+    }
+
+    if (window.siteName) {
+        siteName = window.siteName;
+    } else {
+        siteName = 'Tip';
+    }
+
+    let html = 
+        `<div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:9999">
             <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
                 <div class="toast-header">
                     <img src="/static/images/icon.png" width="20px" height="20px" class="rounded me-2">
-                    <strong class="me-auto">Tip</strong>
+                    <strong class="me-auto">${siteName}</strong>
                     <small>${apiCode}</small>
                     <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
                 </div>
-                <div class="toast-body">${message}</div>
+                <div class="toast-body">
+                    ${message}`
+
+                    if (code == 36104) {
+                        html += 
+                        `<div class="mt-2 pt-2 border-top">
+                            <a class="btn btn-primary btn-sm" href="${langTag}/account/settings#account-tab" role="button">${fs_lang('settingAccount')}</a>
+                        </div>`
+                    }
+                    if (code == 38200) {
+                        html += 
+                        `<div class="mt-2 pt-2 border-top">
+                            <a class="btn btn-primary btn-sm" href="${langTag}/editor/drafts/posts" role="button">${fs_lang('view')}</a>
+                        </div>`
+                    }
+        html += `</div>
             </div>
         </div>`;
+
     $('div.fresns-tips').prepend(html);
-    setTimeoutToastHide();
+
+    if (code == 36104 || code == 38200) {
+    } else {
+        setTimeoutToastHide();
+    }
 };
 
 // copy url
@@ -130,11 +162,11 @@ function fetchSendVerifyCode(type, useType, templateId, account, action, obj, co
         type: 'post',
         data: data,
         error: function (error) {
-            alert(error.responseJSON.message);
+            alert(error.responseJSON.message, error.status);
         },
         success: function (res) {
             if (res.code != 0) {
-                return window.tips(res.message);
+                return window.tips(res.message, res.code);
             }
 
             window.tips(fs_lang('success'));
@@ -176,8 +208,7 @@ function atwho() {
     $('.fresns-content')
         .atwho({
             at: '@',
-            displayTpl:
-                '<li><img src="${image}" height="20" width="20"/> ${nickname} <small class="text-muted">@${name}</small></li>',
+            displayTpl: '<li><img src="${image}" height="20" width="20"/> ${nickname} <small class="text-muted">@${name}</small></li>',
             callbacks: {
                 remoteFilter: function (query, callback) {
                     if (query) {
@@ -196,7 +227,7 @@ function atwho() {
         .atwho({
             at: '#',
             displayTpl: '<li> ${name} </li>',
-            insertTpl: window.hashtag_show == 1 ? '${atwho-at}${name}' : '${atwho-at}${name}${atwho-at}',
+            insertTpl: window.hashtagShow == 1 ? '${atwho-at}${name}' : '${atwho-at}${name}${atwho-at}',
             callbacks: {
                 remoteFilter: function (query, callback) {
                     if (query) {
@@ -284,7 +315,7 @@ function accountVerification(obj) {
         },
         success: function (res) {
             if (res.code !== 0) {
-                window.tips(res.message);
+                window.tips(res.message, res.code);
                 return;
             }
 
@@ -416,7 +447,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             url: `/api/engine/content/file/${fid}/users`,
             success: function (res) {
                 if (res.code != 0) {
-                    return window.tips(res.message);
+                    return window.tips(res.message, res.code);
                 }
 
                 if (!res.data || res.data.list.length <= 0) {
@@ -451,7 +482,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             url: $(this).attr('href'),
             success: function (res) {
                 if (res.code != 0) {
-                    return window.tips(res.message);
+                    return window.tips(res.message, res.code);
                 }
 
                 $.ajax({
@@ -495,8 +526,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             contentType: false,
             success: function (res) {
                 tips(res.message, res.code);
-                if (res.code != 0 || res.code == 38200) {
-                    window.tips(res.message);
+                if (res.code != 0) {
                     return;
                 }
                 window.location.reload();
@@ -527,7 +557,6 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             success: function (res) {
                 tips(res.message, res.code);
                 if (res.code == 38200) {
-                    window.tips(res.message);
                     btn.prop('disabled', false);
                     btn.find('.spinner-border').remove();
                     return;
@@ -575,7 +604,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             body,
             function (e) {
                 if (e.code != 0) {
-                    window.tips(e.message);
+                    window.tips(e.message, e.code);
                     return;
                 }
 
@@ -727,7 +756,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     }
                 }
 
-                window.tips(e.message);
+                window.tips(e.message, e.code);
             },
             function (e) {
                 window.tips(e.responseJSON.message, e.responseJSON.code);
@@ -816,7 +845,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             success: function (res) {
                 tips(res.message, res.code);
                 if (res.code != 0) {
-                    window.tips(res.message);
+                    window.tips(res.message, res.code);
                     return;
                 }
                 window.location.reload();
@@ -1335,7 +1364,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             url,
             body,
             function (res) {
-                window.tips(res.message);
+                window.tips(res.message, res.code);
                 if (res.code != 0) {
                     return;
                 }
@@ -1371,7 +1400,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                         targeObj.addClass('is-invalid');
                         targeObj.parent().append(`<div class="invalid-feedback">` + e.responseJSON.message + `</div>`);
                     } else {
-                        targeObj.parent().find('.invalid-feedback').text(e.responseJSON.message);
+                        targeObj.parent().find('.invalid-feedback').text(e.responseJSON.message, e.status);
                     }
                 }
             },
@@ -1419,7 +1448,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             contentType: false,
             success: function (res) {
                 if (res.code !== 0) {
-                    window.tips(res.message);
+                    window.tips(res.message, res.code);
                     return;
                 }
 
@@ -1429,11 +1458,11 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                         editAction,
                         data,
                         function (res) {
-                            window.tips(res.message);
+                            window.tips(res.message, res.code);
                             window.location.reload();
                         },
                         function (e) {
-                            window.tips(e.responseJSON.message);
+                            window.tips(e.responseJSON.message, e.status);
                         }
                     );
                 }
@@ -1482,7 +1511,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             contentType: false,
             success: function (res) {
                 if (res.code !== 0) {
-                    window.tips(res.message);
+                    window.tips(res.message, res.code);
                     return;
                 }
 
@@ -1492,11 +1521,11 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                         sendAction,
                         data,
                         function (res) {
-                            window.tips(res.message);
+                            window.tips(res.message, res.code);
                             window.location.reload();
                         },
                         function (e) {
-                            window.tips(e.responseJSON.message);
+                            window.tips(e.responseJSON.message, e.status);
                         }
                     );
                 }
@@ -1548,7 +1577,7 @@ window.onmessage = function (event) {
 
     if (data.code != 0) {
         if (data.message) {
-            window.tips(data.message);
+            window.tips(data.message, data.code);
         }
         return;
     }
@@ -1567,7 +1596,7 @@ window.onmessage = function (event) {
                 },
                 success: function (res) {
                     if (res.code !== 0) {
-                        return window.tips(res.message);
+                        return window.tips(res.message, res.code);
                     }
 
                     if (res.data.redirectURL) {
