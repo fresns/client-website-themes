@@ -28,7 +28,7 @@
                 {{-- Settings --}}
                 <div class="card">
                     <div class="card-header">
-                        <ul class="nav nav-pills card-header-pills" id="myTab" role="tablist">
+                        <ul class="nav nav-pills card-header-pills" id="settings-tabs" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">{{ fs_lang('settingGeneral') }}</button>
                             </li>
@@ -45,7 +45,7 @@
                             @endif
                         </ul>
                     </div>
-                    <div class="card-body tab-content" id="myTabContent">
+                    <div class="card-body tab-content" id="settings-tab-content">
                         {{-- User Profile --}}
                         <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             {{-- Avatar --}}
@@ -505,3 +505,22 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+    <script>
+        $(document).ready(function () {
+            var activeTab = window.location.hash.substring(1);
+            if (!activeTab) {
+                activeTab = 'profile-tab';
+            }
+            $('#' + activeTab).tab('show');
+            document.documentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            $('#settings-tabs button').click(function (e) {
+                e.preventDefault();
+                $(this).tab('show');
+                document.documentElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+    </script>
+@endpush
