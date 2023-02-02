@@ -58,11 +58,8 @@ window.tips = function (message, code = 200) {
         langTag = '';
     }
 
-    if (window.siteName) {
-        siteName = window.siteName;
-    } else {
-        siteName = 'Tip';
-    }
+    siteName = window.siteName ?? 'Tip';
+    siteIcon = window.siteIcon ?? '/static/images/icon.png';
 
     if (code == 0 || code == 200) {
         apiCode = '';
@@ -91,7 +88,7 @@ window.tips = function (message, code = 200) {
     let html = `<div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:9999">
         <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
-                <img src="/static/images/icon.png" width="20px" height="20px" class="rounded me-2">
+                <img src="${siteIcon}" width="20px" height="20px" class="rounded me-2">
                 <strong class="me-auto">${siteName}</strong>
                 <small>${apiCode}</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
