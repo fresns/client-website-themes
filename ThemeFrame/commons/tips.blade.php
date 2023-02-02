@@ -1,5 +1,5 @@
 @if (session('success'))
-    <div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:9999">
+    <div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:2048">
         <div class="toast show text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body">{{ session('success') }}</div>
@@ -8,7 +8,7 @@
         </div>
     </div>
 @elseif (session('failure'))
-    <div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:9999">
+    <div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:2048">
         <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <img src="{{ fs_db_config('site_icon') }}" width="20px" height="20px" class="me-2" alt="{{ fs_db_config('site_name') }}">

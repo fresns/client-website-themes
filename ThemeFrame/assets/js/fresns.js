@@ -85,7 +85,7 @@ window.tips = function (message, code = 200) {
         apiMessage = message;
     }
 
-    let html = `<div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:9999">
+    let html = `<div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:2048">
         <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <img src="${siteIcon}" width="20px" height="20px" class="me-2">
