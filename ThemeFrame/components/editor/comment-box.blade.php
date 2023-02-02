@@ -1,9 +1,9 @@
+@php
+    $cid = $cid ?? '';
+@endphp
+
 {{-- Reply Box --}}
 @if (fs_user()->check())
-    @php
-        $cid = $cid ?? '';
-    @endphp
-
     <div class="card order-5 mt-3 fresns-reply @if(empty($show)) hide @else show @endif" @if(empty($show)) style="display: none" @endif>
         <div class="card-header d-flex">
             <div class="flex-grow-1">{{ fs_db_config('publish_comment_name') }} {{ $nickname }}</div>
@@ -16,7 +16,7 @@
                     <input type="hidden" name="commentPid" value="{{ $pid }}">
                     <input type="hidden" name="commentCid" value="{{ $cid }}">
 
-                    <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="{{ 'quick-publish-comment-content'.$pid.$cid }}" rows="3" placeholder="{{ fs_lang('editorContent') }}"></textarea>
+                    <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="{{ 'quick-publish-comment-content'.$pid.$cid }}" rows="5" placeholder="{{ fs_lang('editorContent') }}"></textarea>
 
                     {{-- Stickers and Upload file --}}
                     <div class="d-flex mt-2">

@@ -911,7 +911,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     inputTips +
                     `" name="` +
                     name +
-                    `" rows="3">` +
+                    `" rows="5">` +
                     value +
                     `</textarea>
                 </div>`;
