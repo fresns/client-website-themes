@@ -5,12 +5,16 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Fresns" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>@yield('title') - {{ fs_db_config('site_name') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="keywords" content="@yield('keywords')" />
     <meta name="description" content="@yield('description')" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="{{ fs_db_config('site_name') }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ fs_db_config('site_icon') }}">
+    <link rel="icon" href="{{ fs_db_config('site_icon') }}">
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-icons.css">
     <link rel="stylesheet" href="/static/css/select2.min.css">
@@ -68,9 +72,9 @@
     @include('commons.footer')
 
     {{-- Loading --}}
-    <div id="loading" class="position-fixed top-0 start-0 bottom-0 end-0 bg-white bg-opacity-75" style="z-index:2048;">
-        <div class="position-absolute top-50 start-50 translate-middle">
-            <div class="spinner-border text-secondary" role="status">
+    <div id="loading" class="position-fixed top-0 start-0 bottom-0 end-0">
+        <div class="position-absolute top-50 start-50 translate-middle bg-secondary bg-opacity-75 rounded p-4" style="z-index:2048;">
+            <div class="spinner-border text-light" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
         </div>
@@ -124,18 +128,19 @@
         window.hashtagShow = {{ fs_api_config('hashtag_show') }};
 
         // loading
-        $(document).ready(function () {
-            const loading = $("#loading");
-
-            $('a[href^="http"]').on('click', function(event) {
-                event.preventDefault();
-                loading.show();
-                window.location = $(this).attr('href');
-            });
-
-            $(document).ajaxStop(function () {
-                loading.hide();
-            });
+        $(document).on("click", "a", function(e) {
+            var href = $(this).attr("href");
+            if (href && href !== "#") {
+                if ((href.indexOf(location.hostname) !== -1 || href[0] === "/") && $(this).attr("target") !== "_blank") {
+                    $("#loading").show();
+                }
+            }
+        });
+        $(window).on("load", function() {
+            $("#loading").hide();
+        });
+        window.addEventListener('pageshow', function () {
+            $("#loading").hide();
         });
 
         // video play
