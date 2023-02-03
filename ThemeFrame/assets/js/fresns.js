@@ -99,7 +99,7 @@ window.tips = function (message, code = 200) {
 
     $('div.fresns-tips').prepend(html);
 
-    if (code == 0 || code == 200 || code == 400) {
+    if (code == 0 || code == 200 || code == 400 || code == 401) {
         setTimeoutToastHide();
     }
 };
