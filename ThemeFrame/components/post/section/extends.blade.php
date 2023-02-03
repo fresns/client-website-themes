@@ -28,7 +28,7 @@
             <div class="d-flex align-items-center">
                 {{-- Cover image --}}
                 <div class="flex-shrink-0">
-                    <img src="{{ $extend['cover'] }}" class="frame-image-{{ $extend['infoTypeString'] }}">
+                    <img src="{{ $extend['cover'] }}" loading="lazy" class="frame-image-{{ $extend['infoTypeString'] }}">
                 </div>
 
                 <div class="flex-grow-1 px-3">

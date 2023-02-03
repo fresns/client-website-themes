@@ -1,7 +1,7 @@
 <article class="d-flex">
     @if ($hashtag['cover'])
         <section class="flex-shrink-0">
-            <a href="{{ fs_route(route('fresns.hashtag.detail', ['hid' => $hashtag['hid']])) }}"><img src="{{ $hashtag['cover'] }}" alt="{{ $hashtag['hname'] }}" class="rounded list-cover"></a>
+            <a href="{{ fs_route(route('fresns.hashtag.detail', ['hid' => $hashtag['hid']])) }}"><img src="{{ $hashtag['cover'] }}" loading="lazy" alt="{{ $hashtag['hname'] }}" class="rounded list-cover"></a>
         </section>
     @endif
     <div class="flex-grow-1 ms-3">

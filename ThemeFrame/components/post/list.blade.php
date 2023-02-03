@@ -54,7 +54,7 @@
         <div class="content-title d-flex flex-row bd-highlight">
             {{-- Title Icon --}}
             @if ($title)
-                <img src="{{ $title['imageUrl'] }}" alt="{{ $title['name'] }}" class="me-2">
+                <img src="{{ $title['imageUrl'] }}" loading="lazy" alt="{{ $title['name'] }}" class="me-2">
             @endif
 
             {{-- Title Text --}}
@@ -64,16 +64,16 @@
 
             {{-- Sticky --}}
             @if ($post['stickyState'] == 2)
-                <img src="/assets/themes/ThemeFrame/images/icon-sticky.png" alt="Sticky Group" class="ms-2">
+                <img src="/assets/themes/ThemeFrame/images/icon-sticky.png" loading="lazy" alt="Sticky Group" class="ms-2">
             @elseif ($post['stickyState'] == 3)
-                <img src="/assets/themes/ThemeFrame/images/icon-sticky.png" alt="Sticky All" class="ms-2">
+                <img src="/assets/themes/ThemeFrame/images/icon-sticky.png" loading="lazy" alt="Sticky All" class="ms-2">
             @endif
 
             {{-- Digest --}}
             @if ($post['digestState'] == 2)
-                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" alt="Digest 1" class="ms-2">
+                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" loading="lazy" alt="Digest 1" class="ms-2">
             @elseif ($post['digestState'] == 3)
-                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" alt="Digest 2" class="ms-2">
+                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" loading="lazy" alt="Digest 2" class="ms-2">
             @endif
         </div>
 
@@ -119,7 +119,7 @@
     {{-- Decorate --}}
     @if ($decorate)
         <div class="position-absolute top-0 end-0">
-            <img src="{{ $decorate['imageUrl'] }}" alt="{{ $decorate['name'] }}" height="88rem">
+            <img src="{{ $decorate['imageUrl'] }}" loading="lazy" alt="{{ $decorate['name'] }}" height="88rem">
         </div>
     @endif
 
@@ -155,7 +155,7 @@
                     <div class="content-group me-2">
                         <a href="{{ fs_route(route('fresns.group.detail', ['gid' => $post['group']['gid']])) }}" class="badge rounded-pill text-decoration-none">
                             @if (!empty($post['group']['cover']))
-                                <img src="{{ $post['group']['cover'] }}" alt="$post['group']['gname']" class="rounded">
+                                <img src="{{ $post['group']['cover'] }}" loading="lazy" alt="$post['group']['gname']" class="rounded">
                             @endif
                             {{ $post['group']['gname'] }}
                         </a>
@@ -233,9 +233,9 @@
             <div class="interaction-box fresns-trigger-reply">
                 <a class="btn btn-inter" href="javascript:;" role="button">
                     @if ($iconComment)
-                        <img src="{{ $iconComment['imageUrl'] }}">
+                        <img src="{{ $iconComment['imageUrl'] }}" loading="lazy">
                     @else
-                        <img src="/assets/themes/ThemeFrame/images/icon-comment.png">
+                        <img src="/assets/themes/ThemeFrame/images/icon-comment.png" loading="lazy">
                     @endif
                     <span class="cm-count">
                         {{ $post['commentCount'] }}
@@ -247,9 +247,9 @@
             <div class="interaction-box dropup">
                 <button class="btn btn-inter" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     @if ($iconShare)
-                        <img src="{{ $iconShare['imageUrl'] }}">
+                        <img src="{{ $iconShare['imageUrl'] }}" loading="lazy">
                     @else
-                        <img src="/assets/themes/ThemeFrame/images/icon-share.png">
+                        <img src="/assets/themes/ThemeFrame/images/icon-share.png" loading="lazy">
                     @endif
                 </button>
                 @component('components.post.mark.share', [
@@ -262,9 +262,9 @@
             <div class="ms-auto dropup text-end">
                 <button class="btn btn-inter" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                     @if ($iconMore)
-                        <img src="{{ $iconMore['imageUrl'] }}">
+                        <img src="{{ $iconMore['imageUrl'] }}" loading="lazy">
                     @else
-                        <img src="/assets/themes/ThemeFrame/images/icon-more.png">
+                        <img src="/assets/themes/ThemeFrame/images/icon-more.png" loading="lazy">
                     @endif
                 </button>
                 @component('components.post.mark.more', [

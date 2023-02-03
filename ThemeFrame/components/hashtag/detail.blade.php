@@ -1,7 +1,7 @@
 <article class="d-flex my-3">
     @if ($hashtag['cover'])
         <section class="flex-shrink-0">
-            <img src="{{ $hashtag['cover'] }}" alt="{{ $hashtag['hname'] }}" class="rounded list-cover">
+            <img src="{{ $hashtag['cover'] }}" loading="lazy" alt="{{ $hashtag['hname'] }}" class="rounded list-cover">
         </section>
     @endif
     <div class="flex-grow-1 ms-3">

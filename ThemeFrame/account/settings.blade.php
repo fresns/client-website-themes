@@ -51,7 +51,7 @@
                             {{-- Avatar --}}
                             <div class="input-group mb-3">
                                 <div class="position-relative m-auto">
-                                    <img src="{{ fs_user('detail.avatar') }}" class="rounded-circle" style="width:8rem;height:8rem;">
+                                    <img src="{{ fs_user('detail.avatar') }}" loading="lazy" class="rounded-circle" style="width:8rem;height:8rem;">
                                     <div class="position-absolute top-50 start-50 translate-middle">
                                         <label class="btn btn-light" type="button" for="uploadAvatar"><i class="bi bi-camera-fill"></i></label>
                                         <input type="file"
@@ -353,7 +353,7 @@
                                     <ul class="list-group list-group-flush">
                                         @foreach(fs_api_config('account_connect_services') as $service)
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <img src="/assets/themes/ThemeFrame/images/connects/{{ $service['code'] }}.png" height="32">
+                                                <img src="/assets/themes/ThemeFrame/images/connects/{{ $service['code'] }}.png" loading="lazy" height="32">
 
                                                 @if (fs_account('detail.connects'))
                                                     @foreach(fs_account('detail.connects') as $item)

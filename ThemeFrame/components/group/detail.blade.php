@@ -1,7 +1,7 @@
 <article class="d-flex my-3">
     @if ($group['cover'])
         <section class="flex-shrink-0">
-            <img src="{{ $group['cover'] }}" alt="{{ $group['gname'] }}" class="rounded list-cover">
+            <img src="{{ $group['cover'] }}" loading="lazy" alt="{{ $group['gname'] }}" class="rounded list-cover">
         </section>
     @endif
     <div class="flex-grow-1 ms-3">
@@ -9,7 +9,7 @@
             <section class="d-flex">
                 {{ $group['gname'] }}
                 @if ($group['recommend'])
-                    <img src="/assets/themes/ThemeFrame/images/icon-recommend.png" class="list-recommend" alt="{{ fs_lang('contentRecommend') }}">
+                    <img src="/assets/themes/ThemeFrame/images/icon-recommend.png" class="list-recommend" loading="lazy" alt="{{ fs_lang('contentRecommend') }}">
                 @endif
             </section>
 

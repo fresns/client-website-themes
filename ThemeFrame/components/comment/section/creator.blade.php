@@ -4,16 +4,16 @@
             {{-- Normal Author --}}
             <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $creator['fsid']])) }}">
                 @if ($creator['decorate'])
-                    <img src="{{ $creator['decorate'] }}" alt="Avatar Decorate" class="user-decorate">
+                    <img src="{{ $creator['decorate'] }}" loading="lazy" alt="Avatar Decorate" class="user-decorate">
                 @endif
-                <img src="{{ $creator['avatar'] }}" alt="{{ $creator['username'] }}" class="user-avatar rounded-circle">
+                <img src="{{ $creator['avatar'] }}" loading="lazy" alt="{{ $creator['username'] }}" class="user-avatar rounded-circle">
             </a>
         @elseif (! $creator['deactivate'] && $isAnonymous)
             {{-- Anonymous Author --}}
-            <img src="{{ $creator['avatar'] }}" alt="{{ fs_lang('contentCreatorAnonymous') }}" class="user-avatar rounded-circle">
+            <img src="{{ $creator['avatar'] }}" loading="lazy" alt="{{ fs_lang('contentCreatorAnonymous') }}" class="user-avatar rounded-circle">
         @elseif ($creator['deactivate'])
             {{-- Deactivate Author --}}
-            <img src="{{ fs_db_config('deactivate_avatar') }}" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="user-avatar rounded-circle">
+            <img src="{{ fs_db_config('deactivate_avatar') }}" loading="lazy" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="user-avatar rounded-circle">
         @endif
     </div>
     <div class="flex-grow-1">
@@ -26,9 +26,9 @@
                         @if ($creator['verifiedStatus'])
                             <div class="user-verified">
                                 @if ($creator['verifiedIcon'])
-                                    <img src="{{ $creator['verifiedIcon'] }}" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $creator['verifiedDesc'] }}">
+                                    <img src="{{ $creator['verifiedIcon'] }}" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $creator['verifiedDesc'] }}">
                                 @else
-                                    <img src="/assets/themes/ThemeFrame/images/icon-verified.png" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $creator['verifiedDesc'] }}">
+                                    <img src="/assets/themes/ThemeFrame/images/icon-verified.png" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $creator['verifiedDesc'] }}">
                                 @endif
                             </div>
                         @endif
@@ -36,7 +36,7 @@
                     </a>
                     <div class="user-role d-flex">
                         @if ($creator['roleIconDisplay'])
-                            <div class="user-role-icon"><img src="{{ $creator['roleIcon'] }}" alt="{{ $creator['roleName'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $creator['roleName'] }}"></div>
+                            <div class="user-role-icon"><img src="{{ $creator['roleIcon'] }}" loading="lazy" alt="{{ $creator['roleName'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $creator['roleName'] }}"></div>
                         @endif
                         @if ($creator['roleNameDisplay'])
                             <div class="user-role-name"><span class="badge rounded-pill">{{ $creator['roleName'] }}</span></div>
@@ -57,7 +57,7 @@
                 @if ($creator['operations']['diversifyImages'])
                     <div class="user-icon d-flex flex-wrap flex-lg-nowrap overflow-hidden my-2 my-lg-0">
                         @foreach($creator['operations']['diversifyImages'] as $icon)
-                            <img src="{{ $icon['imageUrl'] }}" alt="{{ $icon['name'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $icon['name'] }}">
+                            <img src="{{ $icon['imageUrl'] }}" loading="lazy" alt="{{ $icon['name'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $icon['name'] }}">
                         @endforeach
                     </div>
                 @endif

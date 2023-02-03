@@ -23,7 +23,7 @@
                 'fresns.profile.blockers',
                 'fresns.profile.followers.you.follow',
             ]) ? 'active' : '' }}" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-users.png" width="24" height="24">
+                <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-users.png" loading="lazy" width="24" height="24">
             </a>
             <ul class="dropdown-menu">
                 @if (fs_api_config('user_likers'))
@@ -49,7 +49,7 @@
     @if (fs_api_config('it_like_users') && fs_api_config('it_like_groups') && fs_api_config('it_like_hashtags') && fs_api_config('it_like_posts') && fs_api_config('it_like_comments'))
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle {{ Route::is('fresns.profile.likes.*') ? 'active' : '' }}" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-likes.png" width="24" height="24">
+                <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-likes.png" loading="lazy" width="24" height="24">
             </a>
             <ul class="dropdown-menu">
                 @if (fs_api_config('it_like_users'))
@@ -75,7 +75,7 @@
     @if (fs_api_config('it_dislike_users') && fs_api_config('it_dislike_groups') && fs_api_config('it_dislike_hashtags') && fs_api_config('it_dislike_posts') && fs_api_config('it_dislike_comments'))
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle {{ Route::is('fresns.profile.dislikes.*') ? 'active' : '' }}" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-dislikes.png" width="24" height="24">
+                <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-dislikes.png" loading="lazy" width="24" height="24">
             </a>
             <ul class="dropdown-menu">
                 @if (fs_api_config('it_dislike_users'))
@@ -101,7 +101,7 @@
     @if (fs_api_config('it_follow_users') && fs_api_config('it_follow_groups') && fs_api_config('it_follow_hashtags') && fs_api_config('it_follow_posts') && fs_api_config('it_follow_comments'))
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle {{ Route::is('fresns.profile.following.*') ? 'active' : '' }}" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-following.png" width="24" height="24">
+                <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-following.png" loading="lazy" width="24" height="24">
             </a>
             <ul class="dropdown-menu">
                 @if (fs_api_config('it_follow_users'))
@@ -127,7 +127,7 @@
     @if (fs_api_config('it_block_users') && fs_api_config('it_block_groups') && fs_api_config('it_block_hashtags') && fs_api_config('it_block_posts') && fs_api_config('it_block_comments'))
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle {{ Route::is('fresns.profile.blocking.*') ? 'active' : '' }}" href="#" data-bs-toggle="dropdown" aria-expanded="false">
-                <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-blocking.png" width="24" height="24">
+                <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-blocking.png" loading="lazy" width="24" height="24">
             </a>
             <ul class="dropdown-menu">
                 @if (fs_api_config('it_block_users'))

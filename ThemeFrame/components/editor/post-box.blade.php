@@ -64,7 +64,7 @@
                                                 <div class="tab-pane fade @if ($loop->first) show active @endif" id="quick-sticker-{{ $loop->index }}" role="tabpanel" aria-labelledby="quick-sticker-{{ $loop->index }}-tab">
                                                     @foreach($sticker['stickers'] ?? [] as $value)
                                                         <a class="fresns-post-sticker btn btn-outline-secondary border-0" href="javascript:;" value="{{ $value['code'] }}" title="{{ $value['code'] }}" >
-                                                            <img src="{{ $value['image'] }}" alt="{{ $value['code'] }}" title="{{ $value['code'] }}">
+                                                            <img src="{{ $value['image'] }}" loading="lazy" alt="{{ $value['code'] }}" title="{{ $value['code'] }}">
                                                         </a>
                                                     @endforeach
                                                 </div>
@@ -124,7 +124,7 @@
                         @foreach(fs_groups('categories') as $groupCategory)
                             <button class="nav-link group-categories" data-page-size="15" data-page="1" data-action="{{ route('fresns.api.sub.groups', ['gid' => $groupCategory['gid']]) }}" id="v-pills-{{ $groupCategory['gid'] }}-post-box-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ $groupCategory['gid'] }}-post-box" type="button" role="tab" aria-controls="v-pills-{{ $groupCategory['gid'] }}-post-box" aria-selected="false">
                                 @if ($groupCategory['cover'])
-                                    <img src="{{ $groupCategory['cover'] }}" height="20">
+                                    <img src="{{ $groupCategory['cover'] }}" loading="lazy" height="20">
                                 @endif
                                 {{ $groupCategory['gname'] }}
                             </button>

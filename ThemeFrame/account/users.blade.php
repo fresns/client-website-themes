@@ -32,7 +32,7 @@
                     <div class="row p-3">
                         @foreach(fs_account('detail.users') as $item)
                             <div class="col-sm-3 d-flex flex-column align-items-center">
-                                <img src="{{ $item['avatar'] }}" class="auth-avatar rounded-circle">
+                                <img src="{{ $item['avatar'] }}" loading="lazy" class="auth-avatar rounded-circle">
                                 <div class="auth-nickname mt-2">{{ $item['nickname'] }}</div>
                                 <div class="text-secondary">{{ '@'.$item['fsid'] }}</div>
 

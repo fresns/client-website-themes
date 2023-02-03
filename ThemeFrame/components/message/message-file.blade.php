@@ -1,6 +1,6 @@
 {{-- Image --}}
 @if ($file['type'] == 1)
-    <img src="{{ $file['imageRatioUrl'] }}" data-zoom-src="{{ $file['imageBigUrl'] }}" class="img-fluid zoom-image" style="max-height:200px">
+    <img src="{{ $file['imageRatioUrl'] }}" loading="lazy" data-zoom-src="{{ $file['imageBigUrl'] }}" class="img-fluid zoom-image" style="max-height:200px">
 @endif
 
 {{-- Video --}}

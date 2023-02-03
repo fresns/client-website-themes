@@ -26,7 +26,7 @@
                         @foreach(fs_groups('categories') as $groupCategory)
                             <button class="nav-link group-categories" data-page-size="15" data-page="1" data-action="{{ route('fresns.api.sub.groups', ['gid' => $groupCategory['gid']]) }}" id="v-pills-{{ $groupCategory['gid'] }}-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ $groupCategory['gid'] }}" type="button" role="tab" aria-controls="v-pills-{{ $groupCategory['gid'] }}" aria-selected="false">
                                 @if ($groupCategory['cover'])
-                                    <img src="{{ $groupCategory['cover'] }}" height="20">
+                                    <img src="{{ $groupCategory['cover'] }}" loading="lazy" height="20">
                                 @endif
                                 {{ $groupCategory['gname'] }}
                             </button>

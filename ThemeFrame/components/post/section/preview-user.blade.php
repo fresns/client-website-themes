@@ -9,7 +9,7 @@
 @endif
 
 <section class="mx-3 mt-3 position-relative">
-    <img src="{{ $btnIconActive }}" height="20">
+    <img src="{{ $btnIconActive }}" loading="lazy" height="20">
     @if ($status)
         {{ fs_user('detail.nickname') }},
     @endif

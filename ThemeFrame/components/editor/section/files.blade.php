@@ -2,7 +2,7 @@
     @if ($files['images'] ?? null)
         @foreach($files['images'] as $image)
             <div class="position-relative">
-                <img src="{{ $image['imageSquareUrl'] }}" class="img-fluid">
+                <img src="{{ $image['imageSquareUrl'] }}" loading="lazy" class="img-fluid">
                 <div class="position-absolute top-0 end-0 editor-btn-delete"><button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0" title="{{ fs_lang('delete') }}" data-fid="{{ $image['fid'] }}" onclick="deleteFile(this)"><i class="bi bi-trash"></i></button></div>
             </div>
         @endforeach
@@ -14,9 +14,9 @@
         @foreach($files['videos'] as $video)
             <div class="position-relative">
                 @if ($video['videoGifUrl'])
-                    <img src="{{ $video['videoGifUrl'] }}" class="img-fluid">
+                    <img src="{{ $video['videoGifUrl'] }}" loading="lazy" class="img-fluid">
                 @elseif ($video['videoCoverUrl'])
-                    <img src="{{ $video['videoCoverUrl'] }}" class="img-fluid">
+                    <img src="{{ $video['videoCoverUrl'] }}" loading="lazy" class="img-fluid">
                 @else
                     <svg class="bd-placeholder-img rounded" xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMidYMid slice" focusable="false">
                         <title>Placeholder</title>

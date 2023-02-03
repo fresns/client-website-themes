@@ -1,8 +1,8 @@
 <a href="{{ fs_route(route('fresns.message.conversation', ['conversationId' => $conversation['id']])) }}" class="list-group-item list-group-item-action d-flex justify-content-between position-relative">
     @if ($conversation['userIsDeactivate'])
-        <img src="{{ fs_db_config('deactivate_avatar') }}" class="conversation-avatar rounded-circle">
+        <img src="{{ fs_db_config('deactivate_avatar') }}" loading="lazy" class="conversation-avatar rounded-circle">
     @else
-        <img src="{{ $conversation['user']['avatar'] }}" class="conversation-avatar rounded-circle">
+        <img src="{{ $conversation['user']['avatar'] }}" loading="lazy" class="conversation-avatar rounded-circle">
     @endif
 
     <div class="flex-fill ms-2">
@@ -15,9 +15,9 @@
 
                     @if($conversation['user']['verifiedStatus'])
                         @if ($conversation['user']['verifiedIcon'])
-                            <img src="{{ $conversation['user']['verifiedIcon'] }}" class="conversation-user-verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $conversation['user']['verifiedDesc'] }}">
+                            <img src="{{ $conversation['user']['verifiedIcon'] }}" loading="lazy" class="conversation-user-verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $conversation['user']['verifiedDesc'] }}">
                         @else
-                            <img src="/assets/themes/ThemeFrame/images/icon-verified.png" class="conversation-user-verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $conversation['user']['verifiedDesc'] }}">
+                            <img src="/assets/themes/ThemeFrame/images/icon-verified.png" loading="lazy" class="conversation-user-verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $conversation['user']['verifiedDesc'] }}">
                         @endif
                     @endif
 

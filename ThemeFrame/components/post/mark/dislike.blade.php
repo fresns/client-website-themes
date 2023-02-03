@@ -17,14 +17,14 @@
     <input type="hidden" name="fsid" value="{{ $pid }}"/>
     @if ($interaction['dislikeStatus'])
         <a class="btn btn-inter btn-active fs-mark" data-interaction-active="{{ $interaction['dislikeStatus'] }}" data-icon-active="{{ $btnIconActive }}" data-icon="{{ $btnIcon }}">
-            <img src="{{ $btnIconActive }}">
+            <img src="{{ $btnIconActive }}" loading="lazy">
             @if (fs_api_config('post_blocker_count'))
                 <span class="show-count">{{ $count }}</span>
             @endif
         </a>
     @else
         <a class="btn btn-inter fs-mark" data-icon-active="{{ $btnIconActive }}" data-icon="{{ $btnIcon }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $interaction['dislikeName'] }}">
-            <img src="{{ $btnIcon }}">
+            <img src="{{ $btnIcon }}" loading="lazy">
             @if (fs_api_config('post_blocker_count'))
                 <span class="show-count">{{ $count }}</span>
             @endif

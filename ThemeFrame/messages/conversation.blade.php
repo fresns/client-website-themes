@@ -16,11 +16,11 @@
                     {{-- User who conversation to me --}}
                     <div class="card-header">
                         @if ($conversation['userIsDeactivate'])
-                            <img src="{{ fs_db_config('deactivate_avatar') }}" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="rounded-circle conversation-avatar">
+                            <img src="{{ fs_db_config('deactivate_avatar') }}" loading="lazy" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="rounded-circle conversation-avatar">
                             {{ fs_lang('contentCreatorDeactivate') }}
                         @else
                             <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $conversation['user']['fsid']])) }}" target="_blank" class="text-decoration-none">
-                                <img src="{{ $conversation['user']['avatar'] }}" alt="{{ $conversation['user']['nickname'] }}" class="rounded-circle conversation-avatar">
+                                <img src="{{ $conversation['user']['avatar'] }}" loading="lazy" alt="{{ $conversation['user']['nickname'] }}" class="rounded-circle conversation-avatar">
                                 <span class="ms-2 fs-5">{{ $conversation['user']['nickname'] }}</span>
                                 <span class="ms-2 conversation-user-name text-secondary">{{ '@'.$conversation['user']['fsid'] }}</span>
                             </a>

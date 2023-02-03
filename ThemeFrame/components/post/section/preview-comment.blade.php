@@ -20,7 +20,7 @@
         @if ($topComment['files']['images'])
             <div class="d-flex align-content-start flex-wrap comment-image-{{ $topComment['fileCount']['images'] }}">
                 @foreach($topComment['files']['images'] as $image)
-                    <img src="{{ $image['imageSquareUrl'] }}" class="img-fluid">
+                    <img src="{{ $image['imageSquareUrl'] }}" loading="lazy" class="img-fluid">
                 @endforeach
             </div>
         @endif

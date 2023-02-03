@@ -85,7 +85,7 @@
                 <div class="d-flex mb-4 mb-lg-0">
                     @if (fs_user()->check())
                         {{-- Logged in --}}
-                        <a class="btn" href="{{ fs_route(route('fresns.account.index')) }}" role="button"><img src="{{ fs_user('detail.avatar') }}" class="nav-avatar rounded-circle"> {{ fs_user('detail.nickname') }}</a>
+                        <a class="btn" href="{{ fs_route(route('fresns.account.index')) }}" role="button"><img src="{{ fs_user('detail.avatar') }}" loading="lazy" class="nav-avatar rounded-circle"> {{ fs_user('detail.nickname') }}</a>
 
                         <button type="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" data-bs-toggle="modal" data-bs-target="#createModal"><i class="bi bi-plus-lg"></i></button>
 

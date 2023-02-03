@@ -7,7 +7,7 @@
     {{-- User Avatar --}}
     @if ($notification['actionUser'])
         <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $notification['actionUser']['fsid']])) }}">
-            <img src="{{ $notification['actionUser']['avatar'] }}" class="rounded-circle mx-3" style="width:3.2rem;height:3.2rem;">
+            <img src="{{ $notification['actionUser']['avatar'] }}" loading="lazy" class="rounded-circle mx-3" style="width:3.2rem;height:3.2rem;">
         </a>
     @endif
 
@@ -21,9 +21,9 @@
                     @if ($notification['actionUser']['verifiedStatus'])
                         <div class="user-verified">
                             @if ($notification['actionUser']['verifiedIcon'])
-                                <img src="{{ $notification['actionUser']['verifiedIcon'] }}" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $notification['actionUser']['verifiedDesc'] ?? '' }}">
+                                <img src="{{ $notification['actionUser']['verifiedIcon'] }}" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $notification['actionUser']['verifiedDesc'] ?? '' }}">
                             @else
-                                <img src="/assets/themes/ThemeFrame/images/icon-verified.png" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $notification['actionUser']['verifiedDesc'] ?? '' }}">
+                                <img src="/assets/themes/ThemeFrame/images/icon-verified.png" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $notification['actionUser']['verifiedDesc'] ?? '' }}">
                             @endif
                         </div>
                     @endif
@@ -108,7 +108,7 @@
                     <div class="content-group mt-2">
                         <a href="{{ fs_route(route('fresns.group.detail', ['gid' => $notification['actionInfo']['gid']])) }}" class="badge rounded-pill text-decoration-none">
                             @if ($notification['actionInfo']['cover'])
-                                <img src="{{ $notification['actionInfo']['cover'] }}" alt="$notification['actionInfo']['gname']" class="rounded">
+                                <img src="{{ $notification['actionInfo']['cover'] }}" loading="lazy" alt="$notification['actionInfo']['gname']" class="rounded">
                             @endif
                             {{ $notification['actionInfo']['gname'] }}
                         </a>
@@ -122,7 +122,7 @@
                 @case(4)
                     <section class="comment-post mt-2 position-relative">
                         <div class="d-flex">
-                            <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" class="rounded"></div>
+                            <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" loading="lazy" class="rounded"></div>
                             <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit(strip_tags($notification['actionInfo']['content']), 80) }}</div>
                         </div>
                         @if ($notification['actionInfo']['group'])
@@ -135,7 +135,7 @@
                 @case(5)
                     <section class="comment-post mt-2 position-relative">
                         <div class="d-flex">
-                            <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" class="rounded"></div>
+                            <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" loading="lazy" class="rounded"></div>
                             <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit(strip_tags($notification['actionInfo']['content']), 80) }}</div>
                         </div>
                         <a href="{{ fs_route(route('fresns.comment.detail', ['cid' => $notification['actionInfo']['cid']])) }}" class="text-decoration-none stretched-link"></a>
