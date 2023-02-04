@@ -13,7 +13,7 @@
         {{-- Content --}}
         <div class="text-break mt-2">
             <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $topComment['creator']['fsid']])) }}" class="fresns_link">{{ $topComment['creator']['nickname'] }}</a>:
-            <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $pid])) }}" class="text-decoration-none link-dark stretched-link">{{ $topComment['content'] }}</a>
+            <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $pid])).'#commentList' }}" class="text-decoration-none link-dark stretched-link">{{ $topComment['content'] }}</a>
         </div>
 
         {{-- Files Images --}}
@@ -67,7 +67,7 @@
             </div>
         @endforeach
 
-        <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $pid])) }}" class="text-decoration-none stretched-link mb-2">
+        <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $pid])).'#commentList' }}" class="text-decoration-none stretched-link mb-2">
             {{ fs_lang('modifierCount') }}
             {{ $commentCount }}
             {{ fs_lang('contentCommentCountDesc') }}
