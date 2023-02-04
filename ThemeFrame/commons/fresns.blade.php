@@ -142,6 +142,10 @@
         window.addEventListener('pageshow', function () {
             $("#loading").hide();
         });
+        window.addEventListener("visibilitychange", function() {
+            // android compatible
+            $("#loading").hide();
+        });
 
         // video play
         var videos = document.getElementsByTagName('video'); 
