@@ -130,7 +130,7 @@
         // loading
         $(document).on("click", "a", function(e) {
             var href = $(this).attr("href");
-            if (href && href !== "#") {
+            if (href && !href.startsWith("javascript:") && href !== "#") {
                 if ((href.indexOf(location.hostname) !== -1 || href[0] === "/") && $(this).attr("target") !== "_blank") {
                     $("#loading").show();
                 }
