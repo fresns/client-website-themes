@@ -14,7 +14,10 @@
                         <div class="shadow-sm">
                             <div class="d-grid">
                                 <button class="rounded-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center p-2" style="background-color: aliceblue;" type="button" data-bs-toggle="modal" data-bs-target="#post-box-fresns-group">
-                                    <span class="py-2 ms-1" id="post-box-group"><i class="bi bi-archive-fill me-2"></i><span class="selected-group">@if($group) {{ $group['gname'] }} @else {{ fs_db_config('group_name') }}: {{ fs_lang('editorNoChooseGroup') }} @endif</span></span>
+                                    <span class="py-2 ms-1">
+                                        <i class="bi bi-archive-fill me-2"></i>
+                                        <span id="post-box-group">@if($group) {{ $group['gname'] }} @else {{ fs_db_config('group_name') }}: {{ fs_lang('editorNoChooseGroup') }} @endif</span>
+                                    </span>
                                     <span class="py-2"><i class="bi bi-chevron-right"></i></span>
                                 </button>
                             </div>
@@ -154,7 +157,7 @@
         function postBoxSelectGroup(obj) {
             var gid = $(obj).data('gid');
             var gname = $(obj).text();
-            $('#createModal .editor-group .selected-group').text(gname);
+            $('#createModal #post-box-group').text(gname);
             $("#createModal input[name='postGid']").val(gid);
         }
 
@@ -219,7 +222,7 @@
             })
 
             $("#post-box-not-select-group").on('click', function (){
-                $('#createModal .editor-group .selected-group').text("{{ fs_lang('editorNoChooseGroup') }}");
+                $('#createModal #post-box-group').text("{{ fs_lang('editorNoChooseGroup') }}");
                 $("#createModal input[name='postGid']").val("");
             })
         })
