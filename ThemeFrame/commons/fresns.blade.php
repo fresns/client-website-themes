@@ -72,11 +72,9 @@
     @include('commons.footer')
 
     {{-- Loading --}}
-    <div id="loading" class="position-fixed top-0 start-0 bottom-0 end-0">
-        <div class="position-absolute top-50 start-50 translate-middle bg-secondary bg-opacity-75 rounded p-4" style="z-index:2048;">
-            <div class="spinner-border text-light" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
+    <div id="loading" class="position-fixed top-50 start-50 translate-middle bg-secondary bg-opacity-75 rounded p-4" style="z-index:2048;display:none;">
+        <div class="spinner-border text-light" role="status">
+            <span class="visually-hidden">Loading...</span>
         </div>
     </div>
 
