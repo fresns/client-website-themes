@@ -161,7 +161,7 @@
             }
         };
     </script>
-    <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v={{ $themeVersion }}" }}"></script>
+    <script src="/assets/plugins/{{ $engineUnikey }}/js/fresns-iframe.js?v={{ $themeVersion }}"></script>
     <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v={{ $themeVersion }}"></script>
     <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v={{ $themeVersion }}"></script>
     <script src="/assets/themes/ThemeFrame/js/prism.min.js?v={{ $themeVersion }}"></script>
