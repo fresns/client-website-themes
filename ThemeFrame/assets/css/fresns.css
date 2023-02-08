@@ -413,7 +413,8 @@ header .navbar {
 }
 
 /* File */
-.image-box, .document-box {
+.image-box,
+.document-box {
     z-index: 999;
 }
 
