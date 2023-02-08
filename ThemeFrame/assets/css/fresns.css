@@ -412,6 +412,11 @@ header .navbar {
     background-color: #dee2e6;
 }
 
+/* File */
+.image-box, .document-box {
+    z-index: 999;
+}
+
 /* File Image */
 .file-image-1 .image-box {
     max-width: 60%;
