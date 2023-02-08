@@ -722,12 +722,14 @@ header .navbar {
 /* file image */
 .editor-file-image .position-relative {
     float: left;
-    width: 31%;
+    width: auto;
+    max-width: 31%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-1 .position-relative {
-    width: 60%;
+    width: auto;
+    max-width: 60%;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-1 input {
@@ -735,56 +737,65 @@ header .navbar {
 }
 .editor-file-image-2 .position-relative {
     float: left;
-    width: 48%;
+    width: auto;
+    max-width: 48%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-3 .position-relative {
     float: left;
-    width: 31%;
+    width: auto;
+    max-width: 31%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-4 .position-relative {
     float: left;
-    width: 48%;
+    width: auto;
+    max-width: 48%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-5 .position-relative {
     float: left;
-    width: 31%;
+    width: auto;
+    max-width: 31%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-6 .position-relative {
     float: left;
-    width: 31%;
+    width: auto;
+    max-width: 31%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-7 .position-relative {
     float: left;
-    width: 31%;
+    width: auto;
+    max-width: 31%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-8 .position-relative {
     float: left;
-    width: 31%;
+    width: auto;
+    max-width: 31%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-9 .position-relative {
     float: left;
-    width: 31%;
+    width: auto;
+    max-width: 31%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 
 /* file video */
 .editor-file-video .position-relative {
-    width: 48%;
+    width: auto;
+    max-width: 48%;
     float: left;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
