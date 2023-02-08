@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.3.0 (2023-02-09)
+
+- Use wrapper parameters to display version numbers
+- Add page load status animation
+- Lazy loading of file resources
+
+
 ## 2.2.0 (2023-02-01)
 
 - Fix read notifications not being clickable
