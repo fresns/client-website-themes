@@ -13,7 +13,7 @@
         {{-- Content --}}
         <div class="text-break mt-2">
             <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $topComment['creator']['fsid']])) }}" class="fresns_link">{{ $topComment['creator']['nickname'] }}</a>:
-            <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $pid])).'#commentList' }}" class="text-decoration-none link-dark stretched-link">{{ $topComment['content'] }}</a>
+            <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $pid])).'#commentList' }}" class="text-decoration-none link-dark stretched-link">{!! Str::limit($topComment['content'], 140) !!}</a>
         </div>
 
         {{-- Files Images --}}
