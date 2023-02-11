@@ -1,6 +1,6 @@
 @if (session('success'))
     <div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:2048">
-        <div class="toast show text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast show text-bg-success" role="alert" aria-live="assertive" aria-atomic="true" data-error-code="{{ session('code') }}">
             <div class="d-flex">
                 <div class="toast-body">{{ session('success') }}</div>
                 <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -9,9 +9,9 @@
     </div>
 @elseif (session('failure'))
     <div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:2048">
-        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true" data-error-code="{{ session('code') }}">
             <div class="toast-header">
-                <img src="{{ fs_db_config('site_icon') }}" width="20px" height="20px" class="me-2" loading="lazy" alt="{{ fs_db_config('site_name') }}">
+                <img src="{{ fs_db_config('site_icon') }}" width="20px" height="20px" class="me-2" alt="{{ fs_db_config('site_name') }}">
                 <strong class="me-auto">{{ fs_db_config('site_name') }}</strong>
                 @if (session('code') !== 0)
                     <small>{{ session('code') }}</small>

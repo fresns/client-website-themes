@@ -14,6 +14,12 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 const setTimeoutToastHide = () => {
     $('.toast.show').each((k, v) => {
         setTimeout(function () {
+            let errorCode = $(v).data('errorCode');
+
+            if (errorCode == 36104 || errorCode == 38200) {
+                return;
+            }
+
             $(v).hide();
         }, 1500);
     });
@@ -99,9 +105,12 @@ window.tips = function (message, code = 200) {
 
     $('div.fresns-tips').prepend(html);
 
-    if (code == 0 || code == 200 || code == 400 || code == 401) {
-        setTimeoutToastHide();
+    // tip toast time
+    if (code == 36104 || code == 38200) {
+        return;
     }
+
+    setTimeoutToastHide();
 };
 
 // copy url
