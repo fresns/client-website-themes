@@ -4,7 +4,7 @@
 @endphp
 
 @if ($user['banner'])
-    <img src="{{ $user['banner'] }}" class="card-img-top">
+    <img src="{{ $user['banner'] }}" loading="lazy" class="card-img-top">
 @endif
 
 <section class="avatar">

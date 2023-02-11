@@ -54,7 +54,7 @@
                     data-title="{{ $plugin['name'] }}"
                     data-url="{{ $plugin['url'] }}">
                     @if ($plugin['icon'])
-                        <img src="{{ $plugin['icon'] }}" width="20" height="20" loading="lazy">
+                        <img src="{{ $plugin['icon'] }}" loading="lazy" width="20" height="20">
                     @endif
                     {{ $plugin['name'] }}
                 </a>

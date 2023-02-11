@@ -254,7 +254,7 @@
                                 @endif
                                 data-title="{{ $extend['name'] }}"
                                 data-url="{{ $extend['url'] }}">
-                                <img src="{{ $extend['icon'] }}" width="20" height="20">
+                                <img src="{{ $extend['icon'] }}" loading="lazy" width="20" height="20">
                                 {{ $extend['name'] }}
                             </a>
                         </li>
