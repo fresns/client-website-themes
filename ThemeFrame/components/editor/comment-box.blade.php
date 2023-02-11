@@ -69,8 +69,8 @@
                         @if(fs_api_config('comment_editor_anonymous'))
                             <div class="bd-highlight">
                                 <div class="form-check">
-                                    <input class="form-check-input" name="isAnonymous" type="checkbox" value="1" id="isAnonymous">
-                                    <label class="form-check-label" for="isAnonymous">{{ fs_lang('editorAnonymous') }}</label>
+                                    <input class="form-check-input" name="isAnonymous" type="checkbox" value="1" id="{{ $pid.$cid.'isAnonymous' }}">
+                                    <label class="form-check-label" for="{{ $pid.$cid.'isAnonymous' }}">{{ fs_lang('editorAnonymous') }}</label>
                                 </div>
                             </div>
                         @endif
@@ -79,6 +79,14 @@
             </form>
         </div>
     </div>
+
+    @push('script')
+        <script>
+            $("{{ '.fresns-comment-sticker'.$pid.$cid }}").on('click',function (){
+                $("{{ '#quick-publish-comment-content'.$pid.$cid }}").trigger('click').insertAtCaret("[" + $(this).attr('value') + "]");
+            });
+        </script>
+    @endpush
 @else
     <div class="card order-5 mt-3 fresns-reply @if(empty($show)) hide @else show @endif" @if(empty($show)) style="display: none" @endif>
         <div class="card-header d-flex">
@@ -107,11 +115,3 @@
         </div>
     </div>
 @endif
-
-@push('script')
-    <script>
-        $("{{ '.fresns-comment-sticker'.$pid.$cid }}").on('click',function (){
-            $("{{ '#quick-publish-comment-content'.$pid.$cid }}").trigger('click').insertAtCaret("[" + $(this).attr('value') + "]");
-        });
-    </script>
-@endpush
