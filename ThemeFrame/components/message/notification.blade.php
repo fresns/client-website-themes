@@ -9,6 +9,8 @@
         <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $notification['actionUser']['fsid']])) }}">
             <img src="{{ $notification['actionUser']['avatar'] }}" loading="lazy" class="rounded-circle mx-3" style="width:3.2rem;height:3.2rem;">
         </a>
+    @else
+        <img src="{{ fs_db_config('site_icon') }}" loading="lazy" class="mx-3" style="width:3.2rem;height:3.2rem;">
     @endif
 
     <div class="my-2 w-100">
@@ -31,35 +33,53 @@
                     <div class="user-name text-secondary">{{ '@'.$notification['actionUser']['fsid'] }}</div>
                 </a>
             </div>
+        @else
+            <div class="border-start border-3 border-secondary mb-2">
+                <p class="fw-semibold mb-0 ms-2">{{ fs_db_config('site_name') }}</p>
+            </div>
         @endif
 
         {{-- Notification Content --}}
         <section class="user-secondary d-flex flex-wrap">
             <p class="mb-0 w-100">
+                @switch($notification['type'])
+                    @case(1)
+                        <span class="badge bg-danger me-1">{{ fs_db_config('menu_notifications_systems') }}</span>
+                    @break
+
+                    @case(2)
+                        <span class="badge bg-danger me-1">{{ fs_db_config('menu_notifications_recommends') }}</span>
+                    @break
+
+                    @default
+
+                    @break
+                @endswitch
+
                 <span class="badge bg-primary">
                     @switch($notification['type'])
                         @case(3)
-                            {{ fs_lang('notificationLike') }}
+                            {{ fs_lang('notificationLike') }}:
                         @break
 
                         @case(4)
-                            {{ fs_lang('notificationDislike') }}
+                            {{ fs_lang('notificationDislike') }}:
                         @break
 
                         @case(5)
-                            {{ fs_lang('notificationFollow') }}
+                            {{ fs_lang('notificationFollow') }}:
                         @break
 
                         @case(6)
-                            {{ fs_lang('notificationBlock') }}
+                            {{ fs_lang('notificationBlock') }}:
                         @break
 
                         @case(7)
-                            {{ fs_lang('notificationMention') }}
+                            {{ fs_lang('notificationMention') }}:
                         @break
 
                         @case(8)
-                            {{ fs_lang('notificationComment') }}
+                            {{ fs_lang('notificationComment') }}:
                         @break
 
                         @default
@@ -68,20 +88,50 @@
                     @endswitch
 
                     @switch($notification['actionObject'])
+                        @case(1)
+                            {{ fs_db_config('user_name') }}
+                        @break
+
                         @case(2)
-                            : {{ fs_db_config('group_name') }}
+                            {{ fs_db_config('group_name') }}
                         @break
 
                         @case(3)
-                            : {{ fs_db_config('hashtag_name') }}
+                            {{ fs_db_config('hashtag_name') }}
                         @break
 
                         @case(4)
-                            : {{ fs_db_config('post_name') }}
+                            {{ fs_db_config('post_name') }}
                         @break
 
                         @case(5)
-                            : {{ fs_db_config('comment_name') }}
+                            {{ fs_db_config('comment_name') }}
+                        @break
+
+                        @default
+
+                        @break
+                    @endswitch
+
+                    @switch($notification['actionType'])
+                        @case(6)
+                            : {{ fs_lang('modify') }}
+                        @break
+
+                        @case(7)
+                            : {{ fs_lang('delete') }}
+                        @break
+
+                        @case(8)
+                            : {{ fs_lang('setting') }} ({{ fs_lang('contentSticky') }})
+                        @break
+
+                        @case(9)
+                            : {{ fs_lang('setting') }} ({{ fs_lang('contentDigest') }})
+                        @break
+
+                        @case(10)
+                            : {{ fs_lang('setting') }}
                         @break
 
                         @default
@@ -89,6 +139,7 @@
                         @break
                     @endswitch
                 </span>
+
                 <span class="badge bg-light text-dark fw-normal ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $notification['datetime'] }}">{{ $notification['datetimeFormat'] }}</span>
             </p>
 
