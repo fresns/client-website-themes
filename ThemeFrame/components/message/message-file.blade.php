@@ -5,13 +5,7 @@
 
 {{-- Video --}}
 @if ($file['type'] == 2)
-    <video controls preload="metadata" controls="true" controlslist="nodownload"
-        @if ($file['videoGifUrl'])
-            poster="{{ $file['videoGifUrl'] }}"
-        @elseif ($file['videoCoverUrl'])
-            poster="{{ $file['videoCoverUrl'] }}"
-        @endif
-    >
+    <video controls preload="metadata" controls="true" controlslist="nodownload" poster="{{ $video['videoPosterUrl'] }}">
         <source src="{{ $file['videoUrl'] }}" type="{{ $file['mime'] }}">
         <span class="alert alert-warning my-2" role="alert">Your browser does not support the video element.</span>
     </video>

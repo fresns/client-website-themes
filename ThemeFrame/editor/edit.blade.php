@@ -186,10 +186,8 @@
             }
             if (fileinfo.type === 2) {
                 var videoImage = ''
-                if (fileinfo.videoGifUrl) {
-                    videoImage = `<img src="${fileinfo.videoGifUrl}" class="img-fluid">`
-                } else if (fileinfo.videoCoverUrl) {
-                    videoImage = `<img src="${fileinfo.videoCoverUrl}" class="img-fluid">`
+                if (fileinfo.videoPosterUrl) {
+                    videoImage = `<img src="${fileinfo.videoPosterUrl}" class="img-fluid">`
                 } else {
                     videoImage = `<svg class="bd-placeholder-img rounded" xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>`
                 }

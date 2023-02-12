@@ -39,13 +39,7 @@
 {{-- Videos --}}
 @if ($files['videos'])
     @foreach($files['videos'] as $video)
-        <video class="mt-2" controls preload="metadata" controls="true" controlslist="nodownload"
-            @if ($video['videoGifUrl'])
-                poster="{{ $video['videoGifUrl'] }}"
-            @elseif ($video['videoCoverUrl'])
-                poster="{{ $video['videoCoverUrl'] }}"
-            @endif
-        >
+        <video class="mt-2" controls preload="metadata" controls="true" controlslist="nodownload" poster="{{ $video['videoPosterUrl'] }}">
             <source src="{{ $video['videoUrl'] }}" type="{{ $video['mime'] }}">
             <div class="alert alert-warning my-2" role="alert">Your browser does not support the video element.</div>
         </video>

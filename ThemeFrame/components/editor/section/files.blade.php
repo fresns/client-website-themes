@@ -13,10 +13,8 @@
     @if ($files['videos'] ?? null)
         @foreach($files['videos'] as $video)
             <div class="position-relative">
-                @if ($video['videoGifUrl'])
-                    <img src="{{ $video['videoGifUrl'] }}" loading="lazy" class="img-fluid">
-                @elseif ($video['videoCoverUrl'])
-                    <img src="{{ $video['videoCoverUrl'] }}" loading="lazy" class="img-fluid">
+                @if ($video['videoPosterUrl'])
+                    <img src="{{ $video['videoPosterUrl'] }}" loading="lazy" class="img-fluid">
                 @else
                     <svg class="bd-placeholder-img rounded" xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMidYMid slice" focusable="false">
                         <title>Placeholder</title>
