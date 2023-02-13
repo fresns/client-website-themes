@@ -921,6 +921,10 @@ header .navbar {
 }
 
 /* conversation */
+.conversation-list-avatar {
+    width: 4rem;
+    height: 4rem;
+}
 .conversation-avatar {
     width: 3rem;
     height: 3rem;

@@ -1,8 +1,8 @@
 <a href="{{ fs_route(route('fresns.message.conversation', ['conversationId' => $conversation['id']])) }}" class="list-group-item list-group-item-action d-flex justify-content-between position-relative">
     @if ($conversation['userIsDeactivate'])
-        <img src="{{ fs_db_config('deactivate_avatar') }}" loading="lazy" class="rounded-circle" width="4rem" height="4rem">
+        <img src="{{ fs_db_config('deactivate_avatar') }}" loading="lazy" class="conversation-list-avatar rounded-circle">
     @else
-        <img src="{{ $conversation['user']['avatar'] }}" loading="lazy" class="rounded-circle" width="4rem" height="4rem">
+        <img src="{{ $conversation['user']['avatar'] }}" loading="lazy" class="conversation-list-avatar rounded-circle">
     @endif
 
     <div class="flex-fill ms-2">
