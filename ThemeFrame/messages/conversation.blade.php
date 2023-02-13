@@ -29,11 +29,7 @@
 
                     {{-- Message List --}}
                     <div class="card-body">
-                        @php
-                            $newMessages = array_reverse($messages->items());
-                        @endphp
-
-                        @foreach($newMessages as $message)
+                        @foreach($messages as $message)
                             @component('components.message.message', compact('message'))@endcomponent
                         @endforeach
 

@@ -922,8 +922,8 @@ header .navbar {
 
 /* conversation */
 .conversation-avatar {
-    width: 4rem;
-    height: 4rem;
+    width: 3rem;
+    height: 3rem;
 }
 .conversation-user-verified {
     width: 1.2rem;
