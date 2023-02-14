@@ -4,7 +4,9 @@
 @endphp
 
 @if ($user['banner'])
-    <img src="{{ $user['banner'] }}" loading="lazy" class="card-img-top">
+    <div style="margin-left:-12px;margin-right:-12px;filter:blur(2px);">
+        <img src="{{ $user['banner'] }}" loading="lazy" class="w-100 rounded-top" style="max-height:200px;">
+    </div>
 @endif
 
 <section class="avatar">
