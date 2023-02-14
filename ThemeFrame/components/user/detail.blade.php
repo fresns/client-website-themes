@@ -34,7 +34,12 @@
         @endif
     </div>
     <div class="mb-2 text-secondary">{{ '@'.$user['fsid'] }}</div>
-    <p class="fs-7 text-secondary px-4">{!! $user['bioHtml'] !!}</p>
+
+    @if ($user['status'])
+        <p class="fs-7 text-secondary px-4">{!! $user['bioHtml'] !!}</p>
+    @else
+        <div class="alert alert-warning" role="alert"><i class="bi bi-exclamation-triangle-fill"></i> {{ fs_code_message(35202) }}</div>
+    @endif
 
     {{-- User Attachment Icons --}}
     @if ($user['operations']['diversifyImages'])
