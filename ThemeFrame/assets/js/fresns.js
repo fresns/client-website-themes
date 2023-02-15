@@ -235,7 +235,7 @@ function atwho() {
         .atwho({
             at: '#',
             displayTpl: '<li> ${name} </li>',
-            insertTpl: window.hashtagShow == 1 ? '${atwho-at}${name}' : '${atwho-at}${name}${atwho-at}',
+            insertTpl: window.hashtagFormat == 1 ? '${atwho-at}${name}' : '${atwho-at}${name}${atwho-at}',
             callbacks: {
                 remoteFilter: function (query, callback) {
                     if (query) {

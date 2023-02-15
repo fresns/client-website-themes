@@ -123,7 +123,7 @@
         window.siteName = "{{ fs_db_config('site_name') }}";
         window.siteIcon = "{{ fs_db_config('site_icon') }}";
         window.langTag = "{{ current_lang_tag() }}";
-        window.hashtagShow = {{ fs_api_config('hashtag_show') }};
+        window.hashtagFormat = {{ fs_api_config('hashtag_format') }};
 
         // loading
         $(document).on("click", "a", function(e) {
