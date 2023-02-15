@@ -1,4 +1,90 @@
-@if (! $creator['deactivate'] && ! $isAnonymous)
+@if (! $creator['status'])
+    {{-- Deactivate Author --}}
+    <div class="d-flex">
+        <div class="flex-shrink-0">
+            <img src="{{ fs_db_config('deactivate_avatar') }}" loading="lazy" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="user-avatar rounded-circle">
+        </div>
+        <div class="flex-grow-1">
+            <div class="user-primary d-lg-flex">
+                <div class="user-info d-flex text-nowrap overflow-hidden">
+                    <div class="text-muted">{{ fs_lang('contentCreatorDeactivate') }}</div>
+                </div>
+            </div>
+            <div class="user-secondary d-flex flex-wrap mb-3">
+                {{-- Post Created Time --}}
+                <time class="text-secondary" datetime="{{ $createTime }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $createTime }}">{{ $createTimeFormat }}</time>
+
+                {{-- Post Edit Time --}}
+                @if ($editTime)
+                    <div class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $editTime }}">({{ fs_lang('contentEditedOn') }} {{ $editTimeFormat }})</div>
+                @endif
+
+                {{-- IP Location --}}
+                @if (fs_db_config('account_ip_location_status') && current_lang_tag() == 'zh-Hans')
+                    <span class="text-secondary ms-3">
+                        <i class="bi bi-geo"></i>
+                        @if ($ipLocation)
+                            {{ fs_lang('ipLocation').$ipLocation }}
+                        @else
+                            {{ fs_lang('errorIp') }}
+                        @endif
+                    </span>
+                @endif
+
+                {{-- Post Location --}}
+                @if ($location['isLbs'])
+                    <a href="{{ fs_route(route('fresns.post.location', [
+                        'pid' => $pid,
+                        'type' => 'posts',
+                    ])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
+                @endif
+            </div>
+        </div>
+    </div>
+@elseif ($isAnonymous)
+    {{-- Anonymous Author --}}
+    <div class="d-flex">
+        <div class="flex-shrink-0">
+            <img src="{{ $creator['avatar'] }}" loading="lazy" alt="{{ fs_lang('contentCreatorAnonymous') }}" class="user-avatar rounded-circle">
+        </div>
+        <div class="flex-grow-1">
+            <div class="user-primary d-lg-flex">
+                <div class="user-info d-flex text-nowrap overflow-hidden">
+                    <div class="text-muted">{{ fs_lang('contentCreatorAnonymous') }}</div>
+                </div>
+            </div>
+            <div class="user-secondary d-flex flex-wrap mb-3">
+                {{-- Post Created Time --}}
+                <time class="text-secondary" datetime="{{ $createTime }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $createTime }}">{{ $createTimeFormat }}</time>
+
+                {{-- Post Edit Time --}}
+                @if ($editTime)
+                    <div class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $editTime }}">({{ fs_lang('contentEditedOn') }} {{ $editTimeFormat }})</div>
+                @endif
+
+                {{-- IP Location --}}
+                @if (fs_db_config('account_ip_location_status') && current_lang_tag() == 'zh-Hans')
+                    <span class="text-secondary ms-3">
+                        <i class="bi bi-geo"></i>
+                        @if ($ipLocation)
+                            {{ fs_lang('ipLocation').$ipLocation }}
+                        @else
+                            {{ fs_lang('errorIp') }}
+                        @endif
+                    </span>
+                @endif
+
+                {{-- Post Location --}}
+                @if ($location['isLbs'])
+                    <a href="{{ fs_route(route('fresns.post.location', [
+                        'pid' => $pid,
+                        'type' => 'posts',
+                    ])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
+                @endif
+            </div>
+        </div>
+    </div>
+@else
     {{-- Normal Author --}}
     <div class="d-flex">
         <div class="flex-shrink-0">
@@ -43,92 +129,6 @@
                         @endforeach
                     </div>
                 @endif
-            </div>
-            <div class="user-secondary d-flex flex-wrap mb-3">
-                {{-- Post Created Time --}}
-                <time class="text-secondary" datetime="{{ $createTime }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $createTime }}">{{ $createTimeFormat }}</time>
-
-                {{-- Post Edit Time --}}
-                @if ($editTime)
-                    <div class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $editTime }}">({{ fs_lang('contentEditedOn') }} {{ $editTimeFormat }})</div>
-                @endif
-
-                {{-- IP Location --}}
-                @if (fs_db_config('account_ip_location_status') && current_lang_tag() == 'zh-Hans')
-                    <span class="text-secondary ms-3">
-                        <i class="bi bi-geo"></i>
-                        @if ($ipLocation)
-                            {{ fs_lang('ipLocation').$ipLocation }}
-                        @else
-                            {{ fs_lang('errorIp') }}
-                        @endif
-                    </span>
-                @endif
-
-                {{-- Post Location --}}
-                @if ($location['isLbs'])
-                    <a href="{{ fs_route(route('fresns.post.location', [
-                        'pid' => $pid,
-                        'type' => 'posts',
-                    ])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
-                @endif
-            </div>
-        </div>
-    </div>
-@elseif (! $creator['deactivate'] && $isAnonymous)
-    {{-- Anonymous Author --}}
-    <div class="d-flex">
-        <div class="flex-shrink-0">
-            <img src="{{ $creator['avatar'] }}" loading="lazy" alt="{{ fs_lang('contentCreatorAnonymous') }}" class="user-avatar rounded-circle">
-        </div>
-        <div class="flex-grow-1">
-            <div class="user-primary d-lg-flex">
-                <div class="user-info d-flex text-nowrap overflow-hidden">
-                    <div class="text-muted">{{ fs_lang('contentCreatorAnonymous') }}</div>
-                </div>
-            </div>
-            <div class="user-secondary d-flex flex-wrap mb-3">
-                {{-- Post Created Time --}}
-                <time class="text-secondary" datetime="{{ $createTime }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $createTime }}">{{ $createTimeFormat }}</time>
-
-                {{-- Post Edit Time --}}
-                @if ($editTime)
-                    <div class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $editTime }}">({{ fs_lang('contentEditedOn') }} {{ $editTimeFormat }})</div>
-                @endif
-
-                {{-- IP Location --}}
-                @if (fs_db_config('account_ip_location_status') && current_lang_tag() == 'zh-Hans')
-                    <span class="text-secondary ms-3">
-                        <i class="bi bi-geo"></i>
-                        @if ($ipLocation)
-                            {{ fs_lang('ipLocation').$ipLocation }}
-                        @else
-                            {{ fs_lang('errorIp') }}
-                        @endif
-                    </span>
-                @endif
-
-                {{-- Post Location --}}
-                @if ($location['isLbs'])
-                    <a href="{{ fs_route(route('fresns.post.location', [
-                        'pid' => $pid,
-                        'type' => 'posts',
-                    ])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
-                @endif
-            </div>
-        </div>
-    </div>
-@elseif ($creator['deactivate'])
-    {{-- Deactivate Author --}}
-    <div class="d-flex">
-        <div class="flex-shrink-0">
-            <img src="{{ fs_db_config('deactivate_avatar') }}" loading="lazy" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="user-avatar rounded-circle">
-        </div>
-        <div class="flex-grow-1">
-            <div class="user-primary d-lg-flex">
-                <div class="user-info d-flex text-nowrap overflow-hidden">
-                    <div class="text-muted">{{ fs_lang('contentCreatorDeactivate') }}</div>
-                </div>
             </div>
             <div class="user-secondary d-flex flex-wrap mb-3">
                 {{-- Post Created Time --}}

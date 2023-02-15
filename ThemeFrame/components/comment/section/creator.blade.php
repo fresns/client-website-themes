@@ -1,6 +1,12 @@
 <div class="d-flex">
     <div class="flex-shrink-0">
-        @if (! $creator['deactivate'] && ! $isAnonymous)
+        @if (! $creator['status'])
+            {{-- Deactivate Author --}}
+            <img src="{{ fs_api_config('deactivate_avatar') }}" loading="lazy" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="user-avatar rounded-circle">
+        @elseif ($isAnonymous)
+            {{-- Anonymous Author --}}
+            <img src="{{ $creator['avatar'] }}" loading="lazy" alt="{{ fs_lang('contentCreatorAnonymous') }}" class="user-avatar rounded-circle">
+        @else
             {{-- Normal Author --}}
             <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $creator['fsid']])) }}">
                 @if ($creator['decorate'])
@@ -8,17 +14,22 @@
                 @endif
                 <img src="{{ $creator['avatar'] }}" loading="lazy" alt="{{ $creator['username'] }}" class="user-avatar rounded-circle">
             </a>
-        @elseif (! $creator['deactivate'] && $isAnonymous)
-            {{-- Anonymous Author --}}
-            <img src="{{ $creator['avatar'] }}" loading="lazy" alt="{{ fs_lang('contentCreatorAnonymous') }}" class="user-avatar rounded-circle">
-        @elseif ($creator['deactivate'])
-            {{-- Deactivate Author --}}
-            <img src="{{ fs_api_config('deactivate_avatar') }}" loading="lazy" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="user-avatar rounded-circle">
         @endif
     </div>
+
     <div class="flex-grow-1">
         <div class="user-primary d-lg-flex">
-            @if (! $creator['deactivate'] && ! $isAnonymous)
+            @if (! $creator['status'])
+                {{-- Deactivate Author --}}
+                <div class="user-info d-flex text-nowrap overflow-hidden">
+                    <div class="text-muted">{{ fs_lang('contentCreatorDeactivate') }}</div>
+                </div>
+            @elseif ($isAnonymous)
+                {{-- Anonymous Author --}}
+                <div class="user-info d-flex text-nowrap overflow-hidden">
+                    <div class="text-muted">{{ fs_lang('contentCreatorAnonymous') }}</div>
+                </div>
+            @else
                 {{-- Normal Author --}}
                 <div class="user-info d-flex text-nowrap overflow-hidden">
                     <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $creator['fsid']])) }}" class="user-link d-flex">
@@ -61,16 +72,6 @@
                         @endforeach
                     </div>
                 @endif
-            @elseif (! $creator['deactivate'] && $isAnonymous)
-                {{-- Anonymous Author --}}
-                <div class="user-info d-flex text-nowrap overflow-hidden">
-                    <div class="text-muted">{{ fs_lang('contentCreatorAnonymous') }}</div>
-                </div>
-            @elseif ($creator['deactivate'])
-                {{-- Deactivate Author --}}
-                <div class="user-info d-flex text-nowrap overflow-hidden">
-                    <div class="text-muted">{{ fs_lang('contentCreatorDeactivate') }}</div>
-                </div>
             @endif
         </div>
         <div class="user-secondary d-flex flex-wrap mb-3">
@@ -86,12 +87,13 @@
             @if ($replyToUser)
                 <div class="text-success ms-2">
                     {{ fs_db_config('publish_comment_name') }}
-                    @if (! $replyToUser['deactivate'] && $replyToUser['fsid'])
-                        <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $replyToUser['fsid']])) }}">{{ '@'.$replyToUser['fsid'] }}</a>
-                    @elseif (! $replyToUser['deactivate'] && empty($replyToUser['fsid']))
-                        <span class="text-muted">{{ fs_lang('contentCreatorAnonymous') }}</span>
-                    @elseif ($replyToUser['deactivate'])
+
+                    @if (! $replyToUser['status'])
                         <span class="text-muted">{{ fs_lang('contentCreatorDeactivate') }}</span>
+                    @elseif (empty($replyToUser['fsid']))
+                        <span class="text-muted">{{ fs_lang('contentCreatorAnonymous') }}</span>
+                    @else
+                        <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $replyToUser['fsid']])) }}">{{ '@'.$replyToUser['fsid'] }}</a>
                     @endif
                 </div>
             @endif
