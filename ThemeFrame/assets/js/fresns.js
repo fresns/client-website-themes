@@ -212,8 +212,8 @@ function showReply(fresnsReply) {
 
 // at and hashtag
 function atwho() {
-    $('.fresns-content')
-        .atwho({
+    if (window.mentionStatus) {
+        $('.fresns-content').atwho({
             at: '@',
             displayTpl:
                 '<li><img src="${image}" height="20" width="20"/> ${nickname} <small class="text-muted">@${name}</small></li>',
@@ -231,8 +231,11 @@ function atwho() {
                     }
                 },
             },
-        })
-        .atwho({
+        });
+    }
+
+    if (window.hashtagStatus) {
+        $('.fresns-content').atwho({
             at: '#',
             displayTpl: '<li> ${name} </li>',
             insertTpl: window.hashtagFormat == 1 ? '${atwho-at}${name}' : '${atwho-at}${name}${atwho-at}',
@@ -251,6 +254,7 @@ function atwho() {
                 },
             },
         });
+    }
 }
 
 // progress
