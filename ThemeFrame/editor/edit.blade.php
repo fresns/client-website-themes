@@ -142,8 +142,8 @@
                 </div>
                 <div class="modal-body">
                     <form class="mt-2" method="post" id="upload-form" multiple="true" enctype="multipart/form-data">
-                        <input type="hidden" name="usageType" @if($type === 'post') value="7" @elseif($type === "comment") value="8" @endif>
-                        <input type="hidden" name="tableName" @if($type === 'post') value="post_logs" @elseif($type === "comment") value="comment_logs" @endif>
+                        <input type="hidden" name="usageType" @if ($type === 'post') value="7" @elseif($type === "comment") value="8" @endif>
+                        <input type="hidden" name="tableName" @if ($type === 'post') value="post_logs" @elseif($type === "comment") value="comment_logs" @endif>
                         <input type="hidden" name="tableColumn" value="id">
                         <input type="hidden" name="tableId" value="{{ $draft['detail']['id'] ?? '' }}">
                         <input type="hidden" name="uploadMode" value="file">
@@ -186,10 +186,8 @@
             }
             if (fileinfo.type === 2) {
                 var videoImage = ''
-                if (fileinfo.videoGifUrl) {
-                    videoImage = `<img src="${fileinfo.videoGifUrl}" class="img-fluid">`
-                } else if (fileinfo.videoCoverUrl) {
-                    videoImage = `<img src="${fileinfo.videoCoverUrl}" class="img-fluid">`
+                if (fileinfo.videoPosterUrl) {
+                    videoImage = `<img src="${fileinfo.videoPosterUrl}" class="img-fluid">`
                 } else {
                     videoImage = `<svg class="bd-placeholder-img rounded" xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>`
                 }

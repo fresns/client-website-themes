@@ -1,10 +1,10 @@
+@php
+    $cid = $cid ?? '';
+@endphp
+
 {{-- Reply Box --}}
 @if (fs_user()->check())
-    @php
-        $cid = $cid ?? '';
-    @endphp
-
-    <div class="card order-5 mt-3 fresns-reply @if(empty($show)) hide @else show @endif" @if(empty($show)) style="display: none" @endif>
+    <div class="card order-5 mt-3 fresns-reply @if (empty($show)) hide @else show @endif" @if (empty($show)) style="display: none" @endif>
         <div class="card-header d-flex">
             <div class="flex-grow-1">{{ fs_db_config('publish_comment_name') }} {{ $nickname }}</div>
             <button type="button" class="btn-close"></button>
@@ -16,7 +16,7 @@
                     <input type="hidden" name="commentPid" value="{{ $pid }}">
                     <input type="hidden" name="commentCid" value="{{ $cid }}">
 
-                    <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="{{ 'quick-publish-comment-content'.$pid.$cid }}" rows="3" placeholder="{{ fs_lang('editorContent') }}"></textarea>
+                    <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="{{ 'quick-publish-comment-content'.$pid.$cid }}" rows="5" placeholder="{{ fs_lang('editorContent') }}"></textarea>
 
                     {{-- Stickers and Upload file --}}
                     <div class="d-flex mt-2">
@@ -39,7 +39,7 @@
                                             <div class="tab-pane fade @if ($loop->first) show active @endif" id="{{ $pid.$cid }}sticker-{{ $loop->index }}" role="tabpanel" aria-labelledby="{{ $pid.$cid }}sticker-{{ $loop->index }}-tab">
                                                 @foreach($sticker['stickers'] ?? [] as $value)
                                                     <a class="{{ 'fresns-comment-sticker'.$pid.$cid }} btn btn-outline-secondary border-0" href="javascript:;" value="{{ $value['code'] }}" title="{{ $value['code'] }}" >
-                                                        <img src="{{ $value['image'] }}" alt="{{ $value['code'] }}" title="{{ $value['code'] }}">
+                                                        <img src="{{ $value['image'] }}" loading="lazy" alt="{{ $value['code'] }}" title="{{ $value['code'] }}">
                                                     </a>
                                                 @endforeach
                                             </div>
@@ -50,7 +50,7 @@
                             </div>
                         @endif
 
-                        @if(fs_api_config('comment_editor_image'))
+                        @if (fs_api_config('comment_editor_image'))
                             <div class="input-group">
                                 <label class="input-group-text" for="file">{{ fs_lang('editorImages') }}</label>
                                 <input type="file" class="form-control" accept="{{ fs_user_panel('fileAccept.images') }}" name="file" id="file">
@@ -66,11 +66,11 @@
                         </div>
 
                         {{-- anonymous checkbox --}}
-                        @if(fs_api_config('comment_editor_anonymous'))
+                        @if (fs_api_config('comment_editor_anonymous'))
                             <div class="bd-highlight">
                                 <div class="form-check">
-                                    <input class="form-check-input" name="isAnonymous" type="checkbox" value="1" id="isAnonymous">
-                                    <label class="form-check-label" for="isAnonymous">{{ fs_lang('editorAnonymous') }}</label>
+                                    <input class="form-check-input" name="isAnonymous" type="checkbox" value="1" id="{{ $pid.$cid.'isAnonymous' }}">
+                                    <label class="form-check-label" for="{{ $pid.$cid.'isAnonymous' }}">{{ fs_lang('editorAnonymous') }}</label>
                                 </div>
                             </div>
                         @endif
@@ -79,8 +79,16 @@
             </form>
         </div>
     </div>
+
+    @push('script')
+        <script>
+            $("{{ '.fresns-comment-sticker'.$pid.$cid }}").on('click',function (){
+                $("{{ '#quick-publish-comment-content'.$pid.$cid }}").trigger('click').insertAtCaret("[" + $(this).attr('value') + "]");
+            });
+        </script>
+    @endpush
 @else
-    <div class="card order-5 mt-3 fresns-reply @if(empty($show)) hide @else show @endif" @if(empty($show)) style="display: none" @endif>
+    <div class="card order-5 mt-3 fresns-reply @if (empty($show)) hide @else show @endif" @if (empty($show)) style="display: none" @endif>
         <div class="card-header d-flex">
             <div class="flex-grow-1">{{ fs_db_config('publish_comment_name') }} {{ $nickname }}</div>
             <button type="button" class="btn-close"></button>
@@ -107,11 +115,3 @@
         </div>
     </div>
 @endif
-
-@push('script')
-    <script>
-        $("{{ '.fresns-comment-sticker'.$pid.$cid }}").on('click',function (){
-            $("{{ '#quick-publish-comment-content'.$pid.$cid }}").trigger('click').insertAtCaret("[" + $(this).attr('value') + "]");
-        });
-    </script>
-@endpush

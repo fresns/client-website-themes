@@ -1,17 +1,11 @@
 {{-- Image --}}
 @if ($file['type'] == 1)
-    <img src="{{ $file['imageRatioUrl'] }}" data-zoom-src="{{ $file['imageBigUrl'] }}" class="img-fluid zoom-image" style="max-height:200px">
+    <img src="{{ $file['imageRatioUrl'] }}" loading="lazy" data-zoom-src="{{ $file['imageBigUrl'] }}" class="img-fluid zoom-image" style="max-height:200px">
 @endif
 
 {{-- Video --}}
 @if ($file['type'] == 2)
-    <video controls preload="metadata" controls="true" controlslist="nodownload"
-        @if ($file['videoGifUrl'])
-            poster="{{ $file['videoGifUrl'] }}"
-        @elseif ($file['videoCoverUrl'])
-            poster="{{ $file['videoCoverUrl'] }}"
-        @endif
-    >
+    <video controls preload="metadata" controls="true" controlslist="nodownload" poster="{{ $file['videoPosterUrl'] }}">
         <source src="{{ $file['videoUrl'] }}" type="{{ $file['mime'] }}">
         <span class="alert alert-warning my-2" role="alert">Your browser does not support the video element.</span>
     </video>

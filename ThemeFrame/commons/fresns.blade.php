@@ -5,18 +5,22 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="Fresns" />
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>@yield('title') - {{ fs_db_config('site_name') }}</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="keywords" content="@yield('keywords')" />
     <meta name="description" content="@yield('description')" />
-    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="{{ fs_db_config('site_name') }}">
+    <link rel="apple-touch-icon-precomposed" href="{{ fs_db_config('site_icon') }}">
+    <link rel="icon" href="{{ fs_db_config('site_icon') }}">
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-icons.css">
     <link rel="stylesheet" href="/static/css/select2.min.css">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v=478e8a54af7fd56d">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v=478e8a54af7fd56d">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v=478e8a54af7fd56d">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v={{ $themeVersion }}">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v={{ $themeVersion }}">
+    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v={{ $themeVersion }}">
     @stack('style')
     @if (fs_db_config('website_stat_position') == 'head')
         {!! fs_db_config('website_stat_code') !!}
@@ -47,7 +51,7 @@
     <div class="modal fade image-zoom" id="imageZoom" tabindex="-1" aria-labelledby="imageZoomLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="mx-auto text-center">
-                <img class="img-fluid">
+                <img class="img-fluid" loading="lazy">
             </div>
         </div>
     </div>
@@ -66,6 +70,15 @@
 
     {{-- Footer --}}
     @include('commons.footer')
+
+    {{-- Loading --}}
+    @if (fs_db_config('fs_theme_loading'))
+        <div id="loading" class="position-fixed top-50 start-50 translate-middle bg-secondary bg-opacity-75 rounded p-4" style="z-index:2048;display:none;">
+            <div class="spinner-border text-light" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    @endif
 
     {{-- Switching Languages Modal --}}
     @if (fs_api_config('language_status'))
@@ -110,8 +123,31 @@
     <script src="/static/js/iframeResizer.min.js"></script>
     <script>
         window.siteName = "{{ fs_db_config('site_name') }}";
+        window.siteIcon = "{{ fs_db_config('site_icon') }}";
         window.langTag = "{{ current_lang_tag() }}";
-        window.hashtagShow = {{ fs_api_config('hashtag_show') }};
+        window.mentionStatus = {{ fs_api_config('mention_status') ? 1 : 0 }};
+        window.hashtagStatus = {{ fs_api_config('hashtag_status') ? 1 : 0 }};
+        window.hashtagFormat = {{ fs_api_config('hashtag_format') }};
+
+        // loading
+        $(document).on("click", "a", function(e) {
+            var href = $(this).attr("href");
+            if (href && !href.startsWith("javascript:") && href !== "#") {
+                if ((href.indexOf(location.hostname) !== -1 || href[0] === "/") && $(this).attr("target") !== "_blank") {
+                    $("#loading").show();
+                }
+            }
+        });
+        $(window).on("load", function() {
+            $("#loading").hide();
+        });
+        window.addEventListener('pageshow', function () {
+            $("#loading").hide();
+        });
+        window.addEventListener("visibilitychange", function() {
+            // android compatible
+            $("#loading").hide();
+        });
 
         // video play
         var videos = document.getElementsByTagName('video'); 
@@ -129,12 +165,12 @@
             }
         };
     </script>
-    <script src="{{ "/assets/plugins/{$engineUnikey}/js/fresns-iframe.js?v=478e8a54af7fd56d" }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v=478e8a54af7fd56d"></script>
-    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v=478e8a54af7fd56d"></script>
-    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v=478e8a54af7fd56d"></script>
-    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v=478e8a54af7fd56d"></script>
-    <script src="/assets/themes/ThemeFrame/js/fresns.js?v=478e8a54af7fd56d"></script>
+    <script src="/assets/plugins/{{ $engineUnikey }}/js/fresns-iframe.js?v={{ $engineVersion }}"></script>
+    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/ThemeFrame/js/fresns.js?v={{ $themeVersion }}"></script>
     @stack('script')
 </body>
 

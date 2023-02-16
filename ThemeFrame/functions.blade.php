@@ -16,30 +16,17 @@
                     @csrf
                     @method('put')
 
-                    {{-- Whether to support email verification code --}}
+                    {{-- Loading dynamic effects --}}
                     <div class="row mb-4">
-                        <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['emailConfig'] }}</label>
-                        <div class="col-lg-6">
-                            <div class="input-group mb-3">
-                                <select class="form-select" name="fs_theme_is_email">
-                                    <option selected disabled>{{ $lang['option_tip'] }}</option>
-                                    <option value="true" @if($themeParams['fs_theme_is_email']['value'] ?? null) selected @endif>{{ $lang['option_support'] }}</option>
-                                    <option value="false" @if(! $themeParams['fs_theme_is_email']['value'] ?? null) selected @endif>{{ $lang['option_no_support'] }}</option>
-                                </select>
+                        <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['loadingConfig'] }}</label>
+                        <div class="col-lg-6 mt-2">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="fs_theme_loading" id="loading_true" value="true" {{ ($params['fs_theme_loading']['value'] ?? false) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="loading_true">{{ __('FsLang::panel.option_activate') }}</label>
                             </div>
-                        </div>
-                    </div>
-
-                    {{-- Whether to support SMS verification code --}}
-                    <div class="row mb-4">
-                        <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['smsConfig'] }}</label>
-                        <div class="col-lg-6">
-                            <div class="input-group mb-3">
-                                <select class="form-select" name="fs_theme_is_sms">
-                                    <option selected disabled>{{ $lang['option_tip'] }}</option>
-                                    <option value="true" @if($themeParams['fs_theme_is_sms']['value'] ?? null) selected @endif>{{ $lang['option_support'] }}</option>
-                                    <option value="false" @if(! $themeParams['fs_theme_is_sms']['value'] ?? null) selected @endif>{{ $lang['option_no_support'] }}</option>
-                                </select>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="fs_theme_loading" id="loading_false" value="false" {{ ! ($params['fs_theme_loading']['value'] ?? false) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="loading_false">{{ __('FsLang::panel.option_deactivate') }}</label>
                             </div>
                         </div>
                     </div>

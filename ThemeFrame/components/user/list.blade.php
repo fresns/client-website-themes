@@ -3,9 +3,9 @@
     <section class="flex-shrink-0">
         <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $user['fsid']])) }}">
             @if ($user['decorate'])
-                <img src="{{ $user['decorate'] }}" alt="Avatar Decorate" class="user-decorate">
+                <img src="{{ $user['decorate'] }}" loading="lazy" alt="Avatar Decorate" class="user-decorate">
             @endif
-            <img src="{{ $user['avatar'] }}" alt="{{ $user['nickname'] }}" class="user-avatar rounded-circle">
+            <img src="{{ $user['avatar'] }}" loading="lazy" alt="{{ $user['nickname'] }}" class="user-avatar rounded-circle">
         </a>
     </section>
     <div class="flex-grow-1">
@@ -17,9 +17,9 @@
                     @if ($user['verifiedStatus'])
                         <div class="user-verified">
                             @if ($user['verifiedIcon'])
-                                <img src="{{ $user['verifiedIcon'] }}" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['verifiedDesc'] }}">
+                                <img src="{{ $user['verifiedIcon'] }}" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['verifiedDesc'] }}">
                             @else
-                                <img src="/assets/themes/ThemeFrame/images/icon-verified.png" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['verifiedDesc'] }}">
+                                <img src="/assets/themes/ThemeFrame/images/icon-verified.png" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['verifiedDesc'] }}">
                             @endif
                         </div>
                     @endif
@@ -27,7 +27,7 @@
                 </a>
                 <div class="user-role d-flex">
                     @if ($user['roleIconDisplay'])
-                        <div class="user-role-icon"><img src="{{ $user['roleIcon'] }}" alt="{{ $user['roleName'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['roleName'] }}"></div>
+                        <div class="user-role-icon"><img src="{{ $user['roleIcon'] }}" loading="lazy" alt="{{ $user['roleName'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['roleName'] }}"></div>
                     @endif
                     @if ($user['roleNameDisplay'])
                         <div class="user-role-name"><span class="badge rounded-pill">{{ $user['roleName'] }}</span></div>
@@ -39,7 +39,7 @@
             @if ($user['operations']['diversifyImages'])
                 <div class="user-icon d-flex flex-wrap flex-lg-nowrap overflow-hidden my-2 my-lg-0">
                     @foreach($user['operations']['diversifyImages'] as $icon)
-                        <img src="{{ $icon['imageUrl'] }}" alt="{{ $icon['name'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $icon['name'] }}">
+                        <img src="{{ $icon['imageUrl'] }}" loading="lazy" alt="{{ $icon['name'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $icon['name'] }}">
                     @endforeach
                 </div>
             @endif

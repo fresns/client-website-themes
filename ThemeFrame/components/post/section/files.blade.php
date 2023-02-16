@@ -6,7 +6,7 @@
             @if (Route::is('fresns.post.detail'))
                 {{-- Detail page leaflet display method --}}
                 <div class="position-relative image-box" style="width:auto;">
-                    <img src="{{ $image['imageRatioUrl'] }}" data-zoom-src="{{ $image['imageBigUrl'] }}" alt="{{ $image['name'] }}" class="img-fluid zoom-image">
+                    <img src="{{ $image['imageRatioUrl'] }}" data-zoom-src="{{ $image['imageBigUrl'] }}" loading="lazy" alt="{{ $image['name'] }}" class="img-fluid zoom-image">
                     @if ($image['imageLong'])
                         <span class="position-absolute bottom-0 end-0 badge bg-light text-dark me-3 mb-2">{{ fs_lang('contentImageLong') }}</span>
                     @endif
@@ -15,19 +15,19 @@
                 {{-- List page single sheet display method --}}
                 @if ($image['imageLong'])
                     <div class="position-relative image-box" style="width:auto;">
-                        <img src="{{ $image['imageSquareUrl'] }}" data-zoom-src="{{ $image['imageBigUrl'] }}" alt="{{ $image['name'] }}" class="img-fluid zoom-image">
+                        <img src="{{ $image['imageSquareUrl'] }}" data-zoom-src="{{ $image['imageBigUrl'] }}" loading="lazy" alt="{{ $image['name'] }}" class="img-fluid zoom-image">
                         <span class="position-absolute bottom-0 end-0 badge bg-light text-dark me-3 mb-2">{{ fs_lang('contentImageLong') }}</span>
                     </div>
                 @else
                     <div class="position-relative image-box">
-                        <img src="{{ $image['imageRatioUrl'] }}" data-zoom-src="{{ $image['imageBigUrl'] }}" alt="{{ $image['name'] }}" class="img-fluid zoom-image">
+                        <img src="{{ $image['imageRatioUrl'] }}" data-zoom-src="{{ $image['imageBigUrl'] }}" loading="lazy" alt="{{ $image['name'] }}" class="img-fluid zoom-image">
                     </div>
                 @endif
             @endif
         @else
             {{-- Multiple Images --}}
             <div class="position-relative image-box">
-                <img src="{{ $image['imageSquareUrl'] }}" data-zoom-src="{{ $image['imageBigUrl'] }}" alt="{{ $image['name'] }}" class="img-fluid zoom-image">
+                <img src="{{ $image['imageSquareUrl'] }}" data-zoom-src="{{ $image['imageBigUrl'] }}" loading="lazy" alt="{{ $image['name'] }}" class="img-fluid zoom-image">
                 @if ($image['imageLong'])
                     <span class="position-absolute bottom-0 end-0 badge bg-light text-dark me-3 mb-2">{{ fs_lang('contentImageLong') }}</span>
                 @endif
@@ -39,13 +39,7 @@
 {{-- Videos --}}
 @if ($files['videos'])
     @foreach($files['videos'] as $video)
-        <video class="mt-2" controls preload="metadata" controls="true" controlslist="nodownload"
-            @if ($video['videoGifUrl'])
-                poster="{{ $video['videoGifUrl'] }}"
-            @elseif ($video['videoCoverUrl'])
-                poster="{{ $video['videoCoverUrl'] }}"
-            @endif
-        >
+        <video class="mt-2" controls preload="metadata" controls="true" controlslist="nodownload" poster="{{ $video['videoPosterUrl'] }}">
             <source src="{{ $video['videoUrl'] }}" type="{{ $video['mime'] }}">
             <div class="alert alert-warning my-2" role="alert">Your browser does not support the video element.</div>
         </video>

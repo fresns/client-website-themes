@@ -14,13 +14,13 @@
             <small class="text-muted">{{ $message['datetimeFormat'] }}</small>
         </div>
         <div class="ms-2">
-            <img src="{{ $message['user']['avatar'] }}" alt="{{ $message['user']['nickname'] }}" class="conversation-avatar rounded-circle">
+            <img src="{{ $message['user']['avatar'] }}" loading="lazy" alt="{{ $message['user']['nickname'] }}" class="conversation-avatar rounded-circle">
         </div>
     </div>
 @else
     <div class="d-flex justify-content-start mt-3">
         <div class="me-2">
-            <img src="{{ $message['user']['avatar'] }}" alt="{{ $message['user']['nickname'] }}" class="conversation-avatar rounded-circle">
+            <img src="{{ $message['user']['avatar'] }}" loading="lazy" alt="{{ $message['user']['nickname'] }}" class="conversation-avatar rounded-circle">
         </div>
         <div class="text-start">
             <p class="bg-secondary bg-gradient bg-opacity-25 text-break rounded p-2 mb-0">

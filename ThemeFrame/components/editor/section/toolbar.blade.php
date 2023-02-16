@@ -22,7 +22,7 @@
                         <div class="tab-pane fade @if ($loop->first) show active @endif" id="sticker-{{ $loop->index }}" role="tabpanel" aria-labelledby="sticker-{{ $loop->index }}-tab">
                             @foreach($sticker['stickers'] ?? [] as $value)
                                 <a class="fresns-sticker btn btn-outline-secondary rounded-0 border-0" href="javascript:;" value="{{ $value['code'] }}" title="{{ $value['code'] }}" >
-                                    <img src="{{ $value['image'] }}" alt="{{ $value['code'] }}" title="{{ $value['code'] }}">
+                                    <img src="{{ $value['image'] }}" loading="lazy" alt="{{ $value['code'] }}" title="{{ $value['code'] }}">
                                 </a>
                             @endforeach
                         </div>
@@ -185,7 +185,7 @@
     @endif
 
     {{-- Mention --}}
-    @if ($config['mention'])
+    @if ($config['mention']['status'] && $config['mention']['display'])
         <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresns-mention">
             <div class="d-flex flex-column">
                 <i class="bi bi-at"></i>
@@ -195,7 +195,7 @@
     @endif
 
     {{-- Hashtag --}}
-    @if ($config['hashtag']['status'])
+    @if ($config['hashtag']['status'] && $config['hashtag']['display'])
         <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresns-hashtag">
             <div class="d-flex flex-column">
                 <i class="bi bi-hash"></i>
@@ -254,7 +254,7 @@
                                 @endif
                                 data-title="{{ $extend['name'] }}"
                                 data-url="{{ $extend['url'] }}">
-                                <img src="{{ $extend['icon'] }}" width="20" height="20">
+                                <img src="{{ $extend['icon'] }}" loading="lazy" width="20" height="20">
                                 {{ $extend['name'] }}
                             </a>
                         </li>
@@ -267,7 +267,7 @@
 
 
 {{-- Mention Modal --}}
-@if ($config['mention'])
+@if ($config['mention']['status'] && $config['mention']['display'])
     <div class="modal fade" id="fresns-mention" tabindex="-1" aria-labelledby="fresns-mention" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -288,7 +288,7 @@
 
 
 {{-- Hashtag Modal --}}
-@if ($config['hashtag']['status'])
+@if ($config['hashtag']['status'] && $config['hashtag']['display'])
     <div class="modal fade" id="fresns-hashtag" tabindex="-1" aria-labelledby="fresns-hashtag" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -310,59 +310,63 @@
 @push('script')
     <script>
         $(function (){
-            $("#atUser").on('input propertychange change', function (){
-                let query = $(this).val().trim();
-                if (query) {
-                    $.get("{{ route('fresns.api.input.tips') }}", {"type": 'user', "key": query}, function (data) {
-                        let html = "";
-                        $.each(data, function (k,v){
-                            html += "<option value='" + v.name + "'>" + v.nickname + " " + "@" + v.name + "</option>"
-                        })
-                        $("#memberLists").empty().html(html);
-                    }, 'json')
-                }
-            }).bind('keypress', function (event) {
-                if (event.keyCode === 13) {
-                    event.preventDefault()
-                    $("#atUser").next().trigger("click")
-                }
-            })
+            @if ($config['mention']['status'])
+                $("#atUser").on('input propertychange change', function (){
+                    let query = $(this).val().trim();
+                    if (query) {
+                        $.get("{{ route('fresns.api.input.tips') }}", {"type": 'user', "key": query}, function (data) {
+                            let html = "";
+                            $.each(data, function (k,v){
+                                html += "<option value='" + v.name + "'>" + v.nickname + " " + "@" + v.name + "</option>"
+                            })
+                            $("#memberLists").empty().html(html);
+                        }, 'json')
+                    }
+                }).bind('keypress', function (event) {
+                    if (event.keyCode === 13) {
+                        event.preventDefault()
+                        $("#atUser").next().trigger("click")
+                    }
+                })
 
-            $("#atHashtag").on('input propertychange change', function (){
-                let query = $(this).val().trim();
-                if (query) {
-                    $.get("{{ route('fresns.api.input.tips') }}", {"type": 'hashtag', "key": query}, function (data) {
-                        let html = "";
-                        $.each(data, function (k,v){
-                            html += "<option value='" + v.name +"'>"+ v.name +"</option>"
-                        })
-                        $("#hashtagLists").empty().html(html);
-                    }, 'json')
-                }
-            }).bind('keypress', function (event) {
-                if (event.keyCode === 13) {
-                    event.preventDefault()
-                    $("#atHashtag").next().trigger("click")
-                }
-            })
+                $("#atUser").next().on('click',function () {
+                    let userContent = $("#atUser").val();
+                    if (userContent) {
+                        $("#content").trigger('click').insertAtCaret(" @" + userContent + " ");
+                    }
+                });
+            @endif
 
-            $("#atHashtag").next().on('click',function () {
-                let hashtagContent = $("#atHashtag").val();
-                if (hashtagContent) {
-                    @if(fs_api_config('hashtag_show') == 2)
-                        $("#content").trigger('click').insertAtCaret(" #" + hashtagContent + "# ");
-                    @else
-                        $("#content").trigger('click').insertAtCaret(" #" + hashtagContent + " ");
-                    @endif
-                }
-            });
+            @if ($config['hashtag']['status'])
+                $("#atHashtag").on('input propertychange change', function (){
+                    let query = $(this).val().trim();
+                    if (query) {
+                        $.get("{{ route('fresns.api.input.tips') }}", {"type": 'hashtag', "key": query}, function (data) {
+                            let html = "";
+                            $.each(data, function (k,v){
+                                html += "<option value='" + v.name +"'>"+ v.name +"</option>"
+                            })
+                            $("#hashtagLists").empty().html(html);
+                        }, 'json')
+                    }
+                }).bind('keypress', function (event) {
+                    if (event.keyCode === 13) {
+                        event.preventDefault()
+                        $("#atHashtag").next().trigger("click")
+                    }
+                })
 
-            $("#atUser").next().on('click',function () {
-                let userContent = $("#atUser").val();
-                if (userContent) {
-                    $("#content").trigger('click').insertAtCaret(" @" + userContent + " ");
-                }
-            });
+                $("#atHashtag").next().on('click',function () {
+                    let hashtagContent = $("#atHashtag").val();
+                    if (hashtagContent) {
+                        @if (fs_api_config('hashtag_format') == 2)
+                            $("#content").trigger('click').insertAtCaret(" #" + hashtagContent + "# ");
+                        @else
+                            $("#content").trigger('click').insertAtCaret(" #" + hashtagContent + " ");
+                        @endif
+                    }
+                });
+            @endif
         })
     </script>
 @endpush

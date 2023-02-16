@@ -14,6 +14,12 @@ var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
 const setTimeoutToastHide = () => {
     $('.toast.show').each((k, v) => {
         setTimeout(function () {
+            let errorCode = $(v).data('errorCode');
+
+            if (errorCode == 36104 || errorCode == 38200) {
+                return;
+            }
+
             $(v).hide();
         }, 1500);
     });
@@ -58,11 +64,8 @@ window.tips = function (message, code = 200) {
         langTag = '';
     }
 
-    if (window.siteName) {
-        siteName = window.siteName;
-    } else {
-        siteName = 'Tip';
-    }
+    siteName = window.siteName ?? 'Tip';
+    siteIcon = window.siteIcon ?? '/static/images/icon.png';
 
     if (code == 0 || code == 200) {
         apiCode = '';
@@ -88,10 +91,10 @@ window.tips = function (message, code = 200) {
         apiMessage = message;
     }
 
-    let html = `<div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:9999">
+    let html = `<div aria-live="polite" aria-atomic="true" class="position-fixed top-50 start-50 translate-middle" style="z-index:2048">
         <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
-                <img src="/static/images/icon.png" width="20px" height="20px" class="rounded me-2">
+                <img src="${siteIcon}" width="20px" height="20px" class="me-2">
                 <strong class="me-auto">${siteName}</strong>
                 <small>${apiCode}</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -102,9 +105,12 @@ window.tips = function (message, code = 200) {
 
     $('div.fresns-tips').prepend(html);
 
-    if (code == 0) {
-        setTimeoutToastHide();
+    // tip toast time
+    if (code == 36104 || code == 38200) {
+        return;
     }
+
+    setTimeoutToastHide();
 };
 
 // copy url
@@ -206,8 +212,8 @@ function showReply(fresnsReply) {
 
 // at and hashtag
 function atwho() {
-    $('.fresns-content')
-        .atwho({
+    if (window.mentionStatus) {
+        $('.fresns-content').atwho({
             at: '@',
             displayTpl:
                 '<li><img src="${image}" height="20" width="20"/> ${nickname} <small class="text-muted">@${name}</small></li>',
@@ -225,11 +231,14 @@ function atwho() {
                     }
                 },
             },
-        })
-        .atwho({
+        });
+    }
+
+    if (window.hashtagStatus) {
+        $('.fresns-content').atwho({
             at: '#',
             displayTpl: '<li> ${name} </li>',
-            insertTpl: window.hashtagShow == 1 ? '${atwho-at}${name}' : '${atwho-at}${name}${atwho-at}',
+            insertTpl: window.hashtagFormat == 1 ? '${atwho-at}${name}' : '${atwho-at}${name}${atwho-at}',
             callbacks: {
                 remoteFilter: function (query, callback) {
                     if (query) {
@@ -245,6 +254,7 @@ function atwho() {
                 },
             },
         });
+    }
 }
 
 // progress
@@ -911,7 +921,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     inputTips +
                     `" name="` +
                     name +
-                    `" rows="3">` +
+                    `" rows="5">` +
                     value +
                     `</textarea>
                 </div>`;

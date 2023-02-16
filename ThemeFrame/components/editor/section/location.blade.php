@@ -12,7 +12,7 @@
                         data-post-message-key="fresnsLocation"
                         data-title="{{ $map['name'] }}"
                         data-url="{{ $map['url'] }}">
-                        <img src="{{ $map['icon'] }}" width="20" height="20">
+                        <img src="{{ $map['icon'] }}" loading="lazy" width="20" height="20">
                         {{ $map['name'] }}
                     </a>
                 </li>

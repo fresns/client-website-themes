@@ -1,24 +1,35 @@
 <div class="d-flex">
     <div class="flex-shrink-0">
-        @if (! $creator['deactivate'] && ! $isAnonymous)
+        @if (! $creator['status'])
+            {{-- Deactivate Author --}}
+            <img src="{{ fs_api_config('deactivate_avatar') }}" loading="lazy" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="user-avatar rounded-circle">
+        @elseif ($isAnonymous)
+            {{-- Anonymous Author --}}
+            <img src="{{ $creator['avatar'] }}" loading="lazy" alt="{{ fs_lang('contentCreatorAnonymous') }}" class="user-avatar rounded-circle">
+        @else
             {{-- Normal Author --}}
             <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $creator['fsid']])) }}">
                 @if ($creator['decorate'])
-                    <img src="{{ $creator['decorate'] }}" alt="Avatar Decorate" class="user-decorate">
+                    <img src="{{ $creator['decorate'] }}" loading="lazy" alt="Avatar Decorate" class="user-decorate">
                 @endif
-                <img src="{{ $creator['avatar'] }}" alt="{{ $creator['username'] }}" class="user-avatar rounded-circle">
+                <img src="{{ $creator['avatar'] }}" loading="lazy" alt="{{ $creator['username'] }}" class="user-avatar rounded-circle">
             </a>
-        @elseif (! $creator['deactivate'] && $isAnonymous)
-            {{-- Anonymous Author --}}
-            <img src="{{ $creator['avatar'] }}" alt="{{ fs_lang('contentCreatorAnonymous') }}" class="user-avatar rounded-circle">
-        @elseif ($creator['deactivate'])
-            {{-- Deactivate Author --}}
-            <img src="{{ fs_db_config('deactivate_avatar') }}" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="user-avatar rounded-circle">
         @endif
     </div>
+
     <div class="flex-grow-1">
         <div class="user-primary d-lg-flex">
-            @if (! $creator['deactivate'] && ! $isAnonymous)
+            @if (! $creator['status'])
+                {{-- Deactivate Author --}}
+                <div class="user-info d-flex text-nowrap overflow-hidden">
+                    <div class="text-muted">{{ fs_lang('contentCreatorDeactivate') }}</div>
+                </div>
+            @elseif ($isAnonymous)
+                {{-- Anonymous Author --}}
+                <div class="user-info d-flex text-nowrap overflow-hidden">
+                    <div class="text-muted">{{ fs_lang('contentCreatorAnonymous') }}</div>
+                </div>
+            @else
                 {{-- Normal Author --}}
                 <div class="user-info d-flex text-nowrap overflow-hidden">
                     <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $creator['fsid']])) }}" class="user-link d-flex">
@@ -26,9 +37,9 @@
                         @if ($creator['verifiedStatus'])
                             <div class="user-verified">
                                 @if ($creator['verifiedIcon'])
-                                    <img src="{{ $creator['verifiedIcon'] }}" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $creator['verifiedDesc'] }}">
+                                    <img src="{{ $creator['verifiedIcon'] }}" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $creator['verifiedDesc'] }}">
                                 @else
-                                    <img src="/assets/themes/ThemeFrame/images/icon-verified.png" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $creator['verifiedDesc'] }}">
+                                    <img src="/assets/themes/ThemeFrame/images/icon-verified.png" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $creator['verifiedDesc'] }}">
                                 @endif
                             </div>
                         @endif
@@ -36,7 +47,7 @@
                     </a>
                     <div class="user-role d-flex">
                         @if ($creator['roleIconDisplay'])
-                            <div class="user-role-icon"><img src="{{ $creator['roleIcon'] }}" alt="{{ $creator['roleName'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $creator['roleName'] }}"></div>
+                            <div class="user-role-icon"><img src="{{ $creator['roleIcon'] }}" loading="lazy" alt="{{ $creator['roleName'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $creator['roleName'] }}"></div>
                         @endif
                         @if ($creator['roleNameDisplay'])
                             <div class="user-role-name"><span class="badge rounded-pill">{{ $creator['roleName'] }}</span></div>
@@ -57,20 +68,10 @@
                 @if ($creator['operations']['diversifyImages'])
                     <div class="user-icon d-flex flex-wrap flex-lg-nowrap overflow-hidden my-2 my-lg-0">
                         @foreach($creator['operations']['diversifyImages'] as $icon)
-                            <img src="{{ $icon['imageUrl'] }}" alt="{{ $icon['name'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $icon['name'] }}">
+                            <img src="{{ $icon['imageUrl'] }}" loading="lazy" alt="{{ $icon['name'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $icon['name'] }}">
                         @endforeach
                     </div>
                 @endif
-            @elseif (! $creator['deactivate'] && $isAnonymous)
-                {{-- Anonymous Author --}}
-                <div class="user-info d-flex text-nowrap overflow-hidden">
-                    <div class="text-muted">{{ fs_lang('contentCreatorAnonymous') }}</div>
-                </div>
-            @elseif ($creator['deactivate'])
-                {{-- Deactivate Author --}}
-                <div class="user-info d-flex text-nowrap overflow-hidden">
-                    <div class="text-muted">{{ fs_lang('contentCreatorDeactivate') }}</div>
-                </div>
             @endif
         </div>
         <div class="user-secondary d-flex flex-wrap mb-3">
@@ -86,18 +87,19 @@
             @if ($replyToUser)
                 <div class="text-success ms-2">
                     {{ fs_db_config('publish_comment_name') }}
-                    @if (! $replyToUser['deactivate'] && $replyToUser['fsid'])
-                        <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $replyToUser['fsid']])) }}">{{ '@'.$replyToUser['fsid'] }}</a>
-                    @elseif (! $replyToUser['deactivate'] && empty($replyToUser['fsid']))
-                        <span class="text-muted">{{ fs_lang('contentCreatorAnonymous') }}</span>
-                    @elseif ($replyToUser['deactivate'])
+
+                    @if (! $replyToUser['status'])
                         <span class="text-muted">{{ fs_lang('contentCreatorDeactivate') }}</span>
+                    @elseif (empty($replyToUser['fsid']))
+                        <span class="text-muted">{{ fs_lang('contentCreatorAnonymous') }}</span>
+                    @else
+                        <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $replyToUser['fsid']])) }}">{{ '@'.$replyToUser['fsid'] }}</a>
                     @endif
                 </div>
             @endif
 
             {{-- IP Location --}}
-            @if (fs_db_config('account_ip_location_status') && current_lang_tag() == 'zh-Hans')
+            @if (fs_api_config('account_ip_location_status') && current_lang_tag() == 'zh-Hans')
                 <span class="text-secondary ms-3">
                     <i class="bi bi-geo"></i>
                     @if ($ipLocation)

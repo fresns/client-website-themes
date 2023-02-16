@@ -85,13 +85,13 @@
                 <div class="d-flex mb-4 mb-lg-0">
                     @if (fs_user()->check())
                         {{-- Logged in --}}
-                        <a class="btn" href="{{ fs_route(route('fresns.account.index')) }}" role="button"><img src="{{ fs_user('detail.avatar') }}" class="nav-avatar rounded-circle"> {{ fs_user('detail.nickname') }}</a>
+                        <a class="btn" href="{{ fs_route(route('fresns.account.index')) }}" role="button"><img src="{{ fs_user('detail.avatar') }}" loading="lazy" class="nav-avatar rounded-circle"> {{ fs_user('detail.nickname') }}</a>
 
                         <button type="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" data-bs-toggle="modal" data-bs-target="#createModal"><i class="bi bi-plus-lg"></i></button>
 
                         <a href="{{ fs_route(route('fresns.message.notifications')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
                             <i class="bi bi-bell"></i>
-                            @if(array_sum(fs_user_panel('unreadNotifications')) > 0)
+                            @if (array_sum(fs_user_panel('unreadNotifications')) > 0)
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ array_sum(fs_user_panel('unreadNotifications')) }}</span>
                             @endif
                         </a>
@@ -99,7 +99,7 @@
                         @if (fs_api_config('conversation_status'))
                             <a href="{{ fs_route(route('fresns.message.index')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
                                 <i class="bi bi-envelope"></i>
-                                @if(fs_user_panel('conversations.unreadMessages') > 0)
+                                @if (fs_user_panel('conversations.unreadMessages') > 0)
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ fs_user_panel('conversations.unreadMessages') }}</span>
                                 @endif
                             </a>
@@ -118,7 +118,7 @@
                                         <i class="bi bi-bell"></i>
                                         {{ fs_db_config('menu_notifications') }}
 
-                                        @if(array_sum(fs_user_panel('unreadNotifications')) > 0)
+                                        @if (array_sum(fs_user_panel('unreadNotifications')) > 0)
                                             <span class="badge bg-danger">{{ array_sum(fs_user_panel('unreadNotifications')) }}</span>
                                         @endif
                                     </a>
@@ -131,7 +131,7 @@
                                             <i class="bi bi-envelope"></i>
                                             {{ fs_db_config('menu_conversations') }}
 
-                                            @if(fs_user_panel('conversations.unreadMessages') > 0)
+                                            @if (fs_user_panel('conversations.unreadMessages') > 0)
                                                 <span class="badge bg-danger">{{ fs_user_panel('conversations.unreadMessages') }}</span>
                                             @endif
                                         </a>
@@ -144,7 +144,7 @@
                                         <i class="bi bi-file-earmark-text"></i>
                                         {{ fs_db_config('menu_editor_drafts') }}
 
-                                        @if(array_sum(fs_user_panel('draftCount')) > 0)
+                                        @if (array_sum(fs_user_panel('draftCount')) > 0)
                                             <span class="badge bg-primary">{{ array_sum(fs_user_panel('draftCount')) }}</span>
                                         @endif
                                     </a>

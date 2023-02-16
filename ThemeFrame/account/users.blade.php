@@ -32,11 +32,11 @@
                     <div class="row p-3">
                         @foreach(fs_account('detail.users') as $item)
                             <div class="col-sm-3 d-flex flex-column align-items-center">
-                                <img src="{{ $item['avatar'] }}" class="auth-avatar rounded-circle">
+                                <img src="{{ $item['avatar'] }}" loading="lazy" class="auth-avatar rounded-circle">
                                 <div class="auth-nickname mt-2">{{ $item['nickname'] }}</div>
                                 <div class="text-secondary">{{ '@'.$item['fsid'] }}</div>
 
-                                @if(fs_user('detail.uid') == $item['uid'])
+                                @if (fs_user('detail.uid') == $item['uid'])
                                     <button type="submit" class="btn btn-outline-secondary btn-sm my-2" disabled>{{ fs_lang('userCurrent') }}</button>
                                 @else
                                     <form action="{{ route('fresns.api.user.auth') }}" method="post">

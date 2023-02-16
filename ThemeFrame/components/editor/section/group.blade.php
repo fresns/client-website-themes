@@ -3,7 +3,7 @@
         <button class="rounded-0 border-0 d-flex justify-content-between p-3" type="button" data-bs-toggle="modal" data-bs-target="#fresns-group">
             <span>
                 <i class="bi bi-archive-fill me-2"></i>
-                <span id="group">@if(!empty($group)) {{ $group['gname'] }} @else {{ fs_db_config('group_name') }}: {{ fs_lang('editorNoChooseGroup') }} @endif</span>
+                <span id="group">@if (!empty($group)) {{ $group['gname'] }} @else {{ fs_db_config('group_name') }}: {{ fs_lang('editorNoChooseGroup') }} @endif</span>
             </span>
             <i class="bi bi-chevron-right"></i>
         </button>
@@ -26,7 +26,7 @@
                         @foreach(fs_groups('categories') as $groupCategory)
                             <button class="nav-link group-categories" data-page-size="15" data-page="1" data-action="{{ route('fresns.api.sub.groups', ['gid' => $groupCategory['gid']]) }}" id="v-pills-{{ $groupCategory['gid'] }}-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ $groupCategory['gid'] }}" type="button" role="tab" aria-controls="v-pills-{{ $groupCategory['gid'] }}" aria-selected="false">
                                 @if ($groupCategory['cover'])
-                                    <img src="{{ $groupCategory['cover'] }}" height="20">
+                                    <img src="{{ $groupCategory['cover'] }}" loading="lazy" height="20">
                                 @endif
                                 {{ $groupCategory['gname'] }}
                             </button>

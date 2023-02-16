@@ -1,14 +1,16 @@
 <li class="list-group-item d-flex justify-content-start align-items-center" data-id="{{ $notification['id'] }}" data-type="{{ $notification['type'] }}" data-status="{{ $notification['readStatus'] }}">
     {{-- Read Status --}}
-    @if(! $notification['readStatus'])
+    @if (! $notification['readStatus'])
         <span class="p-1 bg-danger border border-light rounded-circle" id="badge-{{ $notification['id'] }}"></span>
     @endif
 
     {{-- User Avatar --}}
     @if ($notification['actionUser'])
         <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $notification['actionUser']['fsid']])) }}">
-            <img src="{{ $notification['actionUser']['avatar'] }}" class="rounded-circle mx-3" style="width:3.2rem;height:3.2rem;">
+            <img src="{{ $notification['actionUser']['avatar'] }}" loading="lazy" class="rounded-circle mx-3" style="width:3.2rem;height:3.2rem;">
         </a>
+    @else
+        <img src="{{ fs_db_config('site_icon') }}" loading="lazy" class="mx-3" style="width:3.2rem;height:3.2rem;">
     @endif
 
     <div class="my-2 w-100">
@@ -21,9 +23,9 @@
                     @if ($notification['actionUser']['verifiedStatus'])
                         <div class="user-verified">
                             @if ($notification['actionUser']['verifiedIcon'])
-                                <img src="{{ $notification['actionUser']['verifiedIcon'] }}" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $notification['actionUser']['verifiedDesc'] ?? '' }}">
+                                <img src="{{ $notification['actionUser']['verifiedIcon'] }}" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $notification['actionUser']['verifiedDesc'] ?? '' }}">
                             @else
-                                <img src="/assets/themes/ThemeFrame/images/icon-verified.png" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $notification['actionUser']['verifiedDesc'] ?? '' }}">
+                                <img src="/assets/themes/ThemeFrame/images/icon-verified.png" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $notification['actionUser']['verifiedDesc'] ?? '' }}">
                             @endif
                         </div>
                     @endif
@@ -31,35 +33,53 @@
                     <div class="user-name text-secondary">{{ '@'.$notification['actionUser']['fsid'] }}</div>
                 </a>
             </div>
+        @else
+            <div class="border-start border-3 border-secondary mb-2">
+                <p class="fw-semibold mb-0 ms-2">{{ fs_db_config('site_name') }}</p>
+            </div>
         @endif
 
         {{-- Notification Content --}}
         <section class="user-secondary d-flex flex-wrap">
             <p class="mb-0 w-100">
+                @switch($notification['type'])
+                    @case(1)
+                        <span class="badge bg-danger me-1">{{ fs_db_config('menu_notifications_systems') }}</span>
+                    @break
+
+                    @case(2)
+                        <span class="badge bg-danger me-1">{{ fs_db_config('menu_notifications_recommends') }}</span>
+                    @break
+
+                    @default
+
+                    @break
+                @endswitch
+
                 <span class="badge bg-primary">
                     @switch($notification['type'])
                         @case(3)
-                            {{ fs_lang('notificationLike') }}
+                            {{ fs_lang('notificationLike') }}:
                         @break
 
                         @case(4)
-                            {{ fs_lang('notificationDislike') }}
+                            {{ fs_lang('notificationDislike') }}:
                         @break
 
                         @case(5)
-                            {{ fs_lang('notificationFollow') }}
+                            {{ fs_lang('notificationFollow') }}:
                         @break
 
                         @case(6)
-                            {{ fs_lang('notificationBlock') }}
+                            {{ fs_lang('notificationBlock') }}:
                         @break
 
                         @case(7)
-                            {{ fs_lang('notificationMention') }}
+                            {{ fs_lang('notificationMention') }}:
                         @break
 
                         @case(8)
-                            {{ fs_lang('notificationComment') }}
+                            {{ fs_lang('notificationComment') }}:
                         @break
 
                         @default
@@ -68,20 +88,50 @@
                     @endswitch
 
                     @switch($notification['actionObject'])
+                        @case(1)
+                            {{ fs_db_config('user_name') }}
+                        @break
+
                         @case(2)
-                            : {{ fs_db_config('group_name') }}
+                            {{ fs_db_config('group_name') }}
                         @break
 
                         @case(3)
-                            : {{ fs_db_config('hashtag_name') }}
+                            {{ fs_db_config('hashtag_name') }}
                         @break
 
                         @case(4)
-                            : {{ fs_db_config('post_name') }}
+                            {{ fs_db_config('post_name') }}
                         @break
 
                         @case(5)
-                            : {{ fs_db_config('comment_name') }}
+                            {{ fs_db_config('comment_name') }}
+                        @break
+
+                        @default
+
+                        @break
+                    @endswitch
+
+                    @switch($notification['actionType'])
+                        @case(6)
+                            : {{ fs_lang('modify') }}
+                        @break
+
+                        @case(7)
+                            : {{ fs_lang('delete') }}
+                        @break
+
+                        @case(8)
+                            : {{ fs_lang('setting') }} ({{ fs_lang('contentSticky') }})
+                        @break
+
+                        @case(9)
+                            : {{ fs_lang('setting') }} ({{ fs_lang('contentDigest') }})
+                        @break
+
+                        @case(10)
+                            : {{ fs_lang('setting') }}
                         @break
 
                         @default
@@ -89,6 +139,7 @@
                         @break
                     @endswitch
                 </span>
+
                 <span class="badge bg-light text-dark fw-normal ms-2" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $notification['datetime'] }}">{{ $notification['datetimeFormat'] }}</span>
             </p>
 
@@ -108,7 +159,7 @@
                     <div class="content-group mt-2">
                         <a href="{{ fs_route(route('fresns.group.detail', ['gid' => $notification['actionInfo']['gid']])) }}" class="badge rounded-pill text-decoration-none">
                             @if ($notification['actionInfo']['cover'])
-                                <img src="{{ $notification['actionInfo']['cover'] }}" alt="$notification['actionInfo']['gname']" class="rounded">
+                                <img src="{{ $notification['actionInfo']['cover'] }}" loading="lazy" alt="$notification['actionInfo']['gname']" class="rounded">
                             @endif
                             {{ $notification['actionInfo']['gname'] }}
                         </a>
@@ -122,7 +173,7 @@
                 @case(4)
                     <section class="comment-post mt-2 position-relative">
                         <div class="d-flex">
-                            <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" class="rounded"></div>
+                            <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" loading="lazy" class="rounded"></div>
                             <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit(strip_tags($notification['actionInfo']['content']), 80) }}</div>
                         </div>
                         @if ($notification['actionInfo']['group'])
@@ -135,7 +186,7 @@
                 @case(5)
                     <section class="comment-post mt-2 position-relative">
                         <div class="d-flex">
-                            <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" class="rounded"></div>
+                            <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" loading="lazy" class="rounded"></div>
                             <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit(strip_tags($notification['actionInfo']['content']), 80) }}</div>
                         </div>
                         <a href="{{ fs_route(route('fresns.comment.detail', ['cid' => $notification['actionInfo']['cid']])) }}" class="text-decoration-none stretched-link"></a>

@@ -16,7 +16,7 @@
                     <div class="">{{ fs_account('detail.wallet.currencyCode') }} {{ fs_account('detail.wallet.balance') }}</div>
                     <div class="vr mx-3"></div>
                     <div class="btn-group">
-                        @if(fs_account('items.walletRecharges'))
+                        @if (fs_account('items.walletRecharges'))
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">{{ fs_lang('walletRecharge') }}</button>
                             <ul class="dropdown-menu">
                                 @foreach(fs_account('items.walletRecharges') as $item)
@@ -40,7 +40,7 @@
                     </div>
                     <div class="vr mx-3"></div>
                     <div class="btn-group">
-                        @if(fs_account('items.walletWithdraws'))
+                        @if (fs_account('items.walletWithdraws'))
                             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">{{ fs_lang('walletWithdraw') }}</button>
                             <ul class="dropdown-menu">
                                 @foreach(fs_account('items.walletWithdraws') as $item)

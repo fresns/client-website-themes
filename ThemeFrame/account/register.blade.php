@@ -22,7 +22,7 @@
                                     data-post-message-key="fresnsJoin"
                                     data-title="{{ fs_lang('accountLogin') }}"
                                     data-url="{{ $item['url'] }}">
-                                    <img src="/assets/themes/ThemeFrame/images/connects/{{ $item['code'] }}.png" height="32">
+                                    <img src="/assets/themes/ThemeFrame/images/connects/{{ $item['code'] }}.png" loading="lazy" height="32">
                                 </a>
                             @endforeach
                         </div>

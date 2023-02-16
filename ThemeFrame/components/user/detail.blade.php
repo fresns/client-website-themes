@@ -4,14 +4,16 @@
 @endphp
 
 @if ($user['banner'])
-    <img src="{{ $user['banner'] }}" class="card-img-top">
+    <div style="margin-left:-12px;margin-right:-12px;filter:blur(2px);">
+        <img src="{{ $user['banner'] }}" loading="lazy" class="w-100 rounded-top" style="max-height:200px;">
+    </div>
 @endif
 
 <section class="avatar">
     @if ($user['decorate'])
-        <img src="{{ $user['decorate'] }}" alt="Avatar Decorate" class="profile-decorate">
+        <img src="{{ $user['decorate'] }}" loading="lazy" alt="Avatar Decorate" class="profile-decorate">
     @endif
-    <img src="{{ $user['avatar'] }}" alt="{{ $user['nickname'] }}" class="profile-avatar rounded-circle">
+    <img src="{{ $user['avatar'] }}" loading="lazy" alt="{{ $user['nickname'] }}" class="profile-avatar rounded-circle">
 </section>
 
 <section class="userinfo">
@@ -19,26 +21,31 @@
         <h1 style="color:{{ $user['nicknameColor'] }};">{{ $user['nickname'] }}</h1>
         @if ($user['verifiedStatus'])
             @if ($user['verifiedIcon'])
-                <img src="{{ $user['verifiedIcon'] }}" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['verifiedDesc'] }}">
+                <img src="{{ $user['verifiedIcon'] }}" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['verifiedDesc'] }}">
             @else
-                <img src="/assets/themes/ThemeFrame/images/icon-verified.png" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['verifiedDesc'] }}">
+                <img src="/assets/themes/ThemeFrame/images/icon-verified.png" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['verifiedDesc'] }}">
             @endif
         @endif
         @if ($user['roleIconDisplay'] && $user['roleIcon'])
-            <img src="{{ $user['roleIcon'] }}" alt="{{ $user['roleName'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['roleName'] }}">
+            <img src="{{ $user['roleIcon'] }}" loading="lazy" alt="{{ $user['roleName'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['roleName'] }}">
         @endif
         @if ($user['roleNameDisplay'])
             <span class="badge text-bg-secondary">{{ $user['roleName'] }}</span>
         @endif
     </div>
     <div class="mb-2 text-secondary">{{ '@'.$user['fsid'] }}</div>
-    <p class="fs-7 text-secondary px-4">{!! $user['bioHtml'] !!}</p>
+
+    @if ($user['status'])
+        <p class="fs-7 text-secondary px-4">{!! $user['bioHtml'] !!}</p>
+    @else
+        <div class="alert alert-warning" role="alert"><i class="bi bi-exclamation-triangle-fill"></i> {{ fs_code_message(35202) }}</div>
+    @endif
 
     {{-- User Attachment Icons --}}
     @if ($user['operations']['diversifyImages'])
         <div class="text-center">
             @foreach($user['operations']['diversifyImages'] as $icon)
-                <img src="{{ $icon['imageUrl'] }}" alt="{{ $icon['name'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $icon['name'] }}" style="height:2rem">
+                <img src="{{ $icon['imageUrl'] }}" loading="lazy" alt="{{ $icon['name'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $icon['name'] }}" style="height:2rem">
             @endforeach
         </div>
     @endif
