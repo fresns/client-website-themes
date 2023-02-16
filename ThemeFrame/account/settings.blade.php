@@ -119,7 +119,7 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('userGender') }}</span>
                                 <span class="form-control" id="select-gender">
-                                    @if(fs_user('detail.gender') === 1)
+                                    @if (fs_user('detail.gender') === 1)
                                         {{ fs_lang('settingGenderNull') }}
                                     @elseif(fs_user('detail.gender') === 2)
                                         {{ fs_lang('settingGenderMale') }}
@@ -156,7 +156,7 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_db_config('menu_conversations') }}</span>
                                 <span class="form-control" id="select-conversationLimit">
-                                    @if(fs_user('detail.conversationLimit') == 1)
+                                    @if (fs_user('detail.conversationLimit') == 1)
                                         {{ fs_lang('settingAllowAll') }}
                                     @elseif(fs_user('detail.conversationLimit') == 2)
                                         {{ fs_lang('settingAllowMyFollow') }}
@@ -181,7 +181,7 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_db_config('comment_name') }}</span>
                                 <span class="form-control" id="select-commentLimit">
-                                    @if(fs_user('detail.commentLimit') == 1)
+                                    @if (fs_user('detail.commentLimit') == 1)
                                         {{ fs_lang('settingAllowAll') }}
                                     @elseif(fs_user('detail.commentLimit') == 2)
                                         {{ fs_lang('settingAllowMyFollow') }}
@@ -232,7 +232,7 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('phone') }}</span>
                                 @if (fs_api_config('send_sms_service'))
-                                    @if(empty(fs_account('detail.phone')))
+                                    @if (empty(fs_account('detail.phone')))
                                         <span class="form-control" id="input-editPhone">{{ fs_lang('settingNot') }}</span>
                                         <button class="btn btn-outline-secondary"
                                             data-lable="{{ fs_lang('phone') }}"
@@ -263,7 +263,7 @@
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('email') }}</span>
                                 @if (fs_api_config('send_email_service'))
-                                    @if(empty(fs_account('detail.email')))
+                                    @if (empty(fs_account('detail.email')))
                                         <span class="form-control" id="input-editEmail">{{ fs_lang('settingNot') }}</span>
                                         <button class="btn btn-outline-secondary"
                                             data-lable="{{ fs_lang('email') }}"
@@ -289,7 +289,7 @@
                             {{-- Account Password --}}
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('accountPassword') }}</span>
-                                @if(fs_account('detail.hasPassword'))
+                                @if (fs_account('detail.hasPassword'))
                                     <span class="form-control" id="input-editPassword">{{ fs_lang('settingAlready') }}</span>
                                     <button class="btn btn-outline-secondary"
                                         data-lable="{{ fs_lang('accountPassword') }}"
@@ -320,7 +320,7 @@
                             {{-- Wallet Password --}}
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('walletPassword') }}</span>
-                                @if(fs_account('detail.wallet.hasPassword'))
+                                @if (fs_account('detail.wallet.hasPassword'))
                                     <span class="form-control" id="input-editWalletPassword">{{ fs_lang('settingAlready') }}</span>
                                     <button class="btn btn-outline-secondary"
                                         data-lable="{{ fs_lang('walletPassword') }}"
@@ -361,7 +361,7 @@
 
                                                 @if (fs_account('detail.connects'))
                                                     @foreach(fs_account('detail.connects') as $item)
-                                                        @if($item['connectId'] === intval($service['code']))
+                                                        @if ($item['connectId'] === intval($service['code']))
                                                             {{ $item['nickname'] }}
                                                             <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                                                                 data-type="account"

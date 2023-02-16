@@ -359,7 +359,7 @@
                 $("#atHashtag").next().on('click',function () {
                     let hashtagContent = $("#atHashtag").val();
                     if (hashtagContent) {
-                        @if(fs_api_config('hashtag_format') == 2)
+                        @if (fs_api_config('hashtag_format') == 2)
                             $("#content").trigger('click').insertAtCaret(" #" + hashtagContent + "# ");
                         @else
                             $("#content").trigger('click').insertAtCaret(" #" + hashtagContent + " ");

@@ -23,8 +23,8 @@
                             <div class="input-group mb-3">
                                 <select class="form-select" name="fs_theme_is_email">
                                     <option selected disabled>{{ $lang['option_tip'] }}</option>
-                                    <option value="true" @if($themeParams['fs_theme_is_email']['value'] ?? null) selected @endif>{{ $lang['option_support'] }}</option>
-                                    <option value="false" @if(! $themeParams['fs_theme_is_email']['value'] ?? null) selected @endif>{{ $lang['option_no_support'] }}</option>
+                                    <option value="true" @if ($themeParams['fs_theme_is_email']['value'] ?? null) selected @endif>{{ $lang['option_support'] }}</option>
+                                    <option value="false" @if (! $themeParams['fs_theme_is_email']['value'] ?? null) selected @endif>{{ $lang['option_no_support'] }}</option>
                                 </select>
                             </div>
                         </div>
@@ -37,8 +37,8 @@
                             <div class="input-group mb-3">
                                 <select class="form-select" name="fs_theme_is_sms">
                                     <option selected disabled>{{ $lang['option_tip'] }}</option>
-                                    <option value="true" @if($themeParams['fs_theme_is_sms']['value'] ?? null) selected @endif>{{ $lang['option_support'] }}</option>
-                                    <option value="false" @if(! $themeParams['fs_theme_is_sms']['value'] ?? null) selected @endif>{{ $lang['option_no_support'] }}</option>
+                                    <option value="true" @if ($themeParams['fs_theme_is_sms']['value'] ?? null) selected @endif>{{ $lang['option_support'] }}</option>
+                                    <option value="false" @if (! $themeParams['fs_theme_is_sms']['value'] ?? null) selected @endif>{{ $lang['option_no_support'] }}</option>
                                 </select>
                             </div>
                         </div>

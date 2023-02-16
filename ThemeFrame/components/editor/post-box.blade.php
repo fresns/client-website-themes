@@ -10,13 +10,13 @@
                 <form class="form-post-box" action="{{ route('fresns.api.editor.quick.publish', ['type' => 'post']) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="postGid" value="{{ fs_api_config('post_editor_group') ? $group ? $group['gid'] : '' : '' }}">
-                    @if(fs_api_config('post_editor_group'))
+                    @if (fs_api_config('post_editor_group'))
                         <div class="shadow-sm">
                             <div class="d-grid">
                                 <button class="rounded-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center p-2" style="background-color: aliceblue;" type="button" data-bs-toggle="modal" data-bs-target="#post-box-fresns-group">
                                     <span class="py-2 ms-1">
                                         <i class="bi bi-archive-fill me-2"></i>
-                                        <span id="post-box-group">@if($group) {{ $group['gname'] }} @else {{ fs_db_config('group_name') }}: {{ fs_lang('editorNoChooseGroup') }} @endif</span>
+                                        <span id="post-box-group">@if ($group) {{ $group['gname'] }} @else {{ fs_db_config('group_name') }}: {{ fs_lang('editorNoChooseGroup') }} @endif</span>
                                     </span>
                                     <span class="py-2"><i class="bi bi-chevron-right"></i></span>
                                 </button>
@@ -79,7 +79,7 @@
                             @endif
 
                             {{-- Upload file --}}
-                            @if(fs_api_config('post_editor_image'))
+                            @if (fs_api_config('post_editor_image'))
                                 <div class="input-group">
                                     <label class="input-group-text" for="file">{{ fs_lang('editorImages') }}</label>
                                     <input type="file" class="form-control" accept="{{ fs_user_panel('fileAccept.images') ?? null }}" name="file" id="file">
@@ -93,7 +93,7 @@
                             <div class="bd-highlight me-auto">
                                 <button type="submit" class="btn btn-success btn-lg">{{ fs_db_config('publish_post_name') }}</button>
                             </div>
-                            @if(fs_api_config('post_editor_anonymous'))
+                            @if (fs_api_config('post_editor_anonymous'))
                                 <div class="bd-highlight">
                                     <div class="form-check">
                                         <input class="form-check-input" name="isAnonymous" type="checkbox" value="1" id="isAnonymous">

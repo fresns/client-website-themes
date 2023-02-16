@@ -4,7 +4,7 @@
 
 {{-- Reply Box --}}
 @if (fs_user()->check())
-    <div class="card order-5 mt-3 fresns-reply @if(empty($show)) hide @else show @endif" @if(empty($show)) style="display: none" @endif>
+    <div class="card order-5 mt-3 fresns-reply @if (empty($show)) hide @else show @endif" @if (empty($show)) style="display: none" @endif>
         <div class="card-header d-flex">
             <div class="flex-grow-1">{{ fs_db_config('publish_comment_name') }} {{ $nickname }}</div>
             <button type="button" class="btn-close"></button>
@@ -50,7 +50,7 @@
                             </div>
                         @endif
 
-                        @if(fs_api_config('comment_editor_image'))
+                        @if (fs_api_config('comment_editor_image'))
                             <div class="input-group">
                                 <label class="input-group-text" for="file">{{ fs_lang('editorImages') }}</label>
                                 <input type="file" class="form-control" accept="{{ fs_user_panel('fileAccept.images') }}" name="file" id="file">
@@ -66,7 +66,7 @@
                         </div>
 
                         {{-- anonymous checkbox --}}
-                        @if(fs_api_config('comment_editor_anonymous'))
+                        @if (fs_api_config('comment_editor_anonymous'))
                             <div class="bd-highlight">
                                 <div class="form-check">
                                     <input class="form-check-input" name="isAnonymous" type="checkbox" value="1" id="{{ $pid.$cid.'isAnonymous' }}">
@@ -88,7 +88,7 @@
         </script>
     @endpush
 @else
-    <div class="card order-5 mt-3 fresns-reply @if(empty($show)) hide @else show @endif" @if(empty($show)) style="display: none" @endif>
+    <div class="card order-5 mt-3 fresns-reply @if (empty($show)) hide @else show @endif" @if (empty($show)) style="display: none" @endif>
         <div class="card-header d-flex">
             <div class="flex-grow-1">{{ fs_db_config('publish_comment_name') }} {{ $nickname }}</div>
             <button type="button" class="btn-close"></button>

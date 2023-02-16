@@ -1,6 +1,6 @@
 <li class="list-group-item d-flex justify-content-start align-items-center" data-id="{{ $notification['id'] }}" data-type="{{ $notification['type'] }}" data-status="{{ $notification['readStatus'] }}">
     {{-- Read Status --}}
-    @if(! $notification['readStatus'])
+    @if (! $notification['readStatus'])
         <span class="p-1 bg-danger border border-light rounded-circle" id="badge-{{ $notification['id'] }}"></span>
     @endif
 

@@ -15,7 +15,7 @@
             <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-notifications.png" loading="lazy" width="36" height="36">
             {{ fs_db_config('menu_notifications') }}
 
-            @if(array_sum(fs_user_panel('unreadNotifications')) > 0)
+            @if (array_sum(fs_user_panel('unreadNotifications')) > 0)
                 <span class="badge bg-danger">{{ array_sum(fs_user_panel('unreadNotifications')) }}</span>
             @endif
         </a>
@@ -26,7 +26,7 @@
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-conversations.png" loading="lazy" width="36" height="36">
                 {{ fs_db_config('menu_conversations') }}
 
-                @if(fs_user_panel('conversations.unreadMessages') > 0)
+                @if (fs_user_panel('conversations.unreadMessages') > 0)
                     <span class="badge bg-danger">{{ fs_user_panel('conversations.unreadMessages') }}</span>
                 @endif
             </a>
@@ -37,7 +37,7 @@
             <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-drafts.png" loading="lazy" width="36" height="36">
             {{ fs_db_config('menu_editor_drafts') }}
 
-            @if(array_sum(fs_user_panel('draftCount')) > 0)
+            @if (array_sum(fs_user_panel('draftCount')) > 0)
                 <span class="badge bg-primary">{{ array_sum(fs_user_panel('draftCount')) }}</span>
             @endif
         </a>

@@ -142,8 +142,8 @@
                 </div>
                 <div class="modal-body">
                     <form class="mt-2" method="post" id="upload-form" multiple="true" enctype="multipart/form-data">
-                        <input type="hidden" name="usageType" @if($type === 'post') value="7" @elseif($type === "comment") value="8" @endif>
-                        <input type="hidden" name="tableName" @if($type === 'post') value="post_logs" @elseif($type === "comment") value="comment_logs" @endif>
+                        <input type="hidden" name="usageType" @if ($type === 'post') value="7" @elseif($type === "comment") value="8" @endif>
+                        <input type="hidden" name="tableName" @if ($type === 'post') value="post_logs" @elseif($type === "comment") value="comment_logs" @endif>
                         <input type="hidden" name="tableColumn" value="id">
                         <input type="hidden" name="tableId" value="{{ $draft['detail']['id'] ?? '' }}">
                         <input type="hidden" name="uploadMode" value="file">
