@@ -90,7 +90,7 @@
 
                     @if (! $replyToUser['status'])
                         <span class="text-muted">{{ fs_lang('contentCreatorDeactivate') }}</span>
-                    @elseif (empty($replyToUser['fsid']))
+                    @elseif (! $replyToUser['fsid'])
                         <span class="text-muted">{{ fs_lang('contentCreatorAnonymous') }}</span>
                     @else
                         <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $replyToUser['fsid']])) }}">{{ '@'.$replyToUser['fsid'] }}</a>

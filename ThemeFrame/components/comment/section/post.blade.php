@@ -3,9 +3,9 @@
         <div class="d-flex">
             <div class="flex-shrink-0"><img src="{{ $post['creator']['avatar'] }}" loading="lazy" alt="{{ $post['creator']['nickname'] }}" class="rounded"></div>
             <div class="flex-grow-1">
-                @if ($post['creator']['deactivate'])
+                @if (! $post['creator']['status'])
                     {{ fs_lang('contentCreatorDeactivate') }}:
-                @elseif (empty($post['creator']['fsid']))
+                @elseif (! $post['creator']['fsid'])
                     {{ fs_lang('contentCreatorAnonymous') }}:
                 @else
                     {{ $post['creator']['nickname'] }}:
