@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.4.0 (2023-02-16)
+
+- Enable or disable support for mentions and topics
+- Optimise handling of user deactivation status
+- Optimising the display style of user banner images
+- Changed 404 page image
+- Changed video cover image parameters
+- Modify theme settings and add dynamic effect toggle
+
+
 ## 2.3.0 (2023-02-09)
 
 - Use wrapper parameters to display version numbers
