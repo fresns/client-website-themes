@@ -231,55 +231,59 @@
                             {{-- Cell Phone Number --}}
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('phone') }}</span>
-                                @if(empty(fs_account('detail.phone')))
-                                    <span class="form-control" id="input-editPhone">{{ fs_lang('settingNot') }}</span>
-                                    <button class="btn btn-outline-secondary"
-                                        data-lable="{{ fs_lang('phone') }}"
-                                        data-sms-codes="{{ json_encode(fs_api_config('send_sms_supported_codes'), true) }}"
-                                        data-default-sms-code="{{ fs_account('detail.countryCode') ?: fs_api_config('send_sms_default_code') }}"
-                                        data-name="editPhone"
-                                        data-action="{{ route('fresns.api.account.edit') }}"
-                                        type="button" data-bs-toggle="modal" data-bs-target="#editModal">
-                                        {{ fs_lang('setting') }}
-                                    </button>
-                                @else
-                                    <span class="form-control" id="input-editPhone">+{{ fs_account('detail.countryCode') }} {{ fs_account('detail.purePhone') }}</span>
-                                    <button class="btn btn-outline-secondary"
-                                        data-lable="{{ fs_lang('phone') }}"
-                                        data-desc="{{ fs_lang('settingWarning') }}"
-                                        data-sms-codes="{{ json_encode(fs_api_config('send_sms_supported_codes'), true) }}"
-                                        data-default-sms-code="{{ fs_account('detail.countryCode') ?: fs_api_config('send_sms_default_code') }}"
-                                        data-name="editPhone"
-                                        data-action="{{ route('fresns.api.account.edit') }}"
-                                        data-value="{{ fs_account('detail.phone') }}"
-                                        type="button" data-bs-toggle="modal" data-bs-target="#editModal">
-                                        {{ fs_lang('modify') }}
-                                    </button>
+                                @if (fs_api_config('send_sms_service'))
+                                    @if(empty(fs_account('detail.phone')))
+                                        <span class="form-control" id="input-editPhone">{{ fs_lang('settingNot') }}</span>
+                                        <button class="btn btn-outline-secondary"
+                                            data-lable="{{ fs_lang('phone') }}"
+                                            data-sms-codes="{{ json_encode(fs_api_config('send_sms_supported_codes'), true) }}"
+                                            data-default-sms-code="{{ fs_account('detail.countryCode') ?: fs_api_config('send_sms_default_code') }}"
+                                            data-name="editPhone"
+                                            data-action="{{ route('fresns.api.account.edit') }}"
+                                            type="button" data-bs-toggle="modal" data-bs-target="#editModal">
+                                            {{ fs_lang('setting') }}
+                                        </button>
+                                    @else
+                                        <span class="form-control" id="input-editPhone">+{{ fs_account('detail.countryCode') }} {{ fs_account('detail.purePhone') }}</span>
+                                        <button class="btn btn-outline-secondary"
+                                            data-lable="{{ fs_lang('phone') }}"
+                                            data-desc="{{ fs_lang('settingWarning') }}"
+                                            data-sms-codes="{{ json_encode(fs_api_config('send_sms_supported_codes'), true) }}"
+                                            data-default-sms-code="{{ fs_account('detail.countryCode') ?: fs_api_config('send_sms_default_code') }}"
+                                            data-name="editPhone"
+                                            data-action="{{ route('fresns.api.account.edit') }}"
+                                            data-value="{{ fs_account('detail.phone') }}"
+                                            type="button" data-bs-toggle="modal" data-bs-target="#editModal">
+                                            {{ fs_lang('modify') }}
+                                        </button>
+                                    @endif
                                 @endif
                             </div>
                             {{-- E-Mail --}}
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('email') }}</span>
-                                @if(empty(fs_account('detail.email')))
-                                    <span class="form-control" id="input-editEmail">{{ fs_lang('settingNot') }}</span>
-                                    <button class="btn btn-outline-secondary"
-                                        data-lable="{{ fs_lang('email') }}"
-                                        data-name="editEmail"
-                                        data-action="{{ route('fresns.api.account.edit') }}"
-                                        type="button" data-bs-toggle="modal" data-bs-target="#editModal">
-                                        {{ fs_lang('setting') }}
-                                    </button>
-                                @else
-                                    <span class="form-control" id="input-editEmail">{{ fs_account('detail.email') }}</span>
-                                    <button class="btn btn-outline-secondary"
-                                        data-lable="{{ fs_lang('email') }}"
-                                        data-desc="{{ fs_lang('settingWarning') }}"
-                                        data-name="editEmail"
-                                        data-action="{{ route('fresns.api.account.edit') }}"
-                                        data-value="{{ fs_account('detail.email') }}"
-                                        type="button" data-bs-toggle="modal" data-bs-target="#editModal">
-                                        {{ fs_lang('modify') }}
-                                    </button>
+                                @if (fs_api_config('send_email_service'))
+                                    @if(empty(fs_account('detail.email')))
+                                        <span class="form-control" id="input-editEmail">{{ fs_lang('settingNot') }}</span>
+                                        <button class="btn btn-outline-secondary"
+                                            data-lable="{{ fs_lang('email') }}"
+                                            data-name="editEmail"
+                                            data-action="{{ route('fresns.api.account.edit') }}"
+                                            type="button" data-bs-toggle="modal" data-bs-target="#editModal">
+                                            {{ fs_lang('setting') }}
+                                        </button>
+                                    @else
+                                        <span class="form-control" id="input-editEmail">{{ fs_account('detail.email') }}</span>
+                                        <button class="btn btn-outline-secondary"
+                                            data-lable="{{ fs_lang('email') }}"
+                                            data-desc="{{ fs_lang('settingWarning') }}"
+                                            data-name="editEmail"
+                                            data-action="{{ route('fresns.api.account.edit') }}"
+                                            data-value="{{ fs_account('detail.email') }}"
+                                            type="button" data-bs-toggle="modal" data-bs-target="#editModal">
+                                            {{ fs_lang('modify') }}
+                                        </button>
+                                    @endif
                                 @endif
                             </div>
                             {{-- Account Password --}}

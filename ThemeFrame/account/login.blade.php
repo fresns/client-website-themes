@@ -30,7 +30,7 @@
             @endif
 
             {{-- Select Login Method --}}
-            @if (fs_db_config('fs_theme_is_email') && fs_db_config('fs_theme_is_sms'))
+            @if (fs_api_config('send_email_service') && fs_api_config('send_sms_service'))
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-PasswordAccount-tab" data-bs-toggle="tab" data-bs-target="#nav-PasswordAccount" type="button" role="tab" aria-controls="nav-PasswordAccount" aria-selected="true">{{ fs_lang('accountLoginByPassword') }}</button>
@@ -146,12 +146,12 @@
                         @csrf
                         <input type="hidden" name="redirectURL" value="{{ request()->get('redirectURL') }}">
                         {{-- Account --}}
-                        @if (fs_db_config('fs_theme_is_email') && fs_db_config('fs_theme_is_sms'))
+                        @if (fs_api_config('send_email_service') && fs_api_config('send_sms_service'))
                             <div class="input-group mb-3 mt-2">
                                 <span class="input-group-text" id="basic-addon1">{{ fs_lang('accountType') }}</span>
                                 <div class="form-control">
                                     {{-- E-Mail --}}
-                                    @if (fs_db_config('fs_theme_is_email'))
+                                    @if (fs_api_config('send_email_service'))
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="type" id="code_account_email" value="email" data-bs-toggle="collapse" data-bs-target="#code_account_email:not(.show)" aria-expanded="true" aria-controls="code_account_email" checked>
                                             <label class="form-check-label" for="code_account_email">{{ fs_lang('email') }}</label>
@@ -159,7 +159,7 @@
                                     @endif
 
                                     {{-- Phone --}}
-                                    @if (fs_db_config('fs_theme_is_sms'))
+                                    @if (fs_api_config('send_sms_service'))
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="type" id="code_account_phone" value="phone" data-bs-toggle="collapse" data-bs-target="#code_account_phone:not(.show)" aria-expanded="false" aria-controls="code_account_phone">
                                             <label class="form-check-label" for="code_account_phone">{{ fs_lang('phone') }}</label>
@@ -174,7 +174,7 @@
                             <input type="hidden" name="useType" value="2">
                             <input type="hidden" name="templateId" value="7">
                             {{-- E-Mail --}}
-                            @if (fs_db_config('fs_theme_is_email'))
+                            @if (fs_api_config('send_email_service'))
                                 <div class="collapse show" id="code_account_email" aria-labelledby="code_account_email" data-bs-parent="#accordionCodeAccount">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">{{ fs_lang('email') }}</span>
@@ -187,8 +187,8 @@
                             @endif
 
                             {{-- Cell Phone Number --}}
-                            @if (fs_db_config('fs_theme_is_sms'))
-                                <div class="collapse @if (! fs_db_config('fs_theme_is_email')) show @endif" id="code_account_phone" aria-labelledby="code_account_phone" data-bs-parent="#accordionCodeAccount">
+                            @if (fs_api_config('send_sms_service'))
+                                <div class="collapse @if (! fs_api_config('send_email_service')) show @endif" id="code_account_phone" aria-labelledby="code_account_phone" data-bs-parent="#accordionCodeAccount">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">{{ fs_lang('phone') }}</span>
                                         @if (count(fs_api_config('send_sms_supported_codes')) > 1)
