@@ -19,7 +19,7 @@
                 @endif
             @endif
 
-            : {!! Str::limit($comment['content'], 140) !!}
+            : {!! $comment['content'] !!}
 
             @if ($comment['fileCount']['images'] > 0)
                 <span class="text-primary">[{{ fs_lang('image') }}]</span>
