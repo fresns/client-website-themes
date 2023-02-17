@@ -400,25 +400,25 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
     atwho();
 
     // loading
-    $(document).on("click", "a", function(e) {
-        var href = $(this).attr("href");
+    $(document).on('click', 'a', function (e) {
+        var href = $(this).attr('href');
         var loading = $(this).data('loading');
 
-        if (href && !href.startsWith("javascript:") && href !== "#" && loading !== "false") {
-            if ((href.indexOf(location.hostname) !== -1 || href[0] === "/") && $(this).attr("target") !== "_blank") {
-                $("#loading").show();
+        if (href && !href.startsWith('javascript:') && href !== '#' && loading !== 'false') {
+            if ((href.indexOf(location.hostname) !== -1 || href[0] === '/') && $(this).attr('target') !== '_blank') {
+                $('#loading').show();
             }
         }
     });
-    $(window).on("load", function() {
-        $("#loading").hide();
+    $(window).on('load', function () {
+        $('#loading').hide();
     });
     window.addEventListener('pageshow', function () {
-        $("#loading").hide();
+        $('#loading').hide();
     });
-    window.addEventListener("visibilitychange", function() {
+    window.addEventListener('visibilitychange', function () {
         // android compatible
-        $("#loading").hide();
+        $('#loading').hide();
     });
 
     // image zoom
@@ -430,18 +430,18 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
     // video play
     var videos = document.getElementsByTagName('video');
     for (var i = videos.length - 1; i >= 0; i--) {
-        (function(){
+        (function () {
             var p = i;
-            videos[p].addEventListener('play',function(){
+            videos[p].addEventListener('play', function () {
                 pauseAll(p);
-            })
-        })()
-    };
-    function pauseAll(index){
+            });
+        })();
+    }
+    function pauseAll(index) {
         for (var j = videos.length - 1; j >= 0; j--) {
-            if (j!=index) videos[j].pause();
+            if (j != index) videos[j].pause();
         }
-    };
+    }
 
     // jquery extend
     $.fn.extend({
@@ -549,14 +549,14 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     complete: function (e) {
                         btn.prop('disabled', false);
                         btn.find('.spinner-border').remove();
-                        $("#loading").hide();
+                        $('#loading').hide();
                     },
                 });
             },
             complete: function (e) {
                 btn.prop('disabled', false);
                 btn.find('.spinner-border').remove();
-                $("#loading").hide();
+                $('#loading').hide();
             },
         });
     });
