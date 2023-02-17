@@ -399,11 +399,49 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
     // at and hashtag
     atwho();
 
+    // loading
+    $(document).on("click", "a", function(e) {
+        var href = $(this).attr("href");
+        var loading = $(this).data('loading');
+
+        if (href && !href.startsWith("javascript:") && href !== "#" && loading !== "false") {
+            if ((href.indexOf(location.hostname) !== -1 || href[0] === "/") && $(this).attr("target") !== "_blank") {
+                $("#loading").show();
+            }
+        }
+    });
+    $(window).on("load", function() {
+        $("#loading").hide();
+    });
+    window.addEventListener('pageshow', function () {
+        $("#loading").hide();
+    });
+    window.addEventListener("visibilitychange", function() {
+        // android compatible
+        $("#loading").hide();
+    });
+
     // image zoom
     $('.zoom-image').on('click', function () {
         $('#imageZoom img').attr('src', $(this).data('zoom-src'));
         $('#imageZoom').modal('show');
     });
+
+    // video play
+    var videos = document.getElementsByTagName('video');
+    for (var i = videos.length - 1; i >= 0; i--) {
+        (function(){
+            var p = i;
+            videos[p].addEventListener('play',function(){
+                pauseAll(p);
+            })
+        })()
+    };
+    function pauseAll(index){
+        for (var j = videos.length - 1; j >= 0; j--) {
+            if (j!=index) videos[j].pause();
+        }
+    };
 
     // jquery extend
     $.fn.extend({
@@ -486,8 +524,13 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
 
     $('.fresns-file-download').on('click', function (e) {
         e.preventDefault();
+        $(this).prop('disabled', true);
+        $(this).prepend(
+            '<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> '
+        );
         var name = $(this).data('name');
         var mime = $(this).data('mime');
+        const btn = $(this);
 
         $.ajax({
             method: 'get',
@@ -503,7 +546,17 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     success: function (res) {
                         downloadFile(res, name, mime);
                     },
+                    complete: function (e) {
+                        btn.prop('disabled', false);
+                        btn.find('.spinner-border').remove();
+                        $("#loading").hide();
+                    },
                 });
+            },
+            complete: function (e) {
+                btn.prop('disabled', false);
+                btn.find('.spinner-border').remove();
+                $("#loading").hide();
             },
         });
     });

@@ -128,42 +128,6 @@
         window.mentionStatus = {{ fs_api_config('mention_status') ? 1 : 0 }};
         window.hashtagStatus = {{ fs_api_config('hashtag_status') ? 1 : 0 }};
         window.hashtagFormat = {{ fs_api_config('hashtag_format') }};
-
-        // loading
-        $(document).on("click", "a", function(e) {
-            var href = $(this).attr("href");
-            if (href && !href.startsWith("javascript:") && href !== "#") {
-                if ((href.indexOf(location.hostname) !== -1 || href[0] === "/") && $(this).attr("target") !== "_blank") {
-                    $("#loading").show();
-                }
-            }
-        });
-        $(window).on("load", function() {
-            $("#loading").hide();
-        });
-        window.addEventListener('pageshow', function () {
-            $("#loading").hide();
-        });
-        window.addEventListener("visibilitychange", function() {
-            // android compatible
-            $("#loading").hide();
-        });
-
-        // video play
-        var videos = document.getElementsByTagName('video'); 
-        for (var i = videos.length - 1; i >= 0; i--) {
-            (function(){
-                var p = i;
-                videos[p].addEventListener('play',function(){
-                    pauseAll(p);
-                })
-            })()
-        };
-        function pauseAll(index){
-            for (var j = videos.length - 1; j >= 0; j--) {
-                if (j!=index) videos[j].pause();
-            }
-        };
     </script>
     <script src="/assets/plugins/{{ $engineUnikey }}/js/fresns-iframe.js?v={{ $engineVersion }}"></script>
     <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v={{ $themeVersion }}"></script>
