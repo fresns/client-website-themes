@@ -187,7 +187,7 @@ function downloadFile(url, fileName, mimeType) {
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.responseType = 'blob';
-    xhr.onload = function() {
+    xhr.onload = function () {
         if (xhr.status === 200) {
             const blob = xhr.response;
             const a = document.createElement('a');
