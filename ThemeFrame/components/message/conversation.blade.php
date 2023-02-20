@@ -1,16 +1,14 @@
 <a href="{{ fs_route(route('fresns.message.conversation', ['conversationId' => $conversation['id']])) }}" class="list-group-item list-group-item-action d-flex justify-content-between position-relative">
-    @if ($conversation['userIsDeactivate'])
-        <img src="{{ fs_db_config('deactivate_avatar') }}" loading="lazy" class="conversation-list-avatar rounded-circle">
-    @else
+    @if ($conversation['user']['status'])
         <img src="{{ $conversation['user']['avatar'] }}" loading="lazy" class="conversation-list-avatar rounded-circle">
+    @else
+        <img src="{{ fs_db_config('deactivate_avatar') }}" loading="lazy" class="conversation-list-avatar rounded-circle">
     @endif
 
     <div class="flex-fill ms-2">
         <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">
-                @if ($conversation['userIsDeactivate'])
-                    {{ fs_lang('contentCreatorDeactivate') }}
-                @else
+                @if ($conversation['user']['status'])
                     {{ $conversation['user']['nickname'] }}
 
                     @if ($conversation['user']['verifiedStatus'])
@@ -22,6 +20,8 @@
                     @endif
 
                     <span class="conversation-user-name text-secondary">{{ '@'.$conversation['user']['fsid'] }}</span>
+                @else
+                    {{ fs_lang('contentCreatorDeactivate') }}
                 @endif
             </h5>
             <small class="text-muted pt-1">{{ $conversation['latestMessage']['datetimeFormat'] }}</small>
