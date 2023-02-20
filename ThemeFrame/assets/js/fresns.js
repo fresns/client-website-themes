@@ -184,6 +184,8 @@ function fetchSendVerifyCode(type, useType, templateId, account, action, obj, co
 
 // download file
 function downloadFile(url, fileName, mimeType) {
+    $('#loading').hide();
+
     const xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
     xhr.responseType = 'blob';
@@ -197,9 +199,11 @@ function downloadFile(url, fileName, mimeType) {
             a.href = url;
             a.download = fileName;
             a.type = mimeType;
+
             a.click();
             window.URL.revokeObjectURL(url);
             document.body.removeChild(a);
+            $('#loading').hide();
         }
     };
     xhr.send();
@@ -529,29 +533,30 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
     });
 
     $('.fresns-file-download').on('click', function (e) {
-        e.preventDefault();
-        $(this).prop('disabled', true);
-        $(this).prepend(
+        e.stopPropagation();
+        let button = $(this),
+            url = button.data('url'),
+            name = button.data('name'),
+            mime = button.data('mime');
+
+        button.prop('disabled', true);
+        button.prepend(
             '<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> '
         );
-        var name = $(this).data('name');
-        var mime = $(this).data('mime');
-        const btn = $(this);
 
         $.ajax({
             method: 'get',
-            url: $(this).attr('href'),
+            url: url,
             success: function (res) {
                 if (res.code != 0) {
                     return window.tips(res.message, res.code);
                 }
 
                 downloadFile(res.data.originalUrl, name, mime);
-                $('#loading').hide();
             },
             complete: function (e) {
-                btn.prop('disabled', false);
-                btn.find('.spinner-border').remove();
+                button.prop('disabled', false);
+                button.find('.spinner-border').remove();
                 $('#loading').hide();
             },
         });
