@@ -18,9 +18,9 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-icons.css">
     <link rel="stylesheet" href="/static/css/select2.min.css">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v={{ $themeVersion }}">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v={{ $themeVersion }}">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v={{ $themeVersion }}">
+    <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/atwho.min.css?v={{ $themeVersion }}">
+    <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/prism.min.css?v={{ $themeVersion }}">
+    <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/fresns.css?v={{ $themeVersion }}">
     @stack('style')
     @if (fs_db_config('website_stat_position') == 'head')
         {!! fs_db_config('website_stat_code') !!}
@@ -130,11 +130,11 @@
         window.hashtagFormat = {{ fs_api_config('hashtag_format') }};
     </script>
     <script src="/assets/plugins/{{ $engineUnikey }}/js/fresns-iframe.js?v={{ $engineVersion }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v={{ $themeVersion }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v={{ $themeVersion }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v={{ $themeVersion }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v={{ $themeVersion }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/fresns.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/{{ $themeUnikey }}/js/jquery.caret.min.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/{{ $themeUnikey }}/js/atwho.min.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/{{ $themeUnikey }}/js/prism.min.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/{{ $themeUnikey }}/js/sendVerifyCode.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/{{ $themeUnikey }}/js/fresns.js?v={{ $themeVersion }}"></script>
     @stack('script')
 </body>
 
