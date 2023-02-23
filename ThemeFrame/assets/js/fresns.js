@@ -1518,8 +1518,8 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     return;
                 }
 
-                if (res.data.imageAvatarUrl && res.data.fid) {
-                    let data = { avatarFid: res.data.fid, avatarUrl: null };
+                if (res.data.fid) {
+                    let data = { avatarFid: res.data.fid };
                     window.buildAjaxAndSubmit(
                         editAction,
                         data,
