@@ -26,7 +26,7 @@
                 </div>
 
                 {{-- List --}}
-                <article class="card clearfix">
+                <article class="card clearfix" id="fresns-list-container">
                     @if ($type == 'posts')
                         {{-- Post List --}}
                         @foreach($posts as $post)

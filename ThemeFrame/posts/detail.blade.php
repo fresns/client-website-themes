@@ -18,7 +18,7 @@
                     @component('components.post.detail', compact('post'))@endcomponent
                 </div>
 
-                <article class="card clearfix" id="commentList" name="commentList">
+                <div class="card clearfix" id="commentList" name="commentList">
                     <div class="card-header">
                         <h5 class="mb-0">{{ fs_db_config('comment_name') }}</h5>
                     </div>
@@ -42,23 +42,25 @@
                     @endif
 
                     {{-- Comment List --}}
-                    @foreach($comments as $comment)
-                        @component('components.comment.list', [
-                            'comment' => $comment,
-                            'detailLink' => true,
-                            'sectionCreatorLiked' => true,
-                        ])@endcomponent
+                    <article class="clearfix" id="fresns-list-container">
+                        @foreach($comments as $comment)
+                            @component('components.comment.list', [
+                                'comment' => $comment,
+                                'detailLink' => true,
+                                'sectionCreatorLiked' => true,
+                            ])@endcomponent
 
-                        @if (! $loop->last)
-                            <hr>
-                        @endif
-                    @endforeach
+                            @if (! $loop->last)
+                                <hr>
+                            @endif
+                        @endforeach
+                    </article>
 
                     {{-- Pagination --}}
                     <div class="my-3 table-responsive">
                         {{ $comments->links() }}
                     </div>
-                </article>
+                </div>
             </div>
 
             {{-- Right Sidebar --}}

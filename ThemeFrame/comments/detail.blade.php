@@ -18,7 +18,7 @@
                     @component('components.comment.detail', compact('comment'))@endcomponent
                 </div>
 
-                <article class="card clearfix">
+                <article class="card clearfix" id="fresns-list-container">
                     <div class="card-header">
                         <h5 class="mb-0">{{ fs_db_config('comment_name') }}</h5>
                     </div>

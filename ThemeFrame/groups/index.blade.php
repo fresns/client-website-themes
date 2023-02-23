@@ -29,7 +29,7 @@
                     @endforeach
                 @else
                     {{-- Group List --}}
-                    <div class="card mb-5 py-4">
+                    <div class="card mb-5 py-4" id="fresns-list-container">
                         @foreach($groups ?? [] as $group)
                             @component('components.group.list', compact('group'))@endcomponent
                             @if (! $loop->last)

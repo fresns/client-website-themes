@@ -28,7 +28,7 @@
                 @endif
 
                 {{-- Post List --}}
-                <article class="card clearfix">
+                <article class="card clearfix" id="fresns-list-container">
                     {{-- Check Perm --}}
                     @if ($group['mode'] == 2 && ! $group['interaction']['followStatus'])
                         <div class="text-center py-5 text-danger">

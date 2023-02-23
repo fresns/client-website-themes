@@ -15,7 +15,7 @@
             {{-- Middle Content --}}
             <div class="col-sm-6">
                 {{-- Hashtag List --}}
-                <article class="card clearfix py-4">
+                <article class="card clearfix py-4" id="fresns-list-container">
                     @foreach($hashtags as $hashtag)
                         @component('components.hashtag.list', compact('hashtag'))@endcomponent
                         @if (! $loop->last)
