@@ -2,7 +2,7 @@
 
 @section('list')
     {{-- List --}}
-    <article class="py-4">
+    <article class="py-4" id="fresns-list-container">
         @foreach($comments as $comment)
             @component('components.comment.list', [
                 'comment' => $comment,

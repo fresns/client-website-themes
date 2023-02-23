@@ -29,7 +29,7 @@
                     @endforeach
                 @else
                     {{-- Group List --}}
-                    <div class="card mb-5 py-4" id="fresns-list-container">
+                    <div class="card mb-5 py-4" @if (fs_db_config('menu_group_query_state') != 1) id="fresns-list-container" @endif>
                         @foreach($groups ?? [] as $group)
                             @component('components.group.list', compact('group'))@endcomponent
                             @if (! $loop->last)

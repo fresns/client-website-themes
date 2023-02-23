@@ -15,7 +15,7 @@
             {{-- Middle Content --}}
             <div class="col-sm-6">
                 {{-- Post List --}}
-                <article class="card clearfix" id="fresns-list-container">
+                <article class="card clearfix" @if (fs_db_config('menu_post_list_query_state') != 1) id="fresns-list-container" @endif>
                     @foreach($posts as $post)
                         @component('components.post.list', compact('post'))@endcomponent
                         @if (! $loop->last)

@@ -139,15 +139,6 @@ function sendVerifyCode(obj) {
     fetchSendVerifyCode(type, useType, templateId, account, action, obj, countryCode);
 }
 
-/**
- *
- * @param type
- * @param useType
- * @param templateId
- * @param account
- * @param action
- * @param countryCode
- */
 function fetchSendVerifyCode(type, useType, templateId, account, action, obj, countryCode) {
     let data;
     if (type == 'email') {
@@ -1602,6 +1593,64 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         });
     });
 })(jQuery);
+
+// ajax get list
+$(function () {
+    // Get the initial page number and last page code
+    var currentPage = 1;
+    var lastPage = 1;
+
+    // Whether data is currently being requested
+    var isLoading = false;
+
+    $(window).scroll(function () {
+        if (! window.ajaxList || $('#fresns-list-container').length == 0) {
+            return;
+        }
+
+        // If the scrollbar reaches the bottom
+        if ($(document).height() - $(this).scrollTop() - $(this).height() < 1 && currentPage <= lastPage && !isLoading) {
+            // Show loading text
+            $('#fresns-list-loading').show();
+
+            // Set the current data being requested
+            isLoading = true;
+
+            // Send an AJAX request to get the data of the next page
+            $.ajax({
+                url: window.location.href,
+                type: 'get',
+                data: {
+                    page: currentPage + 1
+                },
+                dataType: 'json',
+                success: function (response) {
+                    // Hide the loading text
+                    $('#fresns-list-loading').hide();
+
+                    // Insert the HTML of the next page to the bottom of the list
+                    $('#fresns-list-container').append(response.html);
+
+                    // Update current page number and last page code
+                    currentPage = response.paginate.currentPage;
+                    lastPage = response.paginate.lastPage;
+
+                    // If it is the last page, the text is displayed
+                    if (currentPage >= lastPage) {
+                        $('#fresns-list-no-more').show();
+                    }
+
+                    // Set the variable to false when the request is complete
+                    isLoading = false;
+                },
+                error: function () {
+                    // If the request fails, also set the variable to false
+                    isLoading = false;
+                }
+            });
+        }
+    });
+});
 
 // Markdown a tag
 $(document).ready(function () {

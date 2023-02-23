@@ -28,21 +28,23 @@
                 @endif
 
                 {{-- Post List --}}
-                <article class="card clearfix" id="fresns-list-container">
+                <div class="card clearfix">
                     {{-- Check Perm --}}
                     @if ($group['mode'] == 2 && ! $group['interaction']['followStatus'])
                         <div class="text-center py-5 text-danger">
                             <i class="bi bi-info-circle"></i> {{ fs_code_message('37103') }}
                         </div>
                     @else
-                        @foreach($posts as $post)
-                            @component('components.post.list', compact('post'))@endcomponent
-                            @if (! $loop->last)
-                                <hr>
-                            @endif
-                        @endforeach
+                        <article id="fresns-list-container">
+                            @foreach($posts as $post)
+                                @component('components.post.list', compact('post'))@endcomponent
+                                @if (! $loop->last)
+                                    <hr>
+                                @endif
+                            @endforeach
+                        </article>
                     @endif
-                </article>
+                </div>
 
                 {{-- Pagination --}}
                 <div class="my-3 table-responsive">
