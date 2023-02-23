@@ -35,6 +35,10 @@
                         @endif
                     @endforeach
                 </article>
+
+                <div class="my-3 table-responsive">
+                    {{ $comments->links() }}
+                </div>
             </div>
 
             {{-- Right Sidebar --}}
