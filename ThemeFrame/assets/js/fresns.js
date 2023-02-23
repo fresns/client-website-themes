@@ -1615,6 +1615,7 @@ $(function () {
             !isLoading
         ) {
             // Show loading text
+            $('#fresns-list-tip').hide();
             $('#fresns-list-loading').show();
 
             // Set the current data being requested
@@ -1631,6 +1632,7 @@ $(function () {
                 success: function (response) {
                     // Hide the loading text
                     $('#fresns-list-loading').hide();
+                    $('#fresns-list-tip').show();
 
                     // Insert the HTML of the next page to the bottom of the list
                     $('#fresns-list-container').append(response.html);
@@ -1641,6 +1643,7 @@ $(function () {
 
                     // If it is the last page, the text is displayed
                     if (currentPage >= lastPage) {
+                        $('#fresns-list-tip').hide();
                         $('#fresns-list-no-more').show();
                     }
 
