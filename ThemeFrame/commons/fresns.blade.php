@@ -122,7 +122,7 @@
     <script src="/static/js/js.cookie.min.js"></script>
     <script src="/static/js/iframeResizer.min.js"></script>
     <script>
-        window.ajaxList = false;
+        window.ajaxGetList = false;
         window.siteName = "{{ fs_db_config('site_name') }}";
         window.siteIcon = "{{ fs_db_config('site_icon') }}";
         window.langTag = "{{ current_lang_tag() }}";

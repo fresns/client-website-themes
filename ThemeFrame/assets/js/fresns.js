@@ -1604,16 +1604,16 @@ $(function () {
     var isLoading = false;
 
     $(window).scroll(function () {
-        if (!window.ajaxList || $('#fresns-list-container').length == 0) {
-            return;
-        }
-
         // If the scrollbar reaches the bottom
         if (
             $(document).height() - $(this).scrollTop() - $(this).height() < 1 &&
+            window.ajaxGetList &&
+            $('#fresns-list-container').length > 0 &&
             currentPage <= lastPage &&
             !isLoading
         ) {
+            console.log('ajax get list');
+
             // Show loading text
             $('#fresns-list-tip').hide();
             $('#fresns-list-loading').show();
