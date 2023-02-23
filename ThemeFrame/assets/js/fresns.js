@@ -1604,12 +1604,16 @@ $(function () {
     var isLoading = false;
 
     $(window).scroll(function () {
-        if (! window.ajaxList || $('#fresns-list-container').length == 0) {
+        if (!window.ajaxList || $('#fresns-list-container').length == 0) {
             return;
         }
 
         // If the scrollbar reaches the bottom
-        if ($(document).height() - $(this).scrollTop() - $(this).height() < 1 && currentPage <= lastPage && !isLoading) {
+        if (
+            $(document).height() - $(this).scrollTop() - $(this).height() < 1 &&
+            currentPage <= lastPage &&
+            !isLoading
+        ) {
             // Show loading text
             $('#fresns-list-loading').show();
 
@@ -1621,7 +1625,7 @@ $(function () {
                 url: window.location.href,
                 type: 'get',
                 data: {
-                    page: currentPage + 1
+                    page: currentPage + 1,
                 },
                 dataType: 'json',
                 success: function (response) {
@@ -1646,7 +1650,7 @@ $(function () {
                 error: function () {
                     // If the request fails, also set the variable to false
                     isLoading = false;
-                }
+                },
             });
         }
     });
