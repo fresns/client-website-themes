@@ -1607,6 +1607,8 @@ $(function () {
     var observer = new IntersectionObserver(
         function (entries, observer) {
             entries.forEach(function (entry) {
+                console.log('ajax get list');
+
                 // Is loading turned on
                 if (!window.ajaxGetList || $('#fresns-list-container').length == 0) {
                     $('#fresns-list-tip').hide();
@@ -1657,6 +1659,8 @@ $(function () {
                         error: function () {
                             // If the request fails, also set the variable to false
                             isLoading = false;
+
+                            console.log('ajax get list => error');
                         },
                     });
                 }
