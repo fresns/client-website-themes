@@ -6,6 +6,8 @@
     use App\Helpers\ConfigHelper;
 
     $email = ConfigHelper::fresnsConfigByItemKey('site_email');
+
+    $codeArr = [31501, 31502, 31503, 31504, 31505, 31601, 31602, 31603];
 @endphp
 
 @section('content')
@@ -17,7 +19,7 @@
                     <p>{{ $message }}</p>
                     <p class="mt-4">Administrator Email: <a href="mailto:{{ $email }}">{{ $email }}</a></p>
 
-                    @if ($code == 31505 || $code == 31603)
+                    @if (in_array($code, $codeArr))
                         <a class="btn btn-outline-success btn-sm mt-4 clear-cookie" href="#" data-method="DELETE" data-action="{{ route('panel.clear.web.cookie') }}">Clear Cookie</a>
                     @endif
                 </div>

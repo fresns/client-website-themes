@@ -93,7 +93,7 @@
                     @elseif (! $replyToUser['fsid'])
                         <span class="text-muted">{{ fs_lang('contentCreatorAnonymous') }}</span>
                     @else
-                        <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $replyToUser['fsid']])) }}">{{ '@'.$replyToUser['fsid'] }}</a>
+                        <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $replyToUser['fsid']])) }}">{{ $replyToUser['nickname'] }}</a>
                     @endif
                 </div>
             @endif
