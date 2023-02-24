@@ -45,7 +45,7 @@
             'editTimeFormat' => $sticky['editTimeFormat'],
             'ipLocation' => $sticky['ipLocation'],
             'location' => $sticky['location'],
-            'replyToUser' => $sticky['replyToUser'],
+            'replyToComment' => $sticky['replyToComment'],
         ])@endcomponent
     </section>
 

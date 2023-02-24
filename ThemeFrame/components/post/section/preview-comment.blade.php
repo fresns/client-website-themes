@@ -39,9 +39,9 @@
                     <span class="author-badge">{{ fs_lang('contentCreator') }}</span>
                 @endif
     
-                @if ($comment['replyToUser'])
-                    @if ($comment['replyToUser']['nickname'])
-                        {{ fs_db_config('publish_comment_name') }} <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToUser']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['replyToUser']['nickname'] }}</a>
+                @if ($comment['replyToComment'])
+                    @if ($comment['replyToComment']['creator']['nickname'])
+                        {{ fs_db_config('publish_comment_name') }} <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToComment']['creator']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['replyToComment']['creator']['nickname'] }}</a>
                     @else
                         {{ fs_db_config('publish_comment_name') }} <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>
                     @endif

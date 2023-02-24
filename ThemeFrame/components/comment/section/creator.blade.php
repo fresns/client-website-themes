@@ -84,16 +84,16 @@
             @endif
 
             {{-- Commenter Reply User --}}
-            @if ($replyToUser)
+            @if ($replyToComment)
                 <div class="text-success ms-2">
                     {{ fs_db_config('publish_comment_name') }}
 
-                    @if (! $replyToUser['status'])
+                    @if (! $replyToComment['creator']['status'])
                         <span class="text-muted">{{ fs_lang('contentCreatorDeactivate') }}</span>
-                    @elseif (! $replyToUser['fsid'])
+                    @elseif (! $replyToComment['creator']['fsid'])
                         <span class="text-muted">{{ fs_lang('contentCreatorAnonymous') }}</span>
                     @else
-                        <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $replyToUser['fsid']])) }}">{{ $replyToUser['nickname'] }}</a>
+                        <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $replyToComment['creator']['fsid']])) }}">{{ $replyToComment['creator']['nickname'] }}</a>
                     @endif
                 </div>
             @endif
