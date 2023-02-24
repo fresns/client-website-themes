@@ -35,14 +35,51 @@
                             <i class="bi bi-info-circle"></i> {{ fs_code_message('37103') }}
                         </div>
                     @else
-                        <article id="fresns-list-container">
-                            @foreach($posts as $post)
-                                @component('components.post.list', compact('post'))@endcomponent
-                                @if (! $loop->last)
-                                    <hr>
-                                @endif
-                            @endforeach
-                        </article>
+                        {{-- List --}}
+                        @switch($type)
+                            {{-- Post List --}}
+                            @case('posts')
+                                <div class="clearfix" id="fresns-list-container">
+                                    @foreach($posts as $post)
+                                        @component('components.post.list', compact('post'))@endcomponent
+
+                                        @if (! $loop->last)
+                                            <hr>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                                {{-- Pagination --}}
+                                <div class="px-3 me-3 me-lg-0 mt-4 table-responsive d-none">
+                                    {{ $posts->links() }}
+                                </div>
+                            @break
+
+                            {{-- Comment List --}}
+                            @case('comments')
+                                <div class="clearfix" id="fresns-list-container">
+                                    @foreach($comments as $comment)
+                                        @component('components.comment.list', [
+                                            'comment' => $comment,
+                                            'detailLink' => true,
+                                            'sectionCreatorLiked' => false,
+                                        ])@endcomponent
+
+                                        @if (! $loop->last)
+                                            <hr>
+                                        @endif
+                                    @endforeach
+                                </div>
+
+                                {{-- Pagination --}}
+                                <div class="px-3 me-3 me-lg-0 mt-4 table-responsive d-none">
+                                    {{ $comments->links() }}
+                                </div>
+                            @break
+
+                            @default
+                                <div class="text-center my-5 text-muted fs-7">{{ fs_lang('listEmpty') }}</div>
+                        @endswitch
                     @endif
                 </div>
 
