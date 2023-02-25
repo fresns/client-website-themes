@@ -1614,7 +1614,7 @@ $(function () {
             url: window.location.href,
             type: 'get',
             data: {
-                page: currentPage + 1
+                page: currentPage + 1,
             },
             dataType: 'json',
             success: function (response) {
@@ -1654,7 +1654,7 @@ $(function () {
         let options = {
             root: null,
             rootMargin: '0px',
-            threshold: 1.0
+            threshold: 1.0,
         };
 
         let observer = new IntersectionObserver(function (entries, observer) {
