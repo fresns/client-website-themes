@@ -1596,81 +1596,91 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
 
 // ajax get list
 $(function () {
-    // Get the initial page number and last page code
     var currentPage = 1;
     var lastPage = 1;
-
-    // Whether data is currently being requested
     var isLoading = false;
 
-    // IntersectionObserver
-    var observer = new IntersectionObserver(
-        function (entries, observer) {
-            entries.forEach(function (entry) {
-                console.log('ajax get list');
+    // Loading data for the next page
+    function loadNextPage() {
+        // Show loading text
+        $('#fresns-list-tip').hide();
+        $('#fresns-list-loading').show();
 
-                // Is loading turned on
-                if (!window.ajaxGetList || $('#fresns-list-container').length == 0) {
+        // Set status to loading
+        isLoading = true;
+
+        // Send an AJAX request to get the data of the next page
+        $.ajax({
+            url: window.location.href,
+            type: 'get',
+            data: {
+                page: currentPage + 1
+            },
+            dataType: 'json',
+            success: function (response) {
+                // Hide the loading text
+                $('#fresns-list-loading').hide();
+                $('#fresns-list-tip').show();
+
+                // Insert the HTML of the next page into the list
+                $('#fresns-list-container').append(response.html);
+
+                // Update current page number and last page code
+                currentPage = response.paginate.currentPage;
+                lastPage = response.paginate.lastPage;
+
+                // If it is the last page, the text of "no more" is displayed
+                if (currentPage >= lastPage) {
                     $('#fresns-list-tip').hide();
                     $('#fresns-list-no-more').show();
+
+                    console.log('ajax get list => no more');
+                }
+
+                // Set status to not loading
+                isLoading = false;
+            },
+            error: function () {
+                // Set status to not loading
+                isLoading = false;
+
+                console.log('ajax get list => error');
+            },
+        });
+    }
+
+    // Use IntersectionObserver to listen to whether the bottom is reached
+    if ('IntersectionObserver' in window) {
+        let options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 1.0
+        };
+
+        let observer = new IntersectionObserver(function (entries, observer) {
+            entries.forEach(function (entry) {
+                if (!window.ajaxGetList || $('#fresns-list-container').length == 0) {
+                    $('#fresns-list-tip').hide();
 
                     console.log('ajax get list => end');
                     return;
                 }
 
-                // The element enters the viewport
                 if (entry.isIntersecting && currentPage <= lastPage && !isLoading) {
-                    // Show loading text
-                    $('#fresns-list-tip').hide();
-                    $('#fresns-list-loading').show();
-
-                    // get next page data
-                    isLoading = true;
-                    $.ajax({
-                        url: window.location.href,
-                        type: 'get',
-                        data: {
-                            page: currentPage + 1,
-                        },
-                        dataType: 'json',
-                        success: function (response) {
-                            // Hide the loading text
-                            $('#fresns-list-loading').hide();
-                            $('#fresns-list-tip').show();
-
-                            // Insert the HTML of the next page to the bottom of the list
-                            $('#fresns-list-container').append(response.html);
-
-                            // Update current page number and last page code
-                            currentPage = response.paginate.currentPage;
-                            lastPage = response.paginate.lastPage;
-
-                            // If it is the last page, the text is displayed
-                            if (currentPage >= lastPage) {
-                                $('#fresns-list-tip').hide();
-                                $('#fresns-list-no-more').show();
-
-                                console.log('ajax get list => no more');
-                            }
-
-                            // Set the variable to false when the request is complete
-                            isLoading = false;
-                        },
-                        error: function () {
-                            // If the request fails, also set the variable to false
-                            isLoading = false;
-
-                            console.log('ajax get list => error');
-                        },
-                    });
+                    loadNextPage();
                 }
             });
-        },
-        { threshold: 1 }
-    );
+        }, options);
 
-    // Listening IntersectionObserver
-    observer.observe(document.querySelector('#fresns-list-tip'));
+        observer.observe(document.querySelector('#fresns-list-tip'));
+    }
+
+    // Click the button to load the next page of data
+    $('#fresns-list-loading-btn').click(function () {
+        if (currentPage <= lastPage && !isLoading) {
+            loadNextPage();
+        }
+    });
 });
 
 // Markdown a tag
