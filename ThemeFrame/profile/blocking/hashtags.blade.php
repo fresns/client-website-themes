@@ -2,7 +2,7 @@
 
 @section('list')
     {{-- List --}}
-    <article class="py-4">
+    <article class="py-4" id="fresns-list-container">
         @foreach($hashtags as $hashtag)
             @component('components.hashtag.list', compact('hashtag'))@endcomponent
             @if (! $loop->last)

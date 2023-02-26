@@ -18,9 +18,9 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/bootstrap-icons.css">
     <link rel="stylesheet" href="/static/css/select2.min.css">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/atwho.min.css?v={{ $themeVersion }}">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/prism.min.css?v={{ $themeVersion }}">
-    <link rel="stylesheet" href="/assets/themes/ThemeFrame/css/fresns.css?v={{ $themeVersion }}">
+    <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/atwho.min.css?v={{ $themeVersion }}">
+    <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/prism.min.css?v={{ $themeVersion }}">
+    <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/fresns.css?v={{ $themeVersion }}">
     @stack('style')
     @if (fs_db_config('website_stat_position') == 'head')
         {!! fs_db_config('website_stat_code') !!}
@@ -122,55 +122,20 @@
     <script src="/static/js/js.cookie.min.js"></script>
     <script src="/static/js/iframeResizer.min.js"></script>
     <script>
+        window.ajaxGetList = false;
         window.siteName = "{{ fs_db_config('site_name') }}";
         window.siteIcon = "{{ fs_db_config('site_icon') }}";
         window.langTag = "{{ current_lang_tag() }}";
         window.mentionStatus = {{ fs_api_config('mention_status') ? 1 : 0 }};
         window.hashtagStatus = {{ fs_api_config('hashtag_status') ? 1 : 0 }};
         window.hashtagFormat = {{ fs_api_config('hashtag_format') }};
-
-        // loading
-        $(document).on("click", "a", function(e) {
-            var href = $(this).attr("href");
-            if (href && !href.startsWith("javascript:") && href !== "#") {
-                if ((href.indexOf(location.hostname) !== -1 || href[0] === "/") && $(this).attr("target") !== "_blank") {
-                    $("#loading").show();
-                }
-            }
-        });
-        $(window).on("load", function() {
-            $("#loading").hide();
-        });
-        window.addEventListener('pageshow', function () {
-            $("#loading").hide();
-        });
-        window.addEventListener("visibilitychange", function() {
-            // android compatible
-            $("#loading").hide();
-        });
-
-        // video play
-        var videos = document.getElementsByTagName('video'); 
-        for (var i = videos.length - 1; i >= 0; i--) {
-            (function(){
-                var p = i;
-                videos[p].addEventListener('play',function(){
-                    pauseAll(p);
-                })
-            })()
-        };
-        function pauseAll(index){
-            for (var j = videos.length - 1; j >= 0; j--) {
-                if (j!=index) videos[j].pause();
-            }
-        };
     </script>
     <script src="/assets/plugins/{{ $engineUnikey }}/js/fresns-iframe.js?v={{ $engineVersion }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/jquery.caret.min.js?v={{ $themeVersion }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/atwho.min.js?v={{ $themeVersion }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/prism.min.js?v={{ $themeVersion }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/sendVerifyCode.js?v={{ $themeVersion }}"></script>
-    <script src="/assets/themes/ThemeFrame/js/fresns.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/{{ $themeUnikey }}/js/jquery.caret.min.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/{{ $themeUnikey }}/js/atwho.min.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/{{ $themeUnikey }}/js/prism.min.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/{{ $themeUnikey }}/js/sendVerifyCode.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/{{ $themeUnikey }}/js/fresns.js?v={{ $themeVersion }}"></script>
     @stack('script')
 </body>
 

@@ -15,7 +15,7 @@
             {{-- Middle Content --}}
             <div class="col-sm-6">
                 {{-- User List --}}
-                <article class="card clearfix">
+                <article class="card clearfix" @if (fs_db_config('menu_user_query_state') != 1) id="fresns-list-container" @endif>
                     @foreach($users as $user)
                         @component('components.user.list', compact('user'))@endcomponent
                         @if (! $loop->last)

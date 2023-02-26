@@ -81,8 +81,8 @@
                             {{-- Upload file --}}
                             @if (fs_api_config('post_editor_image'))
                                 <div class="input-group">
-                                    <label class="input-group-text" for="file">{{ fs_lang('editorImages') }}</label>
-                                    <input type="file" class="form-control" accept="{{ fs_user_panel('fileAccept.images') ?? null }}" name="file" id="file">
+                                    <label class="input-group-text" for="post-file">{{ fs_lang('editorImages') }}</label>
+                                    <input type="file" class="form-control" accept="{{ fs_user_panel('fileAccept.images') ?? null }}" name="file" id="post-file">
                                 </div>
                             @endif
                         </div>

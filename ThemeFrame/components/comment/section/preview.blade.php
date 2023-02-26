@@ -1,4 +1,4 @@
-<section class="comment-preview mt-3 mx-3 position-relative d-flex flex-column">
+<section class="comment-preview mt-2 mx-3 position-relative d-flex flex-column">
     @foreach($subComments as $comment)
         <div class="text-break mb-2">
             @if ($comment['isAnonymous'])
@@ -11,15 +11,15 @@
                 <span class="author-badge">{{ fs_lang('contentCreator') }}</span>
             @endif
 
-            @if ($comment['replyToUser'])
-                @if ($comment['replyToUser']['nickname'])
-                    {{ fs_db_config('publish_comment_name') }} <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToUser']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['replyToUser']['nickname'] }}</a>
+            @if ($comment['replyToComment'])
+                @if ($comment['replyToComment']['creator']['nickname'])
+                    {{ fs_db_config('publish_comment_name') }} <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToComment']['creator']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['replyToComment']['creator']['nickname'] }}</a>
                 @else
                     {{ fs_db_config('publish_comment_name') }} <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>
                 @endif
             @endif
 
-            : {!! Str::limit($comment['content'], 140) !!}
+            : {!! $comment['content'] !!}
 
             @if ($comment['fileCount']['images'] > 0)
                 <span class="text-primary">[{{ fs_lang('image') }}]</span>

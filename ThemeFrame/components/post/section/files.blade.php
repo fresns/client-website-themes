@@ -125,7 +125,12 @@
                             {{ $createTime }}
                         </p>
                         <p class="text-center">
-                            <a href="{{ route('fresns.api.content.file.link', ['fid' => $document['fid'], 'type' => 'post', 'fsid' => $pid]) }}" data-name="{{ $document['name'] }}" data-mime="{{ $document['mime'] }}" class="btn btn-outline-success fresns-file-download" role="button">{{ fs_lang('contentFileDownload') }}</a>
+                            <button type="button" class="btn btn-outline-success fresns-file-download"
+                                data-url="{{ route('fresns.api.content.file.link', ['fid' => $document['fid'], 'type' => 'post', 'fsid' => $pid]) }}"
+                                data-name="{{ $document['name'] }}"
+                                data-mime="{{ $document['mime'] }}">
+                                <i class="fa-solid fa-download"></i> {{ fs_lang('contentFileDownload') }}
+                            </button>
                         </p>
                     </div>
 

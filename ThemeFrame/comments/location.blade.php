@@ -26,39 +26,50 @@
                 </div>
 
                 {{-- List --}}
-                <article class="card clearfix">
-                    @if ($type == 'comments')
-                        {{-- Comment List --}}
-                        @foreach($comments as $comment)
-                            @component('components.comment.list', [
-                                'comment' => $comment,
-                                'detailLink' => true,
-                                'sectionCreatorLiked' => false,
-                            ])@endcomponent
+                @switch($type)
+                    {{-- Post List --}}
+                    @case('posts')
+                        <div class="card clearfix" id="fresns-list-container">
+                            @foreach($posts as $post)
+                                @component('components.post.list', compact('post'))@endcomponent
 
-                            @if (! $loop->last)
-                                <hr>
-                            @endif
-                        @endforeach
-                    @else
-                        {{-- Post List --}}
-                        @foreach($posts as $post)
-                            @component('components.post.list', compact('post'))@endcomponent
-                            @if (! $loop->last)
-                                <hr>
-                            @endif
-                        @endforeach
-                    @endif
-                </article>
+                                @if (! $loop->last)
+                                    <hr>
+                                @endif
+                            @endforeach
+                        </div>
 
-                {{-- Pagination --}}
-                <div class="my-3 table-responsive">
-                    @if ($type == 'comments')
-                        {{ $comments->links() }}
-                    @else
-                        {{ $posts->links() }}
-                    @endif
-                </div>
+                        {{-- Pagination --}}
+                        <div class="px-3 me-3 me-lg-0 mt-4 table-responsive d-none">
+                            {{ $posts->links() }}
+                        </div>
+                    @break
+
+                    {{-- Comment List --}}
+                    @case('comments')
+                        <div class="card clearfix" id="fresns-list-container">
+                            @foreach($comments as $comment)
+                                @component('components.comment.list', [
+                                    'comment' => $comment,
+                                    'detailLink' => true,
+                                    'sectionCreatorLiked' => false,
+                                ])@endcomponent
+
+                                @if (! $loop->last)
+                                    <hr>
+                                @endif
+                            @endforeach
+                        </div>
+
+                        {{-- Pagination --}}
+                        <div class="px-3 me-3 me-lg-0 mt-4 table-responsive d-none">
+                            {{ $comments->links() }}
+                        </div>
+                    @break
+
+                    @default
+                        <div class="text-center my-5 text-muted fs-7">{{ fs_lang('listEmpty') }}</div>
+                @endswitch
             </div>
 
             {{-- Right Sidebar --}}

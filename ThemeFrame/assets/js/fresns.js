@@ -139,15 +139,6 @@ function sendVerifyCode(obj) {
     fetchSendVerifyCode(type, useType, templateId, account, action, obj, countryCode);
 }
 
-/**
- *
- * @param type
- * @param useType
- * @param templateId
- * @param account
- * @param action
- * @param countryCode
- */
 function fetchSendVerifyCode(type, useType, templateId, account, action, obj, countryCode) {
     let data;
     if (type == 'email') {
@@ -183,20 +174,30 @@ function fetchSendVerifyCode(type, useType, templateId, account, action, obj, co
 }
 
 // download file
-function downloadFile(data, fileName, type = 'text/plain') {
-    // Create an invisible A element
-    const a = document.createElement('a');
-    a.style.display = 'none';
-    document.body.appendChild(a);
-    // Set the HREF to a Blob representation of the data to be downloaded
-    a.href = window.URL.createObjectURL(new Blob([data], { type }));
-    // Use download attribute to set set desired file name
-    a.setAttribute('download', fileName);
-    // Trigger the download by simulating click
-    a.click();
-    // Cleanup
-    window.URL.revokeObjectURL(a.href);
-    document.body.removeChild(a);
+function downloadFile(url, fileName, mimeType) {
+    $('#loading').hide();
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', url, true);
+    xhr.responseType = 'blob';
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            const blob = xhr.response;
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            const url = window.URL.createObjectURL(blob);
+            a.href = url;
+            a.download = fileName;
+            a.type = mimeType;
+
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            $('#loading').hide();
+        }
+    };
+    xhr.send();
 }
 
 // comment box
@@ -216,7 +217,9 @@ function atwho() {
         $('.fresns-content').atwho({
             at: '@',
             displayTpl:
-                '<li><img src="${image}" height="20" width="20"/> ${nickname} <small class="text-muted">@${name}</small></li>',
+                '<li><img src="${image}" height="20" width="20"/> ${name} <small class="text-muted">@${fsid}</small></li>',
+            insertTpl: '${atwho-at}${fsid}',
+            searchKey: 'searchQuery',
             callbacks: {
                 remoteFilter: function (query, callback) {
                     if (query) {
@@ -224,6 +227,7 @@ function atwho() {
                             '/api/engine/input-tips',
                             { type: 'user', key: query },
                             function (data) {
+                                data.map((item) => (item.searchQuery = item.name + item.fsid));
                                 callback(data);
                             },
                             'json'
@@ -399,11 +403,49 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
     // at and hashtag
     atwho();
 
+    // loading
+    $(document).on('click', 'a', function (e) {
+        var href = $(this).attr('href');
+        var loading = $(this).data('loading');
+
+        if (href && !href.startsWith('javascript:') && href !== '#' && loading !== 'false') {
+            if ((href.indexOf(location.hostname) !== -1 || href[0] === '/') && $(this).attr('target') !== '_blank') {
+                $('#loading').show();
+            }
+        }
+    });
+    $(window).on('load', function () {
+        $('#loading').hide();
+    });
+    window.addEventListener('pageshow', function () {
+        $('#loading').hide();
+    });
+    window.addEventListener('visibilitychange', function () {
+        // android compatible
+        $('#loading').hide();
+    });
+
     // image zoom
     $('.zoom-image').on('click', function () {
         $('#imageZoom img').attr('src', $(this).data('zoom-src'));
         $('#imageZoom').modal('show');
     });
+
+    // video play
+    var videos = document.getElementsByTagName('video');
+    for (var i = videos.length - 1; i >= 0; i--) {
+        (function () {
+            var p = i;
+            videos[p].addEventListener('play', function () {
+                pauseAll(p);
+            });
+        })();
+    }
+    function pauseAll(index) {
+        for (var j = videos.length - 1; j >= 0; j--) {
+            if (j != index) videos[j].pause();
+        }
+    }
 
     // jquery extend
     $.fn.extend({
@@ -485,25 +527,31 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
     });
 
     $('.fresns-file-download').on('click', function (e) {
-        e.preventDefault();
-        var name = $(this).data('name');
-        var mime = $(this).data('mime');
+        e.stopPropagation();
+        let button = $(this),
+            url = button.data('url'),
+            name = button.data('name'),
+            mime = button.data('mime');
+
+        button.prop('disabled', true);
+        button.prepend(
+            '<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> '
+        );
 
         $.ajax({
             method: 'get',
-            url: $(this).attr('href'),
+            url: url,
             success: function (res) {
                 if (res.code != 0) {
                     return window.tips(res.message, res.code);
                 }
 
-                $.ajax({
-                    method: 'get',
-                    url: res.data.originalUrl,
-                    success: function (res) {
-                        downloadFile(res, name, mime);
-                    },
-                });
+                downloadFile(res.data.originalUrl, name, mime);
+            },
+            complete: function (e) {
+                button.prop('disabled', false);
+                button.find('.spinner-border').remove();
+                $('#loading').hide();
             },
         });
     });
@@ -1464,8 +1512,8 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     return;
                 }
 
-                if (res.data.imageAvatarUrl && res.data.fid) {
-                    let data = { avatarFid: res.data.fid, avatarUrl: null };
+                if (res.data.fid) {
+                    let data = { avatarFid: res.data.fid };
                     window.buildAjaxAndSubmit(
                         editAction,
                         data,
@@ -1548,6 +1596,95 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         });
     });
 })(jQuery);
+
+// ajax get list
+$(function () {
+    var currentPage = 1;
+    var lastPage = 1;
+    var isLoading = false;
+
+    // Loading data for the next page
+    function loadNextPage() {
+        // Show loading text
+        $('#fresns-list-tip').hide();
+        $('#fresns-list-loading').show();
+
+        // Set status to loading
+        isLoading = true;
+
+        // Send an AJAX request to get the data of the next page
+        $.ajax({
+            url: window.location.href,
+            type: 'get',
+            data: {
+                page: currentPage + 1,
+            },
+            dataType: 'json',
+            success: function (response) {
+                // Hide the loading text
+                $('#fresns-list-loading').hide();
+                $('#fresns-list-tip').show();
+
+                // Insert the HTML of the next page into the list
+                $('#fresns-list-container').append(response.html);
+
+                // Update current page number and last page code
+                currentPage = response.paginate.currentPage;
+                lastPage = response.paginate.lastPage;
+
+                // If it is the last page, the text of "no more" is displayed
+                if (currentPage >= lastPage) {
+                    $('#fresns-list-tip').hide();
+                    $('#fresns-list-no-more').show();
+
+                    console.log('ajax get list => no more');
+                }
+
+                // Set status to not loading
+                isLoading = false;
+            },
+            error: function () {
+                // Set status to not loading
+                isLoading = false;
+
+                console.log('ajax get list => error');
+            },
+        });
+    }
+
+    // Use IntersectionObserver to listen to whether the bottom is reached
+    if ('IntersectionObserver' in window) {
+        let options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 1.0,
+        };
+
+        let observer = new IntersectionObserver(function (entries, observer) {
+            entries.forEach(function (entry) {
+                if (!window.ajaxGetList || $('#fresns-list-container').length == 0) {
+                    $('#fresns-list-tip').hide();
+
+                    console.log('ajax get list => end');
+                    return;
+                }
+
+                if (entry.isIntersecting && currentPage <= lastPage && !isLoading) {
+                    loadNextPage();
+                }
+            });
+        }, options);
+
+        observer.observe(document.querySelector('#fresns-list-tip'));
+    }
+
+    // Click the button to load the next page of data
+    $('#fresns-list-loading-btn').click(function () {
+        if (currentPage <= lastPage && !isLoading) {
+            loadNextPage();
+        }
+    });
+});
 
 // Markdown a tag
 $(document).ready(function () {

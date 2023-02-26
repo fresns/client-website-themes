@@ -21,7 +21,7 @@
                 </div>
 
                 {{-- Comment List --}}
-                <article class="card clearfix">
+                <article class="card clearfix" id="fresns-list-container">
                     @foreach($comments as $comment)
                         @component('components.comment.list', [
                             'comment' => $comment,

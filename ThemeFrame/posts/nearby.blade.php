@@ -21,7 +21,7 @@
                 </div>
 
                 {{-- Post List --}}
-                <article class="card clearfix">
+                <article class="card clearfix" id="fresns-list-container">
                     @foreach($posts as $post)
                         @component('components.post.list', compact('post'))@endcomponent
                         @if (! $loop->last)

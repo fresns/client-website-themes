@@ -13,7 +13,7 @@
             {{-- Middle Content --}}
             <div class="col-sm-6">
                 {{-- User List --}}
-                <article class="card clearfix">
+                <article class="card clearfix" id="fresns-list-container">
                     @foreach($users as $user)
                         @component('components.user.list', compact('user'))@endcomponent
                         @if (! $loop->last)

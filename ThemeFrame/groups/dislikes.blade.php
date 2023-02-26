@@ -13,7 +13,7 @@
             {{-- Middle Content --}}
             <div class="col-sm-6">
                 {{-- Group List --}}
-                <article class="card clearfix py-4">
+                <article class="card clearfix py-4" id="fresns-list-container">
                     @foreach($groups as $group)
                         @component('components.group.list', compact('group'))@endcomponent
                         @if (! $loop->last)

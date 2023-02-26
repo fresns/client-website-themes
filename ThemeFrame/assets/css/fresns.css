@@ -641,7 +641,8 @@ header .navbar {
     margin-right: 0.6rem;
 }
 .comment-post .flex-grow-1 {
-    padding-top: 0.2rem;
+    padding-top: 0.1rem;
+    line-height: 1.5;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;

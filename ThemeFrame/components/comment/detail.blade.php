@@ -50,7 +50,7 @@
             'editTimeFormat' => $comment['editTimeFormat'],
             'ipLocation' => $comment['ipLocation'],
             'location' => $comment['location'],
-            'replyToUser' => $comment['replyToUser'],
+            'replyToComment' => $comment['replyToComment'],
         ])@endcomponent
     </section>
 

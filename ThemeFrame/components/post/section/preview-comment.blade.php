@@ -13,7 +13,7 @@
         {{-- Content --}}
         <div class="text-break mt-2">
             <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $topComment['creator']['fsid']])) }}" class="fresns_link">{{ $topComment['creator']['nickname'] }}</a>:
-            <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $pid])).'#commentList' }}" class="text-decoration-none link-dark stretched-link">{!! Str::limit($topComment['content'], 140) !!}</a>
+            <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $pid])).'#commentList' }}" class="text-decoration-none link-dark stretched-link">{!! $topComment['content'] !!}</a>
         </div>
 
         {{-- Files Images --}}
@@ -39,15 +39,15 @@
                     <span class="author-badge">{{ fs_lang('contentCreator') }}</span>
                 @endif
     
-                @if ($comment['replyToUser'])
-                    @if ($comment['replyToUser']['nickname'])
-                        {{ fs_db_config('publish_comment_name') }} <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToUser']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['replyToUser']['nickname'] }}</a>
+                @if ($comment['replyToComment'])
+                    @if ($comment['replyToComment']['creator']['nickname'])
+                        {{ fs_db_config('publish_comment_name') }} <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToComment']['creator']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['replyToComment']['creator']['nickname'] }}</a>
                     @else
                         {{ fs_db_config('publish_comment_name') }} <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>
                     @endif
                 @endif
     
-                : {!! Str::limit($comment['content'], 140) !!}
+                : {!! $comment['content'] !!}
     
                 @if ($comment['fileCount']['images'] > 0)
                     <span class="text-primary">[{{ fs_lang('image') }}]</span>

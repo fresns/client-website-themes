@@ -15,7 +15,7 @@
             {{-- Middle Content --}}
             <div class="col-sm-6">
                 {{-- Comment List --}}
-                <article class="card clearfix">
+                <article class="card clearfix" @if (fs_db_config('menu_comment_list_query_state') != 1) id="fresns-list-container" @endif>
                     @foreach($comments as $comment)
                         @component('components.comment.list', [
                             'comment' => $comment,

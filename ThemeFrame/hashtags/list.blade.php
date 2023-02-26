@@ -15,7 +15,7 @@
             {{-- Middle Content --}}
             <div class="col-sm-6">
                 {{-- Hashtag List --}}
-                <article class="card clearfix py-4">
+                <article class="card clearfix py-4" @if (fs_db_config('menu_hashtag_list_query_state') != 1) id="fresns-list-container" @endif>
                     @foreach($hashtags as $hashtag)
                         @component('components.hashtag.list', compact('hashtag'))@endcomponent
                         @if (! $loop->last)
