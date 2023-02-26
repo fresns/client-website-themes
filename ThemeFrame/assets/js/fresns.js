@@ -227,7 +227,7 @@ function atwho() {
                             '/api/engine/input-tips',
                             { type: 'user', key: query },
                             function (data) {
-                                data.map(item => item.searchQuery = item.name+item.fsid)
+                                data.map((item) => (item.searchQuery = item.name + item.fsid));
                                 callback(data);
                             },
                             'json'
