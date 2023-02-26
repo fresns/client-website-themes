@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.5.0 (2023-02-26)
+
+- View Optimization
+- Bug fixes
+- Compatible with new version parameters
+
+
 ## 2.4.0 (2023-02-16)
 
 - Enable or disable support for mentions and topics
