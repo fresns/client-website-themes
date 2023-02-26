@@ -218,6 +218,8 @@ function atwho() {
             at: '@',
             displayTpl:
                 '<li><img src="${image}" height="20" width="20"/> ${name} <small class="text-muted">@${fsid}</small></li>',
+            insertTpl: '${atwho-at}${fsid}',
+            searchKey: 'searchQuery',
             callbacks: {
                 remoteFilter: function (query, callback) {
                     if (query) {
@@ -225,6 +227,7 @@ function atwho() {
                             '/api/engine/input-tips',
                             { type: 'user', key: query },
                             function (data) {
+                                data.map(item => item.searchQuery = item.name+item.fsid)
                                 callback(data);
                             },
                             'json'
