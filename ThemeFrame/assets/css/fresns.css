@@ -283,7 +283,11 @@ header .navbar {
     z-index: 999;
 }
 .fresns_sticker {
+    padding: 0;
+    margin: 0;
     zoom: 0.5;
+    -moz-transform: scale(0.5);
+    -moz-transform-origin: center;
 }
 
 .content-files video {
