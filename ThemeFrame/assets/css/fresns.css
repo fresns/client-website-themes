@@ -289,6 +289,9 @@ header .navbar {
     -moz-transform: scale(0.5);
     -moz-transform-origin: center;
 }
+.fresns_file_image {
+    margin-bottom: 15px;
+}
 
 .content-files video {
     width: 100%;
