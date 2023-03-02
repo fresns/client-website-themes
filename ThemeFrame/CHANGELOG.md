@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.5.1 (2023-03-02)
+
+- View Optimization
+- Bug fixes
+
+
 ## 2.5.0 (2023-02-26)
 
 - View Optimization
