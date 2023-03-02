@@ -37,12 +37,12 @@
                     @csrf
                     <input type="hidden" name="redirectURL" value="{{ request()->get('redirectURL') }}">
                     {{-- Register Type Switch --}}
-                    @if (fs_api_config('site_register_email') && fs_api_config('site_register_phone'))
+                    @if (fs_api_config('site_email_register') && fs_api_config('site_phone_register'))
                         <div class="input-group mb-3 mt-2">
                             <span class="input-group-text">{{ fs_lang('accountType') }}</span>
                             <div class="form-control">
                                 {{-- E-Mail --}}
-                                @if (fs_api_config('site_register_email'))
+                                @if (fs_api_config('site_email_register'))
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="type" id="code_account_email" value="email" data-bs-toggle="collapse" data-bs-target="#code_account_email:not(.show)" aria-expanded="@if (empty(old('type')) || old('type') == 'email') true @else false @endif" aria-controls="code_account_email" @if (empty(old('type')) || old('type') == 'email') checked @endif>
                                         <label class="form-check-label" for="code_account_email">{{ fs_lang('email') }}</label>
@@ -50,7 +50,7 @@
                                 @endif
 
                                 {{-- Phone --}}
-                                @if (fs_api_config('site_register_phone'))
+                                @if (fs_api_config('site_phone_register'))
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="type" id="code_account_phone" value="phone" data-bs-toggle="collapse" data-bs-target="#code_account_phone:not(.show)" aria-expanded="@if (old('type') == 'phone') true @else false @endif" aria-controls="code_account_phone" @if (old('type') == 'phone') checked @endif>
                                         <label class="form-check-label" for="code_account_phone">{{ fs_lang('phone') }}</label>
@@ -58,9 +58,9 @@
                                 @endif
                             </div>
                         </div>
-                    @elseif (fs_api_config('site_register_email'))
+                    @elseif (fs_api_config('site_email_register'))
                         <input type="radio" name="type" value="email" class="d-none" checked>
-                    @elseif (fs_api_config('site_register_phone'))
+                    @elseif (fs_api_config('site_phone_register'))
                         <input type="radio" name="type" value="phone" class="d-none" checked>
                     @endif
 
@@ -69,7 +69,7 @@
                         <input type="hidden" name="useType" value="1">
                         <input type="hidden" name="templateId" value="2">
                         {{-- E-Mail --}}
-                        @if (fs_api_config('site_register_email'))
+                        @if (fs_api_config('site_email_register'))
                             <div class="collapse @if (empty(old('type')) || old('type') == 'email') show @endif" id="code_account_email" aria-labelledby="code_account_email" data-bs-parent="#accordionCodeAccount">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">{{ fs_lang('email') }}</span>
@@ -82,8 +82,8 @@
                         @endif
 
                         {{-- Cell Phone Number --}}
-                        @if (fs_api_config('site_register_phone'))
-                            <div class="collapse @if (old('type') == 'phone' || ! fs_api_config('site_register_email')) show @endif" id="code_account_phone" aria-labelledby="code_account_phone" data-bs-parent="#accordionCodeAccount">
+                        @if (fs_api_config('site_phone_register'))
+                            <div class="collapse @if (old('type') == 'phone' || ! fs_api_config('site_email_register')) show @endif" id="code_account_phone" aria-labelledby="code_account_phone" data-bs-parent="#accordionCodeAccount">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">{{ fs_lang('phone') }}</span>
                                     @if (count(fs_api_config('send_sms_supported_codes')) > 1)
