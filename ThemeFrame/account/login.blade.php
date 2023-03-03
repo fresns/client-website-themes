@@ -2,6 +2,10 @@
 
 @section('title', fs_db_config('menu_account_login'))
 
+@php
+    $smsCodeCount = count(fs_api_config('send_sms_supported_codes') ?? []);
+@endphp
+
 @section('content')
     <div class="container-fluid">
         <div class="row my-5 pt-5 m-auto" style="max-width:500px;">
@@ -30,7 +34,7 @@
             @endif
 
             {{-- Select Login Method --}}
-            @if (fs_api_config('site_email_login') && fs_api_config('site_phone_login'))
+            @if (fs_api_config('send_email_service') && fs_api_config('send_sms_service'))
                 <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
                         <button class="nav-link active" id="nav-PasswordAccount-tab" data-bs-toggle="tab" data-bs-target="#nav-PasswordAccount" type="button" role="tab" aria-controls="nav-PasswordAccount" aria-selected="true">{{ fs_lang('accountLoginByPassword') }}</button>
@@ -46,63 +50,73 @@
                         @csrf
                         <input type="hidden" name="redirectURL" value="{{ request()->get('redirectURL') }}">
                         {{-- Account Select --}}
-                        <div class="input-group mb-3 mt-2">
-                            <span class="input-group-text" id="basic-addon1">{{ fs_lang('accountType') }}</span>
-                            <div class="form-control">
-                                {{-- E-Mail --}}
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="type" value="email" id="password_account_email" data-bs-toggle="collapse" data-bs-target="#password_account_email:not(.show)" aria-expanded="true" aria-controls="password_account_email" checked>
-                                    <label class="form-check-label" for="password_account_email">{{ fs_lang('email') }}</label>
-                                </div>
-                                {{-- Phone --}}
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="type" value="phone" id="password_account_phone" data-bs-toggle="collapse" data-bs-target="#password_account_phone:not(.show)" aria-expanded="false" aria-controls="password_account_phone">
-                                    <label class="form-check-label" for="password_account_phone">{{ fs_lang('phone') }}</label>
-                                </div>
-                            </div>
-                        </div>
-
-                        {{-- Account --}}
-                        <div>
-                            {{-- E-Mail --}}
-                            <div class="collapse show" id="password_account_email" aria-labelledby="password_account_email" data-bs-parent="#accordionPasswordAccount">
-                                <div class="form-floating mb-3">
-                                    <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="name@example.com">
-                                    <label for="email">{{ fs_lang('email') }}</label>
-                                </div>
-                            </div>
-                            {{-- Phone --}}
-                            <div class="collapse" id="password_account_phone" aria-labelledby="password_account_phone" data-bs-parent="#accordionPasswordAccount">
-                                <div class="row g-2 mb-3">
-                                    @if (count(fs_api_config('send_sms_supported_codes') ?? []) > 1)
-                                        <div class="col-md-3">
-                                            <div class="form-floating">
-                                                {{-- List of country calling codes --}}
-                                                <select class="form-select" name="countryCode" value="{{ old('countryCode') }}">
-                                                    <option disabled>{{ fs_lang('countryCode') }}</option>
-                                                    @foreach(fs_api_config('send_sms_supported_codes') as $countryCode)
-                                                        <option value="{{ $countryCode }}" @if (fs_api_config('send_sms_default_code') == $countryCode) selected @endif>{{ $countryCode }}</option>
-                                                    @endforeach
-                                                </select>
-                                                <label for="sms_code">{{ fs_lang('countryCode') }}</label>
-                                            </div>
-                                        </div>
-                                    @else
-                                        {{-- Default Country Calling Code --}}
-                                        <select class="form-select d-none" name="countryCode">
-                                            <option value="{{ fs_api_config('send_sms_default_code') }}" selected>{{ fs_api_config('send_sms_default_code') }}</option>
-                                        </select>
-                                    @endif
-
+                        @if (fs_api_config('site_email_login') && fs_api_config('site_phone_login'))
+                            <div class="input-group mb-3 mt-2">
+                                <span class="input-group-text" id="basic-addon1">{{ fs_lang('accountType') }}</span>
+                                <div class="form-control">
+                                    {{-- E-Mail --}}
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="type" value="email" id="password_account_email" data-bs-toggle="collapse" data-bs-target="#password_account_email:not(.show)" aria-expanded="true" aria-controls="password_account_email" checked>
+                                        <label class="form-check-label" for="password_account_email">{{ fs_lang('email') }}</label>
+                                    </div>
                                     {{-- Cell Phone Number --}}
-                                    <div @if (count(fs_api_config('send_sms_supported_codes') ?? []) > 1) class="col-md-9" @endif>
-                                        <div class="form-floating">
-                                            <input type="number" name="phone" value="{{ old('phone') }}" class="form-control rounded-bottom-0" placeholder="Phone Number">
-                                            <label for="phone">{{ fs_lang('phone') }}</label>
-                                        </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="type" value="phone" id="password_account_phone" data-bs-toggle="collapse" data-bs-target="#password_account_phone:not(.show)" aria-expanded="false" aria-controls="password_account_phone">
+                                        <label class="form-check-label" for="password_account_phone">{{ fs_lang('phone') }}</label>
                                     </div>
                                 </div>
                             </div>
+                        @endif
+
+                        {{-- Account Input --}}
+                        <div>
+                            {{-- E-Mail --}}
+                            @if (fs_api_config('site_email_login'))
+                                <div class="collapse show" id="password_account_email" aria-labelledby="password_account_email" data-bs-parent="#accordionPasswordAccount">
+                                    <div class="form-floating mb-3">
+                                        <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="name@example.com">
+                                        <label for="email">{{ fs_lang('email') }}</label>
+                                    </div>
+                                </div>
+                            @endif
+
+                            {{-- Cell Phone Number --}}
+                            @if (fs_api_config('site_phone_login'))
+                                <div class="collapse @if (! fs_api_config('site_email_login')) show @endif" id="password_account_phone" aria-labelledby="password_account_phone" data-bs-parent="#accordionPasswordAccount">
+                                    <div class="row g-2 mb-3">
+                                        @if ($smsCodeCount > 1)
+                                            <div class="col-md-3">
+                                                <div class="form-floating">
+                                                    {{-- List of country calling codes --}}
+                                                    <select class="form-select" name="countryCode" value="{{ old('countryCode') }}">
+                                                        <option disabled>{{ fs_lang('countryCode') }}</option>
+                                                        @foreach(fs_api_config('send_sms_supported_codes') as $countryCode)
+                                                            <option value="{{ $countryCode }}" @if (fs_api_config('send_sms_default_code') == $countryCode) selected @endif>{{ $countryCode }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    <label for="sms_code">{{ fs_lang('countryCode') }}</label>
+                                                </div>
+                                            </div>
+                                        @else
+                                            {{-- Default Country Calling Code --}}
+                                            <select class="form-select d-none" name="countryCode">
+                                                <option value="{{ fs_api_config('send_sms_default_code') }}" selected>{{ fs_api_config('send_sms_default_code') }}</option>
+                                            </select>
+                                        @endif
+
+                                        {{-- Cell Phone Number --}}
+                                        <div @if ($smsCodeCount > 1) class="col-md-9" @else class="input-group" @endif>
+                                            @if ($smsCodeCount <= 1)
+                                                <span class="input-group-text">+{{ fs_api_config('send_sms_default_code') }}</span>
+                                            @endif
+                                            <div class="form-floating">
+                                                <input type="number" name="phone" value="{{ old('phone') }}" class="form-control rounded-bottom-0" placeholder="Phone Number">
+                                                <label for="phone">{{ fs_lang('phone') }}</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
 
                         {{-- Password --}}
@@ -145,31 +159,27 @@
                     <form  id="accordionCodeAccount" novalidate class="py-3" method="post" action="{{ route('fresns.api.account.login') }}">
                         @csrf
                         <input type="hidden" name="redirectURL" value="{{ request()->get('redirectURL') }}">
-                        {{-- Account --}}
+                        {{-- Account Select --}}
                         @if (fs_api_config('site_email_login') && fs_api_config('site_phone_login'))
                             <div class="input-group mb-3 mt-2">
                                 <span class="input-group-text" id="basic-addon1">{{ fs_lang('accountType') }}</span>
                                 <div class="form-control">
                                     {{-- E-Mail --}}
-                                    @if (fs_api_config('site_email_login'))
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="type" id="code_account_email" value="email" data-bs-toggle="collapse" data-bs-target="#code_account_email:not(.show)" aria-expanded="true" aria-controls="code_account_email" checked>
-                                            <label class="form-check-label" for="code_account_email">{{ fs_lang('email') }}</label>
-                                        </div>
-                                    @endif
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="type" id="code_account_email" value="email" data-bs-toggle="collapse" data-bs-target="#code_account_email:not(.show)" aria-expanded="true" aria-controls="code_account_email" checked>
+                                        <label class="form-check-label" for="code_account_email">{{ fs_lang('email') }}</label>
+                                    </div>
 
-                                    {{-- Phone --}}
-                                    @if (fs_api_config('site_phone_login'))
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="type" id="code_account_phone" value="phone" data-bs-toggle="collapse" data-bs-target="#code_account_phone:not(.show)" aria-expanded="false" aria-controls="code_account_phone">
-                                            <label class="form-check-label" for="code_account_phone">{{ fs_lang('phone') }}</label>
-                                        </div>
-                                    @endif
+                                    {{-- Cell Phone Number --}}
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="type" id="code_account_phone" value="phone" data-bs-toggle="collapse" data-bs-target="#code_account_phone:not(.show)" aria-expanded="false" aria-controls="code_account_phone">
+                                        <label class="form-check-label" for="code_account_phone">{{ fs_lang('phone') }}</label>
+                                    </div>
                                 </div>
                             </div>
                         @endif
 
-                        {{-- Account Select --}}
+                        {{-- Account Input --}}
                         <div>
                             <input type="hidden" name="useType" value="2">
                             <input type="hidden" name="templateId" value="7">
@@ -204,6 +214,7 @@
                                             <select class="form-select d-none" name="countryCode">
                                                 <option value="{{ fs_api_config('send_sms_default_code') }}" selected>{{ fs_api_config('send_sms_default_code') }}</option>
                                             </select>
+                                            <span class="input-group-text">+{{ fs_api_config('send_sms_default_code') }}</span>
                                         @endif
 
                                         <input type="number" name="phone" value="{{ old('phone') }}" class="form-control" style="width:40%">
