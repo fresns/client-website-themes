@@ -32,7 +32,7 @@
     @include('commons.header')
 
     {{-- Private mode user status handling --}}
-    @if (fs_user()->check() && fs_user('detail.isExpiry'))
+    @if (fs_user()->check() && fs_user('detail.expired'))
         <div class="mt-5 pt-5">
             <div class="alert alert-warning mx-3" role="alert">
                 <i class="bi bi-info-circle"></i>
