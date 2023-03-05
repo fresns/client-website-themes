@@ -66,6 +66,12 @@
                                     </div>
                                 </div>
                             </div>
+                        @else
+                            @if (fs_api_config('site_email_login'))
+                                <input type="hidden" name="type" value="email">
+                            @else
+                                <input type="hidden" name="type" value="phone">
+                            @endif
                         @endif
 
                         {{-- Account Input --}}
