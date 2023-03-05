@@ -653,11 +653,11 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             body = form.serialize(),
             interactionType = form.find('input[name="interactionType"]').val(),
             count = obj.find('.show-count').text(),
-            iconActive = obj.data('icon-active'),
-            interactionActive = obj.data('interaction-active') || 0,
             text = obj.find('.show-text'),
             bi = obj.data('bi'),
-            icon = obj.data('icon');
+            icon = obj.data('icon'),
+            iconActive = obj.data('icon-active'),
+            interactionActive = obj.data('interaction-active') || 0;
 
         window.buildAjaxAndSubmit(
             url,

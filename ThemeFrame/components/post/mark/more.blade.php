@@ -11,12 +11,7 @@
 
     {{-- Delete --}}
     @if ($editStatus['isMe'] && $editStatus['canDelete'])
-        <li>
-            <a class="dropdown-item py-2 api-request-link" href="#" data-method="DELETE" data-id="{{ $pid }}" data-action="{{ route('fresns.api.content.delete',  ['type' => 'post', 'fsid' => $pid]) }}">
-                <i class="bi bi-trash"></i>
-                {{ fs_lang('delete') }}
-            </a>
-        </li>
+        <li><a class="dropdown-item py-2" data-bs-toggle="modal" href="#delete-{{ $pid }}"><i class="fa-regular fa-trash-can"></i> {{ fs_lang('delete') }}</a></li>
     @endif
 
     {{-- Follow --}}
@@ -62,3 +57,21 @@
         @endforeach
     @endif
 </ul>
+
+{{-- Delete Confirm --}}
+@if ($editStatus['isMe'] && $editStatus['canDelete'])
+    <div class="modal fade" id="delete-{{ $pid }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-{{ $pid }}Label" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-5">{{ fs_lang('delete') }}?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ fs_lang('cancel') }}</button>
+                    <a class="btn btn-danger api-request-link" href="#" role="button" data-method="DELETE" data-id="{{ $pid }}" data-action="{{ route('fresns.api.content.delete',  ['type' => 'post', 'fsid' => $pid]) }}" data-bs-dismiss="modal">{{ fs_lang('delete') }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif

@@ -31,6 +31,29 @@
     {{-- Header --}}
     @include('commons.header')
 
+    {{-- Private mode user status handling --}}
+    @if (fs_user()->check() && fs_user('detail.expired'))
+        <div class="mt-5 pt-5">
+            <div class="alert alert-warning mx-3" role="alert">
+                <i class="bi bi-info-circle"></i>
+                @if (fs_api_config('site_private_end_after') == 1)
+                    {{ fs_lang('privateContentHide') }}
+                @else
+                    {{ fs_lang('privateContentShowOld') }}
+                @endif
+
+                <button class="btn btn-primary btn-sm ms-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                    data-type="account"
+                    data-scene="renewal"
+                    data-post-message-key="fresnsRenewal"
+                    data-title="{{ fs_lang('renewal') }}"
+                    data-url="{{ fs_api_config('site_public_service') }}">
+                    {{ fs_lang('renewal') }}
+                </button>
+            </div>
+        </div>
+    @endif
+
     {{-- Main --}}
     @yield('content')
 

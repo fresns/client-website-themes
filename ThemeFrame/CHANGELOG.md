@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.5.2 (2023-03-05)
+
+- Added private mode user handling.
+- Added display of authenticated user description on user profile page.
+
+
+## 2.5.1 (2023-03-02)
+
+- View Optimization
+- Bug fixes
+
+
 ## 2.5.0 (2023-02-26)
 
 - View Optimization

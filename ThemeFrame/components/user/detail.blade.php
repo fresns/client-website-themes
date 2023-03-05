@@ -33,7 +33,15 @@
             <span class="badge text-bg-secondary">{{ $user['roleName'] }}</span>
         @endif
     </div>
+
     <div class="mb-2 text-secondary">{{ '@'.$user['fsid'] }}</div>
+
+    @if ($user['verifiedStatus'] && $user['verifiedDesc'])
+        <span class="badge rounded-pill text-bg-warning fw-normal mb-2">
+            <i class="bi bi-patch-check"></i>
+            {{ $user['verifiedDesc'] }}
+        </span>
+    @endif
 
     @if ($user['status'])
         <p class="fs-7 text-secondary px-4">{!! $user['bioHtml'] !!}</p>
