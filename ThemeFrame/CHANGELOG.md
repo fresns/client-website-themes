@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.5.3 (2023-03-05)
+
+- Fixed an issue with type parameters when enabling single sign-on support only.
+
+
 ## 2.5.2 (2023-03-05)
 
 - Added private mode user handling.
