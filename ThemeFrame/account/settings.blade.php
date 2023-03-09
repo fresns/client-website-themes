@@ -228,6 +228,21 @@
                                 <span class="input-group-text">{{ fs_lang('account') }} ID</span>
                                 <span class="form-control">{{ fs_account('detail.aid') }}</span>
                             </div>
+                            {{-- Account Real Name --}}
+                            @if (fs_api_config('account_real_name_service'))
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">{{ fs_lang('accountRealName') }}</span>
+                                    <span class="form-control">{{ fs_account('detail.verifyStatus') ? fs_lang('success') : fs_lang('settingNot') }}</span>
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                                        data-type="account"
+                                        data-scene="realName"
+                                        data-post-message-key="fresnsRealName"
+                                        data-title="{{ fs_lang('accountRealName') }}"
+                                        data-url="{{ fs_api_config('account_real_name_service') }}">
+                                        {{ fs_lang('accountRealName') }}
+                                    </button>
+                                </div>
+                            @endif
                             {{-- Cell Phone Number --}}
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('phone') }}</span>
