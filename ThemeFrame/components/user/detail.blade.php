@@ -127,7 +127,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="conversationModalLabel">
-                        <a href="{{ fs_route(route('fresns.message.index')) }}" target="_blank" class="text-decoration-none"><i class="bi bi-chat-square-dots"></i> {{ fs_db_config('menu_conversations') }}</a>
+                        <a href="{{ fs_route(route('fresns.messages.index')) }}" target="_blank" class="text-decoration-none"><i class="bi bi-chat-square-dots"></i> {{ fs_db_config('menu_conversations') }}</a>
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

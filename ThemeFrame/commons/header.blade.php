@@ -89,7 +89,7 @@
 
                         <button type="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" data-bs-toggle="modal" data-bs-target="#createModal"><i class="bi bi-plus-lg"></i></button>
 
-                        <a href="{{ fs_route(route('fresns.message.notifications')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
+                        <a href="{{ fs_route(route('fresns.notifications.index')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
                             <i class="bi bi-bell"></i>
                             @if (array_sum(fs_user_panel('unreadNotifications')) > 0)
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ array_sum(fs_user_panel('unreadNotifications')) }}</span>
@@ -97,7 +97,7 @@
                         </a>
 
                         @if (fs_api_config('conversation_status'))
-                            <a href="{{ fs_route(route('fresns.message.index')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
+                            <a href="{{ fs_route(route('fresns.messages.index')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
                                 <i class="bi bi-envelope"></i>
                                 @if (fs_user_panel('conversations.unreadMessages') > 0)
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ fs_user_panel('conversations.unreadMessages') }}</span>
@@ -114,7 +114,7 @@
 
                                 {{-- Notifications --}}
                                 <li>
-                                    <a class="dropdown-item" href="{{ fs_route(route('fresns.message.notifications')) }}">
+                                    <a class="dropdown-item" href="{{ fs_route(route('fresns.notifications.index')) }}">
                                         <i class="bi bi-bell"></i>
                                         {{ fs_db_config('menu_notifications') }}
 
@@ -127,7 +127,7 @@
                                 {{-- Conversations --}}
                                 @if (fs_api_config('conversation_status'))
                                     <li>
-                                        <a class="dropdown-item" href="{{ fs_route(route('fresns.message.index')) }}">
+                                        <a class="dropdown-item" href="{{ fs_route(route('fresns.messages.index')) }}">
                                             <i class="bi bi-envelope"></i>
                                             {{ fs_db_config('menu_conversations') }}
 
