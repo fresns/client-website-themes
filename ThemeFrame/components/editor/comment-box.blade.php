@@ -30,13 +30,13 @@
                                     <ul class="nav nav-tabs" role="tablist">
                                         @foreach(fs_stickers() as $sticker)
                                             <li class="nav-item" role="presentation">
-                                                <button class="nav-link @if ($loop->first) active @endif" id="{{ $pid.$cid }}sticker-{{ $loop->index }}-tab" data-bs-toggle="tab" data-bs-target="#{{ $pid.$cid }}sticker-{{ $loop->index }}" type="button" role="tab" aria-controls="{{ $pid.$cid }}sticker-{{ $loop->index }}" aria-selected="{{ $loop->first }}">{{ $sticker['name'] }}</button>
+                                                <button class="nav-link @if ($loop->first) active @endif" id="quick-comment-{{ $pid.$cid }}-sticker-{{ $loop->index }}-tab" data-bs-toggle="tab" data-bs-target="#quick-comment-{{ $pid.$cid }}-sticker-{{ $loop->index }}" type="button" role="tab" aria-controls="quick-comment-{{ $pid.$cid }}-sticker-{{ $loop->index }}" aria-selected="{{ $loop->first }}">{{ $sticker['name'] }}</button>
                                             </li>
                                         @endforeach
                                     </ul>
                                     <div class="tab-content p-2 fs-sticker">
                                         @foreach(fs_stickers() as $sticker)
-                                            <div class="tab-pane fade @if ($loop->first) show active @endif" id="{{ $pid.$cid }}sticker-{{ $loop->index }}" role="tabpanel" aria-labelledby="{{ $pid.$cid }}sticker-{{ $loop->index }}-tab">
+                                            <div class="tab-pane fade @if ($loop->first) show active @endif" id="quick-comment-{{ $pid.$cid }}-sticker-{{ $loop->index }}" role="tabpanel" aria-labelledby="quick-comment-{{ $pid.$cid }}-sticker-{{ $loop->index }}-tab">
                                                 @foreach($sticker['stickers'] ?? [] as $value)
                                                     <a class="{{ 'fresns-comment-sticker'.$pid.$cid }} btn btn-outline-secondary border-0" href="javascript:;" value="{{ $value['code'] }}" title="{{ $value['code'] }}" >
                                                         <img src="{{ $value['image'] }}" loading="lazy" alt="{{ $value['code'] }}" title="{{ $value['code'] }}">
