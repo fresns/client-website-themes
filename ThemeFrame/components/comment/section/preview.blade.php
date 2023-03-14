@@ -1,7 +1,9 @@
 <section class="comment-preview mt-2 mx-3 position-relative d-flex flex-column">
     @foreach($subComments as $comment)
         <div class="text-break mb-2">
-            @if ($comment['isAnonymous'])
+            @if (! $comment['creator']['status'])
+                <span class="text-info">{{ fs_lang('contentCreatorDeactivate') }}</span>
+            @elseif ($comment['isAnonymous'])
                 <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>
             @else
                 <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['creator']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['creator']['nickname'] }}</a>
@@ -12,10 +14,12 @@
             @endif
 
             @if ($comment['replyToComment'])
-                @if ($comment['replyToComment']['creator']['nickname'])
-                    {{ fs_db_config('publish_comment_name') }} <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToComment']['creator']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['replyToComment']['creator']['nickname'] }}</a>
-                @else
+                @if (! $comment['replyToComment']['creator']['status'])
+                    {{ fs_db_config('publish_comment_name') }} <span class="text-info">{{ fs_lang('contentCreatorDeactivate') }}</span>
+                @elseif ($comment['replyToComment']['isAnonymous'])
                     {{ fs_db_config('publish_comment_name') }} <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>
+                @else
+                    {{ fs_db_config('publish_comment_name') }} <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToComment']['creator']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['replyToComment']['creator']['nickname'] }}</a>
                 @endif
             @endif
 
