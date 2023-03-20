@@ -33,10 +33,7 @@
 
                 {{-- Post Location --}}
                 @if ($location['isLbs'])
-                    <a href="{{ fs_route(route('fresns.post.location', [
-                        'pid' => $pid,
-                        'type' => 'posts',
-                    ])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
+                    <a href="{{ fs_route(route('fresns.post.location', $location['encoded'])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
                 @endif
             </div>
         </div>
@@ -76,10 +73,7 @@
 
                 {{-- Post Location --}}
                 @if ($location['isLbs'])
-                    <a href="{{ fs_route(route('fresns.post.location', [
-                        'pid' => $pid,
-                        'type' => 'posts',
-                    ])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
+                    <a href="{{ fs_route(route('fresns.post.location', $location['encoded'])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
                 @endif
             </div>
         </div>
@@ -153,10 +147,7 @@
 
                 {{-- Post Location --}}
                 @if ($location['isLbs'])
-                    <a href="{{ fs_route(route('fresns.post.location', [
-                        'pid' => $pid,
-                        'type' => 'posts',
-                    ])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
+                    <a href="{{ fs_route(route('fresns.post.location', $location['encoded'])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
                 @endif
             </div>
         </div>
