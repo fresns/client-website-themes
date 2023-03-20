@@ -24,10 +24,10 @@
                 {{-- Tab Content --}}
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ fs_route(route('fresns.post.location', $encoded)) }}">{{ fs_db_config('post_name') }}</a>
+                        <a class="nav-link active" href="{{ fs_route(route('fresns.post.location', $encode)) }}">{{ fs_db_config('post_name') }}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ fs_route(route('fresns.comment.location', $encoded)) }}">{{ fs_db_config('comment_name') }}</a>
+                        <a class="nav-link" href="{{ fs_route(route('fresns.comment.location', $encode)) }}">{{ fs_db_config('comment_name') }}</a>
                     </li>
                 </ul>
 

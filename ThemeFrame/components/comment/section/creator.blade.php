@@ -112,7 +112,7 @@
 
             {{-- Commenter Location --}}
             @if ($location['isLbs'])
-                <a href="{{ fs_route(route('fresns.comment.location', $location['encoded'])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
+                <a href="{{ fs_route(route('fresns.comment.location', $location['encode'])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
             @endif
         </div>
     </div>
