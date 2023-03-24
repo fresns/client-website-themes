@@ -146,6 +146,13 @@
         </section>
     @endif
 
+    {{-- quoted post --}}
+    @if ($post['quotedPost'])
+        @component('components.post.section.quoted-post', [
+            'post' => $post['quotedPost'],
+        ])@endcomponent
+    @endif
+
     {{-- Post extended information --}}
     @if ($post['group'] || $post['isUserList'] || $post['hashtags'])
         <section class="content-append order-4 mx-3 mt-3 d-flex">
