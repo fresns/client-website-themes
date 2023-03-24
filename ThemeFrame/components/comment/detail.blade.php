@@ -35,7 +35,7 @@
 <div class="position-relative pb-2" id="{{ $comment['cid'] }}">
     {{-- Main post preview content --}}
     @component('components.comment.section.post', [
-        'post' => $comment['post'],
+        'post' => $comment['replyToPost'],
     ])@endcomponent
 
     {{-- Comment Author Information --}}
@@ -194,7 +194,7 @@
         {{-- Reply Box --}}
         @component('components.editor.comment-box', [
             'nickname' => $comment['creator']['nickname'],
-            'pid' => $comment['pid'],
+            'pid' => $comment['replyToPost']['pid'],
             'cid' => $comment['cid'],
             'show' => true,
         ])@endcomponent

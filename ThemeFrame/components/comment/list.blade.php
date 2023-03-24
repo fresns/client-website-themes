@@ -202,7 +202,7 @@
         {{-- Reply Box --}}
         @component('components.editor.comment-box', [
             'nickname' => $comment['creator']['nickname'],
-            'pid' => $comment['pid'],
+            'pid' => $comment['replyToPost']['pid'],
             'cid' => $comment['cid'],
         ])@endcomponent
     </section>
@@ -224,9 +224,9 @@
     @endif
 
     {{-- Main post preview content --}}
-    @if ($comment['post'])
+    @if ($comment['replyToPost'])
         @component('components.comment.section.post', [
-            'post' => $comment['post'],
+            'post' => $comment['replyToPost'],
         ])@endcomponent
     @endif
 </div>
