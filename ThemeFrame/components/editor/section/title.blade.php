@@ -1,4 +1,4 @@
-<div class="collapse @if ($config['view'] == 1) show @endif" id="titleCollapse">
+<div class="collapse @if ($config['view'] == 1 || $title) show @endif" id="titleCollapse">
     <input type="text" class="form-control form-control-lg rounded-0 border-0 ps-2"
         id="title"
         name="postTitle"
