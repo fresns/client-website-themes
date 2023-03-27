@@ -3,7 +3,13 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">{{ fs_db_config('publish_post_name') }} <a href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}" class="fs-7">{{ fs_lang('editorFullFunctions') }}</a></h5>
+                <h5 class="modal-title">
+                    {{ fs_db_config('publish_post_name') }}
+                    <a href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}" target="_blank" class="fs-7">
+                        <i class="bi bi-box-arrow-up-right"></i>
+                        {{ fs_lang('editorFullFunctions') }}
+                    </a>
+                </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
