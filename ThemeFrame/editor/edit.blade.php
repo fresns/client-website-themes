@@ -9,7 +9,7 @@
                 @csrf
                 @method("post")
                 <input type="hidden" name="type" value="{{ $type ?? '' }}" />
-                <input type="hidden" name="postGid" value="{{ $group['gid'] ?? '' }}" />
+                <input type="hidden" name="postGid" value="{{ $draft['detail']['group']['gid'] ?? '' }}" />
 
                 {{-- Tip: Publish Permissions --}}
                 @if ($config['publish']['limit']['status'] && $config['publish']['limit']['isInTime'])
@@ -30,7 +30,7 @@
                     @component('components.editor.section.group', [
                         'draftId' => $draft['detail']['id'],
                         'config' => $config['editor']['features']['group'],
-                        'group' => $group,
+                        'group' => $draft['detail']['group'],
                     ])@endcomponent
                 @endif
 
