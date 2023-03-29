@@ -12,14 +12,6 @@
                 ])@endcomponent
             @endif
 
-            {{-- Group --}}
-            @if ($config['editor']['features']['group']['status'])
-                @component('components.editor.section.group', [
-                    'config' => $config['editor']['features']['group'],
-                    'group' => null,
-                ])@endcomponent
-            @endif
-
             {{-- Toolbar --}}
             @component('components.editor.section.toolbar', [
                 'type' => $type,

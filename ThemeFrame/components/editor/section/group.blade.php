@@ -49,18 +49,22 @@
 
 @push('script')
     <script>
-        /**
-         * @param obj
-         */
+        const changeGid = function (gid = '') {
+            $.post("{{ route('fresns.api.editor.update', ['type' => 'post', 'draftId' => $draftId]) }}", {
+                'postGid' : gid,
+            })
+        };
+
         function selectGroup(obj) {
             let gid = $(obj).data('gid'),
                 gname = $(obj).text();
             $('#fresns-group .modal-close').trigger('click');
             $('.fresns-editor .editor-group #group').text(gname);
             $(".fresns-editor input[name='postGid']").val(gid);
+            changeGid(gid);
         }
 
-        function ajaxGetGroupList(action, pageSize = 15, page = 1){
+        function ajaxGetGroupList(action, pageSize = 15, page = 1) {
             let html = '';
 
             $('#fresns-editor-groups .list-group').append('<div class="text-center mt-4 group-spinners"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>');
@@ -102,7 +106,7 @@
         }
 
         $(function (){
-            $("#fresns-group .group-categories").on('click', function (){
+            $("#fresns-group .group-categories").on('click', function () {
                 let obj = $(this),
                     pageSize = obj.data('page-size'),
                     page = obj.data('page'),
@@ -119,9 +123,10 @@
                 ajaxGetGroupList(action, pageSize, page)
             })
 
-            $("#not-select-group").on('click', function (){
+            $("#not-select-group").on('click', function () {
                 $('.fresns-editor .editor-group #group').text("{{ fs_lang('editorNoChooseGroup') }}");
                 $(".fresns-editor input[name='postGid']").val("");
+                changeGid();
             })
         })
     </script>

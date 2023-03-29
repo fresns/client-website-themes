@@ -28,6 +28,7 @@
                 {{-- Group --}}
                 @if ($config['editor']['features']['group']['status'])
                     @component('components.editor.section.group', [
+                        'draftId' => $draft['detail']['id'],
                         'config' => $config['editor']['features']['group'],
                         'group' => $group,
                     ])@endcomponent
@@ -276,22 +277,21 @@
 
         const postDraft = function (title, content, fid = ''){
             $.post("{{ route('fresns.api.editor.update', ['type' => $type, 'draftId' => $draft['detail']['id']]) }}", {
-                'content':  content,
                 'postTitle' : title,
-                'postGid' : "{{ $draft['detail']['group']['gid'] ?? null }}",
-                'request_token' : "{{ \Illuminate\Support\Facades\Cookie::get('token') }}",
-                'deleteFile': fid
+                'content':  content,
             }, function (data){
                 console.log(data)
             })
         };
 
         function deleteFile(obj) {
-            $(obj).parent().parent().remove();
             let fid = $(obj).data('fid'),
-                content = $("#content").val(),
-                title = $("#title").val();
-            postDraft(title, content, fid);
+
+            $.post("{{ route('fresns.api.editor.update', ['type' => $type, 'draftId' => $draft['detail']['id']]) }}", {
+                'deleteFile': fid
+            }, function (data){
+                console.log(data)
+            })
         }
 
         (function($){
