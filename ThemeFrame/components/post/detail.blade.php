@@ -115,12 +115,11 @@
     @endif
 
     {{-- Files --}}
-    <section class="content-files order-3 mx-3 mt-2 d-flex align-content-start flex-wrap file-image-{{ $post['fileCount']['images'] }}">
+    <section class="content-files order-3 mx-3 mt-2 d-flex align-content-start flex-wrap file-image-{{ count($post['files']['images']) }}">
         @component('components.post.section.files', [
             'pid' => $post['pid'],
             'createTime' => $post['createTime'],
             'creator' => $post['creator'],
-            'fileCount' => $post['fileCount'],
             'files' => $post['files'],
         ])@endcomponent
     </section>

@@ -60,7 +60,6 @@
                     @component('components.editor.section.files', [
                         'type' => $type,
                         'files' => $draft['detail']['files'],
-                        'fileCount' => $draft['detail']['fileCount'],
                     ])@endcomponent
 
                     {{-- Extends --}}

@@ -25,19 +25,19 @@
 
             : {!! $comment['content'] !!}
 
-            @if ($comment['fileCount']['images'] > 0)
+            @if (count($comment['files']['images']) > 0)
                 <span class="text-primary">[{{ fs_lang('image') }}]</span>
             @endif
 
-            @if ($comment['fileCount']['videos'] > 0)
+            @if (count($comment['files']['videos']) > 0)
                 <span class="text-primary">[{{ fs_lang('video') }}]</span>
             @endif
 
-            @if ($comment['fileCount']['audios'] > 0)
+            @if (count($comment['files']['audios']) > 0)
                 <span class="text-primary">[{{ fs_lang('audio') }}]</span>
             @endif
 
-            @if ($comment['fileCount']['documents'] > 0)
+            @if (count($comment['files']['documents']) > 0)
                 <span class="text-primary">[{{ fs_lang('document') }}]</span>
             @endif
         </div>

@@ -24,7 +24,7 @@
 
         {{-- Files Images --}}
         @if ($topComment['files']['images'])
-            <div class="d-flex align-content-start flex-wrap comment-image-{{ $topComment['fileCount']['images'] }}">
+            <div class="d-flex align-content-start flex-wrap comment-image-{{ count($topComment['files']['images']) }}">
                 @foreach($topComment['files']['images'] as $image)
                     <img src="{{ $image['imageSquareUrl'] }}" loading="lazy" class="img-fluid">
                 @endforeach
@@ -59,19 +59,19 @@
     
                 : {!! $comment['content'] !!}
     
-                @if ($comment['fileCount']['images'] > 0)
+                @if (count($comment['files']['images']) > 0)
                     <span class="text-primary">[{{ fs_lang('image') }}]</span>
                 @endif
     
-                @if ($comment['fileCount']['videos'] > 0)
+                @if (count($comment['files']['videos']) > 0)
                     <span class="text-primary">[{{ fs_lang('video') }}]</span>
                 @endif
     
-                @if ($comment['fileCount']['audios'] > 0)
+                @if (count($comment['files']['audios']) > 0)
                     <span class="text-primary">[{{ fs_lang('audio') }}]</span>
                 @endif
     
-                @if ($comment['fileCount']['documents'] > 0)
+                @if (count($comment['files']['documents']) > 0)
                     <span class="text-primary">[{{ fs_lang('document') }}]</span>
                 @endif
             </div>

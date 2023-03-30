@@ -94,12 +94,11 @@
     @endif
 
     {{-- Files --}}
-    <section class="content-files order-3 mx-3 mt-2 d-flex align-content-start flex-wrap file-image-{{ $comment['fileCount']['images'] }}">
+    <section class="content-files order-3 mx-3 mt-2 d-flex align-content-start flex-wrap file-image-{{ count($comment['files']['images']) }}">
         @component('components.comment.section.files', [
             'cid' => $comment['cid'],
             'createTime' => $comment['createTime'],
             'creator' => $comment['creator'],
-            'fileCount' => $comment['fileCount'],
             'files' => $comment['files'],
         ])@endcomponent
     </section>

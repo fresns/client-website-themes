@@ -1,7 +1,7 @@
 {{-- Images --}}
 @if ($files['images'])
     @foreach($files['images'] as $image)
-        @if ($fileCount['images'] == 1)
+        @if (count($files['images']) == 1)
             {{-- Single Image --}}
             @if (Route::is('fresns.post.detail'))
                 {{-- Detail page leaflet display method --}}
