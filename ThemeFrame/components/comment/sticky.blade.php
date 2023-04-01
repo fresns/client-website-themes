@@ -43,7 +43,7 @@
             'createTimeFormat' => $sticky['createTimeFormat'],
             'editTime' => $sticky['editTime'],
             'editTimeFormat' => $sticky['editTimeFormat'],
-            'ipLocation' => $sticky['ipLocation'],
+            'moreJson' => $sticky['moreJson'],
             'location' => $sticky['location'],
             'replyToComment' => $sticky['replyToComment'],
         ])@endcomponent

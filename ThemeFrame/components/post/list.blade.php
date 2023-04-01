@@ -43,7 +43,7 @@
             'createTimeFormat' => $post['createTimeFormat'],
             'editTime' => $post['editTime'],
             'editTimeFormat' => $post['editTimeFormat'],
-            'ipLocation' => $post['ipLocation'],
+            'moreJson' => $post['moreJson'],
             'location' => $post['location']
         ])@endcomponent
     </section>

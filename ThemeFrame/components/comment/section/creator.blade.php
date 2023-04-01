@@ -102,8 +102,8 @@
             @if (fs_api_config('account_ip_location_status') && current_lang_tag() == 'zh-Hans')
                 <span class="text-secondary ms-3">
                     <i class="bi bi-geo"></i>
-                    @if ($ipLocation)
-                        {{ fs_lang('ipLocation').$ipLocation }}
+                    @if ($moreJson['ipLocation'] ?? null)
+                        {{ fs_lang('ipLocation').$moreJson['ipLocation'] }}
                     @else
                         {{ fs_lang('errorIp') }}
                     @endif

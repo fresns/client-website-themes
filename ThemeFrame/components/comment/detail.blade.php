@@ -48,7 +48,7 @@
             'createTimeFormat' => $comment['createTimeFormat'],
             'editTime' => $comment['editTime'],
             'editTimeFormat' => $comment['editTimeFormat'],
-            'ipLocation' => $comment['ipLocation'],
+            'moreJson' => $comment['moreJson'],
             'location' => $comment['location'],
             'replyToComment' => $comment['replyToComment'],
         ])@endcomponent
