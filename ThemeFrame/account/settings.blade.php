@@ -10,9 +10,9 @@
                 @include('account.sidebar')
             </div>
 
-            {{-- Account Content --}}
+            {{-- Account Main --}}
             <div class="col-sm-6">
-                {{-- Recall Delete Account --}}
+                {{-- Recall Delete --}}
                 @if (fs_account('detail.waitDelete'))
                     <div class="alert alert-danger" role="alert">
                         <h4 class="alert-heading">{{ fs_lang('accountWaitDelete') }}</h4>
@@ -46,7 +46,7 @@
                         </ul>
                     </div>
                     <div class="card-body tab-content" id="settings-tab-content">
-                        {{-- User Profile --}}
+                        {{-- Profile --}}
                         <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             {{-- Avatar --}}
                             <div class="input-group mb-3">
@@ -150,9 +150,9 @@
                             </div>
                         </div>
 
-                        {{-- Preference Settings --}}
+                        {{-- Preference --}}
                         <div class="tab-pane fade" id="preference" role="tabpanel" aria-labelledby="preference-tab">
-                            {{-- conversation --}}
+                            {{-- Conversations --}}
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_db_config('menu_conversations') }}</span>
                                 <span class="form-control" id="select-conversationLimit">
@@ -228,7 +228,7 @@
                                 <span class="input-group-text">{{ fs_lang('account') }} ID</span>
                                 <span class="form-control">{{ fs_account('detail.aid') }}</span>
                             </div>
-                            {{-- Account Real Name --}}
+                            {{-- Real Name --}}
                             @if (fs_api_config('account_real_name_service'))
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">{{ fs_lang('accountRealName') }}</span>
@@ -243,7 +243,7 @@
                                     </button>
                                 </div>
                             @endif
-                            {{-- Cell Phone Number --}}
+                            {{-- Phone Number --}}
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('phone') }}</span>
                                 @if (fs_api_config('send_sms_service'))
@@ -274,7 +274,7 @@
                                     @endif
                                 @endif
                             </div>
-                            {{-- E-Mail --}}
+                            {{-- Email --}}
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('email') }}</span>
                                 @if (fs_api_config('send_email_service'))
@@ -364,7 +364,7 @@
                                 @endif
                             </div>
 
-                            {{-- Connect Info --}}
+                            {{-- Account Connects --}}
                             @if (fs_api_config('account_connect_services'))
                                 <div class="card mb-3">
                                     <div class="card-header">{{ fs_lang('settingConnect') }}</div>
@@ -438,17 +438,17 @@
                                                     <span class="input-group-text border-end-rounded-0">{{ fs_lang('type') }}</span>
                                                     <div class="form-control">
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input collapse show" type="radio" name="codeType" id="email_to_edit" value="email" data-bs-toggle="collapse" data-bs-target="#email_to_edit:not(.show)" aria-expanded="true" checked>
-                                                            <label class="form-check-label" for="email_to_edit">{{ fs_lang('emailVerifyCode') }}</label>
+                                                            <input class="form-check-input collapse show" type="radio" name="codeType" id="email_code_apply" value="email" data-bs-toggle="collapse" data-bs-target=".email_code_apply:not(.show)" aria-expanded="true" checked>
+                                                            <label class="form-check-label" for="email_code_apply">{{ fs_lang('emailVerifyCode') }}</label>
                                                         </div>
                                                         <div class="form-check form-check-inline">
-                                                            <input class="form-check-input collapse show collapsed" type="radio" name="codeType" id="phone_to_edit" value="sms" data-bs-toggle="collapse" data-bs-target="#phone_to_edit:not(.show)" aria-expanded="false">
-                                                            <label class="form-check-label" for="phone_to_edit">{{ fs_lang('smsVerifyCode') }}</label>
+                                                            <input class="form-check-input collapse show collapsed" type="radio" name="codeType" id="phone_code_apply" value="sms" data-bs-toggle="collapse" data-bs-target=".phone_code_apply:not(.show)" aria-expanded="false">
+                                                            <label class="form-check-label" for="phone_code_apply">{{ fs_lang('smsVerifyCode') }}</label>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div id="apply_delete_mode">
-                                                    <div class="collapse show" id="email_to_edit" aria-labelledby="email_to_edit" data-bs-parent="#apply_delete_mode">
+                                                    <div class="collapse email_code_apply show" aria-labelledby="email_code_apply" data-bs-parent="#apply_delete_mode">
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text border-end-rounded-0">{{ fs_lang('email') }}</span>
                                                             <input class="form-control" type="text" placeholder="{{ fs_account('detail.email') }}" value="{{ fs_account('detail.email') }}" disabled>
@@ -464,7 +464,7 @@
                                                             </button>
                                                         </div>
                                                     </div>
-                                                    <div class="collapse" id="phone_to_edit" aria-labelledby="phone_to_edit" data-bs-parent="#apply_delete_mode">
+                                                    <div class="collapse phone_code_apply" aria-labelledby="phone_code_apply" data-bs-parent="#apply_delete_mode">
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text border-end-rounded-0">{{ fs_lang('phone') }}</span>
                                                             <input class="form-control" type="text" placeholder="{{ fs_account('detail.phone') }}" value="{{ fs_account('detail.phone') }}" disabled>
@@ -498,7 +498,7 @@
                         @endif
                     </div>
                 </div>
-                {{-- End of setting --}}
+                {{-- Settings End --}}
             </div>
         </div>
     </main>
@@ -507,7 +507,7 @@
     <div class="modal fade user-edit" id="editModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form action="" method="post">
+                <form action="" method="post" autocomplete="off">
                     <div class="modal-header">
                         <h5 class="modal-title" id="editModalLabel">{{ fs_lang('errorUnavailable') }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
