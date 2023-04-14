@@ -1,11 +1,11 @@
-@if ($post)
-    <section class="comment-post mt-3 mx-3 position-relative">
+@if ($post['creator'] ?? null)
+    <section class="comment-post mt-2 mx-3 position-relative">
         <div class="d-flex">
             <div class="flex-shrink-0"><img src="{{ $post['creator']['avatar'] }}" loading="lazy" alt="{{ $post['creator']['nickname'] }}" class="rounded"></div>
             <div class="flex-grow-1">
                 @if (! $post['creator']['status'])
                     {{ fs_lang('contentCreatorDeactivate') }}:
-                @elseif (! $post['creator']['fsid'])
+                @elseif (empty($post['creator']['fsid']))
                     {{ fs_lang('contentCreatorAnonymous') }}:
                 @else
                     {{ $post['creator']['nickname'] }}:

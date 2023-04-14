@@ -2,7 +2,7 @@
     {{-- Edit --}}
     @if ($editStatus['isMe'] && $editStatus['canEdit'])
         <li>
-            <a class="dropdown-item py-2" href="#" data-action="{{ fs_route(route('fresns.editor.store', ['type' => 'comment', 'fsid' => $cid])) }}">
+            <a class="dropdown-item py-2 web-request-link" href="#" data-action="{{ fs_route(route('fresns.editor.store', ['type' => 'comment', 'fsid' => $cid])) }}">
                 <i class="bi bi-pencil-square"></i>
                 {{ fs_lang('edit') }}
             </a>
@@ -36,7 +36,7 @@
         </li>
     @endif
 
-    {{-- Management Extensions --}}
+    {{-- Manages --}}
     @if ($manages)
         @foreach($manages as $plugin)
             <li>
@@ -58,7 +58,7 @@
     @endif
 </ul>
 
-{{-- Delete Confirm --}}
+{{-- Delete Secondary Confirmation --}}
 @if ($editStatus['isMe'] && $editStatus['canDelete'])
     <div class="modal fade" id="delete-{{ $cid }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-{{ $cid }}Label" aria-hidden="true">
         <div class="modal-dialog modal-sm">

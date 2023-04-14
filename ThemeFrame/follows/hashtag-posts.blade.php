@@ -10,7 +10,7 @@
                 @include('hashtags.sidebar')
             </div>
 
-            {{-- Middle Content --}}
+            {{-- Middle --}}
             <div class="col-sm-6">
                 {{-- Post List --}}
                 <article class="card clearfix" id="fresns-list-container">

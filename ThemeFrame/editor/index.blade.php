@@ -12,14 +12,6 @@
                 ])@endcomponent
             @endif
 
-            {{-- Group --}}
-            @if ($config['editor']['features']['group']['status'])
-                @component('components.editor.section.group', [
-                    'config' => $config['editor']['features']['group'],
-                    'group' => null,
-                ])@endcomponent
-            @endif
-
             {{-- Toolbar --}}
             @component('components.editor.section.toolbar', [
                 'type' => $type,
@@ -41,27 +33,6 @@
 
                 {{-- Content --}}
                 <textarea class="form-control rounded-0 border-0" id="content" rows="10" placeholder="{{ fs_lang('editorContent') }}"></textarea>
-
-                <hr>
-
-                {{-- Location and Anonymous Start --}}
-                <div class="d-flex justify-content-between">
-                    {{-- Location --}}
-                    @if ($config['editor']['features']['location']['status'])
-                        @component('components.editor.section.location', [
-                            'type' => $type,
-                            'config' => $config['editor']['features']['location'],
-                        ])@endcomponent
-                    @endif
-
-                    {{-- Anonymous --}}
-                    @if ($config['editor']['features']['anonymous'])
-                        @component('components.editor.section.anonymous', [
-                            'type' => $type,
-                        ])@endcomponent
-                    @endif
-                </div>
-                {{-- Location and Anonymous End --}}
             </div>
             {{-- Content End --}}
 

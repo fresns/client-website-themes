@@ -13,9 +13,9 @@
             {{-- Conversation --}}
             <div class="col-sm-9">
                 <div class="card">
-                    {{-- User who conversation to me --}}
+                    {{-- Conversation User --}}
                     <div class="card-header">
-                        @if ($conversation['user']['status'])
+                        @if ($conversation['user'])
                             <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $conversation['user']['fsid']])) }}" target="_blank" class="text-decoration-none">
                                 <img src="{{ $conversation['user']['avatar'] }}" loading="lazy" alt="{{ $conversation['user']['nickname'] }}" class="rounded-circle conversation-avatar">
                                 <span class="ms-2 fs-5">{{ $conversation['user']['nickname'] }}</span>
@@ -27,7 +27,7 @@
                         @endif
                     </div>
 
-                    {{-- Message List --}}
+                    {{-- Messages --}}
                     <div class="card-body">
                         @foreach($messages as $message)
                             @component('components.message.message', compact('message'))@endcomponent

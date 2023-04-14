@@ -1,4 +1,4 @@
-<div class="editor-file-image editor-file-image-{{ $fileCount['images'] }} mt-3 clearfix">
+<div class="editor-file-image editor-file-image-{{ count($files['images']) }} mt-3 clearfix">
     @if ($files['images'] ?? null)
         @foreach($files['images'] as $image)
             <div class="position-relative">

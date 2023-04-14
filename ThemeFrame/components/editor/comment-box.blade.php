@@ -2,7 +2,7 @@
     $cid = $cid ?? '';
 @endphp
 
-{{-- Reply Box --}}
+{{-- Comment Box --}}
 @if (fs_user()->check())
     <div class="card order-5 mt-3 fresns-reply @if (empty($show)) hide @else show @endif" @if (empty($show)) style="display: none" @endif>
         <div class="card-header d-flex">
@@ -18,25 +18,25 @@
 
                     <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="{{ 'quick-publish-comment-content'.$pid.$cid }}" rows="5" placeholder="{{ fs_lang('editorContent') }}"></textarea>
 
-                    {{-- Stickers and Upload file --}}
+                    {{-- Sticker and Upload --}}
                     <div class="d-flex mt-2">
                         @if (fs_api_config('comment_editor_sticker'))
                             <div class="me-2">
                                 <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                     <i class="bi bi-emoji-smile"></i>
                                 </button>
-                                {{-- Sticker List --}}
+                                {{-- Sticker List Start --}}
                                 <div class="dropdown-menu pt-0" aria-labelledby="stickers">
                                     <ul class="nav nav-tabs" role="tablist">
                                         @foreach(fs_stickers() as $sticker)
                                             <li class="nav-item" role="presentation">
-                                                <button class="nav-link @if ($loop->first) active @endif" id="{{ $pid.$cid }}sticker-{{ $loop->index }}-tab" data-bs-toggle="tab" data-bs-target="#{{ $pid.$cid }}sticker-{{ $loop->index }}" type="button" role="tab" aria-controls="{{ $pid.$cid }}sticker-{{ $loop->index }}" aria-selected="{{ $loop->first }}">{{ $sticker['name'] }}</button>
+                                                <button class="nav-link @if ($loop->first) active @endif" id="quick-comment-{{ $pid.$cid }}-sticker-{{ $loop->index }}-tab" data-bs-toggle="tab" data-bs-target="#quick-comment-{{ $pid.$cid }}-sticker-{{ $loop->index }}" type="button" role="tab" aria-controls="quick-comment-{{ $pid.$cid }}-sticker-{{ $loop->index }}" aria-selected="{{ $loop->first }}">{{ $sticker['name'] }}</button>
                                             </li>
                                         @endforeach
                                     </ul>
                                     <div class="tab-content p-2 fs-sticker">
                                         @foreach(fs_stickers() as $sticker)
-                                            <div class="tab-pane fade @if ($loop->first) show active @endif" id="{{ $pid.$cid }}sticker-{{ $loop->index }}" role="tabpanel" aria-labelledby="{{ $pid.$cid }}sticker-{{ $loop->index }}-tab">
+                                            <div class="tab-pane fade @if ($loop->first) show active @endif" id="quick-comment-{{ $pid.$cid }}-sticker-{{ $loop->index }}" role="tabpanel" aria-labelledby="quick-comment-{{ $pid.$cid }}-sticker-{{ $loop->index }}-tab">
                                                 @foreach($sticker['stickers'] ?? [] as $value)
                                                     <a class="{{ 'fresns-comment-sticker'.$pid.$cid }} btn btn-outline-secondary border-0" href="javascript:;" value="{{ $value['code'] }}" title="{{ $value['code'] }}" >
                                                         <img src="{{ $value['image'] }}" loading="lazy" alt="{{ $value['code'] }}" title="{{ $value['code'] }}">
@@ -60,12 +60,12 @@
 
                     <hr>
                     <div class="d-flex bd-highlight align-items-center">
-                        {{-- comment button --}}
+                        {{-- Comment Button --}}
                         <div class="bd-highlight me-auto">
                             <button type="submit" class="btn btn-success">{{ fs_db_config('publish_comment_name') }}</button>
                         </div>
 
-                        {{-- anonymous checkbox --}}
+                        {{-- Anonymous Option --}}
                         @if (fs_api_config('comment_editor_anonymous'))
                             <div class="bd-highlight">
                                 <div class="form-check">
@@ -80,13 +80,11 @@
         </div>
     </div>
 
-    @push('script')
-        <script>
-            $("{{ '.fresns-comment-sticker'.$pid.$cid }}").on('click',function (){
-                $("{{ '#quick-publish-comment-content'.$pid.$cid }}").trigger('click').insertAtCaret("[" + $(this).attr('value') + "]");
-            });
-        </script>
-    @endpush
+    <script>
+        $("{{ '.fresns-comment-sticker'.$pid.$cid }}").on('click',function (){
+            $("{{ '#quick-publish-comment-content'.$pid.$cid }}").trigger('click').insertAtCaret("[" + $(this).attr('value') + "]");
+        });
+    </script>
 @else
     <div class="card order-5 mt-3 fresns-reply @if (empty($show)) hide @else show @endif" @if (empty($show)) style="display: none" @endif>
         <div class="card-header d-flex">

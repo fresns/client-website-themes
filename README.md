@@ -2,8 +2,8 @@
 
 <p align="center">
 <img src="https://img.shields.io/badge/Fresns-%5E2.0-orange" alt="Fresns">
-<img src="https://img.shields.io/badge/FresnsEngine-%5E2.0-green" alt="PluginManager">
-<img src="https://img.shields.io/badge/License-Apache--2.0-blue" alt="License">
+<img src="https://img.shields.io/badge/FresnsEngine-%5E2.0-blueviolet" alt="PluginManager">
+<img src="https://img.shields.io/badge/License-Apache--2.0-green" alt="License">
 </p>
 
 ## Repository Introduction
@@ -25,20 +25,6 @@ A minimalist theme in the form of information flow as an experience, with respon
 
 - Installation with key name: `Moments`
 - Installation using command: `php artisan market:require Moments`
-
-## ForumX
-
-Traditional BBS forum style theme template.
-
-- Installation with key name: `ForumX`
-- Installation using command: `php artisan market:require ForumX`
-
-## ForumQ
-
-Novel infotainment community style theme template.
-
-- Installation with key name: `ForumQ`
-- Installation using command: `php artisan market:require ForumQ`
 
 ## License
 

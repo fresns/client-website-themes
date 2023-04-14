@@ -1,3 +1,3 @@
 <aside>
-    Right Sidebar
+    Right Side
 </aside>

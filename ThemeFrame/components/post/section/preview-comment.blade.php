@@ -12,13 +12,19 @@
 
         {{-- Content --}}
         <div class="text-break mt-2">
-            <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $topComment['creator']['fsid']])) }}" class="fresns_link">{{ $topComment['creator']['nickname'] }}</a>:
+            @if (! $topComment['creator']['status'])
+                <span class="text-info">{{ fs_lang('contentCreatorDeactivate') }}</span>:
+            @elseif ($topComment['isAnonymous'])
+                <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>:
+            @else
+                <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $topComment['creator']['fsid']])) }}" class="fresns_link">{{ $topComment['creator']['nickname'] }}</a>:
+            @endif
             <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $pid])).'#commentList' }}" class="text-decoration-none link-dark stretched-link">{!! $topComment['content'] !!}</a>
         </div>
 
-        {{-- Files Images --}}
+        {{-- Files --}}
         @if ($topComment['files']['images'])
-            <div class="d-flex align-content-start flex-wrap comment-image-{{ $topComment['fileCount']['images'] }}">
+            <div class="d-flex align-content-start flex-wrap comment-image-{{ count($topComment['files']['images']) }}">
                 @foreach($topComment['files']['images'] as $image)
                     <img src="{{ $image['imageSquareUrl'] }}" loading="lazy" class="img-fluid">
                 @endforeach
@@ -29,7 +35,9 @@
     <section class="comment-preview mt-3 mx-3 position-relative d-flex flex-column">
         @foreach($previewComments as $comment)
             <div class="text-break mb-2">
-                @if ($comment['isAnonymous'])
+                @if (! $comment['creator']['status'])
+                    <span class="text-info">{{ fs_lang('contentCreatorDeactivate') }}</span>
+                @elseif ($comment['isAnonymous'])
                     <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>
                 @else
                     <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['creator']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['creator']['nickname'] }}</a>
@@ -40,28 +48,30 @@
                 @endif
     
                 @if ($comment['replyToComment'])
-                    @if ($comment['replyToComment']['creator']['nickname'])
-                        {{ fs_db_config('publish_comment_name') }} <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToComment']['creator']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['replyToComment']['creator']['nickname'] }}</a>
-                    @else
+                    @if (! $comment['replyToComment']['creator']['status'])
+                        {{ fs_db_config('publish_comment_name') }} <span class="text-info">{{ fs_lang('contentCreatorDeactivate') }}</span>
+                    @elseif ($comment['replyToComment']['isAnonymous'])
                         {{ fs_db_config('publish_comment_name') }} <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>
+                    @else
+                        {{ fs_db_config('publish_comment_name') }} <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToComment']['creator']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['replyToComment']['creator']['nickname'] }}</a>
                     @endif
                 @endif
     
                 : {!! $comment['content'] !!}
     
-                @if ($comment['fileCount']['images'] > 0)
+                @if (count($comment['files']['images']) > 0)
                     <span class="text-primary">[{{ fs_lang('image') }}]</span>
                 @endif
     
-                @if ($comment['fileCount']['videos'] > 0)
+                @if (count($comment['files']['videos']) > 0)
                     <span class="text-primary">[{{ fs_lang('video') }}]</span>
                 @endif
     
-                @if ($comment['fileCount']['audios'] > 0)
+                @if (count($comment['files']['audios']) > 0)
                     <span class="text-primary">[{{ fs_lang('audio') }}]</span>
                 @endif
     
-                @if ($comment['fileCount']['documents'] > 0)
+                @if (count($comment['files']['documents']) > 0)
                     <span class="text-primary">[{{ fs_lang('document') }}]</span>
                 @endif
             </div>

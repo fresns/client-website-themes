@@ -10,8 +10,8 @@
             {{ fs_db_config('menu_account') }}
         </a>
 
-        {{-- Messages --}}
-        <a href="{{ fs_route(route('fresns.message.notifications')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.message.notifications') ? 'active' : '' }}">
+        {{-- Notifications --}}
+        <a href="{{ fs_route(route('fresns.notifications.index')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.notifications.index') ? 'active' : '' }}">
             <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-notifications.png" loading="lazy" width="36" height="36">
             {{ fs_db_config('menu_notifications') }}
 
@@ -22,7 +22,7 @@
 
         {{-- Conversations --}}
         @if (fs_api_config('conversation_status'))
-            <a href="{{ fs_route(route('fresns.message.index')) }}" class="list-group-item list-group-item-action {{ Route::is(['fresns.message.index', 'fresns.message.conversation']) ? 'active' : '' }}">
+            <a href="{{ fs_route(route('fresns.messages.index')) }}" class="list-group-item list-group-item-action {{ Route::is(['fresns.messages.index', 'fresns.messages.conversation']) ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-conversations.png" loading="lazy" width="36" height="36">
                 {{ fs_db_config('menu_conversations') }}
 
@@ -50,7 +50,7 @@
             </a>
         @endif
 
-        {{-- List of users belonging to the current account --}}
+        {{-- Users of this account --}}
         @if (fs_user_panel('multiUser.status') || count(fs_account('detail.users')) > 1)
             <a href="{{ fs_route(route('fresns.account.users')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.account.users') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-users.png" loading="lazy" width="36" height="36">

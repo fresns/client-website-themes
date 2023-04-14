@@ -1,6 +1,6 @@
 /*!
  * Fresns (https://fresns.org)
- * Copyright 2021-Present Jarvis Tang
+ * Copyright 2021-Present Jevan Tang
  * Licensed under the Apache-2.0 license
  */
 
@@ -990,24 +990,31 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                 break;
             default:
                 if (name === 'editPhone' && !value) {
-                    let smsCodes = button.data('sms-codes'),
-                        defaultSmsCode = button.data('default-sms-code');
+                    let smsCodes = button.data('sms-codes');
+                    let defaultSmsCode = button.data('default-sms-code');
+
                     html =
                         `
                     <div class="input-group has-validation mb-3">
                         <span class="input-group-text border-end-rounded-0">` +
                         lable +
-                        `</span>
-                        <select class="form-select border-end-rounded-0" name="editCountryCode">
-                            <option disabled>Country Calling Codes</option>`;
-                    $(smsCodes).each(function (k, v) {
-                        let selected = v == defaultSmsCode ? 'selected' : '';
-                        html += `<option ` + selected + ` value="` + v + `">` + v + `</option>`;
-                    });
+                        `</span>`;
+
+                    if (smsCodes.length > 1) {
+                        html += `<select class="form-select border-end-rounded-0" name="editCountryCode">
+                                    <option disabled>Country Calling Codes</option>`;
+                        $(smsCodes).each(function (k, v) {
+                            let selected = v == defaultSmsCode ? 'selected' : '';
+                            html += `<option ` + selected + ` value="` + v + `">` + v + `</option>`;
+                        });
+                        html += `</select>`;
+                    } else {
+                        html += `<span class="input-group-text">+${defaultSmsCode}</span>
+                                <input type="hidden" name="editCountryCode" value="${defaultSmsCode}">`;
+                    }
+
                     html +=
-                        `
-                        </select>
-                        <input type="text" class="form-control w-50" name="` +
+                        `<input type="text" class="form-control w-50" name="` +
                         name +
                         `" value="" required>
                         <input type="hidden" name="codeType" value="sms">
@@ -1039,8 +1046,9 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                         </button>
                     </div>`;
                 } else if (name === 'editPhone' && value) {
-                    let smsCodes = button.data('sms-codes'),
-                        defaultSmsCode = button.data('default-sms-code');
+                    let smsCodes = button.data('sms-codes');
+                    let defaultSmsCode = button.data('default-sms-code');
+
                     html =
                         `
                     <div class="form-text mb-3 text-center">` +
@@ -1067,17 +1075,23 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                         </button>
                     </div>
                     <div class="input-group has-validation mb-3 d-none">
-                        <span class="input-group-text border-end-rounded-0">${fs_lang('newPhone')}</span>
-                        <select class="form-select border-end-rounded-0" name="editCountryCode">
-                            <option disabled>Country Calling Codes</option>`;
-                    $(smsCodes).each(function (k, v) {
-                        let selected = v == defaultSmsCode ? 'selected' : '';
-                        html += `<option ` + selected + ` value="` + v + `">` + v + `</option>`;
-                    });
+                        <span class="input-group-text border-end-rounded-0">${fs_lang('newPhone')}</span>`;
+
+                    if (smsCodes.length > 1) {
+                        html += `<select class="form-select border-end-rounded-0" name="editCountryCode">
+                                    <option disabled>Country Calling Codes</option>`;
+                        $(smsCodes).each(function (k, v) {
+                            let selected = v == defaultSmsCode ? 'selected' : '';
+                            html += `<option ` + selected + ` value="` + v + `">` + v + `</option>`;
+                        });
+                        html += `</select>`;
+                    } else {
+                        html += `<span class="input-group-text">+${defaultSmsCode}</span>
+                                <input type="hidden" name="editCountryCode" value="${defaultSmsCode}">`;
+                    }
+
                     html +=
-                        `
-                        </select>
-                        <input type="text" class="form-control w-50" required name="` +
+                        `<input type="text" class="form-control w-50" required name="` +
                         name +
                         `" value="">
                     </div>
@@ -1142,7 +1156,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                             name +
                             `_mode" id="password_to_edit" value="password_to_` +
                             name +
-                            `" data-bs-toggle="collapse" data-bs-target="#password_to_edit:not(.show)" aria-expanded="true" checked>
+                            `" data-bs-toggle="collapse" data-bs-target=".password_to_edit:not(.show)" aria-controls="password_to_edit" aria-expanded="true" checked>
                                 <label class="form-check-label" for="password_to_edit">${fs_lang('password')}</label>
                             </div>`;
                     }
@@ -1153,7 +1167,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                         name +
                         `_mode" id="email_to_edit" value="email_to_` +
                         name +
-                        `" data-bs-toggle="collapse" data-bs-target="#email_to_edit:not(.show)" aria-expanded="${
+                        `" data-bs-toggle="collapse" data-bs-target=".email_to_edit:not(.show)" aria-expanded="${
                             value ? 'false' : 'true'
                         }" ${value ? '' : 'checked'}>
                                 <label class="form-check-label" for="email_to_edit">${fs_lang(
@@ -1165,15 +1179,15 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                         name +
                         `_mode" id="phone_to_edit" value="phone_to_` +
                         name +
-                        `" data-bs-toggle="collapse" data-bs-target="#phone_to_edit:not(.show)" aria-expanded="false">
+                        `" data-bs-toggle="collapse" data-bs-target=".phone_to_edit:not(.show)" aria-controls="phone_to_edit" aria-expanded="false">
                                 <label class="form-check-label" for="phone_to_edit">${fs_lang('smsVerifyCode')}</label>
                             </div>
                         </div>
                     </div>
                     <div id="edit_password_mode">
-                        <div class="collapse ${
+                        <div class="collapse password_to_edit ${
                             value ? 'show' : ''
-                        }" id="password_to_edit" aria-labelledby="password_to_edit" data-bs-parent="#edit_password_mode">
+                        }" aria-labelledby="password_to_edit" data-bs-parent="#edit_password_mode">
                             <div class="input-group mb-3">
                                 <span class="input-group-text border-end-rounded-0">${fs_lang('passwordCurrent')}</span>
                                 <input type="hidden" class="form-control" name="edit_type" value="` +
@@ -1181,12 +1195,12 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                         `">
                                 <input type="password" class="form-control" name="now_` +
                         name +
-                        `">
+                        `" autocomplete="new-password">
                             </div>
                         </div>
-                        <div class="collapse ${
+                        <div class="collapse email_to_edit ${
                             !value ? 'show' : ''
-                        }" id="email_to_edit" aria-labelledby="email_to_edit" data-bs-parent="#edit_password_mode">
+                        }" aria-labelledby="email_to_edit" data-bs-parent="#edit_password_mode">
                             <div class="input-group mb-3">
                                 <span class="input-group-text border-end-rounded-0">${fs_lang('email')}</span>
                                 <input class="form-control" type="text" placeholder="` +
@@ -1197,13 +1211,13 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
-                                <input type="text" class="form-control" name="email_verifyCode">
-                                <button data-type="email" data-use-type="4" data-template-id="5" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)"  class="btn btn-outline-secondary send-verify-code" type="button">
+                                <input type="text" class="form-control" name="email_verifyCode" autocomplete="off">
+                                <button data-type="email" data-use-type="4" data-template-id="5" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary send-verify-code" type="button">
                                     ${fs_lang('sendVerifyCode')}
                                 </button>
                             </div>
                         </div>
-                        <div class="collapse" id="phone_to_edit" aria-labelledby="phone_to_edit" data-bs-parent="#edit_password_mode">
+                        <div class="collapse phone_to_edit" aria-labelledby="phone_to_edit" data-bs-parent="#edit_password_mode">
                             <div class="input-group mb-3">
                                 <span class="input-group-text border-end-rounded-0">${fs_lang('phone')}</span>
                                 <input class="form-control" type="text" placeholder="` +
@@ -1215,7 +1229,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                             <div class="input-group mb-3">
                                 <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
                                 <input type="text" class="form-control" name="phone_verifyCode">
-                                <button data-type="sms" data-use-type="4" data-template-id="5" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)"  class="btn btn-outline-secondary send-verify-code" type="button">
+                                <button data-type="sms" data-use-type="4" data-template-id="5" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary send-verify-code" type="button">
                                     ${fs_lang('sendVerifyCode')}
                                 </button>
                             </div>
@@ -1224,13 +1238,13 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                             <span class="input-group-text border-end-rounded-0">${fs_lang('passwordNew')}</span>
                             <input type="password" class="form-control" name="new_` +
                         name +
-                        `">
+                        `" autocomplete="off">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text border-end-rounded-0">${fs_lang('passwordAgain')}</span>
                             <input type="password" class="form-control" name="new_` +
                         name +
-                        `_confirmation">
+                        `_confirmation" autocomplete="off">
                         </div>
                     </div>`;
                 } else {

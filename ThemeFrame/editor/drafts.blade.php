@@ -10,10 +10,10 @@
                 @include('account.sidebar')
             </div>
 
-            {{-- Drafts --}}
+            {{-- Draft List --}}
             <div class="col-sm-6">
                 <div class="card">
-                    {{-- Menu --}}
+                    {{-- Menus --}}
                     <div class="card-header">
                         <ul class="nav nav-tabs card-header-tabs">
                             {{-- posts --}}
@@ -39,7 +39,7 @@
                         </ul>
                     </div>
 
-                    {{-- List --}}
+                    {{-- Draft List --}}
                     <div class="card-body">
                         @component('components.editor.draft-list', [
                             'type' => $type,

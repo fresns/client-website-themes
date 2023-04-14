@@ -10,9 +10,9 @@
                 @include('comments.sidebar')
             </div>
 
-            {{-- Middle Content --}}
+            {{-- Middle --}}
             <div class="col-sm-6">
-                {{-- Get Location --}}
+                {{-- Location --}}
                 <div class="alert alert-warning" role="alert" id="currentLocation">
                     <button class="btn btn-primary" type="button" disabled>
                         <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -86,7 +86,7 @@
                 e.preventDefault();
             }
 
-            // There is a location on the url
+            // URL with location information
             let urlSearchParams = new URLSearchParams(window.location.search)
             if (urlSearchParams.has('mapLat') && urlSearchParams.has('mapLng')) {
                 console.log(urlSearchParams.toString())

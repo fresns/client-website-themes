@@ -10,7 +10,7 @@
                 @include('search.sidebar')
             </div>
 
-            {{-- Middle Content --}}
+            {{-- Middle --}}
             <div class="col-sm-6">
                 {{-- Hashtag List --}}
                 <article class="card clearfix">

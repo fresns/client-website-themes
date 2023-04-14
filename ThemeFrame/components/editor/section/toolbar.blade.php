@@ -8,7 +8,7 @@
                     <span>{{ fs_lang('editorStickers') }}</span>
                 </div>
             </button>
-            {{-- Sticker List --}}
+            {{-- Sticker List Start --}}
             <div class="dropdown-menu rounded-0 pt-0" aria-labelledby="stickers">
                 <ul class="nav nav-tabs" role="tablist">
                     @foreach(fs_stickers() as $sticker)
@@ -29,6 +29,7 @@
                     @endforeach
                 </div>
             </div>
+            {{-- Sticker List End --}}
         </div>
     @endif
 
@@ -204,7 +205,7 @@
         </button>
     @endif
 
-    {{-- Extend Toolbar --}}
+    {{-- Toolbar Extends --}}
     @if ($config['extend']['list'])
         @foreach($config['extend']['list'] as $extend)
             @if ($extend['editorToolbar'])
@@ -220,7 +221,7 @@
                     data-title="{{ $extend['name'] }}"
                     data-url="{{ $extend['url'] }}">
                     <div class="d-flex flex-column">
-                        <img src="{{ $extend['icon'] }}" width="20" height="20">
+                        <img src="{{ $extend['icon'] }}" loading="lazy" width="20" height="20">
                         <span>{{ $extend['name'] }}</span>
                     </div>
                 </button>
@@ -228,7 +229,7 @@
         @endforeach
     @endif
 
-    {{-- Extend Menu --}}
+    {{-- Extend Menus --}}
     @if ($config['extend']['status'] && $config['extend']['list'])
         <div class="dropdown">
             <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="dropdown" aria-expanded="false">
@@ -265,7 +266,6 @@
     @endif
 </div>
 
-
 {{-- Mention Modal --}}
 @if ($config['mention']['status'] && $config['mention']['display'])
     <div class="modal fade" id="fresns-mention" tabindex="-1" aria-labelledby="fresns-mention" aria-hidden="true">
@@ -285,7 +285,6 @@
         </div>
     </div>
 @endif
-
 
 {{-- Hashtag Modal --}}
 @if ($config['hashtag']['status'] && $config['hashtag']['display'])

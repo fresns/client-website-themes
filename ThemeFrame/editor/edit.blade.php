@@ -9,8 +9,7 @@
                 @csrf
                 @method("post")
                 <input type="hidden" name="type" value="{{ $type ?? '' }}" />
-                <input type="hidden" name="postGid" value="{{ $group['gid'] ?? '' }}" />
-
+                <input type="hidden" name="postGid" value="{{ $draft['detail']['group']['gid'] ?? '' }}" />
                 {{-- Tip: Publish Permissions --}}
                 @if ($config['publish']['limit']['status'] && $config['publish']['limit']['isInTime'])
                     @component('components.editor.tip.publish', [
@@ -18,7 +17,7 @@
                     ])@endcomponent
                 @endif
 
-                {{-- Tip: Edit Timer --}}
+                {{-- Tip: Editorial Timing --}}
                 @if ($draft['edit']['isEdit'])
                     @component('components.editor.tip.edit', [
                         'config' => $draft['edit'],
@@ -28,8 +27,9 @@
                 {{-- Group --}}
                 @if ($config['editor']['features']['group']['status'])
                     @component('components.editor.section.group', [
+                        'draftId' => $draft['detail']['id'],
                         'config' => $config['editor']['features']['group'],
-                        'group' => $group,
+                        'group' => $draft['detail']['group'],
                     ])@endcomponent
                 @endif
 
@@ -45,7 +45,7 @@
                 {{-- Content Start --}}
                 <div class="editor-content p-3">
                     {{-- Title --}}
-                    @if ($config['editor']['toolbar']['title']['status'])
+                    @if ($config['editor']['toolbar']['title']['status'] || $draft['detail']['title'])
                         @component('components.editor.section.title', [
                             'config' => $config['editor']['toolbar']['title'],
                             'title' => $draft['detail']['title'],
@@ -59,7 +59,6 @@
                     @component('components.editor.section.files', [
                         'type' => $type,
                         'files' => $draft['detail']['files'],
-                        'fileCount' => $draft['detail']['fileCount'],
                     ])@endcomponent
 
                     {{-- Extends --}}
@@ -68,7 +67,7 @@
                         'extends' => $draft['detail']['extends'],
                     ])@endcomponent
 
-                    {{-- Allow Info --}}
+                    {{-- allowJson --}}
                     @if ($draft['detail']['allowJson'])
                         @component('components.editor.section.allow', [
                             'type' => $type,
@@ -76,7 +75,7 @@
                         ])@endcomponent
                     @endif
 
-                    {{-- Comment with button settings --}}
+                    {{-- commentBtnJson --}}
                     @if ($draft['detail']['commentBtnJson'])
                         @component('components.editor.section.comment-btn', [
                             'type' => $type,
@@ -84,7 +83,7 @@
                         ])@endcomponent
                     @endif
 
-                    {{-- Post User List Configuration --}}
+                    {{-- userListJson --}}
                     @if ($draft['detail']['userListJson'])
                         @component('components.editor.section.user-list', [
                             'type' => $type,
@@ -94,12 +93,14 @@
 
                     <hr>
 
-                    {{-- Location and Anonymous Start --}}
+                    {{-- Location and Anonymous: Start --}}
                     <div class="d-flex justify-content-between">
                         {{-- Location --}}
-                        @if ($config['editor']['features']['location']['status'] && $config['editor']['features']['location']['maps'])
+                        @if ($config['editor']['features']['location']['status'])
                             @component('components.editor.section.location', [
                                 'type' => $type,
+                                'plid' => $plid,
+                                'clid' => $clid,
                                 'config' => $config['editor']['features']['location'],
                                 'location' => $draft['detail']['mapJson'],
                             ])@endcomponent
@@ -113,7 +114,7 @@
                             ])@endcomponent
                         @endif
                     </div>
-                    {{-- Location and Anonymous End --}}
+                    {{-- Location and Anonymous: End --}}
                 </div>
                 {{-- Content End --}}
 
@@ -276,22 +277,32 @@
 
         const postDraft = function (title, content, fid = ''){
             $.post("{{ route('fresns.api.editor.update', ['type' => $type, 'draftId' => $draft['detail']['id']]) }}", {
-                'content':  content,
                 'postTitle' : title,
-                'postGid' : "{{ $draft['detail']['group']['gid'] ?? null }}",
-                'request_token' : "{{ \Illuminate\Support\Facades\Cookie::get('token') }}",
-                'deleteFile': fid
+                'content':  content,
             }, function (data){
                 console.log(data)
             })
         };
 
         function deleteFile(obj) {
-            $(obj).parent().parent().remove();
-            let fid = $(obj).data('fid'),
-                content = $("#content").val(),
-                title = $("#title").val();
-            postDraft(title, content, fid);
+            let fid = $(obj).data('fid');
+
+            $.post("{{ route('fresns.api.editor.update', ['type' => $type, 'draftId' => $draft['detail']['id']]) }}", {
+                'deleteFile': fid
+            }, function (data){
+                console.log(data)
+            })
+        }
+
+        function deleteMap() {
+            $.post("{{ route('fresns.api.editor.update', ['type' => $type, 'draftId' => $draft['detail']['id']]) }}", {
+                'deleteMap': 1
+            }, function (data){
+                console.log(data)
+            });
+
+            $('#location-info').hide();
+            $('#location-btn').show();
         }
 
         (function($){

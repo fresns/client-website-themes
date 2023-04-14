@@ -12,10 +12,10 @@
                 @include('groups.sidebar')
             </div>
 
-            {{-- Middle Content --}}
+            {{-- Middle --}}
             <div class="col-sm-6">
                 @if (fs_db_config('menu_group_type') == 'tree')
-                    {{-- Group Tree Structure List --}}
+                    {{-- Group Tree --}}
                     @foreach($groupTree ?? [] as $tree)
                         <h3 class="fs-5">{{ $tree['gname'] }}</h3>
                         <div class="card mb-5 py-4">

@@ -12,7 +12,7 @@
                 @include('posts.sidebar')
             </div>
 
-            {{-- Middle Content --}}
+            {{-- Middle --}}
             <div class="col-sm-6">
                 <div class="card shadow-sm mb-4">
                     @component('components.post.detail', compact('post'))@endcomponent
@@ -23,7 +23,7 @@
                         <h5 class="mb-0">{{ fs_db_config('comment_name') }}</h5>
                     </div>
 
-                    {{-- Sticky Comment List --}}
+                    {{-- Sticky Comments --}}
                     @if (fs_sticky_comments($post['pid']))
                         <div class="card-body bg-primary bg-opacity-10 mb-4">
                             @foreach(fs_sticky_comments($post['pid']) as $sticky)
@@ -36,7 +36,7 @@
                         </div>
                     @endif
 
-                    {{-- Empty List --}}
+                    {{-- No Comments --}}
                     @if ($comments->isEmpty())
                         <div class="text-center my-5 text-muted fs-7"><i class="bi bi-chat-square-text"></i> {{ fs_lang('listEmpty') }}</div>
                     @endif
@@ -56,7 +56,7 @@
                         @endforeach
                     </article>
 
-                    {{-- Pagination --}}
+                    {{-- Comment Pagination --}}
                     <div class="my-3 table-responsive">
                         {{ $comments->links() }}
                     </div>

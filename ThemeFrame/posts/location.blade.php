@@ -1,14 +1,10 @@
 @extends('commons.fresns')
 
 @php
-    $title = $archive['location']['poi'] ? $archive['location']['poi'].' - ' : '';
+    $title = $location['poi'] ? $location['poi'].' - ' : '';
 @endphp
 
-@if ($type == 'posts')
-    @section('title', $title.fs_db_config('menu_location_posts'))
-@else
-    @section('title', $title.fs_db_config('menu_location_comments'))
-@endif
+@section('title', $title.fs_db_config('menu_location_posts'))
 
 @section('content')
     <main class="container-fluid">
@@ -18,58 +14,38 @@
                 @include('posts.sidebar')
             </div>
 
-            {{-- Middle Content --}}
+            {{-- Middle --}}
             <div class="col-sm-6">
                 {{-- Location Info --}}
                 <div class="alert alert-primary" role="alert">
-                    <i class="bi bi-geo-alt-fill"></i> {{ $archive['location']['poi'] ?? $archive['location']['latitude'].' / '.$archive['location']['longitude'] }}
+                    <i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] ?? $location['latitude'].' / '.$location['longitude'] }}
                 </div>
 
-                {{-- List --}}
-                @switch($type)
-                    {{-- Post List --}}
-                    @case('posts')
-                        <div class="card clearfix" id="fresns-list-container">
-                            @foreach($posts as $post)
-                                @component('components.post.list', compact('post'))@endcomponent
+                {{-- Switch Content --}}
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ fs_route(route('fresns.post.location', $encode)) }}">{{ fs_db_config('post_name') }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ fs_route(route('fresns.comment.location', $encode)) }}">{{ fs_db_config('comment_name') }}</a>
+                    </li>
+                </ul>
 
-                                @if (! $loop->last)
-                                    <hr>
-                                @endif
-                            @endforeach
-                        </div>
+                {{-- Post List --}}
+                <div class="card clearfix" id="fresns-list-container">
+                    @foreach($posts as $post)
+                        @component('components.post.list', compact('post'))@endcomponent
 
-                        {{-- Pagination --}}
-                        <div class="px-3 me-3 me-lg-0 mt-4 table-responsive d-none">
-                            {{ $posts->links() }}
-                        </div>
-                    @break
+                        @if (! $loop->last)
+                            <hr>
+                        @endif
+                    @endforeach
+                </div>
 
-                    {{-- Comment List --}}
-                    @case('comments')
-                        <div class="card clearfix" id="fresns-list-container">
-                            @foreach($comments as $comment)
-                                @component('components.comment.list', [
-                                    'comment' => $comment,
-                                    'detailLink' => true,
-                                    'sectionCreatorLiked' => false,
-                                ])@endcomponent
-
-                                @if (! $loop->last)
-                                    <hr>
-                                @endif
-                            @endforeach
-                        </div>
-
-                        {{-- Pagination --}}
-                        <div class="px-3 me-3 me-lg-0 mt-4 table-responsive d-none">
-                            {{ $comments->links() }}
-                        </div>
-                    @break
-
-                    @default
-                        <div class="text-center my-5 text-muted fs-7">{{ fs_lang('listEmpty') }}</div>
-                @endswitch
+                {{-- Pagination --}}
+                <div class="px-3 me-3 me-lg-0 mt-4 table-responsive d-none">
+                    {{ $posts->links() }}
+                </div>
             </div>
 
             {{-- Right Sidebar --}}

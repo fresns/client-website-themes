@@ -10,7 +10,7 @@
                 @include('account.sidebar')
             </div>
 
-            {{-- Account Content --}}
+            {{-- Account Main --}}
             <div class="col-sm-9">
                 <div class="card hstack p-3 mb-3">
                     <div class="">{{ fs_account('detail.wallet.currencyCode') }} {{ fs_account('detail.wallet.balance') }}</div>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
 
-                {{-- Transaction History --}}
+                {{-- Wallet Logs --}}
                 <div class="card">
                     <div class="card-header">
                         {{ fs_lang('walletLogs') }}

@@ -1,5 +1,5 @@
 @if (! $creator['status'])
-    {{-- Deactivate Author --}}
+    {{-- Deactivate --}}
     <div class="d-flex">
         <div class="flex-shrink-0">
             <img src="{{ fs_db_config('deactivate_avatar') }}" loading="lazy" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="user-avatar rounded-circle">
@@ -11,10 +11,10 @@
                 </div>
             </div>
             <div class="user-secondary d-flex flex-wrap mb-3">
-                {{-- Post Created Time --}}
+                {{-- Create Time --}}
                 <time class="text-secondary" datetime="{{ $createTime }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $createTime }}">{{ $createTimeFormat }}</time>
 
-                {{-- Post Edit Time --}}
+                {{-- Edit Time --}}
                 @if ($editTime)
                     <div class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $editTime }}">({{ fs_lang('contentEditedOn') }} {{ $editTimeFormat }})</div>
                 @endif
@@ -23,8 +23,8 @@
                 @if (fs_db_config('account_ip_location_status') && current_lang_tag() == 'zh-Hans')
                     <span class="text-secondary ms-3">
                         <i class="bi bi-geo"></i>
-                        @if ($ipLocation)
-                            {{ fs_lang('ipLocation').$ipLocation }}
+                        @if ($moreJson['ipLocation'] ?? null)
+                            {{ fs_lang('ipLocation').$moreJson['ipLocation'] }}
                         @else
                             {{ fs_lang('errorIp') }}
                         @endif
@@ -33,16 +33,13 @@
 
                 {{-- Post Location --}}
                 @if ($location['isLbs'])
-                    <a href="{{ fs_route(route('fresns.post.location', [
-                        'pid' => $pid,
-                        'type' => 'posts',
-                    ])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
+                    <a href="{{ fs_route(route('fresns.post.location', $location['encode'])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
                 @endif
             </div>
         </div>
     </div>
 @elseif ($isAnonymous)
-    {{-- Anonymous Author --}}
+    {{-- Anonymous --}}
     <div class="d-flex">
         <div class="flex-shrink-0">
             <img src="{{ $creator['avatar'] }}" loading="lazy" alt="{{ fs_lang('contentCreatorAnonymous') }}" class="user-avatar rounded-circle">
@@ -54,10 +51,10 @@
                 </div>
             </div>
             <div class="user-secondary d-flex flex-wrap mb-3">
-                {{-- Post Created Time --}}
+                {{-- Create Time --}}
                 <time class="text-secondary" datetime="{{ $createTime }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $createTime }}">{{ $createTimeFormat }}</time>
 
-                {{-- Post Edit Time --}}
+                {{-- Edit Time --}}
                 @if ($editTime)
                     <div class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $editTime }}">({{ fs_lang('contentEditedOn') }} {{ $editTimeFormat }})</div>
                 @endif
@@ -66,8 +63,8 @@
                 @if (fs_db_config('account_ip_location_status') && current_lang_tag() == 'zh-Hans')
                     <span class="text-secondary ms-3">
                         <i class="bi bi-geo"></i>
-                        @if ($ipLocation)
-                            {{ fs_lang('ipLocation').$ipLocation }}
+                        @if ($moreJson['ipLocation'] ?? null)
+                            {{ fs_lang('ipLocation').$moreJson['ipLocation'] }}
                         @else
                             {{ fs_lang('errorIp') }}
                         @endif
@@ -76,16 +73,13 @@
 
                 {{-- Post Location --}}
                 @if ($location['isLbs'])
-                    <a href="{{ fs_route(route('fresns.post.location', [
-                        'pid' => $pid,
-                        'type' => 'posts',
-                    ])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
+                    <a href="{{ fs_route(route('fresns.post.location', $location['encode'])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
                 @endif
             </div>
         </div>
     </div>
 @else
-    {{-- Normal Author --}}
+    {{-- Creator --}}
     <div class="d-flex">
         <div class="flex-shrink-0">
             <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $creator['fsid']])) }}">
@@ -121,7 +115,7 @@
                     </div>
                 </div>
 
-                {{-- User Attachment Icons --}}
+                {{-- User Affiliate Icons --}}
                 @if ($creator['operations']['diversifyImages'])
                     <div class="user-icon d-flex flex-wrap flex-lg-nowrap overflow-hidden my-2 my-lg-0">
                         @foreach($creator['operations']['diversifyImages'] as $icon)
@@ -131,10 +125,10 @@
                 @endif
             </div>
             <div class="user-secondary d-flex flex-wrap mb-3">
-                {{-- Post Created Time --}}
+                {{-- Create Time --}}
                 <time class="text-secondary" datetime="{{ $createTime }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $createTime }}">{{ $createTimeFormat }}</time>
 
-                {{-- Post Edit Time --}}
+                {{-- Edit Time --}}
                 @if ($editTime)
                     <div class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $editTime }}">({{ fs_lang('contentEditedOn') }} {{ $editTimeFormat }})</div>
                 @endif
@@ -143,8 +137,8 @@
                 @if (fs_db_config('account_ip_location_status') && current_lang_tag() == 'zh-Hans')
                     <span class="text-secondary ms-3">
                         <i class="bi bi-geo"></i>
-                        @if ($ipLocation)
-                            {{ fs_lang('ipLocation').$ipLocation }}
+                        @if ($moreJson['ipLocation'] ?? null)
+                            {{ fs_lang('ipLocation').$moreJson['ipLocation'] }}
                         @else
                             {{ fs_lang('errorIp') }}
                         @endif
@@ -153,10 +147,7 @@
 
                 {{-- Post Location --}}
                 @if ($location['isLbs'])
-                    <a href="{{ fs_route(route('fresns.post.location', [
-                        'pid' => $pid,
-                        'type' => 'posts',
-                    ])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
+                    <a href="{{ fs_route(route('fresns.post.location', $location['encode'])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
                 @endif
             </div>
         </div>

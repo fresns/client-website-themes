@@ -11,6 +11,9 @@
 
     $title = null;
     $decorate = null;
+
+    $detailLink = $detailLink ?? true;
+    $sectionCreatorLiked = $sectionCreatorLiked ?? false;
 @endphp
 
 @if ($sticky['operations']['buttonIcons'])
@@ -33,7 +36,7 @@
 @endif
 
 <div class="position-relative pb-2" id="{{ $sticky['cid'] }}">
-    {{-- Comment Author Information --}}
+    {{-- Comment Creator --}}
     <section class="content-creator order-0">
         @component('components.comment.section.creator', [
             'cid' => $sticky['cid'],
@@ -43,17 +46,17 @@
             'createTimeFormat' => $sticky['createTimeFormat'],
             'editTime' => $sticky['editTime'],
             'editTimeFormat' => $sticky['editTimeFormat'],
-            'ipLocation' => $sticky['ipLocation'],
+            'moreJson' => $sticky['moreJson'],
             'location' => $sticky['location'],
             'replyToComment' => $sticky['replyToComment'],
         ])@endcomponent
     </section>
 
-    {{-- Comment --}}
+    {{-- Comment Main --}}
     <section class="content-main order-2 mx-3 position-relative">
-        {{--  Title --}}
+        {{-- Title --}}
         <div class="content-title d-flex flex-row bd-highlight">
-            {{--  Title Icon --}}
+            {{-- Title Icon --}}
             @if ($title)
                 <img src="{{ $title['imageUrl'] }}" loading="lazy" alt="{{ $title['name'] }}" class="me-2">
             @endif
@@ -65,13 +68,13 @@
 
             {{-- Digest --}}
             @if ($sticky['digestState'] == 2)
-                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" loading="lazy" alt="Digest 1" class="ms-2">
+                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" loading="lazy" alt="General Digest" class="ms-2">
             @elseif ($sticky['digestState'] == 3)
-                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" loading="lazy" alt="Digest 2" class="ms-2">
+                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" loading="lazy" alt="Senior Digest" class="ms-2">
             @endif
         </div>
 
-        {{-- Full Text --}}
+        {{-- Content --}}
         <div class="content-article">
             @if ($sticky['isMarkdown'])
                 {!! Str::markdown($sticky['content']) !!}
@@ -79,7 +82,7 @@
                 {!! nl2br($sticky['content']) !!}
             @endif
 
-            {{-- Detail Page Link --}}
+            {{-- Detail Link --}}
             @if ($detailLink)
                 <p class="mt-2">
                     <a href="{{ fs_route(route('fresns.comment.detail', ['cid' => $sticky['cid']])) }}" class="text-decoration-none stretched-link">
@@ -92,7 +95,7 @@
         </div>
     </section>
 
-    {{-- Decorate --}}
+    {{-- Comment Decorate --}}
     @if ($decorate)
         <div class="position-absolute top-0 end-0">
             <img src="{{ $decorate['imageUrl'] }}" loading="lazy" alt="{{ $decorate['name'] }}" height="88rem">
@@ -100,17 +103,16 @@
     @endif
 
     {{-- Files --}}
-    <section class="content-files order-3 mx-3 mt-2 d-flex align-content-start flex-wrap file-image-{{ $sticky['fileCount']['images'] }}">
+    <section class="content-files order-3 mx-3 mt-2 d-flex align-content-start flex-wrap file-image-{{ count($sticky['files']['images']) }}">
         @component('components.comment.section.files', [
             'cid' => $sticky['cid'],
             'createTime' => $sticky['createTime'],
             'creator' => $sticky['creator'],
-            'fileCount' => $sticky['fileCount'],
             'files' => $sticky['files'],
         ])@endcomponent
     </section>
 
-    {{-- Extends --}}
+    {{-- Content Extends --}}
     @if ($sticky['extends'])
         <section class="content-extends order-3 mx-3">
             @component('components.comment.section.extends', [
@@ -122,7 +124,7 @@
         </section>
     @endif
 
-    {{-- Interaction Function --}}
+    {{-- Comment Interaction --}}
     <section class="interaction order-5 mt-3 mx-3">
         <div class="d-flex">
             {{-- Like --}}
@@ -149,7 +151,7 @@
                 </div>
             @endif
 
-            {{-- Reply --}}
+            {{-- Comment --}}
             <div class="interaction-box fresns-trigger-reply">
                 <a class="btn btn-inter" href="javascript:;" role="button">
                     @if ($iconComment)
@@ -199,15 +201,15 @@
             </div>
         </div>
 
-        {{-- Reply Box --}}
+        {{-- Comment Box --}}
         @component('components.editor.comment-box', [
             'nickname' => $sticky['creator']['nickname'],
-            'pid' => $sticky['pid'],
+            'pid' => $sticky['replyToPost']['pid'],
             'cid' => $sticky['cid'],
         ])@endcomponent
     </section>
 
-    {{-- Post Author Likes Status --}}
+    {{-- Post Creator Like Status --}}
     @if ($sectionCreatorLiked && $sticky['interaction']['postCreatorLikeStatus'])
         <div class="post-creator-liked order-5 mt-2 mx-3">
             <span class="author-badge p-1">{{ fs_lang('contentCreatorLiked') }}</span>

@@ -1,10 +1,10 @@
-{{-- Images --}}
+{{-- Image --}}
 @if ($files['images'])
     @foreach($files['images'] as $image)
-        @if ($fileCount['images'] == 1)
-            {{-- Single Image --}}
+        @if (count($files['images']) == 1)
+            {{-- One Image --}}
             @if (Route::is('fresns.post.detail'))
-                {{-- Detail page leaflet display method --}}
+                {{-- Detail Style --}}
                 <div class="position-relative image-box" style="width:auto;">
                     <img src="{{ $image['imageRatioUrl'] }}" data-fid="{{ $image['fid'] }}" data-zoom-src="{{ $image['imageBigUrl'] }}" loading="lazy" alt="{{ $image['name'] }}" class="img-fluid zoom-image">
                     @if ($image['imageLong'])
@@ -12,7 +12,7 @@
                     @endif
                 </div>
             @else
-                {{-- List page single sheet display method --}}
+                {{-- List Style --}}
                 @if ($image['imageLong'])
                     <div class="position-relative image-box" style="width:auto;">
                         <img src="{{ $image['imageSquareUrl'] }}" data-fid="{{ $image['fid'] }}" data-zoom-src="{{ $image['imageBigUrl'] }}" loading="lazy" alt="{{ $image['name'] }}" class="img-fluid zoom-image">
@@ -36,7 +36,7 @@
     @endforeach
 @endif
 
-{{-- Videos --}}
+{{-- Video --}}
 @if ($files['videos'])
     @foreach($files['videos'] as $video)
         <video class="mt-2" controls preload="metadata" controls="true" controlslist="nodownload" poster="{{ $video['videoPosterUrl'] }}" data-fid="{{ $video['fid'] }}">
@@ -46,7 +46,7 @@
     @endforeach
 @endif
 
-{{-- Audios --}}
+{{-- Audio --}}
 @if ($files['audios'])
     @foreach($files['audios'] as $audio)
         <audio class="w-100 py-1 mt-2" src="{{ $audio['audioUrl'] }}" data-fid="{{ $audio['fid'] }}" controls="controls" preload="metadata" controlsList="nodownload" oncontextmenu="return false">
@@ -55,7 +55,7 @@
     @endforeach
 @endif
 
-{{-- Documents --}}
+{{-- Document --}}
 @if ($files['documents'])
     @foreach($files['documents'] as $document)
         <button type="button" class="btn document-box fresns-file-users" data-fid="{{ $document['fid'] }}" data-bs-toggle="modal" data-bs-target="#downloadModal-{{ $document['fid'] }}">
@@ -134,7 +134,7 @@
                         </p>
                     </div>
 
-                    {{-- Download Users --}}
+                    {{-- Downloader --}}
                     <hr class="dropdown-divider">
                     <div class="modal-body">
                         <p class="text-center">{{ fs_lang('contentFileDownloader') }}</p>

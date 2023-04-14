@@ -9,7 +9,7 @@
         </a>
     </section>
     <div class="flex-grow-1">
-        {{-- Header --}}
+        {{-- User Header --}}
         <header class="user-primary d-lg-flex">
             <div class="user-info d-flex text-nowrap overflow-hidden">
                 <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $user['fsid']])) }}" class="user-link d-flex">
@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            {{-- User Attachment Icons --}}
+            {{-- User Affiliate Icons --}}
             @if ($user['operations']['diversifyImages'])
                 <div class="user-icon d-flex flex-wrap flex-lg-nowrap overflow-hidden my-2 my-lg-0">
                     @foreach($user['operations']['diversifyImages'] as $icon)
@@ -45,12 +45,12 @@
             @endif
         </header>
 
-        {{-- Bio --}}
+        {{-- User Bio --}}
         <section class="user-secondary d-flex flex-wrap mb-1">
-            <p class="fs-7 mt-1 mb-2 pe-2 text-secondary">{{ $user['bio'] }}</p>
+            <p class="fs-7 mt-1 mb-2 pe-2 text-secondary">{!! $user['bioHtml'] !!}</p>
         </section>
 
-        {{-- Interactive information and features --}}
+        {{-- User Interaction --}}
         <footer class="interaction-btn">
             {{-- Like --}}
             @if ($user['interaction']['likeSetting'])
@@ -88,7 +88,7 @@
                 ])@endcomponent
             @endif
 
-            {{-- Follow Status --}}
+            {{-- Follow Me Status --}}
             @if ($user['interaction']['followMeStatus'] && $user['interaction']['followStatus'])
                 <span class="badge rounded-pill bg-secondary m-1">{{ fs_lang('userFollowMutual') }}</span>
             @elseif ($user['interaction']['followMeStatus'])
