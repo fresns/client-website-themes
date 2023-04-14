@@ -15,9 +15,9 @@
     <meta name="apple-mobile-web-app-title" content="{{ fs_db_config('site_name') }}">
     <link rel="apple-touch-icon-precomposed" href="{{ fs_db_config('site_icon') }}">
     <link rel="icon" href="{{ fs_db_config('site_icon') }}">
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/bootstrap-icons.css">
-    <link rel="stylesheet" href="/static/css/select2.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css?v={{ $fresnsVersion }}">
+    <link rel="stylesheet" href="/static/css/bootstrap-icons.css?v={{ $fresnsVersion }}">
+    <link rel="stylesheet" href="/static/css/select2.min.css?v={{ $fresnsVersion }}">
     <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/atwho.min.css?v={{ $themeVersion }}">
     <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/prism.min.css?v={{ $themeVersion }}">
     <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/fresns.css?v={{ $themeVersion }}">
@@ -139,11 +139,10 @@
     @if (fs_db_config('website_stat_position') == 'body')
         <div style="display:none;">{!! fs_db_config('website_stat_code') !!}</div>
     @endif
-    <script src="/static/js/base64.js"></script>
-    <script src="/static/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/js/select2.min.js"></script>
-    <script src="/static/js/js.cookie.min.js"></script>
-    <script src="/static/js/iframeResizer.min.js"></script>
+    <script src="/static/js/base64.js?v={{ $fresnsVersion }}"></script>
+    <script src="/static/js/bootstrap.bundle.min.js?v={{ $fresnsVersion }}"></script>
+    <script src="/static/js/select2.min.js?v={{ $fresnsVersion }}"></script>
+    <script src="/static/js/iframeResizer.min.js?v={{ $fresnsVersion }}"></script>
     <script>
         window.ajaxGetList = false;
         window.siteName = "{{ fs_db_config('site_name') }}";

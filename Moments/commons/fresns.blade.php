@@ -16,12 +16,12 @@
     <meta name="apple-mobile-web-app-title" content="{{ fs_db_config('site_name') }}">
     <link rel="apple-touch-icon-precomposed" href="{{ fs_db_config('site_icon') }}">
     <link rel="icon" href="{{ fs_db_config('site_icon') }}">
-    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/static/css/fontawesome.min.css">
-    <link rel="stylesheet" href="/static/css/select2.min.css">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css?v={{ $fresnsVersion }}">
+    <link rel="stylesheet" href="/static/css/fontawesome.min.css?v={{ $fresnsVersion }}">
+    <link rel="stylesheet" href="/static/css/select2.min.css?v={{ $fresnsVersion }}">
     <link rel="stylesheet" href="/assets/themes/Moments/css/atwho.min.css?v={{ $themeVersion }}">
     <link rel="stylesheet" href="/assets/themes/Moments/css/prism.min.css?v={{ $themeVersion }}">
-    <link rel="stylesheet" href="/assets/themes/Moments/css/fancybox.css?v={{ $themeVersion }}">
+    <link rel="stylesheet" href="/assets/themes/Moments/css/fancybox.min.css?v={{ $themeVersion }}">
     <link rel="stylesheet" href="/assets/themes/Moments/css/fresns.css?v={{ $themeVersion }}">
     <script src="/static/js/jquery.min.js"></script>
     @stack('style')
@@ -227,11 +227,10 @@
     @if (fs_db_config('website_stat_position') == 'body')
         <div style="display:none;">{!! fs_db_config('website_stat_code') !!}</div>
     @endif
-    <script src="/static/js/base64.js"></script>
-    <script src="/static/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/js/select2.min.js"></script>
-    <script src="/static/js/js.cookie.min.js"></script>
-    <script src="/static/js/iframeResizer.min.js"></script>
+    <script src="/static/js/base64.js?v={{ $fresnsVersion }}"></script>
+    <script src="/static/js/bootstrap.bundle.min.js?v={{ $fresnsVersion }}"></script>
+    <script src="/static/js/select2.min.js?v={{ $fresnsVersion }}"></script>
+    <script src="/static/js/iframeResizer.min.js?v={{ $fresnsVersion }}"></script>
     <script>
         window.ajaxGetList = true;
         window.siteName = "{{ fs_db_config('site_name') }}";
@@ -255,7 +254,7 @@
     <script src="/assets/themes/Moments/js/jquery.caret.min.js?v={{ $themeVersion }}"></script>
     <script src="/assets/themes/Moments/js/atwho.min.js?v={{ $themeVersion }}"></script>
     <script src="/assets/themes/Moments/js/prism.min.js?v={{ $themeVersion }}"></script>
-    <script src="/assets/themes/Moments/js/fancybox.umd.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/Moments/js/fancybox.umd.min.js?v={{ $themeVersion }}"></script>
     <script src="/assets/themes/Moments/js/sendVerifyCode.js?v={{ $themeVersion }}"></script>
     <script src="/assets/themes/Moments/js/fresns.js?v={{ $themeVersion }}"></script>
     @stack('script')
