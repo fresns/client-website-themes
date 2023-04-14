@@ -428,8 +428,8 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
     // image zoom
     const fancybox = $('[data-fancybox]');
     if (fancybox) {
-        Fancybox.bind("[data-fancybox]", {
-            loop: true
+        Fancybox.bind('[data-fancybox]', {
+            loop: true,
         });
     }
 
@@ -748,7 +748,9 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
 
                         likeOrDislikeObj.find('i').removeClass();
                         likeOrDislikeObj.find('i').addClass('bi ' + newBi);
-                        likeOrDislikeObj.hasClass('btn') ? likeOrDislikeObj.removeClass('btn-success').addClass('btn-outline-success') : likeOrDislikeObj.removeClass('text-success');
+                        likeOrDislikeObj.hasClass('btn')
+                            ? likeOrDislikeObj.removeClass('btn-success').addClass('btn-outline-success')
+                            : likeOrDislikeObj.removeClass('text-success');
                     } else {
                         const likeOrDislikeObjIconActive = likeOrDislikeObj.data('icon-active');
                         const likeOrDislikeObjIcon = likeOrDislikeObj.data('icon');
@@ -758,9 +760,13 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                                 .find('img')
                                 .attr(
                                     'src',
-                                    likeOrDislikeObjInteractionActivate == 0 ? likeOrDislikeObjIconActive : likeOrDislikeObjIcon
+                                    likeOrDislikeObjInteractionActivate == 0
+                                        ? likeOrDislikeObjIconActive
+                                        : likeOrDislikeObjIcon
                                 );
-                            likeOrDislikeObj.hasClass('btn') ? likeOrDislikeObj.removeClass('btn-active') : likeOrDislikeObj.removeClass('text-success');
+                            likeOrDislikeObj.hasClass('btn')
+                                ? likeOrDislikeObj.removeClass('btn-active')
+                                : likeOrDislikeObj.removeClass('text-success');
                         }
                     }
                 } else if (interactionType == 'dislike') {
@@ -801,9 +807,13 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                                 .find('img')
                                 .attr(
                                     'src',
-                                    likeOrDislikeObjInteractionActivate == 0 ? likeOrDislikeObjIconActive : likeOrDislikeObjIcon
+                                    likeOrDislikeObjInteractionActivate == 0
+                                        ? likeOrDislikeObjIconActive
+                                        : likeOrDislikeObjIcon
                                 );
-                            likeOrDislikeObj.hasClass('btn') ? likeOrDislikeObj.removeClass('btn-active') : likeOrDislikeObj.removeClass('text-success');
+                            likeOrDislikeObj.hasClass('btn')
+                                ? likeOrDislikeObj.removeClass('btn-active')
+                                : likeOrDislikeObj.removeClass('text-success');
                         }
                     }
                 }
@@ -985,7 +995,8 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     let smsCodes = button.data('sms-codes');
                     let defaultSmsCode = button.data('default-sms-code');
 
-                    html = `
+                    html =
+                        `
                     <div class="input-group has-validation mb-3">
                         <span class="input-group-text border-end-rounded-0">` +
                         lable +
@@ -1004,7 +1015,8 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                                 <input type="hidden" name="editCountryCode" value="${defaultSmsCode}">`;
                     }
 
-                    html += `<input type="text" class="form-control w-50" name="` +
+                    html +=
+                        `<input type="text" class="form-control w-50" name="` +
                         name +
                         `" value="" required>
                         <input type="hidden" name="codeType" value="sms">
@@ -1039,7 +1051,8 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     let smsCodes = button.data('sms-codes');
                     let defaultSmsCode = button.data('default-sms-code');
 
-                    html = `
+                    html =
+                        `
                     <div class="form-text mb-3 text-center">` +
                         desc +
                         `</div>
@@ -1079,7 +1092,8 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                                 <input type="hidden" name="editCountryCode" value="${defaultSmsCode}">`;
                     }
 
-                    html += `<input type="text" class="form-control w-50" required name="` +
+                    html +=
+                        `<input type="text" class="form-control w-50" required name="` +
                         name +
                         `" value="">
                     </div>

@@ -8,7 +8,7 @@
 body {
     background: #ffffff;
     line-height: 1.34;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 .fs-7 {
     font-size: 0.9rem;
@@ -33,10 +33,10 @@ body {
 /* Navbar */
 .fs-navbar {
     --bs-bg-opacity: 1;
-    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
+    background-color: rgba(var(--bs-light-rgb), var(--bs-bg-opacity)) !important;
 }
 .fs-navbar .navbar-brand:hover {
-    background-color: rgba(255, 197, 23, .15);
+    background-color: rgba(255, 197, 23, 0.15);
 }
 .fs-menus .nav-link {
     font-size: 20px;
@@ -67,7 +67,7 @@ body {
 }
 .fs-main {
     margin-top: 36px;
-    border-right: 0px var(--bs-border-style) var(--bs-border-color)!important;
+    border-right: 0px var(--bs-border-style) var(--bs-border-color) !important;
 }
 .fs-account-main {
     margin-top: 44px;
@@ -84,7 +84,7 @@ body {
         height: calc(100vh);
         align-items: start;
         width: 20%;
-        background-color: #ffffff!important;
+        background-color: #ffffff !important;
     }
     .fs-account {
         position: absolute;
@@ -93,15 +93,15 @@ body {
     }
     .fs-main {
         width: 50%;
-        float: left!important;
+        float: left !important;
         margin-left: 20%;
         margin-top: 0;
-        border-right: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important;
+        border-right: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
     }
     .fs-sidebar {
         width: 30%;
         padding: 0 2rem;
-        float: left!important;
+        float: left !important;
     }
     .fs-account-main .account-settings {
         width: 50%;
@@ -116,7 +116,7 @@ body {
         height: calc(100vh);
         align-items: start;
         width: 25%;
-        background-color: #ffffff!important;
+        background-color: #ffffff !important;
     }
     .fs-account {
         position: absolute;
@@ -125,15 +125,15 @@ body {
     }
     .fs-main {
         width: 40%;
-        float: left!important;
+        float: left !important;
         margin-left: 25%;
         margin-top: 0;
-        border-right: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color)!important;
+        border-right: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
     }
     .fs-sidebar {
         width: 25%;
         padding: 0 2rem;
-        float: left!important;
+        float: left !important;
     }
     .fs-account-main .account-settings {
         width: 50%;
@@ -156,7 +156,8 @@ body {
 .nav-link {
     color: var(--bs-orange);
 }
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
     background-color: var(--bs-orange);
 }
 .fs-list-group .fs-mark {
@@ -211,7 +212,7 @@ body {
     }
 
     50% {
-        transform: translateY(18px) scale(1, .9) rotate(45deg);
+        transform: translateY(18px) scale(1, 0.9) rotate(45deg);
         border-bottom-right-radius: 40px;
     }
 
@@ -225,7 +226,8 @@ body {
 }
 
 @keyframes shadow324 {
-    0%, 100% {
+    0%,
+    100% {
         transform: scale(1, 1);
     }
 
@@ -291,7 +293,8 @@ body {
 .fs-list-group {
     background-color: rgb(247, 249, 249);
 }
-.fs-list-group a:hover, .fs-list-group .position-relative:hover {
+.fs-list-group a:hover,
+.fs-list-group .position-relative:hover {
     background-color: rgba(15, 20, 25, 0.1);
 }
 .fs-list-group .btn-success {
