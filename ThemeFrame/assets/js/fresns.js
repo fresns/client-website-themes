@@ -993,7 +993,8 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     let smsCodes = button.data('sms-codes');
                     let defaultSmsCode = button.data('default-sms-code');
 
-                    html = `
+                    html =
+                        `
                     <div class="input-group has-validation mb-3">
                         <span class="input-group-text border-end-rounded-0">` +
                         lable +
@@ -1012,7 +1013,8 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                                 <input type="hidden" name="editCountryCode" value="${defaultSmsCode}">`;
                     }
 
-                    html += `<input type="text" class="form-control w-50" name="` +
+                    html +=
+                        `<input type="text" class="form-control w-50" name="` +
                         name +
                         `" value="" required>
                         <input type="hidden" name="codeType" value="sms">
@@ -1047,7 +1049,8 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     let smsCodes = button.data('sms-codes');
                     let defaultSmsCode = button.data('default-sms-code');
 
-                    html = `
+                    html =
+                        `
                     <div class="form-text mb-3 text-center">` +
                         desc +
                         `</div>
@@ -1087,7 +1090,8 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                                 <input type="hidden" name="editCountryCode" value="${defaultSmsCode}">`;
                     }
 
-                    html += `<input type="text" class="form-control w-50" required name="` +
+                    html +=
+                        `<input type="text" class="form-control w-50" required name="` +
                         name +
                         `" value="">
                     </div>
