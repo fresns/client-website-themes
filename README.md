@@ -26,20 +26,6 @@ A minimalist theme in the form of information flow as an experience, with respon
 - Installation with key name: `Moments`
 - Installation using command: `php artisan market:require Moments`
 
-## ForumX
-
-Traditional BBS forum style theme template.
-
-- Installation with key name: `ForumX`
-- Installation using command: `php artisan market:require ForumX`
-
-## ForumQ
-
-Novel infotainment community style theme template.
-
-- Installation with key name: `ForumQ`
-- Installation using command: `php artisan market:require ForumQ`
-
 ## License
 
 Fresns is open-sourced software licensed under the [Apache-2.0 license](https://opensource.org/licenses/Apache-2.0).

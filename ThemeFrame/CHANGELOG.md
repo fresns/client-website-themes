@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.5.4 (2023-04-14)
+
+- Complete the Real Name Authentication action button
+- Adjust the location of the notification message template file
+- Fix conflict with expression option box IDs
+- Fix the anonymous comments preview bug
+- Fix title box not being displayed automatically when editor title has value
+- Support displaying post references
+- Compatible with Fresns v2.8.0
+
+
 ## 2.5.3 (2023-03-05)
 
 - Fixed an issue with type parameters when enabling single sign-on support only.
