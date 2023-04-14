@@ -12,15 +12,15 @@
                 @include('groups.sidebar')
             </div>
 
-            {{-- Middle Content --}}
+            {{-- Middle --}}
             <div class="col-sm-6">
                 <div class="card shadow-sm mb-3">
                     @component('components.group.detail', compact('group'))@endcomponent
                 </div>
 
-                {{-- Sticky Post List --}}
+                {{-- Sticky Posts --}}
                 @if (fs_sticky_posts($group['gid']))
-                    <div class="list-group mb-4">
+                    <div class="list-group mb-3">
                         @foreach(fs_sticky_posts($group['gid']) as $sticky)
                             @component('components.post.sticky', compact('sticky'))@endcomponent
                         @endforeach
@@ -29,12 +29,8 @@
 
                 {{-- Post List --}}
                 <div class="card clearfix">
-                    {{-- Check Perm --}}
-                    @if ($group['mode'] == 2 && ! $group['interaction']['followStatus'])
-                        <div class="text-center py-5 text-danger">
-                            <i class="bi bi-info-circle"></i> {{ fs_code_message('37103') }}
-                        </div>
-                    @else
+                    {{-- Can View Content --}}
+                    @if ($group['canViewContent'])
                         {{-- List --}}
                         @switch($type)
                             {{-- Post List --}}
@@ -80,6 +76,10 @@
                             @default
                                 <div class="text-center my-5 text-muted fs-7">{{ fs_lang('listEmpty') }}</div>
                         @endswitch
+                    @else
+                        <div class="text-center py-5 text-danger">
+                            <i class="bi bi-info-circle"></i> {{ fs_code_message('37103') }}
+                        </div>
                     @endif
                 </div>
 

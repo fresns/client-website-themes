@@ -3,7 +3,7 @@
         <button class="rounded-0 border-0 d-flex justify-content-between p-3" type="button" data-bs-toggle="modal" data-bs-target="#fresns-group">
             <span>
                 <i class="bi bi-archive-fill me-2"></i>
-                <span id="group">@if (!empty($group)) {{ $group['gname'] }} @else {{ fs_db_config('group_name') }}: {{ fs_lang('editorNoChooseGroup') }} @endif</span>
+                <span id="group">@if (!empty($group)) {{ $group['gname'] }} @else {{ fs_db_config('group_name') }}: {{ fs_lang('editorNoSelectGroup') }} @endif</span>
             </span>
             <i class="bi bi-chevron-right"></i>
         </button>
@@ -18,7 +18,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {{-- Group Body --}}
+                {{-- Group List --}}
                 <div class="d-flex align-items-start">
                     <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         @if (! fs_api_config('post_editor_group_required'))
@@ -36,14 +36,14 @@
                     </div>
 
                     <div class="tab-content" id="v-pills-tabContent" style="width:70%;">
-                        {{-- Group List --}}
+                        {{-- Groups --}}
                         <div id="fresns-editor-groups">
                             <div class="list-group"></div>
                             <div class="list-group-addmore text-center my-3 fs-7"></div>
                         </div>
                     </div>
                 </div>
-                {{-- Group Body End --}}
+                {{-- Group List --}}
             </div>
         </div>
     </div>
@@ -126,7 +126,7 @@
             })
 
             $("#not-select-group").on('click', function () {
-                $('.fresns-editor .editor-group #group').text("{{ fs_lang('editorNoChooseGroup') }}");
+                $('.fresns-editor .editor-group #group').text("{{ fs_lang('editorNoSelectGroup') }}");
                 $(".fresns-editor input[name='postGid']").val("");
                 changeGid();
             })

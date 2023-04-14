@@ -33,12 +33,12 @@
 @endif
 
 <div class="position-relative pb-2" id="{{ $comment['cid'] }}">
-    {{-- Main post preview content --}}
+    {{-- Post Preview --}}
     @component('components.comment.section.post', [
         'post' => $comment['replyToPost'],
     ])@endcomponent
 
-    {{-- Comment Author Information --}}
+    {{-- Comment Creator --}}
     <section class="content-creator order-0">
         @component('components.comment.section.creator', [
             'cid' => $comment['cid'],
@@ -54,7 +54,7 @@
         ])@endcomponent
     </section>
 
-    {{-- Comment --}}
+    {{-- Comment Main --}}
     <section class="content-main order-2 mx-3 position-relative">
         {{-- Title --}}
         <div class="content-title d-flex flex-row bd-highlight">
@@ -70,13 +70,13 @@
 
             {{-- Digest --}}
             @if ($comment['digestState'] == 2)
-                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" loading="lazy" alt="Digest 1" class="ms-2">
+                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" loading="lazy" alt="General Digest" class="ms-2">
             @elseif ($comment['digestState'] == 3)
-                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" loading="lazy" alt="Digest 2" class="ms-2">
+                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" loading="lazy" alt="Senior Digest" class="ms-2">
             @endif
         </div>
 
-        {{-- Full Text --}}
+        {{-- Content --}}
         <div class="content-article text-break">
             @if ($comment['isMarkdown'])
                 {!! Str::markdown($comment['content']) !!}
@@ -86,7 +86,7 @@
         </div>
     </section>
 
-    {{-- Decorate --}}
+    {{-- Comment Decorate --}}
     @if ($decorate)
         <div class="position-absolute top-0 end-0">
             <img src="{{ $decorate['imageUrl'] }}" loading="lazy" alt="{{ $decorate['name'] }}" height="88rem">
@@ -103,7 +103,7 @@
         ])@endcomponent
     </section>
 
-    {{-- Extends --}}
+    {{-- Content Extends --}}
     @if ($comment['extends'])
         <section class="content-extends order-3 mx-3">
             @component('components.comment.section.extends', [
@@ -115,7 +115,7 @@
         </section>
     @endif
 
-    {{-- Interaction Function --}}
+    {{-- Comment Interaction --}}
     <section class="interaction order-5 mt-3 mx-3">
         <div class="d-flex">
             {{-- Like --}}
@@ -142,7 +142,7 @@
                 </div>
             @endif
 
-            {{-- Reply --}}
+            {{-- Comment --}}
             <div class="interaction-box fresns-trigger-reply">
                 <a class="btn btn-inter" href="javascript:;" role="button">
                     @if ($iconComment)
@@ -190,7 +190,7 @@
             </div>
         </div>
 
-        {{-- Reply Box --}}
+        {{-- Comment Box --}}
         @component('components.editor.comment-box', [
             'nickname' => $comment['creator']['nickname'],
             'pid' => $comment['replyToPost']['pid'],
@@ -199,7 +199,7 @@
         ])@endcomponent
     </section>
 
-    {{-- Post Author Likes Status --}}
+    {{-- Post Creator Like Status --}}
     @if ($comment['interaction']['postCreatorLikeStatus'])
         <div class="post-creator-liked order-5 mt-2 mx-3">
             <span class="author-badge p-1">{{ fs_lang('contentCreatorLiked') }}</span>

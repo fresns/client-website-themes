@@ -21,7 +21,7 @@
             </a>
         @endif
 
-        {{-- My like hashtags --}}
+        {{-- Likes --}}
         @if (fs_api_config('like_hashtag_setting'))
             <a href="{{ fs_route(route('fresns.hashtag.likes')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.hashtag.likes') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-likes.png" loading="lazy" width="36" height="36">
@@ -29,7 +29,7 @@
             </a>
         @endif
 
-        {{-- My dislike hashtags --}}
+        {{-- Dislikes --}}
         @if (fs_api_config('dislike_hashtag_setting'))
             <a href="{{ fs_route(route('fresns.hashtag.dislikes')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.hashtag.dislikes') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-dislikes.png" loading="lazy" width="36" height="36">
@@ -37,7 +37,7 @@
             </a>
         @endif
 
-        {{-- My follow hashtags --}}
+        {{-- Following --}}
         @if (fs_api_config('follow_hashtag_setting'))
             <a href="{{ fs_route(route('fresns.hashtag.following')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.hashtag.following') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-following.png" loading="lazy" width="36" height="36">
@@ -45,7 +45,7 @@
             </a>
         @endif
 
-        {{-- My block hashtags --}}
+        {{-- Blocking --}}
         @if (fs_api_config('block_hashtag_setting'))
             <a href="{{ fs_route(route('fresns.hashtag.blocking')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.hashtag.blocking') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-blocking.png" loading="lazy" width="36" height="36">
@@ -53,7 +53,7 @@
             </a>
         @endif
 
-        {{-- I follow the hashtags posts --}}
+        {{-- Post List by Follow Hashtags --}}
         @if (fs_api_config('view_posts_by_follow_object'))
             <a href="{{ fs_route(route('fresns.follow.hashtag.posts')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.follow.hashtag.posts') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-follow-posts.png" loading="lazy" width="36" height="36">
@@ -61,7 +61,7 @@
             </a>
         @endif
 
-        {{-- I follow the hashtags comments --}}
+        {{-- Comment List by Follow Hashtags --}}
         @if (fs_api_config('view_comments_by_follow_object'))
             <a href="{{ fs_route(route('fresns.follow.hashtag.comments')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.follow.hashtag.comments') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-follow-comments.png" loading="lazy" width="36" height="36">

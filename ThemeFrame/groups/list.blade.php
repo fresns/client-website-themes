@@ -12,7 +12,7 @@
                 @include('groups.sidebar')
             </div>
 
-            {{-- Middle Content --}}
+            {{-- Middle --}}
             <div class="col-sm-6">
                 {{-- Group List --}}
                 <article class="card clearfix py-4" @if (fs_db_config('menu_group_list_query_state') != 1) id="fresns-list-container" @endif>

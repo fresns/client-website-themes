@@ -33,7 +33,7 @@
 @endif
 
 <div class="position-relative pb-2" id="{{ $post['pid'] }}">
-    {{-- Post Author Information --}}
+    {{-- Post Creator --}}
     <section class="content-creator order-0">
         @component('components.post.section.creator', [
             'pid' => $post['pid'],
@@ -48,7 +48,7 @@
         ])@endcomponent
     </section>
 
-    {{-- Post --}}
+    {{-- Post Main --}}
     <section class="content-main order-2 mx-3 position-relative">
         {{-- Title --}}
         <div class="content-title d-flex flex-row bd-highlight">
@@ -57,27 +57,27 @@
                 <img src="{{ $title['imageUrl'] }}" loading="lazy" alt="{{ $title['name'] }}" class="me-2">
             @endif
 
-            {{-- Title Text --}}
+            {{-- Title --}}
             @if ($post['title'])
-                <h1 class="h5 mb-3">{{ $post['title'] }}</h1>
+                <h1 class="h3 mb-3">{{ $post['title'] }}</h1>
             @endif
 
             {{-- Sticky --}}
             @if ($post['stickyState'] == 2)
-                <img src="/assets/themes/ThemeFrame/images/icon-sticky.png" loading="lazy" alt="Sticky Group" class="ms-2">
+                <img src="/assets/themes/ThemeFrame/images/icon-sticky.png" loading="lazy" alt="Group Sticky" class="ms-2">
             @elseif ($post['stickyState'] == 3)
-                <img src="/assets/themes/ThemeFrame/images/icon-sticky.png" loading="lazy" alt="Sticky All" class="ms-2">
+                <img src="/assets/themes/ThemeFrame/images/icon-sticky.png" loading="lazy" alt="Global Sticky" class="ms-2">
             @endif
 
             {{-- Digest --}}
             @if ($post['digestState'] == 2)
-                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" loading="lazy" alt="Digest 1" class="ms-2">
+                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" loading="lazy" alt="General Digest" class="ms-2">
             @elseif ($post['digestState'] == 3)
-                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" loading="lazy" alt="Digest 2" class="ms-2">
+                <img src="/assets/themes/ThemeFrame/images/icon-digest.png" loading="lazy" alt="Senior Digest" class="ms-2">
             @endif
         </div>
 
-        {{-- Full Text --}}
+        {{-- Content --}}
         <div class="content-article text-break">
             @if ($post['isMarkdown'])
                 {!! Str::markdown($post['content']) !!}
@@ -87,7 +87,7 @@
         </div>
     </section>
 
-    {{-- Post permission information --}}
+    {{-- Post Allow Info --}}
     @if (! $post['isAllow'])
         <section class="post-allow order-2">
             <div class="post-allow-static"></div>
@@ -107,7 +107,7 @@
         </section>
     @endif
 
-    {{-- Decorate --}}
+    {{-- Post Decorate --}}
     @if ($decorate)
         <div class="position-absolute top-0 end-0">
             <img src="{{ $decorate['imageUrl'] }}" loading="lazy" alt="{{ $decorate['name'] }}" height="88rem">
@@ -124,7 +124,7 @@
         ])@endcomponent
     </section>
 
-    {{-- Extends --}}
+    {{-- Content Extends --}}
     @if ($post['extends'])
         <section class="content-extends order-3 mx-3">
             @component('components.post.section.extends', [
@@ -136,14 +136,14 @@
         </section>
     @endif
 
-    {{-- quoted post --}}
+    {{-- Quoted Post --}}
     @if ($post['quotedPost'])
         @component('components.post.section.quoted-post', [
             'post' => $post['quotedPost'],
         ])@endcomponent
     @endif
 
-    {{-- Post extended information --}}
+    {{-- Post Append --}}
     @if ($post['group'] || $post['isUserList'] || $post['hashtags'])
         <section class="content-append order-4 mx-3 mt-3 d-flex">
             <div class="me-auto d-flex flex-row">
@@ -171,7 +171,7 @@
                 @endif
             </div>
 
-            {{-- Post Users --}}
+            {{-- Post Affiliate User List --}}
             @if ($post['isUserList'])
                 <div class="content-user-list">
                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
@@ -190,7 +190,7 @@
         </section>
     @endif
 
-    {{-- Interaction Function --}}
+    {{-- Post Interaction --}}
     <section class="interaction order-5 mt-3 px-3">
         <div class="d-flex">
             {{-- Like --}}
@@ -265,7 +265,7 @@
             </div>
         </div>
 
-        {{-- Comment reply box --}}
+        {{-- Comment Box --}}
         @component('components.editor.comment-box', [
             'nickname' => $post['creator']['nickname'],
             'pid' => $post['pid'],

@@ -22,7 +22,7 @@
                                 <button class="rounded-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center p-2" style="background-color: aliceblue;" type="button" data-bs-toggle="modal" data-bs-target="#post-box-fresns-group">
                                     <span class="py-2 ms-1">
                                         <i class="bi bi-archive-fill me-2"></i>
-                                        <span id="post-box-group">@if ($group) {{ $group['gname'] }} @else {{ fs_db_config('group_name') }}: {{ fs_lang('editorNoChooseGroup') }} @endif</span>
+                                        <span id="post-box-group">@if ($group) {{ $group['gname'] }} @else {{ fs_db_config('group_name') }}: {{ fs_lang('editorNoSelectGroup') }} @endif</span>
                                     </span>
                                     <span class="py-2"><i class="bi bi-chevron-right"></i></span>
                                 </button>
@@ -46,20 +46,20 @@
                         {{-- Content --}}
                         <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="quick-publish-post-content" rows="10" placeholder="{{ fs_lang('editorContent') }}"></textarea>
 
-                        {{-- Features --}}
+                        {{-- Function Buttons --}}
                         <div class="d-flex mt-2">
                             {{-- Title --}}
                             @if (fs_api_config('post_editor_title') && fs_api_config('post_editor_title_view') == 2)
                                 <button type="button" class="btn btn-outline-secondary me-2" data-bs-toggle="collapse" href="#quickTitleCollapse" aria-expanded="false" aria-controls="quickTitleCollapse"><i class="bi bi-textarea-t"></i></button>
                             @endif
 
-                            {{-- Stickers --}}
+                            {{-- Sticker --}}
                             @if (fs_api_config('post_editor_sticker'))
                                 <div class="me-2">
                                     <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                         <i class="bi bi-emoji-smile"></i>
                                     </button>
-                                    {{-- Sticker List --}}
+                                    {{-- Sticker List Start --}}
                                     <div class="dropdown-menu pt-0" aria-labelledby="stickers">
                                         <ul class="nav nav-tabs" role="tablist">
                                             @foreach(fs_stickers() as $sticker)
@@ -84,7 +84,7 @@
                                 </div>
                             @endif
 
-                            {{-- Upload file --}}
+                            {{-- Upload Image --}}
                             @if (fs_api_config('post_editor_image'))
                                 <div class="input-group">
                                     <label class="input-group-text" for="post-file">{{ fs_lang('editorImages') }}</label>
@@ -93,7 +93,7 @@
                             @endif
                         </div>
 
-                        {{-- Attachment Status --}}
+                        {{-- Other Options --}}
                         <hr>
                         <div class="d-flex bd-highlight align-items-center">
                             <div class="bd-highlight me-auto">
@@ -125,7 +125,7 @@
                 <button type="button" class="btn-close" data-bs-target="#createModal" data-bs-toggle="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                {{-- Group Body --}}
+                {{-- Group List --}}
                 <div class="d-flex align-items-start">
                     <div class="nav flex-column nav-pills me-3" id="v-pills-post-box-tab" role="tablist" aria-orientation="vertical">
                         @if (! fs_api_config('post_editor_group_required'))
@@ -143,14 +143,14 @@
                     </div>
 
                     <div class="tab-content" id="v-pills-post-box-tabContent" style="width:70%;">
-                        {{-- Group List --}}
+                        {{-- Group --}}
                         <div id="fresns-post-box-groups">
                             <div class="list-group"></div>
                             <div class="list-group-addmore text-center my-3 fs-7"></div>
                         </div>
                     </div>
                 </div>
-                {{-- Group Body End --}}
+                {{-- Group List --}}
             </div>
         </div>
     </div>
@@ -230,7 +230,7 @@
             })
 
             $("#post-box-not-select-group").on('click', function (){
-                $('#createModal #post-box-group').text("{{ fs_lang('editorNoChooseGroup') }}");
+                $('#createModal #post-box-group').text("{{ fs_lang('editorNoSelectGroup') }}");
                 $("#createModal input[name='postGid']").val("");
             })
         })

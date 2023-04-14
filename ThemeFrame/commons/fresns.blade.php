@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/atwho.min.css?v={{ $themeVersion }}">
     <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/prism.min.css?v={{ $themeVersion }}">
     <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/fresns.css?v={{ $themeVersion }}">
+    <script src="/static/js/jquery.min.js"></script>
     @stack('style')
     @if (fs_db_config('website_stat_position') == 'head')
         {!! fs_db_config('website_stat_code') !!}
@@ -139,7 +140,6 @@
         <div style="display:none;">{!! fs_db_config('website_stat_code') !!}</div>
     @endif
     <script src="/static/js/base64.js"></script>
-    <script src="/static/js/jquery.min.js"></script>
     <script src="/static/js/bootstrap.bundle.min.js"></script>
     <script src="/static/js/select2.min.js"></script>
     <script src="/static/js/js.cookie.min.js"></script>
@@ -149,6 +149,7 @@
         window.siteName = "{{ fs_db_config('site_name') }}";
         window.siteIcon = "{{ fs_db_config('site_icon') }}";
         window.langTag = "{{ current_lang_tag() }}";
+        window.userIdentifier = "{{ fs_api_config('user_identifier') }}";
         window.mentionStatus = {{ fs_api_config('mention_status') ? 1 : 0 }};
         window.hashtagStatus = {{ fs_api_config('hashtag_status') ? 1 : 0 }};
         window.hashtagFormat = {{ fs_api_config('hashtag_format') }};

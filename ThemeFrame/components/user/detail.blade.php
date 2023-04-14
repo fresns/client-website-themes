@@ -49,7 +49,7 @@
         <div class="alert alert-warning" role="alert"><i class="bi bi-exclamation-triangle-fill"></i> {{ fs_code_message(35202) }}</div>
     @endif
 
-    {{-- User Attachment Icons --}}
+    {{-- User Affiliate Icons --}}
     @if ($user['operations']['diversifyImages'])
         <div class="text-center">
             @foreach($user['operations']['diversifyImages'] as $icon)
@@ -112,7 +112,7 @@
         ])@endcomponent
     @endif
 
-    {{-- Follow Status --}}
+    {{-- Follow Me Status --}}
     @if ($user['interaction']['followMeStatus'] && $user['interaction']['followStatus'])
         <span class="badge rounded-pill bg-secondary m-1">{{ fs_lang('userFollowMutual') }}</span>
     @elseif ($user['interaction']['followMeStatus'])
@@ -120,7 +120,7 @@
     @endif
 </section>
 
-{{-- Conversation Modal --}}
+{{-- Conversation --}}
 @if (fs_api_config('conversation_status') && $user['conversation']['status'])
     <div class="modal fade" id="conversationModal-{{ $user['fsid'] }}" tabindex="-1" aria-labelledby="conversationModalLabel" aria-hidden="true">
         <div class="modal-dialog">

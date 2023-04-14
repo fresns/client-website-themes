@@ -1,5 +1,5 @@
 @if (fs_account()->check())
-    {{-- After login: Select user --}}
+    {{-- After Login: Select User Modal --}}
     <div class="modal fade" id="userAuth" data-bs-backdrop="static" tabindex="-1"  aria-hidden="true" aria-labelledby="userAuthModal">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -20,7 +20,7 @@
                                     @if ($item['hasPassword'])
                                         <a data-bs-target="#userPwdLogin" data-uid="{{ $item['uid'] }}" data-nickname="{{ $item['nickname'] }}" data-bs-toggle="modal" data-bs-dismiss="modal" class="btn btn-outline-secondary btn-sm my-2" onclick="$('#userPwdLoginLabel').text($(this).data('nickname'));$('#userPwdLogin input[name=uidOrUsername]').val($(this).data('uid'))">{{ fs_lang('userPassword') }}</a>
                                     @else
-                                        <button type="submit" class="btn btn-outline-secondary btn-sm my-2">{{ fs_lang('choose') }}</button>
+                                        <button type="submit" class="btn btn-outline-secondary btn-sm my-2">{{ fs_lang('select') }}</button>
                                     @endif
                                 </form>
                             </div>
@@ -35,7 +35,7 @@
         </div>
     </div>
 
-    {{-- After login: select user - enter password --}}
+    {{-- After Login: Select User - Enter Password Modal --}}
     <div class="modal fade" id="userPwdLogin" aria-hidden="true" aria-labelledby="userPwdLoginLabel" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content" id="user-password-auth">

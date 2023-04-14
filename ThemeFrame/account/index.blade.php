@@ -10,7 +10,7 @@
                 @include('account.sidebar')
             </div>
 
-            {{-- Account Content --}}
+            {{-- Account Main --}}
             <div class="col-sm-9">
 
             </div>

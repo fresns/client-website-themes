@@ -39,7 +39,7 @@
             </div>
         @endif
 
-        {{-- Notification Content --}}
+        {{-- Content of notice --}}
         <section class="user-secondary d-flex flex-wrap">
             <p class="mb-0 w-100">
                 @switch($notification['type'])

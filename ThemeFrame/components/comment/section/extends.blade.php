@@ -26,7 +26,7 @@
     @foreach($extends['infoBox'] as $extend)
         <div class="position-relative frame-box-info mb-3">
             <div class="d-flex align-items-center">
-                {{-- Cover image --}}
+                {{-- Cover Image --}}
                 <div class="flex-shrink-0">
                     <img src="{{ $extend['cover'] }}" loading="lazy" class="frame-image-{{ $extend['infoTypeString'] }}">
                 </div>

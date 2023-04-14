@@ -20,18 +20,18 @@
                         <div class="input-group mb-3 mt-2">
                             <span class="input-group-text">{{ fs_lang('accountType') }}</span>
                             <div class="form-control">
-                                {{-- E-Mail --}}
+                                {{-- Email --}}
                                 @if (fs_api_config('send_email_service'))
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="type" id="code_account_email" value="email" data-bs-toggle="collapse" data-bs-target="#code_account_email:not(.show)" aria-expanded="@if (empty(old('type')) || old('type') == 'email') true @else false @endif" aria-controls="code_account_email" @if (empty(old('type')) || old('type') == 'email') checked @endif>
+                                        <input class="form-check-input" type="radio" name="type" id="code_account_email" value="email" data-bs-toggle="collapse" data-bs-target=".code_account_email:not(.show)" aria-expanded="@if (empty(old('type')) || old('type') == 'email') true @else false @endif" aria-controls="code_account_email" @if (empty(old('type')) || old('type') == 'email') checked @endif>
                                         <label class="form-check-label" for="code_account_email">{{ fs_lang('email') }}</label>
                                     </div>
                                 @endif
 
-                                {{-- Phone --}}
+                                {{-- Phone Number --}}
                                 @if (fs_api_config('send_sms_service'))
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="type" id="code_account_phone" value="phone" data-bs-toggle="collapse" data-bs-target="#code_account_phone:not(.show)" aria-expanded="@if (old('type') == 'phone') true @else false @endif" aria-controls="code_account_phone" @if (old('type') == 'phone') checked @endif>
+                                        <input class="form-check-input" type="radio" name="type" id="code_account_phone" value="phone" data-bs-toggle="collapse" data-bs-target=".code_account_phone:not(.show)" aria-expanded="@if (old('type') == 'phone') true @else false @endif" aria-controls="code_account_phone" @if (old('type') == 'phone') checked @endif>
                                         <label class="form-check-label" for="code_account_phone">{{ fs_lang('phone') }}</label>
                                     </div>
                                 @endif
@@ -39,29 +39,29 @@
                         </div>
                     @endif
 
-                    {{-- Switching Accordion --}}
+                    {{-- Switch Accordion --}}
                     <input type="hidden" name="useType" value="2">
                     <input type="hidden" name="templateId" value="5">
-                    {{-- E-Mail --}}
+                    {{-- Email --}}
                     @if (fs_api_config('send_email_service'))
-                        <div class="collapse @if (empty(old('type')) || old('type') == 'email') show @endif" id="code_account_email" aria-labelledby="code_account_email" data-bs-parent="#accordionCodeAccount">
+                        <div class="collapse code_account_email @if (empty(old('type')) || old('type') == 'email') show @endif" aria-labelledby="code_account_email" data-bs-parent="#accordionCodeAccount">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('email') }}</span>
                                 <input type="email" name="email" value="{{ old('email') }}" class="form-control">
 
-                                {{-- Get email verify code --}}
+                                {{-- Get email verification code --}}
                                 <button data-action="{{ route("fresns.api.send.verify.code") }}"  class="btn btn-outline-secondary send-verify-code" type="button">{{ fs_lang('sendVerifyCode') }}</button>
                             </div>
                         </div>
                     @endif
 
-                    {{-- Cell Phone Number --}}
+                    {{-- Phone Number --}}
                     @if (fs_api_config('send_sms_service'))
-                        <div class="collapse @if (old('type') == 'phone' || ! fs_api_config('send_email_service')) show @endif" id="code_account_phone" aria-labelledby="code_account_phone" data-bs-parent="#accordionCodeAccount">
+                        <div class="collapse code_account_phone @if (old('type') == 'phone' || ! fs_api_config('send_email_service')) show @endif" aria-labelledby="code_account_phone" data-bs-parent="#accordionCodeAccount">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('phone') }}</span>
                                 @if (count(fs_api_config('send_sms_supported_codes')) > 1)
-                                    {{-- List of country calling codes --}}
+                                    {{-- Country Calling Codes --}}
                                     <select class="form-select" name="countryCode" value="{{ old('countryCode') }}">
                                         <option disabled>{{ fs_lang('countryCode') }}</option>
                                         @foreach(fs_api_config('send_sms_supported_codes') as $countryCode)
@@ -77,7 +77,7 @@
 
                                 <input type="number" name="phone" value="{{ old('phone') }}" class="form-control" style="width:40%">
 
-                                {{-- Get cell phone verify code --}}
+                                {{-- Get SMS verification code --}}
                                 <button data-action="{{ route("fresns.api.send.verify.code") }}"  class="btn btn-outline-secondary send-verify-code" type="button">{{ fs_lang('sendVerifyCode') }}</button>
                             </div>
                         </div>
@@ -95,7 +95,7 @@
                         <input type="password" class="form-control" name="password" required>
                     </div>
 
-                    {{-- Enter the new password again --}}
+                    {{-- Enter a new password again --}}
                     <div class="input-group mb-3">
                         <span class="input-group-text">{{ fs_lang('passwordAgain') }}</span>
                         <input type="password" class="form-control" name="password_confirmation" required>

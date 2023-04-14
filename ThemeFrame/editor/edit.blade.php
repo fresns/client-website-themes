@@ -10,7 +10,6 @@
                 @method("post")
                 <input type="hidden" name="type" value="{{ $type ?? '' }}" />
                 <input type="hidden" name="postGid" value="{{ $draft['detail']['group']['gid'] ?? '' }}" />
-
                 {{-- Tip: Publish Permissions --}}
                 @if ($config['publish']['limit']['status'] && $config['publish']['limit']['isInTime'])
                     @component('components.editor.tip.publish', [
@@ -18,7 +17,7 @@
                     ])@endcomponent
                 @endif
 
-                {{-- Tip: Edit Timer --}}
+                {{-- Tip: Editorial Timing --}}
                 @if ($draft['edit']['isEdit'])
                     @component('components.editor.tip.edit', [
                         'config' => $draft['edit'],
@@ -68,7 +67,7 @@
                         'extends' => $draft['detail']['extends'],
                     ])@endcomponent
 
-                    {{-- Allow Info --}}
+                    {{-- allowJson --}}
                     @if ($draft['detail']['allowJson'])
                         @component('components.editor.section.allow', [
                             'type' => $type,
@@ -76,7 +75,7 @@
                         ])@endcomponent
                     @endif
 
-                    {{-- Comment with button settings --}}
+                    {{-- commentBtnJson --}}
                     @if ($draft['detail']['commentBtnJson'])
                         @component('components.editor.section.comment-btn', [
                             'type' => $type,
@@ -84,7 +83,7 @@
                         ])@endcomponent
                     @endif
 
-                    {{-- Post User List Configuration --}}
+                    {{-- userListJson --}}
                     @if ($draft['detail']['userListJson'])
                         @component('components.editor.section.user-list', [
                             'type' => $type,
@@ -94,12 +93,14 @@
 
                     <hr>
 
-                    {{-- Location and Anonymous Start --}}
+                    {{-- Location and Anonymous: Start --}}
                     <div class="d-flex justify-content-between">
                         {{-- Location --}}
-                        @if ($config['editor']['features']['location']['status'] && $config['editor']['features']['location']['maps'])
+                        @if ($config['editor']['features']['location']['status'])
                             @component('components.editor.section.location', [
                                 'type' => $type,
+                                'plid' => $plid,
+                                'clid' => $clid,
                                 'config' => $config['editor']['features']['location'],
                                 'location' => $draft['detail']['mapJson'],
                             ])@endcomponent
@@ -113,7 +114,7 @@
                             ])@endcomponent
                         @endif
                     </div>
-                    {{-- Location and Anonymous End --}}
+                    {{-- Location and Anonymous: End --}}
                 </div>
                 {{-- Content End --}}
 
@@ -284,13 +285,24 @@
         };
 
         function deleteFile(obj) {
-            let fid = $(obj).data('fid'),
+            let fid = $(obj).data('fid');
 
             $.post("{{ route('fresns.api.editor.update', ['type' => $type, 'draftId' => $draft['detail']['id']]) }}", {
                 'deleteFile': fid
             }, function (data){
                 console.log(data)
             })
+        }
+
+        function deleteMap() {
+            $.post("{{ route('fresns.api.editor.update', ['type' => $type, 'draftId' => $draft['detail']['id']]) }}", {
+                'deleteMap': 1
+            }, function (data){
+                console.log(data)
+            });
+
+            $('#location-info').hide();
+            $('#location-btn').show();
         }
 
         (function($){

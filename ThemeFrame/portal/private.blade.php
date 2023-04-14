@@ -10,10 +10,10 @@
                     <h3 class="card-title">{{ fs_db_config('site_name') }}</h3>
                     <p>{{ fs_lang('private') }}</p>
 
-                    {{-- Login --}}
+                    {{-- Go to login --}}
                     <p class="mt-4"><a class="btn btn-outline-success" href="{{ fs_route(route('fresns.account.login')) }}" role="button">{{ fs_lang('accountLogin') }}</a></p>
 
-                    {{-- Plugin Join --}}
+                    {{-- Join --}}
                     @if (fs_api_config('site_private_status') && fs_api_config('site_private_service'))
                         <p class="mt-4">
                             <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"

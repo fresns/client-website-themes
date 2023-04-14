@@ -21,7 +21,7 @@
             </a>
         @endif
 
-        {{-- Comments from nearby --}}
+        {{-- Nearby --}}
         @if (fs_api_config('comment_editor_location'))
             <a href="{{ fs_route(route('fresns.comment.nearby')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.comment.nearby') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-nearby.png" loading="lazy" width="36" height="36">
@@ -29,7 +29,7 @@
             </a>
         @endif
 
-        {{-- My like comments --}}
+        {{-- Likes --}}
         @if (fs_api_config('like_comment_setting'))
             <a href="{{ fs_route(route('fresns.comment.likes')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.comment.likes') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-likes.png" loading="lazy" width="36" height="36">
@@ -37,7 +37,7 @@
             </a>
         @endif
 
-        {{-- My dislike comments --}}
+        {{-- Dislikes --}}
         @if (fs_api_config('dislike_comment_setting'))
             <a href="{{ fs_route(route('fresns.comment.dislikes')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.comment.dislikes') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-dislikes.png" loading="lazy" width="36" height="36">
@@ -45,7 +45,7 @@
             </a>
         @endif
 
-        {{-- My follow comments --}}
+        {{-- Following --}}
         @if (fs_api_config('follow_comment_setting'))
             <a href="{{ fs_route(route('fresns.comment.following')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.comment.following') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-following.png" loading="lazy" width="36" height="36">
@@ -53,7 +53,7 @@
             </a>
         @endif
 
-        {{-- My block comments --}}
+        {{-- Blocking --}}
         @if (fs_api_config('block_comment_setting'))
             <a href="{{ fs_route(route('fresns.comment.blocking')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.comment.blocking') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-blocking.png" loading="lazy" width="36" height="36">
@@ -61,7 +61,7 @@
             </a>
         @endif
 
-        {{-- Comments from I follow (users, groups, hashtags) --}}
+        {{-- Comment List by Follow --}}
         @if (fs_api_config('view_comments_by_follow_object'))
             <a href="{{ fs_route(route('fresns.follow.all.comments')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.follow.all.comments') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-follow-comments.png" loading="lazy" width="36" height="36">

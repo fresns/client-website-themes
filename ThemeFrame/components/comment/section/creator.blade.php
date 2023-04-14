@@ -1,13 +1,13 @@
 <div class="d-flex">
     <div class="flex-shrink-0">
         @if (! $creator['status'])
-            {{-- Deactivate Author --}}
+            {{-- Deactivate --}}
             <img src="{{ fs_api_config('deactivate_avatar') }}" loading="lazy" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="user-avatar rounded-circle">
         @elseif ($isAnonymous)
-            {{-- Anonymous Author --}}
+            {{-- Anonymous --}}
             <img src="{{ $creator['avatar'] }}" loading="lazy" alt="{{ fs_lang('contentCreatorAnonymous') }}" class="user-avatar rounded-circle">
         @else
-            {{-- Normal Author --}}
+            {{-- Creator --}}
             <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $creator['fsid']])) }}">
                 @if ($creator['decorate'])
                     <img src="{{ $creator['decorate'] }}" loading="lazy" alt="Avatar Decorate" class="user-decorate">
@@ -20,17 +20,17 @@
     <div class="flex-grow-1">
         <div class="user-primary d-lg-flex">
             @if (! $creator['status'])
-                {{-- Deactivate Author --}}
+                {{-- Deactivate --}}
                 <div class="user-info d-flex text-nowrap overflow-hidden">
                     <div class="text-muted">{{ fs_lang('contentCreatorDeactivate') }}</div>
                 </div>
             @elseif ($isAnonymous)
-                {{-- Anonymous Author --}}
+                {{-- Anonymous --}}
                 <div class="user-info d-flex text-nowrap overflow-hidden">
                     <div class="text-muted">{{ fs_lang('contentCreatorAnonymous') }}</div>
                 </div>
             @else
-                {{-- Normal Author --}}
+                {{-- Creator --}}
                 <div class="user-info d-flex text-nowrap overflow-hidden">
                     <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $creator['fsid']])) }}" class="user-link d-flex">
                         <div class="user-nickname text-nowrap overflow-hidden" style="color:{{ $creator['nicknameColor'] }};">{{ $creator['nickname'] }}</div>
@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                {{-- Post Author --}}
+                {{-- Post Creator --}}
                 @if ($creator['isPostCreator'])
                     <div>
                         <span class="author-badge" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ fs_db_config('post_name').': '.fs_lang('contentCreator') }}">
@@ -64,7 +64,7 @@
                     </div>
                 @endif
 
-                {{-- User Attachment Icons --}}
+                {{-- User Affiliate Icons --}}
                 @if ($creator['operations']['diversifyImages'])
                     <div class="user-icon d-flex flex-wrap flex-lg-nowrap overflow-hidden my-2 my-lg-0">
                         @foreach($creator['operations']['diversifyImages'] as $icon)
@@ -75,15 +75,15 @@
             @endif
         </div>
         <div class="user-secondary d-flex flex-wrap mb-3">
-            {{-- Comment Created Time --}}
+            {{-- Create Time --}}
             <time class="text-secondary" datetime="{{ $createTime }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $createTime }}">{{ $createTimeFormat }}</time>
 
-            {{-- Comment Edit Time --}}
+            {{-- Edit Time --}}
             @if ($editTime)
                 <div class="text-secondary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $editTime }}">({{ fs_lang('contentEditedOn') }} {{ $editTimeFormat }})</div>
             @endif
 
-            {{-- Commenter Reply User --}}
+            {{-- Reply To Comment --}}
             @if ($replyToComment)
                 <div class="text-success ms-2">
                     {{ fs_db_config('publish_comment_name') }}
@@ -110,9 +110,9 @@
                 </span>
             @endif
 
-            {{-- Commenter Location --}}
+            {{-- Comment Location --}}
             @if ($location['isLbs'])
-                <a href="{{ fs_route(route('fresns.comment.location', $location['encode'])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
+                <a href="{{ fs_route(route('fresns.post.location', $location['encode'])) }}" class="link-secondary ms-3"><i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] }}</a>
             @endif
         </div>
     </div>

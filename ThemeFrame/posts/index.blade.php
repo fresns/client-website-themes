@@ -12,9 +12,9 @@
                 @include('posts.sidebar')
             </div>
 
-            {{-- Middle Content --}}
+            {{-- Middle --}}
             <div class="col-sm-6">
-                {{-- Sticky Post List --}}
+                {{-- Sticky Posts --}}
                 @if (fs_sticky_posts())
                     <div class="list-group mb-4">
                         @foreach(fs_sticky_posts() as $sticky)

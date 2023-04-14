@@ -10,7 +10,7 @@
             <header class="profile-header position-relative text-center">
                 @component('components.user.detail', compact('profile', 'followersYouFollow'))@endcomponent
 
-                {{-- manage menus --}}
+                {{-- Menus --}}
                 @if ($items['manages'])
                     <div class="position-absolute top-0 end-0 dropdown">
                         <button class="btn btn-outline-secondary rounded-circle mt-2" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots"></i></button>

@@ -22,7 +22,7 @@
             <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $pid])).'#commentList' }}" class="text-decoration-none link-dark stretched-link">{!! $topComment['content'] !!}</a>
         </div>
 
-        {{-- Files Images --}}
+        {{-- Files --}}
         @if ($topComment['files']['images'])
             <div class="d-flex align-content-start flex-wrap comment-image-{{ count($topComment['files']['images']) }}">
                 @foreach($topComment['files']['images'] as $image)

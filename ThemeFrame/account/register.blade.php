@@ -32,27 +32,27 @@
                     </div>
                 @endif
 
-                {{-- Register --}}
+                {{-- Registration --}}
                 <form class="py-3" id="accordionCodeAccount" method="post" novalidate action="{{ route("fresns.api.account.register") }}">
                     @csrf
                     <input type="hidden" name="redirectURL" value="{{ request()->get('redirectURL') }}">
-                    {{-- Register Type Switch --}}
+                    {{-- Registration Type Switch --}}
                     @if (fs_api_config('site_email_register') && fs_api_config('site_phone_register'))
                         <div class="input-group mb-3 mt-2">
                             <span class="input-group-text">{{ fs_lang('accountType') }}</span>
                             <div class="form-control">
-                                {{-- E-Mail --}}
+                                {{-- Email --}}
                                 @if (fs_api_config('site_email_register'))
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="type" id="code_account_email" value="email" data-bs-toggle="collapse" data-bs-target="#code_account_email:not(.show)" aria-expanded="@if (empty(old('type')) || old('type') == 'email') true @else false @endif" aria-controls="code_account_email" @if (empty(old('type')) || old('type') == 'email') checked @endif>
+                                        <input class="form-check-input" type="radio" name="type" id="code_account_email" value="email" data-bs-toggle="collapse" data-bs-target=".code_account_email:not(.show)" aria-expanded="@if (empty(old('type')) || old('type') == 'email') true @else false @endif" aria-controls="code_account_email" @if (empty(old('type')) || old('type') == 'email') checked @endif>
                                         <label class="form-check-label" for="code_account_email">{{ fs_lang('email') }}</label>
                                     </div>
                                 @endif
 
-                                {{-- Phone --}}
+                                {{-- Phone Number --}}
                                 @if (fs_api_config('site_phone_register'))
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="type" id="code_account_phone" value="phone" data-bs-toggle="collapse" data-bs-target="#code_account_phone:not(.show)" aria-expanded="@if (old('type') == 'phone') true @else false @endif" aria-controls="code_account_phone" @if (old('type') == 'phone') checked @endif>
+                                        <input class="form-check-input" type="radio" name="type" id="code_account_phone" value="phone" data-bs-toggle="collapse" data-bs-target=".code_account_phone:not(.show)" aria-expanded="@if (old('type') == 'phone') true @else false @endif" aria-controls="code_account_phone" @if (old('type') == 'phone') checked @endif>
                                         <label class="form-check-label" for="code_account_phone">{{ fs_lang('phone') }}</label>
                                     </div>
                                 @endif
@@ -64,30 +64,30 @@
                         <input type="radio" name="type" value="phone" class="d-none" checked>
                     @endif
 
-                    {{-- Switching Accordion --}}
+                    {{-- Switch Accordion --}}
                     <div>
                         <input type="hidden" name="useType" value="1">
                         <input type="hidden" name="templateId" value="2">
-                        {{-- E-Mail --}}
+                        {{-- Email --}}
                         @if (fs_api_config('site_email_register'))
-                            <div class="collapse @if (empty(old('type')) || old('type') == 'email') show @endif" id="code_account_email" aria-labelledby="code_account_email" data-bs-parent="#accordionCodeAccount">
+                            <div class="collapse code_account_email @if (empty(old('type')) || old('type') == 'email') show @endif" aria-labelledby="code_account_email" data-bs-parent="#accordionCodeAccount">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">{{ fs_lang('email') }}</span>
                                     <input type="email" name="email" value="{{ old('email') }}" class="form-control">
 
-                                    {{-- Get email verify code --}}
+                                    {{-- Get email verification code --}}
                                     <button class="btn btn-outline-secondary send-verify-code" type="button" data-action="{{ route("fresns.api.send.verify.code") }}">{{ fs_lang('sendVerifyCode') }}</button>
                                 </div>
                             </div>
                         @endif
 
-                        {{-- Cell Phone Number --}}
+                        {{-- Phone Number --}}
                         @if (fs_api_config('site_phone_register'))
-                            <div class="collapse @if (old('type') == 'phone' || ! fs_api_config('site_email_register')) show @endif" id="code_account_phone" aria-labelledby="code_account_phone" data-bs-parent="#accordionCodeAccount">
+                            <div class="collapse code_account_phone @if (old('type') == 'phone' || ! fs_api_config('site_email_register')) show @endif" aria-labelledby="code_account_phone" data-bs-parent="#accordionCodeAccount">
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">{{ fs_lang('phone') }}</span>
                                     @if (count(fs_api_config('send_sms_supported_codes')) > 1)
-                                        {{-- List of country calling codes --}}
+                                        {{-- Country Calling Codes --}}
                                         <select class="form-select" name="countryCode" value="{{ old('countryCode') }}">
                                             <option disabled>{{ fs_lang('countryCode') }}</option>
                                             @foreach(fs_api_config('send_sms_supported_codes') as $countryCode)
@@ -103,7 +103,7 @@
 
                                     <input type="number" name="phone" value="{{ old('phone') }}" class="form-control" style="width:40%">
 
-                                    {{-- Get cell phone verify code --}}
+                                    {{-- Get SMS verification code --}}
                                     <button class="btn btn-outline-secondary send-verify-code" type="button" data-action="{{ route("fresns.api.send.verify.code") }}">{{ fs_lang('sendVerifyCode') }}</button>
                                 </div>
                             </div>
@@ -128,13 +128,13 @@
                         <input type="password" class="form-control" minlength="{{ fs_api_config('password_length') }}" maxlength="32" name="password" required>
                     </div>
 
-                    {{-- Enter the password again --}}
+                    {{-- Enter Your Password Again --}}
                     <div class="input-group">
                         <span class="input-group-text">{{ fs_lang('passwordAgain') }}</span>
                         <input type="password" class="form-control" minlength="{{ fs_api_config('password_length') }}" maxlength="32" name="password_confirmation" required>
                     </div>
 
-                    {{-- Password requirement hint --}}
+                    {{-- Password Request Prompt --}}
                     <div class="form-text mb-3">
                         {{ fs_lang('passwordInfo') }}:
 
@@ -155,7 +155,7 @@
                         <span class="badge rounded-pill bg-secondary">{{ fs_api_config('password_length') }}~32</span>
                     </div>
 
-                    {{-- Terms of Service --}}
+                    {{-- Policies --}}
                     <label class="form-label fs-6 mt-2">
                         <i class="bi bi-check-circle-fill"></i> {{ fs_lang('accountInfo') }}
                         @if (fs_api_config('account_terms_status'))
@@ -175,7 +175,7 @@
                         <div class="float-start w-65">
                             <button class="w-100 btn btn-lg btn-primary" type="submit">{{ fs_lang('accountRegister') }}</button>
                         </div>
-                        {{-- Login Link --}}
+                        {{-- Login Button --}}
                         <div class="float-start w-35 ps-4">
                             <a class="w-100 btn btn-lg btn-outline-success" href="{{ fs_route(route('fresns.account.login')) }}" role="button">{{ fs_lang('accountLogin') }}</a>
                         </div>
@@ -213,7 +213,7 @@
         </div>
     @endif
 
-    {{-- Privacy Policy Modal --}}
+    {{-- Privacy Modal --}}
     @if (fs_api_config('account_privacy_status'))
         <div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -233,7 +233,7 @@
         </div>
     @endif
 
-    {{-- Cookie Modal --}}
+    {{-- Cookies Modal --}}
     @if (fs_api_config('account_cookies_status'))
         <div class="modal fade" id="cookieModal" tabindex="-1" aria-labelledby="cookieModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -243,7 +243,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        {!! fs_api_config('account_cookies') ? Str::markdown(fs_api_config('account_cookies')): '' !!}
+                        {!! fs_api_config('account_cookies') ? Str::markdown(fs_api_config('account_cookies')) : '' !!}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ fs_lang('close') }}</button>

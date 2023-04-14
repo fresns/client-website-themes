@@ -49,19 +49,19 @@
                     <form id="accordionPasswordAccount" class="py-3" method="post" novalidate action="{{ route('fresns.api.account.login') }}" onsubmit="var passwordInput = document.querySelector('#nav-PasswordAccount > form > div.form-floating > input'); passwordInput.value = Base64.encode(passwordInput.value)">
                         @csrf
                         <input type="hidden" name="redirectURL" value="{{ request()->get('redirectURL') }}">
-                        {{-- Account Select --}}
+                        {{-- Account Options --}}
                         @if (fs_api_config('site_email_login') && fs_api_config('site_phone_login'))
                             <div class="input-group mb-3 mt-2">
                                 <span class="input-group-text" id="basic-addon1">{{ fs_lang('accountType') }}</span>
                                 <div class="form-control">
-                                    {{-- E-Mail --}}
+                                    {{-- Email --}}
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="type" value="email" id="password_account_email" data-bs-toggle="collapse" data-bs-target="#password_account_email:not(.show)" aria-expanded="true" aria-controls="password_account_email" checked>
+                                        <input class="form-check-input" type="radio" name="type" value="email" id="password_account_email" data-bs-toggle="collapse" data-bs-target=".password_account_email:not(.show)" aria-expanded="true" aria-controls="password_account_email" checked>
                                         <label class="form-check-label" for="password_account_email">{{ fs_lang('email') }}</label>
                                     </div>
-                                    {{-- Cell Phone Number --}}
+                                    {{-- Phone Number --}}
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="type" value="phone" id="password_account_phone" data-bs-toggle="collapse" data-bs-target="#password_account_phone:not(.show)" aria-expanded="false" aria-controls="password_account_phone">
+                                        <input class="form-check-input" type="radio" name="type" value="phone" id="password_account_phone" data-bs-toggle="collapse" data-bs-target=".password_account_phone:not(.show)" aria-expanded="false" aria-controls="password_account_phone">
                                         <label class="form-check-label" for="password_account_phone">{{ fs_lang('phone') }}</label>
                                     </div>
                                 </div>
@@ -76,9 +76,9 @@
 
                         {{-- Account Input --}}
                         <div>
-                            {{-- E-Mail --}}
+                            {{-- Email --}}
                             @if (fs_api_config('site_email_login'))
-                                <div class="collapse show" id="password_account_email" aria-labelledby="password_account_email" data-bs-parent="#accordionPasswordAccount">
+                                <div class="collapse password_account_email show" aria-labelledby="password_account_email" data-bs-parent="#accordionPasswordAccount">
                                     <div class="form-floating mb-3">
                                         <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="name@example.com">
                                         <label for="email">{{ fs_lang('email') }}</label>
@@ -86,14 +86,14 @@
                                 </div>
                             @endif
 
-                            {{-- Cell Phone Number --}}
+                            {{-- Phone Number --}}
                             @if (fs_api_config('site_phone_login'))
-                                <div class="collapse @if (! fs_api_config('site_email_login')) show @endif" id="password_account_phone" aria-labelledby="password_account_phone" data-bs-parent="#accordionPasswordAccount">
+                                <div class="collapse password_account_phone @if (! fs_api_config('site_email_login')) show @endif" aria-labelledby="password_account_phone" data-bs-parent="#accordionPasswordAccount">
                                     <div class="row g-2 mb-3">
                                         @if ($smsCodeCount > 1)
                                             <div class="col-md-3">
                                                 <div class="form-floating">
-                                                    {{-- List of country calling codes --}}
+                                                    {{-- Country Calling Codes --}}
                                                     <select class="form-select" name="countryCode" value="{{ old('countryCode') }}">
                                                         <option disabled>{{ fs_lang('countryCode') }}</option>
                                                         @foreach(fs_api_config('send_sms_supported_codes') as $countryCode)
@@ -110,7 +110,7 @@
                                             </select>
                                         @endif
 
-                                        {{-- Cell Phone Number --}}
+                                        {{-- Phone Number --}}
                                         <div @if ($smsCodeCount > 1) class="col-md-9" @else class="input-group" @endif>
                                             @if ($smsCodeCount <= 1)
                                                 <span class="input-group-text">+{{ fs_api_config('send_sms_default_code') }}</span>
@@ -131,7 +131,7 @@
                             <label for="password">{{ fs_lang('password') }}</label>
                         </div>
 
-                        {{-- Forgot your password? --}}
+                        {{-- Reset Password --}}
                         <div class="mt-2 text-center"><a href="{{ fs_route(route('fresns.account.reset.password')) }}">{{ fs_lang('passwordForgot') }}?</a></div>
 
                         {{-- Login or Register --}}
@@ -158,27 +158,27 @@
                         </div>
                     </form>
                 </div>
-                {{-- Password Login: end --}}
+                {{-- Password Login: End --}}
 
-                {{-- Code Login: Start --}}
+                {{-- Verify Code Login: Start --}}
                 <div class="tab-pane fade" id="nav-CodeAccount" role="tabpanel" aria-labelledby="nav-CodeAccount-tab">
                     <form  id="accordionCodeAccount" novalidate class="py-3" method="post" action="{{ route('fresns.api.account.login') }}">
                         @csrf
                         <input type="hidden" name="redirectURL" value="{{ request()->get('redirectURL') }}">
-                        {{-- Account Select --}}
+                        {{-- Account Options --}}
                         @if (fs_api_config('site_email_login') && fs_api_config('site_phone_login'))
                             <div class="input-group mb-3 mt-2">
                                 <span class="input-group-text" id="basic-addon1">{{ fs_lang('accountType') }}</span>
                                 <div class="form-control">
-                                    {{-- E-Mail --}}
+                                    {{-- Email --}}
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="type" id="code_account_email" value="email" data-bs-toggle="collapse" data-bs-target="#code_account_email:not(.show)" aria-expanded="true" aria-controls="code_account_email" checked>
+                                        <input class="form-check-input" type="radio" name="type" id="code_account_email" value="email" data-bs-toggle="collapse" data-bs-target=".code_account_email:not(.show)" aria-expanded="true" aria-controls="code_account_email" checked>
                                         <label class="form-check-label" for="code_account_email">{{ fs_lang('email') }}</label>
                                     </div>
 
-                                    {{-- Cell Phone Number --}}
+                                    {{-- Phone Number --}}
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="type" id="code_account_phone" value="phone" data-bs-toggle="collapse" data-bs-target="#code_account_phone:not(.show)" aria-expanded="false" aria-controls="code_account_phone">
+                                        <input class="form-check-input" type="radio" name="type" id="code_account_phone" value="phone" data-bs-toggle="collapse" data-bs-target=".code_account_phone:not(.show)" aria-expanded="false" aria-controls="code_account_phone">
                                         <label class="form-check-label" for="code_account_phone">{{ fs_lang('phone') }}</label>
                                     </div>
                                 </div>
@@ -189,26 +189,26 @@
                         <div>
                             <input type="hidden" name="useType" value="2">
                             <input type="hidden" name="templateId" value="7">
-                            {{-- E-Mail --}}
+                            {{-- Email --}}
                             @if (fs_api_config('site_email_login'))
-                                <div class="collapse show" id="code_account_email" aria-labelledby="code_account_email" data-bs-parent="#accordionCodeAccount">
+                                <div class="collapse code_account_email show" aria-labelledby="code_account_email" data-bs-parent="#accordionCodeAccount">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">{{ fs_lang('email') }}</span>
                                         <input type="email" name="email" value="{{ old('email') }}" class="form-control">
 
-                                        {{-- Get email verify code --}}
+                                        {{-- Get email verification code --}}
                                         <button class="btn btn-outline-secondary send-verify-code" type="button" data-action="{{ route("fresns.api.send.verify.code") }}">{{ fs_lang('sendVerifyCode') }}</button>
                                     </div>
                                 </div>
                             @endif
 
-                            {{-- Cell Phone Number --}}
+                            {{-- Phone Number --}}
                             @if (fs_api_config('site_phone_login'))
-                                <div class="collapse @if (! fs_api_config('site_email_login')) show @endif" id="code_account_phone" aria-labelledby="code_account_phone" data-bs-parent="#accordionCodeAccount">
+                                <div class="collapse code_account_phone @if (! fs_api_config('site_email_login')) show @endif" aria-labelledby="code_account_phone" data-bs-parent="#accordionCodeAccount">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">{{ fs_lang('phone') }}</span>
                                         @if (count(fs_api_config('send_sms_supported_codes')) > 1)
-                                            {{-- List of country calling codes --}}
+                                            {{-- Country Calling Codes --}}
                                             <select class="form-select" name="countryCode" value="{{ old('countryCode') }}">
                                                 <option disabled>{{ fs_lang('countryCode') }}</option>
                                                 @foreach(fs_api_config('send_sms_supported_codes') as $countryCode)
@@ -225,7 +225,7 @@
 
                                         <input type="number" name="phone" value="{{ old('phone') }}" class="form-control" style="width:40%">
 
-                                        {{-- Get cell phone verify code --}}
+                                        {{-- Get SMS verification code --}}
                                         <button class="btn btn-outline-secondary send-verify-code" type="button" data-action="{{ route("fresns.api.send.verify.code") }}">{{ fs_lang('sendVerifyCode') }}</button>
                                     </div>
                                 </div>
@@ -262,7 +262,7 @@
                         </div>
                     </form>
                 </div>
-                {{-- Code Login: End --}}
+                {{-- Verify Code Login: End --}}
             </div>
         </div>
     </div>

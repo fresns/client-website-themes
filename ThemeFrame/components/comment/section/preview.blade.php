@@ -1,4 +1,4 @@
-<section class="comment-preview mt-2 mx-3 position-relative d-flex flex-column">
+<section class="comment-preview mt-3 mx-3 position-relative d-flex flex-column">
     @foreach($subComments as $comment)
         <div class="text-break mb-2">
             @if (! $comment['creator']['status'])

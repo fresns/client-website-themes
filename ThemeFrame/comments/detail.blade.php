@@ -12,7 +12,7 @@
                 @include('comments.sidebar')
             </div>
 
-            {{-- Middle Content --}}
+            {{-- Middle --}}
             <div class="col-sm-6">
                 <div class="card shadow-sm mb-3">
                     @component('components.comment.detail', compact('comment'))@endcomponent

@@ -10,7 +10,7 @@
                 @include('account.sidebar')
             </div>
 
-            {{-- List of users belonging to the current account --}}
+            {{-- Users of this account --}}
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-header">
@@ -45,7 +45,7 @@
                                         @if ($item['hasPassword'])
                                             <a data-bs-target="#userPwdLogin" data-uid="{{ $item['uid'] }}" data-nickname="{{ $item['nickname'] }}" data-bs-toggle="modal" data-bs-dismiss="modal" class="btn btn-outline-secondary btn-sm my-2" onclick="$('#userPwdLoginLabel').text($(this).data('nickname'));$('#userPwdLogin input[name=uidOrUsername]').val($(this).data('uid'))">{{ fs_lang('userPassword') }}</a>
                                         @else
-                                            <button type="submit" class="btn btn-outline-secondary btn-sm my-2">{{ fs_lang('choose') }}</button>
+                                            <button type="submit" class="btn btn-outline-secondary btn-sm my-2">{{ fs_lang('select') }}</button>
                                         @endif
                                     </form>
                                 @endif

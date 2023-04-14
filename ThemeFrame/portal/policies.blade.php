@@ -28,22 +28,22 @@
             </div>
 
             <div class="tab-content border-start ps-lg-5 pb-5 account-settings" id="policies-tab-content">
-                {{-- terms --}}
+                {{-- Terms --}}
                 <div class="tab-pane fade show active" id="terms" role="tabpanel" aria-labelledby="terms-tab" tabindex="0">
                     {!! fs_api_config('account_terms') ? Str::markdown(fs_api_config('account_terms')) : '' !!}
                 </div>
 
-                {{-- privacy --}}
+                {{-- Privacy --}}
                 <div class="tab-pane fade" id="privacy" role="tabpanel" aria-labelledby="privacy-tab" tabindex="0">
                     {!! fs_api_config('account_privacy') ? Str::markdown(fs_api_config('account_privacy')) : '' !!}
                 </div>
 
-                {{-- cookies --}}
+                {{-- Cookies --}}
                 <div class="tab-pane fade" id="cookies" role="tabpanel" aria-labelledby="cookies-tab" tabindex="0">
                     {!! fs_api_config('account_cookies') ? Str::markdown(fs_api_config('account_cookies')) : '' !!}
                 </div>
 
-                {{-- delete account --}}
+                {{-- Delete Account --}}
                 <div class="tab-pane fade" id="delete" role="tabpanel" aria-labelledby="delete-tab" tabindex="0">
                     {!! fs_api_config('account_delete') ? Str::markdown(fs_api_config('account_delete')) : '' !!}
                 </div>

@@ -126,7 +126,7 @@
                         </div>
                     @endif
 
-                    {{-- Notifications --}}
+                    {{-- List of notices --}}
                     <div class="card-body">
                         @if ($notifications->isEmpty())
                             {{-- No Notification --}}
@@ -134,7 +134,7 @@
                                 <i class="bi bi-chat-square"></i> {{ fs_lang('listEmpty') }}
                             </div>
                         @else
-                            {{-- Mark all as read --}}
+                            {{-- Read Button --}}
                             @if ($types)
                                 <div class="border-bottom text-center py-3">
                                     <form class="api-request-form" action="{{ route('fresns.api.message.mark.as.read', ['type' => 'notification']) }}" method="put">
@@ -154,7 +154,7 @@
                                 @endforeach
                             </ul>
 
-                            {{-- Notification Pagination --}}
+                            {{-- Notification List-Pagination --}}
                             <div class="my-3 table-responsive">
                                 {{ $notifications->links() }}
                             </div>

@@ -14,14 +14,14 @@
                 @include('posts.sidebar')
             </div>
 
-            {{-- Middle Content --}}
+            {{-- Middle --}}
             <div class="col-sm-6">
                 {{-- Location Info --}}
                 <div class="alert alert-primary" role="alert">
                     <i class="bi bi-geo-alt-fill"></i> {{ $location['poi'] ?? $location['latitude'].' / '.$location['longitude'] }}
                 </div>
 
-                {{-- Tab Content --}}
+                {{-- Switch Content --}}
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
                         <a class="nav-link active" href="{{ fs_route(route('fresns.post.location', $encode)) }}">{{ fs_db_config('post_name') }}</a>

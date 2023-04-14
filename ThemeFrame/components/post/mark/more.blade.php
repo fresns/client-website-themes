@@ -36,7 +36,7 @@
         </li>
     @endif
 
-    {{-- Management Extensions --}}
+    {{-- Manages --}}
     @if ($manages)
         @foreach($manages as $plugin)
             <li>
@@ -58,7 +58,7 @@
     @endif
 </ul>
 
-{{-- Delete Confirm --}}
+{{-- Delete Secondary Confirmation --}}
 @if ($editStatus['isMe'] && $editStatus['canDelete'])
     <div class="modal fade" id="delete-{{ $pid }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-{{ $pid }}Label" aria-hidden="true">
         <div class="modal-dialog modal-sm">

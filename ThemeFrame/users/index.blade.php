@@ -12,7 +12,7 @@
                 @include('users.sidebar')
             </div>
 
-            {{-- Middle Content --}}
+            {{-- Middle --}}
             <div class="col-sm-6">
                 {{-- User List --}}
                 <article class="card clearfix" @if (fs_db_config('menu_user_query_state') != 1) id="fresns-list-container" @endif>
