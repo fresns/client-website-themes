@@ -1,24 +1,24 @@
-@if ($post['creator'] ?? null)
+@if ($quotedPost['creator'] ?? null)
     <section class="comment-post my-2 mx-3 position-relative">
         <div class="d-flex">
-            <div class="flex-shrink-0"><img src="{{ $post['creator']['avatar'] }}" loading="lazy" alt="{{ $post['creator']['nickname'] }}" class="rounded"></div>
+            <div class="flex-shrink-0"><img src="{{ $quotedPost['creator']['avatar'] }}" loading="lazy" alt="{{ $quotedPost['creator']['nickname'] }}" class="rounded"></div>
             <div class="flex-grow-1">
-                @if (! $post['creator']['status'])
+                @if (isset($quotedPost['creator']['status']) && ! $quotedPost['creator']['status'])
                     {{ fs_lang('contentCreatorDeactivate') }}:
-                @elseif (! $post['creator']['fsid'])
+                @elseif (! $quotedPost['creator']['fsid'])
                     {{ fs_lang('contentCreatorAnonymous') }}:
                 @else
-                    {{ $post['creator']['nickname'] }}:
+                    {{ $quotedPost['creator']['nickname'] }}:
                 @endif
 
-                {!! Str::limit(strip_tags($post['content']), 140) !!}
+                {!! Str::limit(strip_tags($quotedPost['content']), 140) !!}
             </div>
         </div>
 
-        @if ($post['group'])
-            <div class="comment-post-group border-top text-secondary">{{ $post['group']['gname'] }}</div>
+        @if ($quotedPost['group'])
+            <div class="comment-post-group border-top text-secondary">{{ $quotedPost['group']['gname'] }}</div>
         @endif
 
-        <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $post['pid']])) }}" class="text-decoration-none stretched-link"></a>
+        <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $quotedPost['pid']])) }}" class="text-decoration-none stretched-link"></a>
     </section>
 @endif

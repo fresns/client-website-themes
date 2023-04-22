@@ -122,7 +122,7 @@
                         <p class="text-center text-secondary">
                             {{ fs_lang('contentFileUploader') }}: {{ $creator['nickname'] }}
                             <span class="mx-3">{{$document['size']}}</span>
-                            {{ $createTime }}
+                            {{ $createdDatetime }}
                         </p>
                         <p class="text-center">
                             <button type="button" class="btn btn-outline-success fresns-file-download"

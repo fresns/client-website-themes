@@ -67,7 +67,7 @@
                                 @if (fs_api_config('comment_editor_image'))
                                     <div class="input-group">
                                         <label class="input-group-text" for="modal-comment-file-{{ $pid.$cid }}">{{ fs_lang('editorImages') }}</label>
-                                        <input type="file" class="form-control" accept="{{ fs_user_panel('fileAccept.images') }}" name="file" id="modal-comment-file-{{ $pid.$cid }}">
+                                        <input type="file" class="form-control" accept="{{ fs_user_panel('fileAccept.images') }}" name="image" id="modal-comment-file-{{ $pid.$cid }}">
                                     </div>
                                 @endif
                             </div>

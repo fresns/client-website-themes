@@ -45,7 +45,7 @@
                 {{-- Content Start --}}
                 <div class="editor-content p-3">
                     {{-- Title --}}
-                    @if ($config['editor']['toolbar']['title']['status'] || $draft['detail']['title'])
+                    @if (isset($draft['detail']['title']) && ($config['editor']['toolbar']['title']['status'] || $draft['detail']['title']))
                         @component('components.editor.section.title', [
                             'config' => $config['editor']['toolbar']['title'],
                             'title' => $draft['detail']['title'],

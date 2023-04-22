@@ -39,10 +39,10 @@
             'pid' => $post['pid'],
             'creator' => $post['creator'],
             'isAnonymous' => $post['isAnonymous'],
-            'createTime' => $post['createTime'],
-            'createTimeFormat' => $post['createTimeFormat'],
-            'editTime' => $post['editTime'],
-            'editTimeFormat' => $post['editTimeFormat'],
+            'createdDatetime' => $post['createdDatetime'],
+            'createdTimeAgo' => $post['createdTimeAgo'],
+            'editedDatetime' => $post['editedDatetime'],
+            'editedTimeAgo' => $post['editedTimeAgo'],
             'moreJson' => $post['moreJson'],
             'location' => $post['location']
         ])@endcomponent
@@ -88,20 +88,20 @@
     </section>
 
     {{-- Post Allow Info --}}
-    @if (! $post['isAllow'])
+    @if (! $post['allowConfig']['isAllow'])
         <section class="post-allow order-2">
             <div class="post-allow-static"></div>
             <div class="text-center">
-                <p class="text-secondary mb-2">{{ fs_lang('contentAllowInfo') }} {{ $post['allowProportion'] }}%</p>
+                <p class="text-secondary mb-2">{{ fs_lang('contentAllowInfo') }} {{ $post['allowConfig']['previewProportion'] }}%</p>
                 <button type="button" class="btn btn-outline-info btn-lg w-50" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                     data-type="post"
                     data-scene="postAllowBtn"
                     data-post-message-key="fresnsPostAllowBtn"
                     data-pid="{{ $post['pid'] }}"
                     data-uid="{{ $post['creator']['uid'] }}"
-                    data-title="{{ $post['allowBtnName'] }}"
-                    data-url="{{ $post['allowBtnUrl'] }}">
-                    {{ $post['allowBtnName'] }}
+                    data-title="{{ $post['allowConfig']['buttonName'] }}"
+                    data-url="{{ $post['allowConfig']['buttonUrl'] }}">
+                    {{ $post['allowConfig']['buttonName'] }}
                 </button>
             </div>
         </section>
@@ -118,7 +118,7 @@
     <section class="content-files order-3 mx-3 mt-2 d-flex align-content-start flex-wrap file-image-{{ count($post['files']['images']) }}">
         @component('components.post.section.files', [
             'pid' => $post['pid'],
-            'createTime' => $post['createTime'],
+            'createdDatetime' => $post['createdDatetime'],
             'creator' => $post['creator'],
             'files' => $post['files'],
         ])@endcomponent
@@ -129,7 +129,7 @@
         <section class="content-extends order-3 mx-3">
             @component('components.post.section.extends', [
                 'pid' => $post['pid'],
-                'createTime' => $post['createTime'],
+                'createdDatetime' => $post['createdDatetime'],
                 'creator' => $post['creator'],
                 'extends' => $post['extends']
             ])@endcomponent
@@ -139,12 +139,12 @@
     {{-- Quoted Post --}}
     @if ($post['quotedPost'])
         @component('components.post.section.quoted-post', [
-            'post' => $post['quotedPost'],
+            'quotedPost' => $post['quotedPost'],
         ])@endcomponent
     @endif
 
     {{-- Post Append --}}
-    @if ($post['group'] || $post['isUserList'] || $post['hashtags'])
+    @if ($post['group'] || $post['affiliatedUserConfig']['hasUserList'] || $post['hashtags'])
         <section class="content-append order-4 mx-3 mt-3 d-flex">
             <div class="me-auto d-flex flex-row">
                 {{-- Post Group --}}
@@ -172,7 +172,7 @@
             </div>
 
             {{-- Post Affiliate User List --}}
-            @if ($post['isUserList'])
+            @if ($post['affiliatedUserConfig']['hasUserList'])
                 <div class="content-user-list">
                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                         data-type="post"
@@ -180,10 +180,10 @@
                         data-post-message-key="fresnsPostUserList"
                         data-pid="{{ $post['pid'] }}"
                         data-uid="{{ $post['creator']['uid'] }}"
-                        data-title="{{ $post['userListName'] }}"
-                        data-url="{{ $post['userListUrl'] }}">
-                        {{ $post['userListName'] }}
-                        <span class="badge bg-light text-dark">{{ $post['userListCount'] }}</span>
+                        data-title="{{ $post['affiliatedUserConfig']['userListName'] }}"
+                        data-url="{{ $post['affiliatedUserConfig']['userListUrl'] }}">
+                        {{ $post['affiliatedUserConfig']['userListName'] }}
+                        <span class="badge bg-light text-dark">{{ $post['affiliatedUserConfig']['userListCount'] }}</span>
                     </button>
                 </div>
             @endif

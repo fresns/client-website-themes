@@ -42,10 +42,10 @@
             'cid' => $sticky['cid'],
             'creator' => $sticky['creator'],
             'isAnonymous' => $sticky['isAnonymous'],
-            'createTime' => $sticky['createTime'],
-            'createTimeFormat' => $sticky['createTimeFormat'],
-            'editTime' => $sticky['editTime'],
-            'editTimeFormat' => $sticky['editTimeFormat'],
+            'createdDatetime' => $sticky['createdDatetime'],
+            'createdTimeAgo' => $sticky['createdTimeAgo'],
+            'editedDatetime' => $sticky['editedDatetime'],
+            'editedTimeAgo' => $sticky['editedTimeAgo'],
             'moreJson' => $sticky['moreJson'],
             'location' => $sticky['location'],
             'replyToComment' => $sticky['replyToComment'],
@@ -106,7 +106,7 @@
     <section class="content-files order-3 mx-3 mt-2 d-flex align-content-start flex-wrap file-image-{{ count($sticky['files']['images']) }}">
         @component('components.comment.section.files', [
             'cid' => $sticky['cid'],
-            'createTime' => $sticky['createTime'],
+            'createdDatetime' => $sticky['createdDatetime'],
             'creator' => $sticky['creator'],
             'files' => $sticky['files'],
         ])@endcomponent
@@ -117,7 +117,7 @@
         <section class="content-extends order-3 mx-3">
             @component('components.comment.section.extends', [
                 'cid' => $sticky['cid'],
-                'createTime' => $sticky['createTime'],
+                'createdDatetime' => $sticky['createdDatetime'],
                 'creator' => $sticky['creator'],
                 'extends' => $sticky['extends']
             ])@endcomponent
