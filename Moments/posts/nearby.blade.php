@@ -97,7 +97,7 @@
                     }, false)
 
                     let url = "{{ fs_route(route('fresns.post.nearby')) }}";
-                    url = url + "?mapId=1&mapLat=" + position.coords.longitude + "&mapLng=" + position.coords.latitude;
+                    url = url + "?mapId=1&mapLat=" + position.coords.latitude + "&mapLng=" + position.coords.longitude;
 
                     window.getNearbyPostsPagination(url)
                 }, window.onError, options);

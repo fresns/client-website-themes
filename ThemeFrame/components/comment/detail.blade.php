@@ -44,10 +44,10 @@
             'cid' => $comment['cid'],
             'creator' => $comment['creator'],
             'isAnonymous' => $comment['isAnonymous'],
-            'createTime' => $comment['createTime'],
-            'createTimeFormat' => $comment['createTimeFormat'],
-            'editTime' => $comment['editTime'],
-            'editTimeFormat' => $comment['editTimeFormat'],
+            'createdDatetime' => $comment['createdDatetime'],
+            'createdTimeAgo' => $comment['createdTimeAgo'],
+            'editedDatetime' => $comment['editedDatetime'],
+            'editedTimeAgo' => $comment['editedTimeAgo'],
             'moreJson' => $comment['moreJson'],
             'location' => $comment['location'],
             'replyToComment' => $comment['replyToComment'],
@@ -97,7 +97,7 @@
     <section class="content-files order-3 mx-3 mt-2 d-flex align-content-start flex-wrap file-image-{{ count($comment['files']['images']) }}">
         @component('components.comment.section.files', [
             'cid' => $comment['cid'],
-            'createTime' => $comment['createTime'],
+            'createdDatetime' => $comment['createdDatetime'],
             'creator' => $comment['creator'],
             'files' => $comment['files'],
         ])@endcomponent
@@ -108,7 +108,7 @@
         <section class="content-extends order-3 mx-3">
             @component('components.comment.section.extends', [
                 'cid' => $comment['cid'],
-                'createTime' => $comment['createTime'],
+                'createdDatetime' => $comment['createdDatetime'],
                 'creator' => $comment['creator'],
                 'extends' => $comment['extends']
             ])@endcomponent

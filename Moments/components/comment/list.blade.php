@@ -47,10 +47,10 @@
             'cid' => $comment['cid'],
             'creator' => $comment['creator'],
             'isAnonymous' => $comment['isAnonymous'],
-            'createTime' => $comment['createTime'],
-            'createTimeFormat' => $comment['createTimeFormat'],
-            'editTime' => $comment['editTime'],
-            'editTimeFormat' => $comment['editTimeFormat'],
+            'createdDatetime' => $comment['createdDatetime'],
+            'createdTimeAgo' => $comment['createdTimeAgo'],
+            'editedDatetime' => $comment['editedDatetime'],
+            'editedTimeAgo' => $comment['editedTimeAgo'],
             'moreJson' => $comment['moreJson'],
             'location' => $comment['location'],
             'replyToComment' => $comment['replyToComment'],
@@ -75,7 +75,7 @@
                     <span class="mx-1">|</span>
 
                     {{ fs_lang('contentPublishedOn') }}
-                    {{ $comment['replyToComment']['createTime'] }}
+                    {{ $comment['replyToComment']['createdDatetime'] }}
                 </p>
                 <p class="mb-0">
                     <a data-bs-toggle="modal" href="#replyToComment-{{ $comment['cid'] }}" class="text-decoration-none stretched-link">
@@ -93,10 +93,10 @@
                                     'cid' => $comment['replyToComment']['cid'],
                                     'creator' => $comment['replyToComment']['creator'],
                                     'isAnonymous' => $comment['replyToComment']['isAnonymous'],
-                                    'createTime' => $comment['replyToComment']['createTime'],
-                                    'createTimeFormat' => $comment['replyToComment']['createTimeFormat'],
-                                    'editTime' => $comment['replyToComment']['editTime'],
-                                    'editTimeFormat' => $comment['replyToComment']['editTimeFormat'],
+                                    'createdDatetime' => $comment['replyToComment']['createdDatetime'],
+                                    'createdTimeAgo' => $comment['replyToComment']['createdTimeAgo'],
+                                    'editedDatetime' => $comment['replyToComment']['editedDatetime'],
+                                    'editedTimeAgo' => $comment['replyToComment']['editedTimeAgo'],
                                     'moreJson' => $comment['replyToComment']['moreJson'],
                                     'location' => $comment['replyToComment']['location'],
                                     'replyToComment' => $comment['replyToComment']['replyToComment'],
@@ -169,7 +169,7 @@
         <section class="content-files order-3 mx-3 mt-2 d-flex align-content-start flex-wrap file-image-{{ count($comment['files']['images']) }}">
             @component('components.comment.section.files', [
                 'cid' => $comment['cid'],
-                'createTime' => $comment['createTime'],
+                'createdDatetime' => $comment['createdDatetime'],
                 'creator' => $comment['creator'],
                 'files' => $comment['files'],
             ])@endcomponent
@@ -181,7 +181,7 @@
         <section class="content-extends order-3 mx-3">
             @component('components.comment.section.extends', [
                 'cid' => $comment['cid'],
-                'createTime' => $comment['createTime'],
+                'createdDatetime' => $comment['createdDatetime'],
                 'creator' => $comment['creator'],
                 'extends' => $comment['extends']
             ])@endcomponent

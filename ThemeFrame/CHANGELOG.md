@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.5.5 (2023-04-22)
+
+- Bug fixes
+- Adapted to the new parameters of Fresns v2.9.0
+
+
 ## 2.5.4 (2023-04-14)
 
 - Complete the Real Name Authentication action button

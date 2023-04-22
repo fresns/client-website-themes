@@ -102,7 +102,7 @@
                     }, false)
 
                     let url = "{{ fs_route(route('fresns.comment.nearby')) }}";
-                    url = url + "?mapId=1&mapLat=" + position.coords.longitude + "&mapLng=" + position.coords.latitude;
+                    url = url + "?mapId=1&mapLat=" + position.coords.latitude + "&mapLng=" + position.coords.longitude;
 
                     window.getNearbyCommentsPagination(url)
                 }, window.onError, options);

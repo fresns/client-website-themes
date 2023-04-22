@@ -1146,6 +1146,11 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                         </button>
                     </div>`;
                 } else if (name === 'editPassword' || name === 'editWalletPassword') {
+                    let templateId = 5;
+                    if (name === 'editWalletPassword') {
+                        templateId = 6;
+                    }
+
                     html = `
                     <div class="input-group mb-3 mt-2">
                         <span class="input-group-text border-end-rounded-0">${fs_lang('settingType')}</span>
@@ -1214,7 +1219,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                             <div class="input-group mb-3">
                                 <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
                                 <input type="text" class="form-control" name="email_verifyCode" autocomplete="off">
-                                <button data-type="email" data-use-type="4" data-template-id="5" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary send-verify-code" type="button">
+                                <button data-type="email" data-use-type="4" data-template-id="${templateId}" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary send-verify-code" type="button">
                                     ${fs_lang('sendVerifyCode')}
                                 </button>
                             </div>
@@ -1231,7 +1236,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                             <div class="input-group mb-3">
                                 <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
                                 <input type="text" class="form-control" name="phone_verifyCode">
-                                <button data-type="sms" data-use-type="4" data-template-id="5" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary send-verify-code" type="button">
+                                <button data-type="sms" data-use-type="4" data-template-id="${templateId}" data-action="/api/engine/send-verify-code" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary send-verify-code" type="button">
                                     ${fs_lang('sendVerifyCode')}
                                 </button>
                             </div>
