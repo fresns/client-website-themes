@@ -517,7 +517,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                 for (var i = 0; i < res.data.list.length; i++) {
                     item = res.data.list[i];
 
-                    html += `<img src="${item.downloadUser.avatar}" alt="${item.downloadUser.username}" class="rounded-circle">`;
+                    html += `<img src="${item.user.avatar}" alt="${item.user.username}" class="rounded-circle">`;
                 }
 
                 $(modal).find('.file-download-user .file-user-list').html(html);
