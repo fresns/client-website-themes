@@ -6,9 +6,13 @@
 
     {{-- User Avatar --}}
     @if ($notification['actionUser'])
-        <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $notification['actionUser']['fsid']])) }}">
-            <img src="{{ $notification['actionUser']['avatar'] }}" loading="lazy" class="rounded-circle mx-3" style="width:3.2rem;height:3.2rem;">
-        </a>
+        @if ($notification['actionUser']['status'])
+            <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $notification['actionUser']['fsid']])) }}">
+                <img src="{{ $notification['actionUser']['avatar'] }}" loading="lazy" class="rounded-circle mx-3" style="width:3.2rem;height:3.2rem;">
+            </a>
+        @else
+            <img src="{{ fs_db_config('deactivate_avatar') }}" loading="lazy" class="conversation-list-avatar rounded-circle">
+        @endif
     @else
         <img src="{{ fs_db_config('site_icon') }}" loading="lazy" class="mx-3" style="width:3.2rem;height:3.2rem;">
     @endif
@@ -17,21 +21,25 @@
         {{-- User Profile --}}
         @if ($notification['actionUser'])
             <div class="user-info text-nowrap overflow-hidden">
-                <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $notification['actionUser']['fsid']])) }}" class="user-link d-flex">
-                    <div class="user-nickname text-nowrap overflow-hidden">{{ $notification['actionUser']['nickname'] }}</div>
+                @if ($notification['actionUser']['status'])
+                    <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $notification['actionUser']['fsid']])) }}" class="user-link d-flex">
+                        <div class="user-nickname text-nowrap overflow-hidden">{{ $notification['actionUser']['nickname'] }}</div>
 
-                    @if ($notification['actionUser']['verifiedStatus'])
-                        <div class="user-verified">
-                            @if ($notification['actionUser']['verifiedIcon'])
-                                <img src="{{ $notification['actionUser']['verifiedIcon'] }}" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $notification['actionUser']['verifiedDesc'] ?? '' }}">
-                            @else
-                                <img src="/assets/themes/ThemeFrame/images/icon-verified.png" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $notification['actionUser']['verifiedDesc'] ?? '' }}">
-                            @endif
-                        </div>
-                    @endif
+                        @if ($notification['actionUser']['verifiedStatus'])
+                            <div class="user-verified">
+                                @if ($notification['actionUser']['verifiedIcon'])
+                                    <img src="{{ $notification['actionUser']['verifiedIcon'] }}" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $notification['actionUser']['verifiedDesc'] ?? '' }}">
+                                @else
+                                    <img src="/assets/themes/ThemeFrame/images/icon-verified.png" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $notification['actionUser']['verifiedDesc'] ?? '' }}">
+                                @endif
+                            </div>
+                        @endif
 
-                    <div class="user-name text-secondary">{{ '@'.$notification['actionUser']['fsid'] }}</div>
-                </a>
+                        <div class="user-name text-secondary">{{ '@'.$notification['actionUser']['fsid'] }}</div>
+                    </a>
+                @else
+                    <div class="user-nickname text-nowrap overflow-hidden">{{ fs_lang('contentCreatorDeactivate') }}</div>
+                @endif
             </div>
         @else
             <div class="border-start border-3 border-secondary mb-2">
