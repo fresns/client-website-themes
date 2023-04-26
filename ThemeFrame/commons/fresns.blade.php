@@ -157,7 +157,6 @@
     <script src="/assets/themes/{{ $themeUnikey }}/js/jquery.caret.min.js?v={{ $themeVersion }}"></script>
     <script src="/assets/themes/{{ $themeUnikey }}/js/atwho.min.js?v={{ $themeVersion }}"></script>
     <script src="/assets/themes/{{ $themeUnikey }}/js/prism.min.js?v={{ $themeVersion }}"></script>
-    <script src="/assets/themes/{{ $themeUnikey }}/js/sendVerifyCode.js?v={{ $themeVersion }}"></script>
     <script src="/assets/themes/{{ $themeUnikey }}/js/fresns.js?v={{ $themeVersion }}"></script>
     @stack('script')
 </body>
