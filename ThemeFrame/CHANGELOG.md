@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.6.0 (2023-04-27)
+
+- Refactor: code for sending captcha function
+- Refactor: Editor auto-update function
+- Refactor: JS form for account settings function
+- Fix: Page error after user logout for notification messages
+- Fix: Editor removes missing items after deleting a file
+- Fix: Draft triggers review, causing page to enter a dead loop
+
+
 ## 2.5.5 (2023-04-22)
 
 - Bug fixes
