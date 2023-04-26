@@ -292,6 +292,8 @@
             }, function (data){
                 console.log(data)
             })
+
+            $(obj).parent().parent().remove();
         }
 
         function deleteMap() {
