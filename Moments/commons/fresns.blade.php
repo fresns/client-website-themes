@@ -255,7 +255,6 @@
     <script src="/assets/themes/Moments/js/atwho.min.js?v={{ $themeVersion }}"></script>
     <script src="/assets/themes/Moments/js/prism.min.js?v={{ $themeVersion }}"></script>
     <script src="/assets/themes/Moments/js/fancybox.umd.min.js?v={{ $themeVersion }}"></script>
-    <script src="/assets/themes/Moments/js/sendVerifyCode.js?v={{ $themeVersion }}"></script>
     <script src="/assets/themes/Moments/js/fresns.js?v={{ $themeVersion }}"></script>
     @stack('script')
 </body>
