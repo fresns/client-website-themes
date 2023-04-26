@@ -135,11 +135,11 @@ function sendVerifyCode(obj) {
         account = '';
 
     if (countryCodeSelectId) {
-        countryCode = $("#" + countryCodeSelectId).val();
+        countryCode = $('#' + countryCodeSelectId).val();
     }
 
     if (accountInputId) {
-        account = $("#" + accountInputId).val();
+        account = $('#' + accountInputId).val();
     }
 
     fetchSendVerifyCode(type, useType, templateId, account, obj, countryCode);
@@ -1146,10 +1146,10 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                 }
                 html += `
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="${name}_mode" id="email_to_edit" value="email_to_${name}" data-bs-toggle="collapse" data-bs-target=".email_to_edit:not(.show)" aria-expanded="${value ? 'false' : 'true'}" ${value ? '' : 'checked'}>
-                            <label class="form-check-label" for="email_to_edit">${fs_lang(
-                                'emailVerifyCode'
-                            )}</label>
+                            <input class="form-check-input" type="radio" name="${name}_mode" id="email_to_edit" value="email_to_${name}" data-bs-toggle="collapse" data-bs-target=".email_to_edit:not(.show)" aria-expanded="${
+                    value ? 'false' : 'true'
+                }" ${value ? '' : 'checked'}>
+                            <label class="form-check-label" for="email_to_edit">${fs_lang('emailVerifyCode')}</label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="${name}_mode" id="phone_to_edit" value="phone_to_${name}" data-bs-toggle="collapse" data-bs-target=".phone_to_edit:not(.show)" aria-controls="phone_to_edit" aria-expanded="false">
@@ -1158,14 +1158,18 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     </div>
                 </div>
                 <div id="edit_password_mode">
-                    <div class="collapse password_to_edit ${value ? 'show' : ''}" aria-labelledby="password_to_edit" data-bs-parent="#edit_password_mode">
+                    <div class="collapse password_to_edit ${
+                        value ? 'show' : ''
+                    }" aria-labelledby="password_to_edit" data-bs-parent="#edit_password_mode">
                         <div class="input-group mb-3">
                             <span class="input-group-text border-end-rounded-0">${fs_lang('passwordCurrent')}</span>
                             <input type="hidden" class="form-control" name="edit_type" value="${name}">
                             <input type="password" class="form-control" name="now_${name}" autocomplete="new-password">
                         </div>
                     </div>
-                    <div class="collapse email_to_edit ${!value ? 'show' : ''}" aria-labelledby="email_to_edit" data-bs-parent="#edit_password_mode">
+                    <div class="collapse email_to_edit ${
+                        !value ? 'show' : ''
+                    }" aria-labelledby="email_to_edit" data-bs-parent="#edit_password_mode">
                         <div class="input-group mb-3">
                             <span class="input-group-text border-end-rounded-0">${fs_lang('email')}</span>
                             <input class="form-control" type="text" placeholder="${email}" value="${email}" id="emailEditPassword" disabled>
@@ -1312,10 +1316,10 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                             form.find('.modal-body .invalid-feedback').length
                                 ? form.find('.modal-body .invalid-feedback').text(fs_lang('settingCheckError'))
                                 : form.find('.modal-body').append(
-                                        `<div class="invalid-feedback d-block">
+                                      `<div class="invalid-feedback d-block">
                                             ${fs_lang('settingCheckError')}
                                         </div>`
-                                    );
+                                  );
                         } else if ($(v).next().length) {
                             $(v)
                                 .parent()
