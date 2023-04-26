@@ -81,7 +81,7 @@
                                 <span class="input-group-text">{{ fs_db_config('user_nickname_name') }}</span>
                                 <span class="form-control" id="input-nickname">{{ fs_user('detail.nickname') }}</span>
                                 <button class="btn btn-outline-secondary"
-                                    data-lable="{{ fs_db_config('user_nickname_name') }}"
+                                    data-label="{{ fs_db_config('user_nickname_name') }}"
                                     data-desc="{{ fs_lang('settingIntervalDays') }}: {{ fs_api_config('nickname_edit') }} {{ fs_lang('modifierDays') }} | {{ fs_lang('settingLastTime') }}: {{ fs_user('detail.lastEditNickname') }}"
                                     data-name="nickname"
                                     data-action="{{ route('fresns.api.user.edit') }}"
@@ -93,7 +93,7 @@
                                 <span class="input-group-text">{{ fs_db_config('user_username_name') }}</span>
                                 <span class="form-control" id="input-username">{{ fs_user('detail.username') }}</span>
                                 <button class="btn btn-outline-secondary"
-                                    data-lable="{{ fs_db_config('user_username_name') }}"
+                                    data-label="{{ fs_db_config('user_username_name') }}"
                                     data-desc="{{ fs_lang('settingIntervalDays') }}: {{ fs_api_config('username_edit') }} {{ fs_lang('modifierDays') }} | {{ fs_lang('settingLastTime') }}: {{ fs_user('detail.lastEditUsername') }}<br>{{ fs_lang('modifierLength') }}: {{ fs_api_config('username_min') }} - {{ fs_api_config('username_max') }}<br>{{ fs_lang('settingNameWarning') }}"
                                     data-name="username"
                                     data-action="{{ route('fresns.api.user.edit') }}"
@@ -105,7 +105,7 @@
                                 <span class="input-group-text">{{ fs_db_config('user_bio_name') }}</span>
                                 <span class="form-control" id="textarea-bio">{{ fs_user('detail.bio') }}</span>
                                 <button class="btn btn-outline-secondary"
-                                    data-lable="{{ fs_db_config('user_bio_name') }}"
+                                    data-label="{{ fs_db_config('user_bio_name') }}"
                                     data-type="textarea"
                                     @if (fs_api_config('bio_support_mention') || fs_api_config('bio_support_hashtag'))
                                         data-input-tips="fresns-content"
@@ -128,7 +128,7 @@
                                     @endif
                                 </span>
                                 <button class="btn btn-outline-secondary"
-                                    data-lable="{{ fs_lang('userGender') }}"
+                                    data-label="{{ fs_lang('userGender') }}"
                                     data-type="select"
                                     data-option='[{"id":1,"text":"{{ fs_lang('settingGenderNull') }}"},{"id":2,"text":"{{ fs_lang('settingGenderMale') }}"},{"id":3,"text":"{{ fs_lang('settingGenderFemale') }}"}]'
                                     data-name="gender"
@@ -141,7 +141,7 @@
                                 <span class="input-group-text">{{ fs_lang('userBirthday') }}</span>
                                 <span class="form-control" id="input-birthday">{{ fs_user('detail.birthday') }}</span>
                                 <button class="btn btn-outline-secondary"
-                                    data-lable="{{ fs_lang('userBirthday') }}"
+                                    data-label="{{ fs_lang('userBirthday') }}"
                                     data-type="date"
                                     data-name="birthday"
                                     data-action="{{ route('fresns.api.user.edit') }}"
@@ -167,7 +167,7 @@
                                     @endif
                                 </span>
                                 <button class="btn btn-outline-secondary"
-                                    data-lable="{{ fs_db_config('menu_conversations') }}"
+                                    data-label="{{ fs_db_config('menu_conversations') }}"
                                     data-type="select"
                                     data-option='[{"id":1,"text":"{{ fs_lang('settingAllowAll') }}"},{"id":2,"text":"{{ fs_lang('settingAllowMyFollow') }}"},{"id":3,"text":"{{ fs_lang('settingAllowMyFollowAndVerified') }}"},{"id":4,"text":"{{ fs_lang('settingAllowNotAll') }}"}]'
                                     data-name="conversationLimit"
@@ -192,7 +192,7 @@
                                     @endif
                                 </span>
                                 <button class="btn btn-outline-secondary"
-                                    data-lable="{{ fs_db_config('comment_name') }}"
+                                    data-label="{{ fs_db_config('comment_name') }}"
                                     data-type="select"
                                     data-option='[{"id":1,"text":"{{ fs_lang('settingAllowAll') }}"},{"id":2,"text":"{{ fs_lang('settingAllowMyFollow') }}"},{"id":3,"text":"{{ fs_lang('settingAllowMyFollowAndVerified') }}"},{"id":4,"text":"{{ fs_lang('settingAllowNotAll') }}"}]'
                                     data-name="commentLimit"
@@ -209,7 +209,7 @@
                                     UTC {{ fs_user('detail.timezone') }}
                                 </span>
                                 <button class="btn btn-outline-secondary"
-                                    data-lable="{{ fs_lang('userTimeZone') }}"
+                                    data-label="{{ fs_lang('userTimeZone') }}"
                                     data-type="select"
                                     data-option="{{ json_encode(array_map(function ($val){ return ['id' => $val['value'], 'text' => $val['name']]; }, fs_api_config('utc')), true) }}"
                                     data-name="timezone"
@@ -228,6 +228,7 @@
                                 <span class="input-group-text">{{ fs_lang('account') }} ID</span>
                                 <span class="form-control">{{ fs_account('detail.aid') }}</span>
                             </div>
+
                             {{-- Real Name --}}
                             @if (fs_api_config('account_real_name_service'))
                                 <div class="input-group mb-3">
@@ -243,125 +244,77 @@
                                     </button>
                                 </div>
                             @endif
+
                             {{-- Phone Number --}}
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('phone') }}</span>
                                 @if (fs_api_config('send_sms_service'))
-                                    @if (empty(fs_account('detail.phone')))
-                                        <span class="form-control" id="input-editPhone">{{ fs_lang('settingNot') }}</span>
-                                        <button class="btn btn-outline-secondary"
-                                            data-lable="{{ fs_lang('phone') }}"
-                                            data-sms-codes="{{ json_encode(fs_api_config('send_sms_supported_codes'), true) }}"
-                                            data-default-sms-code="{{ fs_account('detail.countryCode') ?: fs_api_config('send_sms_default_code') }}"
-                                            data-name="editPhone"
-                                            data-action="{{ route('fresns.api.account.edit') }}"
-                                            type="button" data-bs-toggle="modal" data-bs-target="#editModal">
-                                            {{ fs_lang('setting') }}
-                                        </button>
-                                    @else
-                                        <span class="form-control" id="input-editPhone">+{{ fs_account('detail.countryCode') }} {{ fs_account('detail.purePhone') }}</span>
-                                        <button class="btn btn-outline-secondary"
-                                            data-lable="{{ fs_lang('phone') }}"
-                                            data-desc="{{ fs_lang('settingWarning') }}"
-                                            data-sms-codes="{{ json_encode(fs_api_config('send_sms_supported_codes'), true) }}"
-                                            data-default-sms-code="{{ fs_account('detail.countryCode') ?: fs_api_config('send_sms_default_code') }}"
-                                            data-name="editPhone"
-                                            data-action="{{ route('fresns.api.account.edit') }}"
-                                            data-value="{{ fs_account('detail.phone') }}"
-                                            type="button" data-bs-toggle="modal" data-bs-target="#editModal">
-                                            {{ fs_lang('modify') }}
-                                        </button>
-                                    @endif
+                                    <span class="form-control">{{ fs_account('detail.phone') ? '+'.fs_account('detail.phone') : fs_lang('settingNot') }}</span>
+                                    <button class="btn btn-outline-secondary"
+                                        data-label="{{ fs_lang('phone') }}"
+                                        data-type="editPhone"
+                                        data-desc="{{ fs_lang('settingWarning') }}"
+                                        data-sms-codes="{{ json_encode(fs_api_config('send_sms_supported_codes'), true) }}"
+                                        data-default-sms-code="{{ fs_account('detail.countryCode') ?: fs_api_config('send_sms_default_code') }}"
+                                        data-name="editPhone"
+                                        data-value="{{ fs_account('detail.phone') }}"
+                                        data-action="{{ route('fresns.api.account.edit') }}"
+                                        type="button" data-bs-toggle="modal" data-bs-target="#editModal">
+                                        {{ fs_account('detail.phone') ? fs_lang('modify') : fs_lang('setting') }}
+                                    </button>
                                 @endif
                             </div>
+
                             {{-- Email --}}
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('email') }}</span>
                                 @if (fs_api_config('send_email_service'))
-                                    @if (empty(fs_account('detail.email')))
-                                        <span class="form-control" id="input-editEmail">{{ fs_lang('settingNot') }}</span>
-                                        <button class="btn btn-outline-secondary"
-                                            data-lable="{{ fs_lang('email') }}"
-                                            data-name="editEmail"
-                                            data-action="{{ route('fresns.api.account.edit') }}"
-                                            type="button" data-bs-toggle="modal" data-bs-target="#editModal">
-                                            {{ fs_lang('setting') }}
-                                        </button>
-                                    @else
-                                        <span class="form-control" id="input-editEmail">{{ fs_account('detail.email') }}</span>
-                                        <button class="btn btn-outline-secondary"
-                                            data-lable="{{ fs_lang('email') }}"
-                                            data-desc="{{ fs_lang('settingWarning') }}"
-                                            data-name="editEmail"
-                                            data-action="{{ route('fresns.api.account.edit') }}"
-                                            data-value="{{ fs_account('detail.email') }}"
-                                            type="button" data-bs-toggle="modal" data-bs-target="#editModal">
-                                            {{ fs_lang('modify') }}
-                                        </button>
-                                    @endif
+                                    <span class="form-control">{{ fs_account('detail.email') ?: fs_lang('settingNot') }}</span>
+                                    <button class="btn btn-outline-secondary"
+                                        data-label="{{ fs_lang('email') }}"
+                                        data-desc="{{ fs_lang('settingWarning') }}"
+                                        data-type="editEmail"
+                                        data-name="editEmail"
+                                        data-value="{{ fs_account('detail.email') }}"
+                                        data-action="{{ route('fresns.api.account.edit') }}"
+                                        type="button" data-bs-toggle="modal" data-bs-target="#editModal">
+                                        {{ fs_account('detail.email') ? fs_lang('modify') : fs_lang('setting') }}
+                                    </button>
                                 @endif
                             </div>
+
                             {{-- Account Password --}}
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('accountPassword') }}</span>
-                                @if (fs_account('detail.hasPassword'))
-                                    <span class="form-control" id="input-editPassword">{{ fs_lang('settingAlready') }}</span>
-                                    <button class="btn btn-outline-secondary"
-                                        data-lable="{{ fs_lang('accountPassword') }}"
-                                        data-name="editPassword"
-                                        data-type="input"
-                                        data-email="{{ fs_account('detail.email') }}"
-                                        data-value="{{ fs_account('detail.password') }}"
-                                        data-phone="{{ fs_account('detail.phone') }}"
-                                        data-action="{{ route('fresns.api.account.edit') }}"
-                                        type="button" data-bs-toggle="modal" data-bs-target="#editModal">
-                                        {{ fs_lang('modify') }}
-                                    </button>
-                                @else
-                                    <span class="form-control" id="input-editPassword">{{ fs_lang('settingNot') }}</span>
-                                    <button class="btn btn-outline-secondary"
-                                        data-lable="{{ fs_lang('accountPassword') }}"
-                                        data-name="editPassword"
-                                        data-value="{{ fs_account('detail.password') }}"
-                                        data-type="input"
-                                        data-email="{{ fs_account('detail.email') }}"
-                                        data-phone="{{ fs_account('detail.phone') }}"
-                                        data-action="{{ route('fresns.api.account.edit') }}"
-                                        type="button" data-bs-toggle="modal" data-bs-target="#editModal">
-                                        {{ fs_lang('setting') }}
-                                    </button>
-                                @endif
+                                <span class="form-control">{{ fs_account('detail.hasPassword') ? fs_lang('settingAlready') : fs_lang('settingNot') }}</span>
+                                <button class="btn btn-outline-secondary"
+                                    data-label="{{ fs_lang('accountPassword') }}"
+                                    data-type="editPassword"
+                                    data-email="{{ fs_account('detail.email') }}"
+                                    data-phone="{{ fs_account('detail.phone') }}"
+                                    data-name="editPassword"
+                                    data-value="{{ fs_account('detail.hasPassword') }}"
+                                    data-action="{{ route('fresns.api.account.edit') }}"
+                                    type="button" data-bs-toggle="modal" data-bs-target="#editModal">
+                                    {{ fs_account('detail.hasPassword') ? fs_lang('modify') : fs_lang('setting') }}
+                                </button>
                             </div>
+
                             {{-- Wallet Password --}}
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('walletPassword') }}</span>
-                                @if (fs_account('detail.wallet.hasPassword'))
-                                    <span class="form-control" id="input-editWalletPassword">{{ fs_lang('settingAlready') }}</span>
-                                    <button class="btn btn-outline-secondary"
-                                        data-lable="{{ fs_lang('walletPassword') }}"
-                                        data-name="editWalletPassword"
-                                        data-value="{{ fs_account('detail.wallet.password') }}"
-                                        data-type="input"
-                                        data-email="{{ fs_account('detail.email') }}"
-                                        data-phone="{{ fs_account('detail.phone') }}"
-                                        data-action="{{ route('fresns.api.account.edit') }}"
-                                        type="button" data-bs-toggle="modal" data-bs-target="#editModal">
-                                        {{ fs_lang('modify') }}
-                                    </button>
-                                @else
-                                    <span class="form-control" id="input-editWalletPassword">{{ fs_lang('settingNot') }}</span>
-                                    <button class="btn btn-outline-secondary"
-                                        data-lable="{{ fs_lang('walletPassword') }}"
-                                        data-name="editWalletPassword"
-                                        data-value="{{ fs_account('detail.wallet.password') }}"
-                                        data-type="input"
-                                        data-email="{{ fs_account('detail.email') }}"
-                                        data-phone="{{ fs_account('detail.phone') }}"
-                                        data-action="{{ route('fresns.api.account.edit') }}"
-                                        type="button" data-bs-toggle="modal" data-bs-target="#editModal">
-                                        {{ fs_lang('setting') }}
-                                    </button>
-                                @endif
+                                <span class="form-control">{{ fs_account('detail.wallet.hasPassword') ? fs_lang('settingAlready') : fs_lang('settingNot') }}</span>
+                                <button class="btn btn-outline-secondary"
+                                    data-label="{{ fs_lang('walletPassword') }}"
+                                    data-type="editPassword"
+                                    data-email="{{ fs_account('detail.email') }}"
+                                    data-phone="{{ fs_account('detail.phone') }}"
+                                    data-name="editWalletPassword"
+                                    data-value="{{ fs_account('detail.wallet.hasPassword') }}"
+                                    data-action="{{ route('fresns.api.account.edit') }}"
+                                    type="button" data-bs-toggle="modal" data-bs-target="#editModal">
+                                    {{ fs_account('detail.wallet.hasPassword') ? fs_lang('modify') : fs_lang('setting') }}
+                                </button>
                             </div>
 
                             {{-- Account Connects --}}
@@ -451,12 +404,12 @@
                                                     <div class="collapse email_code_apply show" aria-labelledby="email_code_apply" data-bs-parent="#apply_delete_mode">
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text border-end-rounded-0">{{ fs_lang('email') }}</span>
-                                                            <input class="form-control" type="text" placeholder="{{ fs_account('detail.email') }}" value="{{ fs_account('detail.email') }}" disabled>
-                                                            <button class="btn btn-outline-secondary send-verify-code"
+                                                            <input class="form-control" type="text" placeholder="{{ fs_account('detail.email') }}" value="{{ fs_account('detail.email') }}" id="emailCodeApply" disabled>
+                                                            <button class="btn btn-outline-secondary"
                                                                 data-type="email"
                                                                 data-use-type="4"
                                                                 data-template-id="8"
-                                                                data-action="{{ route('fresns.api.send.verify.code') }}"
+                                                                data-account-input-id="emailCodeApply"
                                                                 onclick="sendVerifyCode(this)"
                                                                 @empty(fs_account('detail.email')) disabled @endempty
                                                                 type="button">
@@ -467,12 +420,12 @@
                                                     <div class="collapse phone_code_apply" aria-labelledby="phone_code_apply" data-bs-parent="#apply_delete_mode">
                                                         <div class="input-group mb-3">
                                                             <span class="input-group-text border-end-rounded-0">{{ fs_lang('phone') }}</span>
-                                                            <input class="form-control" type="text" placeholder="{{ fs_account('detail.phone') }}" value="{{ fs_account('detail.phone') }}" disabled>
-                                                            <button class="btn btn-outline-secondary send-verify-code"
+                                                            <input class="form-control" type="text" placeholder="{{ fs_account('detail.phone') }}" value="{{ fs_account('detail.phone') }}" id="smsCodeApply" disabled>
+                                                            <button class="btn btn-outline-secondary"
                                                                 data-type="sms"
                                                                 data-use-type="4"
                                                                 data-template-id="8"
-                                                                data-action="{{ route('fresns.api.send.verify.code') }}"
+                                                                data-account-input-id="smsCodeApply"
                                                                 onclick="sendVerifyCode(this)"
                                                                 @empty(fs_account('detail.phone')) disabled @endempty
                                                                 type="button">

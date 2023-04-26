@@ -113,7 +113,7 @@
                                         {{-- Phone Number --}}
                                         <div @if ($smsCodeCount > 1) class="col-md-9" @else class="input-group" @endif>
                                             @if ($smsCodeCount <= 1)
-                                                <span class="input-group-text">+{{ fs_api_config('send_sms_default_code') }}</span>
+                                                <span class="input-group-text border-end-rounded-0">+{{ fs_api_config('send_sms_default_code') }}</span>
                                             @endif
                                             <div class="form-floating">
                                                 <input type="number" name="phone" value="{{ old('phone') }}" class="form-control rounded-bottom-0" placeholder="Phone Number">
@@ -183,21 +183,31 @@
                                     </div>
                                 </div>
                             </div>
+                        @else
+                            @if (fs_api_config('site_email_login'))
+                                <input type="hidden" name="type" value="email">
+                            @else
+                                <input type="hidden" name="type" value="phone">
+                            @endif
                         @endif
 
                         {{-- Account Input --}}
                         <div>
-                            <input type="hidden" name="useType" value="2">
-                            <input type="hidden" name="templateId" value="7">
                             {{-- Email --}}
                             @if (fs_api_config('site_email_login'))
                                 <div class="collapse code_account_email show" aria-labelledby="code_account_email" data-bs-parent="#accordionCodeAccount">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">{{ fs_lang('email') }}</span>
-                                        <input type="email" name="email" value="{{ old('email') }}" class="form-control">
+                                        <input type="email" name="email" value="{{ old('email') }}" id="emailLogin" class="form-control">
 
-                                        {{-- Get email verification code --}}
-                                        <button class="btn btn-outline-secondary send-verify-code" type="button" data-action="{{ route("fresns.api.send.verify.code") }}">{{ fs_lang('sendVerifyCode') }}</button>
+                                        {{-- Get email verify code --}}
+                                        <button class="btn btn-outline-secondary"
+                                            type="button"
+                                            data-type="email"
+                                            data-use-type="2"
+                                            data-template-id="7"
+                                            data-account-input-id="emailLogin"
+                                            onclick="sendVerifyCode(this)">{{ fs_lang('sendVerifyCode') }}</button>
                                     </div>
                                 </div>
                             @endif
@@ -209,7 +219,7 @@
                                         <span class="input-group-text">{{ fs_lang('phone') }}</span>
                                         @if (count(fs_api_config('send_sms_supported_codes')) > 1)
                                             {{-- Country Calling Codes --}}
-                                            <select class="form-select" name="countryCode" value="{{ old('countryCode') }}">
+                                            <select class="form-select" name="countryCode" id="loginCountryCode">
                                                 <option disabled>{{ fs_lang('countryCode') }}</option>
                                                 @foreach(fs_api_config('send_sms_supported_codes') as $countryCode)
                                                     <option value="{{ $countryCode }}" @if (fs_api_config('send_sms_default_code') == $countryCode) selected @endif>{{ $countryCode }}</option>
@@ -217,16 +227,23 @@
                                             </select>
                                         @else
                                             {{-- Default Country Calling Code --}}
-                                            <select class="form-select d-none" name="countryCode">
+                                            <select class="form-select d-none" name="countryCode" id="loginCountryCode">
                                                 <option value="{{ fs_api_config('send_sms_default_code') }}" selected>{{ fs_api_config('send_sms_default_code') }}</option>
                                             </select>
-                                            <span class="input-group-text">+{{ fs_api_config('send_sms_default_code') }}</span>
+                                            <span class="input-group-text border-end-rounded-0">+{{ fs_api_config('send_sms_default_code') }}</span>
                                         @endif
 
-                                        <input type="number" name="phone" value="{{ old('phone') }}" class="form-control" style="width:40%">
+                                        <input type="number" name="phone" value="{{ old('phone') }}" id="phoneLogin" class="form-control" style="width:40%">
 
-                                        {{-- Get SMS verification code --}}
-                                        <button class="btn btn-outline-secondary send-verify-code" type="button" data-action="{{ route("fresns.api.send.verify.code") }}">{{ fs_lang('sendVerifyCode') }}</button>
+                                        {{-- Get sms verify code --}}
+                                        <button class="btn btn-outline-secondary"
+                                            type="button"
+                                            data-type="sms"
+                                            data-use-type="2"
+                                            data-template-id="7"
+                                            data-country-code-select-id="loginCountryCode"
+                                            data-account-input-id="phoneLogin"
+                                            onclick="sendVerifyCode(this)">{{ fs_lang('sendVerifyCode') }}</button>
                                     </div>
                                 </div>
                             @endif

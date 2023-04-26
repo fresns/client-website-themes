@@ -17,11 +17,18 @@
                     ])@endcomponent
                 @endif
 
-                {{-- Tip: Editorial Timing --}}
-                @if ($draft['edit']['isEdit'])
+                {{-- Tip: Edit Controls --}}
+                @if ($draft['editControls']['isEditDraft'])
                     @component('components.editor.tip.edit', [
-                        'config' => $draft['edit'],
+                        'config' => $draft['editControls'],
                     ])@endcomponent
+                @endif
+
+                {{-- Tip: Draft under review --}}
+                @if ($draft['detail']['state'] == 2)
+                    <div class="alert alert-warning" role="alert">
+                        <i class="fa-solid fa-triangle-exclamation"></i> {{ fs_code_message('38101') }}
+                    </div>
                 @endif
 
                 {{-- Group --}}
@@ -45,10 +52,10 @@
                 {{-- Content Start --}}
                 <div class="editor-content p-3">
                     {{-- Title --}}
-                    @if (isset($draft['detail']['title']) && ($config['editor']['toolbar']['title']['status'] || $draft['detail']['title']))
+                    @if ($config['editor']['toolbar']['title']['status'] || optional($draft['detail'])['title'])
                         @component('components.editor.section.title', [
                             'config' => $config['editor']['toolbar']['title'],
-                            'title' => $draft['detail']['title'],
+                            'title' => $draft['detail']['title'] ?? '',
                         ])@endcomponent
                     @endif
 
@@ -120,7 +127,7 @@
 
                 {{-- Button --}}
                 <div class="editor-submit d-grid mb-5">
-                    <button type="submit" class="btn btn-success btn-lg mt-3 mb-5 mx-3">
+                    <button type="submit" class="btn btn-success btn-lg mt-3 mb-5 mx-3" {{ $draft['detail']['state'] == 2 ? 'disabled' : ''}}>
                         @if ($type == 'post')
                             {{ fs_db_config('publish_post_name') }}
                         @endif
@@ -275,15 +282,6 @@
             }
         };
 
-        const postDraft = function (title, content, fid = ''){
-            $.post("{{ route('fresns.api.editor.update', ['type' => $type, 'draftId' => $draft['detail']['id']]) }}", {
-                'postTitle' : title,
-                'content':  content,
-            }, function (data){
-                console.log(data)
-            })
-        };
-
         function deleteFile(obj) {
             let fid = $(obj).data('fid');
 
@@ -292,6 +290,8 @@
             }, function (data){
                 console.log(data)
             })
+
+            $(obj).parent().parent().remove();
         }
 
         function deleteMap() {
@@ -335,15 +335,6 @@
                 $("#maxNumber").text(maxNumber);
                 $("#fresns-upload input[name='type']").val(type);
             })
-
-            let content, title;
-
-            setInterval(function (){
-                content = $("#content").val();
-                title = $("#title").val();
-                postDraft(title, content);
-            }, 10000);
-
 
             $(".fresns-sticker").on('click',function (){
                 $("#content").trigger('click').insertAtCaret("[" + $(this).attr('value') + "]");
@@ -413,6 +404,39 @@
                     },
                 });
             })
+
+            // update draft
+            const updateDraft = function (title, content, fid = ''){
+                $.post("{{ route('fresns.api.editor.update', ['type' => $type, 'draftId' => $draft['detail']['id']]) }}", {
+                    'postTitle' : title,
+                    'content':  content,
+                }, function(data) {
+                    console.log(data);
+
+                    // If the 'code' value in the returned JSON is not 0, stop the interval loop
+                    if (data.code != 0) {
+                        clearInterval(intervalId);
+                    }
+                });
+            };
+
+            let content, title;
+            let intervalId;
+
+            // Start the interval loop
+            intervalId = setInterval(function() {
+                content = $("#content").val();
+                title = $("#title").val();
+                updateDraft(title, content);
+            }, 10000);
+
+            // Add a click event listener to the submit button
+            $(document).ready(function() {
+                $("button[type='submit']").on('click', function(event) {
+                    // Stop the interval loop
+                    clearInterval(intervalId);
+                });
+            });
         })(jQuery);
     </script>
 @endpush

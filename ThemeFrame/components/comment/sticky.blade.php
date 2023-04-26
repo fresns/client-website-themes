@@ -192,7 +192,7 @@
                 @component('components.comment.mark.more', [
                     'cid' => $sticky['cid'],
                     'uid' => $sticky['creator']['uid'],
-                    'editStatus' => $sticky['editStatus'],
+                    'editControls' => $sticky['editControls'],
                     'interaction' => $sticky['interaction'],
                     'followCount' => $sticky['followCount'],
                     'blockCount' => $sticky['blockCount'],

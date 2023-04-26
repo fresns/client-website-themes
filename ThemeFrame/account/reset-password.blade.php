@@ -40,17 +40,21 @@
                     @endif
 
                     {{-- Switch Accordion --}}
-                    <input type="hidden" name="useType" value="2">
-                    <input type="hidden" name="templateId" value="5">
                     {{-- Email --}}
                     @if (fs_api_config('send_email_service'))
                         <div class="collapse code_account_email @if (empty(old('type')) || old('type') == 'email') show @endif" aria-labelledby="code_account_email" data-bs-parent="#accordionCodeAccount">
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_lang('email') }}</span>
-                                <input type="email" name="email" value="{{ old('email') }}" class="form-control">
+                                <input type="email" name="email" value="{{ old('email') }}" id="emailReset" class="form-control">
 
-                                {{-- Get email verification code --}}
-                                <button data-action="{{ route("fresns.api.send.verify.code") }}"  class="btn btn-outline-secondary send-verify-code" type="button">{{ fs_lang('sendVerifyCode') }}</button>
+                                {{-- Get email verify code --}}
+                                <button class="btn btn-outline-secondary"
+                                    type="button"
+                                    data-type="email"
+                                    data-use-type="2"
+                                    data-template-id="5"
+                                    data-account-input-id="emailReset"
+                                    onclick="sendVerifyCode(this)">{{ fs_lang('sendVerifyCode') }}</button>
                             </div>
                         </div>
                     @endif
@@ -62,7 +66,7 @@
                                 <span class="input-group-text">{{ fs_lang('phone') }}</span>
                                 @if (count(fs_api_config('send_sms_supported_codes')) > 1)
                                     {{-- Country Calling Codes --}}
-                                    <select class="form-select" name="countryCode" value="{{ old('countryCode') }}">
+                                    <select class="form-select" name="countryCode" id="resetCountryCode">
                                         <option disabled>{{ fs_lang('countryCode') }}</option>
                                         @foreach(fs_api_config('send_sms_supported_codes') as $countryCode)
                                             <option value="{{ $countryCode }}" @if (fs_api_config('send_sms_default_code') == $countryCode) selected @endif>{{ $countryCode }}</option>
@@ -70,15 +74,23 @@
                                     </select>
                                 @else
                                     {{-- Default Country Calling Code --}}
-                                    <select class="form-select d-none" name="countryCode">
+                                    <select class="form-select d-none" name="countryCode" id="resetCountryCode">
                                         <option value="{{ fs_api_config('send_sms_default_code') }}" selected>{{ fs_api_config('send_sms_default_code') }}</option>
                                     </select>
+                                    <span class="input-group-text border-end-rounded-0">+{{ fs_api_config('send_sms_default_code') }}</span>
                                 @endif
 
-                                <input type="number" name="phone" value="{{ old('phone') }}" class="form-control" style="width:40%">
+                                <input type="number" name="phone" value="{{ old('phone') }}" id="phoneReset" class="form-control" style="width:40%">
 
-                                {{-- Get SMS verification code --}}
-                                <button data-action="{{ route("fresns.api.send.verify.code") }}"  class="btn btn-outline-secondary send-verify-code" type="button">{{ fs_lang('sendVerifyCode') }}</button>
+                                {{-- Get sms verify code --}}
+                                <button class="btn btn-outline-secondary"
+                                    type="button"
+                                    data-type="sms"
+                                    data-use-type="2"
+                                    data-template-id="5"
+                                    data-country-code-select-id="resetCountryCode"
+                                    data-account-input-id="phoneReset"
+                                    onclick="sendVerifyCode(this)">{{ fs_lang('sendVerifyCode') }}</button>
                             </div>
                         </div>
                     @endif
