@@ -16,7 +16,7 @@
     <link rel="apple-touch-icon-precomposed" href="{{ fs_db_config('site_icon') }}">
     <link rel="icon" href="{{ fs_db_config('site_icon') }}">
     <link rel="stylesheet" href="/static/css/bootstrap.min.css?v={{ $fresnsVersion }}">
-    <link rel="stylesheet" href="/static/css/bootstrap-icons.css?v={{ $fresnsVersion }}">
+    <link rel="stylesheet" href="/static/css/bootstrap-icons.min.css?v={{ $fresnsVersion }}">
     <link rel="stylesheet" href="/static/css/select2.min.css?v={{ $fresnsVersion }}">
     <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/atwho.min.css?v={{ $themeVersion }}">
     <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/prism.min.css?v={{ $themeVersion }}">

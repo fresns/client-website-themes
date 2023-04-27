@@ -18,16 +18,16 @@
                 @endif
 
                 {{-- Tip: Edit Controls --}}
-                @if ($draft['editControls']['isEditDraft'])
+                @if ($draft['editControls']['isEditDraft'] && ! in_array($draft['detail']['state'], [2, 3]))
                     @component('components.editor.tip.edit', [
                         'config' => $draft['editControls'],
                     ])@endcomponent
                 @endif
 
-                {{-- Tip: Draft under review --}}
-                @if ($draft['detail']['state'] == 2)
+                {{-- Tip: Draft under review or published --}}
+                @if (in_array($draft['detail']['state'], [2, 3]))
                     <div class="alert alert-warning" role="alert">
-                        <i class="bi bi-exclamation-triangle-fill"></i> {{ fs_code_message('38101') }}
+                        <i class="bi bi-exclamation-triangle-fill"></i> {{ $draft['detail']['state'] == 2 ? fs_code_message('38101') : fs_code_message('38102') }}
                     </div>
                 @endif
 
@@ -71,6 +71,8 @@
                     {{-- Extends --}}
                     @component('components.editor.section.extends', [
                         'type' => $type,
+                        'plid' => $plid,
+                        'clid' => $clid,
                         'extends' => $draft['detail']['extends'],
                     ])@endcomponent
 
@@ -78,6 +80,8 @@
                     @if ($draft['detail']['allowJson'])
                         @component('components.editor.section.allow', [
                             'type' => $type,
+                            'plid' => $plid,
+                            'clid' => $clid,
                             'allow' => $draft['detail']['allowJson'],
                         ])@endcomponent
                     @endif
@@ -86,6 +90,8 @@
                     @if ($draft['detail']['commentBtnJson'])
                         @component('components.editor.section.comment-btn', [
                             'type' => $type,
+                            'plid' => $plid,
+                            'clid' => $clid,
                             'commentBtn' => $draft['detail']['commentBtnJson'],
                         ])@endcomponent
                     @endif
@@ -94,6 +100,8 @@
                     @if ($draft['detail']['userListJson'])
                         @component('components.editor.section.user-list', [
                             'type' => $type,
+                            'plid' => $plid,
+                            'clid' => $clid,
                             'userList' => $draft['detail']['userListJson'],
                         ])@endcomponent
                     @endif
@@ -127,7 +135,7 @@
 
                 {{-- Button --}}
                 <div class="editor-submit d-grid">
-                    <button type="submit" class="btn btn-success btn-lg my-5 mx-3" {{ $draft['detail']['state'] == 2 ? 'disabled' : ''}}>
+                    <button type="submit" class="btn btn-success btn-lg my-5 mx-3" {{ in_array($draft['detail']['state'], [2, 3]) ? 'disabled' : ''}}>
                         @if ($type == 'post')
                             {{ fs_db_config('publish_post_name') }}
                         @endif
@@ -164,7 +172,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="ajax-upload">{{ fs_lang('editorUploadBtn') }}</button>
+                    <button type="button" class="btn btn-primary" id="ajax-upload">{{ fs_lang('editorUploadButton') }}</button>
                     <div class="progress w-100 d-none" id="upload-progress"></div>
                 </div>
             </div>

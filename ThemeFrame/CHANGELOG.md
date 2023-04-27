@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.6.1 (2023-04-27)
+
+- fix: `percentage` parameter name
+- fix: editor deadlock issue
+- chore: change bootstrap-icons.min.css new filename
+
+
 ## 2.6.0 (2023-04-27)
 
 - Refactor: code for sending captcha function
