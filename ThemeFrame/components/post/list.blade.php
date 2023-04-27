@@ -101,7 +101,7 @@
         <section class="post-allow order-2">
             <div class="post-allow-static"></div>
             <div class="text-center">
-                <p class="text-secondary mb-2">{{ fs_lang('contentAllowInfo') }} {{ $post['allowConfig']['previewProportion'] }}%</p>
+                <p class="text-secondary mb-2">{{ fs_lang('contentAllowInfo') }} {{ $post['allowConfig']['previewPercentage'] }}%</p>
                 <button type="button" class="btn btn-outline-info btn-lg w-50" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                     data-type="post"
                     data-scene="postAllowBtn"

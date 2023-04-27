@@ -36,13 +36,13 @@
             </div>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-            <div class="bd-highlight">{{ fs_lang('editorAllowProportionName') }}</div>
+            <div class="bd-highlight">{{ fs_lang('editorAllowPercentageName') }}</div>
             <div class="bd-highlight">
-                <span class="badge bg-secondary rounded-pill">{{ $allow['proportion'] }}%</span>
+                <span class="badge bg-secondary rounded-pill">{{ $allow['percentage'] }}%</span>
             </div>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-            <div class="bd-highlight">{{ fs_lang('editorAllowBtnName') }}</div>
+            <div class="bd-highlight">{{ fs_lang('editorAllowButtonName') }}</div>
             <div class="bd-highlight">
                 <span class="badge bg-secondary rounded-pill">{{ $allow['defaultLangBtnName'] }}</span>
             </div>
