@@ -579,7 +579,7 @@ body {
 .post-top-comment:hover {
     background-color: #dee2e6;
 }
-.comment-creator a {
+.comment-author a {
     text-decoration: none;
 }
 .comment-image-1 .image-box,
@@ -771,23 +771,23 @@ body {
 }
 
 /* Comment */
-.comment-creator .user-avatar {
+.comment-author .user-avatar {
     width: 2rem;
     height: 2rem;
     margin: 0.8rem;
 }
-.comment-creator .user-decorate {
+.comment-author .user-decorate {
     width: 3.6rem;
     height: 3.6rem;
 }
-.comment-creator .user-primary {
+.comment-author .user-primary {
     margin-top: 0.6rem;
 }
-.comment-creator .user-link .user-nickname {
+.comment-author .user-link .user-nickname {
     font-weight: 400;
     font-size: 0.95rem;
 }
-.comment-creator .user-info .text-muted {
+.comment-author .user-info .text-muted {
     font-size: 0.95rem;
 }
 .comment-box {

@@ -43,11 +43,11 @@
         'post' => $comment['replyToPost'],
     ])@endcomponent
 
-    {{-- Comment Creator --}}
-    <section class="content-creator order-0">
-        @component('components.comment.section.creator', [
+    {{-- Comment Author --}}
+    <section class="content-author order-0">
+        @component('components.comment.section.author', [
             'cid' => $comment['cid'],
-            'creator' => $comment['creator'],
+            'author' => $comment['author'],
             'isAnonymous' => $comment['isAnonymous'],
             'createdDatetime' => $comment['createdDatetime'],
             'createdTimeAgo' => $comment['createdTimeAgo'],
@@ -83,10 +83,16 @@
 
         {{-- Content --}}
         <div class="content-article text-break">
-            @if ($comment['isMarkdown'])
-                {!! Str::markdown($comment['content']) !!}
+            @if ($comment['isCommentPrivate'])
+                <div class="alert alert-warning" role="alert">
+                    <i class="fa-solid fa-circle-info"></i> {{ fs_lang('editorCommentPrivate') }}
+                </div>
             @else
-                {!! nl2br($comment['content']) !!}
+                @if ($comment['isMarkdown'])
+                    {!! Str::markdown($comment['content']) !!}
+                @else
+                    {!! nl2br($comment['content']) !!}
+                @endif
             @endif
         </div>
     </section>
@@ -104,7 +110,7 @@
             @component('components.comment.section.files', [
                 'cid' => $comment['cid'],
                 'createdDatetime' => $comment['createdDatetime'],
-                'creator' => $comment['creator'],
+                'author' => $comment['author'],
                 'files' => $comment['files'],
             ])@endcomponent
         </section>
@@ -116,7 +122,7 @@
             @component('components.comment.section.extends', [
                 'cid' => $comment['cid'],
                 'createdDatetime' => $comment['createdDatetime'],
-                'creator' => $comment['creator'],
+                'author' => $comment['author'],
                 'extends' => $comment['extends']
             ])@endcomponent
         </section>
@@ -187,7 +193,7 @@
                 </button>
                 @component('components.comment.mark.more', [
                     'cid' => $comment['cid'],
-                    'uid' => $comment['creator']['uid'],
+                    'uid' => $comment['author']['uid'],
                     'editControls' => $comment['editControls'],
                     'interaction' => $comment['interaction'],
                     'followCount' => $comment['followCount'],
@@ -198,10 +204,10 @@
         </div>
     </section>
 
-    {{-- Post Creator Like Status --}}
-    @if ($comment['interaction']['postCreatorLikeStatus'])
-        <div class="post-creator-liked order-5 mt-2 mx-3">
-            <span class="author-badge p-1">{{ fs_lang('contentCreatorLiked') }}</span>
+    {{-- Post Author Like Status --}}
+    @if ($comment['interaction']['postAuthorLikeStatus'])
+        <div class="post-author-liked order-5 mt-2 mx-3">
+            <span class="author-badge p-1">{{ fs_lang('contentAuthorLiked') }}</span>
         </div>
     @endif
 </article>
@@ -209,7 +215,7 @@
 {{-- Comment Box --}}
 @if (fs_user()->check())
     @component('components.editor.comment-box', [
-        'nickname' => $comment['creator']['nickname'],
+        'nickname' => $comment['author']['nickname'],
         'pid' => $comment['replyToPost']['pid'],
         'cid' => $comment['cid'],
     ])@endcomponent

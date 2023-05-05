@@ -21,7 +21,7 @@
             @component('components.comment.list', [
                 'comment' => $comment,
                 'detailLink' => true,
-                'sectionCreatorLiked' => false,
+                'sectionAuthorLiked' => false,
             ])@endcomponent
         @endforeach
     </div>

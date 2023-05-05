@@ -1,14 +1,14 @@
-@if ($post['creator'] ?? null)
+@if ($post['author'] ?? null)
     <section class="comment-post my-2 mx-3 position-relative">
         <div class="d-flex">
-            <div class="flex-shrink-0"><img src="{{ $post['creator']['avatar'] }}" loading="lazy" alt="{{ $post['creator']['nickname'] }}" class="rounded"></div>
+            <div class="flex-shrink-0"><img src="{{ $post['author']['avatar'] }}" loading="lazy" alt="{{ $post['author']['nickname'] }}" class="rounded"></div>
             <div class="flex-grow-1">
-                @if (! $post['creator']['status'])
-                    {{ fs_lang('contentCreatorDeactivate') }}:
-                @elseif (! $post['creator']['fsid'])
-                    {{ fs_lang('contentCreatorAnonymous') }}:
+                @if (! $post['author']['status'])
+                    {{ fs_lang('userDeactivate') }}:
+                @elseif (! $post['author']['fsid'])
+                    {{ fs_lang('contentAuthorAnonymous') }}:
                 @else
-                    {{ $post['creator']['nickname'] }}:
+                    {{ $post['author']['nickname'] }}:
                 @endif
 
                 {!! Str::limit(strip_tags($post['content']), 140) !!}

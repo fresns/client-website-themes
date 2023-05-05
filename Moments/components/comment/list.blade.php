@@ -13,7 +13,7 @@
     $decorate = null;
 
     $detailLink = $detailLink ?? true;
-    $sectionCreatorLiked = $sectionCreatorLiked ?? false;
+    $sectionAuthorLiked = $sectionAuthorLiked ?? false;
 
     $totalFiles = 0;
     foreach($comment['files'] as $fileType => $files) {
@@ -41,11 +41,11 @@
 @endif
 
 <article class="position-relative border-bottom pb-2 fs-hover" id="{{ $comment['cid'] }}">
-    {{-- Comment Creator --}}
-    <section class="content-creator order-0">
-        @component('components.comment.section.creator', [
+    {{-- Comment Author --}}
+    <section class="content-author order-0">
+        @component('components.comment.section.author', [
             'cid' => $comment['cid'],
-            'creator' => $comment['creator'],
+            'author' => $comment['author'],
             'isAnonymous' => $comment['isAnonymous'],
             'createdDatetime' => $comment['createdDatetime'],
             'createdTimeAgo' => $comment['createdTimeAgo'],
@@ -64,12 +64,12 @@
             <div class="fs-reply-to-comment fs-text-decoration position-relative">
                 <p class="mb-1">
                     {{ fs_db_config('publish_comment_name') }}
-                    @if (! $comment['replyToComment']['creator']['status'])
-                        {{ fs_lang('contentCreatorDeactivate') }}
-                    @elseif (! $comment['replyToComment']['creator']['fsid'])
-                        {{ fs_lang('contentCreatorAnonymous') }}
+                    @if (! $comment['replyToComment']['author']['status'])
+                        {{ fs_lang('userDeactivate') }}
+                    @elseif (! $comment['replyToComment']['author']['fsid'])
+                        {{ fs_lang('contentAuthorAnonymous') }}
                     @else
-                        <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToComment']['creator']['fsid']])) }}">{{ $comment['replyToComment']['creator']['nickname'] }}</a>
+                        <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToComment']['author']['fsid']])) }}">{{ $comment['replyToComment']['author']['nickname'] }}</a>
                     @endif
 
                     <span class="mx-1">|</span>
@@ -89,9 +89,9 @@
                     <div class="modal-content">
                         <div class="modal-header p-0 pe-4">
                             <div class="modal-title">
-                                @component('components.comment.section.creator', [
+                                @component('components.comment.section.author', [
                                     'cid' => $comment['replyToComment']['cid'],
-                                    'creator' => $comment['replyToComment']['creator'],
+                                    'author' => $comment['replyToComment']['author'],
                                     'isAnonymous' => $comment['replyToComment']['isAnonymous'],
                                     'createdDatetime' => $comment['replyToComment']['createdDatetime'],
                                     'createdTimeAgo' => $comment['replyToComment']['createdTimeAgo'],
@@ -138,21 +138,27 @@
 
         {{-- Content --}}
         <div class="content-article text-break">
-            @if ($comment['isMarkdown'])
-                {!! Str::markdown($comment['content']) !!}
+            @if ($comment['isCommentPrivate'])
+                <div class="alert alert-warning" role="alert">
+                    <i class="fa-solid fa-circle-info"></i> {{ fs_lang('editorCommentPrivate') }}
+                </div>
             @else
-                {!! nl2br($comment['content']) !!}
-            @endif
+                @if ($comment['isMarkdown'])
+                    {!! Str::markdown($comment['content']) !!}
+                @else
+                    {!! nl2br($comment['content']) !!}
+                @endif
 
-            {{-- Detail Link --}}
-            @if ($detailLink)
-                <p class="mt-2">
-                    <a href="{{ fs_route(route('fresns.comment.detail', ['cid' => $comment['cid']])) }}" class="text-decoration-none stretched-link">
-                        @if ($comment['isBrief'])
-                            {{ fs_lang('contentFull') }}
-                        @endif
-                    </a>
-                </p>
+                {{-- Detail Link --}}
+                @if ($detailLink)
+                    <p class="mt-2">
+                        <a href="{{ fs_route(route('fresns.comment.detail', ['cid' => $comment['cid']])) }}" class="text-decoration-none stretched-link">
+                            @if ($comment['isBrief'])
+                                {{ fs_lang('contentFull') }}
+                            @endif
+                        </a>
+                    </p>
+                @endif
             @endif
         </div>
     </section>
@@ -170,7 +176,7 @@
             @component('components.comment.section.files', [
                 'cid' => $comment['cid'],
                 'createdDatetime' => $comment['createdDatetime'],
-                'creator' => $comment['creator'],
+                'author' => $comment['author'],
                 'files' => $comment['files'],
             ])@endcomponent
         </section>
@@ -182,7 +188,7 @@
             @component('components.comment.section.extends', [
                 'cid' => $comment['cid'],
                 'createdDatetime' => $comment['createdDatetime'],
-                'creator' => $comment['creator'],
+                'author' => $comment['author'],
                 'extends' => $comment['extends']
             ])@endcomponent
         </section>
@@ -255,7 +261,7 @@
                 </button>
                 @component('components.comment.mark.more', [
                     'cid' => $comment['cid'],
-                    'uid' => $comment['creator']['uid'],
+                    'uid' => $comment['author']['uid'],
                     'editControls' => $comment['editControls'],
                     'interaction' => $comment['interaction'],
                     'followCount' => $comment['followCount'],
@@ -268,17 +274,17 @@
         {{-- Comment Box --}}
         @if (fs_user()->check())
             @component('components.editor.comment-box', [
-                'nickname' => $comment['creator']['nickname'],
+                'nickname' => $comment['author']['nickname'],
                 'pid' => $comment['replyToPost']['pid'],
                 'cid' => $comment['cid'],
             ])@endcomponent
         @endif
     </section>
 
-    {{-- Post Creator Like Status --}}
-    @if ($sectionCreatorLiked && $comment['interaction']['postCreatorLikeStatus'])
-        <div class="post-creator-liked order-5 mt-1 mb-2 mx-3">
-            <span class="author-badge p-1">{{ fs_lang('contentCreatorLiked') }}</span>
+    {{-- Post Author Like Status --}}
+    @if ($sectionAuthorLiked && $comment['interaction']['postAuthorLikeStatus'])
+        <div class="post-author-liked order-5 mt-1 mb-2 mx-3">
+            <span class="author-badge p-1">{{ fs_lang('contentAuthorLiked') }}</span>
         </div>
     @endif
 
