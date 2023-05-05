@@ -38,7 +38,7 @@
                         <div class="user-name text-secondary">{{ '@'.$notification['actionUser']['fsid'] }}</div>
                     </a>
                 @else
-                    <div class="user-nickname text-nowrap overflow-hidden">{{ fs_lang('contentCreatorDeactivate') }}</div>
+                    <div class="user-nickname text-nowrap overflow-hidden">{{ fs_lang('userDeactivate') }}</div>
                 @endif
             </div>
         @else
@@ -181,7 +181,7 @@
                 @case(4)
                     <section class="comment-post mt-2 position-relative">
                         <div class="d-flex">
-                            <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" loading="lazy" class="rounded"></div>
+                            <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['author']['avatar'] }}" loading="lazy" class="rounded"></div>
                             <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit(strip_tags($notification['actionInfo']['content']), 80) }}</div>
                         </div>
                         @if ($notification['actionInfo']['group'])
@@ -194,7 +194,7 @@
                 @case(5)
                     <section class="comment-post mt-2 position-relative">
                         <div class="d-flex">
-                            <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['creator']['avatar'] }}" loading="lazy" class="rounded"></div>
+                            <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['author']['avatar'] }}" loading="lazy" class="rounded"></div>
                             <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit(strip_tags($notification['actionInfo']['content']), 80) }}</div>
                         </div>
                         <a href="{{ fs_route(route('fresns.comment.detail', ['cid' => $notification['actionInfo']['cid']])) }}" class="text-decoration-none stretched-link"></a>

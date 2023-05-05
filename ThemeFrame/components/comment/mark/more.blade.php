@@ -11,7 +11,7 @@
 
     {{-- Delete --}}
     @if ($editControls['isMe'] && $editControls['canDelete'])
-        <li><a class="dropdown-item py-2" data-bs-toggle="modal" href="#delete-{{ $cid }}"><i class="fa-regular fa-trash-can"></i> {{ fs_lang('delete') }}</a></li>
+        <li><a class="dropdown-item py-2" data-bs-toggle="modal" href="#delete-{{ $cid }}"><i class="bi bi-trash"></i> {{ fs_lang('delete') }}</a></li>
     @endif
 
     {{-- Follow --}}

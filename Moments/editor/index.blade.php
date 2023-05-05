@@ -70,7 +70,7 @@
                     <a class="btn btn-secondary" href="{{ fs_route(route('fresns.post.index')) }}" role="button">{{ fs_lang('return') }}</a>
                     <form action="{{ fs_route(route('fresns.editor.store', ['type' => $type])) }}" method="post">
                         @csrf
-                        <button type="submit" class="btn btn-primary">{{ fs_lang('editorCreate') }}</button>
+                        <button type="submit" class="btn btn-primary">{{ fs_lang('editorDraftCreate') }}</button>
                     </form>
                 </div>
             </div>

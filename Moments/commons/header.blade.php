@@ -146,7 +146,7 @@
                             </button>
                             <ul class="dropdown-menu">
                                 @foreach(fs_api_config('language_menus') as $lang)
-                                    @if ($lang['isEnable'])
+                                    @if ($lang['isEnabled'])
                                         <li>
                                             <a class="dropdown-item py-3 @if (current_lang_tag() == $lang['langTag']) active @endif" hreflang="{{ $lang['langTag'] }}" href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL($lang['langTag'], null, [], true) }}">
                                                 {{ $lang['langName'] }}
@@ -175,6 +175,8 @@
                         <div class="text-secondary ms-4 pt-2 me-1" style="padding-top: 10px"><i class="fa-solid fa-ellipsis"></i></div>
                     </button>
                     <ul class="dropdown-menu">
+                        {{-- User Center --}}
+                        <li><a class="dropdown-item py-3" href="{{ fs_route(route('fresns.account.index')) }}"><i class="fa-regular fa-circle-user me-2"></i> {{ fs_db_config('menu_account') }}</a></li>
                         {{-- Manage Users --}}
                         @if (fs_user_panel('multiUser.status') || count(fs_account('detail.users')) > 1)
                             <li><a class="dropdown-item py-3" href="{{ fs_route(route('fresns.account.users')) }}"><i class="fa-solid fa-user-gear me-2"></i> {{ fs_db_config('menu_account_users') }}</a></li>

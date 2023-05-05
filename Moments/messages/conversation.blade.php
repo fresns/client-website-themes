@@ -13,8 +13,8 @@
                     <span class="ms-2 conversation-user-name text-secondary">{{ '@'.$conversation['user']['username'] }}</span>
                 </a>
             @else
-                <img src="{{ fs_db_config('deactivate_avatar') }}" loading="lazy" alt="{{ fs_lang('contentCreatorDeactivate') }}" class="rounded-circle conversation-avatar">
-                {{ fs_lang('contentCreatorDeactivate') }}
+                <img src="{{ fs_db_config('deactivate_avatar') }}" loading="lazy" alt="{{ fs_lang('userDeactivate') }}" class="rounded-circle conversation-avatar">
+                {{ fs_lang('userDeactivate') }}
             @endif
         </div>
 

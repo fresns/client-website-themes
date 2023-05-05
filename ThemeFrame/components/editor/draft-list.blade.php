@@ -34,7 +34,11 @@
 
                     {{-- state --}}
                     @if ($draft['state'] == 2)
-                        <span class="badge bg-success">{{ fs_lang('contentReview') }}</span>
+                        <span class="badge bg-success">{{ fs_lang('contentReviewPending') }}</span>
+                    @endif
+                    @if ($draft['state'] == 4)
+                        <span class="badge bg-danger me-1">{{ fs_lang('contentReviewRejected') }}</span>
+                        <span class="badge bg-secondary">{{ $draft['reason'] }}</span>
                     @endif
                 </td>
                 <td class="text-center">
