@@ -50,6 +50,12 @@
             </a>
         @endif
 
+        {{-- User Extcredits --}}
+        <a href="{{ fs_route(route('fresns.account.user.extcredits')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.account.user.extcredits') ? 'active' : '' }}">
+            <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-wallet.png" loading="lazy" width="36" height="36">
+            {{ fs_lang('userExtcreditsLogs') }}
+        </a>
+
         {{-- Users of this account --}}
         @if (fs_user_panel('multiUser.status') || count(fs_account('detail.users')) > 1)
             <a href="{{ fs_route(route('fresns.account.users')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.account.users') ? 'active' : '' }}">
