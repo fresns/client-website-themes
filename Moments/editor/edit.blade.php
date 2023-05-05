@@ -76,13 +76,13 @@
                         'extends' => $draft['detail']['extends'],
                     ])@endcomponent
 
-                    {{-- allowJson --}}
-                    @if ($draft['detail']['allowJson'])
-                        @component('components.editor.section.allow', [
+                    {{-- readJson --}}
+                    @if ($draft['detail']['readJson'])
+                        @component('components.editor.section.read', [
                             'type' => $type,
                             'plid' => $plid,
                             'clid' => $clid,
-                            'allow' => $draft['detail']['allowJson'],
+                            'readConfig' => $draft['detail']['readJson'],
                         ])@endcomponent
                     @endif
 
