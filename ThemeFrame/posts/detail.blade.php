@@ -30,7 +30,7 @@
                                 @component('components.comment.sticky', [
                                     'sticky' => $sticky,
                                     'detailLink' => true,
-                                    'sectionCreatorLiked' => true,
+                                    'sectionAuthorLiked' => true,
                                 ])@endcomponent
                             @endforeach
                         </div>
@@ -47,7 +47,7 @@
                             @component('components.comment.list', [
                                 'comment' => $comment,
                                 'detailLink' => true,
-                                'sectionCreatorLiked' => true,
+                                'sectionAuthorLiked' => true,
                             ])@endcomponent
 
                             @if (! $loop->last)

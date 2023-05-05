@@ -12,7 +12,7 @@
                     data-scene="extendBox"
                     data-post-message-key="fresnsPostExtendBox"
                     data-pid="{{ $pid }}"
-                    data-uid="{{ $creator['uid'] }}"
+                    data-uid="{{ $author['uid'] }}"
                     data-title="{{ $extend['title'] }}"
                     data-url="{{ $extend['accessUrl'] }}">
                 </a>
@@ -58,7 +58,7 @@
                     data-scene="extendBox"
                     data-post-message-key="fresnsPostExtendBox"
                     data-pid="{{ $pid }}"
-                    data-uid="{{ $creator['uid'] }}"
+                    data-uid="{{ $author['uid'] }}"
                     data-title="{{ $extend['title'] }}"
                     data-url="{{ $extend['accessUrl'] }}">
                 </a>
