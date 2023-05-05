@@ -140,6 +140,27 @@
                         data-value="{{ fs_user('detail.birthday') }}"
                         type="button" data-bs-toggle="modal" data-bs-target="#editModal">{{ fs_lang('modify') }}</button>
                 </div>
+
+                {{-- profiles --}}
+                @foreach(fs_user_panel('profiles') as $profile)
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">
+                            <img src="{{ $profile['icon'] }}" loading="lazy" class="rounded me-2" height="24">
+                            {{ $profile['name'] }}
+                        </span>
+                        <span class="form-control"></span>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                            data-type="account"
+                            data-scene="profileExtension"
+                            data-post-message-key="fresnsProfileExtension"
+                            data-aid="{{ fs_account('detail.aid') }}"
+                            data-uid="{{ fs_user('detail.uid') }}"
+                            data-title="{{ $profile['name'] }}"
+                            data-url="{{ $profile['url'] }}">
+                            {{ fs_lang('setting') }}
+                        </button>
+                    </div>
+                @endforeach
             </div>
 
             {{-- Preference --}}
