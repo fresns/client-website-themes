@@ -20,7 +20,7 @@
                                 data-type="account"
                                 data-scene="featureExtension"
                                 data-post-message-key="fresnsFeatureExtension"
-                                data-title="{{ fs_lang('accountLogin') }}"
+                                data-title="{{ $feature['name'] }}"
                                 data-url="{{ $feature['url'] }}">
                                 <img src="{{ $feature['icon'] }}" loading="lazy" class="rounded" height="52">
                                 <p class="mb-0 text-center">{{ $feature['name'] }}</p>
