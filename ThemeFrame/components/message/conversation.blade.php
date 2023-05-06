@@ -21,7 +21,7 @@
 
                     <span class="conversation-user-name text-secondary">{{ '@'.$conversation['user']['fsid'] }}</span>
                 @else
-                    {{ fs_lang('contentCreatorDeactivate') }}
+                    {{ fs_lang('userDeactivate') }}
                 @endif
             </h5>
             <small class="text-muted pt-1">{{ $conversation['latestMessage']['datetimeFormat'] }}</small>

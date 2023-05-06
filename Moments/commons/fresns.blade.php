@@ -170,7 +170,7 @@
                     <div class="modal-body">
                         <ul class="list-group list-group-flush">
                             @foreach(fs_api_config('language_menus') as $lang)
-                                @if ($lang['isEnable'])
+                                @if ($lang['isEnabled'])
                                     <a class="list-group-item list-group-item-action @if (current_lang_tag() == $lang['langTag']) active @endif" hreflang="{{ $lang['langTag'] }}" href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL($lang['langTag'], null, [], true) }}">
                                         {{ $lang['langName'] }}
                                         @if ($lang['areaName'])
@@ -250,7 +250,7 @@
             }
         };
     </script>
-    <script src="/assets/plugins/{{ $engineUnikey }}/js/fresns-iframe.js?v={{ $engineVersion }}"></script>
+    <script src="/assets/plugins/{{ $engineFskey }}/js/fresns-iframe.js?v={{ $engineVersion }}"></script>
     <script src="/assets/themes/Moments/js/jquery.caret.min.js?v={{ $themeVersion }}"></script>
     <script src="/assets/themes/Moments/js/atwho.min.js?v={{ $themeVersion }}"></script>
     <script src="/assets/themes/Moments/js/prism.min.js?v={{ $themeVersion }}"></script>

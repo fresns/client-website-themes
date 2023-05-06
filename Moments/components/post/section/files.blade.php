@@ -116,7 +116,7 @@
                         </p>
                         <p class="text-center fs-5">{{ $document['name'] }}</p>
                         <p class="text-center text-secondary">
-                            {{ fs_lang('contentFileUploader') }}: {{ $creator['nickname'] }}
+                            {{ fs_lang('contentFileUploader') }}: {{ $author['nickname'] }}
                             <span class="mx-3">{{$document['size']}}</span>
                             {{ $createdDatetime }}
                         </p>

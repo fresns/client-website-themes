@@ -207,7 +207,7 @@
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     @foreach(fs_api_config('language_menus') as $lang)
-                                        @if ($lang['isEnable'])
+                                        @if ($lang['isEnabled'])
                                             <li>
                                                 <a class="dropdown-item @if (current_lang_tag() == $lang['langTag']) active @endif" hreflang="{{ $lang['langTag'] }}" href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL($lang['langTag'], null, [], true) }}">
                                                     {{ $lang['langName'] }}

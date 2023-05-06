@@ -76,13 +76,13 @@
                         'extends' => $draft['detail']['extends'],
                     ])@endcomponent
 
-                    {{-- allowJson --}}
-                    @if ($draft['detail']['allowJson'])
-                        @component('components.editor.section.allow', [
+                    {{-- readJson --}}
+                    @if ($draft['detail']['readJson'])
+                        @component('components.editor.section.read', [
                             'type' => $type,
                             'plid' => $plid,
                             'clid' => $clid,
-                            'allow' => $draft['detail']['allowJson'],
+                            'readConfig' => $draft['detail']['readJson'],
                         ])@endcomponent
                     @endif
 
@@ -127,6 +127,23 @@
                                 'type' => $type,
                                 'isAnonymous' => $draft['detail']['isAnonymous'],
                             ])@endcomponent
+                        @endif
+
+                        {{-- comment disable and private --}}
+                        @if ($type == 'post')
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="postIsCommentDisabled" value="1" id="postIsCommentDisabled">
+                                <label class="form-check-label" for="postIsCommentDisabled">
+                                    {{ fs_lang('editorCommentDisable') }}
+                                </label>
+                            </div>
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="postIsCommentPrivate" value="1" id="postIsCommentPrivate">
+                                <label class="form-check-label" for="postIsCommentPrivate">
+                                    {{ fs_lang('editorCommentPrivate') }}
+                                </label>
+                            </div>
                         @endif
                     </div>
                     {{-- Location and Anonymous: End --}}

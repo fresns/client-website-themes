@@ -120,7 +120,7 @@
                         </p>
                         <p class="text-center fs-5">{{ $document['name'] }}</p>
                         <p class="text-center text-secondary">
-                            {{ fs_lang('contentFileUploader') }}: {{ $creator['nickname'] }}
+                            {{ fs_lang('contentFileUploader') }}: {{ $author['nickname'] }}
                             <span class="mx-3">{{$document['size']}}</span>
                             {{ $createdDatetime }}
                         </p>
@@ -129,7 +129,7 @@
                                 data-url="{{ route('fresns.api.content.file.link', ['fid' => $document['fid'], 'type' => 'post', 'fsid' => $pid]) }}"
                                 data-name="{{ $document['name'] }}"
                                 data-mime="{{ $document['mime'] }}">
-                                <i class="fa-solid fa-download"></i> {{ fs_lang('contentFileDownload') }}
+                                <i class="bi bi-download"></i> {{ fs_lang('contentFileDownload') }}
                             </button>
                         </p>
                     </div>

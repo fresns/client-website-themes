@@ -38,11 +38,11 @@
 @endif
 
 <article class="position-relative border-bottom pt-2 pb-3 fs-hover" id="{{ $post['pid'] }}">
-    {{-- Post Creator --}}
-    <section class="content-creator order-0">
-        @component('components.post.section.creator', [
+    {{-- Post Author --}}
+    <section class="content-author order-0">
+        @component('components.post.section.author', [
             'pid' => $post['pid'],
-            'creator' => $post['creator'],
+            'author' => $post['author'],
             'isAnonymous' => $post['isAnonymous'],
             'createdDatetime' => $post['createdDatetime'],
             'createdTimeAgo' => $post['createdTimeAgo'],
@@ -97,20 +97,20 @@
     </section>
 
     {{-- Post Allow Info --}}
-    @if (! $post['allowConfig']['isAllow'])
+    @if ($post['readConfig']['isReadLocked'])
         <section class="post-allow order-2">
             <div class="post-allow-static"></div>
             <div class="text-center">
-                <p class="text-secondary mb-2">{{ fs_lang('contentAllowInfo') }} {{ $post['allowConfig']['previewPercentage'] }}%</p>
+                <p class="text-secondary mb-2">{{ fs_lang('contentPreReadInfo') }} {{ $post['readConfig']['previewPercentage'] }}%</p>
                 <button type="button" class="btn btn-outline-info btn-lg w-50" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                     data-type="post"
-                    data-scene="postAllowBtn"
-                    data-post-message-key="fresnsPostAllowBtn"
+                    data-scene="postAuthBtn"
+                    data-post-message-key="fresnsPostAuthBtn"
                     data-pid="{{ $post['pid'] }}"
-                    data-uid="{{ $post['creator']['uid'] }}"
-                    data-title="{{ $post['allowConfig']['buttonName'] }}"
-                    data-url="{{ $post['allowConfig']['buttonUrl'] }}">
-                    {{ $post['allowConfig']['buttonName'] }}
+                    data-uid="{{ $post['author']['uid'] }}"
+                    data-title="{{ $post['readConfig']['buttonName'] }}"
+                    data-url="{{ $post['readConfig']['buttonUrl'] }}">
+                    {{ $post['readConfig']['buttonName'] }}
                 </button>
             </div>
         </section>
@@ -129,7 +129,7 @@
             @component('components.post.section.files', [
                 'pid' => $post['pid'],
                 'createdDatetime' => $post['createdDatetime'],
-                'creator' => $post['creator'],
+                'author' => $post['author'],
                 'files' => $post['files'],
             ])@endcomponent
 
@@ -138,16 +138,14 @@
     @endif
 
     {{-- Content Extends --}}
-    @if ($post['extends'])
-        <section class="content-extends order-3 mx-3">
-            @component('components.post.section.extends', [
-                'pid' => $post['pid'],
-                'createdDatetime' => $post['createdDatetime'],
-                'creator' => $post['creator'],
-                'extends' => $post['extends']
-            ])@endcomponent
-        </section>
-    @endif
+    <section class="content-extends order-3 mx-3">
+        @component('components.post.section.extends', [
+            'pid' => $post['pid'],
+            'createdDatetime' => $post['createdDatetime'],
+            'author' => $post['author'],
+            'extends' => $post['extends']
+        ])@endcomponent
+    </section>
 
     {{-- Quoted Post --}}
     @if ($post['quotedPost'])
@@ -187,7 +185,7 @@
                         data-scene="postUserList"
                         data-post-message-key="fresnsPostUserList"
                         data-pid="{{ $post['pid'] }}"
-                        data-uid="{{ $post['creator']['uid'] }}"
+                        data-uid="{{ $post['author']['uid'] }}"
                         data-title="{{ $post['affiliatedUserConfig']['userListName'] }}"
                         data-url="{{ $post['affiliatedUserConfig']['userListUrl'] }}">
                         {{ $post['affiliatedUserConfig']['userListName'] }}
@@ -272,7 +270,7 @@
                 </button>
                 @component('components.post.mark.more', [
                     'pid' => $post['pid'],
-                    'uid' => $post['creator']['uid'],
+                    'uid' => $post['author']['uid'],
                     'editControls' => $post['editControls'],
                     'interaction' => $post['interaction'],
                     'followCount' => $post['followCount'],
@@ -285,7 +283,7 @@
         {{-- Comment Box --}}
         @if (fs_user()->check())
             @component('components.editor.comment-box', [
-                'nickname' => $post['creator']['nickname'],
+                'nickname' => $post['author']['nickname'],
                 'pid' => $post['pid'],
             ])@endcomponent
         @endif

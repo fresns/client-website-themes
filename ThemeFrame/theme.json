@@ -1,10 +1,10 @@
 {
-    "unikey": "ThemeFrame",
+    "fskey": "ThemeFrame",
     "name": "Theme Frame",
     "description": "Fresns theme framework to showcase web-side functionality and interaction flow.",
     "author": "Fresns",
     "authorLink": "https://fresns.org",
-    "version": "2.6.1",
+    "version": "2.7.0",
     "functions": true,
     "functionKeys": [
         {

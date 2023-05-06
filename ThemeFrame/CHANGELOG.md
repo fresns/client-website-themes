@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.7.0 (2023-05-06)
+
+- feat: group extensions
+- feat: user features
+- feat: user profiles
+- fix: account connect services
+- fix: connects icons
+- fix: is comment private
+- refactor: post and comment author
+- refactor: read config
+
+
 ## 2.6.1 (2023-04-27)
 
 - fix: `percentage` parameter name

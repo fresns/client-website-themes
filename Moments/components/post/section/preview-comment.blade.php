@@ -12,12 +12,12 @@
 
         {{-- Content --}}
         <div class="text-break mt-2">
-            @if (! $topComment['creator']['status'])
-                <span class="text-info">{{ fs_lang('contentCreatorDeactivate') }}</span>:
+            @if (! $topComment['author']['status'])
+                <span class="text-info">{{ fs_lang('userDeactivate') }}</span>:
             @elseif ($topComment['isAnonymous'])
-                <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>:
+                <span class="text-info">{{ fs_lang('contentAuthorAnonymous') }}</span>:
             @else
-                <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $topComment['creator']['fsid']])) }}" class="fresns_link">{{ $topComment['creator']['nickname'] }}</a>:
+                <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $topComment['author']['fsid']])) }}" class="fresns_link">{{ $topComment['author']['nickname'] }}</a>:
             @endif
             <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $pid])).'#commentList' }}" class="text-decoration-none link-dark stretched-link">{!! $topComment['content'] !!}</a>
         </div>
@@ -37,25 +37,25 @@
     <section class="comment-preview mt-3 mx-3 position-relative d-flex flex-column">
         @foreach($previewComments as $comment)
             <div class="text-break mb-2">
-                @if (! $comment['creator']['status'])
-                    <span class="text-info">{{ fs_lang('contentCreatorDeactivate') }}</span>
+                @if (! $comment['author']['status'])
+                    <span class="text-info">{{ fs_lang('userDeactivate') }}</span>
                 @elseif ($comment['isAnonymous'])
-                    <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>
+                    <span class="text-info">{{ fs_lang('contentAuthorAnonymous') }}</span>
                 @else
-                    <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['creator']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['creator']['nickname'] }}</a>
+                    <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['author']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['author']['nickname'] }}</a>
                 @endif
     
-                @if ($comment['creator']['isPostCreator'])
-                    <span class="author-badge">{{ fs_lang('contentCreator') }}</span>
+                @if ($comment['author']['isPostAuthor'])
+                    <span class="author-badge">{{ fs_lang('contentAuthor') }}</span>
                 @endif
     
                 @if ($comment['replyToComment'])
-                    @if (! $comment['replyToComment']['creator']['status'])
-                        {{ fs_db_config('publish_comment_name') }} <span class="text-info">{{ fs_lang('contentCreatorDeactivate') }}</span>
+                    @if (! $comment['replyToComment']['author']['status'])
+                        {{ fs_db_config('publish_comment_name') }} <span class="text-info">{{ fs_lang('userDeactivate') }}</span>
                     @elseif ($comment['replyToComment']['isAnonymous'])
-                        {{ fs_db_config('publish_comment_name') }} <span class="text-info">{{ fs_lang('contentCreatorAnonymous') }}</span>
+                        {{ fs_db_config('publish_comment_name') }} <span class="text-info">{{ fs_lang('contentAuthorAnonymous') }}</span>
                     @else
-                        {{ fs_db_config('publish_comment_name') }} <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToComment']['creator']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['replyToComment']['creator']['nickname'] }}</a>
+                        {{ fs_db_config('publish_comment_name') }} <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $comment['replyToComment']['author']['fsid']])) }}" class="content-link text-decoration-none">{{ $comment['replyToComment']['author']['nickname'] }}</a>
                     @endif
                 @endif
     

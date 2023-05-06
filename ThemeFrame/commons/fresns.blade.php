@@ -18,9 +18,9 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css?v={{ $fresnsVersion }}">
     <link rel="stylesheet" href="/static/css/bootstrap-icons.min.css?v={{ $fresnsVersion }}">
     <link rel="stylesheet" href="/static/css/select2.min.css?v={{ $fresnsVersion }}">
-    <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/atwho.min.css?v={{ $themeVersion }}">
-    <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/prism.min.css?v={{ $themeVersion }}">
-    <link rel="stylesheet" href="/assets/themes/{{ $themeUnikey }}/css/fresns.css?v={{ $themeVersion }}">
+    <link rel="stylesheet" href="/assets/themes/{{ $themeFskey }}/css/atwho.min.css?v={{ $themeVersion }}">
+    <link rel="stylesheet" href="/assets/themes/{{ $themeFskey }}/css/prism.min.css?v={{ $themeVersion }}">
+    <link rel="stylesheet" href="/assets/themes/{{ $themeFskey }}/css/fresns.css?v={{ $themeVersion }}">
     <script src="/static/js/jquery.min.js"></script>
     @stack('style')
     @if (fs_db_config('website_stat_position') == 'head')
@@ -116,7 +116,7 @@
                     <div class="modal-body">
                         <ul class="list-group list-group-flush">
                             @foreach(fs_api_config('language_menus') as $lang)
-                                @if ($lang['isEnable'])
+                                @if ($lang['isEnabled'])
                                     <a class="list-group-item list-group-item-action @if (current_lang_tag() == $lang['langTag']) active @endif" hreflang="{{ $lang['langTag'] }}" href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL($lang['langTag'], null, [], true) }}">
                                         {{ $lang['langName'] }}
                                         @if ($lang['areaName'])
@@ -153,11 +153,11 @@
         window.hashtagStatus = {{ fs_api_config('hashtag_status') ? 1 : 0 }};
         window.hashtagFormat = {{ fs_api_config('hashtag_format') }};
     </script>
-    <script src="/assets/plugins/{{ $engineUnikey }}/js/fresns-iframe.js?v={{ $engineVersion }}"></script>
-    <script src="/assets/themes/{{ $themeUnikey }}/js/jquery.caret.min.js?v={{ $themeVersion }}"></script>
-    <script src="/assets/themes/{{ $themeUnikey }}/js/atwho.min.js?v={{ $themeVersion }}"></script>
-    <script src="/assets/themes/{{ $themeUnikey }}/js/prism.min.js?v={{ $themeVersion }}"></script>
-    <script src="/assets/themes/{{ $themeUnikey }}/js/fresns.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/plugins/{{ $engineFskey }}/js/fresns-iframe.js?v={{ $engineVersion }}"></script>
+    <script src="/assets/themes/{{ $themeFskey }}/js/jquery.caret.min.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/{{ $themeFskey }}/js/atwho.min.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/{{ $themeFskey }}/js/prism.min.js?v={{ $themeVersion }}"></script>
+    <script src="/assets/themes/{{ $themeFskey }}/js/fresns.js?v={{ $themeVersion }}"></script>
     @stack('script')
 </body>
 
