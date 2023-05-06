@@ -345,36 +345,41 @@
 
                                     <ul class="list-group list-group-flush">
                                         @foreach(fs_api_config('account_connect_services') as $service)
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <img src="/assets/themes/ThemeFrame/images/connects/{{ $service['code'] }}.png" loading="lazy" height="32">
+                                            @php
+                                                $found = false;
+                                                $nickname = '';
+                                                $connectKey = array_search($service['code'], array_column(fs_api_config('connects'), 'id'));
+                                            @endphp
+                                            @foreach (fs_account('detail.connects') as $item)
+                                                @if ($item['connectId'] == intval($service['code']))
+                                                    @php
+                                                        $found = true;
+                                                        $nickname = $item['nickname'];
+                                                        break;
+                                                    @endphp
+                                                @endif
+                                            @endforeach
 
-                                                @if (fs_account('detail.connects'))
-                                                    @foreach(fs_account('detail.connects') as $item)
-                                                        @if ($item['connectId'] === intval($service['code']))
-                                                            {{ $item['nickname'] }}
-                                                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                                                data-type="account"
-                                                                data-scene="connect"
-                                                                data-post-message-key="fresnsConnect"
-                                                                data-aid="{{ fs_account('detail.aid') }}"
-                                                                data-uid="{{ fs_user('detail.uid') }}"
-                                                                data-title="{{ fs_lang('settingConnect') }}: {{ $service['code'] }}"
-                                                                data-url="{{ $service['url'] }}">
-                                                                {{ fs_lang('settingConnectRemove') }}
-                                                            </button>
-                                                        @else
-                                                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                                                data-type="account"
-                                                                data-scene="connect"
-                                                                data-post-message-key="fresnsConnect"
-                                                                data-aid="{{ fs_account('detail.aid') }}"
-                                                                data-uid="{{ fs_user('detail.uid') }}"
-                                                                data-title="{{ fs_lang('settingConnect') }}: {{ $service['code'] }}"
-                                                                data-url="{{ $service['url'] }}">
-                                                                {{ fs_lang('settingConnectAdd') }}
-                                                            </button>
-                                                        @endif
-                                                    @endforeach
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <div>
+                                                    <img src="/assets/themes/ThemeFrame/images/connects/{{ $service['code'] }}.png" loading="lazy" height="32">
+                                                    <span class="text-secondary ms-1">{{ fs_api_config('connects')[$connectKey]['name'] ?? '' }}</span>
+                                                </div>
+
+                                                @if ($found)
+                                                    <div>
+                                                        <span class="me-3">{{ $nickname }}</span>
+                                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                                                            data-type="account"
+                                                            data-scene="connect"
+                                                            data-post-message-key="fresnsConnect"
+                                                            data-aid="{{ fs_account('detail.aid') }}"
+                                                            data-uid="{{ fs_user('detail.uid') }}"
+                                                            data-title="{{ fs_lang('settingConnect') }}: {{ fs_api_config('connects')[$connectKey]['name'] ?? $service['code'] }}"
+                                                            data-url="{{ $service['url'] }}">
+                                                            {{ fs_lang('settingConnectRemove') }}
+                                                        </button>
+                                                    </div>
                                                 @else
                                                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                                                         data-type="account"
@@ -382,7 +387,7 @@
                                                         data-post-message-key="fresnsConnect"
                                                         data-aid="{{ fs_account('detail.aid') }}"
                                                         data-uid="{{ fs_user('detail.uid') }}"
-                                                        data-title="{{ fs_lang('settingConnect') }}: {{ $service['code'] }}"
+                                                        data-title="{{ fs_lang('settingConnect') }}: {{ fs_api_config('connects')[$connectKey]['name'] ?? $service['code'] }}"
                                                         data-url="{{ $service['url'] }}">
                                                         {{ fs_lang('settingConnectAdd') }}
                                                     </button>
