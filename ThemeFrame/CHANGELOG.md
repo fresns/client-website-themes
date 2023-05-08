@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.7.1 (2023-05-08)
+
+- Example of refinement of editor functionality
+
+
 ## 2.7.0 (2023-05-06)
 
 - feat: group extensions
