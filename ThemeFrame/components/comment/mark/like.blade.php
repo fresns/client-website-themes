@@ -18,14 +18,14 @@
     @if ($interaction['likeStatus'])
         <a class="btn btn-inter btn-active fs-mark" data-icon="{{ $btnIcon }}" data-icon-active="{{ $btnIconActive }}" data-interaction-active="{{ $interaction['likeStatus'] }}">
             <img src="{{ $btnIconActive }}" loading="lazy">
-            @if (fs_api_config('comment_liker_count'))
+            @if (fs_api_config('comment_liker_count') && $count)
                 <span class="show-count">{{ $count }}</span>
             @endif
         </a>
     @else
         <a class="btn btn-inter fs-mark" data-icon="{{ $btnIcon }}" data-icon-active="{{ $btnIconActive }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $interaction['likeName'] }}">
             <img src="{{ $btnIcon }}" loading="lazy">
-            @if (fs_api_config('comment_liker_count'))
+            @if (fs_api_config('comment_liker_count') && $count)
                 <span class="show-count">{{ $count }}</span>
             @endif
         </a>

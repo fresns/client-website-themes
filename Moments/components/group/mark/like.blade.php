@@ -6,14 +6,14 @@
     @if ($interaction['likeStatus'])
         <a class="btn btn-success btn-sm fs-mark" data-interaction-active="{{ $interaction['likeStatus'] }}" data-bi="fa-regular fa-thumbs-up" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ fs_lang('cancel') }}">
             <i class="fa-solid fa-thumbs-up"></i>
-            @if (fs_api_config('group_liker_count'))
+            @if (fs_api_config('group_liker_count') && $count)
                 <span class="show-count">{{ $count }}</span>
             @endif
         </a>
     @else
         <a class="btn btn-outline-success btn-sm fs-mark" data-bi="fa-solid fa-thumbs-up" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $interaction['likeName'] }}">
             <i class="fa-regular fa-thumbs-up"></i>
-            @if (fs_api_config('group_liker_count'))
+            @if (fs_api_config('group_liker_count') && $count)
                 <span class="show-count">{{ $count }}</span>
             @endif
         </a>
