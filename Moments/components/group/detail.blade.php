@@ -64,7 +64,11 @@
         <section class="fs-7 mt-1 text-secondary">{{ $group['description'] }}</section>
 
         <div class="position-absolute top-0 end-0 d-lg-none">
-            <button class="btn btn-warning text-white rounded-pill fs-create shadow me-4" type="button" data-bs-toggle="modal" data-bs-target="#createModal"><i class="fa-solid fa-plus"></i></button>
+            @if (fs_db_config('fs_theme_quick_publish'))
+                <button class="btn btn-warning text-white rounded-pill fs-create shadow me-4" type="button" data-bs-toggle="modal" data-bs-target="#createModal"><i class="fa-solid fa-plus"></i></button>
+            @else
+                <a class="btn btn-warning text-white rounded-pill fs-create shadow me-4" href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}"><i class="fa-solid fa-plus"></i></a>
+            @endif
         </div>
     </div>
 </article>

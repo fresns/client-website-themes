@@ -87,7 +87,11 @@
                         {{-- Logged In --}}
                         <a class="btn" href="{{ fs_route(route('fresns.account.index')) }}" role="button"><img src="{{ fs_user('detail.avatar') }}" loading="lazy" class="nav-avatar rounded-circle"> {{ fs_user('detail.nickname') }}</a>
 
-                        <button type="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" data-bs-toggle="modal" data-bs-target="#createModal"><i class="bi bi-plus-lg"></i></button>
+                        @if (fs_db_config('fs_theme_quick_publish'))
+                            <button type="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" data-bs-toggle="modal" data-bs-target="#createModal"><i class="bi bi-plus-lg"></i></button>
+                        @else
+                            <a class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}"><i class="bi bi-plus-lg"></i></a>
+                        @endif
 
                         <a href="{{ fs_route(route('fresns.notifications.index')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
                             <i class="bi bi-bell"></i>
