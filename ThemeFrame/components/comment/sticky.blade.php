@@ -76,7 +76,7 @@
 
         {{-- Content --}}
         <div class="content-article">
-            @if ($comment['isCommentPrivate'])
+            @if ($sticky['isCommentPrivate'])
                 <div class="alert alert-warning" role="alert">
                     <i class="bi bi-info-circle"></i> {{ fs_lang('editorCommentPrivate') }}
                 </div>
