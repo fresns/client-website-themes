@@ -1690,24 +1690,40 @@ $(document).ready(function () {
 
 // fresns extensions callback
 window.onmessage = function (event) {
-    let data;
+    let fresnsCallback;
 
     try {
-        data = JSON.parse(event.data);
-    } catch (error) {}
-
-    if (!data) {
+        fresnsCallback = JSON.parse(event.data);
+    } catch (error) {
         return;
     }
 
-    if (data.code != 0) {
-        if (data.message) {
-            window.tips(data.message, data.code);
+    console.log('fresnsCallback', fresnsCallback);
+
+    if (!fresnsCallback) {
+        return;
+    }
+
+    if (fresnsCallback.code != 0) {
+        if (fresnsCallback.message) {
+            window.tips(fresnsCallback.message, fresnsCallback.code);
         }
         return;
     }
 
-    switch (data.postMessageKey) {
+    switch (fresnsCallback.action.postMessageKey) {
+        case 'reload':
+            setTimeout(function() {
+                window.location.reload();
+            }, 2000);
+            break;
+
+        case 'fresnsConnect':
+            if (fresnsCallback.action.reloadData) {
+                window.location.href = `/${langTag}/account/settings#account-tab`;
+            }
+            break;
+
         case 'fresnsJoin':
             let params = new URLSearchParams(window.location.search.slice(1));
 
@@ -1716,7 +1732,7 @@ window.onmessage = function (event) {
                 type: 'post',
                 dataType: 'json',
                 data: {
-                    apiData: data,
+                    apiData: fresnsCallback,
                     redirectURL: params.get('redirectURL'),
                 },
                 success: function (res) {
@@ -1731,9 +1747,27 @@ window.onmessage = function (event) {
                 },
             });
             break;
+
+        case 'fresnsEditorUpload':
+            fresnsCallback.data.forEach(fileinfo => {
+                addEditorAttachment(fileinfo);
+            });
+
+            if (fresnsCallback.action.reloadData) {
+                $('#fresnsModal').modal('hide');
+
+                return;
+            }
+            break;
     }
 
-    if (data.windowClose) {
+    if (fresnsCallback.action.windowClose) {
         $('#fresnsModal').modal('hide');
     }
+
+    if (fresnsCallback.action.redirectUrl) {
+        window.location.href = fresnsCallback.action.redirectUrl;
+    }
+
+    console.log('fresnsCallback end');
 };

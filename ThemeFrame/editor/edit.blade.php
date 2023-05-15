@@ -131,14 +131,14 @@
 
                         {{-- comment disable and private --}}
                         @if ($type == 'post')
-                            <div class="form-check">
+                            <div class="form-check ms-3">
                                 <input class="form-check-input" type="checkbox" name="postIsCommentDisabled" value="1" id="postIsCommentDisabled" {{ $draft['detail']['isCommentDisabled'] ? 'checked' : '' }}>
                                 <label class="form-check-label" for="postIsCommentDisabled">
                                     {{ fs_lang('editorCommentDisable') }}
                                 </label>
                             </div>
 
-                            <div class="form-check">
+                            <div class="form-check ms-3">
                                 <input class="form-check-input" type="checkbox" name="postIsCommentPrivate" value="1" id="postIsCommentPrivate" {{ $draft['detail']['isCommentPrivate'] ? 'checked' : '' }}>
                                 <label class="form-check-label" for="postIsCommentPrivate">
                                     {{ fs_lang('editorCommentPrivate') }}
@@ -147,7 +147,7 @@
                         @endif
 
                         {{-- Markdown --}}
-                        <div class="form-check">
+                        <div class="form-check ms-3">
                             <input class="form-check-input" type="checkbox" name="isMarkdown" value="1" id="isMarkdown" {{ $draft['detail']['isMarkdown'] ? 'checked' : '' }}>
                             <label class="form-check-label" for="isMarkdown">Markdown</label>
                         </div>
@@ -277,41 +277,6 @@
                 $(".editor-file-document").append(html);
             }
         }
-
-        window.onmessage = function (event) {
-            var data = event.data;
-            console.log('Fresns Plugin Message', data);
-
-            if (data.code != 0) {
-                if (data.message) {
-                    window.tips(data.message);
-                }
-                return
-            }
-
-            switch (data.postMessageKey) {
-                case "fresnsEditorUpload":
-                    console.log('Fresns Plugin Data', data.data)
-
-                    data.data.forEach(fileinfo => {
-                        addEditorAttachment(fileinfo);
-                    });
-
-                    if (data.windowClose) {
-                        // Close plugin window
-                        $('#done-extensions').click()
-                    }
-                break;
-
-                case "fresnsEditorExtension":
-                    console.log('Fresns Plugin Data', data.data)
-
-                    if (data.windowClose) {
-                        window.location.refresh()
-                    }
-                break;
-            }
-        };
 
         function deleteFile(obj) {
             let fid = $(obj).data('fid');
