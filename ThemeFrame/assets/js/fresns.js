@@ -1713,7 +1713,7 @@ window.onmessage = function (event) {
 
     switch (fresnsCallback.action.postMessageKey) {
         case 'reload':
-            setTimeout(function() {
+            setTimeout(function () {
                 window.location.reload();
             }, 2000);
             break;
@@ -1749,7 +1749,7 @@ window.onmessage = function (event) {
             break;
 
         case 'fresnsEditorUpload':
-            fresnsCallback.data.forEach(fileinfo => {
+            fresnsCallback.data.forEach((fileinfo) => {
                 addEditorAttachment(fileinfo);
             });
 
