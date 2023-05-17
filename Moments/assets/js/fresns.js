@@ -1475,20 +1475,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     return;
                 }
 
-                if (res.data.fid) {
-                    let data = { avatarFid: res.data.fid };
-                    window.buildAjaxAndSubmit(
-                        editAction,
-                        data,
-                        function (res) {
-                            window.tips(res.message, res.code);
-                            window.location.reload();
-                        },
-                        function (e) {
-                            window.tips(e.responseJSON.message, e.status);
-                        }
-                    );
-                }
+                window.location.reload();
             },
             error: function (e) {
                 window.tips(e.responseJSON.message, e.status);
