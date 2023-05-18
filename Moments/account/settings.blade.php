@@ -350,27 +350,17 @@
                                     </div>
                                     <div>
                                         <span class="me-3">{{ $item['nickname'] }}</span>
-                                        @if ($item['connected'])
-                                            <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                                        @if ($item['service'])
+                                            <button type="button" class="btn btn-sm {{ $item['connected'] ? 'btn-danger' : 'btn-warning' }}" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                                                 data-type="account"
                                                 data-scene="connect"
                                                 data-post-message-key="fresnsConnect"
                                                 data-aid="{{ fs_account('detail.aid') }}"
                                                 data-uid="{{ fs_user('detail.uid') }}"
+                                                data-connect-id="{{ $item['connectId'] }}"
                                                 data-title="{{ fs_lang('settingConnect') }}: {{ $item['connectName'] ?? $item['connectId'] }}"
                                                 data-url="{{ $item['service'] }}">
-                                                {{ fs_lang('settingAccountDisconnect') }}
-                                            </button>
-                                        @else
-                                            <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                                data-type="account"
-                                                data-scene="connect"
-                                                data-post-message-key="fresnsConnect"
-                                                data-aid="{{ fs_account('detail.aid') }}"
-                                                data-uid="{{ fs_user('detail.uid') }}"
-                                                data-title="{{ fs_lang('settingConnect') }}: {{ $item['connectName'] ?? $item['connectId'] }}"
-                                                data-url="{{ $item['service'] }}">
-                                                {{ fs_lang('settingAccountConnect') }}
+                                                {{ $item['connected'] ? fs_lang('settingAccountDisconnect') : fs_lang('settingAccountConnect') }}
                                             </button>
                                         @endif
                                     </div>
