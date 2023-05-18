@@ -339,63 +339,37 @@
                             </div>
 
                             {{-- Account Connects --}}
-                            @if (fs_api_config('account_connect_services'))
+                            @if (fs_account('detail.connects'))
                                 <div class="card mb-3">
                                     <div class="card-header">{{ fs_lang('settingConnect') }}</div>
-
+                                    {{-- Connects --}}
                                     <ul class="list-group list-group-flush">
-                                        @foreach(fs_api_config('account_connect_services') as $service)
-                                            @php
-                                                $found = false;
-                                                $nickname = '';
-                                                $connectKey = array_search($service['code'], array_column(fs_api_config('connects'), 'id'));
-                                            @endphp
-                                            @foreach (fs_account('detail.connects') as $item)
-                                                @if ($item['connectId'] == intval($service['code']))
-                                                    @php
-                                                        $found = true;
-                                                        $nickname = $item['nickname'];
-                                                        break;
-                                                    @endphp
-                                                @endif
-                                            @endforeach
-
+                                        @foreach (fs_account('detail.connects') as $item)
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <div>
-                                                    <img src="/assets/themes/ThemeFrame/images/connects/{{ $service['code'] }}.png" loading="lazy" height="32">
-                                                    <span class="text-secondary ms-1">{{ fs_api_config('connects')[$connectKey]['name'] ?? '' }}</span>
+                                                    <img src="/assets/themes/ThemeFrame/images/connects/{{ $item['connectId'] }}.png" loading="lazy" height="32">
+                                                    <span class="text-secondary ms-1">{{ $item['connectName'] }}</span>
                                                 </div>
-
-                                                @if ($found)
-                                                    <div>
-                                                        <span class="me-3">{{ $nickname }}</span>
-                                                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                                                <div>
+                                                    <span class="me-3">{{ $item['nickname'] }}</span>
+                                                    @if ($item['service'])
+                                                        <button type="button" class="btn btn-sm {{ $item['connected'] ? 'btn-danger' : 'btn-warning' }}" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                                                             data-type="account"
                                                             data-scene="connect"
                                                             data-post-message-key="fresnsConnect"
                                                             data-aid="{{ fs_account('detail.aid') }}"
                                                             data-uid="{{ fs_user('detail.uid') }}"
-                                                            data-title="{{ fs_lang('settingConnect') }}: {{ fs_api_config('connects')[$connectKey]['name'] ?? $service['code'] }}"
-                                                            data-url="{{ $service['url'] }}">
-                                                            {{ fs_lang('settingConnectRemove') }}
+                                                            data-connect-id="{{ $item['connectId'] }}"
+                                                            data-title="{{ fs_lang('settingConnect') }}: {{ $item['connectName'] ?? $item['connectId'] }}"
+                                                            data-url="{{ $item['service'] }}">
+                                                            {{ $item['connected'] ? fs_lang('settingAccountDisconnect') : fs_lang('settingAccountConnect') }}
                                                         </button>
-                                                    </div>
-                                                @else
-                                                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                                        data-type="account"
-                                                        data-scene="connect"
-                                                        data-post-message-key="fresnsConnect"
-                                                        data-aid="{{ fs_account('detail.aid') }}"
-                                                        data-uid="{{ fs_user('detail.uid') }}"
-                                                        data-title="{{ fs_lang('settingConnect') }}: {{ fs_api_config('connects')[$connectKey]['name'] ?? $service['code'] }}"
-                                                        data-url="{{ $service['url'] }}">
-                                                        {{ fs_lang('settingConnectAdd') }}
-                                                    </button>
-                                                @endif
+                                                    @endif
+                                                </div>
                                             </li>
                                         @endforeach
                                     </ul>
-
+                                    {{-- Connects End --}}
                                 </div>
                             @endif
                         </div>

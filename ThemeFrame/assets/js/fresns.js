@@ -680,17 +680,24 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         obj.prop('disabled', true);
         obj.prepend('<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> ');
 
-        let form = obj.parent('form');
+        let form = obj.closest('form');
 
         const url = form.attr('action'),
             body = form.serialize(),
             interactionType = form.find('input[name="interactionType"]').val(),
             count = obj.find('.show-count').text(),
             text = obj.find('.show-text'),
+            id = obj.data('id'),
+            collapseId = obj.data('collapse-id'),
             bi = obj.data('bi'),
             icon = obj.data('icon'),
             iconActive = obj.data('icon-active'),
             interactionActive = obj.data('interaction-active') || 0;
+
+        let markBtn = obj;
+        if (id) {
+            markBtn = $('#' + id);
+        }
 
         window.buildAjaxAndSubmit(
             url,
@@ -708,19 +715,19 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                 }
 
                 if (iconActive) {
-                    obj.find('img').attr('src', interactionActive == 0 ? iconActive : icon);
+                    markBtn.find('img').attr('src', interactionActive == 0 ? iconActive : icon);
                     if (interactionActive) {
-                        obj.removeClass('btn-active');
+                        markBtn.removeClass('btn-active');
                     } else {
-                        obj.addClass('btn-active');
+                        markBtn.addClass('btn-active');
                     }
                 }
 
                 if (count) {
                     if (interactionActive) {
-                        obj.find('.show-count').text(parseInt(count) - 1);
+                        markBtn.find('.show-count').text(parseInt(count) - 1);
                     } else {
-                        obj.find('.show-count').text(parseInt(count) + 1);
+                        markBtn.find('.show-count').text(parseInt(count) + 1);
                     }
                 }
 
@@ -728,30 +735,36 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     const isFollowOrBlock = interactionType === 'follow' || interactionType === 'block';
 
                     if (isFollowOrBlock && interactionActive) {
-                        obj.find('.show-text').text(obj.data('name'));
+                        markBtn.find('.show-text').text(markBtn.data('name'));
                     } else {
-                        obj.find('.show-text').text('√ ' + obj.data('name'));
+                        markBtn.find('.show-text').text('√ ' + markBtn.data('name'));
                     }
                 }
+
                 if (bi) {
-                    obj.find('i').removeClass();
+                    markBtn.find('i').removeClass();
                     if (interactionActive) {
                         if (bi.indexOf('-fill') > 0) {
-                            obj.find('i').addClass('bi ' + bi.slice(0, -5));
+                            markBtn.find('i').addClass('bi ' + bi.slice(0, -5));
                         } else {
-                            obj.find('i').addClass('bi ' + bi);
+                            markBtn.find('i').addClass('bi ' + bi);
                         }
-                        obj.hasClass('btn')
-                            ? obj.removeClass('btn-success').addClass('btn-outline-success')
-                            : obj.removeClass('text-success');
+                        markBtn.hasClass('btn')
+                            ? markBtn.removeClass('btn-success').addClass('btn-outline-success')
+                            : markBtn.removeClass('text-success');
                     } else {
-                        obj.find('i').addClass('bi ' + bi);
-                        obj.hasClass('btn')
-                            ? obj.addClass('btn-success').removeClass('btn-outline-success')
-                            : obj.addClass('text-success');
+                        markBtn.find('i').addClass('bi ' + bi);
+                        markBtn.hasClass('btn')
+                            ? markBtn.addClass('btn-success').removeClass('btn-outline-success')
+                            : markBtn.addClass('text-success');
                     }
                 }
-                interactionType === 'like' ? obj.addClass('btn-pre') : obj.removeClass('btn-pre');
+
+                interactionType === 'like' ? markBtn.addClass('btn-pre') : markBtn.removeClass('btn-pre');
+
+                if (collapseId) {
+                    $('#' + collapseId).collapse('hide');
+                }
 
                 if (interactionType == 'like') {
                     let formObj = form.parent().find('form')[1];
@@ -1288,7 +1301,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         let obj = $(this),
             targeType = obj.data('targe-type'),
             targeName = obj.data('targe-name'),
-            form = obj.parent().parent('form'),
+            form = obj.closest('form'),
             exit = false;
 
         targeType = targeType === 'date' ? 'input' : targeType;
@@ -1472,20 +1485,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     return;
                 }
 
-                if (res.data.fid) {
-                    let data = { avatarFid: res.data.fid };
-                    window.buildAjaxAndSubmit(
-                        editAction,
-                        data,
-                        function (res) {
-                            window.tips(res.message, res.code);
-                            window.location.reload();
-                        },
-                        function (e) {
-                            window.tips(e.responseJSON.message, e.status);
-                        }
-                    );
-                }
+                window.location.reload();
             },
             error: function (e) {
                 window.tips(e.responseJSON.message, e.status);
@@ -1677,24 +1677,40 @@ $(document).ready(function () {
 
 // fresns extensions callback
 window.onmessage = function (event) {
-    let data;
+    let fresnsCallback;
 
     try {
-        data = JSON.parse(event.data);
-    } catch (error) {}
-
-    if (!data) {
+        fresnsCallback = JSON.parse(event.data);
+    } catch (error) {
         return;
     }
 
-    if (data.code != 0) {
-        if (data.message) {
-            window.tips(data.message, data.code);
+    console.log('fresnsCallback', fresnsCallback);
+
+    if (!fresnsCallback) {
+        return;
+    }
+
+    if (fresnsCallback.code != 0) {
+        if (fresnsCallback.message) {
+            window.tips(fresnsCallback.message, fresnsCallback.code);
         }
         return;
     }
 
-    switch (data.postMessageKey) {
+    switch (fresnsCallback.action.postMessageKey) {
+        case 'reload':
+            setTimeout(function () {
+                window.location.reload();
+            }, 1500);
+            break;
+
+        case 'fresnsConnect':
+            if (fresnsCallback.action.reloadData) {
+                window.location.href = `/${langTag}/account/settings#account-tab`;
+            }
+            break;
+
         case 'fresnsJoin':
             let params = new URLSearchParams(window.location.search.slice(1));
 
@@ -1703,7 +1719,7 @@ window.onmessage = function (event) {
                 type: 'post',
                 dataType: 'json',
                 data: {
-                    apiData: data,
+                    apiData: fresnsCallback,
                     redirectURL: params.get('redirectURL'),
                 },
                 success: function (res) {
@@ -1718,9 +1734,27 @@ window.onmessage = function (event) {
                 },
             });
             break;
+
+        case 'fresnsEditorUpload':
+            fresnsCallback.data.forEach((fileinfo) => {
+                addEditorAttachment(fileinfo);
+            });
+
+            if (fresnsCallback.action.reloadData) {
+                $('#fresnsModal').modal('hide');
+
+                return;
+            }
+            break;
     }
 
-    if (data.windowClose) {
+    if (fresnsCallback.action.windowClose) {
         $('#fresnsModal').modal('hide');
     }
+
+    if (fresnsCallback.action.redirectUrl) {
+        window.location.href = fresnsCallback.action.redirectUrl;
+    }
+
+    console.log('fresnsCallback end');
 };

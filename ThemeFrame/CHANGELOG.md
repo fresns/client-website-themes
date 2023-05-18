@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.8.0 (2023-05-18)
+
+- Disable selection of groups not allowed to post
+- Theme configuration supports enabling fast posting or not
+- `actionCid` is changed to `contentFsid`
+- `Block` action requires two confirmations
+- Optimise callback functionality
+- Optimise interconnection support
+
+
 ## 2.7.1 (2023-05-08)
 
 - Example of refinement of editor functionality

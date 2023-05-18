@@ -131,7 +131,11 @@
                     {{-- Publish --}}
                     <li class="nav-item mt-4">
                         <div class="d-grid gap-2">
-                            <button class="btn btn-warning text-white rounded-pill fs-create" type="button" data-bs-toggle="modal" data-bs-target="#createModal">{{ fs_db_config('publish_post_name') }}</button>
+                            @if (fs_db_config('fs_theme_quick_publish'))
+                                <button class="btn btn-warning text-white rounded-pill fs-create" type="button" data-bs-toggle="modal" data-bs-target="#createModal">{{ fs_db_config('publish_post_name') }}</button>
+                            @else
+                                <a class="btn btn-warning text-white rounded-pill fs-create" href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}">{{ fs_db_config('publish_post_name') }}</a>
+                            @endif
                         </div>
                     </li>
                 @else

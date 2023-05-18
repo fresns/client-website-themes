@@ -12,12 +12,19 @@
             @endif
         </a>
     @else
-        <a class="dropdown-item py-2 fs-mark" data-bi="fa-solid fa-circle-xmark" data-name="{{ $interaction['blockName'] }}" href="javascript:void(0)">
+        <a class="dropdown-item py-2" id="fs-mark-block-{{ $cid }}" data-bs-toggle="collapse" href="#collapse-{{ $cid }}" aria-expanded="false" aria-controls="collapse-{{ $cid }}">
             <i class="fa-regular fa-circle-xmark"></i>
             <span class="show-text">{{ $interaction['blockName'] }}</span>
             @if (fs_api_config('comment_blocker_count') && $count)
-                <span class="show-count badge text-bg-light">{{ $count }}</span>
+                <span class="show-count">{{ $count }}</span>
             @endif
         </a>
+
+        <div class="collapse" id="collapse-{{ $cid }}">
+            <div class="card card-body mx-3 my-1">
+                <h5 class="card-title fs-6">{{ $interaction['blockName'] }}?</h5>
+                <a class="btn btn-danger btn-sm fs-mark" role="button" data-id="fs-mark-block-{{ $cid }}" data-collapse-id="collapse-{{ $cid }}" data-bi="fa-solid fa-circle-xmark" data-name="{{ $interaction['blockName'] }}" href="javascript:void(0)">{{ fs_lang('confirm') }}</a>
+            </div>
+        </div>
     @endif
 </form>

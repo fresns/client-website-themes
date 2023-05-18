@@ -31,6 +31,21 @@
                         </div>
                     </div>
 
+                    {{-- Quick publish post --}}
+                    <div class="row mb-4">
+                        <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['quickPublishConfig'] }}</label>
+                        <div class="col-lg-6 mt-2">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="fs_theme_quick_publish" id="quick_publish_true" value="true" {{ ($params['fs_theme_quick_publish']['value'] ?? false) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="quick_publish_true">{{ __('FsLang::panel.option_activate') }}</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="fs_theme_quick_publish" id="quick_publish_false" value="false" {{ ! ($params['fs_theme_quick_publish']['value'] ?? false) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="quick_publish_false">{{ __('FsLang::panel.option_deactivate') }}</label>
+                            </div>
+                        </div>
+                    </div>
+
                     {{-- Is the message page displayed --}}
                     <div class="row mb-4">
                         <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['notificationConfig'] }}</label>
@@ -66,6 +81,10 @@
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="checkbox" id="notification_comments" name="fs_theme_notifications[]" value="comments" {{ in_array('comments', $params['fs_theme_notifications']['value'] ?? []) ? 'checked' : '' }}>
                                 <label class="form-check-label" for="notification_comments">{{ $lang['notification_comments'] }}</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="notification_quotes" name="fs_theme_notifications[]" value="quotes" {{ in_array('quotes', $params['fs_theme_notifications']['value'] ?? []) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="notification_quotes">{{ $lang['notification_quotes'] }}</label>
                             </div>
                         </div>
                     </div>

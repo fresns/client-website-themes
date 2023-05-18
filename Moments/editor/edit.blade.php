@@ -255,41 +255,6 @@
             }
         }
 
-        window.onmessage = function (event) {
-            var data = event.data;
-            console.log('Fresns Plugin Message', data);
-
-            if (data.code != 0) {
-                if (data.message) {
-                    window.tips(data.message);
-                }
-                return
-            }
-
-            switch (data.postMessageKey) {
-                case "fresnsEditorUpload":
-                    console.log('Fresns Plugin Data', data.data)
-
-                    data.data.forEach(fileinfo => {
-                        addEditorAttachment(fileinfo);
-                    });
-
-                    if (data.windowClose) {
-                        // Close plugin window
-                        $('#done-extensions').click()
-                    }
-                break;
-
-                case "fresnsEditorExtension":
-                    console.log('Fresns Plugin Data', data.data)
-
-                    if (data.windowClose) {
-                        window.location.refresh()
-                    }
-                break;
-            }
-        };
-
         function deleteFile(obj) {
             let fid = $(obj).data('fid');
 

@@ -12,19 +12,22 @@
 
                 {{-- Quick Login --}}
                 @if (fs_api_config('account_connect_services'))
-                    <div class="card mx-2 p-0">
-                        <div class="card-header">{{ fs_lang('accountLoginByConnects') }}</div>
-                        <div class="card-body">
-                            @foreach(fs_api_config('account_connect_services') as $item)
-                                <a class="btn btn-outline-primary mx-2" data-bs-toggle="modal" href="#fresnsModal"
-                                    data-type="account"
-                                    data-scene="join"
-                                    data-post-message-key="fresnsJoin"
-                                    data-title="{{ fs_lang('accountLogin') }}"
-                                    data-url="{{ $item['url'] }}">
-                                    <img src="/assets/themes/ThemeFrame/images/connects/{{ $item['code'] }}.png" loading="lazy" height="32">
-                                </a>
-                            @endforeach
+                    <div>
+                        <div class="card p-0">
+                            <div class="card-header">{{ fs_lang('accountLoginByConnects') }}</div>
+                            <div class="card-body">
+                                @foreach(fs_api_config('account_connect_services') as $item)
+                                    <a class="btn btn-outline-primary mx-2" data-bs-toggle="modal" href="#fresnsModal"
+                                        data-type="account"
+                                        data-scene="join"
+                                        data-post-message-key="fresnsJoin"
+                                        data-connect-id="{{ $item['code'] }}"
+                                        data-title="{{ fs_lang('accountLogin') }}"
+                                        data-url="{{ $item['url'] }}">
+                                        <img src="/assets/themes/ThemeFrame/images/connects/{{ $item['code'] }}.png" loading="lazy" height="32">
+                                    </a>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                     <div class="text-center my-4">

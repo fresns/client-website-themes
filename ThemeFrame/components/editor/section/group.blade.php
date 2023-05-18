@@ -78,7 +78,12 @@
                 page = page + 1
                 if (lists.length > 0) {
                     $.each(lists, function (i, list){
-                        html += '<a href="javascript:void(0)" data-gid="'+ list.gid +'" onclick="selectGroup(this)" class="list-group-item list-group-item-action">';
+                        html += '<a href="javascript:void(0)" data-gid="'+ list.gid +'" onclick="selectGroup(this)" class="list-group-item list-group-item-action';
+                        if (list.publishRule.allowPost) {
+                            html += '">';
+                        } else {
+                            html += ' disabled opacity-75">';
+                        }
                         if (list.cover) {
                             html += '<img src="' + list.cover + '" height="20" class="me-1">';
                         }

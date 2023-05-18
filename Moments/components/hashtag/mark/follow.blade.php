@@ -6,14 +6,14 @@
     @if ($interaction['followStatus'])
         <a class="btn btn-success btn-sm fs-mark" data-interaction-active="{{ $interaction['followStatus'] }}" data-bi="fa-regular fa-star" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ fs_lang('cancel') }}">
             <i class="fa-solid fa-star"></i>
-            @if (fs_api_config('hashtag_follower_count'))
+            @if (fs_api_config('hashtag_follower_count') && $count)
                 <span class="show-count">{{ $count }}</span>
             @endif
         </a>
     @else
         <a class="btn btn-outline-success btn-sm fs-mark" data-bi="fa-solid fa-star" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $interaction['followName'] }}">
             <i class="fa-regular fa-star"></i>
-            @if (fs_api_config('hashtag_follower_count'))
+            @if (fs_api_config('hashtag_follower_count') && $count)
                 <span class="show-count">{{ $count }}</span>
             @endif
         </a>

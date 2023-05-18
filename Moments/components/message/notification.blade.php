@@ -121,6 +121,10 @@
                         @break
                     @endswitch
 
+                    @if ($notification['isMention'])
+                        ({{ fs_lang('notificationFromContentMentionYou') }})
+                    @endif
+
                     @switch($notification['actionType'])
                         @case(6)
                             : {{ fs_lang('modify') }}
@@ -152,8 +156,20 @@
             </p>
 
             @if ($notification['content'])
-                @if ($notification['actionCid'])
-                    <a href="{{ fs_route(route('fresns.comment.detail', ['cid' => $notification['actionCid']])) }}" class="text-decoration-none text-secondary fs-6 mt-2">{{ $notification['content'] }}</a>
+                @if ($notification['contentFsid'])
+                    @switch($notification['type'])
+                        @case(8)
+                            <a href="{{ fs_route(route('fresns.comment.detail', ['cid' => $notification['contentFsid']])) }}" class="text-decoration-none text-secondary fs-6 mt-2">{{ $notification['content'] }}</a>
+                        @break
+
+                        @case(9)
+                            <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $notification['contentFsid']])) }}" class="text-decoration-none text-secondary fs-6 mt-2">{{ $notification['content'] }}</a>
+                        @break
+
+                        @default
+                            <span class="text-secondary fs-6 mt-2">{{ $notification['content'] }}</span>
+                        @break
+                    @endswitch
                 @else
                     <span class="text-secondary fs-6 mt-2">{{ $notification['content'] }}</span>
                 @endif
