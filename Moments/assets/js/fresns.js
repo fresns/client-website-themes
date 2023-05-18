@@ -1690,9 +1690,7 @@ window.onmessage = function (event) {
 
     switch (fresnsCallback.action.postMessageKey) {
         case 'reload':
-            setTimeout(function () {
-                window.location.reload();
-            }, 1500);
+            window.location.reload();
             break;
 
         case 'fresnsConnect':
