@@ -14,15 +14,19 @@ If you have installed a third-party engine plug-in, there may be compatibility i
 
 ## ThemeFrame
 
-Fresns theme framework to showcase web-side functionality and interaction flow.
+![ThemeFrame](https://files.fresns.org/marketplace/fresns/ThemeFrame.png)
 
+- Fresns theme framework to showcase web-side functionality and interaction flow.
+- Theme Detail: [https://marketplace.fresns.com/open-source/detail/ThemeFrame](https://marketplace.fresns.com/open-source/detail/ThemeFrame)
 - Installation with key name: `ThemeFrame`
 - Installation using command: `php artisan market:require ThemeFrame`
 
 ## Moments
 
-A minimalist theme in the form of information flow as an experience, with responsive design, adaptive to computers, tablets, mobile devices.
+![Moments](https://files.fresns.org/marketplace/fresns/Moments.png)
 
+- A minimalist theme in the form of information flow as an experience, with responsive design, adaptive to computers, tablets, mobile devices.
+- Theme Detail: [https://marketplace.fresns.com/open-source/detail/Moments](https://marketplace.fresns.com/open-source/detail/Moments)
 - Installation with key name: `Moments`
 - Installation using command: `php artisan market:require Moments`
 
