@@ -66,7 +66,7 @@
                     <h5 class="modal-title" id="fresnsModalLabel">Extensions title</h5>
                     <button type="button" class="btn-close btn-done-extensions" id="done-extensions" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body"></div>
+                <div class="modal-body" style="padding:0"></div>
             </div>
         </div>
     </div>

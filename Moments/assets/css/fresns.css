@@ -884,7 +884,7 @@ body {
  */
 .fresns-editor {
     width: 100%;
-    max-width: 640px;
+    max-width: 720px;
 }
 .fresns-editor.fresns-editor-box {
     margin-top: 0 !important;
@@ -958,56 +958,56 @@ body {
 .editor-file-image-2 .position-relative {
     float: left;
     width: auto;
-    max-width: 48%;
+    max-width: 47%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-3 .position-relative {
     float: left;
     width: auto;
-    max-width: 31%;
+    max-width: 30%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-4 .position-relative {
     float: left;
     width: auto;
-    max-width: 48%;
+    max-width: 47%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-5 .position-relative {
     float: left;
     width: auto;
-    max-width: 31%;
+    max-width: 30%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-6 .position-relative {
     float: left;
     width: auto;
-    max-width: 31%;
+    max-width: 30%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-7 .position-relative {
     float: left;
     width: auto;
-    max-width: 31%;
+    max-width: 30%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-8 .position-relative {
     float: left;
     width: auto;
-    max-width: 31%;
+    max-width: 30%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }
 .editor-file-image-9 .position-relative {
     float: left;
     width: auto;
-    max-width: 31%;
+    max-width: 30%;
     margin-left: 0.5rem;
     margin-bottom: 0.5rem;
 }

@@ -4,6 +4,11 @@
 
 @section('content')
     <div class="card border-0 hstack p-3">
+        @desktop
+            <div class="me-2 mt-1">
+                <a class="btn btn-outline-secondary border-0 rounded-circle" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
+            </div>
+        @enddesktop
         <div class="fs-5">{{ fs_db_config('menu_account_wallet') }}</div>
         <div class="vr mx-3"></div>
         <div class="">{{ fs_account('detail.wallet.currencyCode') }} {{ fs_account('detail.wallet.balance') }}</div>
@@ -63,54 +68,56 @@
             {{ fs_lang('walletLogs') }}
         </div>
         <div class="card-body">
-            <table class="table table-hover align-middle text-nowrap">
-                <thead>
-                    <tr class="table-info">
-                        <th scope="col">{{ fs_lang('walletLogType') }}</th>
-                        <th scope="col">{{ fs_lang('walletLogAmountTotal') }}</th>
-                        <th scope="col">{{ fs_lang('walletLogAmount') }}</th>
-                        <th scope="col">{{ fs_lang('walletLogSystemFee') }}</th>
-                        <th scope="col">{{ fs_lang('walletLogOpeningBalance') }}</th>
-                        <th scope="col">{{ fs_lang('walletLogClosingBalance') }}</th>
-                        <th scope="col">{{ fs_lang('walletLogTime') }}</th>
-                        <th scope="col">{{ fs_lang('walletLogRemark') }}</th>
-                        <th scope="col">{{ fs_lang('walletLogUser') }}</th>
-                        <th scope="col">{{ fs_lang('walletLogStatus') }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($logs as $log)
-                        <tr>
-                            <th scope="row">{{ fs_lang("walletLogType{$log['type']}") }}</th>
-                            <td>{{ $log['amountTotal'] }}</td>
-                            <td>{{ $log['transactionAmount'] }}</td>
-                            <td>{{ $log['systemFee'] }}</td>
-                            <td>{{ $log['openingBalance'] }}</td>
-                            <td>{{ $log['closingBalance'] }}</td>
-                            <td>
-                                <time class="text-secondary" datetime="{{ $log['createdDatetime'] }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $log['createdDatetime'] }}">
-                                    {{ $log['createdTimeAgo'] }}
-                                </time>
-                            </td>
-                            <td>{{ $log['remark'] }}</td>
-                            <td>
-                                @if ($log['user'])
-                                    @if ($log['user']['status'])
-                                        <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $log['user']['fsid']])) }}">
-                                            <img src="{{ $log['user']['avatar'] }}" loading="lazy" class="rounded-circle" width="24" height="24">
-                                            {{ $log['user']['nickname'] }}
-                                        </a>
-                                    @else
-                                        {{-- Deactivate --}}
-                                        <img src="{{ fs_api_config('deactivate_avatar') }}" loading="lazy" alt="{{ fs_lang('userDeactivate') }}" class="user-avatar rounded-circle">
-                                    @endif
-                                @endif
-                            </td>
-                            <td><i class="bi {{ $log['status'] ? 'bi-check-lg text-success' : 'bi-dash-lg text-secondary' }}"></i></td>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle text-nowrap">
+                    <thead>
+                        <tr class="table-info">
+                            <th scope="col">{{ fs_lang('walletLogType') }}</th>
+                            <th scope="col">{{ fs_lang('walletLogAmountTotal') }}</th>
+                            <th scope="col">{{ fs_lang('walletLogAmount') }}</th>
+                            <th scope="col">{{ fs_lang('walletLogSystemFee') }}</th>
+                            <th scope="col">{{ fs_lang('walletLogOpeningBalance') }}</th>
+                            <th scope="col">{{ fs_lang('walletLogClosingBalance') }}</th>
+                            <th scope="col">{{ fs_lang('walletLogTime') }}</th>
+                            <th scope="col">{{ fs_lang('walletLogRemark') }}</th>
+                            <th scope="col">{{ fs_lang('walletLogUser') }}</th>
+                            <th scope="col">{{ fs_lang('walletLogStatus') }}</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach($logs as $log)
+                            <tr>
+                                <th scope="row">{{ fs_lang("walletLogType{$log['type']}") }}</th>
+                                <td>{{ $log['amountTotal'] }}</td>
+                                <td>{{ $log['transactionAmount'] }}</td>
+                                <td>{{ $log['systemFee'] }}</td>
+                                <td>{{ $log['openingBalance'] }}</td>
+                                <td>{{ $log['closingBalance'] }}</td>
+                                <td>
+                                    <time class="text-secondary" datetime="{{ $log['createdDatetime'] }}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $log['createdDatetime'] }}">
+                                        {{ $log['createdTimeAgo'] }}
+                                    </time>
+                                </td>
+                                <td>{{ $log['remark'] }}</td>
+                                <td>
+                                    @if ($log['user'])
+                                        @if ($log['user']['status'])
+                                            <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $log['user']['fsid']])) }}">
+                                                <img src="{{ $log['user']['avatar'] }}" loading="lazy" class="rounded-circle" width="24" height="24">
+                                                {{ $log['user']['nickname'] }}
+                                            </a>
+                                        @else
+                                            {{-- Deactivate --}}
+                                            <img src="{{ fs_api_config('deactivate_avatar') }}" loading="lazy" alt="{{ fs_lang('userDeactivate') }}" class="user-avatar rounded-circle">
+                                        @endif
+                                    @endif
+                                </td>
+                                <td><i class="bi {{ $log['status'] ? 'bi-check-lg text-success' : 'bi-dash-lg text-secondary' }}"></i></td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
 
             <div class="my-3 table-responsive">
                 {{ $logs->links() }}

@@ -2,7 +2,7 @@
 <aside class="mt-2 mb-3">
     <form action="{{ fs_route(route('fresns.search.index')) }}" method="get">
         <input type="hidden" name="searchType" value="post"/>
-        <input class="form-control rounded-pill bg-light p-2" name="searchKey" value="{{ request('searchKey') }}" placeholder="{{ fs_lang('search') }}" aria-label="Search">
+        <input class="form-control rounded-pill bg-light py-2 px-3" name="searchKey" value="{{ request('searchKey') }}" placeholder="{{ fs_lang('search') }}" aria-label="Search">
     </form>
 </aside>
 

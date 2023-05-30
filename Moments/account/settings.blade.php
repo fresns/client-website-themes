@@ -11,9 +11,15 @@
 @section('content')
     <div class="d-lg-flex align-items-lg-start">
         <div class="nav nav-pills flex-lg-column @desktop w-25 @else border-bottom mb-4 @enddesktop" id="settings-tabs" role="tablist" aria-orientation="vertical">
-            <div class="mx-3 mt-3 d-none d-lg-block">
-                <h1 class="fs-5">{{ fs_db_config('menu_account_settings') }}</h1>
-            </div>
+            @desktop
+                <div class="d-flex mx-3">
+                    <span class="me-2" style="margin-top:11px;">
+                        <a class="btn btn-outline-secondary border-0 rounded-circle" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
+                    </span>
+                    <h1 class="fs-5 my-3">{{ fs_db_config('menu_account_settings') }}</h1>
+                </div>
+            @enddesktop
+
             <button class="nav-link text-start rounded-0 py-3 px-2 px-lg-3 active" id="profile-tab" data-bs-toggle="pill" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">{{ fs_lang('settingGeneral') }}</button>
             <button class="nav-link text-start rounded-0 py-3 px-2 px-lg-3" id="preference-tab" data-bs-toggle="pill" data-bs-target="#preference" type="button" role="tab" aria-controls="preference" aria-selected="false">{{ fs_lang('settingPreference') }}</button>
             <button class="nav-link text-start rounded-0 py-3 px-2 px-lg-3" id="account-tab" data-bs-toggle="pill" data-bs-target="#account" type="button" role="tab" aria-controls="account" aria-selected="false">{{ fs_lang('settingAccount') }}</button>
@@ -37,8 +43,8 @@
         <div class="tab-content border-start ps-lg-5 pb-5 account-settings px-3" id="settings-tab-content">
             {{-- Profile --}}
             <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-                <div class="my-3 d-none d-lg-block">
-                    <h1 class="fs-5">{{ fs_lang('settingGeneral') }}</h1>
+                <div class="d-none d-lg-block">
+                    <h1 class="fs-5 my-3">{{ fs_lang('settingGeneral') }}</h1>
                 </div>
                 {{-- Avatar --}}
                 <div class="input-group mb-3">
@@ -165,8 +171,8 @@
 
             {{-- Preference --}}
             <div class="tab-pane fade" id="preference" role="tabpanel" aria-labelledby="preference-tab" tabindex="0">
-                <div class="my-3 d-none d-lg-block">
-                    <h1 class="fs-5">{{ fs_lang('settingPreference') }}</h1>
+                <div class="d-none d-lg-block">
+                    <h1 class="fs-5 my-3">{{ fs_lang('settingPreference') }}</h1>
                 </div>
                 {{-- Conversation --}}
                 <div class="input-group mb-3">
@@ -239,8 +245,8 @@
 
             {{-- Account Settings --}}
             <div class="tab-pane fade" id="account" role="tabpanel" aria-labelledby="account-tab" tabindex="0">
-                <div class="my-3 d-none d-lg-block">
-                    <h1 class="fs-5">{{ fs_lang('settingAccount') }}</h1>
+                <div class="d-none d-lg-block">
+                    <h1 class="fs-5 my-3">{{ fs_lang('settingAccount') }}</h1>
                 </div>
                 {{-- Account ID --}}
                 {{-- <div class="input-group mb-3">
@@ -374,8 +380,8 @@
 
             {{-- Delete Account --}}
             <div class="tab-pane fade" id="delete" role="tabpanel" aria-labelledby="delete-tab" tabindex="0">
-                <div class="my-3 d-none d-lg-block">
-                    <h1 class="fs-5">{{ fs_lang('accountDelete') }}</h1>
+                <div class="d-none d-lg-block">
+                    <h1 class="fs-5 my-3">{{ fs_lang('accountDelete') }}</h1>
                 </div>
                 <div>
                     {!! fs_api_config('account_delete') ? Str::markdown(fs_api_config('account_delete')) : '' !!}

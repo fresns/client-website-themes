@@ -3,8 +3,13 @@
 @section('title', fs_db_config('menu_account_users'))
 
 @section('content')
-    <div class="d-flex justify-content-between mx-3 mt-3">
-        <h1 class="fs-5">{{ fs_db_config('user_name') }}</h1>
+    <div class="d-flex mx-3">
+        @desktop
+            <span class="me-2" style="margin-top:11px;">
+                <a class="btn btn-outline-secondary border-0 rounded-circle" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
+            </span>
+        @enddesktop
+        <h1 class="fs-5 my-3">{{ fs_db_config('user_name') }}</h1>
         <div>
             @if (fs_user_panel('multiUser.status'))
                 <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
@@ -24,7 +29,7 @@
 
     <div class="row p-3">
         @foreach(fs_account('detail.users') as $item)
-            <div class="col-sm-3 d-flex flex-column align-items-center">
+            <div class="col-6 col-md-4 d-flex flex-column align-items-center">
                 <img src="{{ $item['avatar'] }}" loading="lazy" class="auth-avatar rounded-circle">
                 <div class="auth-nickname mt-2">{{ $item['nickname'] }}</div>
                 <div class="text-secondary">{{ '@' . $item['username'] }}</div>

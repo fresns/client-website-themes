@@ -32,7 +32,7 @@
                 @endif
 
                 {{-- Content --}}
-                <textarea class="form-control rounded-0 border-0" id="content" rows="10" placeholder="{{ fs_lang('editorContent') }}"></textarea>
+                <textarea class="form-control rounded-0 border-0" id="content" rows="20" placeholder="{{ fs_lang('editorContent') }}"></textarea>
             </div>
             {{-- Content End --}}
 

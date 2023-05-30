@@ -5,8 +5,13 @@
 @section('content')
     <div class="d-flex align-items-start">
         <div class="nav flex-column nav-pills w-25 sticky-top" id="policies-tabs" role="tablist" aria-orientation="vertical">
-            <div class="d-flex justify-content-between mx-3 mt-3">
-                <h1 class="fs-5">{{ fs_lang('accountPolicies') }}</h1>
+            <div class="d-flex mx-3">
+                @desktop
+                    <span class="me-2" style="margin-top:11px;">
+                        <a class="btn btn-outline-secondary border-0 rounded-circle" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
+                    </span>
+                @enddesktop
+                <h1 class="fs-5 my-3">{{ fs_lang('accountPolicies') }}</h1>
             </div>
 
             @if (fs_api_config('account_terms_status'))
@@ -26,7 +31,7 @@
             @endif
         </div>
 
-        <div class="tab-content border-start ps-lg-5 pb-5 account-settings" id="policies-tab-content">
+        <div class="tab-content border-start ps-3 ps-lg-5 pb-5 account-settings" id="policies-tab-content">
             {{-- Terms --}}
             <div class="tab-pane fade py-4 show active" id="terms" role="tabpanel" aria-labelledby="terms-tab" tabindex="0">
                 {!! fs_api_config('account_terms') ? Str::markdown(fs_api_config('account_terms')) : '' !!}

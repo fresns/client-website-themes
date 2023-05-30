@@ -10,7 +10,7 @@
                 <div class="modal-body">
                     <div class="row">
                         @foreach(fs_account('detail.users') as $item)
-                            <div class="col-sm-3 d-flex flex-column align-items-center">
+                            <div class="col-6 col-md-4 d-flex flex-column align-items-center">
                                 <img src="{{ $item['avatar'] }}" loading="lazy" class="auth-avatar rounded-circle">
                                 <div class="auth-nickname mt-2">{{ $item['nickname'] }}</div>
                                 <div class="text-secondary">{{ '@' . $item['username'] }}</div>

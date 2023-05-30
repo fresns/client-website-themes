@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.8.1 (2023-05-30)
+
+- Optimised views
+
+
 ## 2.8.0 (2023-05-18)
 
 - Disable selection of groups not allowed to post

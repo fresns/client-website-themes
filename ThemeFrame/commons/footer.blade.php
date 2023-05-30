@@ -23,5 +23,5 @@
         <p class="mb-1" style="font-size:15px;">{{ fs_db_config('china_broadcasting_license') }}</p>
     @endif
 
-    <p class="mb-0">Powered by <a href="https://fresns.cn" target="_blank" class="text-decoration-none link-secondary">Fresns</a></p>
+    <p class="mb-0">Powered by <a href="https://fresns.org" target="_blank" class="text-decoration-none link-secondary">Fresns</a></p>
 </footer>
