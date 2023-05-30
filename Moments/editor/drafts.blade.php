@@ -6,8 +6,13 @@
     <div class="card border-0">
         {{-- Menus --}}
         <div class="card-header">
-            <div class="d-flex justify-content-between">
-                <h1 class="fs-5 mb-3">{{ fs_db_config('menu_editor_drafts') }}</h1>
+            <div class="d-flex">
+                @desktop
+                    <span class="me-2 mb-2" style="margin-top:3px;">
+                        <a class="btn btn-outline-secondary border-0 rounded-circle" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
+                    </span>
+                @enddesktop
+                <h1 class="fs-5 mt-2">{{ fs_db_config('menu_editor_drafts') }}</h1>
             </div>
             <ul class="nav nav-tabs card-header-tabs">
                 {{-- posts --}}

@@ -3,8 +3,13 @@
 @section('title', fs_db_config('menu_search').': '.fs_db_config('group_name'))
 
 @section('content')
-    <div class="d-flex justify-content-between mx-3 mt-3">
-        <h1 class="fs-5">
+    <div class="d-flex mx-3">
+        @desktop
+            <span class="me-2" style="margin-top:11px;">
+                <a class="btn btn-outline-secondary border-0 rounded-circle" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
+            </span>
+        @enddesktop
+        <h1 class="fs-5 my-3">
             {{ fs_db_config('menu_search') }}: {{ fs_db_config('group_name') }}
             <span class="badge bg-secondary ms-3">{{ request('searchKey') }}</span>
         </h1>

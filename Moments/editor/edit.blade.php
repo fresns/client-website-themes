@@ -4,33 +4,34 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="fresns-editor ms-lg-5 mt-lg-5">
+        <div class="fresns-editor ms-lg-5">
+            {{-- Tip: Publish Permissions --}}
+            @if ($config['publish']['limit']['status'] && $config['publish']['limit']['isInTime'])
+                @component('components.editor.tip.publish', [
+                    'config' => $config['publish'],
+                ])@endcomponent
+            @endif
+
+            {{-- Tip: Edit Controls --}}
+            @if ($draft['editControls']['isEditDraft'] && ! in_array($draft['detail']['state'], [2, 3]))
+                @component('components.editor.tip.edit', [
+                    'config' => $draft['editControls'],
+                ])@endcomponent
+            @endif
+
+            {{-- Tip: Draft under review or published --}}
+            @if (in_array($draft['detail']['state'], [2, 3]))
+                <div class="alert alert-warning mt-3" role="alert">
+                    <i class="fa-solid fa-triangle-exclamation"></i> {{ $draft['detail']['state'] == 2 ? fs_code_message('38101') : fs_code_message('38102') }}
+                </div>
+            @endif
+
+            {{-- Editor Form --}}
             <form action="{{ fs_route(route('fresns.editor.publish', [$type, $draft['detail']['id']])) }}" method="post">
                 @csrf
                 @method("post")
                 <input type="hidden" name="type" value="{{ $type ?? '' }}" />
                 <input type="hidden" name="postGid" value="{{ $draft['detail']['group']['gid'] ?? '' }}" />
-                {{-- Tip: Publish Permissions --}}
-                @if ($config['publish']['limit']['status'] && $config['publish']['limit']['isInTime'])
-                    @component('components.editor.tip.publish', [
-                        'config' => $config['publish'],
-                    ])@endcomponent
-                @endif
-
-                {{-- Tip: Edit Controls --}}
-                @if ($draft['editControls']['isEditDraft'] && ! in_array($draft['detail']['state'], [2, 3]))
-                    @component('components.editor.tip.edit', [
-                        'config' => $draft['editControls'],
-                    ])@endcomponent
-                @endif
-
-                {{-- Tip: Draft under review or published --}}
-                @if (in_array($draft['detail']['state'], [2, 3]))
-                    <div class="alert alert-warning" role="alert">
-                        <i class="fa-solid fa-triangle-exclamation"></i> {{ $draft['detail']['state'] == 2 ? fs_code_message('38101') : fs_code_message('38102') }}
-                    </div>
-                @endif
-
                 {{-- Group --}}
                 @if ($config['editor']['features']['group']['status'])
                     @component('components.editor.section.group', [
@@ -50,7 +51,7 @@
                 ])@endcomponent
 
                 {{-- Content Start --}}
-                <div class="editor-content p-3">
+                <div class="editor-content py-3">
                     {{-- Title --}}
                     @if ($config['editor']['toolbar']['title']['status'] || optional($draft['detail'])['title'])
                         @component('components.editor.section.title', [
@@ -60,7 +61,7 @@
                     @endif
 
                     {{-- Content --}}
-                    <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="content" rows="10" placeholder="{{ fs_lang('editorContent') }}">{{ $draft['detail']['content'] }}</textarea>
+                    <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="content" rows="20" placeholder="{{ fs_lang('editorContent') }}">{{ $draft['detail']['content'] }}</textarea>
 
                     {{-- Files --}}
                     @component('components.editor.section.files', [

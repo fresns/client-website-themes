@@ -3,6 +3,15 @@
 @section('title', fs_db_config('menu_conversations').' - '.$conversation['user']['nickname'])
 
 @section('content')
+    @desktop
+        <div class="d-flex mx-3">
+                <span class="me-2" style="margin-top:11px;">
+                    <a class="btn btn-outline-secondary border-0 rounded-circle" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
+                </span>
+                <h1 class="fs-5 my-3">{{ fs_db_config('menu_conversations') }}</h1>
+        </div>
+    @enddesktop
+
     <div class="card border-0">
         {{-- Conversation User --}}
         <div class="card-header">

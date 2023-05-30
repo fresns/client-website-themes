@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <div class="fresns-editor ms-lg-5 mt-lg-5">
+        <div class="fresns-editor ms-lg-5">
             {{-- Tip: Publish Permissions --}}
             @if ($config['publish']['limit']['status'] && $config['publish']['limit']['isInTime'])
                 @component('components.editor.tip.publish', [
@@ -22,7 +22,7 @@
             ])@endcomponent
 
             {{-- Content Start --}}
-            <div class="editor-content p-3">
+            <div class="editor-content py-3">
                 {{-- Title --}}
                 @if ($config['editor']['toolbar']['title']['status'])
                     @component('components.editor.section.title', [
@@ -32,7 +32,7 @@
                 @endif
 
                 {{-- Content --}}
-                <textarea class="form-control rounded-0 border-0" id="content" rows="10" placeholder="{{ fs_lang('editorContent') }}"></textarea>
+                <textarea class="form-control rounded-0 border-0" id="content" rows="20" placeholder="{{ fs_lang('editorContent') }}"></textarea>
             </div>
             {{-- Content End --}}
 

@@ -159,19 +159,19 @@
                 @if ($notification['contentFsid'])
                     @switch($notification['type'])
                         @case(8)
-                            <a href="{{ fs_route(route('fresns.comment.detail', ['cid' => $notification['contentFsid']])) }}" class="text-decoration-none text-secondary fs-6 mt-2">{{ $notification['content'] }}</a>
+                            <a href="{{ fs_route(route('fresns.comment.detail', ['cid' => $notification['contentFsid']])) }}" class="text-decoration-none text-secondary fs-6 mt-2 text-wrap text-break">{{ $notification['content'] }}</a>
                         @break
 
                         @case(9)
-                            <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $notification['contentFsid']])) }}" class="text-decoration-none text-secondary fs-6 mt-2">{{ $notification['content'] }}</a>
+                            <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $notification['contentFsid']])) }}" class="text-decoration-none text-secondary fs-6 mt-2 text-wrap text-break">{{ $notification['content'] }}</a>
                         @break
 
                         @default
-                            <span class="text-secondary fs-6 mt-2">{{ $notification['content'] }}</span>
+                            <span class="text-secondary fs-6 mt-2 text-wrap text-break">{{ $notification['content'] }}</span>
                         @break
                     @endswitch
                 @else
-                    <span class="text-secondary fs-6 mt-2">{{ $notification['content'] }}</span>
+                    <span class="text-secondary fs-6 mt-2 text-wrap text-break">{{ $notification['content'] }}</span>
                 @endif
             @endif
         </section>
@@ -198,7 +198,7 @@
                     <section class="comment-post mt-2 position-relative">
                         <div class="d-flex">
                             <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['author']['avatar'] }}" loading="lazy" class="rounded"></div>
-                            <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit(strip_tags($notification['actionInfo']['content']), 80) }}</div>
+                            <div class="flex-grow-1 text-wrap text-break">{{ $notification['actionInfo']['title'] ?? Str::limit(strip_tags($notification['actionInfo']['content']), 80) }}</div>
                         </div>
                         @if ($notification['actionInfo']['group'])
                             <div class="comment-post-group border-top text-secondary">{{ $notification['actionInfo']['group']['gname'] }}</div>
@@ -211,7 +211,7 @@
                     <section class="comment-post mt-2 position-relative">
                         <div class="d-flex">
                             <div class="flex-shrink-0"><img src="{{ $notification['actionInfo']['author']['avatar'] }}" loading="lazy" class="rounded"></div>
-                            <div class="flex-grow-1">{{ $notification['actionInfo']['title'] ?? Str::limit(strip_tags($notification['actionInfo']['content']), 80) }}</div>
+                            <div class="flex-grow-1 text-wrap text-break">{{ $notification['actionInfo']['title'] ?? Str::limit(strip_tags($notification['actionInfo']['content']), 80) }}</div>
                         </div>
                         <a href="{{ fs_route(route('fresns.comment.detail', ['cid' => $notification['actionInfo']['cid']])) }}" class="text-decoration-none stretched-link"></a>
                     </section>

@@ -16,7 +16,7 @@
         @component('components.comment.detail', compact('comment'))@endcomponent
     </div>
 
-    <div class="clearfix" id="commentList" name="commentList">
+    <div class="clearfix pb-5" id="commentList" name="commentList">
         <div class="d-flex justify-content-between px-3 mt-4 border-bottom">
             <h3 class="fs-5 pt-2">
                 {{ fs_db_config('comment_name') }}

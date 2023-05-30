@@ -1,4 +1,4 @@
-<div class="editor-alert">
+<div class="editor-alert mt-3">
     <ul class="list-group mb-3">
         <li class="list-group-item list-group-item-danger">{{ fs_lang('editorLimitTitle') }}:</li>
         @if ($config['limit']['type'] == 1)

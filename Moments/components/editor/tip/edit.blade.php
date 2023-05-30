@@ -1,4 +1,4 @@
-<div class="editor-alert">
+<div class="editor-alert mt-3">
     @if ($config['editableStatus'])
         <div class="alert alert-danger" role="alert">
             {{ fs_lang('editoreditedDatetimeTitle') }}<br>

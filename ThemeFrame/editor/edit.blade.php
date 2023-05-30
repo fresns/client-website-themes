@@ -60,7 +60,7 @@
                     @endif
 
                     {{-- Content --}}
-                    <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="content" rows="10" placeholder="{{ fs_lang('editorContent') }}">{{ $draft['detail']['content'] }}</textarea>
+                    <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="content" rows="20" placeholder="{{ fs_lang('editorContent') }}">{{ $draft['detail']['content'] }}</textarea>
 
                     {{-- Files --}}
                     @component('components.editor.section.files', [

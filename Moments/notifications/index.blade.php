@@ -96,14 +96,12 @@
 
         {{-- quote notifications --}}
         @if (in_array('quotes', fs_db_config('fs_theme_notifications', [])))
-            <li class="nav-item">
-                <a class="nav-link @if ($types == 9) active @endif" href="{{ fs_route(route('fresns.notifications.index', ['types' => 9])) }}">
-                    {{ fs_db_config('menu_notifications_quotes') }}
-                    @if (fs_user_panel('unreadNotifications.quotes') > 0)
-                        <span class="badge bg-danger">{{ fs_user_panel('unreadNotifications.quotes') }}</span>
-                    @endif
-                </a>
-            </li>
+            <a class="nav-link rounded-pill px-2 @if ($types == 9) active @endif" href="{{ fs_route(route('fresns.notifications.index', ['types' => 9])) }}">
+                {{ fs_db_config('menu_notifications_quotes') }}
+                @if (fs_user_panel('unreadNotifications.quotes') > 0)
+                    <span class="badge bg-danger">{{ fs_user_panel('unreadNotifications.quotes') }}</span>
+                @endif
+            </a>
         @endif
     </nav>
 

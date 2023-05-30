@@ -1,22 +1,54 @@
 <nav class="navbar navbar-expand-lg fixed-top border-end fs-navbar">
     <div class="container-fluid d-lg-flex flex-lg-column align-items-center">
+        {{-- go back --}}
         @if (! Route::is([
             'fresns.home',
-            'fresns.*.index',
-            'fresns.notifications.index',
+            'fresns.portal',
+            'fresns.post.index',
+            'fresns.post.nearby',
+            'fresns.group.index',
+            'fresns.follow.all.posts',
+            'fresns.account.index',
             'fresns.account.login',
             'fresns.account.register',
             'fresns.account.reset.password',
-        ]) || Route::is('fresns.messages.index'))
+        ]) && request()->url() != fs_route(route('fresns.custom.page', ['name' => 'channels'])))
             <a class="btn btn-outline-secondary border-0 rounded-circle d-block d-sm-none" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
         @endif
+
+        {{-- logo --}}
         <a class="navbar-brand rounded-circle" href="{{ fs_route(route('fresns.home')) }}">
             <img src="{{ fs_db_config('site_icon') }}" alt="{{ fs_db_config('site_name') }}" class="d-none d-sm-block" width="50" height="50">
             <img src="{{ fs_db_config('site_logo') }}" alt="{{ fs_db_config('site_name') }}" class="d-block d-sm-none" height="30">
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+
+        @mobile
+            @if (fs_user()->check() && Route::is([
+                'fresns.home',
+                'fresns.portal',
+                'fresns.*.index',
+                'fresns.*.list',
+                'fresns.*.location',
+                'fresns.*.nearby',
+                'fresns.follow.*',
+                'fresns.group.detail',
+            ]) && ! Route::is([
+                'fresns.notifications.index',
+                'fresns.messages.index',
+            ]) || request()->url() == fs_route(route('fresns.custom.page', ['name' => 'channels'])))
+                @if (fs_db_config('fs_theme_quick_publish'))
+                    <button class="btn btn-warning text-white rounded-pill fs-create fs-6" type="button" data-bs-toggle="modal" data-bs-target="#createModal">{{ fs_db_config('publish_post_name') }}</button>
+                @else
+                    <a class="btn btn-warning text-white rounded-pill fs-create fs-6" href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}">{{ fs_db_config('publish_post_name') }}</a>
+                @endif
+            @else
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            @endif
+        @endmobile
+
+        {{-- navbar --}}
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav fs-menus d-flex flex-column">
                 {{-- Home --}}
@@ -26,27 +58,32 @@
                         <span class="me-2">{{ fs_lang('home') }}</span>
                     </a>
                 </li>
-                {{-- Explore --}}
+                {{-- Portal or Post --}}
                 <li class="nav-item mt-1">
-                    <a class="nav-link rounded-pill d-inline-flex {{ Route::is([
-                        'fresns.hashtag.list',
-                        'fresns.post.list',
-                        'fresns.comment.list',
-                        'fresns.user.list',
-                    ]) ? 'active' : '' }}" href="{{ fs_route(route('fresns.hashtag.list')) }}">{!! Route::is([
-                            'fresns.hashtag.list',
-                            'fresns.post.list',
-                            'fresns.comment.list',
-                            'fresns.user.list',
-                        ]) ? '<i class="fa-solid fa-compass mx-2 mt-1"></i>' : '<i class="fa-regular fa-compass mx-2 mt-1"></i>' !!}
-                        <span class="me-2">{{ fs_lang('discover') }}</span>
-                    </a>
+                    @if (fs_db_config('default_homepage') == 'post')
+                        <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.portal') ? 'active' : '' }}" href="{{ fs_route(route('fresns.portal')) }}">
+                            {!! Route::is('fresns.portal') ? '<i class="fa-solid fa-newspaper mx-2 mt-1"></i>' : '<i class="fa-regular fa-newspaper mx-2 mt-1"></i>' !!}
+                            <span class="me-2">{{ fs_db_config('menu_portal_name') }}</span>
+                        </a>
+                    @else
+                        <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.post.index') ? 'active' : '' }}" href="{{ fs_route(route('fresns.post.index')) }}">
+                            {!! Route::is('fresns.post.index') ? '<i class="fa-solid fa-newspaper mx-2 mt-1"></i>' : '<i class="fa-regular fa-newspaper mx-2 mt-1"></i>' !!}
+                            <span class="me-2">{{ fs_db_config('menu_post_name') }}</span>
+                        </a>
+                    @endif
                 </li>
-                {{-- Communities --}}
+                {{-- Group --}}
                 <li class="nav-item mt-1">
                     <a class="nav-link rounded-pill d-inline-flex {{ Route::is(['fresns.group.index', 'fresns.group.detail']) ? 'active' : '' }}" href="{{ fs_route(route('fresns.group.index')) }}">
-                        {!! Route::is(['fresns.group.*']) ? '<i class="fa-solid fa-newspaper mx-2 mt-1"></i>' : '<i class="fa-regular fa-newspaper mx-2 mt-1"></i>' !!}
+                        {!! Route::is(['fresns.group.*']) ? '<i class="fa-solid fa-building mx-2 mt-1"></i>' : '<i class="fa-regular fa-building mx-2 mt-1"></i>' !!}
                         <span class="me-2">{{ fs_db_config('menu_group_name') }}</span>
+                    </a>
+                </li>
+                {{-- Channels --}}
+                <li class="nav-item mt-1">
+                    <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.custom.page', ['name' => 'channels']) ? 'active' : '' }}" href="{{ fs_route(route('fresns.custom.page', ['name' => 'channels'])) }}">
+                        {!! Route::is('fresns.custom.page', ['name' => 'channels']) ? '<i class="fa-solid fa-compass mx-2 mt-1"></i>' : '<i class="fa-regular fa-compass mx-2 mt-1"></i>' !!}
+                        <span class="me-2">{{ fs_lang('discover') }}</span>
                     </a>
                 </li>
                 @if (fs_user()->check())
@@ -74,59 +111,12 @@
                             </a>
                         </li>
                     @endif
-                    {{-- Profile --}}
+                    {{-- User Center --}}
                     <li class="nav-item mt-1">
-                        <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.profile.*', ['uidOrUsername' => fs_user('detail.fsid')]) ? 'active' : '' }}" href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => fs_user('detail.fsid')])) }}">
-                            {!! Route::is('fresns.profile.*', ['uidOrUsername' => fs_user('detail.fsid')]) ? '<i class="fa-solid fa-user mx-2 mt-1"></i>' : '<i class="fa-regular fa-user mx-2 mt-1"></i>' !!}
-                            <span class="me-2">{{ fs_lang('userProfile') }}</span>
+                        <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.account.*') ? 'active' : '' }}" href="{{ fs_route(route('fresns.account.index')) }}">
+                            {!! Route::is('fresns.account.*') ? '<i class="fa-solid fa-user mx-2 mt-1"></i>' : '<i class="fa-regular fa-user mx-2 mt-1"></i>' !!}
+                            {{ fs_db_config('menu_account') }}
                         </a>
-                    </li>
-                    {{-- More --}}
-                    <li class="nav-item mt-1 dropup-center dropup">
-                        <a class="nav-link rounded-pill d-inline-flex" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-list-ul mx-2 mt-1"></i>
-                            <span class="me-2">{{ fs_lang('more') }}</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            {{-- Draft Box --}}
-                            <li>
-                                <a class="dropdown-item py-2" href="{{ fs_route(route('fresns.editor.drafts', ['type' => 'posts'])) }}">
-                                    <i class="fa-solid fa-envelope-open-text me-2"></i>
-                                    {{ fs_db_config('menu_editor_drafts') }}
-
-                                    @if (array_sum(fs_user_panel('draftCount')) > 0)
-                                        <span class="badge bg-success rounded-pill">{{ array_sum(fs_user_panel('draftCount')) }}</span>
-                                    @endif
-                                </a>
-                            <li>
-                            {{-- Blacklist --}}
-                            <li>
-                                <a class="dropdown-item py-2" href="{{ fs_route(route('fresns.user.blocking')) }}">
-                                    <i class="fa-solid fa-user-shield me-2"></i>
-                                    {{ fs_db_config('menu_block_users') }}
-                                </a>
-                            <li>
-                            {{-- Favorites --}}
-                            <li>
-                                <a class="dropdown-item py-2" href="{{ fs_route(route('fresns.post.following')) }}">
-                                    <i class="fa-solid fa-box-archive me-2"></i>
-                                    {{ fs_db_config('menu_follow_posts') }}
-                                </a>
-                            <li>
-                            {{-- Wallet --}}
-                            @if (fs_api_config('wallet_status'))
-                                <li>
-                                    <a class="dropdown-item py-2" href="{{ fs_route(route('fresns.account.wallet')) }}"><i class="fa-solid fa-wallet me-2"></i> {{ fs_db_config('menu_account_wallet') }}</a>
-                                </li>
-                            @endif
-                            {{-- Settings --}}
-                            <li><a class="dropdown-item py-2" href="{{ fs_route(route('fresns.account.settings')) }}"><i class="fa-solid fa-gear me-2"></i> {{ fs_db_config('menu_account_settings') }}</a></li>
-                            {{-- Switch Languages --}}
-                            @if (fs_api_config('language_status'))
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item py-2" href="#translate" data-bs-toggle="modal"><i class="fa-solid fa-language me-2"></i> {{ fs_lang('optionLanguage') }}</a></li>
-                            @endif
-                        </ul>
                     </li>
                     {{-- Publish --}}
                     <li class="nav-item mt-4">
@@ -179,11 +169,9 @@
                         <div class="text-secondary ms-4 pt-2 me-1" style="padding-top: 10px"><i class="fa-solid fa-ellipsis"></i></div>
                     </button>
                     <ul class="dropdown-menu">
-                        {{-- User Center --}}
-                        <li><a class="dropdown-item py-3" href="{{ fs_route(route('fresns.account.index')) }}"><i class="fa-regular fa-circle-user me-2"></i> {{ fs_db_config('menu_account') }}</a></li>
-                        {{-- Manage Users --}}
-                        @if (fs_user_panel('multiUser.status') || count(fs_account('detail.users')) > 1)
-                            <li><a class="dropdown-item py-3" href="{{ fs_route(route('fresns.account.users')) }}"><i class="fa-solid fa-user-gear me-2"></i> {{ fs_db_config('menu_account_users') }}</a></li>
+                        {{-- Switch Languages --}}
+                        @if (fs_api_config('language_status'))
+                            <li><a class="dropdown-item py-3" href="#translate" data-bs-toggle="modal"><i class="fa-solid fa-language me-2"></i> {{ fs_lang('optionLanguage') }}</a></li>
                         @endif
                         {{-- Switch Users --}}
                         @if (count(fs_account('detail.users')) > 1)

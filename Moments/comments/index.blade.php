@@ -5,8 +5,14 @@
 @section('description', fs_db_config('menu_comment_description'))
 
 @section('content')
-    {{-- Navigation --}}
-    @include('commons.discover-tabs')
+    <div class="d-flex mx-3">
+        @desktop
+            <span class="me-2" style="margin-top:11px;">
+                <a class="btn btn-outline-secondary border-0 rounded-circle" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
+            </span>
+        @enddesktop
+        <h1 class="fs-5 my-3">{{ fs_db_config('menu_comment_name') }}</h1>
+    </div>
 
     {{-- Comment List --}}
     <div class="clearfix border-top" @if (fs_db_config('menu_comment_query_state') != 1) id="fresns-list-container" @endif>
