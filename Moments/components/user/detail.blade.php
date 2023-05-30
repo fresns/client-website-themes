@@ -63,7 +63,7 @@
         $user['stats']['extcredits5State'] == 3)
         <div class="d-flex gap-2 justify-content-center">
             {{-- extcredits1 --}}
-            @if ($user['stats']['extcredits1State'] == 3)
+            @if ($user['stats']['extcredits1State'] == 3 && $user['stats']['extcredits1'])
                 <span class="badge d-flex align-items-center p-1 px-2 text-light-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
                     {{ $user['stats']['extcredits1Name'] }}
                     <span class="vr mx-2"></span>
@@ -71,7 +71,7 @@
                 </span>
             @endif
             {{-- extcredits2 --}}
-            @if ($user['stats']['extcredits2State'] == 3)
+            @if ($user['stats']['extcredits2State'] == 3 && $user['stats']['extcredits2'])
                 <span class="badge d-flex align-items-center p-1 px-2 text-light-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
                     {{ $user['stats']['extcredits2Name'] }}
                     <span class="vr mx-2"></span>
@@ -79,7 +79,7 @@
                 </span>
             @endif
             {{-- extcredits3 --}}
-            @if ($user['stats']['extcredits3State'] == 3)
+            @if ($user['stats']['extcredits3State'] == 3 && $user['stats']['extcredits3'])
                 <span class="badge d-flex align-items-center p-1 px-2 text-light-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
                     {{ $user['stats']['extcredits3Name'] }}
                     <span class="vr mx-2"></span>
@@ -87,7 +87,7 @@
                 </span>
             @endif
             {{-- extcredits4 --}}
-            @if ($user['stats']['extcredits4State'] == 3)
+            @if ($user['stats']['extcredits4State'] == 3 && $user['stats']['extcredits4'])
                 <span class="badge d-flex align-items-center p-1 px-2 text-light-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
                     {{ $user['stats']['extcredits4Name'] }}
                     <span class="vr mx-2"></span>
@@ -95,7 +95,7 @@
                 </span>
             @endif
             {{-- extcredits5 --}}
-            @if ($user['stats']['extcredits5State'] == 3)
+            @if ($user['stats']['extcredits5State'] == 3 && $user['stats']['extcredits5'])
                 <span class="badge d-flex align-items-center p-1 px-2 text-light-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
                     {{ $user['stats']['extcredits5Name'] }}
                     <span class="vr mx-2"></span>
