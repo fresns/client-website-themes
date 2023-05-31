@@ -236,6 +236,7 @@
     <script src="/static/js/base64.js?v={{ $fresnsVersion }}"></script>
     <script src="/static/js/bootstrap.bundle.min.js?v={{ $fresnsVersion }}"></script>
     <script src="/static/js/select2.min.js?v={{ $fresnsVersion }}"></script>
+    <script src="/static/js/masonry.pkgd.min.js?v={{ $themeVersion }}"></script>
     <script src="/static/js/iframeResizer.min.js?v={{ $fresnsVersion }}"></script>
     <script>
         window.ajaxGetList = true;
