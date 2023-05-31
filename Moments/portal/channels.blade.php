@@ -4,10 +4,28 @@
 
 @section('content')
     <div class="text-bg-light p-2 mb-3">
-        <form action="{{ fs_route(route('fresns.search.index')) }}" method="get">
-            <input type="hidden" name="searchType" value="post"/>
-            <input class="form-control rounded-pill bg-light py-2 px-3" name="searchKey" value="{{ request('searchKey') }}" placeholder="{{ fs_lang('search') }}" aria-label="Search">
-        </form>
+        @if (! fs_db_config('fs_search_method'))
+            <form action="{{ fs_route(route('fresns.search.index')) }}" method="get">
+                <input type="hidden" name="searchType" value="post"/>
+                <input class="form-control rounded-pill bg-light py-2 px-3" name="searchKey" value="{{ request('searchKey') }}" placeholder="{{ fs_lang('search') }}" aria-label="Search">
+            </form>
+        @else
+            @php
+                $siteDomain = \App\Helpers\StrHelper::extractDomainByUrl(fs_api_config('site_url'));
+            @endphp
+
+            <form id="searchForm" action="https://www.google.com/search" method="get" target="_blank">
+                <input type="text" id="searchInput" name="userSearch" placeholder="{{ fs_lang('search') }}" class="form-control rounded-pill bg-light py-2 px-3">
+                <input type="hidden" id="hiddenSearch" name="q">
+            </form>
+            <script>
+                document.getElementById('searchForm').addEventListener('submit', function(e) {
+                    const searchInput = document.getElementById('searchInput');
+                    const hiddenSearch = document.getElementById('hiddenSearch');
+                    hiddenSearch.value = 'site:{{ $siteDomain }} ' + searchInput.value;
+                });
+            </script>
+        @endif
 
         {{-- Sticky Posts --}}
         @if (fs_sticky_posts())

@@ -4,7 +4,7 @@
     "description": "A minimalist theme in the form of information flow as an experience, with responsive design, adaptive to computers, tablets, mobile devices.",
     "author": "Fresns",
     "authorLink": "https://fresns.org",
-    "version": "1.12.1",
+    "version": "1.12.2",
     "functions": true,
     "functionKeys": [
         {
@@ -22,6 +22,12 @@
         {
             "itemKey": "fs_theme_notifications",
             "itemType": "array",
+            "itemTag": "themes",
+            "isMultilingual": false
+        },
+        {
+            "itemKey": "fs_search_method",
+            "itemType": "string",
             "itemTag": "themes",
             "isMultilingual": false
         }
@@ -45,7 +51,8 @@
             "notification_blocks": "Blocks",
             "notification_mentions": "Mentions",
             "notification_comments": "Comments",
-            "notification_quotes": "Quotes"
+            "notification_quotes": "Quotes",
+            "search_method": "Search Method"
         },
         "zh-Hans": {
             "name": "Moments",
@@ -65,7 +72,8 @@
             "notification_blocks": "屏蔽",
             "notification_mentions": "提及",
             "notification_comments": "评论",
-            "notification_quotes": "引用"
+            "notification_quotes": "引用",
+            "search_method": "搜索方式"
         },
         "zh-Hant": {
             "name": "Moments",
@@ -85,7 +93,8 @@
             "notification_blocks": "封鎖",
             "notification_mentions": "提及",
             "notification_comments": "留言",
-            "notification_quotes": "引用"
+            "notification_quotes": "引用",
+            "search_method": "搜索方式"
         }
     }
 }

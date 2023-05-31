@@ -89,6 +89,17 @@
                         </div>
                     </div>
 
+                    {{-- fs_search_method --}}
+                    <div class="row mb-4">
+                        <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['search_method'] }}</label>
+                        <div class="col-lg-6">
+                            <select class="form-select" name="fs_search_method">
+                                <option value="" {{ !($params['fs_search_method']['value'] ?? '') ? 'selected' : '' }}>Site API</option>
+                                <option value="google" {{ ($params['fs_search_method']['value'] ?? '') == 'google' ? 'selected' : '' }}>Google</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <div class="row mb-4">
                         <div class="col-lg-2"></div>
                         <div class="col-lg-10"><button type="submit" class="btn btn-primary">{{ $lang['save'] }}</button></div>
