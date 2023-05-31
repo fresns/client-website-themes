@@ -22,31 +22,29 @@
             <img src="{{ fs_db_config('site_logo') }}" alt="{{ fs_db_config('site_name') }}" class="d-block d-sm-none" height="30">
         </a>
 
-        @mobile
-            @if (fs_user()->check() && Route::is([
-                'fresns.home',
-                'fresns.portal',
-                'fresns.*.index',
-                'fresns.*.list',
-                'fresns.*.location',
-                'fresns.*.nearby',
-                'fresns.follow.*',
-                'fresns.group.detail',
-            ]) && ! Route::is([
-                'fresns.notifications.index',
-                'fresns.messages.index',
-            ]) || request()->url() == fs_route(route('fresns.custom.page', ['name' => 'channels'])))
-                @if (fs_db_config('fs_theme_quick_publish'))
-                    <button class="btn btn-warning text-white rounded-pill fs-create fs-6" type="button" data-bs-toggle="modal" data-bs-target="#createModal">{{ fs_db_config('publish_post_name') }}</button>
-                @else
-                    <a class="btn btn-warning text-white rounded-pill fs-create fs-6" href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}">{{ fs_db_config('publish_post_name') }}</a>
-                @endif
+        @if (fs_user()->check() && Route::is([
+            'fresns.home',
+            'fresns.portal',
+            'fresns.*.index',
+            'fresns.*.list',
+            'fresns.*.location',
+            'fresns.*.nearby',
+            'fresns.follow.*',
+            'fresns.group.detail',
+        ]) && ! Route::is([
+            'fresns.notifications.index',
+            'fresns.messages.index',
+        ]) || request()->url() == fs_route(route('fresns.custom.page', ['name' => 'channels'])))
+            @if (fs_db_config('fs_theme_quick_publish'))
+                <button class="btn btn-warning text-white rounded-pill d-lg-none fs-create fs-6" type="button" data-bs-toggle="modal" data-bs-target="#createModal">{{ fs_db_config('publish_post_name') }}</button>
             @else
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <a class="btn btn-warning text-white rounded-pill d-lg-none fs-create fs-6" href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}">{{ fs_db_config('publish_post_name') }}</a>
             @endif
-        @endmobile
+        @else
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        @endif
 
         {{-- navbar --}}
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
