@@ -9,3 +9,7 @@
         {!! $content !!}
     </div>
 @endsection
+
+@push('script')
+    <script src="/static/js/masonry.pkgd.min.js?v={{ $themeVersion }}"></script>
+@endpush
