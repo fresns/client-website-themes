@@ -316,7 +316,7 @@
                         $.get("{{ route('fresns.api.input.tips') }}", {"type": 'user', "key": query}, function (data) {
                             let html = "";
                             $.each(data, function (k,v){
-                                html += "<option value='" + v.name + "'>" + v.nickname + " " + "@" + v.name + "</option>"
+                                html += "<option value='" + v.fsid + "'>" + v.name + " " + "@" + v.fsid + "</option>"
                             })
                             $("#memberLists").empty().html(html);
                         }, 'json')
