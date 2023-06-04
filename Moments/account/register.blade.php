@@ -20,7 +20,7 @@
                                     data-type="account"
                                     data-scene="join"
                                     data-post-message-key="fresnsJoin"
-                                    data-connect-id="{{ $item['code'] }}"
+                                    data-connect-platform-id="{{ $item['code'] }}"
                                     data-title="{{ fs_lang('accountLogin') }}"
                                     data-url="{{ $item['url'] }}">
                                     <img src="/assets/themes/Moments/images/connects/{{ $item['code'] }}.png" loading="lazy" height="32">
