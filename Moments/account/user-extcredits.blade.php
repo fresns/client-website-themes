@@ -3,7 +3,7 @@
 @section('title', fs_lang('userExtcreditsLogs'))
 
 @section('content')
-    <div class="card">
+    <div class="card rounded-0">
         <div class="card-header">
             @desktop
                 <span class="me-2">
