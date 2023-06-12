@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.8.2 (2023-06-12)
+
+- Customise connect platform id
+- Fix input tips
+- Optimise extension style
+
+
 ## 2.8.1 (2023-05-30)
 
 - Optimised views
