@@ -22,27 +22,33 @@
             </div>
 
             {{-- portal or Post --}}
-            <div class="col text-center">
-                @if (fs_db_config('default_homepage') == 'post')
-                    <a class="text-decoration-none {{ Route::is('fresns.portal') ? 'link-fresns' : 'link-secondary' }}" href="{{ fs_route(route('fresns.portal')) }}">
-                        <div class="fs-5 pt-2">{!! Route::is('fresns.portal') ? '<i class="fa-solid fa-newspaper"></i>' : '<i class="fa-regular fa-newspaper"></i>' !!}</div>
-                        <div class="fs-8 pb-2">{{ fs_db_config('menu_portal_name') }}</div>
-                    </a>
-                @else
+            @if (fs_db_config('default_homepage') == 'post')
+                @if (fs_db_config('menu_portal_status'))
+                    <div class="col text-center">
+                        <a class="text-decoration-none {{ Route::is('fresns.portal') ? 'link-fresns' : 'link-secondary' }}" href="{{ fs_route(route('fresns.portal')) }}">
+                            <div class="fs-5 pt-2">{!! Route::is('fresns.portal') ? '<i class="fa-solid fa-newspaper"></i>' : '<i class="fa-regular fa-newspaper"></i>' !!}</div>
+                            <div class="fs-8 pb-2">{{ fs_db_config('menu_portal_name') }}</div>
+                        </a>
+                    </div>
+                @endif
+            @else
+                <div class="col text-center">
                     <a class="text-decoration-none {{ Route::is('fresns.post.index') ? 'link-fresns' : 'link-secondary' }}" href="{{ fs_route(route('fresns.post.index')) }}">
                         <div class="fs-5 pt-2">{!! Route::is('fresns.post.index') ? '<i class="fa-solid fa-newspaper"></i>' : '<i class="fa-regular fa-newspaper"></i>' !!}</div>
                         <div class="fs-8 pb-2">{{ fs_db_config('menu_post_name') }}</div>
                     </a>
-                @endif
-            </div>
+                </div>
+            @endif
 
             {{-- group --}}
-            <div class="col text-center">
-                <a class="text-decoration-none {{ Route::is('fresns.group.index') ? 'link-fresns' : 'link-secondary' }}" href="{{ fs_route(route('fresns.group.index')) }}">
-                    <div class="fs-5 pt-2">{!! Route::is(['fresns.group.*']) ? '<i class="fa-solid fa-building"></i>' : '<i class="fa-regular fa-building"></i>' !!}</div>
-                    <div class="fs-8 pb-2">{{ fs_db_config('menu_group_name') }}</div>
-                </a>
-            </div>
+            @if (fs_db_config('menu_group_status'))
+                <div class="col text-center">
+                    <a class="text-decoration-none {{ Route::is('fresns.group.index') ? 'link-fresns' : 'link-secondary' }}" href="{{ fs_route(route('fresns.group.index')) }}">
+                        <div class="fs-5 pt-2">{!! Route::is(['fresns.group.*']) ? '<i class="fa-solid fa-building"></i>' : '<i class="fa-regular fa-building"></i>' !!}</div>
+                        <div class="fs-8 pb-2">{{ fs_db_config('menu_group_name') }}</div>
+                    </a>
+                </div>
+            @endif
 
             {{-- channels --}}
             <div class="col text-center">

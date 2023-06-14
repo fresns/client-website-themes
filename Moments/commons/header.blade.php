@@ -57,26 +57,32 @@
                     </a>
                 </li>
                 {{-- Portal or Post --}}
-                <li class="nav-item mt-1">
-                    @if (fs_db_config('default_homepage') == 'post')
-                        <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.portal') ? 'active' : '' }}" href="{{ fs_route(route('fresns.portal')) }}">
-                            {!! Route::is('fresns.portal') ? '<i class="fa-solid fa-newspaper mx-2 mt-1"></i>' : '<i class="fa-regular fa-newspaper mx-2 mt-1"></i>' !!}
-                            <span class="me-2">{{ fs_db_config('menu_portal_name') }}</span>
-                        </a>
-                    @else
+                @if (fs_db_config('default_homepage') == 'post')
+                    @if (fs_db_config('menu_portal_status'))
+                        <li class="nav-item mt-1">
+                            <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.portal') ? 'active' : '' }}" href="{{ fs_route(route('fresns.portal')) }}">
+                                {!! Route::is('fresns.portal') ? '<i class="fa-solid fa-newspaper mx-2 mt-1"></i>' : '<i class="fa-regular fa-newspaper mx-2 mt-1"></i>' !!}
+                                <span class="me-2">{{ fs_db_config('menu_portal_name') }}</span>
+                            </a>
+                        </li>
+                    @endif
+                @else
+                    <li class="nav-item mt-1">
                         <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.post.index') ? 'active' : '' }}" href="{{ fs_route(route('fresns.post.index')) }}">
                             {!! Route::is('fresns.post.index') ? '<i class="fa-solid fa-newspaper mx-2 mt-1"></i>' : '<i class="fa-regular fa-newspaper mx-2 mt-1"></i>' !!}
                             <span class="me-2">{{ fs_db_config('menu_post_name') }}</span>
                         </a>
-                    @endif
-                </li>
+                    </li>
+                @endif
                 {{-- Group --}}
-                <li class="nav-item mt-1">
-                    <a class="nav-link rounded-pill d-inline-flex {{ Route::is(['fresns.group.index', 'fresns.group.detail']) ? 'active' : '' }}" href="{{ fs_route(route('fresns.group.index')) }}">
-                        {!! Route::is(['fresns.group.*']) ? '<i class="fa-solid fa-building mx-2 mt-1"></i>' : '<i class="fa-regular fa-building mx-2 mt-1"></i>' !!}
-                        <span class="me-2">{{ fs_db_config('menu_group_name') }}</span>
-                    </a>
-                </li>
+                @if (fs_db_config('menu_group_status'))
+                    <li class="nav-item mt-1">
+                        <a class="nav-link rounded-pill d-inline-flex {{ Route::is(['fresns.group.index', 'fresns.group.detail']) ? 'active' : '' }}" href="{{ fs_route(route('fresns.group.index')) }}">
+                            {!! Route::is(['fresns.group.*']) ? '<i class="fa-solid fa-building mx-2 mt-1"></i>' : '<i class="fa-regular fa-building mx-2 mt-1"></i>' !!}
+                            <span class="me-2">{{ fs_db_config('menu_group_name') }}</span>
+                        </a>
+                    </li>
+                @endif
                 {{-- Channels --}}
                 <li class="nav-item mt-1">
                     <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.custom.page', ['name' => 'channels']) ? 'active' : '' }}" href="{{ fs_route(route('fresns.custom.page', ['name' => 'channels'])) }}">
