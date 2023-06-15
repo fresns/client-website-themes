@@ -347,7 +347,7 @@
                                         @foreach (fs_account('detail.connects') as $item)
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <div>
-                                                    <img src="/assets/themes/ThemeFrame/images/connects/{{ $item['connectId'] }}.png" loading="lazy" height="32">
+                                                    <img src="/assets/themes/ThemeFrame/images/connects/{{ $item['connectPlatformId'] }}.png" loading="lazy" height="32">
                                                     <span class="text-secondary ms-1">{{ $item['connectName'] }}</span>
                                                 </div>
                                                 <div>
@@ -359,8 +359,8 @@
                                                             data-post-message-key="fresnsConnect"
                                                             data-aid="{{ fs_account('detail.aid') }}"
                                                             data-uid="{{ fs_user('detail.uid') }}"
-                                                            data-connect-id="{{ $item['connectId'] }}"
-                                                            data-title="{{ fs_lang('settingConnect') }}: {{ $item['connectName'] ?? $item['connectId'] }}"
+                                                            data-connect-platform-id="{{ $item['connectPlatformId'] }}"
+                                                            data-title="{{ fs_lang('settingConnect') }}: {{ $item['connectName'] ?? $item['connectPlatformId'] }}"
                                                             data-url="{{ $item['service'] }}">
                                                             {{ $item['connected'] ? fs_lang('settingAccountDisconnect') : fs_lang('settingAccountConnect') }}
                                                         </button>

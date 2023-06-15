@@ -19,24 +19,26 @@
                 </div>
 
                 {{-- extensions --}}
-                <div class="clearfix mb-3">
+                <div class="clearfix">
                     @foreach($items['extensions'] as $extension)
-                        <div class="position-relative mx-3 mt-3" style="width:52px">
+                        <div class="float-start mb-3" style="width:20%">
                             <a class="text-decoration-none" data-bs-toggle="modal" href="#fresnsModal"
                                 data-type="group"
                                 data-scene="groupExtension"
                                 data-post-message-key="fresnsGroupExtension"
                                 data-title="{{ $extension['name'] }}"
                                 data-url="{{ $extension['url'] }}">
-                                <img src="{{ $extension['icon'] }}" loading="lazy" class="rounded" height="52">
-                                <p class="mb-0 text-center">{{ $extension['name'] }}</p>
+                                <div class="position-relative mx-auto" style="width:52px">
+                                    <img src="{{ $extension['icon'] }}" loading="lazy" class="rounded" height="52">
+                                    @if ($extension['badgeType'])
+                                        <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1">
+                                            {{ $extension['badgeType'] == 1 ? '' : $extension['badgeValue'] }}
+                                            <span class="visually-hidden">unread messages</span>
+                                        </span>
+                                    @endif
+                                </div>
+                                <p class="mt-1 mb-0 fs-7 text-center text-nowrap">{{ $extension['name'] }}</p>
                             </a>
-                            @if ($extension['badgeType'])
-                                <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-1">
-                                    {{ $extension['badgeType'] == 1 ? '' : $extension['badgeValue'] }}
-                                    <span class="visually-hidden">unread messages</span>
-                                </span>
-                            @endif
                         </div>
                     @endforeach
                 </div>

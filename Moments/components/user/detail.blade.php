@@ -42,14 +42,14 @@
     @endif
 
     @if ($user['status'])
-        <p class="fs-7 text-secondary px-4">{!! $user['bioHtml'] !!}</p>
+        <p class="fs-7 text-secondary px-4 mb-3">{!! $user['bioHtml'] !!}</p>
     @else
         <div class="alert alert-warning" role="alert"><i class="fa-solid fa-triangle-exclamation"></i> {{ fs_code_message(35202) }}</div>
     @endif
 
     {{-- User Affiliate Icons --}}
     @if ($user['operations']['diversifyImages'])
-        <div class="text-center">
+        <div class="text-center mb-3">
             @foreach($user['operations']['diversifyImages'] as $icon)
                 <img src="{{ $icon['imageUrl'] }}" loading="lazy" alt="{{ $icon['name'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $icon['name'] }}" style="height:2rem">
             @endforeach
@@ -61,7 +61,7 @@
         $user['stats']['extcredits3State'] == 3 ||
         $user['stats']['extcredits4State'] == 3 ||
         $user['stats']['extcredits5State'] == 3)
-        <div class="d-flex gap-2 justify-content-center">
+        <div class="d-flex gap-2 justify-content-center mb-3">
             {{-- extcredits1 --}}
             @if ($user['stats']['extcredits1State'] == 3 && $user['stats']['extcredits1'])
                 <span class="badge d-flex align-items-center p-1 px-2 text-light-emphasis bg-light-subtle border border-dark-subtle rounded-pill">
@@ -107,7 +107,7 @@
 </section>
 
 @if (fs_api_config('it_followers_you_follow') && $followersYouFollow)
-    <section class="text-center my-3">
+    <section class="text-center mb-3">
         <a href="{{ fs_route(route('fresns.profile.followers.you.follow', ['uidOrUsername' => $user['fsid']])) }}" class="text-muted fs-7 text-decoration-none">
             @foreach($followersYouFollow as $friend)
                 {{ $friend['nickname'] }}@if (! $loop->last), @endif

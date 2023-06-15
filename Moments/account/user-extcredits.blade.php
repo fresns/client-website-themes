@@ -3,7 +3,7 @@
 @section('title', fs_lang('userExtcreditsLogs'))
 
 @section('content')
-    <div class="card">
+    <div class="card rounded-0">
         <div class="card-header">
             @desktop
                 <span class="me-2">
@@ -23,7 +23,9 @@
                 <table class="table table-hover align-middle text-nowrap">
                     <thead>
                         <tr class="table-info">
-                            <th scope="col">{{ fs_lang('userExtcreditsLogName') }}</th>
+                            @empty($extcreditsId)
+                                <th scope="col">{{ fs_lang('userExtcreditsLogName') }}</th>
+                            @endempty
                             <th scope="col">{{ fs_lang('userExtcreditsLogAmount') }}</th>
                             <th scope="col">{{ fs_lang('userExtcreditsLogOpeningAmount') }}</th>
                             <th scope="col">{{ fs_lang('userExtcreditsLogClosingAmount') }}</th>
@@ -35,7 +37,9 @@
                     <tbody>
                         @foreach($logs as $log)
                             <tr>
-                                <th scope="row">{{ fs_api_config("extcredits{$log['extcreditsId']}_name") }}</th>
+                                @empty($extcreditsId)
+                                    <th scope="row">{{ fs_api_config("extcredits{$log['extcreditsId']}_name") }}</th>
+                                @endempty
                                 <td title="{{ $log['type'] }}">{{ $log['type'] == 'increment' ? '+' : '-' }}{{ $log['amount'] }}</td>
                                 <td>{{ $log['openingAmount'] }}</td>
                                 <td>{{ $log['closingAmount'] }}</td>
