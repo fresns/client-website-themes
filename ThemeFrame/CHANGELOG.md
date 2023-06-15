@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.8.3 (2023-06-16)
+
+- Optimise style
+
+
 ## 2.8.2 (2023-06-12)
 
 - Customise connect platform id
