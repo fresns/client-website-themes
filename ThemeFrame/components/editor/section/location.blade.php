@@ -8,7 +8,7 @@
                 <a class="dropdown-item py-2 {{ $config['map'] ? '' : 'disabled' }}" role="button" data-bs-toggle="modal" href="#fresnsModal"
                     data-type="editor"
                     data-scene="{{ $type.'Editor' }}"
-                    data-post-message-key="fresnsEditorExtension"
+                    data-post-message-key="fresnsEditorLocation"
                     @if ($type == 'post')
                         data-plid="{{ $plid }}"
                     @else
@@ -32,7 +32,7 @@
         data-bs-target="#fresnsModal"
         data-type="editor"
         data-scene="{{ $type.'Editor' }}"
-        data-post-message-key="fresnsEditorExtension"
+        data-post-message-key="fresnsEditorLocation"
         @if ($type == 'post')
             data-plid="{{ $plid }}"
         @else
