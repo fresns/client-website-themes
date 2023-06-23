@@ -74,18 +74,6 @@
                     <span class="input-group-text">{{ fs_db_config('user_uid_name') }}</span>
                     <span class="form-control">{{ fs_user('detail.uid') }}</span>
                 </div> --}}
-                {{-- Nickname --}}
-                <div class="input-group mb-3">
-                    <span class="input-group-text">{{ fs_db_config('user_nickname_name') }}</span>
-                    <span class="form-control" id="input-nickname">{{ fs_user('detail.nickname') }}</span>
-                    <button class="btn btn-outline-secondary"
-                        data-label="{{ fs_db_config('user_nickname_name') }}"
-                        data-desc="{{ fs_lang('settingIntervalDays') }}: {{ fs_api_config('nickname_edit') }} {{ fs_lang('modifierDays') }} | {{ fs_lang('settingLastTime') }}: {{ fs_user('detail.lastEditNickname') }}"
-                        data-name="nickname"
-                        data-action="{{ route('fresns.api.user.edit') }}"
-                        data-value="{{ fs_user('detail.nickname') }}"
-                        type="button" data-bs-toggle="modal" data-bs-target="#editModal">{{ fs_lang('modify') }}</button>
-                </div>
                 {{-- Username --}}
                 <div class="input-group mb-3">
                     <span class="input-group-text">{{ fs_db_config('user_username_name') }}</span>
@@ -96,6 +84,18 @@
                         data-name="username"
                         data-action="{{ route('fresns.api.user.edit') }}"
                         data-value="{{ fs_user('detail.username') }}"
+                        type="button" data-bs-toggle="modal" data-bs-target="#editModal">{{ fs_lang('modify') }}</button>
+                </div>
+                {{-- Nickname --}}
+                <div class="input-group mb-3">
+                    <span class="input-group-text">{{ fs_db_config('user_nickname_name') }}</span>
+                    <span class="form-control" id="input-nickname">{{ fs_user('detail.nickname') }}</span>
+                    <button class="btn btn-outline-secondary"
+                        data-label="{{ fs_db_config('user_nickname_name') }}"
+                        data-desc="{{ fs_lang('settingIntervalDays') }}: {{ fs_api_config('nickname_edit') }} {{ fs_lang('modifierDays') }} | {{ fs_lang('settingLastTime') }}: {{ fs_user('detail.lastEditNickname') }}"
+                        data-name="nickname"
+                        data-action="{{ route('fresns.api.user.edit') }}"
+                        data-value="{{ fs_user('detail.nickname') }}"
                         type="button" data-bs-toggle="modal" data-bs-target="#editModal">{{ fs_lang('modify') }}</button>
                 </div>
                 {{-- Bio --}}
