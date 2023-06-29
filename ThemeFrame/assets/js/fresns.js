@@ -1221,8 +1221,10 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                 html += `
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="codeType" id="email_to_edit" value="email" data-bs-toggle="collapse" data-bs-target=".email_to_edit:not(.show)" aria-expanded="${
-                    value ? 'false' : 'true'
-                }" ${value ? '' : 'checked'} onchange="document.querySelector('#smsVerifyCode').name = 'smsVerifyCode';document.querySelector('#emailVerifyCode').name = 'verifyCode';document.querySelector('#currentPassword').value = '';">
+                                value ? 'false' : 'true'
+                            }" ${
+                    value ? '' : 'checked'
+                } onchange="document.querySelector('#smsVerifyCode').name = 'smsVerifyCode';document.querySelector('#emailVerifyCode').name = 'verifyCode';document.querySelector('#currentPassword').value = '';">
                             <label class="form-check-label" for="email_to_edit">${fs_lang('emailVerifyCode')}</label>
                         </div>
                         <div class="form-check form-check-inline">
@@ -1360,7 +1362,11 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             body = form.serializeArray();
 
         for (let i = 0; i < body.length; i++) {
-            if (body[i].name === "currentPassword" || body[i].name === "currentWalletPassword" || body[i].name === "newPassword") {
+            if (
+                body[i].name === 'currentPassword' ||
+                body[i].name === 'currentWalletPassword' ||
+                body[i].name === 'newPassword'
+            ) {
                 body[i].value = Base64.encode(body[i].value);
             }
         }
