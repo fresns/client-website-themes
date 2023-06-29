@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.8.5 (2023-06-29)
+
+- Optimise account settings
+
+
 ## 2.8.4 (2023-06-23)
 
 - chore: editor postMessage key
