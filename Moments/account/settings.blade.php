@@ -277,11 +277,11 @@
                         <span class="form-control">{{ fs_account('detail.phone') ? '+'.fs_account('detail.phone') : fs_lang('settingNot') }}</span>
                         <button class="btn btn-outline-secondary"
                             data-label="{{ fs_lang('phone') }}"
-                            data-type="editPhone"
                             data-desc="{{ fs_lang('settingWarning') }}"
+                            data-type="editPhone"
+                            data-name="newPhone"
                             data-sms-codes="{{ json_encode(fs_api_config('send_sms_supported_codes'), true) }}"
                             data-default-sms-code="{{ fs_account('detail.countryCode') ?: fs_api_config('send_sms_default_code') }}"
-                            data-name="editPhone"
                             data-value="{{ fs_account('detail.phone') }}"
                             data-action="{{ route('fresns.api.account.edit') }}"
                             type="button" data-bs-toggle="modal" data-bs-target="#editModal">
@@ -299,7 +299,7 @@
                             data-label="{{ fs_lang('email') }}"
                             data-desc="{{ fs_lang('settingWarning') }}"
                             data-type="editEmail"
-                            data-name="editEmail"
+                            data-name="newEmail"
                             data-value="{{ fs_account('detail.email') }}"
                             data-action="{{ route('fresns.api.account.edit') }}"
                             type="button" data-bs-toggle="modal" data-bs-target="#editModal">
@@ -314,10 +314,16 @@
                     <span class="form-control">{{ fs_account('detail.hasPassword') ? fs_lang('settingAlready') : fs_lang('settingNot') }}</span>
                     <button class="btn btn-outline-secondary"
                         data-label="{{ fs_lang('accountPassword') }}"
+                        data-desc="{{ fs_lang('passwordInfo') }}: 
+                            @if (in_array('number', fs_api_config('password_strength'))) {{ fs_lang('passwordInfoNumbers') }} @endif
+                            @if (in_array('lowercase', fs_api_config('password_strength'))) | {{ fs_lang('passwordInfoLowercaseLetters') }} @endif
+                            @if (in_array('uppercase', fs_api_config('password_strength'))) | {{ fs_lang('passwordInfoUppercaseLetters') }} @endif
+                            @if (in_array('symbols', fs_api_config('password_strength'))) | {{ fs_lang('passwordInfoSymbols') }} @endif
+                            | {{ fs_lang('modifierLength') }}: {{ fs_api_config('password_length').'~32' }}"
                         data-type="editPassword"
+                        data-name="newPassword"
                         data-email="{{ fs_account('detail.email') }}"
                         data-phone="{{ fs_account('detail.phone') }}"
-                        data-name="editPassword"
                         data-value="{{ fs_account('detail.hasPassword') }}"
                         data-action="{{ route('fresns.api.account.edit') }}"
                         type="button" data-bs-toggle="modal" data-bs-target="#editModal">
@@ -332,9 +338,9 @@
                     <button class="btn btn-outline-secondary"
                         data-label="{{ fs_lang('walletPassword') }}"
                         data-type="editPassword"
+                        data-name="newWalletPassword"
                         data-email="{{ fs_account('detail.email') }}"
                         data-phone="{{ fs_account('detail.phone') }}"
-                        data-name="editWalletPassword"
                         data-value="{{ fs_account('detail.wallet.hasPassword') }}"
                         data-action="{{ route('fresns.api.account.edit') }}"
                         type="button" data-bs-toggle="modal" data-bs-target="#editModal">
