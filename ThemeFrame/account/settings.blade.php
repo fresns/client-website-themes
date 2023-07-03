@@ -161,8 +161,6 @@
                                         data-type="account"
                                         data-scene="profileExtension"
                                         data-post-message-key="fresnsProfileExtension"
-                                        data-aid="{{ fs_account('detail.aid') }}"
-                                        data-uid="{{ fs_user('detail.uid') }}"
                                         data-title="{{ $profile['name'] }}"
                                         data-url="{{ $profile['url'] }}">
                                         {{ fs_lang('setting') }}
@@ -363,8 +361,6 @@
                                                             data-type="account"
                                                             data-scene="connect"
                                                             data-post-message-key="fresnsConnect"
-                                                            data-aid="{{ fs_account('detail.aid') }}"
-                                                            data-uid="{{ fs_user('detail.uid') }}"
                                                             data-connect-platform-id="{{ $item['connectPlatformId'] }}"
                                                             data-title="{{ fs_lang('settingConnect') }}: {{ $item['connectName'] ?? $item['connectPlatformId'] }}"
                                                             data-url="{{ $item['service'] }}">

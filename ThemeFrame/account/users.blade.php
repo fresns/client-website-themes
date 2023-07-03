@@ -19,9 +19,7 @@
                             <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                                 data-type="account"
                                 data-scene="users"
-                                data-post-message-key="fresnsConnect"
-                                data-aid="{{ fs_account('detail.aid') }}"
-                                data-uid="{{ fs_user('detail.uid') }}"
+                                data-post-message-key="fresnsUsers"
                                 data-title="{{ fs_db_config('user_name') }}"
                                 data-url="{{ fs_user_panel('multiUser.service') }}">
                                 <i class="bi bi-people-fill"></i>
