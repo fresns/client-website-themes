@@ -199,7 +199,9 @@ function fetchSendVerifyCode(type, useType, templateId, account, obj, countryCod
         },
         success: function (res) {
             if (res.code != 0) {
-                return window.tips(res.message, res.code);
+                window.tips(res.message, res.code);
+
+                return;
             }
 
             window.tips(fs_lang('send') + ': ' + fs_lang('success'));
@@ -534,7 +536,9 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             url: `/api/engine/content/file/${fid}/users`,
             success: function (res) {
                 if (res.code != 0) {
-                    return window.tips(res.message, res.code);
+                    window.tips(res.message, res.code);
+
+                    return;
                 }
 
                 if (!res.data || res.data.list.length <= 0) {
@@ -576,12 +580,16 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             url: url,
             success: function (res) {
                 if (res.code != 0) {
-                    return window.tips(res.message, res.code);
+                    window.tips(res.message, res.code);
+
+                    return;
                 }
 
                 downloadFile(res.data.originalUrl, name, mime);
             },
             complete: function (e) {
+                window.tips(e.responseJSON.message, e.responseJSON.code);
+
                 button.prop('disabled', false);
                 button.find('.spinner-border').remove();
                 $('#loading').hide();
@@ -1714,7 +1722,9 @@ window.onmessage = function (event) {
                 },
                 success: function (res) {
                     if (res.code !== 0) {
-                        return window.tips(res.message, res.code);
+                        window.tips(res.message, res.code);
+
+                        return;
                     }
 
                     if (res.data.redirectURL) {
