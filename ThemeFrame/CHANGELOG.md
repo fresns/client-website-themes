@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 
 
+## 2.8.6 (2023-07-12)
+
+- Fixed language identification bug in editor
+- Fixed problem with not displaying the download prompt when not logged in.
+- Optimize view style
+
+
 ## 2.8.5 (2023-06-29)
 
 - Optimise account settings
