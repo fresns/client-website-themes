@@ -20,7 +20,7 @@
                                     <a class="dropdown-item" data-bs-toggle="modal" href="#fresnsModal"
                                         data-type="profile"
                                         data-scene="manage"
-                                        data-post-message-key="fresnsPostManage"
+                                        data-post-message-key="fresnsUserManage"
                                         data-uid="{{ $profile['uid'] }}"
                                         data-title="{{ $plugin['name'] }}"
                                         data-url="{{ $plugin['url'] }}">

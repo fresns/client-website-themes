@@ -6,7 +6,7 @@
     <div class="collapse navbar-collapse list-group mt-2 mt-lg-0" id="fresnsMenus">
         {{-- Search Users --}}
         @if (fs_api_config('menu_user_status'))
-            <a href="{{ fs_route(route('fresns.search.users')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.search.users') ? 'active' : '' }}">
+            <a href="{{ fs_route(route('fresns.search.users', ['searchKey' => request('searchKey')])) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.search.users') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-user-list.png" loading="lazy" width="36" height="36">
                 {{ fs_db_config('user_name') }}
             </a>
@@ -14,7 +14,7 @@
 
         {{-- Search Groups --}}
         @if (fs_api_config('menu_group_status'))
-            <a href="{{ fs_route(route('fresns.search.groups')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.search.groups') ? 'active' : '' }}">
+            <a href="{{ fs_route(route('fresns.search.groups', ['searchKey' => request('searchKey')])) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.search.groups') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-group-list.png" loading="lazy" width="36" height="36">
                 {{ fs_db_config('group_name') }}
             </a>
@@ -22,7 +22,7 @@
 
         {{-- Search Hashtags --}}
         @if (fs_api_config('menu_hashtag_status'))
-            <a href="{{ fs_route(route('fresns.search.hashtags')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.search.hashtags') ? 'active' : '' }}">
+            <a href="{{ fs_route(route('fresns.search.hashtags', ['searchKey' => request('searchKey')])) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.search.hashtags') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-hashtag-list.png" loading="lazy" width="36" height="36">
                 {{ fs_db_config('hashtag_name') }}
             </a>
@@ -30,7 +30,7 @@
 
         {{-- Search Posts --}}
         @if (fs_api_config('menu_post_status'))
-            <a href="{{ fs_route(route('fresns.search.posts')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.search.posts') ? 'active' : '' }}">
+            <a href="{{ fs_route(route('fresns.search.posts', ['searchKey' => request('searchKey')])) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.search.posts') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-post-list.png" loading="lazy" width="36" height="36">
                 {{ fs_db_config('post_name') }}
             </a>
@@ -38,7 +38,7 @@
 
         {{-- Search Comments --}}
         @if (fs_api_config('menu_comment_status'))
-            <a href="{{ fs_route(route('fresns.search.comments')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.search.comments') ? 'active' : '' }}">
+            <a href="{{ fs_route(route('fresns.search.comments', ['searchKey' => request('searchKey')])) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.search.comments') ? 'active' : '' }}">
                 <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-comment-list.png" loading="lazy" width="36" height="36">
                 {{ fs_db_config('comment_name') }}
             </a>

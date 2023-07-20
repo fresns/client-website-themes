@@ -33,7 +33,7 @@
                                 <button class="nav-link active" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="true">{{ fs_lang('settingGeneral') }}</button>
                             </li>
                             <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="preference-tab" data-bs-toggle="tab" data-bs-target="#preference" type="button" role="tab" aria-controls="preference" aria-selected="false">{{ fs_lang('settingPreference') }}</button>
+                                <button class="nav-link" id="interaction-tab" data-bs-toggle="tab" data-bs-target="#interaction" type="button" role="tab" aria-controls="interaction" aria-selected="false">{{ fs_lang('settingInteraction') }}</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="account-tab" data-bs-toggle="tab" data-bs-target="#account" type="button" role="tab" aria-controls="account" aria-selected="false">{{ fs_lang('settingAccount') }}</button>
@@ -148,29 +148,10 @@
                                     data-value="{{ fs_user('detail.birthday') }}"
                                     type="button" data-bs-toggle="modal" data-bs-target="#editModal">{{ fs_lang('modify') }}</button>
                             </div>
-
-                            {{-- profiles --}}
-                            @foreach(fs_user_panel('profiles') as $profile)
-                                <div class="input-group mb-3">
-                                    <span class="input-group-text">
-                                        <img src="{{ $profile['icon'] }}" loading="lazy" class="rounded me-2" height="24">
-                                        {{ $profile['name'] }}
-                                    </span>
-                                    <span class="form-control"></span>
-                                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                        data-type="account"
-                                        data-scene="profileExtension"
-                                        data-post-message-key="fresnsProfileExtension"
-                                        data-title="{{ $profile['name'] }}"
-                                        data-url="{{ $profile['url'] }}">
-                                        {{ fs_lang('setting') }}
-                                    </button>
-                                </div>
-                            @endforeach
                         </div>
 
-                        {{-- Preference --}}
-                        <div class="tab-pane fade" id="preference" role="tabpanel" aria-labelledby="preference-tab">
+                        {{-- Interaction --}}
+                        <div class="tab-pane fade" id="interaction" role="tabpanel" aria-labelledby="interaction-tab">
                             {{-- Conversations --}}
                             <div class="input-group mb-3">
                                 <span class="input-group-text">{{ fs_db_config('menu_conversations') }}</span>
@@ -221,23 +202,24 @@
                                     {{ fs_lang('modify') }}
                                 </button>
                             </div>
-                            {{-- Timezone --}}
-                            <div class="input-group mb-3">
-                                <span class="input-group-text">{{ fs_lang('userTimeZone') }}</span>
-                                <span class="form-control" id="select-timezone">
-                                    UTC {{ fs_user('detail.timezone') }}
-                                </span>
-                                <button class="btn btn-outline-secondary"
-                                    data-label="{{ fs_lang('userTimeZone') }}"
-                                    data-type="select"
-                                    data-option="{{ json_encode(array_map(function ($val){ return ['id' => $val['value'], 'text' => $val['name']]; }, fs_api_config('utc')), true) }}"
-                                    data-name="timezone"
-                                    data-action="{{ route('fresns.api.user.edit') }}"
-                                    data-value="{{ fs_user('detail.timezone') }}"
-                                    type="button" data-bs-toggle="modal" data-bs-target="#editModal">
-                                    {{ fs_lang('modify') }}
-                                </button>
-                            </div>
+                            {{-- Profiles --}}
+                            @foreach(fs_user_panel('profiles') as $profile)
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text">
+                                        <img src="{{ $profile['icon'] }}" loading="lazy" class="rounded me-2" height="24">
+                                        {{ $profile['name'] }}
+                                    </span>
+                                    <span class="form-control"></span>
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                                        data-type="account"
+                                        data-scene="profileExtension"
+                                        data-post-message-key="fresnsProfileExtension"
+                                        data-title="{{ $profile['name'] }}"
+                                        data-url="{{ $profile['url'] }}">
+                                        {{ fs_lang('setting') }}
+                                    </button>
+                                </div>
+                            @endforeach
                         </div>
 
                         {{-- Account Settings --}}
