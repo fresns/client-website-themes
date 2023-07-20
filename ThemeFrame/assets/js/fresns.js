@@ -4,6 +4,14 @@
  * Licensed under the Apache-2.0 license
  */
 
+// utc timezone
+const now = new Date();
+const timezoneOffsetInHours = now.getTimezoneOffset() / -60;
+const fresnsTimezone = (timezoneOffsetInHours > 0 ? '+' : '') + timezoneOffsetInHours.toString();
+const expires = new Date();
+expires.setFullYear(expires.getFullYear() + 1);
+document.cookie = `fresns_timezone=${fresnsTimezone}; expires=${expires.toUTCString()}; path=/`;
+
 // bootstrap Tooltips
 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
 var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
@@ -1704,7 +1712,7 @@ window.onmessage = function (event) {
             break;
 
         case 'fresnsConnect':
-            if (fresnsCallback.action.reloadData) {
+            if (fresnsCallback.action.dataHandler == 'reload') {
                 window.location.href = `/${langTag}/account/settings#account-tab`;
             }
             break;
@@ -1735,12 +1743,24 @@ window.onmessage = function (event) {
             });
             break;
 
-        case 'fresnsEditorUpload':
-            fresnsCallback.data.forEach((fileinfo) => {
-                addEditorAttachment(fileinfo);
-            });
+        case 'fresnsUserManage':
+            window.location.reload();
+            break;
 
-            if (fresnsCallback.action.reloadData) {
+        case 'fresnsPostManage':
+            window.location.reload();
+            break;
+
+        case 'fresnsCommentManage':
+            window.location.reload();
+            break;
+
+        case 'fresnsEditorUpload':
+            if (fresnsCallback.action.dataHandler == 'add') {
+                fresnsCallback.data.forEach((fileinfo) => {
+                    addEditorAttachment(fileinfo);
+                });
+
                 $('#fresnsModal').modal('hide');
 
                 return;
