@@ -66,7 +66,7 @@
 
                         @if (fs_user()->check())
                             @php
-                                $unreadCount = fs_user_panel('conversations.unreadMessages') + array_sum(fs_user_panel('unreadNotifications'));
+                                $unreadCount = fs_user_panel('conversations.unreadMessages') + fs_user_panel('unreadNotifications.all');
                             @endphp
                             @if ($unreadCount > 0)
                                 <span class="position-absolute top-0 start-100 translate-middle badge bg-danger rounded-pill" style="font-size:0.6rem">

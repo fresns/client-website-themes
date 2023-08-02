@@ -97,8 +97,8 @@
                             {!! Route::is(['fresns.notifications.index']) ? '<i class="fa-solid fa-bell mx-2 mt-1"></i>' : '<i class="fa-regular fa-bell mx-2 mt-1"></i>' !!}
                             <span class="me-2">{{ fs_db_config('menu_notifications') }}</span>
 
-                            @if (array_sum(fs_user_panel('unreadNotifications')) > 0)
-                                <span class="badge bg-danger rounded-pill">{{ array_sum(fs_user_panel('unreadNotifications')) }}</span>
+                            @if (fs_user_panel('unreadNotifications.all') > 0)
+                                <span class="badge bg-danger rounded-pill">{{ fs_user_panel('unreadNotifications.all') }}</span>
                             @endif
                         </a>
                     </li>

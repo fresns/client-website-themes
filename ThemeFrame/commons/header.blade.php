@@ -95,8 +95,8 @@
 
                         <a href="{{ fs_route(route('fresns.notifications.index')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
                             <i class="bi bi-bell"></i>
-                            @if (array_sum(fs_user_panel('unreadNotifications')) > 0)
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ array_sum(fs_user_panel('unreadNotifications')) }}</span>
+                            @if (fs_user_panel('unreadNotifications.all') > 0)
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ fs_user_panel('unreadNotifications.all') }}</span>
                             @endif
                         </a>
 
@@ -122,8 +122,8 @@
                                         <i class="bi bi-bell"></i>
                                         {{ fs_db_config('menu_notifications') }}
 
-                                        @if (array_sum(fs_user_panel('unreadNotifications')) > 0)
-                                            <span class="badge bg-danger">{{ array_sum(fs_user_panel('unreadNotifications')) }}</span>
+                                        @if (fs_user_panel('unreadNotifications.all') > 0)
+                                            <span class="badge bg-danger">{{ fs_user_panel('unreadNotifications.all') }}</span>
                                         @endif
                                     </a>
                                 </li>
