@@ -82,7 +82,7 @@
                     data-bs-toggle="modal"
                     data-fs-height="100%"
                     href="#fresnsModal"
-                    data-type="account"
+                    data-type="portal"
                     data-scene="fresnsChannel"
                     data-post-message-key="fresnsChannel"
                     data-title="{{ $channel['name'] }}"
