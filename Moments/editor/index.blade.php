@@ -33,6 +33,16 @@
 
                 {{-- Content --}}
                 <textarea class="form-control rounded-0 border-0" id="content" rows="15" placeholder="{{ fs_lang('editorContent') }}"></textarea>
+
+                {{-- Content is Markdown --}}
+                @if (fs_db_config('fs_theme_editor_markdown')['editor'] ?? false)
+                    <div class="bd-highlight my-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="isMarkdown" value="1" id="contentIsMarkdown">
+                            <label class="form-check-label" for="contentIsMarkdown">{{ fs_lang('editorContentMarkdown') }}</label>
+                        </div>
+                    </div>
+                @endif
             </div>
             {{-- Content End --}}
 

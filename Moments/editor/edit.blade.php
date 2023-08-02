@@ -63,6 +63,16 @@
                     {{-- Content --}}
                     <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="content" rows="15" placeholder="{{ fs_lang('editorContent') }}">{{ $draft['detail']['content'] }}</textarea>
 
+                    {{-- Content is Markdown --}}
+                    @if (fs_db_config('fs_theme_editor_markdown')['editor'] ?? false)
+                        <div class="bd-highlight my-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="isMarkdown" value="1" id="contentIsMarkdown" {{ $draft['detail']['isMarkdown'] ? 'checked' : '' }}>
+                                <label class="form-check-label" for="contentIsMarkdown">{{ fs_lang('editorContentMarkdown') }}</label>
+                            </div>
+                        </div>
+                    @endif
+
                     {{-- Files --}}
                     @component('components.editor.section.files', [
                         'type' => $type,

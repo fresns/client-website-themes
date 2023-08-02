@@ -46,6 +46,16 @@
                         {{-- Content --}}
                         <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="quick-publish-post-content" rows="10" placeholder="{{ fs_lang('editorContent') }}"></textarea>
 
+                        {{-- Content is Markdown --}}
+                        @if (fs_db_config('fs_theme_editor_markdown')['quickPublish'] ?? false)
+                            <div class="bd-highlight my-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="isMarkdown" value="1" id="isMarkdown">
+                                    <label class="form-check-label" for="isMarkdown">{{ fs_lang('editorContentMarkdown') }}</label>
+                                </div>
+                            </div>
+                        @endif
+
                         {{-- Function Buttons --}}
                         <div class="d-flex mt-2">
                             {{-- Title --}}
