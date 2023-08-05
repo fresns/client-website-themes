@@ -28,11 +28,11 @@
             <div class="d-flex align-items-center">
                 {{-- Cover Image --}}
                 <div class="flex-shrink-0">
-                    <img src="{{ $extend['cover'] }}" loading="lazy" class="frame-image-{{ $extend['infoTypeString'] }}">
+                    <img src="{{ $extend['cover'] }}" loading="lazy" class="frame-image-{{ $extend['infoBoxTypeString'] }}">
                 </div>
 
                 <div class="flex-grow-1 px-3">
-                    <div class="d-flex flex-column frame-box-{{ $extend['infoTypeString'] }}">
+                    <div class="d-flex flex-column frame-box-{{ $extend['infoBoxTypeString'] }}">
                         <div class="frame-title" style="color:{{ $extend['titleColor'] }}">{{ $extend['title'] }}</div>
 
                         @if ($extend['descPrimary'])
