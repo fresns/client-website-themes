@@ -341,7 +341,10 @@
                                         <span class="text-secondary ms-1">{{ $item['connectName'] }}</span>
                                     </div>
                                     <div>
-                                        <span class="me-3">{{ $item['nickname'] }}</span>
+                                        @if ($item['connected'])
+                                            <span class="me-3">{!! $item['nickname'] ?? '<i class="fa-solid fa-circle-check text-success"></i>' !!}</span>
+                                        @endif
+
                                         @if ($item['service'])
                                             <button type="button" class="btn btn-sm {{ $item['connected'] ? 'btn-danger' : 'btn-warning' }}" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                                                 data-type="account"
