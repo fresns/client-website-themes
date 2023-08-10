@@ -13,6 +13,16 @@
 
                 <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="{{ 'quick-publish-comment-content'.$pid }}" rows="4" placeholder="{{ fs_lang('editorContent') }}"></textarea>
 
+                {{-- Content is Markdown --}}
+                @if (fs_db_config('fs_theme_editor_markdown')['commentBox'] ?? false)
+                    <div class="bd-highlight my-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="isMarkdown" value="1" id="commentIsMarkdown">
+                            <label class="form-check-label" for="commentIsMarkdown">{{ fs_lang('editorContentMarkdown') }}</label>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="clearfix my-2">
                     {{-- Sticker and Upload --}}
                     <div class="float-lg-start @desktop w-65 @enddesktop">

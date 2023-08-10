@@ -46,6 +46,25 @@
                         </div>
                     </div>
 
+                    {{-- Content markdown config --}}
+                    <div class="row mb-4">
+                        <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['ContentMarkdownConfig'] }}</label>
+                        <div class="col-lg-10 mt-2">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="option_quick_publish" name="fs_theme_editor_markdown[quickPublish]" value="1" {{ ($params['fs_theme_editor_markdown']['value']['quickPublish'] ?? false) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="option_quick_publish">{{ $lang['option_quick_publish'] }}</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="option_editor" name="fs_theme_editor_markdown[editor]" value="1" {{ ($params['fs_theme_editor_markdown']['value']['editor'] ?? false) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="option_editor">{{ $lang['option_editor'] }}</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="option_comment_box" name="fs_theme_editor_markdown[commentBox]" value="1" {{ ($params['fs_theme_editor_markdown']['value']['commentBox'] ?? false) ? 'checked' : '' }}>
+                                <label class="form-check-label" for="option_comment_box">{{ $lang['option_comment_box'] }}</label>
+                            </div>
+                        </div>
+                    </div>
+
                     {{-- Is the message page displayed --}}
                     <div class="row mb-4">
                         <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['notificationConfig'] }}</label>

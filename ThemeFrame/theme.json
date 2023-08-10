@@ -4,7 +4,7 @@
     "description": "Fresns theme framework to showcase web-side functionality and interaction flow.",
     "author": "Fresns",
     "authorLink": "https://fresns.org",
-    "version": "2.8.7",
+    "version": "2.8.8",
     "functions": true,
     "functionKeys": [
         {
@@ -72,7 +72,7 @@
             "description": "Fresns 官方開發的主題框架，展示網站端功能和交互流程。",
             "save": "保存",
             "loadingConfig": "加載動效",
-            "quickPublishConfig": "快速發表帖子",
+            "quickPublishConfig": "快速發表貼文",
             "notificationConfig": "消息頁是否顯示",
             "option_tip": "請選擇...",
             "option_support": "支持",

@@ -74,8 +74,8 @@
             <a href="{{ fs_route(route('fresns.notifications.index')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                 <span class="py-2"><i class="fa-regular fa-bell me-2"></i> {{ fs_db_config('menu_notifications') }}</span>
                 <span class="py-2 text-black-50">
-                    @if (array_sum(fs_user_panel('unreadNotifications')) > 0)
-                        <span class="badge bg-danger rounded-pill">{{ array_sum(fs_user_panel('unreadNotifications')) }}</span>
+                    @if (fs_user_panel('unreadNotifications.all') > 0)
+                        <span class="badge bg-danger rounded-pill">{{ fs_user_panel('unreadNotifications.all') }}</span>
                     @endif
                     <i class="fa-solid fa-chevron-right"></i>
                 </span>

@@ -15,8 +15,8 @@
             <img class="img-fluid" src="/assets/themes/ThemeFrame/images/menu-account-notifications.png" loading="lazy" width="36" height="36">
             {{ fs_db_config('menu_notifications') }}
 
-            @if (array_sum(fs_user_panel('unreadNotifications')) > 0)
-                <span class="badge bg-danger">{{ array_sum(fs_user_panel('unreadNotifications')) }}</span>
+            @if (fs_user_panel('unreadNotifications.all') > 0)
+                <span class="badge bg-danger">{{ fs_user_panel('unreadNotifications.all') }}</span>
             @endif
         </a>
 

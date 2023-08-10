@@ -19,7 +19,18 @@
                             <input type="hidden" name="commentPid" value="{{ $pid }}">
                             <input type="hidden" name="commentCid" value="{{ $cid }}">
 
+                            {{-- Content --}}
                             <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="{{ 'modal-quick-publish-comment-content'.$pid.$cid }}" rows="5" placeholder="{{ fs_lang('editorContent') }}"></textarea>
+
+                            {{-- Content is Markdown --}}
+                            @if (fs_db_config('fs_theme_editor_markdown')['commentBox'] ?? false)
+                                <div class="bd-highlight my-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="isMarkdown" value="1" id="{{ $pid.$cid }}-commentIsMarkdown">
+                                        <label class="form-check-label" for="{{ $pid.$cid }}-commentIsMarkdown">{{ fs_lang('editorContentMarkdown') }}</label>
+                                    </div>
+                                </div>
+                            @endif
 
                             {{-- Sticker and Upload --}}
                             <div class="d-flex mt-2">

@@ -21,8 +21,8 @@
                                 <li class="nav-item">
                                     <a class="nav-link @if (empty($types)) active @endif" href="{{ fs_route(route('fresns.notifications.index')) }}">
                                         {{ fs_db_config('menu_notifications_all') }}
-                                        @if (array_sum(fs_user_panel('unreadNotifications')) > 0)
-                                            <span class="badge bg-danger">{{ array_sum(fs_user_panel('unreadNotifications')) }}</span>
+                                        @if (fs_user_panel('unreadNotifications.all') > 0)
+                                            <span class="badge bg-danger">{{ fs_user_panel('unreadNotifications.all') }}</span>
                                         @endif
                                     </a>
                                 </li>
