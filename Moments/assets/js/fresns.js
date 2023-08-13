@@ -219,6 +219,14 @@ function fetchSendVerifyCode(type, useType, templateId, account, obj, countryCod
 
 // download file
 function downloadFile(url, fileName, mimeType) {
+    const currentDomain = window.location.origin;
+    const fileDomain = new URL(url).origin;
+
+    if (currentDomain !== fileDomain) {
+        window.open(url);
+        return;
+    }
+
     $('#loading').hide();
 
     const xhr = new XMLHttpRequest();
