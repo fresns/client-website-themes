@@ -52,7 +52,7 @@
                 {{-- Home --}}
                 <li class="nav-item mt-1">
                     <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.home') ? 'active' : '' }}" href="{{ fs_route(route('fresns.home')) }}">
-                        {!! Route::is('fresns.home') ? '<i class="fa-solid fa-house-user mx-2 mt-1"></i>' : '<i class="fa-solid fa-house mx-2 mt-1"></i>' !!}
+                        {!! Route::is('fresns.home') ? '<i class="fa-solid fa-fw fa-house-user mx-2 mt-1"></i>' : '<i class="fa-solid fa-fw fa-house mx-2 mt-1"></i>' !!}
                         <span class="me-2">{{ fs_lang('home') }}</span>
                     </a>
                 </li>
@@ -61,7 +61,7 @@
                     @if (fs_db_config('menu_portal_status'))
                         <li class="nav-item mt-1">
                             <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.portal') ? 'active' : '' }}" href="{{ fs_route(route('fresns.portal')) }}">
-                                {!! Route::is('fresns.portal') ? '<i class="fa-solid fa-newspaper mx-2 mt-1"></i>' : '<i class="fa-regular fa-newspaper mx-2 mt-1"></i>' !!}
+                                {!! Route::is('fresns.portal') ? '<i class="fa-solid fa-fw fa-newspaper mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-newspaper mx-2 mt-1"></i>' !!}
                                 <span class="me-2">{{ fs_db_config('menu_portal_name') }}</span>
                             </a>
                         </li>
@@ -69,7 +69,7 @@
                 @else
                     <li class="nav-item mt-1">
                         <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.post.index') ? 'active' : '' }}" href="{{ fs_route(route('fresns.post.index')) }}">
-                            {!! Route::is('fresns.post.index') ? '<i class="fa-solid fa-newspaper mx-2 mt-1"></i>' : '<i class="fa-regular fa-newspaper mx-2 mt-1"></i>' !!}
+                            {!! Route::is('fresns.post.index') ? '<i class="fa-solid fa-fw fa-newspaper mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-newspaper mx-2 mt-1"></i>' !!}
                             <span class="me-2">{{ fs_db_config('menu_post_name') }}</span>
                         </a>
                     </li>
@@ -78,7 +78,7 @@
                 @if (fs_db_config('menu_group_status'))
                     <li class="nav-item mt-1">
                         <a class="nav-link rounded-pill d-inline-flex {{ Route::is(['fresns.group.index', 'fresns.group.detail']) ? 'active' : '' }}" href="{{ fs_route(route('fresns.group.index')) }}">
-                            {!! Route::is(['fresns.group.*']) ? '<i class="fa-solid fa-building mx-2 mt-1"></i>' : '<i class="fa-regular fa-building mx-2 mt-1"></i>' !!}
+                            {!! Route::is(['fresns.group.*']) ? '<i class="fa-solid fa-fw fa-building mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-building mx-2 mt-1"></i>' !!}
                             <span class="me-2">{{ fs_db_config('menu_group_name') }}</span>
                         </a>
                     </li>
@@ -86,7 +86,7 @@
                 {{-- Channels --}}
                 <li class="nav-item mt-1">
                     <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.custom.page', ['name' => 'channels']) ? 'active' : '' }}" href="{{ fs_route(route('fresns.custom.page', ['name' => 'channels'])) }}">
-                        {!! Route::is('fresns.custom.page', ['name' => 'channels']) ? '<i class="fa-solid fa-compass mx-2 mt-1"></i>' : '<i class="fa-regular fa-compass mx-2 mt-1"></i>' !!}
+                        {!! Route::is('fresns.custom.page', ['name' => 'channels']) ? '<i class="fa-solid fa-fw fa-compass mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-compass mx-2 mt-1"></i>' !!}
                         <span class="me-2">{{ fs_lang('discover') }}</span>
                     </a>
                 </li>
@@ -94,7 +94,7 @@
                     {{-- Notifications --}}
                     <li class="nav-item mt-1">
                         <a class="nav-link rounded-pill d-inline-flex {{ Route::is(['fresns.notifications.index']) ? 'active' : '' }}" href="{{ fs_route(route('fresns.notifications.index')) }}">
-                            {!! Route::is(['fresns.notifications.index']) ? '<i class="fa-solid fa-bell mx-2 mt-1"></i>' : '<i class="fa-regular fa-bell mx-2 mt-1"></i>' !!}
+                            {!! Route::is(['fresns.notifications.index']) ? '<i class="fa-solid fa-fw fa-bell mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-bell mx-2 mt-1"></i>' !!}
                             <span class="me-2">{{ fs_db_config('menu_notifications') }}</span>
 
                             @if (fs_user_panel('unreadNotifications.all') > 0)
@@ -106,7 +106,7 @@
                     @if (fs_api_config('conversation_status'))
                         <li class="nav-item mt-1">
                             <a class="nav-link rounded-pill d-inline-flex {{ Route::is(['fresns.messages.index', 'fresns.messages.conversation']) ? 'active' : '' }}" href="{{ fs_route(route('fresns.messages.index')) }}">
-                                {!! Route::is(['fresns.messages.index', 'fresns.messages.conversation']) ? '<i class="fa-solid fa-envelope mx-2 mt-1"></i>' : '<i class="fa-regular fa-envelope mx-2 mt-1"></i>' !!}
+                                {!! Route::is(['fresns.messages.index', 'fresns.messages.conversation']) ? '<i class="fa-solid fa-fw fa-envelope mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-envelope mx-2 mt-1"></i>' !!}
                                 <span class="me-2">{{ fs_db_config('menu_conversations') }}</span>
 
                                 @if (fs_user_panel('conversations.unreadMessages') > 0)
@@ -118,7 +118,7 @@
                     {{-- User Center --}}
                     <li class="nav-item mt-1">
                         <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.account.*') ? 'active' : '' }}" href="{{ fs_route(route('fresns.account.index')) }}">
-                            {!! Route::is('fresns.account.*') ? '<i class="fa-solid fa-user mx-2 mt-1"></i>' : '<i class="fa-regular fa-user mx-2 mt-1"></i>' !!}
+                            {!! Route::is('fresns.account.*') ? '<i class="fa-solid fa-fw fa-user mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-user mx-2 mt-1"></i>' !!}
                             {{ fs_db_config('menu_account') }}
                         </a>
                     </li>
@@ -137,7 +137,7 @@
                     @if (fs_api_config('language_status'))
                         <li class="nav-item mt-4 d-grid gap-2 dropup-center dropup">
                             <button class="btn btn-outline-secondary rounded-pill" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <i class="fa-solid fa-language"></i>
+                                <i class="fa-solid fa-fw fa-language"></i>
                                 @foreach(fs_api_config('language_menus') as $lang)
                                     @if (current_lang_tag() == $lang['langTag']) {{ $lang['langName'] }} @endif
                                 @endforeach
@@ -175,14 +175,14 @@
                     <ul class="dropdown-menu">
                         {{-- Switch Languages --}}
                         @if (fs_api_config('language_status'))
-                            <li><a class="dropdown-item py-3" href="#translate" data-bs-toggle="modal"><i class="fa-solid fa-language me-2"></i> {{ fs_lang('optionLanguage') }}</a></li>
+                            <li><a class="dropdown-item py-3" href="#translate" data-bs-toggle="modal"><i class="fa-solid fa-fw fa-language me-2"></i> {{ fs_lang('optionLanguage') }}</a></li>
                         @endif
                         {{-- Switch Users --}}
                         @if (count(fs_account('detail.users')) > 1)
-                            <li><a class="dropdown-item py-3" href="#userAuth" id="switch-user" data-bs-toggle="modal"><i class="fa-solid fa-users me-2"></i> {{ fs_lang('optionUser') }}</a></li>
+                            <li><a class="dropdown-item py-3" href="#userAuth" id="switch-user" data-bs-toggle="modal"><i class="fa-solid fa-fw fa-users me-2"></i> {{ fs_lang('optionUser') }}</a></li>
                         @endif
                         {{-- Logout --}}
-                        <li><a class="dropdown-item py-3" href="{{ fs_route(route('fresns.account.logout', ['redirectURL' => request()->fullUrl()])) }}"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i> {{ fs_lang('accountLogout') }}</a></li>
+                        <li><a class="dropdown-item py-3" href="{{ fs_route(route('fresns.account.logout', ['redirectURL' => request()->fullUrl()])) }}"><i class="fa-solid fa-fw fa-arrow-right-from-bracket me-2"></i> {{ fs_lang('accountLogout') }}</a></li>
                     </ul>
                 @else
                     <a class="btn btn-outline-success" href="{{ fs_route(route('fresns.account.login', ['redirectURL' => request()->fullUrl()])) }}" role="button">{{ fs_lang('accountLogin') }}</a>
