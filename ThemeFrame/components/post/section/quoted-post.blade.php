@@ -11,7 +11,11 @@
                     {{ $quotedPost['author']['nickname'] }}:
                 @endif
 
-                {!! Str::limit(strip_tags($quotedPost['content']), 140) !!}
+                @if ($quotedPost['title'])
+                    {{ $quotedPost['title'] }}
+                @else
+                    {!! Str::limit(strip_tags($quotedPost['content']), 140) !!}
+                @endif
             </div>
         </div>
 

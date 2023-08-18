@@ -219,6 +219,14 @@ function fetchSendVerifyCode(type, useType, templateId, account, obj, countryCod
 
 // download file
 function downloadFile(url, fileName, mimeType) {
+    const currentDomain = window.location.origin;
+    const fileDomain = new URL(url).origin;
+
+    if (currentDomain !== fileDomain) {
+        window.open(url);
+        return;
+    }
+
     $('#loading').hide();
 
     const xhr = new XMLHttpRequest();
@@ -1268,7 +1276,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
-                            <input type="text" class="form-control" name="emailVerifyCode" id="emailVerifyCode" autocomplete="off">
+                            <input type="text" class="form-control" name="verifyCode" id="emailVerifyCode" autocomplete="off">
                             <button data-type="email" data-use-type="4" data-template-id="${templateId}" data-account-input-id="emailEditPassword" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary" type="button">
                                 ${fs_lang('sendVerifyCode')}
                             </button>
