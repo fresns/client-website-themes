@@ -16,6 +16,10 @@
                         <div class="card-header">{{ fs_lang('accountLoginByConnects') }}</div>
                         <div class="card-body">
                             @foreach(fs_api_config('account_connect_services') as $item)
+                                @if($item['code'] == 23 || $item['code'] == 26)
+                                    @continue
+                                @endif
+
                                 <a class="btn btn-outline-primary mx-2" data-bs-toggle="modal" href="#fresnsModal"
                                     data-type="account"
                                     data-scene="join"
