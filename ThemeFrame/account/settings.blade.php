@@ -331,6 +331,10 @@
                                     {{-- Connects --}}
                                     <ul class="list-group list-group-flush">
                                         @foreach (fs_account('detail.connects') as $item)
+                                            @if($item['connectPlatformId'] == 26 && ! $item['connected'])
+                                                @continue
+                                            @endif
+
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <div>
                                                     <img src="/assets/themes/ThemeFrame/images/connects/{{ $item['connectPlatformId'] }}.png" loading="lazy" height="32">

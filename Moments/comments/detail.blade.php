@@ -1,8 +1,14 @@
 @extends('commons.fresns')
 
-@section('title', $items['title'] ?? Str::limit(strip_tags($comment['content']), 40))
-@section('keywords', $items['keywords'])
-@section('description', $items['description'] ?? Str::limit(strip_tags($comment['content']), 140))
+@if($comment['isMarkdown'])
+    @section('title', $items['title'] ?? Str::limit(strip_tags(Str::markdown($comment['content'])), 40))
+    @section('keywords', $items['keywords'])
+    @section('description', $items['description'] ?? Str::limit(strip_tags(Str::markdown($comment['content'])), 140))
+@else
+    @section('title', $items['title'] ?? Str::limit(strip_tags($comment['content']), 40))
+    @section('keywords', $items['keywords'])
+    @section('description', $items['description'] ?? Str::limit(strip_tags($comment['content']), 140))
+@endif
 
 @section('content')
     @desktop

@@ -663,8 +663,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         let form = $(this),
             data = new FormData($(this)[0]),
             btn = $(this).find('button[type="submit"]'),
-            actionUrl = $(this).attr('action'),
-            fresnsReply = $(this).parent().parent();
+            actionUrl = $(this).attr('action');
 
         $.ajax({
             type: 'POST',
@@ -675,26 +674,14 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             contentType: false,
             success: function (res) {
                 tips(res.message, res.code);
-                if (res.code == 38200) {
-                    btn.prop('disabled', false);
-                    btn.find('.spinner-border').remove();
+                if (res.code != 0) {
                     return;
                 }
-                if (fresnsReply.prev().find('.cm-count').length === 1) {
-                    if (res.code === 0) {
-                        let oldCount = fresnsReply.prev().find('.cm-count').text();
-                        fresnsReply
-                            .prev()
-                            .find('.cm-count')
-                            .text(parseInt(oldCount) + 1);
-                        form[0].reset();
-                        showReply(fresnsReply);
-                    }
-                    btn.prop('disabled', false);
-                    btn.find('.spinner-border').remove();
-                } else {
-                    window.location.reload();
-                }
+                window.location.reload();
+            },
+            complete: function (e) {
+                btn.prop('disabled', false);
+                btn.find('.spinner-border').remove();
             },
         });
     });
