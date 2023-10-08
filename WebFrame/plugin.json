@@ -1,0 +1,18 @@
+{
+    "fskey": "WebFrame",
+    "name": "WebFrame",
+    "description": "Fresns website framework to showcase web-side functionality and interaction flow.",
+    "author": "Fresns",
+    "authorLink": "https://fresns.org",
+    "version": "3.0.0",
+    "scene": [
+        "website"
+    ],
+    "accessPath": null,
+    "settingsPath": "/web-frame/admin",
+    "providers": [
+        "Plugins\\WebFrame\\Providers\\WebFrameServiceProvider"
+    ],
+    "autoloadFiles": [],
+    "aliases": {}
+}

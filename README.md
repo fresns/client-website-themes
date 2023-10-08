@@ -2,7 +2,7 @@
 
 <p align="center">
 <img src="https://img.shields.io/badge/Fresns-%5E2.0-orange" alt="Fresns">
-<img src="https://img.shields.io/badge/FresnsEngine-%5E2.0-blueviolet" alt="PluginManager">
+<img src="https://img.shields.io/badge/WebFrame-%5E3.0-blueviolet" alt="WebFrame">
 <img src="https://img.shields.io/badge/License-Apache--2.0-green" alt="License">
 </p>
 
@@ -12,18 +12,18 @@ The official theme template developed by Fresns for the [FresnsEngine 2.x](https
 
 If you have installed a third-party engine plug-in, there may be compatibility issues, so please check the engine you are using for details.
 
-## ThemeFrame
+## WebFrame
 
-![ThemeFrame](https://files.fresns.org/marketplace/fresns/ThemeFrame.png)
+![WebFrame](https://files.fresns.org/wiki/previews/WebFrame.png)
 
-- Fresns theme framework to showcase web-side functionality and interaction flow.
-- Theme Detail: [https://marketplace.fresns.com/open-source/detail/ThemeFrame](https://marketplace.fresns.com/open-source/detail/ThemeFrame)
-- Installation with key name: `ThemeFrame`
-- Installation using command: `php artisan market:require ThemeFrame`
+- Fresns view framework to showcase web-side functionality and interaction flow.
+- Theme Detail: [https://marketplace.fresns.com/open-source/detail/WebFrame](https://marketplace.fresns.com/open-source/detail/WebFrame)
+- Installation with key name: `WebFrame`
+- Installation using command: `php artisan market:require WebFrame`
 
 ## Moments
 
-![Moments](https://files.fresns.org/marketplace/fresns/Moments.png)
+![Moments](https://files.fresns.org/wiki/previews/Moments.png)
 
 - A minimalist theme in the form of information flow as an experience, with responsive design, adaptive to computers, tablets, mobile devices.
 - Theme Detail: [https://marketplace.fresns.com/open-source/detail/Moments](https://marketplace.fresns.com/open-source/detail/Moments)
