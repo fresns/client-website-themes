@@ -21,8 +21,8 @@ if (yearElement) {
 /* Fresns Token */
 $.ajaxSetup({
     headers: {
-        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-    }
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content'),
+    },
 });
 
 // FsLang trans
@@ -105,21 +105,27 @@ $(document).ready(function () {
         }
 
         $(this).parent().siblings('.showSelectTypeName').text($(this).text());
-        $(this).parent().siblings('.' + hideClass).hide();
-        $(this).parent().siblings('.' + showClass).show();
+        $(this)
+            .parent()
+            .siblings('.' + hideClass)
+            .hide();
+        $(this)
+            .parent()
+            .siblings('.' + showClass)
+            .show();
     });
 
-    $('.delete-file').click(function() {
+    $('.delete-file').click(function () {
         $(this).siblings('.file-value').val('');
         window.tips(trans('tips.deleteSuccess')); //FsLang
     });
 
-    $('#langModal').on('show.bs.modal', function(e) {
+    $('#langModal').on('show.bs.modal', function (e) {
         let target = $(e.relatedTarget);
         let languages = target.data('languages');
         let key = target.data('key');
 
-        $(this).find('input[name=key]').val(key)
+        $(this).find('input[name=key]').val(key);
 
         if (languages) {
             let $this = $(this);
@@ -129,12 +135,12 @@ $(document).ready(function () {
         }
     });
 
-    $('#langDescModal').on('show.bs.modal', function(e) {
+    $('#langDescModal').on('show.bs.modal', function (e) {
         let target = $(e.relatedTarget);
         let languages = target.data('languages');
         let key = target.data('key');
 
-        $(this).find('input[name=key]').val(key)
+        $(this).find('input[name=key]').val(key);
 
         if (languages) {
             let $this = $(this);
@@ -150,15 +156,15 @@ $(document).ready(function () {
         let key = $(this).data('key');
 
         template = $($(templateId).html()).clone();
-        template.find('input.plugin-code').attr('name', key+'['+(index+ 1)+'][code]')
-        template.find('select.plugin-fskey').attr('name', key+'['+(index+ 1)+'][plugin]')
+        template.find('input.plugin-code').attr('name', key + '[' + (index + 1) + '][code]');
+        template.find('select.plugin-fskey').attr('name', key + '[' + (index + 1) + '][plugin]');
 
-        $(this).data('count', index+1)
+        $(this).data('count', index + 1);
 
         $(this).parent().parent().find('.plugin-box').append(template);
     });
 
-    $(document).on('click', '.delete-plugin', function() {
-        $(this).parent().remove()
+    $(document).on('click', '.delete-plugin', function () {
+        $(this).parent().remove();
     });
 });
