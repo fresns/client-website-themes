@@ -6,58 +6,58 @@
 <img src="https://img.shields.io/badge/License-Apache--2.0-green" alt="License">
 </p>
 
-# Introduction
+# 介紹
 
-This is a client program developed with a plugin mechanism, running by being installed in the main program through a plugin method, and it references the Composer [web-engine](https://github.com/fresns/web-engine) extension package. Essentially, it is a plugin that, in addition to the default encapsulated functions, can develop any function according to the plugin mechanism.
+這是一個以外掛機制開發的用戶端程式，通過外掛方式安裝在主程式中運行，引用了 Composer [web-engine](https://github.com/fresns/web-engine) 擴展包。所以本質上就是外掛，除了默認封裝的功能之外，也可以按照外掛機制開發任何功能。
 
-The following view and configuration function development are all pre-encapsulated functions that can be used directly.
+以下視圖和配置功能的開發，均是已經封裝好的功能，可以直接使用。
 
-## View Development
+## 視圖開發
 
-The user-end view interface is based on the Laravel Blade scheme, with files located in `resources/views`, used by the [web-engine](https://github.com/fresns/web-engine) extension package's routing. Please refer to the documentation of the [web-engine](https://github.com/fresns/web-engine) extension package for development.
+用戶端視圖界面基於 Laravel Blade 方案，文件位於 `resources/views`，由 [web-engine](https://github.com/fresns/web-engine) 擴展包的路由使用。開發請參考 [web-engine](https://github.com/fresns/web-engine) 擴展包的文檔。
 
-- Path Structure [https://github.com/fresns/web-engine#path-structure](https://github.com/fresns/web-engine#path-structure)
-- View Tags [https://github.com/fresns/web-engine#view-tags](https://github.com/fresns/web-engine#view-tags)
+- 路徑結構 [https://github.com/fresns/web-engine#path-structure](https://github.com/fresns/web-engine#path-structure)
+- 視圖標籤 [https://github.com/fresns/web-engine#view-tags](https://github.com/fresns/web-engine#view-tags)
 
-## Configuration Development
+## 配置開發
 
-The configuration function of this client is also based on the Laravel Blade scheme, and the view file is `resources/views/functions.blade.php`
+本用戶端的配置功能也是基於 Laravel Blade 方案，視圖文件是 `resources/views/functions.blade.php`
 
-### Settings Page
+### 設置頁面
 
-The access address of the settings page is composed of "route name" and "path name", with the route name configured in the file `app/Config/ConfigInfo.php`
+設置頁面的訪問地址由「路由名」和「路徑名」組成，路由名配置文件 `app/Config/ConfigInfo.php`
 
-For example, if the route name is `web-frame`, plus the path name `admin` of the settings page, the final address of the settings page is `/web-frame/admin`
+比如路由名是 `web-frame`，加上設置頁面的路徑名 `admin`，最終設置頁面的地址是 `/web-frame/admin`
 
-### Configuration Items
+### 配置項
 
-Configuration items are stored in the [configs](https://fresns.org/database/systems/configs.html) data table, and all parameter formats are the same as the data table fields.
+配置項存儲在 [configs](https://fresns.org/database/systems/configs.html) 數據表，所有參數格式同數據表字段。
 
-- Configuration Item List `app/Config/ConfigInfo.php` const `ITEMS`
-- Configuration Item Format Reference [https://fresns.org/supports/utilities/config.html](https://fresns.org/supports/utilities/config.html)
+- 配置項列表 `app/Config/ConfigInfo.php` const `ITEMS`
+- 配置項格式參考 [https://fresns.org/supports/utilities/config.html](https://fresns.org/supports/utilities/config.html)
 
-### Multi-language for Settings Page
+### 設置頁多語言
 
-If you need to support multiple languages, the language files are in the `resources/lang/` directory.
+如果你需要支持多語言，語言文件在 `resources/lang/` 目錄。
 
-Usage: `{{ __('WebFrame::fresns.name') }}`
+使用方式 `{{ __('WebFrame::fresns.name') }}`
 
-Where `WebFrame` is the namespace name, configured in `app/Config/ConfigInfo.php` const `WebFrame`
+其中 `WebFrame` 是命名空間名，配置在 `app/Config/ConfigInfo.php` const `WebFrame`
 
-### View Setting Function
+### 設置頁視圖功能
 
-Setting the view file of the function `resources/views/functions.blade.php`
+視圖文件 `resources/views/functions.blade.php`
 
-**Introduction to View Functions**
+**視圖功能介紹**
 
-The view settings file, which is responsible for defining the view's own configuration items, has four configuration types.
+視圖設置文件，負責定義視圖自己的配置項，共有四種配置類型。
 
-- 1. General form tag: Type is input, textarea, select
-- 2. Upload file html tag: Type is input type="file"
-- 3. Multilingual html tag: Type is input or textarea
-- 4. associated plugin html tag: Type is select or select multiple
+- 1、常規表單組件：組件為 input、textarea、select
+- 2、上傳文件組件：組件為 input type="file"
+- 3、多語言組件：組件為 input 或 textarea
+- 4、關聯外掛組件：組件為 select 或 select multiple
 
-**form**
+**表單**
 
 ```html
 <form action="{{ route('web-frame.admin.update') }}" method="post" enctype="multipart/form-data">
@@ -100,14 +100,14 @@ The view settings file, which is responsible for defining the view's own configu
         <input type="number" name="fs_theme_plugins[{{$key}}][order]">
     @endforeach
 
-    <button type="submit">Save</button>
+    <button type="submit">儲存</button>
 </form>
 
 <!-- plugin select multiple: template -->
 <template id="pluginTemplate">
     <input type="text" class="plugin-code" name="">
     <select class="plugin-fskey" name="">
-        <option selected disabled>Please select the plugin</option>
+        <option selected disabled>請選擇關聯外掛</option>
         <option value="">Null</option>
         <option value="1">One</option>
         <option value="2">Two</option>
@@ -116,13 +116,13 @@ The view settings file, which is responsible for defining the view's own configu
 </template>
 ```
 
-**Multilingual form: input**
+**多語言表單：單行輸入**
 
 ```html
-<!-- Get multilingual data -->
+<!-- 獲取多語言數據 -->
 {{ json_encode($params['fs_theme_title']['language_values'] ?? []) }}
 
-<!-- Value of the default language -->
+<!-- 默認語言的值 -->
 {{ $params['fs_theme_title']['value'] ?? '' }}
 ```
 
@@ -143,23 +143,23 @@ The view settings file, which is responsible for defining the view's own configu
             {{ '('.$lang['areaName'].')' }}
         @endif
 
-        @if ($lang['langTag'] == $defaultLanguage) Default Language @endif
+        @if ($lang['langTag'] == $defaultLanguage) 默認語言 @endif
 
         <input type="text" name="languages[{{ $lang['langTag'] }}]" value="{{ $params['fs_company_name']['language_values'][$lang['langTag']] ?? '' }}">
     @endforeach
 
-    <button type="submit">Save</button>
+    <button type="submit">保存</button>
 </form>
 ```
 
-**Multilingual form: textarea**
+**多语言表单：多行输入**
 
 ```html
-<!-- Get multilingual data -->
-{{ json_encode($params['fs_theme_desc']['language_values'] ?? []) }}
+<!-- 獲取多語言數據 -->
+{{ json_encode($params['fs_theme_title']['language_values'] ?? []) }}
 
-<!-- Value of the default language -->
-{{ $params['fs_theme_desc']['value'] ?? '' }}
+<!-- 默認語言的值 -->
+{{ $params['fs_theme_title']['value'] ?? '' }}
 ```
 
 ```html
@@ -179,11 +179,11 @@ The view settings file, which is responsible for defining the view's own configu
             {{ '('.$lang['areaName'].')' }}
         @endif
 
-        @if ($lang['langTag'] == $defaultLanguage) Default Language @endif
+        @if ($lang['langTag'] == $defaultLanguage) 默認語言 @endif
 
         <textarea name="languages[{{ $lang['langTag'] }}]">{{ $params['fs_company_name']['language_values'][$lang['langTag']] ?? '' }}</textarea>
     @endforeach
 
-    <button type="submit">Save</button>
+    <button type="submit">保存</button>
 </form>
 ```
