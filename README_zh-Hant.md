@@ -6,58 +6,76 @@
 <img src="https://img.shields.io/badge/License-Apache--2.0-green" alt="License">
 </p>
 
-# 介绍
+[English](README.md) | [简体中文](README_zh-Hans.md)
 
-这是一个以插件机制开发的客户端程序，通过插件方式安装在主程序中运行，引用了 Composer [web-engine](https://github.com/fresns/web-engine) 扩展包。所以本质上就是插件，除了默认封装的功能之外，也可以按照插件机制开发任何功能。
+# 介紹
 
-以下视图和配置功能的开发，均是已经封装好的功能，可以直接使用。
+這是一個以外掛機制開發的用戶端程式，通過外掛方式安裝在主程式中運行，引用了 Composer [web-engine](https://github.com/fresns/web-engine) 擴展包。所以本質上就是外掛，除了默認封裝的功能之外，也可以按照外掛機制開發任何功能。
 
-## 视图开发
+以下視圖和配置功能的開發，均是已經封裝好的功能，可以直接使用。
 
-用户端视图界面基于 Laravel Blade 方案，文件位于 `resources/views`，由 [web-engine](https://github.com/fresns/web-engine) 扩展包的路由使用。开发请参考 [web-engine](https://github.com/fresns/web-engine) 扩展包的文档。
+## 介面預覽
 
-- 路径结构 [https://github.com/fresns/web-engine#path-structure](https://github.com/fresns/web-engine#path-structure)
-- 视图标签 [https://github.com/fresns/web-engine#view-tags](https://github.com/fresns/web-engine#view-tags)
+### WebFrame
 
-## 配置开发
+![WebFrame](https://files.fresns.org/wiki/previews/WebFrame.png)
 
-本客户端的配置功能也是基于 Laravel Blade 方案，视图文件是 `resources/views/functions.blade.php`
+- 框架主題，展示網站端功能和互動流程。
+- [https://marketplace.fresns.com/open-source/detail/WebFrame](https://marketplace.fresns.com/open-source/detail/WebFrame)
 
-### 设置页面
+### Moments
 
-设置页面的访问地址由「路由名」和「路径名」组成，路由名配置文件 `app/Config/ConfigInfo.php`
+![Moments](https://files.fresns.org/wiki/previews/Moments.png)
 
-比如路由名是 `web-frame`，加上设置页面的路径名 `admin`，最终设置页面的地址是 `/web-frame/admin`
+- 一款以資訊流為體驗形式的極簡風格主題，採用響應式設計，自適應電腦、平板電腦、行動裝置。
+- [https://marketplace.fresns.com/open-source/detail/Moments](https://marketplace.fresns.com/open-source/detail/Moments)
 
-### 配置项
+## 視圖開發
 
-配置项存储在 [configs](https://fresns.org/database/systems/configs.html) 数据表，所有参数格式同数据表字段。
+用戶端視圖界面基於 Laravel Blade 方案，文件位於 `resources/views`，由 [web-engine](https://github.com/fresns/web-engine) 擴展包的路由使用。開發請參考 [web-engine](https://github.com/fresns/web-engine) 擴展包的文檔。
 
-- 配置项列表 `app/Config/ConfigInfo.php` const `ITEMS`
-- 配置项格式参考 [https://fresns.org/supports/utilities/config.html](https://fresns.org/supports/utilities/config.html)
+- 路徑結構 [https://github.com/fresns/web-engine#path-structure](https://github.com/fresns/web-engine#path-structure)
+- 視圖標籤 [https://github.com/fresns/web-engine#view-tags](https://github.com/fresns/web-engine#view-tags)
 
-### 设置页多语言
+## 配置開發
 
-如果你需要支持多语言，语言文件在 `resources/lang/` 目录。
+本用戶端的配置功能也是基於 Laravel Blade 方案，視圖文件是 `resources/views/functions.blade.php`
+
+### 設置頁面
+
+設置頁面的訪問地址由「路由名」和「路徑名」組成，路由名配置文件 `app/Config/ConfigInfo.php`
+
+比如路由名是 `web-frame`，加上設置頁面的路徑名 `admin`，最終設置頁面的地址是 `/web-frame/admin`
+
+### 配置項
+
+配置項存儲在 [configs](https://fresns.org/database/systems/configs.html) 數據表，所有參數格式同數據表字段。
+
+- 配置項列表 `app/Config/ConfigInfo.php` const `ITEMS`
+- 配置項格式參考 [https://fresns.org/supports/utilities/config.html](https://fresns.org/supports/utilities/config.html)
+
+### 設置頁多語言
+
+如果你需要支持多語言，語言文件在 `resources/lang/` 目錄。
 
 使用方式 `{{ __('WebFrame::fresns.name') }}`
 
-其中 `WebFrame` 是命名空间名，配置在 `app/Config/ConfigInfo.php` const `WebFrame`
+其中 `WebFrame` 是命名空間名，配置在 `app/Config/ConfigInfo.php` const `WebFrame`
 
-### 设置页视图功能
+### 設置頁視圖功能
 
-视图文件 `resources/views/functions.blade.php`
+視圖文件 `resources/views/functions.blade.php`
 
-**视图功能介绍**
+**視圖功能介紹**
 
-视图设置文件，负责定义视图自己的配置项，共有四种配置类型。
+視圖設置文件，負責定義視圖自己的配置項，共有四種配置類型。
 
-- 1、常规表单组件：组件为 input、textarea、select
-- 2、上传文件组件：组件为 input type="file"
-- 3、多语言组件：组件为 input 或 textarea
-- 4、关联插件组件：组件为 select 或 select multiple
+- 1、常規表單組件：組件為 input、textarea、select
+- 2、上傳文件組件：組件為 input type="file"
+- 3、多語言組件：組件為 input 或 textarea
+- 4、關聯外掛組件：組件為 select 或 select multiple
 
-**表单**
+**表單**
 
 ```html
 <form action="{{ route('web-frame.admin.update') }}" method="post" enctype="multipart/form-data">
@@ -100,14 +118,14 @@
         <input type="number" name="fs_theme_plugins[{{$key}}][order]">
     @endforeach
 
-    <button type="submit">Save</button>
+    <button type="submit">儲存</button>
 </form>
 
 <!-- plugin select multiple: template -->
 <template id="pluginTemplate">
     <input type="text" class="plugin-code" name="">
     <select class="plugin-fskey" name="">
-        <option selected disabled>请选择关联插件</option>
+        <option selected disabled>請選擇關聯外掛</option>
         <option value="">Null</option>
         <option value="1">One</option>
         <option value="2">Two</option>
@@ -116,13 +134,13 @@
 </template>
 ```
 
-**多语言表单：单行输入**
+**多語言表單：單行輸入**
 
 ```html
-<!-- 获取多语言数据 -->
+<!-- 獲取多語言數據 -->
 {{ json_encode($params['fs_theme_title']['language_values'] ?? []) }}
 
-<!-- 默认语言的值 -->
+<!-- 默認語言的值 -->
 {{ $params['fs_theme_title']['value'] ?? '' }}
 ```
 
@@ -143,7 +161,7 @@
             {{ '('.$lang['areaName'].')' }}
         @endif
 
-        @if ($lang['langTag'] == $defaultLanguage) 默认语言 @endif
+        @if ($lang['langTag'] == $defaultLanguage) 默認語言 @endif
 
         <input type="text" name="languages[{{ $lang['langTag'] }}]" value="{{ $params['fs_company_name']['language_values'][$lang['langTag']] ?? '' }}">
     @endforeach
@@ -155,11 +173,11 @@
 **多语言表单：多行输入**
 
 ```html
-<!-- 获取多语言数据 -->
-{{ json_encode($params['fs_theme_desc']['language_values'] ?? []) }}
+<!-- 獲取多語言數據 -->
+{{ json_encode($params['fs_theme_title']['language_values'] ?? []) }}
 
-<!-- 默认语言的值 -->
-{{ $params['fs_theme_desc']['value'] ?? '' }}
+<!-- 默認語言的值 -->
+{{ $params['fs_theme_title']['value'] ?? '' }}
 ```
 
 ```html
@@ -179,7 +197,7 @@
             {{ '('.$lang['areaName'].')' }}
         @endif
 
-        @if ($lang['langTag'] == $defaultLanguage) 默认语言 @endif
+        @if ($lang['langTag'] == $defaultLanguage) 默認語言 @endif
 
         <textarea name="languages[{{ $lang['langTag'] }}]">{{ $params['fs_company_name']['language_values'][$lang['langTag']] ?? '' }}</textarea>
     @endforeach
@@ -187,3 +205,7 @@
     <button type="submit">保存</button>
 </form>
 ```
+
+## 授權協議
+
+Fresns 網站是根據 [Apache-2.0](https://opensource.org/licenses/Apache-2.0) 授權的開源軟體。
