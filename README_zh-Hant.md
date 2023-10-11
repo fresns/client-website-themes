@@ -166,11 +166,11 @@
         <input type="text" name="languages[{{ $lang['langTag'] }}]" value="{{ $params['fs_company_name']['language_values'][$lang['langTag']] ?? '' }}">
     @endforeach
 
-    <button type="submit">保存</button>
+    <button type="submit">儲存</button>
 </form>
 ```
 
-**多语言表单：多行输入**
+**多語言表單：多行輸入**
 
 ```html
 <!-- 獲取多語言數據 -->
@@ -202,7 +202,7 @@
         <textarea name="languages[{{ $lang['langTag'] }}]">{{ $params['fs_company_name']['language_values'][$lang['langTag']] ?? '' }}</textarea>
     @endforeach
 
-    <button type="submit">保存</button>
+    <button type="submit">儲存</button>
 </form>
 ```
 
