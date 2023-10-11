@@ -21,14 +21,14 @@
 ![WebFrame](https://files.fresns.org/wiki/previews/WebFrame.png)
 
 - 框架主題，展示網站端功能和互動流程。
-- [https://marketplace.fresns.com/open-source/detail/WebFrame](https://marketplace.fresns.com/open-source/detail/WebFrame)
+- [https://marketplace.fresns.com/open-source/detail/WebFrame](https://marketplace.fresns.com/zh-Hant/open-source/detail/WebFrame)
 
 ### Moments
 
 ![Moments](https://files.fresns.org/wiki/previews/Moments.png)
 
 - 一款以資訊流為體驗形式的極簡風格主題，採用響應式設計，自適應電腦、平板電腦、行動裝置。
-- [https://marketplace.fresns.com/open-source/detail/Moments](https://marketplace.fresns.com/open-source/detail/Moments)
+- [https://marketplace.fresns.com/open-source/detail/Moments](https://marketplace.fresns.com/zh-Hant/open-source/detail/Moments)
 
 ## 視圖開發
 

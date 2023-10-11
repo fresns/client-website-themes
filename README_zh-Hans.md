@@ -21,14 +21,14 @@
 ![WebFrame](https://files.fresns.org/wiki/previews/WebFrame.png)
 
 - 框架主题，展示网站端功能和交互流程。
-- [https://marketplace.fresns.com/open-source/detail/WebFrame](https://marketplace.fresns.com/open-source/detail/WebFrame)
+- [https://marketplace.fresns.com/open-source/detail/WebFrame](https://marketplace.fresns.com/zh-Hans/open-source/detail/WebFrame)
 
 ### Moments
 
 ![Moments](https://files.fresns.org/wiki/previews/Moments.png)
 
 - 一款以信息流为体验形式的极简风格主题，采用响应式设计，自适应电脑、平板电脑、移动设备。
-- [https://marketplace.fresns.com/open-source/detail/Moments](https://marketplace.fresns.com/open-source/detail/Moments)
+- [https://marketplace.fresns.com/open-source/detail/Moments](https://marketplace.fresns.com/zh-Hans/open-source/detail/Moments)
 
 ## 视图开发
 
@@ -49,10 +49,10 @@
 
 ### 配置项
 
-配置项存储在 [configs](https://fresns.org/database/systems/configs.html) 数据表，所有参数格式同数据表字段。
+配置项存储在 [configs](https://zh-hans.fresns.org/database/systems/configs.html) 数据表，所有参数格式同数据表字段。
 
 - 配置项列表 `app/Config/ConfigInfo.php` const `ITEMS`
-- 配置项格式参考 [https://fresns.org/supports/utilities/config.html](https://fresns.org/supports/utilities/config.html)
+- 配置项格式参考 [https://zh-hans.fresns.org/supports/utilities/config.html](https://zh-hans.fresns.org/supports/utilities/config.html)
 
 ### 设置页多语言
 
