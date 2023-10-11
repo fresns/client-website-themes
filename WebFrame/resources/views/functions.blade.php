@@ -105,7 +105,6 @@
                         @csrf
                         @method('put')
 
-                        <input type="hidden" name="fskey" value="WebFrame">
                         <input type="hidden" name="itemKey" value="fs_company_name">
 
                         <div class="table-responsive">

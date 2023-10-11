@@ -136,9 +136,8 @@ class AdminController extends Controller
     public function updateLanguages(Request $request)
     {
         $itemKey = $request->itemKey;
-        $fskey = $request->fskey;
 
-        if (! $itemKey || ! $fskey) {
+        if (! $itemKey) {
             abort(404);
         }
 
