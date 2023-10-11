@@ -150,7 +150,6 @@
     @csrf
     @method('put')
 
-    <input type="hidden" name="fskey" value="WebFrame">
     <input type="hidden" name="itemKey" value="fs_theme_title">
 
     @foreach ($optionalLanguages as $lang)
@@ -186,7 +185,6 @@
     @csrf
     @method('put')
 
-    <input type="hidden" name="fskey" value="WebFrame">
     <input type="hidden" name="itemKey" value="fs_theme_desc">
 
     @foreach ($optionalLanguages as $lang)
