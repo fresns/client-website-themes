@@ -69,11 +69,11 @@
                         @if (fs_db_config('china_icp_filing'))
                             <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow" class="text-decoration-none link-secondary">{{fs_db_config('china_icp_filing')}}</a>
                         @endif
-                        @if (fs_db_config('china_icp_filing') && fs_db_config('china_psb_filing'))
+                        @if (fs_db_config('china_icp_filing') && fs_db_config('china_mps_filing'))
                             <span class="mx-1">|</span>
                         @endif
-                        @if (fs_db_config('china_psb_filing'))
-                            <a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode={{ Str::of(fs_db_config('china_psb_filing'))->match('/\d+/') }}" target="_blank" rel="nofollow" class="text-decoration-none link-secondary">{{ fs_db_config('china_psb_filing') }}</a>
+                        @if (fs_db_config('china_mps_filing'))
+                            <a href="https://beian.mps.gov.cn/#/query/webSearch?code={{ Str::of(fs_db_config('china_mps_filing'))->match('/\d+/') }}" target="_blank" rel="nofollow" class="text-decoration-none link-secondary">{{ fs_db_config('china_mps_filing') }}</a>
                         @endif
                     </p>
 
