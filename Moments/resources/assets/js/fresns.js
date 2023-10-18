@@ -982,8 +982,11 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             result[`password`] = window.btoa(result[`password`]);
         }
 
+        if (result['password_confirmation'] !== undefined) {
+            result[`password_confirmation`] = window.btoa(result[`password_confirmation`]);
+        }
+
         let bodyArr = [];
-        let formData = new FormData();
 
         for (i in result) {
             if (i == 'verifyCode' && result[i] == '') {
