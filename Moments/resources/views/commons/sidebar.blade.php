@@ -24,6 +24,9 @@
     @endif
 </aside>
 
+{{-- Widget --}}
+{!! fs_db_config('moments_widget_sidebar') !!}
+
 {{-- Sticky Posts --}}
 @if (fs_sticky_posts())
     <aside class="fs-list-group rounded mb-3">

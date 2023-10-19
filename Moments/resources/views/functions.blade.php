@@ -108,11 +108,147 @@
             </div>
         </div>
 
+        {{-- Sidebar --}}
+        <div class="row mb-4">
+            <label class="col-lg-2 col-form-label text-lg-end">Sidebar Widget</label>
+            <div class="col-lg-6">
+                <button type="button" class="btn btn-outline-secondary btn-modal w-100 text-start" data-bs-toggle="modal" data-bs-target="#sidebarModal">{{ __('FsLang::panel.button_edit') }}</button>
+            </div>
+        </div>
+
+        {{-- Portal --}}
+        <div class="row mb-4">
+            <label class="col-lg-2 col-form-label text-lg-end">Portal Widget</label>
+            <div class="col-lg-6">
+                <button type="button" class="btn btn-outline-secondary btn-modal w-100 text-start" data-bs-toggle="modal" data-bs-target="#portalModal">{{ __('FsLang::panel.button_edit') }}</button>
+            </div>
+        </div>
+
         <div class="row mb-4">
             <div class="col-lg-2"></div>
             <div class="col-lg-10"><button type="submit" class="btn btn-primary">{{ __('FsLang::panel.button_save') }}</button></div>
         </div>
     </form>
+
+    {{-- Sidebar Modal --}}
+    <div class="modal fade" id="sidebarModal" tabindex="-1" aria-labelledby="sidebarModal" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sidebar Widget</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('moments.admin.update.languages') }}" method="post">
+                        @csrf
+                        @method('put')
+
+                        <input type="hidden" name="itemKey" value="moments_widget_sidebar">
+
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle text-nowrap">
+                                <thead>
+                                    <tr class="table-info">
+                                        <th scope="col">{{ __('FsLang::panel.table_lang_tag') }}</th>
+                                        <th scope="col">{{ __('FsLang::panel.table_lang_name') }}</th>
+                                        <th scope="col" class="w-75">{{ __('FsLang::panel.table_content') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($optionalLanguages as $lang)
+                                        <tr>
+                                            <td>
+                                                {{ $lang['langTag'] }}
+                                                @if ($lang['langTag'] == $defaultLanguage)
+                                                    <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('FsLang::panel.default_language') }}" data-bs-original-title="{{ __('FsLang::panel.default_language') }}" aria-label="{{ __('FsLang::panel.default_language') }}"></i>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                {{ $lang['langName'] }}
+                                                @if ($lang['areaName'])
+                                                    {{ '('.$lang['areaName'].')' }}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <div class="form-floating">
+                                                    <textarea class="form-control" name="languages[{{ $lang['langTag'] }}]" placeholder="HTML" style="height:300px">{{ $params['moments_widget_sidebar']['language_values'][$lang['langTag']] ?? '' }}</textarea>
+                                                    <label for="floatingTextarea2">HTML</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--button_save-->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">{{ __('FsLang::panel.button_save') }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Portal Modal --}}
+    <div class="modal fade" id="portalModal" tabindex="-1" aria-labelledby="portalModal" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Portal Widget</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="{{ route('moments.admin.update.languages') }}" method="post">
+                        @csrf
+                        @method('put')
+
+                        <input type="hidden" name="itemKey" value="moments_widget_portal">
+
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle text-nowrap">
+                                <thead>
+                                    <tr class="table-info">
+                                        <th scope="col">{{ __('FsLang::panel.table_lang_tag') }}</th>
+                                        <th scope="col">{{ __('FsLang::panel.table_lang_name') }}</th>
+                                        <th scope="col" class="w-75">{{ __('FsLang::panel.table_content') }}</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($optionalLanguages as $lang)
+                                        <tr>
+                                            <td>
+                                                {{ $lang['langTag'] }}
+                                                @if ($lang['langTag'] == $defaultLanguage)
+                                                    <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('FsLang::panel.default_language') }}" data-bs-original-title="{{ __('FsLang::panel.default_language') }}" aria-label="{{ __('FsLang::panel.default_language') }}"></i>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                {{ $lang['langName'] }}
+                                                @if ($lang['areaName'])
+                                                    {{ '('.$lang['areaName'].')' }}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <div class="form-floating">
+                                                    <textarea class="form-control" name="languages[{{ $lang['langTag'] }}]" placeholder="HTML" style="height:300px">{{ $params['moments_widget_portal']['language_values'][$lang['langTag']] ?? '' }}</textarea>
+                                                    <label for="floatingTextarea2">HTML</label>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--button_save-->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">{{ __('FsLang::panel.button_save') }}</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('script')
