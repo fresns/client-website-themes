@@ -1012,7 +1012,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
 
                 if (res.code == 0) {
                     setTimeout(function () {
-                        window.location.href = res.data.redirectURL || '/account/login';
+                        window.location.href = res?.data?.redirectURL || '/account/login';
                     }, 1000);
                 }
             },
