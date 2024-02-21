@@ -1,5 +1,5 @@
 @php
-    $btnIconActive = '/assets/WebFrame/images/icon-like-active.png';
+    $btnIconActive = fs_theme('assets').'images/icon-like-active.png';
 @endphp
 
 @if ($icon)

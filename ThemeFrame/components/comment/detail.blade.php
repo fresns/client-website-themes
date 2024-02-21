@@ -90,14 +90,14 @@
 
             {{-- Sticky --}}
             @if ($comment['isSticky'])
-                <img src="/assets/WebFrame/images/icon-sticky.png" loading="lazy" alt="Sticky" class="ms-2">
+                <img src="{{ fs_theme('assets') }}images/icon-sticky.png" loading="lazy" alt="Sticky" class="ms-2">
             @endif
 
             {{-- Digest --}}
             @if ($comment['digestState'] == 2)
-                <img src="/assets/WebFrame/images/icon-digest.png" loading="lazy" alt="General Digest" class="ms-2">
+                <img src="{{ fs_theme('assets') }}images/icon-digest.png" loading="lazy" alt="General Digest" class="ms-2">
             @elseif ($comment['digestState'] == 3)
-                <img src="/assets/WebFrame/images/icon-digest.png" loading="lazy" alt="Senior Digest" class="ms-2">
+                <img src="{{ fs_theme('assets') }}images/icon-digest.png" loading="lazy" alt="Senior Digest" class="ms-2">
             @endif
         </div>
 
@@ -179,7 +179,7 @@
                     @if ($iconComment)
                         <img src="{{ $iconComment['imageUrl'] }}" loading="lazy">
                     @else
-                        <img src="/assets/WebFrame/images/icon-comment.png" loading="lazy">
+                        <img src="{{ fs_theme('assets') }}images/icon-comment.png" loading="lazy">
                     @endif
                     {{ $comment['commentCount'] }}
                 </a>
@@ -191,7 +191,7 @@
                     @if ($iconShare)
                         <img src="{{ $iconShare['imageUrl'] }}" loading="lazy">
                     @else
-                        <img src="/assets/WebFrame/images/icon-share.png" loading="lazy">
+                        <img src="{{ fs_theme('assets') }}images/icon-share.png" loading="lazy">
                     @endif
                 </button>
                 @component('components.comment.mark.share', [
@@ -206,7 +206,7 @@
                     @if ($iconMore)
                         <img src="{{ $iconMore['imageUrl'] }}" loading="lazy">
                     @else
-                        <img src="/assets/WebFrame/images/icon-more.png" loading="lazy">
+                        <img src="{{ fs_theme('assets') }}images/icon-more.png" loading="lazy">
                     @endif
                 </button>
                 @component('components.comment.mark.more', [

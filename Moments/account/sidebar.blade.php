@@ -6,13 +6,13 @@
     <div class="collapse navbar-collapse list-group mt-2 mt-lg-0" id="fresnsMenus">
         {{-- User Center --}}
         <a href="{{ fs_route(route('fresns.account.index')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.account.index') ? 'active' : '' }}">
-            <img class="img-fluid" src="/assets/Moments/images/menu-account.png" loading="lazy" width="36" height="36">
+            <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-account.png" loading="lazy" width="36" height="36">
             {{ fs_config('menu_account') }}
         </a>
 
         {{-- Notifications --}}
         <a href="{{ fs_route(route('fresns.notifications.index')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.notifications.index') ? 'active' : '' }}">
-            <img class="img-fluid" src="/assets/Moments/images/menu-account-notifications.png" loading="lazy" width="36" height="36">
+            <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-account-notifications.png" loading="lazy" width="36" height="36">
             {{ fs_config('menu_notifications') }}
 
             @if (fs_user_panel('unreadNotifications.all') > 0)
@@ -23,7 +23,7 @@
         {{-- Conversations --}}
         @if (fs_config('conversation_status'))
             <a href="{{ fs_route(route('fresns.messages.index')) }}" class="list-group-item list-group-item-action {{ Route::is(['fresns.messages.index', 'fresns.messages.conversation']) ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/Moments/images/menu-account-conversations.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-account-conversations.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_conversations') }}
 
                 @if (fs_user_panel('conversations.unreadMessages') > 0)
@@ -34,7 +34,7 @@
 
         {{-- Draft Box --}}
         <a href="{{ fs_route(route('fresns.editor.drafts', ['type' => 'posts'])) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.editor.drafts') ? 'active' : '' }}">
-            <img class="img-fluid" src="/assets/Moments/images/menu-account-drafts.png" loading="lazy" width="36" height="36">
+            <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-account-drafts.png" loading="lazy" width="36" height="36">
             {{ fs_config('menu_editor_drafts') }}
 
             @if (array_sum(fs_user_panel('draftCount')) > 0)
@@ -45,7 +45,7 @@
         {{-- Wallet --}}
         @if (fs_config('wallet_status'))
             <a href="{{ fs_route(route('fresns.account.wallet')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.account.wallet') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/Moments/images/menu-account-wallet.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-account-wallet.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_account_wallet') }}
             </a>
         @endif
@@ -53,14 +53,14 @@
         {{-- Users of this account --}}
         @if (fs_user_panel('multiUser.status') || count(fs_account('detail.users')) > 1)
             <a href="{{ fs_route(route('fresns.account.users')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.account.users') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/Moments/images/menu-account-users.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-account-users.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_account_users') }}
             </a>
         @endif
 
         {{-- Settings --}}
         <a href="{{ fs_route(route('fresns.account.settings')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.account.settings') ? 'active' : '' }}">
-            <img class="img-fluid" src="/assets/Moments/images/menu-account-settings.png" loading="lazy" width="36" height="36">
+            <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-account-settings.png" loading="lazy" width="36" height="36">
             {{ fs_config('menu_account_settings') }}
         </a>
     </div>

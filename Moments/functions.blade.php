@@ -251,6 +251,9 @@
     </div>
 @endsection
 
+@push('style')
+@endpush
+
 @push('script')
     <script src="/assets/Moments/js/functions.js"></script>
 @endpush

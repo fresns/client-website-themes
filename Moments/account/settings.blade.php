@@ -351,7 +351,7 @@
 
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                     <div>
-                                        <img src="/assets/Moments/images/connects/{{ $item['connectPlatformId'] }}.png" loading="lazy" height="32">
+                                        <img src="{{ fs_theme('assets') }}images/connects/{{ $item['connectPlatformId'] }}.png" loading="lazy" height="32">
                                         <span class="text-secondary ms-1">{{ $item['connectName'] }}</span>
                                     </div>
                                     <div>

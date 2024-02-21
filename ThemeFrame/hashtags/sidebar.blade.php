@@ -8,7 +8,7 @@
         @if (fs_config('menu_hashtag_status'))
             <a href="{{ fs_route(route('fresns.hashtag.index')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.hashtag.index') ? 'active' : '' }}
                 @if (request()->url() === rtrim(fs_route(route('fresns.home')), '/')) active @endif">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-hashtag-home.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-hashtag-home.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_hashtag_name') }}
             </a>
         @endif
@@ -16,7 +16,7 @@
         {{-- Hashtag List --}}
         @if (fs_config('menu_hashtag_list_status'))
             <a href="{{ fs_route(route('fresns.hashtag.list')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.hashtag.list') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-hashtag-list.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-hashtag-list.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_hashtag_list_name') }}
             </a>
         @endif
@@ -24,7 +24,7 @@
         {{-- Likes --}}
         @if (fs_config('like_hashtag_setting'))
             <a href="{{ fs_route(route('fresns.hashtag.likes')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.hashtag.likes') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-likes.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-likes.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_like_hashtags') }}
             </a>
         @endif
@@ -32,7 +32,7 @@
         {{-- Dislikes --}}
         @if (fs_config('dislike_hashtag_setting'))
             <a href="{{ fs_route(route('fresns.hashtag.dislikes')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.hashtag.dislikes') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-dislikes.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-dislikes.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_dislike_hashtags') }}
             </a>
         @endif
@@ -40,7 +40,7 @@
         {{-- Following --}}
         @if (fs_config('follow_hashtag_setting'))
             <a href="{{ fs_route(route('fresns.hashtag.following')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.hashtag.following') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-following.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-following.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_follow_hashtags') }}
             </a>
         @endif
@@ -48,7 +48,7 @@
         {{-- Blocking --}}
         @if (fs_config('block_hashtag_setting'))
             <a href="{{ fs_route(route('fresns.hashtag.blocking')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.hashtag.blocking') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-blocking.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-blocking.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_block_hashtags') }}
             </a>
         @endif
@@ -56,7 +56,7 @@
         {{-- Post List by Follow Hashtags --}}
         @if (fs_config('view_posts_by_follow_object'))
             <a href="{{ fs_route(route('fresns.follow.hashtag.posts')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.follow.hashtag.posts') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-follow-posts.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-follow-posts.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_follow_hashtag_posts') }}
             </a>
         @endif
@@ -64,7 +64,7 @@
         {{-- Comment List by Follow Hashtags --}}
         @if (fs_config('view_comments_by_follow_object'))
             <a href="{{ fs_route(route('fresns.follow.hashtag.comments')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.follow.hashtag.comments') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-follow-comments.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-follow-comments.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_follow_hashtag_comments') }}
             </a>
         @endif

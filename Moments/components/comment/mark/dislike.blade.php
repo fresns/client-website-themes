@@ -1,6 +1,6 @@
 @php
-    $btnIcon = '/assets/Moments/images/icon-dislike.png';
-    $btnIconActive = '/assets/Moments/images/icon-dislike-active.png';
+    $btnIcon = fs_theme('assets').'images/icon-dislike.png';
+    $btnIconActive = fs_theme('assets').'images/icon-dislike-active.png';
 @endphp
 
 @if ($icon)

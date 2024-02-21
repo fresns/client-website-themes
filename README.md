@@ -16,14 +16,14 @@ The following view and configuration function development are all pre-encapsulat
 
 ### ThemeFrame
 
-![ThemeFrame](https://assets.fresns.com/images/wikis/previews/ThemeFrame.png)
+![ThemeFrame](https://assets.fresns.com/images/wiki/previews/ThemeFrame.png)
 
 - Fresns view framework to showcase web-side functionality and interaction flow.
 - [https://marketplace.fresns.com/clients/detail/ThemeFrame](https://marketplace.fresns.com/clients/detail/ThemeFrame)
 
 ### Moments
 
-![Moments](https://assets.fresns.com/images/wikis/previews/Moments.png)
+![Moments](https://assets.fresns.com/images/wiki/previews/Moments.png)
 
 - A minimalist theme in the form of information flow as an experience, with responsive design, adaptive to computers, tablets, mobile devices.
 - [https://marketplace.fresns.com/clients/detail/Moments](https://marketplace.fresns.com/clients/detail/Moments)

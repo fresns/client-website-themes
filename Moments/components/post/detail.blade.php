@@ -89,16 +89,16 @@
 
             {{-- Sticky --}}
             @if ($post['stickyState'] == 2)
-                <img src="/assets/Moments/images/icon-sticky.png" loading="lazy" alt="Group Sticky" class="ms-2">
+                <img src="{{ fs_theme('assets') }}images/icon-sticky.png" loading="lazy" alt="Group Sticky" class="ms-2">
             @elseif ($post['stickyState'] == 3)
-                <img src="/assets/Moments/images/icon-sticky.png" loading="lazy" alt="Global Sticky" class="ms-2">
+                <img src="{{ fs_theme('assets') }}images/icon-sticky.png" loading="lazy" alt="Global Sticky" class="ms-2">
             @endif
 
             {{-- Digest --}}
             @if ($post['digestState'] == 2)
-                <img src="/assets/Moments/images/icon-digest.png" loading="lazy" alt="General Digest" class="ms-2">
+                <img src="{{ fs_theme('assets') }}images/icon-digest.png" loading="lazy" alt="General Digest" class="ms-2">
             @elseif ($post['digestState'] == 3)
-                <img src="/assets/Moments/images/icon-digest.png" loading="lazy" alt="Senior Digest" class="ms-2">
+                <img src="{{ fs_theme('assets') }}images/icon-digest.png" loading="lazy" alt="Senior Digest" class="ms-2">
             @endif
         </div>
 
@@ -244,7 +244,7 @@
                     @if ($iconShare)
                         <img src="{{ $iconShare['imageUrl'] }}" loading="lazy">
                     @else
-                        <img src="/assets/Moments/images/icon-share.png" loading="lazy">
+                        <img src="{{ fs_theme('assets') }}images/icon-share.png" loading="lazy">
                     @endif
                 </button>
                 @component('components.post.mark.share', [
@@ -259,7 +259,7 @@
                     @if ($iconMore)
                         <img src="{{ $iconMore['imageUrl'] }}" loading="lazy">
                     @else
-                        <img src="/assets/Moments/images/icon-more.png" loading="lazy">
+                        <img src="{{ fs_theme('assets') }}images/icon-more.png" loading="lazy">
                     @endif
                 </button>
                 @component('components.post.mark.more', [

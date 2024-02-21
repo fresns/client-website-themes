@@ -21,7 +21,7 @@
                         @if (fs_user('detail.verifiedIcon'))
                             <img src="{{ fs_user('detail.verifiedIcon') }}" alt="Verified" loading="lazy" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ fs_user('detail.verifiedDesc') }}" height="20">
                         @else
-                            <img src="/assets/Moments/images/icon-verified.png" alt="Verified" loading="lazy" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ fs_user('detail.verifiedDesc') }}" height="20">
+                            <img src="{{ fs_theme('assets') }}images/icon-verified.png" alt="Verified" loading="lazy" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ fs_user('detail.verifiedDesc') }}" height="20">
                         @endif
                     @endif
                 </div>

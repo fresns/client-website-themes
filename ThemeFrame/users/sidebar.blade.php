@@ -8,7 +8,7 @@
         @if (fs_config('menu_user_status'))
             <a href="{{ fs_route(route('fresns.user.index')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.user.index') ? 'active' : '' }}
                 @if (request()->url() === rtrim(fs_route(route('fresns.home')), '/')) active @endif">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-user-home.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-user-home.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_user_name') }}
             </a>
         @endif
@@ -16,7 +16,7 @@
         {{-- User List --}}
         @if (fs_config('menu_user_list_status'))
             <a href="{{ fs_route(route('fresns.user.list')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.user.list') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-user-list.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-user-list.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_user_list_name') }}
             </a>
         @endif
@@ -24,7 +24,7 @@
         {{-- Likes --}}
         @if (fs_config('like_user_setting'))
             <a href="{{ fs_route(route('fresns.user.likes')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.user.likes') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-likes.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-likes.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_like_users') }}
             </a>
         @endif
@@ -32,7 +32,7 @@
         {{-- Dislikes --}}
         @if (fs_config('dislike_user_setting'))
             <a href="{{ fs_route(route('fresns.user.dislikes')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.user.dislikes') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-dislikes.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-dislikes.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_dislike_users') }}
             </a>
         @endif
@@ -40,7 +40,7 @@
         {{-- Following --}}
         @if (fs_config('follow_user_setting'))
             <a href="{{ fs_route(route('fresns.user.following')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.user.following') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-following.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-following.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_follow_users') }}
             </a>
         @endif
@@ -48,7 +48,7 @@
         {{-- Blocking --}}
         @if (fs_config('block_user_setting'))
             <a href="{{ fs_route(route('fresns.user.blocking')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.user.blocking') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-blocking.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-blocking.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_block_users') }}
             </a>
         @endif
@@ -56,7 +56,7 @@
         {{-- Post List by Follow Users --}}
         @if (fs_config('view_posts_by_follow_object'))
             <a href="{{ fs_route(route('fresns.follow.user.posts')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.follow.user.posts') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-follow-posts.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-follow-posts.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_follow_user_posts') }}
             </a>
         @endif
@@ -64,7 +64,7 @@
         {{-- Comment List by Follow Users --}}
         @if (fs_config('view_comments_by_follow_object'))
             <a href="{{ fs_route(route('fresns.follow.user.comments')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.follow.user.comments') ? 'active' : '' }}">
-                <img class="img-fluid" src="/assets/WebFrame/images/menu-follow-comments.png" loading="lazy" width="36" height="36">
+                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-follow-comments.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_follow_user_comments') }}
             </a>
         @endif

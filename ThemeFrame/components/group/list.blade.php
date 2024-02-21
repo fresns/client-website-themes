@@ -9,7 +9,7 @@
             <section class="d-flex">
                 <a href="{{ fs_route(route('fresns.group.detail', ['gid' => $group['gid']])) }}" class="text-nowrap overflow-hidden list-name">{{ $group['gname'] }}</a>
                 @if ($group['recommend'])
-                    <img src="/assets/WebFrame/images/icon-recommend.png" class="list-recommend ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Recommend" loading="lazy" alt="Recommend">
+                    <img src="{{ fs_theme('assets') }}images/icon-recommend.png" class="list-recommend ms-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Recommend" loading="lazy" alt="Recommend">
                 @endif
                 <div class="badge-bg-info ms-2">
                     <span class="badge rounded-pill">{{ $group['postCount'] }} {{ fs_config('post_name') }}</span>

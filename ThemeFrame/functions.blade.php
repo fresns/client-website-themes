@@ -148,6 +148,9 @@
     </div>
 @endsection
 
+@push('style')
+@endpush
+
 @push('script')
     <script src="/assets/WebFrame/js/functions.js"></script>
 @endpush

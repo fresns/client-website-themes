@@ -19,10 +19,10 @@
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/fontawesome.min.css">
     <link rel="stylesheet" href="/static/css/select2.min.css">
-    <link rel="stylesheet" href="/assets/{{ fs_theme('fskey') }}/css/atwho.min.css?v={{ fs_theme('version') }}">
-    <link rel="stylesheet" href="/assets/{{ fs_theme('fskey') }}/css/prism.min.css?v={{ fs_theme('version') }}">
-    <link rel="stylesheet" href="/assets/{{ fs_theme('fskey') }}/css/fancybox.min.css?v={{ fs_theme('version') }}">
-    <link rel="stylesheet" href="/assets/{{ fs_theme('fskey') }}/css/fresns.css?v={{ fs_theme('version') }}">
+    <link rel="stylesheet" href="{{ fs_theme('assets') }}css/atwho.min.css?v={{ fs_theme('version') }}">
+    <link rel="stylesheet" href="{{ fs_theme('assets') }}css/prism.min.css?v={{ fs_theme('version') }}">
+    <link rel="stylesheet" href="{{ fs_theme('assets') }}css/fancybox.min.css?v={{ fs_theme('version') }}">
+    <link rel="stylesheet" href="{{ fs_theme('assets') }}css/fresns.css?v={{ fs_theme('version') }}">
     <script src="/static/js/jquery.min.js"></script>
     @stack('style')
     @if (fs_config('website_stat_position') == 'head')
@@ -257,12 +257,12 @@
             }
         };
     </script>
-    <script src="/assets/{{ fs_theme('fskey') }}/js/fresns-iframe.js?v={{ fs_theme('version') }}"></script>
-    <script src="/assets/{{ fs_theme('fskey') }}/js/jquery.caret.min.js?v={{ fs_theme('version') }}"></script>
-    <script src="/assets/{{ fs_theme('fskey') }}/js/atwho.min.js?v={{ fs_theme('version') }}"></script>
-    <script src="/assets/{{ fs_theme('fskey') }}/js/prism.min.js?v={{ fs_theme('version') }}"></script>
-    <script src="/assets/{{ fs_theme('fskey') }}/js/fancybox.umd.min.js?v={{ fs_theme('version') }}"></script>
-    <script src="/assets/{{ fs_theme('fskey') }}/js/fresns.js?v={{ fs_theme('version') }}"></script>
+    <script src="{{ fs_theme('assets') }}js/fresns-iframe.js?v={{ fs_theme('version') }}"></script>
+    <script src="{{ fs_theme('assets') }}js/jquery.caret.min.js?v={{ fs_theme('version') }}"></script>
+    <script src="{{ fs_theme('assets') }}js/atwho.min.js?v={{ fs_theme('version') }}"></script>
+    <script src="{{ fs_theme('assets') }}js/prism.min.js?v={{ fs_theme('version') }}"></script>
+    <script src="{{ fs_theme('assets') }}js/fancybox.umd.min.js?v={{ fs_theme('version') }}"></script>
+    <script src="{{ fs_theme('assets') }}js/fresns.js?v={{ fs_theme('version') }}"></script>
     @stack('script')
 </body>
 
