@@ -5,10 +5,7 @@
     'fresns.post.nearby',
     'fresns.group.index',
     'fresns.follow.all.posts',
-    'fresns.account.index',
-    'fresns.account.login',
-    'fresns.account.register',
-    'fresns.account.reset.password',
+    'fresns.me.index',
 ]) || request()->url() == fs_route(route('fresns.custom.page', ['name' => 'channels'])))
     <div class="clearfix py-5 d-lg-none"></div>
     <div class="fs-tabbar fixed-bottom bg-light border-top d-lg-none">
@@ -60,9 +57,9 @@
 
             {{-- user --}}
             <div class="col text-center">
-                <a class="text-decoration-none {{ Route::is('fresns.account.index') ? 'link-fresns' : 'link-secondary' }}" href="{{ fs_route(route('fresns.account.index')) }}">
+                <a class="text-decoration-none {{ Route::is('fresns.me.index') ? 'link-fresns' : 'link-secondary' }}" href="{{ fs_route(route('fresns.me.index')) }}">
                     <div class="fs-5 pt-2 position-relative">
-                        {!! Route::is(['fresns.account.*']) ? '<i class="fa-solid fa-user"></i>' : '<i class="fa-regular fa-user"></i>' !!}
+                        {!! Route::is(['fresns.me.*']) ? '<i class="fa-solid fa-user"></i>' : '<i class="fa-regular fa-user"></i>' !!}
 
                         @if (fs_user()->check())
                             @php

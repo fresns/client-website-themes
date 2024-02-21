@@ -85,7 +85,7 @@
                 <div class="d-flex mb-4 mb-lg-0">
                     @if (fs_user()->check())
                         {{-- Logged In --}}
-                        <a class="btn" href="{{ fs_route(route('fresns.account.index')) }}" role="button"><img src="{{ fs_user('detail.avatar') }}" loading="lazy" class="nav-avatar rounded-circle"> {{ fs_user('detail.nickname') }}</a>
+                        <a class="btn" href="{{ fs_route(route('fresns.me.index')) }}" role="button"><img src="{{ fs_user('detail.avatar') }}" loading="lazy" class="nav-avatar rounded-circle"> {{ fs_user('detail.nickname') }}</a>
 
                         @if (fs_config('webframe_quick_publish'))
                             <button type="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" data-bs-toggle="modal" data-bs-target="#createModal"><i class="bi bi-plus-lg"></i></button>
@@ -114,7 +114,7 @@
                             <button class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-caret-down-fill"></i></button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 {{-- User Center --}}
-                                <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.index')) }}"><i class="bi bi-person-fill"></i> {{ fs_config('menu_account') }}</a></li>
+                                <li><a class="dropdown-item" href="{{ fs_route(route('fresns.me.index')) }}"><i class="bi bi-person-fill"></i> {{ fs_config('menu_account') }}</a></li>
 
                                 {{-- Notifications --}}
                                 <li>
@@ -144,7 +144,7 @@
 
                                 {{-- Drafts --}}
                                 <li>
-                                    <a class="dropdown-item" href="{{ fs_route(route('fresns.editor.drafts', ['type' => 'posts'])) }}">
+                                    <a class="dropdown-item" href="{{ fs_route(route('fresns.me.drafts', ['type' => 'posts'])) }}">
                                         <i class="bi bi-file-earmark-text"></i>
                                         {{ fs_config('menu_editor_drafts') }}
 
@@ -156,16 +156,16 @@
 
                                 {{-- Wallet --}}
                                 @if (fs_config('wallet_status'))
-                                    <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.wallet')) }}"><i class="bi bi-wallet"></i> {{ fs_config('menu_account_wallet') }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ fs_route(route('fresns.me.wallet')) }}"><i class="bi bi-wallet"></i> {{ fs_config('menu_account_wallet') }}</a></li>
                                 @endif
 
                                 {{-- Users of this account --}}
                                 @if (fs_user_panel('multiUser.status') || count(fs_account('detail.users')) > 1)
-                                    <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.users')) }}"><i class="bi bi-people"></i> {{ fs_config('menu_account_users') }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ fs_route(route('fresns.me.users')) }}"><i class="bi bi-people"></i> {{ fs_config('menu_account_users') }}</a></li>
                                 @endif
 
                                 {{-- Settings --}}
-                                <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.settings')) }}"><i class="bi bi-gear"></i> {{ fs_config('menu_account_settings') }}</a></li>
+                                <li><a class="dropdown-item" href="{{ fs_route(route('fresns.me.settings')) }}"><i class="bi bi-gear"></i> {{ fs_config('menu_account_settings') }}</a></li>
                                 <li><hr class="dropdown-divider"></li>
 
                                 {{-- Switch Languages --}}
@@ -179,26 +179,29 @@
                                 @endif
 
                                 {{-- Logout --}}
-                                <li><a class="dropdown-item" href="{{ fs_route(route('fresns.account.logout')) }}"><i class="bi bi-power"></i> {{ fs_lang('accountLogout') }}</a></li>
+                                <li><a class="dropdown-item" href="{{ fs_route(route('fresns.me.logout')) }}"><i class="bi bi-power"></i> {{ fs_lang('accountLogout') }}</a></li>
                             </ul>
                         </div>
                     @else
                         {{-- Not Logged In --}}
-                        <a class="btn btn-outline-success me-3" href="{{ fs_route(route('fresns.account.login', ['redirectURL' => request()->fullUrl()])) }}" role="button">{{ fs_lang('accountLogin') }}</a>
+                        <button class="btn btn-outline-success me-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                            data-type="account"
+                            data-scene="sign"
+                            data-post-message-key="fresnsAccountSign"
+                            data-title="{{ fs_lang('accountLogin') }}"
+                            data-url="{{ fs_config('account_login_service') }}">
+                            {{ fs_lang('accountLogin') }}
+                        </button>
 
-                        @if (fs_config('site_public_status'))
-                            @if (fs_config('site_public_service'))
-                                <button class="btn btn-success me-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                    data-type="account"
-                                    data-scene="join"
-                                    data-post-message-key="fresnsJoin"
-                                    data-title="{{ fs_lang('accountRegister') }}"
-                                    data-url="{{ fs_config('site_public_service') }}">
-                                    {{ fs_lang('accountRegister') }}
-                                </button>
-                            @else
-                                <a class="btn btn-success me-3" href="{{ fs_route(route('fresns.account.register', ['redirectURL' => request()->fullUrl()])) }}" role="button">{{ fs_lang('accountRegister') }}</a>
-                            @endif
+                        @if (fs_config('account_register_status'))
+                            <button class="btn btn-success me-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                                data-type="account"
+                                data-scene="sign"
+                                data-post-message-key="fresnsAccountSign"
+                                data-title="{{ fs_lang('accountRegister') }}"
+                                data-url="{{ fs_config('account_register_service') }}">
+                                {{ fs_lang('accountRegister') }}
+                            </button>
                         @endif
 
                         @if (fs_config('language_status'))

@@ -94,21 +94,24 @@
         <div class="card-body py-5 text-center">
             <p class="mb-4 text-secondary">{{ fs_lang('errorNoLogin') }}</p>
 
-            <a class="btn btn-outline-success me-3" href="{{ fs_route(route('fresns.account.login', ['redirectURL' => request()->fullUrl()])) }}" role="button">{{ fs_lang('accountLogin') }}</a>
+            <button class="btn btn-outline-success me-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                data-type="account"
+                data-scene="sign"
+                data-post-message-key="fresnsAccountSign"
+                data-title="{{ fs_lang('accountLogin') }}"
+                data-url="{{ fs_config('account_login_service') }}">
+                {{ fs_lang('accountLogin') }}
+            </button>
 
-            @if (fs_config('site_public_status'))
-                @if (fs_config('site_public_service'))
-                    <button class="btn btn-success me-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                        data-type="account"
-                        data-scene="join"
-                        data-post-message-key="fresnsJoin"
-                        data-title="{{ fs_lang('accountRegister') }}"
-                        data-url="{{ fs_config('site_public_service') }}">
-                        {{ fs_lang('accountRegister') }}
-                    </button>
-                @else
-                    <a class="btn btn-success me-3" href="{{ fs_route(route('fresns.account.register', ['redirectURL' => request()->fullUrl()])) }}" role="button">{{ fs_lang('accountRegister') }}</a>
-                @endif
+            @if (fs_config('account_register_status'))
+                <button class="btn btn-success me-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                    data-type="account"
+                    data-scene="sign"
+                    data-post-message-key="fresnsAccountSign"
+                    data-title="{{ fs_lang('accountRegister') }}"
+                    data-url="{{ fs_config('account_register_service') }}">
+                    {{ fs_lang('accountRegister') }}
+                </button>
             @endif
         </div>
     </div>

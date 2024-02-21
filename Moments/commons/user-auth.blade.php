@@ -29,7 +29,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <a class="btn btn-danger" role="button" href="{{ fs_route(route('fresns.account.logout', ['redirectURL' => request()->fullUrl()])) }}"><i class="fa-solid fa-arrow-right-from-bracket"></i> {{ fs_lang('accountLogout') }}</a>
+                    <a class="btn btn-danger" role="button" href="{{ fs_route(route('fresns.me.logout', ['redirectURL' => request()->fullUrl()])) }}"><i class="fa-solid fa-arrow-right-from-bracket"></i> {{ fs_lang('accountLogout') }}</a>
                 </div>
             </div>
         </div>

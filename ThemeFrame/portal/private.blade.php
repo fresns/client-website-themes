@@ -11,15 +11,24 @@
                     <p>{{ fs_lang('private') }}</p>
 
                     {{-- Go to login --}}
-                    <p class="mt-4"><a class="btn btn-outline-success" href="{{ fs_route(route('fresns.account.login')) }}" role="button">{{ fs_lang('accountLogin') }}</a></p>
+                    <p class="mt-4">
+                        <button class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                            data-type="account"
+                            data-scene="sign"
+                            data-post-message-key="fresnsAccountSign"
+                            data-title="{{ fs_lang('accountLogin') }}"
+                            data-url="{{ fs_config('account_login_service') }}">
+                            {{ fs_lang('accountLogin') }}
+                        </button>
+                    </p>
 
                     {{-- Join --}}
                     @if (fs_config('site_private_status') && fs_config('site_private_service'))
                         <p class="mt-4">
                             <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                                 data-type="account"
-                                data-scene="join"
-                                data-post-message-key="fresnsJoin"
+                                data-scene="sign"
+                                data-post-message-key="fresnsAccountSign"
                                 data-title="{{ fs_lang('accountJoin') }}"
                                 data-url="{{ fs_config('site_private_service') }}">
                                 {{ fs_lang('accountJoin') }}

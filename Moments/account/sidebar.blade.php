@@ -5,7 +5,7 @@
     </button>
     <div class="collapse navbar-collapse list-group mt-2 mt-lg-0" id="fresnsMenus">
         {{-- User Center --}}
-        <a href="{{ fs_route(route('fresns.account.index')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.account.index') ? 'active' : '' }}">
+        <a href="{{ fs_route(route('fresns.me.index')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.me.index') ? 'active' : '' }}">
             <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-account.png" loading="lazy" width="36" height="36">
             {{ fs_config('menu_account') }}
         </a>
@@ -33,7 +33,7 @@
         @endif
 
         {{-- Draft Box --}}
-        <a href="{{ fs_route(route('fresns.editor.drafts', ['type' => 'posts'])) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.editor.drafts') ? 'active' : '' }}">
+        <a href="{{ fs_route(route('fresns.me.drafts', ['type' => 'posts'])) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.me.drafts') ? 'active' : '' }}">
             <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-account-drafts.png" loading="lazy" width="36" height="36">
             {{ fs_config('menu_editor_drafts') }}
 
@@ -44,7 +44,7 @@
 
         {{-- Wallet --}}
         @if (fs_config('wallet_status'))
-            <a href="{{ fs_route(route('fresns.account.wallet')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.account.wallet') ? 'active' : '' }}">
+            <a href="{{ fs_route(route('fresns.me.wallet')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.me.wallet') ? 'active' : '' }}">
                 <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-account-wallet.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_account_wallet') }}
             </a>
@@ -52,14 +52,14 @@
 
         {{-- Users of this account --}}
         @if (fs_user_panel('multiUser.status') || count(fs_account('detail.users')) > 1)
-            <a href="{{ fs_route(route('fresns.account.users')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.account.users') ? 'active' : '' }}">
+            <a href="{{ fs_route(route('fresns.me.users')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.me.users') ? 'active' : '' }}">
                 <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-account-users.png" loading="lazy" width="36" height="36">
                 {{ fs_config('menu_account_users') }}
             </a>
         @endif
 
         {{-- Settings --}}
-        <a href="{{ fs_route(route('fresns.account.settings')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.account.settings') ? 'active' : '' }}">
+        <a href="{{ fs_route(route('fresns.me.settings')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.me.settings') ? 'active' : '' }}">
             <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-account-settings.png" loading="lazy" width="36" height="36">
             {{ fs_config('menu_account_settings') }}
         </a>

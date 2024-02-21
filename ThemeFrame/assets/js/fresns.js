@@ -1717,7 +1717,7 @@ window.onmessage = function (event) {
             }
             break;
 
-        case 'fresnsJoin':
+        case 'fresnsAccountSign':
             let params = new URLSearchParams(window.location.search.slice(1));
 
             $.ajax({

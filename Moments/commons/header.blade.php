@@ -8,10 +8,7 @@
             'fresns.post.nearby',
             'fresns.group.index',
             'fresns.follow.all.posts',
-            'fresns.account.index',
-            'fresns.account.login',
-            'fresns.account.register',
-            'fresns.account.reset.password',
+            'fresns.me.index',
         ]) && request()->url() != fs_route(route('fresns.custom.page', ['name' => 'channels'])))
             <a class="btn btn-outline-secondary border-0 rounded-circle d-block d-sm-none" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
         @endif
@@ -117,8 +114,8 @@
                     @endif
                     {{-- User Center --}}
                     <li class="nav-item mt-1">
-                        <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.account.*') ? 'active' : '' }}" href="{{ fs_route(route('fresns.account.index')) }}">
-                            {!! Route::is('fresns.account.*') ? '<i class="fa-solid fa-fw fa-user mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-user mx-2 mt-1"></i>' !!}
+                        <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.me.*') ? 'active' : '' }}" href="{{ fs_route(route('fresns.me.index')) }}">
+                            {!! Route::is('fresns.me.*') ? '<i class="fa-solid fa-fw fa-user mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-user mx-2 mt-1"></i>' !!}
                             {{ fs_config('menu_account') }}
                         </a>
                     </li>
@@ -182,24 +179,27 @@
                             <li><a class="dropdown-item py-3" href="#userAuth" id="switch-user" data-bs-toggle="modal"><i class="fa-solid fa-fw fa-users me-2"></i> {{ fs_lang('optionUser') }}</a></li>
                         @endif
                         {{-- Logout --}}
-                        <li><a class="dropdown-item py-3" href="{{ fs_route(route('fresns.account.logout', ['redirectURL' => request()->fullUrl()])) }}"><i class="fa-solid fa-fw fa-arrow-right-from-bracket me-2"></i> {{ fs_lang('accountLogout') }}</a></li>
+                        <li><a class="dropdown-item py-3" href="{{ fs_route(route('fresns.me.logout', ['redirectURL' => request()->fullUrl()])) }}"><i class="fa-solid fa-fw fa-arrow-right-from-bracket me-2"></i> {{ fs_lang('accountLogout') }}</a></li>
                     </ul>
                 @else
-                    <a class="btn btn-outline-success" href="{{ fs_route(route('fresns.account.login', ['redirectURL' => request()->fullUrl()])) }}" role="button">{{ fs_lang('accountLogin') }}</a>
+                    <button class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                        data-type="account"
+                        data-scene="sign"
+                        data-post-message-key="fresnsAccountSign"
+                        data-title="{{ fs_lang('accountLogin') }}"
+                        data-url="{{ fs_config('account_login_service') }}">
+                        {{ fs_lang('accountLogin') }}
+                    </button>
 
-                    @if (fs_config('site_public_status'))
-                        @if (fs_config('site_public_service'))
-                            <button class="btn btn-outline-primary ms-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                data-type="account"
-                                data-scene="join"
-                                data-post-message-key="fresnsJoin"
-                                data-title="{{ fs_lang('accountRegister') }}"
-                                data-url="{{ fs_config('site_public_service') }}">
-                                {{ fs_lang('accountRegister') }}
-                            </button>
-                        @else
-                            <a class="btn btn-outline-primary ms-3" href="{{ fs_route(route('fresns.account.register', ['redirectURL' => request()->fullUrl()])) }}" role="button">{{ fs_lang('accountRegister') }}</a>
-                        @endif
+                    @if (fs_config('account_register_status'))
+                        <button class="btn btn-outline-primary ms-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                            data-type="account"
+                            data-scene="sign"
+                            data-post-message-key="fresnsAccountSign"
+                            data-title="{{ fs_lang('accountRegister') }}"
+                            data-url="{{ fs_config('account_register_service') }}">
+                            {{ fs_lang('accountRegister') }}
+                        </button>
                     @endif
                 @endif
             </div>

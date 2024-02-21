@@ -17,7 +17,7 @@
             <ul class="nav nav-tabs card-header-tabs">
                 {{-- posts --}}
                 <li class="nav-item">
-                    <a class="nav-link @if ($type == 'posts') active @endif" href="{{ fs_route(route('fresns.editor.drafts', ['type' => 'posts'])) }}">
+                    <a class="nav-link @if ($type == 'posts') active @endif" href="{{ fs_route(route('fresns.me.drafts', ['type' => 'posts'])) }}">
                         {{ fs_config('post_name') }}
 
                         @if (fs_user_panel('draftCount.posts') > 0)
@@ -27,7 +27,7 @@
                 </li>
                 {{-- comments --}}
                 <li class="nav-item">
-                    <a class="nav-link @if ($type == 'comments') active @endif" href="{{ fs_route(route('fresns.editor.drafts', ['type' => 'comments'])) }}">
+                    <a class="nav-link @if ($type == 'comments') active @endif" href="{{ fs_route(route('fresns.me.drafts', ['type' => 'comments'])) }}">
                         {{ fs_config('comment_name') }}
 
                         @if (fs_user_panel('draftCount.comments') > 0)
