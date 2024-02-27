@@ -6,7 +6,7 @@
     "authorLink": "https://fresns.org",
     "version": "3.0.0",
     "functions": true,
-    "functionKeys": [
+    "functionItems": [
         {
             "itemKey": "fs_theme_loading",
             "itemType": "boolean",
@@ -31,6 +31,16 @@
             "itemKey": "fs_search_method",
             "itemType": "string",
             "isMultilingual": false
+        },
+        {
+            "itemKey": "moments_widget_sidebar",
+            "itemType": "string",
+            "isMultilingual": true
+        },
+        {
+            "itemKey": "moments_widget_portal",
+            "itemType": "string",
+            "isMultilingual": true
         }
     ],
     "functionLang": {
@@ -40,7 +50,7 @@
             "save": "Save",
             "loadingConfig": "Loading dynamic effects",
             "quickPublishConfig": "Quick publish post",
-            "ContentMarkdownConfig": "Content Markdown Option",
+            "contentMarkdownConfig": "Content Markdown Option",
             "notificationConfig": "Does the message page display",
             "option_tip": "Please select...",
             "option_support": "Support",
@@ -65,7 +75,7 @@
             "save": "保存",
             "loadingConfig": "加载动效",
             "quickPublishConfig": "快速发表帖子",
-            "ContentMarkdownConfig": "内容 Markdown 选项",
+            "contentMarkdownConfig": "内容 Markdown 选项",
             "notificationConfig": "消息页是否显示",
             "option_tip": "请选择...",
             "option_support": "支持",
@@ -90,7 +100,7 @@
             "save": "保存",
             "loadingConfig": "加載動效",
             "quickPublishConfig": "快速發表貼文",
-            "ContentMarkdownConfig": "內容 Markdown 選項",
+            "contentMarkdownConfig": "內容 Markdown 選項",
             "notificationConfig": "消息頁是否顯示",
             "option_tip": "請選擇...",
             "option_support": "支持",

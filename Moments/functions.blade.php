@@ -1,134 +1,145 @@
-@extends('WebEngine::layout')
+@extends('FsTheme::layout')
 
 @section('body')
-    <form action="{{ route('moments.admin.update') }}" method="post" enctype="multipart/form-data">
-        @csrf
-        @method('put')
+    <header class="border-bottom mb-3 pt-5 ps-5 pb-3">
+        <h3>{{ $lang['name'] }}</h3>
+        <p class="text-secondary"><i class="bi bi-palette"></i> {{ $lang['description'] }}</p>
+    </header>
 
-        {{-- Loading dynamic effects --}}
-        <div class="row mb-4">
-            <label class="col-lg-2 col-form-label text-lg-end">{{ __('Moments::fresns.loadingConfig') }}</label>
-            <div class="col-lg-6 mt-2">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="moments_loading" id="loading_true" value="true" {{ ($params['moments_loading']['value'] ?? false) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="loading_true">{{ __('FsLang::panel.option_activate') }}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="moments_loading" id="loading_false" value="false" {{ ! ($params['moments_loading']['value'] ?? false) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="loading_false">{{ __('FsLang::panel.option_deactivate') }}</label>
+    <main class="my-5">
+        <form action="{{ route('fresns.api.functions', ['fskey' => 'Moments']) }}" method="post" enctype="multipart/form-data">
+            @csrf
+            @method('put')
+
+            {{-- Loading dynamic effects --}}
+            <div class="row mb-4">
+                <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['loadingConfig'] }}</label>
+                <div class="col-lg-6 mt-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="fs_theme_loading" id="loading_true" value="true" {{ $params['fs_theme_loading'] ? 'checked' : '' }}>
+                        <label class="form-check-label" for="loading_true">{{ __('FsLang::panel.option_activate') }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="fs_theme_loading" id="loading_false" value="false" {{ ! $params['fs_theme_loading'] ? 'checked' : '' }}>
+                        <label class="form-check-label" for="loading_false">{{ __('FsLang::panel.option_deactivate') }}</label>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        {{-- Quick publish post --}}
-        <div class="row mb-4">
-            <label class="col-lg-2 col-form-label text-lg-end">{{ __('Moments::fresns.quickPublishConfig') }}</label>
-            <div class="col-lg-6 mt-2">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="moments_quick_publish" id="quick_publish_true" value="true" {{ ($params['moments_quick_publish']['value'] ?? false) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="quick_publish_true">{{ __('FsLang::panel.option_activate') }}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="moments_quick_publish" id="quick_publish_false" value="false" {{ ! ($params['moments_quick_publish']['value'] ?? false) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="quick_publish_false">{{ __('FsLang::panel.option_deactivate') }}</label>
+            {{-- Quick publish post --}}
+            <div class="row mb-4">
+                <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['quickPublishConfig'] }}</label>
+                <div class="col-lg-6 mt-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="fs_theme_quick_publish" id="quick_publish_true" value="true" {{ $params['fs_theme_quick_publish'] ? 'checked' : '' }}>
+                        <label class="form-check-label" for="quick_publish_true">{{ __('FsLang::panel.option_activate') }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="fs_theme_quick_publish" id="quick_publish_false" value="false" {{ ! $params['fs_theme_quick_publish'] ? 'checked' : '' }}>
+                        <label class="form-check-label" for="quick_publish_false">{{ __('FsLang::panel.option_deactivate') }}</label>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        {{-- Content markdown config --}}
-        <div class="row mb-4">
-            <label class="col-lg-2 col-form-label text-lg-end">{{ __('Moments::fresns.ContentMarkdownConfig') }}</label>
-            <div class="col-lg-10 mt-2">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="option_quick_publish" name="moments_editor_markdown[quickPublish]" value="1" {{ ($params['moments_editor_markdown']['value']['quickPublish'] ?? false) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="option_quick_publish">{{ __('Moments::fresns.option_quick_publish') }}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="option_editor" name="moments_editor_markdown[editor]" value="1" {{ ($params['moments_editor_markdown']['value']['editor'] ?? false) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="option_editor">{{ __('Moments::fresns.option_editor') }}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="option_comment_box" name="moments_editor_markdown[commentBox]" value="1" {{ ($params['moments_editor_markdown']['value']['commentBox'] ?? false) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="option_comment_box">{{ __('Moments::fresns.option_comment_box') }}</label>
+            {{-- Content markdown config --}}
+            <div class="row mb-4">
+                <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['contentMarkdownConfig'] }}</label>
+                <div class="col-lg-10 mt-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="option_quick_publish" name="fs_theme_editor_markdown[quickPublish]" value="1" {{ ($params['fs_theme_editor_markdown']['quickPublish'] ?? false) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="option_quick_publish">{{ $lang['option_quick_publish'] }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="option_editor" name="fs_theme_editor_markdown[editor]" value="1" {{ ($params['fs_theme_editor_markdown']['editor'] ?? false) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="option_editor">{{ $lang['option_editor'] }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="option_comment_box" name="fs_theme_editor_markdown[commentBox]" value="1" {{ ($params['fs_theme_editor_markdown']['commentBox'] ?? false) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="option_comment_box">{{ $lang['option_comment_box'] }}</label>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        {{-- Is the message page displayed --}}
-        <div class="row mb-4">
-            <label class="col-lg-2 col-form-label text-lg-end">{{ __('Moments::fresns.notificationConfig') }}</label>
-            <div class="col-lg-10 mt-2">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="notification_systems" name="moments_notifications[]" value="systems" {{ in_array('systems', $params['moments_notifications']['value'] ?? []) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="notification_systems">{{ __('Moments::fresns.notification_systems') }}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="notification_recommends" name="moments_notifications[]" value="recommends" {{ in_array('recommends', $params['moments_notifications']['value'] ?? []) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="notification_recommends">{{ __('Moments::fresns.notification_recommends') }}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="notification_likes" name="moments_notifications[]" value="likes" {{ in_array('likes', $params['moments_notifications']['value'] ?? []) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="notification_likes">{{ __('Moments::fresns.notification_likes') }}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="notification_dislikes" name="moments_notifications[]" value="dislikes" {{ in_array('dislikes', $params['moments_notifications']['value'] ?? []) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="notification_dislikes">{{ __('Moments::fresns.notification_dislikes') }}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="notification_follows" name="moments_notifications[]" value="follows" {{ in_array('follows', $params['moments_notifications']['value'] ?? []) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="notification_follows">{{ __('Moments::fresns.notification_follows') }}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="notification_blocks" name="moments_notifications[]" value="blocks" {{ in_array('blocks', $params['moments_notifications']['value'] ?? []) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="notification_blocks">{{ __('Moments::fresns.notification_blocks') }}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="notification_mentions" name="moments_notifications[]" value="mentions" {{ in_array('mentions', $params['moments_notifications']['value'] ?? []) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="notification_mentions">{{ __('Moments::fresns.notification_mentions') }}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="notification_comments" name="moments_notifications[]" value="comments" {{ in_array('comments', $params['moments_notifications']['value'] ?? []) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="notification_comments">{{ __('Moments::fresns.notification_comments') }}</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="notification_quotes" name="moments_notifications[]" value="quotes" {{ in_array('quotes', $params['moments_notifications']['value'] ?? []) ? 'checked' : '' }}>
-                    <label class="form-check-label" for="notification_quotes">{{ __('Moments::fresns.notification_quotes') }}</label>
+            {{-- Is the message page displayed --}}
+            <div class="row mb-4">
+                <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['notificationConfig'] }}</label>
+                <div class="col-lg-10 mt-2">
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="notification_systems" name="fs_theme_notifications[]" value="systems" {{ in_array('systems', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="notification_systems">{{ $lang['notification_systems'] }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="notification_recommends" name="fs_theme_notifications[]" value="recommends" {{ in_array('recommends', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="notification_recommends">{{ $lang['notification_recommends'] }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="notification_likes" name="fs_theme_notifications[]" value="likes" {{ in_array('likes', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="notification_likes">{{ $lang['notification_likes'] }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="notification_dislikes" name="fs_theme_notifications[]" value="dislikes" {{ in_array('dislikes', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="notification_dislikes">{{ $lang['notification_dislikes'] }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="notification_follows" name="fs_theme_notifications[]" value="follows" {{ in_array('follows', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="notification_follows">{{ $lang['notification_follows'] }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="notification_blocks" name="fs_theme_notifications[]" value="blocks" {{ in_array('blocks', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="notification_blocks">{{ $lang['notification_blocks'] }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="notification_mentions" name="fs_theme_notifications[]" value="mentions" {{ in_array('mentions', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="notification_mentions">{{ $lang['notification_mentions'] }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="notification_comments" name="fs_theme_notifications[]" value="comments" {{ in_array('comments', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="notification_comments">{{ $lang['notification_comments'] }}</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" id="notification_quotes" name="fs_theme_notifications[]" value="quotes" {{ in_array('quotes', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="notification_quotes">{{ $lang['notification_quotes'] }}</label>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        {{-- moments_search_method --}}
-        <div class="row mb-4">
-            <label class="col-lg-2 col-form-label text-lg-end">{{ __('Moments::fresns.search_method') }}</label>
-            <div class="col-lg-6">
-                <select class="form-select" name="moments_search_method">
-                    <option value="" {{ !($params['moments_search_method']['value'] ?? '') ? 'selected' : '' }}>Site API</option>
-                    <option value="google" {{ ($params['moments_search_method']['value'] ?? '') == 'google' ? 'selected' : '' }}>Google</option>
-                </select>
+            {{-- Search Method --}}
+            <div class="row mb-4">
+                <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['search_method'] }}</label>
+                <div class="col-lg-6">
+                    <select class="form-select" name="fs_search_method">
+                        <option value="" {{ ! $params['fs_search_method'] ? 'selected' : '' }}>Fresns API</option>
+                        <option value="google" {{ $params['fs_search_method'] == 'google' ? 'selected' : '' }}>Google</option>
+                    </select>
+                </div>
             </div>
-        </div>
 
-        {{-- Sidebar --}}
-        <div class="row mb-4">
-            <label class="col-lg-2 col-form-label text-lg-end">Sidebar Widget</label>
-            <div class="col-lg-6">
-                <button type="button" class="btn btn-outline-secondary btn-modal w-100 text-start" data-bs-toggle="modal" data-bs-target="#sidebarModal">{{ __('FsLang::panel.button_edit') }}</button>
+            {{-- Sidebar --}}
+            <div class="row mb-4">
+                <label class="col-lg-2 col-form-label text-lg-end">Sidebar Widget</label>
+                <div class="col-lg-6">
+                    <button type="button" class="btn btn-outline-secondary btn-modal w-100 text-start" data-bs-toggle="modal" data-bs-target="#sidebarModal">{{ __('FsLang::panel.button_edit') }}</button>
+                </div>
             </div>
-        </div>
 
-        {{-- Portal --}}
-        <div class="row mb-4">
-            <label class="col-lg-2 col-form-label text-lg-end">Portal Widget</label>
-            <div class="col-lg-6">
-                <button type="button" class="btn btn-outline-secondary btn-modal w-100 text-start" data-bs-toggle="modal" data-bs-target="#portalModal">{{ __('FsLang::panel.button_edit') }}</button>
+            {{-- Portal --}}
+            <div class="row mb-4">
+                <label class="col-lg-2 col-form-label text-lg-end">Portal Widget</label>
+                <div class="col-lg-6">
+                    <button type="button" class="btn btn-outline-secondary btn-modal w-100 text-start" data-bs-toggle="modal" data-bs-target="#portalModal">{{ __('FsLang::panel.button_edit') }}</button>
+                </div>
             </div>
-        </div>
 
-        <div class="row mb-4">
-            <div class="col-lg-2"></div>
-            <div class="col-lg-10"><button type="submit" class="btn btn-primary">{{ __('FsLang::panel.button_save') }}</button></div>
-        </div>
-    </form>
+            <div class="row mb-4">
+                <div class="col-lg-2"></div>
+                <div class="col-lg-10"><button type="submit" class="btn btn-primary">{{ $lang['save'] }}</button></div>
+            </div>
+        </form>
+    </main>
+
+    <footer class="copyright text-center">
+        <p class="my-5 text-muted">&copy; <span class="copyright-year"></span> Fresns</p>
+    </footer>
 
     {{-- Sidebar Modal --}}
     <div class="modal fade" id="sidebarModal" tabindex="-1" aria-labelledby="sidebarModal" aria-hidden="true">
@@ -139,11 +150,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('moments.admin.update.languages') }}" method="post">
+                    <form action="{{ route('fresns.api.functions', ['fskey' => 'Moments']) }}" method="post">
                         @csrf
                         @method('put')
-
-                        <input type="hidden" name="itemKey" value="moments_widget_sidebar">
 
                         <div class="table-responsive">
                             <table class="table table-hover align-middle text-nowrap">
@@ -155,23 +164,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($optionalLanguages as $lang)
+                                    @foreach ($languageMenus as $langMenu)
                                         <tr>
                                             <td>
-                                                {{ $lang['langTag'] }}
-                                                @if ($lang['langTag'] == $defaultLanguage)
+                                                {{ $langMenu['langTag'] }}
+                                                @if ($langMenu['langTag'] == $defaultLanguage)
                                                     <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('FsLang::panel.default_language') }}" data-bs-original-title="{{ __('FsLang::panel.default_language') }}" aria-label="{{ __('FsLang::panel.default_language') }}"></i>
                                                 @endif
                                             </td>
                                             <td>
-                                                {{ $lang['langName'] }}
-                                                @if ($lang['areaName'])
-                                                    {{ '('.$lang['areaName'].')' }}
+                                                {{ $langMenu['langName'] }}
+                                                @if ($langMenu['areaName'])
+                                                    {{ '('.$langMenu['areaName'].')' }}
                                                 @endif
                                             </td>
                                             <td>
                                                 <div class="form-floating">
-                                                    <textarea class="form-control" name="languages[{{ $lang['langTag'] }}]" placeholder="HTML" style="height:300px">{{ $params['moments_widget_sidebar']['language_values'][$lang['langTag']] ?? '' }}</textarea>
+                                                    <textarea class="form-control" name="moments_widget_sidebar[{{ $langMenu['langTag'] }}]" placeholder="HTML" style="height:300px">{{ $params['moments_widget_sidebar'][$langMenu['langTag']] ?? '' }}</textarea>
                                                     <label for="floatingTextarea2">HTML</label>
                                                 </div>
                                             </td>
@@ -182,7 +191,7 @@
                         </div>
                         <!--button_save-->
                         <div class="text-center">
-                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">{{ __('FsLang::panel.button_save') }}</button>
+                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">{{ $lang['save'] }}</button>
                         </div>
                     </form>
                 </div>
@@ -199,11 +208,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="{{ route('moments.admin.update.languages') }}" method="post">
+                    <form action="{{ route('fresns.api.functions', ['fskey' => 'Moments']) }}" method="post">
                         @csrf
                         @method('put')
-
-                        <input type="hidden" name="itemKey" value="moments_widget_portal">
 
                         <div class="table-responsive">
                             <table class="table table-hover align-middle text-nowrap">
@@ -215,23 +222,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($optionalLanguages as $lang)
+                                    @foreach ($languageMenus as $langMenu)
                                         <tr>
                                             <td>
-                                                {{ $lang['langTag'] }}
-                                                @if ($lang['langTag'] == $defaultLanguage)
+                                                {{ $langMenu['langTag'] }}
+                                                @if ($langMenu['langTag'] == $defaultLanguage)
                                                     <i class="bi bi-info-circle text-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ __('FsLang::panel.default_language') }}" data-bs-original-title="{{ __('FsLang::panel.default_language') }}" aria-label="{{ __('FsLang::panel.default_language') }}"></i>
                                                 @endif
                                             </td>
                                             <td>
-                                                {{ $lang['langName'] }}
-                                                @if ($lang['areaName'])
-                                                    {{ '('.$lang['areaName'].')' }}
+                                                {{ $langMenu['langName'] }}
+                                                @if ($langMenu['areaName'])
+                                                    {{ '('.$langMenu['areaName'].')' }}
                                                 @endif
                                             </td>
                                             <td>
                                                 <div class="form-floating">
-                                                    <textarea class="form-control" name="languages[{{ $lang['langTag'] }}]" placeholder="HTML" style="height:300px">{{ $params['moments_widget_portal']['language_values'][$lang['langTag']] ?? '' }}</textarea>
+                                                    <textarea class="form-control" name="moments_widget_portal[{{ $langMenu['langTag'] }}]" placeholder="HTML" style="height:300px">{{ $params['moments_widget_portal'][$langMenu['langTag']] ?? '' }}</textarea>
                                                     <label for="floatingTextarea2">HTML</label>
                                                 </div>
                                             </td>
@@ -242,7 +249,7 @@
                         </div>
                         <!--button_save-->
                         <div class="text-center">
-                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">{{ __('FsLang::panel.button_save') }}</button>
+                            <button type="submit" class="btn btn-success" data-bs-dismiss="modal" aria-label="Close">{{ $lang['save'] }}</button>
                         </div>
                     </form>
                 </div>
@@ -250,10 +257,3 @@
         </div>
     </div>
 @endsection
-
-@push('style')
-@endpush
-
-@push('script')
-    <script src="/assets/Moments/js/functions.js"></script>
-@endpush

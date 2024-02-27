@@ -6,7 +6,7 @@
     "authorLink": "https://fresns.org",
     "version": "4.0.0",
     "functions": true,
-    "functionKeys": [
+    "functionItems": [
         {
             "itemKey": "fs_theme_loading",
             "itemType": "boolean",
@@ -21,6 +21,11 @@
             "itemKey": "fs_theme_notifications",
             "itemType": "array",
             "isMultilingual": false
+        },
+        {
+            "itemKey": "fs_company_name",
+            "itemType": "object",
+            "isMultilingual": true
         }
     ],
     "functionLang": {
@@ -42,7 +47,8 @@
             "notification_blocks": "Blocks",
             "notification_mentions": "Mentions",
             "notification_comments": "Comments",
-            "notification_quotes": "Quotes"
+            "notification_quotes": "Quotes",
+            "company_name": "Company Name"
         },
         "zh-Hans": {
             "name": "Fresns 主题框架",
@@ -62,7 +68,8 @@
             "notification_blocks": "屏蔽",
             "notification_mentions": "提及",
             "notification_comments": "评论",
-            "notification_quotes": "引用"
+            "notification_quotes": "引用",
+            "company_name": "公司名称"
         },
         "zh-Hant": {
             "name": "Fresns 主題框架",
@@ -82,7 +89,8 @@
             "notification_blocks": "封鎖",
             "notification_mentions": "提及",
             "notification_comments": "留言",
-            "notification_quotes": "引用"
+            "notification_quotes": "引用",
+            "company_name": "公司名稱"
         }
     }
 }
