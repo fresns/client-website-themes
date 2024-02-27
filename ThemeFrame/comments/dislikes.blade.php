@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_dislike_comments'))
+@section('title', fs_config('channel_dislikes_comments_name'))
 
 @section('content')
     <main class="container-fluid">

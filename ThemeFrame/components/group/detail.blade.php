@@ -1,13 +1,13 @@
 <article class="d-flex my-3">
     @if ($group['cover'])
         <section class="flex-shrink-0">
-            <img src="{{ $group['cover'] }}" loading="lazy" alt="{{ $group['gname'] }}" class="rounded list-cover">
+            <img src="{{ $group['cover'] }}" loading="lazy" alt="{{ $group['name'] }}" class="rounded list-cover">
         </section>
     @endif
     <div class="flex-grow-1 ms-3">
         <header class="d-lg-flex">
             <section class="d-flex">
-                {{ $group['gname'] }}
+                {{ $group['name'] }}
                 @if ($group['recommend'])
                     <img src="{{ fs_theme('assets') }}images/icon-recommend.png" class="list-recommend" loading="lazy" alt="{{ fs_lang('contentRecommend') }}">
                 @endif
@@ -15,7 +15,7 @@
 
             <section class="list-btn ms-auto">
                 {{-- Like --}}
-                @if ($group['interaction']['likeSetting'])
+                @if ($group['interaction']['likeEnabled'])
                     @component('components.group.mark.like', [
                         'gid' => $group['gid'],
                         'interaction' => $group['interaction'],
@@ -24,7 +24,7 @@
                 @endif
 
                 {{-- Dislike --}}
-                @if ($group['interaction']['dislikeSetting'])
+                @if ($group['interaction']['dislikeEnabled'])
                     @component('components.group.mark.dislike', [
                         'gid' => $group['gid'],
                         'interaction' => $group['interaction'],
@@ -33,10 +33,10 @@
                 @endif
 
                 {{-- Follow --}}
-                @if ($group['interaction']['followSetting'])
+                @if ($group['interaction']['followEnabled'])
                     @component('components.group.mark.follow', [
                         'gid' => $group['gid'],
-                        'gname' => $group['gname'],
+                        'name' => $group['name'],
                         'followType' => $group['followType'],
                         'followUrl' => $group['followUrl'],
                         'interaction' => $group['interaction'],
@@ -45,7 +45,7 @@
                 @endif
 
                 {{-- Block --}}
-                @if ($group['interaction']['blockSetting'])
+                @if ($group['interaction']['blockEnabled'])
                     @component('components.group.mark.block', [
                         'gid' => $group['gid'],
                         'interaction' => $group['interaction'],

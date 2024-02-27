@@ -12,7 +12,7 @@
     <div class="text-start ms-2 mt-2">
         <div class="user-nickname text-nowrap overflow-hidden mt-1" style="color:{{ $user['nicknameColor'] }};">
             {{ $user['nickname'] }}
-            @if ($user['verifiedStatus'])
+            @if ($user['verified'])
                 @if ($user['verifiedIcon'])
                     <img src="{{ $user['verifiedIcon'] }}" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['verifiedDesc'] }}" height="18">
                 @else

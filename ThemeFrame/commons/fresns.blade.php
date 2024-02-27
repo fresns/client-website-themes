@@ -96,7 +96,7 @@
     @include('commons.footer')
 
     {{-- Loading --}}
-    @if (fs_config('webframe_loading'))
+    @if (fs_config('fs_theme_loading'))
         <div id="loading" class="position-fixed top-50 start-50 translate-middle bg-secondary bg-opacity-75 rounded p-4" style="z-index:2048;display:none;">
             <div class="spinner-border text-light" role="status">
                 <span class="visually-hidden">Loading...</span>
@@ -139,7 +139,6 @@
     @if (fs_config('website_stat_position') == 'body')
         <div style="display:none;">{!! fs_config('website_stat_code') !!}</div>
     @endif
-    <script src="/static/js/base64.js"></script>
     <script src="/static/js/bootstrap.bundle.min.js"></script>
     <script src="/static/js/select2.min.js"></script>
     <script src="/static/js/masonry.pkgd.min.js"></script>

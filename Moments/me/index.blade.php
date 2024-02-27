@@ -17,7 +17,7 @@
             <div @if (fs_user('detail.decorate')) class="ms-3" @endif>
                 <div class="fs-4 fw-semibold mt-1">
                     {{ fs_user('detail.nickname') }}
-                    @if (fs_user('detail.verifiedStatus'))
+                    @if (fs_user('detail.verified'))
                         @if (fs_user('detail.verifiedIcon'))
                             <img src="{{ fs_user('detail.verifiedIcon') }}" alt="Verified" loading="lazy" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ fs_user('detail.verifiedDesc') }}" height="20">
                         @else
@@ -45,7 +45,7 @@
 
     {{-- features --}}
     <div class="clearfix">
-        @foreach(fs_user_panel('features') as $feature)
+        @foreach(fs_user_overview('features') as $feature)
             <div class="float-start mt-3" style="width:20%">
                 <a class="text-decoration-none" data-bs-toggle="modal" href="#fresnsModal"
                     data-type="account"
@@ -74,8 +74,8 @@
             <a href="{{ fs_route(route('fresns.notifications.index')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                 <span class="py-2"><i class="fa-regular fa-bell me-2"></i> {{ fs_config('menu_notifications') }}</span>
                 <span class="py-2 text-black-50">
-                    @if (fs_user_panel('unreadNotifications.all') > 0)
-                        <span class="badge bg-danger rounded-pill">{{ fs_user_panel('unreadNotifications.all') }}</span>
+                    @if (fs_user_overview('unreadNotifications.all') > 0)
+                        <span class="badge bg-danger rounded-pill">{{ fs_user_overview('unreadNotifications.all') }}</span>
                     @endif
                     <i class="fa-solid fa-chevron-right"></i>
                 </span>
@@ -85,8 +85,8 @@
                     <a href="{{ fs_route(route('fresns.messages.index')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                         <span class="py-2"><i class="fa-regular fa-envelope me-2"></i> {{ fs_config('menu_conversations') }}</span>
                         <span class="py-2 text-black-50">
-                            @if (fs_user_panel('conversations.unreadMessages') > 0)
-                                <span class="badge bg-danger rounded-pill">{{ fs_user_panel('conversations.unreadMessages') }}</span>
+                            @if (fs_user_overview('conversations.unreadMessages') > 0)
+                                <span class="badge bg-danger rounded-pill">{{ fs_user_overview('conversations.unreadMessages') }}</span>
                             @endif
                             <i class="fa-solid fa-chevron-right"></i>
                         </span>
@@ -156,20 +156,20 @@
         <a href="{{ fs_route(route('fresns.me.drafts', ['type' => 'posts'])) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
             <span class="py-2"><i class="fa-solid fa-fw fa-envelope-open-text me-2"></i> {{ fs_config('menu_editor_drafts') }}</span>
             <span class="py-2 text-black-50">
-                @if (array_sum(fs_user_panel('draftCount')) > 0)
-                    <span class="badge bg-success rounded-pill">{{ array_sum(fs_user_panel('draftCount')) }}</span>
+                @if (array_sum(fs_user_overview('draftCount')) > 0)
+                    <span class="badge bg-success rounded-pill">{{ array_sum(fs_user_overview('draftCount')) }}</span>
                 @endif
                 <i class="fa-solid fa-chevron-right"></i>
             </span>
         </a>
         {{-- Favorites --}}
         <a href="{{ fs_route(route('fresns.post.following')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-            <span class="py-2"><i class="fa-solid fa-fw fa-box-archive me-2"></i> {{ fs_config('menu_follow_posts') }}</span>
+            <span class="py-2"><i class="fa-solid fa-fw fa-box-archive me-2"></i> {{ fs_config('channel_following_posts_name') }}</span>
             <span class="py-2 text-black-50"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
         {{-- Blacklist --}}
         <a href="{{ fs_route(route('fresns.user.blocking')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-            <span class="py-2"><i class="fa-solid fa-fw fa-user-shield me-2"></i> {{ fs_config('menu_block_users') }}</span>
+            <span class="py-2"><i class="fa-solid fa-fw fa-user-shield me-2"></i> {{ fs_config('channel_blocking_users_name') }}</span>
             <span class="py-2 text-black-50"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
     </div>
@@ -181,7 +181,7 @@
             <span class="py-2 text-black-50"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
         {{-- Manage Users --}}
-        @if (fs_user_panel('multiUser.status') || count(fs_account('detail.users')) > 1)
+        @if (fs_user_overview('multiUser.status') || count(fs_account('detail.users')) > 1)
             {{-- User Page --}}
             <a href="{{ fs_route(route('fresns.me.users')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                 <span class="py-2"><i class="fa-solid fa-fw fa-user-gear me-2"></i> {{ fs_config('menu_account_users') }}</span>

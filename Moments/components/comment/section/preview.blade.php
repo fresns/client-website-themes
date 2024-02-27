@@ -1,5 +1,5 @@
 <section class="comment-preview my-2 mx-3 position-relative d-flex flex-column">
-    @foreach($subComments as $comment)
+    @foreach($previewComments as $comment)
         <div class="text-break mb-2">
             @if (! $comment['author']['status'])
                 <span class="text-info">{{ fs_lang('userDeactivate') }}</span>

@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', $items['title'] ?? $group['gname'])
+@section('title', $items['title'] ?? $group['name'])
 @section('keywords', $items['keywords'])
 @section('description', $items['description'] ?? $group['description'])
 

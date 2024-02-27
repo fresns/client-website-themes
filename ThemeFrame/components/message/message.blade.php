@@ -1,4 +1,4 @@
-@if ($message['isMe'])
+@if ($message['isAuthor'])
     <div class="d-flex justify-content-end mt-3">
         <div class="text-end">
             <p class="bg-success bg-gradient text-white rounded p-2 mb-0">

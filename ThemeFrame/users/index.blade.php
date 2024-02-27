@@ -1,8 +1,8 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_user_title'))
-@section('keywords', fs_config('menu_user_keywords'))
-@section('description', fs_config('menu_user_description'))
+@section('title', fs_config('channel_user_seo')['title'])
+@section('keywords', fs_config('channel_user_seo')['keywords'])
+@section('description', fs_config('channel_user_seo')['description'])
 
 @section('content')
     <main class="container-fluid">

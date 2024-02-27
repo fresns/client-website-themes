@@ -4,15 +4,15 @@
  * Licensed under the Apache-2.0 license
  */
 
-function authorization() {
-    let authorization;
+function accessToken() {
+    let accessToken;
     $.ajaxSettings.async = false;
-    $.get('/api/web-engine/url-authorization', false, function (res) {
-        authorization = res.data.authorization;
+    $.get('/api/theme/access-token', false, function (res) {
+        accessToken = res.data.accessToken;
     });
     $.ajaxSettings.async = true;
 
-    return authorization;
+    return accessToken;
 }
 
 (function ($) {
@@ -31,8 +31,8 @@ function authorization() {
                 if (replaceJson[attr]) {
                     url = url.replace(v, replaceJson[attr]);
                 } else {
-                    if (v === '{authorization}') {
-                        url = url.replace('{authorization}', authorization());
+                    if (v === '{accessToken}') {
+                        url = url.replace('{accessToken}', accessToken());
                     } else {
                         url = url.replace(v, '');
                     }

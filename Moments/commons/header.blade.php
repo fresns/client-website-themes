@@ -32,7 +32,7 @@
             'fresns.notifications.index',
             'fresns.messages.index',
         ]) || request()->url() == fs_route(route('fresns.custom.page', ['name' => 'channels'])))
-            @if (fs_config('moments_quick_publish'))
+            @if (fs_config('fs_theme_quick_publish'))
                 <button class="btn btn-warning text-white rounded-pill d-lg-none fs-create fs-6" type="button" data-bs-toggle="modal" data-bs-target="#createModal">{{ fs_config('publish_post_name') }}</button>
             @else
                 <a class="btn btn-warning text-white rounded-pill d-lg-none fs-create fs-6" href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}">{{ fs_config('publish_post_name') }}</a>
@@ -55,11 +55,11 @@
                 </li>
                 {{-- Portal or Post --}}
                 @if (fs_config('default_homepage') == 'post')
-                    @if (fs_config('menu_portal_status'))
+                    @if (fs_config('channel_portal_status'))
                         <li class="nav-item mt-1">
                             <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.portal') ? 'active' : '' }}" href="{{ fs_route(route('fresns.portal')) }}">
                                 {!! Route::is('fresns.portal') ? '<i class="fa-solid fa-fw fa-newspaper mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-newspaper mx-2 mt-1"></i>' !!}
-                                <span class="me-2">{{ fs_config('menu_portal_name') }}</span>
+                                <span class="me-2">{{ fs_config('channel_portal_name') }}</span>
                             </a>
                         </li>
                     @endif
@@ -67,16 +67,16 @@
                     <li class="nav-item mt-1">
                         <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.post.index') ? 'active' : '' }}" href="{{ fs_route(route('fresns.post.index')) }}">
                             {!! Route::is('fresns.post.index') ? '<i class="fa-solid fa-fw fa-newspaper mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-newspaper mx-2 mt-1"></i>' !!}
-                            <span class="me-2">{{ fs_config('menu_post_name') }}</span>
+                            <span class="me-2">{{ fs_config('channel_post_name') }}</span>
                         </a>
                     </li>
                 @endif
                 {{-- Group --}}
-                @if (fs_config('menu_group_status'))
+                @if (fs_config('channel_group_status'))
                     <li class="nav-item mt-1">
                         <a class="nav-link rounded-pill d-inline-flex {{ Route::is(['fresns.group.index', 'fresns.group.detail']) ? 'active' : '' }}" href="{{ fs_route(route('fresns.group.index')) }}">
                             {!! Route::is(['fresns.group.*']) ? '<i class="fa-solid fa-fw fa-building mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-building mx-2 mt-1"></i>' !!}
-                            <span class="me-2">{{ fs_config('menu_group_name') }}</span>
+                            <span class="me-2">{{ fs_config('channel_group_name') }}</span>
                         </a>
                     </li>
                 @endif
@@ -94,8 +94,8 @@
                             {!! Route::is(['fresns.notifications.index']) ? '<i class="fa-solid fa-fw fa-bell mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-bell mx-2 mt-1"></i>' !!}
                             <span class="me-2">{{ fs_config('menu_notifications') }}</span>
 
-                            @if (fs_user_panel('unreadNotifications.all') > 0)
-                                <span class="badge bg-danger rounded-pill">{{ fs_user_panel('unreadNotifications.all') }}</span>
+                            @if (fs_user_overview('unreadNotifications.all') > 0)
+                                <span class="badge bg-danger rounded-pill">{{ fs_user_overview('unreadNotifications.all') }}</span>
                             @endif
                         </a>
                     </li>
@@ -106,8 +106,8 @@
                                 {!! Route::is(['fresns.messages.index', 'fresns.messages.conversation']) ? '<i class="fa-solid fa-fw fa-envelope mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-envelope mx-2 mt-1"></i>' !!}
                                 <span class="me-2">{{ fs_config('menu_conversations') }}</span>
 
-                                @if (fs_user_panel('conversations.unreadMessages') > 0)
-                                    <span class="badge bg-danger rounded-pill">{{ fs_user_panel('conversations.unreadMessages') }}</span>
+                                @if (fs_user_overview('conversations.unreadMessages') > 0)
+                                    <span class="badge bg-danger rounded-pill">{{ fs_user_overview('conversations.unreadMessages') }}</span>
                                 @endif
                             </a>
                         </li>
@@ -122,7 +122,7 @@
                     {{-- Publish --}}
                     <li class="nav-item mt-4">
                         <div class="d-grid gap-2">
-                            @if (fs_config('moments_quick_publish'))
+                            @if (fs_config('fs_theme_quick_publish'))
                                 <button class="btn btn-warning text-white rounded-pill fs-create" type="button" data-bs-toggle="modal" data-bs-target="#createModal">{{ fs_config('publish_post_name') }}</button>
                             @else
                                 <a class="btn btn-warning text-white rounded-pill fs-create" href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}">{{ fs_config('publish_post_name') }}</a>

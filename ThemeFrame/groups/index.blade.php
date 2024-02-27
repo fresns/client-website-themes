@@ -1,8 +1,8 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_group_title'))
-@section('keywords', fs_config('menu_group_keywords'))
-@section('description', fs_config('menu_group_description'))
+@section('title', fs_config('channel_group_seo')['title'])
+@section('keywords', fs_config('channel_group_seo')['keywords'])
+@section('description', fs_config('channel_group_seo')['description'])
 
 @section('content')
     <main class="container-fluid">
@@ -17,7 +17,7 @@
                 @if (fs_config('menu_group_type') == 'tree')
                     {{-- Group Tree --}}
                     @foreach($groupTree ?? [] as $tree)
-                        <h3 class="fs-5">{{ $tree['gname'] }}</h3>
+                        <h3 class="fs-5">{{ $tree['name'] }}</h3>
                         <div class="card mb-5 py-4">
                             @foreach($tree['groups'] ?? [] as $group)
                                 @component('components.group.list', compact('group'))@endcomponent

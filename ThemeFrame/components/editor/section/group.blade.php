@@ -3,7 +3,7 @@
         <button class="rounded-0 border-0 d-flex justify-content-between p-3" type="button" data-bs-toggle="modal" data-bs-target="#fresns-group">
             <span>
                 <i class="bi bi-archive-fill me-2"></i>
-                <span id="group">@if (!empty($group)) {{ $group['gname'] }} @else {{ fs_config('group_name') }}: {{ fs_lang('editorNoSelectGroup') }} @endif</span>
+                <span id="group">@if (!empty($group)) {{ $group['name'] }} @else {{ fs_config('group_name') }}: {{ fs_lang('editorNoSelectGroup') }} @endif</span>
             </span>
             <i class="bi bi-chevron-right"></i>
         </button>
@@ -30,7 +30,7 @@
                                 @if ($groupCategory['cover'])
                                     <img src="{{ $groupCategory['cover'] }}" loading="lazy" height="20">
                                 @endif
-                                {{ $groupCategory['gname'] }}
+                                {{ $groupCategory['name'] }}
                             </button>
                         @endforeach
                     </div>
@@ -87,7 +87,7 @@
                         if (list.cover) {
                             html += '<img src="' + list.cover + '" height="20" class="me-1">';
                         }
-                        html += list.gname + '</a>'
+                        html += list.name + '</a>'
                     });
                 }
                 if (data.pagination.currentPage === 1){

@@ -15,13 +15,13 @@
                 <div class="card">
                     <div class="card-header">
                         {{ fs_config('user_name') }}
-                        @if (fs_user_panel('multiUser.status'))
+                        @if (fs_user_overview('multiUser.status'))
                             <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                                 data-type="account"
                                 data-scene="users"
                                 data-post-message-key="fresnsUsers"
                                 data-title="{{ fs_config('user_name') }}"
-                                data-url="{{ fs_user_panel('multiUser.service') }}">
+                                data-url="{{ fs_user_overview('multiUser.service') }}">
                                 <i class="bi bi-people-fill"></i>
                                 {{ fs_lang('setting') }}
                             </button>

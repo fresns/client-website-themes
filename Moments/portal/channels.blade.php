@@ -35,37 +35,37 @@
 
     <div class="list-group rounded-0 my-3">
         {{-- User --}}
-        @if (fs_config('menu_user_list_status'))
+        @if (fs_config('channel_user_list_status'))
             <a href="{{ fs_route(route('fresns.user.list')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                <span class="py-2"><i class="fa-regular fa-fw fa-circle-user me-2"></i> {{ fs_config('menu_user_list_name') }}</span>
+                <span class="py-2"><i class="fa-regular fa-fw fa-circle-user me-2"></i> {{ fs_config('channel_user_list_name') }}</span>
                 <span class="py-2 text-black-50"><i class="fa-solid fa-chevron-right"></i></span>
             </a>
         @endif
         {{-- Group --}}
-        @if (fs_config('menu_group_list_status'))
+        @if (fs_config('channel_group_list_status'))
             <a href="{{ fs_route(route('fresns.group.list')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                <span class="py-2"><i class="fa-regular fa-fw fa-building me-2"></i> {{ fs_config('menu_group_list_name') }}</span>
+                <span class="py-2"><i class="fa-regular fa-fw fa-building me-2"></i> {{ fs_config('channel_group_list_name') }}</span>
                 <span class="py-2 text-black-50"><i class="fa-solid fa-chevron-right"></i></span>
             </a>
         @endif
         {{-- Hashtag --}}
-        @if (fs_config('menu_hashtag_list_status'))
+        @if (fs_config('channel_hashtag_list_status'))
             <a href="{{ fs_route(route('fresns.hashtag.list')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                <span class="py-2"><i class="fa-solid fa-fw fa-hashtag me-2"></i> {{ fs_config('menu_hashtag_list_name') }}</span>
+                <span class="py-2"><i class="fa-solid fa-fw fa-hashtag me-2"></i> {{ fs_config('channel_hashtag_list_name') }}</span>
                 <span class="py-2 text-black-50"><i class="fa-solid fa-chevron-right"></i></span>
             </a>
         @endif
         {{-- Post --}}
-        @if (fs_config('menu_post_list_status'))
+        @if (fs_config('channel_post_list_status'))
             <a href="{{ fs_route(route('fresns.post.list')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                <span class="py-2"><i class="fa-regular fa-fw fa-newspaper me-2"></i> {{ fs_config('menu_post_list_name') }}</span>
+                <span class="py-2"><i class="fa-regular fa-fw fa-newspaper me-2"></i> {{ fs_config('channel_post_list_name') }}</span>
                 <span class="py-2 text-black-50"><i class="fa-solid fa-chevron-right"></i></span>
             </a>
         @endif
         {{-- Comment --}}
-        @if (fs_config('menu_comment_list_status'))
+        @if (fs_config('channel_comment_list_status'))
             <a href="{{ fs_route(route('fresns.comment.list')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                <span class="py-2"><i class="fa-regular fa-fw fa-comment-dots me-2"></i> {{ fs_config('menu_comment_list_name') }}</span>
+                <span class="py-2"><i class="fa-regular fa-fw fa-comment-dots me-2"></i> {{ fs_config('channel_comment_list_name') }}</span>
                 <span class="py-2 text-black-50"><i class="fa-solid fa-chevron-right"></i></span>
             </a>
         @endif

@@ -22,7 +22,7 @@
                                 <button class="rounded-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center p-2" style="background-color: aliceblue;" type="button" data-bs-toggle="modal" data-bs-target="#post-box-fresns-group">
                                     <span class="py-2 ms-1">
                                         <i class="bi bi-archive-fill me-2"></i>
-                                        <span id="post-box-group">@if ($group) {{ $group['gname'] }} @else {{ fs_config('group_name') }}: {{ fs_lang('editorNoSelectGroup') }} @endif</span>
+                                        <span id="post-box-group">@if ($group) {{ $group['name'] }} @else {{ fs_config('group_name') }}: {{ fs_lang('editorNoSelectGroup') }} @endif</span>
                                     </span>
                                     <span class="py-2"><i class="bi bi-chevron-right"></i></span>
                                 </button>
@@ -88,7 +88,7 @@
                             @if (fs_config('post_editor_image'))
                                 <div class="input-group">
                                     <label class="input-group-text" for="post-file">{{ fs_lang('editorImages') }}</label>
-                                    <input type="file" class="form-control" accept="{{ fs_user_panel('fileAccept.images') ?? null }}" name="image" id="post-file">
+                                    <input type="file" class="form-control" accept="{{ fs_user_overview('fileAccept.images') ?? null }}" name="image" id="post-file">
                                 </div>
                             @endif
                         </div>
@@ -137,7 +137,7 @@
                                 @if ($groupCategory['cover'])
                                     <img src="{{ $groupCategory['cover'] }}" loading="lazy" height="20">
                                 @endif
-                                {{ $groupCategory['gname'] }}
+                                {{ $groupCategory['name'] }}
                             </button>
                         @endforeach
                     </div>
@@ -190,7 +190,7 @@
                         if (list.cover) {
                             html += '<img src="' + list.cover + '" height="20" class="me-1">';
                         }
-                        html += list.gname + '</a>'
+                        html += list.name + '</a>'
                     });
                 }
 

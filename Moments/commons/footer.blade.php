@@ -6,8 +6,8 @@
         @if (fs_config('account_privacy_status'))
             <a href="{{ fs_route(route('fresns.custom.page', ['name' => 'policies'])).'#privacy-tab' }}" class="link-secondary ms-2">{{ fs_lang('accountPoliciesPrivacy') }}</a>
         @endif
-        @if (fs_config('account_cookies_status'))
-            <a href="{{ fs_route(route('fresns.custom.page', ['name' => 'policies'])).'#cookies-tab' }}" class="link-secondary ms-2">{{ fs_lang('accountPoliciesCookies') }}</a>
+        @if (fs_config('account_cookie_status'))
+            <a href="{{ fs_route(route('fresns.custom.page', ['name' => 'policies'])).'#cookies-tab' }}" class="link-secondary ms-2">{{ fs_lang('accountPoliciesCookie') }}</a>
         @endif
     </p>
 

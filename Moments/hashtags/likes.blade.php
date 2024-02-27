@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_like_hashtags'))
+@section('title', fs_config('channel_likes_hashtags_name'))
 
 @section('content')
     {{-- Navigation --}}

@@ -2,7 +2,7 @@
     @csrf
     <input type="hidden" name="interactionType" value="dislike"/>
     <input type="hidden" name="markType" value="hashtag"/>
-    <input type="hidden" name="fsid" value="{{ $hid }}"/>
+    <input type="hidden" name="fsid" value="{{ $htid }}"/>
     @if ($interaction['dislikeStatus'])
         <a class="btn btn-success btn-sm fs-mark" data-interaction-active="{{ $interaction['dislikeStatus'] }}" data-bi="bi-hand-thumbs-down">
             <i class="bi bi-hand-thumbs-down-fill"></i>

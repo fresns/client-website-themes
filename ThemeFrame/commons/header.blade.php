@@ -9,67 +9,100 @@
                 {{-- navbar --}}
                 <ul class="nav nav-pills me-auto my-4 my-lg-0">
                     {{-- portal --}}
-                    @if (fs_config('menu_portal_status'))
+                    @if (fs_config('channel_portal_status'))
                         <li class="nav-item">
                             <a class="nav-link {{ Route::is('fresns.portal') ? 'active' : '' }}
                                 @if (request()->url() == rtrim(fs_route(route('fresns.home')), '/') && fs_config('default_homepage') == 'portal') active @endif"
                                 href="{{ fs_route(route('fresns.portal')) }}">
-                                {{ fs_config('menu_portal_name') }}
+                                {{ fs_config('channel_portal_name') }}
                             </a>
                         </li>
                     @endif
 
                     {{-- user --}}
-                    @if (fs_config('menu_user_status'))
+                    @if (fs_config('channel_user_status'))
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::is(['fresns.user.*', 'fresns.follow.user.*']) ? 'active' : '' }}
+                            <a class="nav-link {{ Route::is('fresns.user.*') ? 'active' : '' }}
                                 @if (request()->url() == rtrim(fs_route(route('fresns.home')), '/') && fs_config('default_homepage') == 'user') active @endif"
                                 href="{{ fs_route(route('fresns.user.index')) }}">
-                                {{ fs_config('menu_user_name') }}
+                                {{ fs_config('channel_user_name') }}
                             </a>
                         </li>
                     @endif
 
                     {{-- group --}}
-                    @if (fs_config('menu_group_status'))
+                    @if (fs_config('channel_group_status'))
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::is(['fresns.group.*', 'fresns.follow.group.*']) ? 'active' : '' }}
+                            <a class="nav-link {{ Route::is('fresns.group.*') ? 'active' : '' }}
                                 @if (request()->url() == rtrim(fs_route(route('fresns.home')), '/') && fs_config('default_homepage') == 'group') active @endif"
                                 href="{{ fs_route(route('fresns.group.index')) }}">
-                                {{ fs_config('menu_group_name') }}
+                                {{ fs_config('channel_group_name') }}
                             </a>
                         </li>
                     @endif
 
                     {{-- hashtag --}}
-                    @if (fs_config('menu_hashtag_status'))
+                    @if (fs_config('channel_hashtag_status'))
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::is(['fresns.hashtag.*', 'fresns.follow.hashtag.*']) ? 'active' : '' }}
+                            <a class="nav-link {{ Route::is('fresns.hashtag.*') ? 'active' : '' }}
                                 @if (request()->url() == rtrim(fs_route(route('fresns.home')), '/') && fs_config('default_homepage') == 'hashtag') active @endif"
                                 href="{{ fs_route(route('fresns.hashtag.index')) }}">
-                                {{ fs_config('menu_hashtag_name') }}
+                                {{ fs_config('channel_hashtag_name') }}
+                            </a>
+                        </li>
+                    @endif
+
+                    {{-- geotag --}}
+                    @if (fs_config('channel_geotag_status'))
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('fresns.geotag.*') ? 'active' : '' }}
+                                @if (request()->url() == rtrim(fs_route(route('fresns.home')), '/') && fs_config('default_homepage') == 'geotag') active @endif"
+                                href="{{ fs_route(route('fresns.geotag.index')) }}">
+                                {{ fs_config('channel_geotag_name') }}
                             </a>
                         </li>
                     @endif
 
                     {{-- post --}}
-                    @if (fs_config('menu_post_status'))
+                    @if (fs_config('channel_post_status'))
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::is(['fresns.post.*', 'fresns.follow.all.posts']) ? 'active' : '' }}
+                            <a class="nav-link {{ Route::is('fresns.post.*') ? 'active' : '' }}
                                 @if (request()->url() == rtrim(fs_route(route('fresns.home')), '/') && fs_config('default_homepage') == 'post') active @endif"
                                 href="{{ fs_route(route('fresns.post.index')) }}">
-                                {{ fs_config('menu_post_name') }}
+                                {{ fs_config('channel_post_name') }}
                             </a>
                         </li>
                     @endif
 
                     {{-- comment --}}
-                    @if (fs_config('menu_comment_status'))
+                    @if (fs_config('channel_comment_status'))
                         <li class="nav-item">
-                            <a class="nav-link {{ Route::is(['fresns.comment.*', 'fresns.follow.all.comments']) ? 'active' : '' }}
+                            <a class="nav-link {{ Route::is('fresns.comment.*') ? 'active' : '' }}
                                 @if (request()->url() == rtrim(fs_route(route('fresns.home')), '/') && fs_config('default_homepage') == 'comment') active @endif"
                                 href="{{ fs_route(route('fresns.comment.index')) }}">
-                                {{ fs_config('menu_comment_name') }}
+                                {{ fs_config('channel_comment_name') }}
+                            </a>
+                        </li>
+                    @endif
+
+                    {{-- timeline --}}
+                    @if (fs_config('channel_timeline_posts_status') || fs_config('channel_timeline_comments_status'))
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('fresns.timeline.*') ? 'active' : '' }}
+                                @if (request()->url() == rtrim(fs_route(route('fresns.home')), '/') && fs_config('default_homepage') == 'timeline') active @endif"
+                                href="{{ fs_route(route('fresns.timeline.index')) }}">
+                                {{ fs_config('channel_timeline_name') }}
+                            </a>
+                        </li>
+                    @endif
+
+                    {{-- nearby --}}
+                    @if (fs_config('channel_nearby_posts_status') || fs_config('channel_nearby_comments_status'))
+                        <li class="nav-item">
+                            <a class="nav-link {{ Route::is('fresns.nearby.*') ? 'active' : '' }}
+                                @if (request()->url() == rtrim(fs_route(route('fresns.home')), '/') && fs_config('default_homepage') == 'nearby') active @endif"
+                                href="{{ fs_route(route('fresns.nearby.index')) }}">
+                                {{ fs_config('channel_nearby_name') }}
                             </a>
                         </li>
                     @endif
@@ -95,16 +128,16 @@
 
                         <a href="{{ fs_route(route('fresns.notifications.index')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
                             <i class="bi bi-bell"></i>
-                            @if (fs_user_panel('unreadNotifications.all') > 0)
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ fs_user_panel('unreadNotifications.all') }}</span>
+                            @if (fs_user_overview('unreadNotifications.all') > 0)
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ fs_user_overview('unreadNotifications.all') }}</span>
                             @endif
                         </a>
 
                         @if (fs_config('conversation_status'))
                             <a href="{{ fs_route(route('fresns.messages.index')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
                                 <i class="bi bi-envelope"></i>
-                                @if (fs_user_panel('conversations.unreadMessages') > 0)
-                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ fs_user_panel('conversations.unreadMessages') }}</span>
+                                @if (fs_user_overview('conversations.unreadMessages') > 0)
+                                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ fs_user_overview('conversations.unreadMessages') }}</span>
                                 @endif
                             </a>
                         @endif
@@ -122,8 +155,8 @@
                                         <i class="bi bi-bell"></i>
                                         {{ fs_config('menu_notifications') }}
 
-                                        @if (fs_user_panel('unreadNotifications.all') > 0)
-                                            <span class="badge bg-danger">{{ fs_user_panel('unreadNotifications.all') }}</span>
+                                        @if (fs_user_overview('unreadNotifications.all') > 0)
+                                            <span class="badge bg-danger">{{ fs_user_overview('unreadNotifications.all') }}</span>
                                         @endif
                                     </a>
                                 </li>
@@ -135,8 +168,8 @@
                                             <i class="bi bi-envelope"></i>
                                             {{ fs_config('menu_conversations') }}
 
-                                            @if (fs_user_panel('conversations.unreadMessages') > 0)
-                                                <span class="badge bg-danger">{{ fs_user_panel('conversations.unreadMessages') }}</span>
+                                            @if (fs_user_overview('conversations.unreadMessages') > 0)
+                                                <span class="badge bg-danger">{{ fs_user_overview('conversations.unreadMessages') }}</span>
                                             @endif
                                         </a>
                                     </li>
@@ -148,8 +181,8 @@
                                         <i class="bi bi-file-earmark-text"></i>
                                         {{ fs_config('menu_editor_drafts') }}
 
-                                        @if (array_sum(fs_user_panel('draftCount')) > 0)
-                                            <span class="badge bg-primary">{{ array_sum(fs_user_panel('draftCount')) }}</span>
+                                        @if (array_sum(fs_user_overview('draftCount')) > 0)
+                                            <span class="badge bg-primary">{{ array_sum(fs_user_overview('draftCount')) }}</span>
                                         @endif
                                     </a>
                                 </li>
@@ -160,7 +193,7 @@
                                 @endif
 
                                 {{-- Users of this account --}}
-                                @if (fs_user_panel('multiUser.status') || count(fs_account('detail.users')) > 1)
+                                @if (fs_user_overview('multiUser.status') || count(fs_account('detail.users')) > 1)
                                     <li><a class="dropdown-item" href="{{ fs_route(route('fresns.me.users')) }}"><i class="bi bi-people"></i> {{ fs_config('menu_account_users') }}</a></li>
                                 @endif
 

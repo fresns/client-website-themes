@@ -1,8 +1,8 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_comment_title'))
-@section('keywords', fs_config('menu_comment_keywords'))
-@section('description', fs_config('menu_comment_description'))
+@section('title', fs_config('channel_comment_seo')['title'])
+@section('keywords', fs_config('channel_comment_seo')['keywords'])
+@section('description', fs_config('channel_comment_seo')['description'])
 
 @section('content')
     <div class="d-flex mx-3">
@@ -11,7 +11,7 @@
                 <a class="btn btn-outline-secondary border-0 rounded-circle" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
             </span>
         @enddesktop
-        <h1 class="fs-5 my-3">{{ fs_config('menu_comment_name') }}</h1>
+        <h1 class="fs-5 my-3">{{ fs_config('channel_comment_name') }}</h1>
     </div>
 
     {{-- Comment List --}}

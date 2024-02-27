@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_dislike_groups'))
+@section('title', fs_config('channel_dislikes_groups_name'))
 
 @section('content')
     {{-- Navigation --}}

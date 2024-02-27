@@ -101,7 +101,7 @@
 
         {{-- Content --}}
         <div class="content-article">
-            @if ($sticky['isCommentPrivate'])
+            @if ($comment['privacy'] == 'private')
                 <div class="alert alert-warning" role="alert">
                     <i class="bi bi-info-circle"></i> {{ fs_lang('editorCommentPrivate') }}
                 </div>
@@ -159,7 +159,7 @@
     <section class="interaction order-5 mt-3 mx-3">
         <div class="d-flex">
             {{-- Like --}}
-            @if ($sticky['interaction']['likeSetting'])
+            @if ($sticky['interaction']['likeEnabled'])
                 <div class="interaction-box">
                     @component('components.comment.mark.like', [
                         'cid' => $sticky['cid'],
@@ -171,7 +171,7 @@
             @endif
 
             {{-- Dislike --}}
-            @if ($sticky['interaction']['dislikeSetting'])
+            @if ($sticky['interaction']['dislikeEnabled'])
                 <div class="interaction-box">
                     @component('components.comment.mark.dislike', [
                         'cid' => $sticky['cid'],

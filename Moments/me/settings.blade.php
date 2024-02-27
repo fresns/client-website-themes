@@ -66,7 +66,7 @@
                                 id="uploadAvatar"
                                 name="uploadAvatar"
                                 hidden="hidden"
-                                accept="{{ fs_user_panel('fileAccept.images') }}"
+                                accept="{{ fs_user_overview('fileAccept.images') }}"
                                 data-upload-action="{{ route('fresns.api.upload.file') }}"
                                 data-edit-action="{{ route('fresns.api.user.edit') }}"
                                 data-type="image"
@@ -214,7 +214,7 @@
                     </button>
                 </div>
                 {{-- Profiles --}}
-                @foreach(fs_user_panel('profiles') as $profile)
+                @foreach(fs_user_overview('profiles') as $profile)
                     <div class="input-group mb-3">
                         <span class="input-group-text">
                             <img src="{{ $profile['icon'] }}" loading="lazy" class="rounded me-2" height="24">
@@ -385,7 +385,7 @@
                     <h1 class="fs-5 my-3">{{ fs_lang('accountDelete') }}</h1>
                 </div>
                 <div>
-                    {!! fs_config('account_delete') ? Str::markdown(fs_config('account_delete')) : '' !!}
+                    {!! fs_config('account_delete_policy') ? Str::markdown(fs_config('account_delete_policy')) : '' !!}
                 </div>
                 @if (! fs_account('detail.waitDelete') && fs_config('delete_account_type') != 1)
                     <hr>

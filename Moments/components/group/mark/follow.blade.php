@@ -28,7 +28,7 @@
                 data-scene="follow"
                 data-post-message-key="fresnsFollow"
                 data-gid="{{ $gid }}"
-                data-title="{{ $interaction['followName'] }}: {{ $gname }}"
+                data-title="{{ $interaction['followName'] }}: {{ $name }}"
                 data-url="{{ $followUrl }}">
                 <i class="fa-regular fa-flag"></i>
                 {{ $interaction['followName'] }}

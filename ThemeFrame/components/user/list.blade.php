@@ -14,7 +14,7 @@
             <div class="user-info d-flex text-nowrap overflow-hidden">
                 <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $user['fsid']])) }}" class="user-link d-flex">
                     <div class="user-nickname text-nowrap overflow-hidden" style="color:{{ $user['nicknameColor'] }};">{{ $user['nickname'] }}</div>
-                    @if ($user['verifiedStatus'])
+                    @if ($user['verified'])
                         <div class="user-verified">
                             @if ($user['verifiedIcon'])
                                 <img src="{{ $user['verifiedIcon'] }}" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['verifiedDesc'] }}">
@@ -53,38 +53,38 @@
         {{-- User Interaction --}}
         <footer class="interaction-btn">
             {{-- Like --}}
-            @if ($user['interaction']['likeSetting'])
+            @if ($user['interaction']['likeEnabled'])
                 @component('components.user.mark.like', [
                     'uid' => $user['uid'],
                     'interaction' => $user['interaction'],
-                    'count' => $user['stats']['likeMeCount']
+                    'count' => $user['stats']['likerCount']
                 ])@endcomponent
             @endif
 
             {{-- Dislike --}}
-            @if ($user['interaction']['dislikeSetting'])
+            @if ($user['interaction']['dislikeEnabled'])
                 @component('components.user.mark.dislike', [
                     'uid' => $user['uid'],
                     'interaction' => $user['interaction'],
-                    'count' => $user['stats']['dislikeMeCount']
+                    'count' => $user['stats']['dislikerCount']
                 ])@endcomponent
             @endif
 
             {{-- Follow --}}
-            @if ($user['interaction']['followSetting'])
+            @if ($user['interaction']['followEnabled'])
                 @component('components.user.mark.follow', [
                     'uid' => $user['uid'],
                     'interaction' => $user['interaction'],
-                    'count' => $user['stats']['followMeCount']
+                    'count' => $user['stats']['followerCount']
                 ])@endcomponent
             @endif
 
             {{-- Block --}}
-            @if ($user['interaction']['blockSetting'])
+            @if ($user['interaction']['blockEnabled'])
                 @component('components.user.mark.block', [
                     'uid' => $user['uid'],
                     'interaction' => $user['interaction'],
-                    'count' => $user['stats']['blockMeCount']
+                    'count' => $user['stats']['blockerCount']
                 ])@endcomponent
             @endif
 

@@ -70,7 +70,7 @@
                 <div class="user-info d-flex text-nowrap overflow-hidden">
                     <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $author['fsid']])) }}" class="user-link d-flex">
                         <div class="user-nickname text-nowrap overflow-hidden" style="color:{{ $author['nicknameColor'] }};">{{ $author['nickname'] }}</div>
-                        @if ($author['verifiedStatus'])
+                        @if ($author['verified'])
                             <div class="user-verified">
                                 @if ($author['verifiedIcon'])
                                     <img src="{{ $author['verifiedIcon'] }}" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $author['verifiedDesc'] }}">

@@ -5,67 +5,51 @@
     </button>
     <div class="collapse navbar-collapse list-group mt-2 mt-lg-0" id="fresnsMenus">
         {{-- Post Home --}}
-        @if (fs_config('menu_post_status'))
+        @if (fs_config('channel_post_status'))
             <a href="{{ fs_route(route('fresns.post.index')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.post.index') ? 'active' : '' }}
                 @if (request()->url() === rtrim(fs_route(route('fresns.home')), '/')) active @endif">
                 <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-post-home.png" loading="lazy" width="36" height="36">
-                {{ fs_config('menu_post_name') }}
+                {{ fs_config('channel_post_name') }}
             </a>
         @endif
 
         {{-- Post List --}}
-        @if (fs_config('menu_post_list_status'))
+        @if (fs_config('channel_post_list_status'))
             <a href="{{ fs_route(route('fresns.post.list')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.post.list') ? 'active' : '' }}">
                 <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-post-list.png" loading="lazy" width="36" height="36">
-                {{ fs_config('menu_post_list_name') }}
-            </a>
-        @endif
-
-        {{-- Nearby --}}
-        @if (fs_config('post_editor_location'))
-            <a href="{{ fs_route(route('fresns.post.nearby')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.post.nearby') ? 'active' : '' }}">
-                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-nearby.png" loading="lazy" width="36" height="36">
-                {{ fs_config('menu_nearby_posts') }}
+                {{ fs_config('channel_post_list_name') }}
             </a>
         @endif
 
         {{-- Likes --}}
-        @if (fs_config('like_post_setting'))
+        @if (fs_config('post_like_enabled'))
             <a href="{{ fs_route(route('fresns.post.likes')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.post.likes') ? 'active' : '' }}">
                 <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-likes.png" loading="lazy" width="36" height="36">
-                {{ fs_config('menu_like_posts') }}
+                {{ fs_config('channel_likes_posts_name') }}
             </a>
         @endif
 
         {{-- Dislikes --}}
-        @if (fs_config('dislike_post_setting'))
+        @if (fs_config('post_dislike_enabled'))
             <a href="{{ fs_route(route('fresns.post.dislikes')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.post.dislikes') ? 'active' : '' }}">
                 <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-dislikes.png" loading="lazy" width="36" height="36">
-                {{ fs_config('menu_dislike_posts') }}
+                {{ fs_config('channel_dislikes_posts_name') }}
             </a>
         @endif
 
         {{-- Following --}}
-        @if (fs_config('follow_post_setting'))
+        @if (fs_config('post_follow_enabled'))
             <a href="{{ fs_route(route('fresns.post.following')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.post.following') ? 'active' : '' }}">
                 <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-following.png" loading="lazy" width="36" height="36">
-                {{ fs_config('menu_follow_posts') }}
+                {{ fs_config('channel_following_posts_name') }}
             </a>
         @endif
 
         {{-- Blocking --}}
-        @if (fs_config('block_post_setting'))
+        @if (fs_config('post_block_enabled'))
             <a href="{{ fs_route(route('fresns.post.blocking')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.post.blocking') ? 'active' : '' }}">
                 <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-blocking.png" loading="lazy" width="36" height="36">
-                {{ fs_config('menu_block_posts') }}
-            </a>
-        @endif
-
-        {{-- Post List by Follow --}}
-        @if (fs_config('view_posts_by_follow_object'))
-            <a href="{{ fs_route(route('fresns.follow.all.posts')) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.follow.all.posts') ? 'active' : '' }}">
-                <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-follow-posts.png" loading="lazy" width="36" height="36">
-                {{ fs_config('menu_follow_all_posts') }}
+                {{ fs_config('channel_blocking_posts_name') }}
             </a>
         @endif
     </div>

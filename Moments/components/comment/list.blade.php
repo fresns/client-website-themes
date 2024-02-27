@@ -163,7 +163,7 @@
 
         {{-- Content --}}
         <div class="content-article text-break">
-            @if ($comment['isCommentPrivate'])
+            @if ($comment['privacy'] == 'private')
                 <div class="alert alert-warning" role="alert">
                     <i class="fa-solid fa-circle-info"></i> {{ fs_lang('editorCommentPrivate') }}
                 </div>
@@ -223,7 +223,7 @@
     <section class="interaction order-5 mt-3 mx-3">
         <div class="d-flex">
             {{-- Like --}}
-            @if ($comment['interaction']['likeSetting'])
+            @if ($comment['interaction']['likeEnabled'])
                 <div class="interaction-box">
                     @component('components.comment.mark.like', [
                         'cid' => $comment['cid'],
@@ -235,7 +235,7 @@
             @endif
 
             {{-- Dislike --}}
-            @if ($comment['interaction']['dislikeSetting'])
+            @if ($comment['interaction']['dislikeEnabled'])
                 <div class="interaction-box">
                     @component('components.comment.mark.dislike', [
                         'cid' => $comment['cid'],
@@ -300,7 +300,7 @@
         @if (fs_user()->check())
             @component('components.editor.comment-box', [
                 'nickname' => $comment['author']['nickname'],
-                'pid' => $comment['replyToPost']['pid'],
+                'pid' => $comment['replyToPost']['pid'] ?? null,
                 'cid' => $comment['cid'],
             ])@endcomponent
         @endif
@@ -314,11 +314,11 @@
     @endif
 
     {{-- Comment Preview --}}
-    @if ($comment['subComments'])
+    @if ($comment['previewComments'])
         @component('components.comment.section.preview', [
             'cid' => $comment['cid'],
             'commentCount' => $comment['commentCount'],
-            'subComments' => $comment['subComments'],
+            'previewComments' => $comment['previewComments'],
         ])@endcomponent
     @endif
 

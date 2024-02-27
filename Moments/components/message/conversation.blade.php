@@ -11,7 +11,7 @@
                 @if ($conversation['user']['status'])
                     {{ $conversation['user']['nickname'] }}
 
-                    @if ($conversation['user']['verifiedStatus'])
+                    @if ($conversation['user']['verified'])
                         @if ($conversation['user']['verifiedIcon'])
                             <img src="{{ $conversation['user']['verifiedIcon'] }}" loading="lazy" class="conversation-user-verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $conversation['user']['verifiedDesc'] }}">
                         @else

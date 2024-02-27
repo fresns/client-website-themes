@@ -57,8 +57,8 @@
                     @if (fs_config('account_privacy_status'))
                         <a href="{{ fs_route(route('fresns.custom.page', ['name' => 'policies'])).'#privacy-tab' }}" class="link-secondary text-decoration-none ms-2">{{ fs_lang('accountPoliciesPrivacy') }}</a>
                     @endif
-                    @if (fs_config('account_cookies_status'))
-                        <a href="{{ fs_route(route('fresns.custom.page', ['name' => 'policies'])).'#cookies-tab' }}" class="link-secondary text-decoration-none ms-2">{{ fs_lang('accountPoliciesCookies') }}</a>
+                    @if (fs_config('account_cookie_status'))
+                        <a href="{{ fs_route(route('fresns.custom.page', ['name' => 'policies'])).'#cookies-tab' }}" class="link-secondary text-decoration-none ms-2">{{ fs_lang('accountPoliciesCookie') }}</a>
                     @endif
                 </p>
 
@@ -158,7 +158,7 @@
     </div>
 
     {{-- Loading --}}
-    @if (fs_config('moments_loading'))
+    @if (fs_config('fs_theme_loading'))
         <div id="loading" class="position-fixed top-50 start-50 translate-middle bg-light bg-opacity-75 rounded pt-4 pb-5 px-5" style="z-index:2048;display:none;">
             <div class="loader"></div>
         </div>
@@ -236,7 +236,6 @@
     @if (fs_config('website_stat_position') == 'body')
         <div style="display:none;">{!! fs_config('website_stat_code') !!}</div>
     @endif
-    <script src="/static/js/base64.js"></script>
     <script src="/static/js/bootstrap.bundle.min.js"></script>
     <script src="/static/js/select2.min.js"></script>
     <script src="/static/js/masonry.pkgd.min.js"></script>

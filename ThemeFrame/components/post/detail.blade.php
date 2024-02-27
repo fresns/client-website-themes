@@ -167,7 +167,7 @@
     @endif
 
     {{-- Post Append --}}
-    @if ($post['group'] || $post['affiliatedUserConfig']['hasUserList'] || $post['hashtags'])
+    @if ($post['group'] || $post['associatedUserListConfig']['hasUserList'] || $post['hashtags'])
         <section class="content-append order-4 mx-3 mt-3 d-flex">
             <div class="me-auto d-flex flex-row">
                 {{-- Post Group --}}
@@ -175,9 +175,9 @@
                     <div class="content-group me-2">
                         <a href="{{ fs_route(route('fresns.group.detail', ['gid' => $post['group']['gid']])) }}" class="badge rounded-pill text-decoration-none">
                             @if (!empty($post['group']['cover']))
-                                <img src="{{ $post['group']['cover'] }}" loading="lazy" alt="$post['group']['gname']" class="rounded">
+                                <img src="{{ $post['group']['cover'] }}" loading="lazy" alt="$post['group']['name']" class="rounded">
                             @endif
-                            {{ $post['group']['gname'] }}
+                            {{ $post['group']['name'] }}
                         </a>
                     </div>
                 @endif
@@ -186,8 +186,8 @@
                 @if ($post['hashtags'])
                     @foreach($post['hashtags'] as $hashtag)
                         <div class="content-group me-2 mt-1">
-                            <a href="{{ fs_route(route('fresns.hashtag.detail', ['hid' => $hashtag['hid']])) }}" class="badge rounded-pill text-decoration-none">
-                                {{ '# '.$hashtag['hname'] }}
+                            <a href="{{ fs_route(route('fresns.hashtag.detail', ['htid' => $hashtag['htid']])) }}" class="badge rounded-pill text-decoration-none">
+                                {{ '# '.$hashtag['name'] }}
                             </a>
                         </div>
                     @endforeach
@@ -195,7 +195,7 @@
             </div>
 
             {{-- Post Affiliate User List --}}
-            @if ($post['affiliatedUserConfig']['hasUserList'])
+            @if ($post['associatedUserListConfig']['hasUserList'])
                 <div class="content-user-list">
                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                         data-type="post"
@@ -203,10 +203,10 @@
                         data-post-message-key="fresnsPostUserList"
                         data-pid="{{ $post['pid'] }}"
                         data-uid="{{ $post['author']['uid'] }}"
-                        data-title="{{ $post['affiliatedUserConfig']['userListName'] }}"
-                        data-url="{{ $post['affiliatedUserConfig']['userListUrl'] }}">
-                        {{ $post['affiliatedUserConfig']['userListName'] }}
-                        <span class="badge bg-light text-dark">{{ $post['affiliatedUserConfig']['userListCount'] }}</span>
+                        data-title="{{ $post['associatedUserListConfig']['userListName'] }}"
+                        data-url="{{ $post['associatedUserListConfig']['userListUrl'] }}">
+                        {{ $post['associatedUserListConfig']['userListName'] }}
+                        <span class="badge bg-light text-dark">{{ $post['associatedUserListConfig']['userListCount'] }}</span>
                     </button>
                 </div>
             @endif
@@ -217,7 +217,7 @@
     <section class="interaction order-5 mt-3 px-3">
         <div class="d-flex">
             {{-- Like --}}
-            @if ($post['interaction']['likeSetting'])
+            @if ($post['interaction']['likeEnabled'])
                 <div class="interaction-box">
                     @component('components.post.mark.like', [
                         'pid' => $post['pid'],
@@ -229,7 +229,7 @@
             @endif
 
             {{-- Dislike --}}
-            @if ($post['interaction']['dislikeSetting'])
+            @if ($post['interaction']['dislikeEnabled'])
                 <div class="interaction-box">
                     @component('components.post.mark.dislike', [
                         'pid' => $post['pid'],

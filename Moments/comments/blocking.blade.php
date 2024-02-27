@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_block_comments'))
+@section('title', fs_config('channel_blocking_comments_name'))
 
 @section('content')
     {{-- Navigation --}}

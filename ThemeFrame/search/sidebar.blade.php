@@ -5,7 +5,7 @@
     </button>
     <div class="collapse navbar-collapse list-group mt-2 mt-lg-0" id="fresnsMenus">
         {{-- Search Users --}}
-        @if (fs_config('menu_user_status'))
+        @if (fs_config('channel_user_status'))
             <a href="{{ fs_route(route('fresns.search.users', ['searchKey' => request('searchKey')])) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.search.users') ? 'active' : '' }}">
                 <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-user-list.png" loading="lazy" width="36" height="36">
                 {{ fs_config('user_name') }}
@@ -13,7 +13,7 @@
         @endif
 
         {{-- Search Groups --}}
-        @if (fs_config('menu_group_status'))
+        @if (fs_config('channel_group_status'))
             <a href="{{ fs_route(route('fresns.search.groups', ['searchKey' => request('searchKey')])) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.search.groups') ? 'active' : '' }}">
                 <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-group-list.png" loading="lazy" width="36" height="36">
                 {{ fs_config('group_name') }}
@@ -21,7 +21,7 @@
         @endif
 
         {{-- Search Hashtags --}}
-        @if (fs_config('menu_hashtag_status'))
+        @if (fs_config('channel_hashtag_status'))
             <a href="{{ fs_route(route('fresns.search.hashtags', ['searchKey' => request('searchKey')])) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.search.hashtags') ? 'active' : '' }}">
                 <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-hashtag-list.png" loading="lazy" width="36" height="36">
                 {{ fs_config('hashtag_name') }}
@@ -29,7 +29,7 @@
         @endif
 
         {{-- Search Posts --}}
-        @if (fs_config('menu_post_status'))
+        @if (fs_config('channel_post_status'))
             <a href="{{ fs_route(route('fresns.search.posts', ['searchKey' => request('searchKey')])) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.search.posts') ? 'active' : '' }}">
                 <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-post-list.png" loading="lazy" width="36" height="36">
                 {{ fs_config('post_name') }}
@@ -37,7 +37,7 @@
         @endif
 
         {{-- Search Comments --}}
-        @if (fs_config('menu_comment_status'))
+        @if (fs_config('channel_comment_status'))
             <a href="{{ fs_route(route('fresns.search.comments', ['searchKey' => request('searchKey')])) }}" class="list-group-item list-group-item-action {{ Route::is('fresns.search.comments') ? 'active' : '' }}">
                 <img class="img-fluid" src="{{ fs_theme('assets') }}images/menu-comment-list.png" loading="lazy" width="36" height="36">
                 {{ fs_config('comment_name') }}

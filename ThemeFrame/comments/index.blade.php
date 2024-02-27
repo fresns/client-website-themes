@@ -1,8 +1,8 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_comment_title'))
-@section('keywords', fs_config('menu_comment_keywords'))
-@section('description', fs_config('menu_comment_description'))
+@section('title', fs_config('channel_comment_seo')['title'])
+@section('keywords', fs_config('channel_comment_seo')['keywords'])
+@section('description', fs_config('channel_comment_seo')['description'])
 
 @section('content')
     <main class="container-fluid">

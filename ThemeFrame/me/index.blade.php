@@ -14,7 +14,7 @@
             <div class="col-sm-9">
                 {{-- features --}}
                 <div class="clearfix">
-                    @foreach(fs_user_panel('features') as $feature)
+                    @foreach(fs_user_overview('features') as $feature)
                         <div class="float-start mt-3" style="width:20%">
                             <a class="text-decoration-none" data-bs-toggle="modal" href="#fresnsModal"
                                 data-type="account"

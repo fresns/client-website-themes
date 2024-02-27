@@ -2,7 +2,7 @@
     @csrf
     <input type="hidden" name="interactionType" value="follow"/>
     <input type="hidden" name="markType" value="hashtag"/>
-    <input type="hidden" name="fsid" value="{{ $hid }}"/>
+    <input type="hidden" name="fsid" value="{{ $htid }}"/>
     @if ($interaction['followStatus'])
         <a class="btn btn-success btn-sm fs-mark" data-interaction-active="{{ $interaction['followStatus'] }}" data-bi="fa-regular fa-star" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ fs_lang('cancel') }}">
             <i class="fa-solid fa-star"></i>

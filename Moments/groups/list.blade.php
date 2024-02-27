@@ -1,8 +1,8 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_group_list_title'))
-@section('keywords', fs_config('menu_group_list_keywords'))
-@section('description', fs_config('menu_group_list_description'))
+@section('title', fs_config('channel_group_list_seo')['title'])
+@section('keywords', fs_config('channel_group_list_seo')['keywords'])
+@section('description', fs_config('channel_group_list_seo')['description'])
 
 @section('content')
     <div class="d-flex mx-3">
@@ -11,7 +11,7 @@
                 <a class="btn btn-outline-secondary border-0 rounded-circle" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
             </span>
         @enddesktop
-        <h1 class="fs-5 my-3">{{ fs_config('menu_group_list_name') }}</h1>
+        <h1 class="fs-5 my-3">{{ fs_config('channel_group_list_name') }}</h1>
     </div>
 
     {{-- Group List --}}

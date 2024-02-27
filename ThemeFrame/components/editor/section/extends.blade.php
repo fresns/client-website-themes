@@ -1,10 +1,10 @@
 {{-- Text Box --}}
-@if ($extends['textBox'] ?? null)
+@if ($extends['texts'] ?? null)
     <div class="mt-3 clearfix">
-        @foreach($extends['textBox'] as $textBox)
+        @foreach($extends['texts'] as $text)
             <div class="position-relative">
                 <div class="editor-frame-text">
-                    {{ $textBox['textContent'] }}
+                    {{ $text['content'] }}
                 </div>
 
                 {{-- Delete --}}
@@ -19,24 +19,24 @@
 @endif
 
 {{-- Info Box --}}
-@if ($extends['infoBox'] ?? null)
+@if ($extends['infos'] ?? null)
     <div class="mt-3 clearfix">
-        @foreach($extends['infoBox'] as $infoBox)
+        @foreach($extends['infos'] as $info)
             <div class="position-relative">
-                <div class="editor-frame-info clearfix editor-info-{{ $infoBox['infoBoxTypeString'] }}">
-                    <div class="editor-info-img"><img src="{{ $infoBox['cover'] }}" loading="lazy"></div>
+                <div class="editor-frame-info clearfix editor-info-{{ $info['typeString'] }}">
+                    <div class="editor-info-img"><img src="{{ $info['cover'] }}" loading="lazy"></div>
                     <div class="editor-info-body">
-                        <div class="editor-info-title" @if ($infoBox['titleColor']) style="color:{{ $infoBox['titleColor'] }};" @endif>{{ $infoBox['title'] }}</div>
-                        @if ($infoBox['descPrimary'])
-                            <div class="editor-info-desc" @if ($infoBox['descPrimaryColor']) style="color:{{ $infoBox['descPrimaryColor'] }};" @endif>{{ $infoBox['descPrimary'] }}</div>
+                        <div class="editor-info-title" @if ($info['titleColor']) style="color:{{ $info['titleColor'] }};" @endif>{{ $info['title'] }}</div>
+                        @if ($info['descPrimary'])
+                            <div class="editor-info-desc" @if ($info['descPrimaryColor']) style="color:{{ $info['descPrimaryColor'] }};" @endif>{{ $info['descPrimary'] }}</div>
                         @endif
-                        @if ($infoBox['descSecondary'])
-                            <div class="editor-info-desc" @if ($infoBox['descSecondaryColor']) style="color:{{ $infoBox['descSecondaryColor'] }};" @endif>{{ $infoBox['descSecondary'] }}</div>
+                        @if ($info['descSecondary'])
+                            <div class="editor-info-desc" @if ($info['descSecondaryColor']) style="color:{{ $info['descSecondaryColor'] }};" @endif>{{ $info['descSecondary'] }}</div>
                         @endif
                     </div>
-                    @if ($infoBox['buttonName'])
+                    @if ($info['buttonName'])
                         <div class="editor-info-btn">
-                            <a class="btn btn-info btn-sm text-nowrap disabled" href="#" role="button" @if ($infoBox['buttonColor']) style="background-color:{{ $infoBox['buttonColor'] }};border-color:{{ $infoBox['buttonColor'] }};" @endif>{{ $infoBox['buttonName'] }}</a>
+                            <a class="btn btn-info btn-sm text-nowrap disabled" href="#" role="button" @if ($info['buttonColor']) style="background-color:{{ $info['buttonColor'] }};border-color:{{ $info['buttonColor'] }};" @endif>{{ $info['buttonName'] }}</a>
                         </div>
                     @endif
                 </div>

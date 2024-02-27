@@ -131,28 +131,6 @@ function copyToClipboard(element) {
     window.tips(fs_lang('copySuccess'));
 }
 
-// send verify code
-function sendVerifyCode(obj) {
-    let type = $(obj).data('type'),
-        useType = $(obj).data('use-type'),
-        templateId = $(obj).data('template-id'),
-        countryCodeSelectId = $(obj).data('country-code-select-id'),
-        accountInputId = $(obj).data('account-input-id');
-
-    let countryCode = '',
-        account = '';
-
-    if (countryCodeSelectId) {
-        countryCode = $('#' + countryCodeSelectId).val();
-    }
-
-    if (accountInputId) {
-        account = $('#' + accountInputId).val();
-    }
-
-    fetchSendVerifyCode(type, useType, templateId, account, obj, countryCode);
-}
-
 // send Timer
 var countdown = 60;
 function setSendCodeTime(obj, stop) {
@@ -176,45 +154,6 @@ function setSendCodeTime(obj, stop) {
     setTimeout(function () {
         setSendCodeTime(obj);
     }, 1000);
-}
-
-// send request
-function fetchSendVerifyCode(type, useType, templateId, account, obj, countryCode) {
-    let data;
-    if (type == 'email') {
-        if (!account) {
-            window.tips(fs_lang('email') + ': ' + fs_lang('errorEmpty'));
-            return;
-        }
-        data = { type: type, useType: useType, templateId: templateId, account: account };
-    } else if (type == 'sms') {
-        if (!account) {
-            window.tips(fs_lang('phone') + ': ' + fs_lang('errorEmpty'));
-            return;
-        }
-        data = { type: type, useType: useType, templateId: templateId, account: account, countryCode: countryCode };
-    }
-
-    setSendCodeTime($(obj));
-
-    $.ajax({
-        url: '/api/web-engine/send-verify-code',
-        type: 'post',
-        data: data,
-        error: function (error) {
-            setSendCodeTime(obj, true);
-            alert(error.responseJSON.message, error.status);
-        },
-        success: function (res) {
-            if (res.code != 0) {
-                window.tips(res.message, res.code);
-
-                return;
-            }
-
-            window.tips(fs_lang('send') + ': ' + fs_lang('success'));
-        },
-    });
 }
 
 // download file
@@ -364,42 +303,6 @@ window.progress = {
         this.parentElement?.empty();
     },
 };
-
-// verification
-function accountVerification(obj) {
-    let codeType = $(obj).data('code-type'),
-        verifyCode = $(obj).prev().val();
-    $(obj).prop('disabled', true);
-    $(obj).prepend('<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> ');
-
-    $.ajax({
-        url: '/api/web-engine/account/verify-identity',
-        type: 'post',
-        data: { type: codeType, verifyCode },
-        error: function (error) {
-            $(obj).prev().addClass('is-invalid');
-            $(obj).after(`<div class="invalid-feedback">` + error.responseJSON.message + `</div>`);
-        },
-        success: function (res) {
-            if (res.code !== 0) {
-                window.tips(res.message, res.code);
-                return;
-            }
-
-            let html = '';
-            $(obj)
-                .parent()
-                .siblings()
-                .each(function (k, v) {
-                    $(v).removeClass('d-none');
-                });
-        },
-        complete: function () {
-            $(obj).prop('disabled', false);
-            $(obj).children('.spinner-border').remove();
-        },
-    });
-}
 
 // build form and submit
 window.buildFormAndSubmit = function (url, method, body) {
@@ -964,68 +867,6 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         });
     });
 
-    // register, login, reset-password
-    $("#accordionCodeAccount button[type='submit']").on('click', function (e) {
-        e.preventDefault();
-        let obj = $(this),
-            form = $('#accordionCodeAccount');
-
-        let url = form.attr('action'),
-            body = form.serializeArray();
-
-        let result = [];
-        jQuery.each(body, function (i, field) {
-            result[field.name] = field.value;
-        });
-
-        if (result['password'] !== undefined) {
-            result[`password`] = window.btoa(result[`password`]);
-        }
-
-        if (result['password_confirmation'] !== undefined) {
-            result[`password_confirmation`] = window.btoa(result[`password_confirmation`]);
-        }
-
-        let bodyArr = [];
-
-        for (i in result) {
-            if (i == 'verifyCode' && result[i] == '') {
-                window.tips(fs_lang('verifyCode') + ': ' + fs_lang('errorEmpty'));
-                return;
-            }
-
-            let item = `${i}=${result[i]}`;
-
-            bodyArr.push(item);
-        }
-
-        body = bodyArr.join('&');
-
-        obj.prop('disabled', true);
-        obj.prepend('<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> ');
-
-        window.buildAjaxAndSubmit(
-            url,
-            body,
-            function (res) {
-                window.tips(res.message || fs_lang('accountLogin') + ': ' + fs_lang('errorUnknown'));
-
-                if (res.code == 0) {
-                    setTimeout(function () {
-                        window.location.href = res?.data?.redirectURL || '/account/login';
-                    }, 1000);
-                }
-            },
-            function (e) {
-                console.error(e);
-            },
-            function (e) {
-                obj.prop('disabled', false);
-                obj.children('.spinner-border').remove();
-            }
-        );
-    });
-
     // User Settings
     $('#editModal.user-edit').on('show.bs.modal', function (e) {
         let button = $(e.relatedTarget),
@@ -1036,8 +877,6 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             inputTips = button.data('input-tips'),
             option = button.data('option'),
             action = button.data('action'),
-            email = button.data('email') ?? '',
-            phone = button.data('phone') ?? '',
             value = button.data('value') ?? '';
 
         $(this).find('.modal-title').empty().html(label);
@@ -1074,214 +913,6 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                 <div class="input-group has-validation">
                     <span class="input-group-text border-end-rounded-0">${label}</span>
                     <input type="date" class="form-control" name="${name}" value="${value}" required>
-                </div>`;
-                break;
-            case 'editPhone':
-                let smsCodes = button.data('sms-codes');
-                let defaultSmsCode = button.data('default-sms-code');
-
-                if (value) {
-                    html = `
-                    <div class="form-text mb-3 text-center">${desc}</div>
-                    <div class="input-group has-validation mb-3">
-                        <span class="input-group-text border-end-rounded-0">${label}</span>
-                        <input class="form-control border-end-rounded-0" type="text" placeholder="${value}" value="${value}" id="oldPhone" disabled>
-                        <button data-type="sms" data-use-type="4" data-template-id="4" data-account-input-id="oldPhone" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary" type="button">
-                            ${fs_lang('sendVerifyCode')}
-                        </button>
-                    </div>
-                    <div class="input-group has-validation mb-3">
-                        <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
-                        <input type="text" class="form-control border-end-rounded-0" name="verifyCode">
-                        <button class="btn btn-outline-secondary" data-code-type="sms" type="button" onclick="accountVerification(this)">
-                            ${fs_lang('check')}
-                        </button>
-                    </div>
-                    <div class="input-group has-validation mb-3 d-none">
-                        <span class="input-group-text border-end-rounded-0">${fs_lang('newPhone')}</span>`;
-
-                    if (smsCodes.length > 1) {
-                        html += `<select class="form-select border-end-rounded-0" name="newCountryCode" id="newCountryCode">
-                                    <option disabled>Country Calling Codes</option>`;
-                        $(smsCodes).each(function (k, v) {
-                            let selected = v == defaultSmsCode ? 'selected' : '';
-                            html += `<option ` + selected + ` value="` + v + `">` + v + `</option>`;
-                        });
-                        html += `</select>`;
-                    } else {
-                        html += `<select class="d-none" name="newCountryCode" id="newCountryCode">
-                                <option value="${defaultSmsCode}" selected>+${defaultSmsCode}</option>
-                            </select>
-                            <span class="input-group-text border-end-rounded-0">+${defaultSmsCode}</span>`;
-                    }
-
-                    html += `<input type="text" class="form-control w-50" required name="${name}" id="newPhone" value="">
-                    </div>
-                    <div class="input-group has-validation d-none">
-                        <span class="input-group-text border-end-rounded-0">${fs_lang('newVerifyCode')}</span>
-                        <input type="text" class="form-control border-end-rounded-0" name="newVerifyCode">
-                        <input type="hidden" name="codeType" value="sms">
-                        <button data-type="sms" data-use-type="1" data-template-id="3" data-country-code-select-id="newCountryCode" data-account-input-id="newPhone" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary" type="button">
-                            ${fs_lang('sendVerifyCode')}
-                        </button>
-                    </div>`;
-                } else {
-                    html = `
-                    <div class="input-group has-validation mb-3">
-                        <span class="input-group-text border-end-rounded-0">${label}</span>`;
-
-                    if (smsCodes.length > 1) {
-                        html += `<select class="form-select border-end-rounded-0" name="newCountryCode" id="newCountryCode">
-                                    <option disabled>Country Calling Codes</option>`;
-                        $(smsCodes).each(function (k, v) {
-                            let selected = v == defaultSmsCode ? 'selected' : '';
-                            html += `<option ` + selected + ` value="` + v + `">` + v + `</option>`;
-                        });
-                        html += `</select>`;
-                    } else {
-                        html += `<select class="d-none" name="newCountryCode" id="newCountryCode">
-                                <option value="${defaultSmsCode}" selected>+${defaultSmsCode}</option>
-                            </select>
-                            <span class="input-group-text border-end-rounded-0">+${defaultSmsCode}</span>`;
-                    }
-
-                    html += `<input type="text" class="form-control w-50" name="${name}" value="" id="newPhone" required>
-                    </div>
-                    <input type="hidden" name="codeType" value="sms">
-                    <div class="input-group has-validation">
-                        <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
-                        <input type="text" class="form-control border-end-rounded-0" name="newVerifyCode" required>
-                        <button data-type="sms" data-use-type="3" data-template-id="4" data-country-code-select-id="newCountryCode" data-account-input-id="newPhone" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary" type="button">
-                            ${fs_lang('sendVerifyCode')}
-                        </button>
-                    </div>`;
-                }
-                break;
-            case 'editEmail':
-                if (value) {
-                    html = `
-                    <div class="form-text has-validation mb-3 text-center">${desc}</div>
-                    <div class="input-group mb-3">
-                        <span class="input-group-text border-end-rounded-0">${label}</span>
-                        <input class="form-control border-end-rounded-0" type="text" placeholder="${value}" value="${value}" id="oldEmail" disabled>
-                        <button data-type="email" data-use-type="4" data-template-id="4" data-account-input-id="oldEmail" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary" type="button">
-                            ${fs_lang('sendVerifyCode')}
-                        </button>
-                    </div>
-                    <div class="input-group has-validation mb-3">
-                        <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
-                        <input type="text" class="form-control border-end-rounded-0" name="verifyCode">
-                        <button class="btn btn-outline-secondary" required data-code-type="email" type="button" onclick="accountVerification(this)">
-                            ${fs_lang('check')}
-                        </button>
-                    </div>
-                    <div class="input-group has-validation mb-3 d-none">
-                        <span class="input-group-text border-end-rounded-0">${fs_lang('newEmail')}</span>
-                        <input type="text" class="form-control border-end-rounded-0" required name="${name}" id="newEmail" value="">
-                        <button data-type="email" data-use-type="1" data-template-id="3" data-account-input-id="newEmail" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary" type="button">
-                            ${fs_lang('sendVerifyCode')}
-                        </button>
-                    </div>
-                    <div class="input-group d-none">
-                        <span class="input-group-text border-end-rounded-0">${fs_lang('newVerifyCode')}</span>
-                        <input type="text" class="form-control border-end-rounded-0" name="newVerifyCode">
-                        <input type="hidden" name="codeType" value="email">
-                    </div>`;
-                } else {
-                    html = `
-                    <div class="input-group has-validation mb-3">
-                        <span class="input-group-text border-end-rounded-0">${label}</span>
-                        <input type="text" class="form-control border-end-rounded-0" name="${name}" value="" id="newEmail" required>
-                        <input type="hidden" name="codeType" value="email">
-                    </div>
-                    <div class="input-group has-validation">
-                        <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
-                        <input type="text" class="form-control border-end-rounded-0" name="newVerifyCode">
-                        <button data-type="email" data-use-type="3" data-template-id="4" data-account-input-id="newEmail" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary" type="button">
-                            ${fs_lang('sendVerifyCode')}
-                        </button>
-                    </div>`;
-                }
-                break;
-            case 'editPassword':
-                let templateId = 5;
-                let currentPassword = 'currentPassword';
-                if (name === 'newWalletPassword') {
-                    templateId = 6;
-                    currentPassword = 'currentWalletPassword';
-                }
-
-                html = `
-                <div class="input-group mb-3 mt-2">
-                    <span class="input-group-text border-end-rounded-0">${fs_lang('settingType')}</span>
-                    <div class="form-control">`;
-                if (value) {
-                    html += `
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="codeType" id="password_to_edit" value="password" data-bs-toggle="collapse" data-bs-target=".password_to_edit:not(.show)" aria-controls="password_to_edit" aria-expanded="true" checked onchange="document.querySelector('input[name=verifyCode]').value = '';">
-                            <label class="form-check-label" for="password_to_edit">${fs_lang('password')}</label>
-                        </div>`;
-                }
-                html += `
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="codeType" id="email_to_edit" value="email" data-bs-toggle="collapse" data-bs-target=".email_to_edit:not(.show)" aria-expanded="${
-                                value ? 'false' : 'true'
-                            }" ${
-                    value ? '' : 'checked'
-                } onchange="document.querySelector('#smsVerifyCode').name = 'smsVerifyCode';document.querySelector('#emailVerifyCode').name = 'verifyCode';document.querySelector('#currentPassword').value = '';">
-                            <label class="form-check-label" for="email_to_edit">${fs_lang('emailVerifyCode')}</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="codeType" id="phone_to_edit" value="sms" data-bs-toggle="collapse" data-bs-target=".phone_to_edit:not(.show)" aria-controls="phone_to_edit" aria-expanded="false" onchange="document.querySelector('#smsVerifyCode').name = 'verifyCode';document.querySelector('#emailVerifyCode').name = 'emailVerifyCode';document.querySelector('#currentPassword').value = '';">
-                            <label class="form-check-label" for="phone_to_edit">${fs_lang('smsVerifyCode')}</label>
-                        </div>
-                    </div>
-                </div>
-                <div id="edit_password_mode">
-                    <div class="collapse password_to_edit ${
-                        value ? 'show' : ''
-                    }" aria-labelledby="password_to_edit" data-bs-parent="#edit_password_mode">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text border-end-rounded-0">${fs_lang('passwordCurrent')}</span>
-                            <input type="text" class="form-control" name="${currentPassword}">
-                        </div>
-                    </div>
-
-                    <div class="collapse email_to_edit ${
-                        !value ? 'show' : ''
-                    }" aria-labelledby="email_to_edit" data-bs-parent="#edit_password_mode">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text border-end-rounded-0">${fs_lang('email')}</span>
-                            <input class="form-control" type="text" placeholder="${email}" value="${email}" id="emailEditPassword" disabled>
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
-                            <input type="text" class="form-control" name="verifyCode" id="emailVerifyCode" autocomplete="off">
-                            <button data-type="email" data-use-type="4" data-template-id="${templateId}" data-account-input-id="emailEditPassword" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary" type="button">
-                                ${fs_lang('sendVerifyCode')}
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="collapse phone_to_edit" aria-labelledby="phone_to_edit" data-bs-parent="#edit_password_mode">
-                        <div class="input-group mb-3">
-                            <span class="input-group-text border-end-rounded-0">${fs_lang('phone')}</span>
-                            <input class="form-control" type="text" placeholder="${phone}" value="${phone}" id="phoneEditPassword" disabled>
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group-text border-end-rounded-0">${fs_lang('verifyCode')}</span>
-                            <input type="text" class="form-control" name="smsVerifyCode" id="smsVerifyCode" autocomplete="off">
-                            <button data-type="sms" data-use-type="4" data-template-id="${templateId}" data-account-input-id="phoneEditPassword" onclick="sendVerifyCode(this)" class="btn btn-outline-secondary" type="button">
-                                ${fs_lang('sendVerifyCode')}
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="input-group mb-3">
-                        <span class="input-group-text border-end-rounded-0">${fs_lang('passwordNew')}</span>
-                        <input type="text" class="form-control" name="${name}" autocomplete="off">
-                    </div>
-                    <div class="form-text">${desc}</div>
                 </div>`;
                 break;
             default:

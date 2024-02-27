@@ -1,12 +1,12 @@
 @extends('commons.fresns')
 
-@section('title', fs_lang('private'))
+@section('title', fs_lang('sitePrivate'))
 
 @section('content')
     <div class="m-lg-5 ps-lg-5 pb-lg-5" style="max-width:800px;">
         <div class="card-body p-5">
             <h3 class="card-title">{{ fs_config('site_name') }}</h3>
-            <p>{{ fs_lang('private') }}</p>
+            <p>{{ fs_lang('sitePrivateDesc') }}</p>
 
             {{-- Go to login --}}
             <p class="mt-4">

@@ -16,7 +16,7 @@
         </div>
 
         @if ($post['group'])
-            <div class="comment-post-group border-top text-secondary">{{ $post['group']['gname'] }}</div>
+            <div class="comment-post-group border-top text-secondary">{{ $post['group']['name'] }}</div>
         @endif
 
         <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $post['pid']])) }}" class="text-decoration-none stretched-link"></a>

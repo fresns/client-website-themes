@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_like_groups'))
+@section('title', fs_config('channel_likes_groups_name'))
 
 @section('content')
     <main class="container-fluid">

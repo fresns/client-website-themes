@@ -20,8 +20,8 @@
                     <a class="nav-link @if ($type == 'posts') active @endif" href="{{ fs_route(route('fresns.me.drafts', ['type' => 'posts'])) }}">
                         {{ fs_config('post_name') }}
 
-                        @if (fs_user_panel('draftCount.posts') > 0)
-                            <span class="badge bg-danger">{{ fs_user_panel('draftCount.posts') }}</span>
+                        @if (fs_user_overview('draftCount.posts') > 0)
+                            <span class="badge bg-danger">{{ fs_user_overview('draftCount.posts') }}</span>
                         @endif
                     </a>
                 </li>
@@ -30,8 +30,8 @@
                     <a class="nav-link @if ($type == 'comments') active @endif" href="{{ fs_route(route('fresns.me.drafts', ['type' => 'comments'])) }}">
                         {{ fs_config('comment_name') }}
 
-                        @if (fs_user_panel('draftCount.comments') > 0)
-                            <span class="badge bg-danger">{{ fs_user_panel('draftCount.comments') }}</span>
+                        @if (fs_user_overview('draftCount.comments') > 0)
+                            <span class="badge bg-danger">{{ fs_user_overview('draftCount.comments') }}</span>
                         @endif
                     </a>
                 </li>

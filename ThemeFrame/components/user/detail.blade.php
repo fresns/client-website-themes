@@ -19,7 +19,7 @@
 <section class="userinfo">
     <div class="profile-nickname d-flex justify-content-center">
         <h1 style="color:{{ $user['nicknameColor'] }};">{{ $user['nickname'] }}</h1>
-        @if ($user['verifiedStatus'])
+        @if ($user['verified'])
             @if ($user['verifiedIcon'])
                 <img src="{{ $user['verifiedIcon'] }}" loading="lazy" alt="Verified" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $user['verifiedDesc'] }}">
             @else
@@ -36,7 +36,7 @@
 
     <div class="mb-2 text-secondary">{{ '@'.$user['fsid'] }}</div>
 
-    @if ($user['verifiedStatus'] && $user['verifiedDesc'])
+    @if ($user['verified'] && $user['verifiedDesc'])
         <span class="badge rounded-pill text-bg-warning fw-normal mb-2">
             <i class="bi bi-patch-check"></i>
             {{ $user['verifiedDesc'] }}
@@ -77,38 +77,38 @@
     @endif
 
     {{-- Like --}}
-    @if ($user['interaction']['likeSetting'])
+    @if ($user['interaction']['likeEnabled'])
         @component('components.user.mark.like', [
             'uid' => $user['uid'],
             'interaction' => $user['interaction'],
-            'count' => $user['stats']['likeMeCount']
+            'count' => $user['stats']['likerCount']
         ])@endcomponent
     @endif
 
     {{-- Dislike --}}
-    @if ($user['interaction']['dislikeSetting'])
+    @if ($user['interaction']['dislikeEnabled'])
         @component('components.user.mark.dislike', [
             'uid' => $user['uid'],
             'interaction' => $user['interaction'],
-            'count' => $user['stats']['dislikeMeCount']
+            'count' => $user['stats']['dislikerCount']
         ])@endcomponent
     @endif
 
     {{-- Follow --}}
-    @if ($user['interaction']['followSetting'])
+    @if ($user['interaction']['followEnabled'])
         @component('components.user.mark.follow', [
             'uid' => $user['uid'],
             'interaction' => $user['interaction'],
-            'count' => $user['stats']['followMeCount']
+            'count' => $user['stats']['followerCount']
         ])@endcomponent
     @endif
 
     {{-- Block --}}
-    @if ($user['interaction']['blockSetting'])
+    @if ($user['interaction']['blockEnabled'])
         @component('components.user.mark.block', [
             'uid' => $user['uid'],
             'interaction' => $user['interaction'],
-            'count' => $user['stats']['blockMeCount']
+            'count' => $user['stats']['blockerCount']
         ])@endcomponent
     @endif
 

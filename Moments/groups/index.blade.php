@@ -1,8 +1,8 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_group_title'))
-@section('keywords', fs_config('menu_group_keywords'))
-@section('description', fs_config('menu_group_description'))
+@section('title', fs_config('channel_group_seo')['title'])
+@section('keywords', fs_config('channel_group_seo')['keywords'])
+@section('description', fs_config('channel_group_seo')['description'])
 
 @section('content')
     @if (fs_config('menu_group_type') == 'tree')
@@ -10,9 +10,9 @@
         @foreach($groupTree ?? [] as $tree)
             <h3 class="fs-5 p-3 border-bottom mb-0">
                 @if ($tree['cover'])
-                    <img src="{{ $tree['cover'] }}" loading="lazy" alt="{{ $tree['gname'] }}" width="20" height="20">
+                    <img src="{{ $tree['cover'] }}" loading="lazy" alt="{{ $tree['name'] }}" width="20" height="20">
                 @endif
-                {{ $tree['gname'] }}
+                {{ $tree['name'] }}
             </h3>
             <div class="mb-4">
                 @foreach($tree['groups'] ?? [] as $group)
@@ -27,7 +27,7 @@
                     <a class="btn btn-outline-secondary border-0 rounded-circle" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
                 </span>
             @enddesktop
-            <h1 class="fs-5 my-3">{{ fs_config('menu_group_name') }}</h1>
+            <h1 class="fs-5 my-3">{{ fs_config('channel_group_name') }}</h1>
         </div>
 
         {{-- Group List --}}

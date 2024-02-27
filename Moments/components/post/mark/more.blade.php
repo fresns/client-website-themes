@@ -1,6 +1,6 @@
 <ul class="dropdown-menu interaction-more" aria-labelledby="more">
     {{-- Edit --}}
-    @if ($editControls['isMe'] && $editControls['canEdit'])
+    @if ($editControls['isAuthor'] && $editControls['canEdit'])
         <li>
             <a class="dropdown-item py-2 web-request-link" href="#" data-action="{{ fs_route(route('fresns.editor.store', ['type' => 'post', 'fsid' => $pid])) }}">
                 <i class="fa-regular fa-pen-to-square"></i>
@@ -10,12 +10,12 @@
     @endif
 
     {{-- Delete --}}
-    @if ($editControls['isMe'] && $editControls['canDelete'])
+    @if ($editControls['isAuthor'] && $editControls['canDelete'])
         <li><a class="dropdown-item py-2" data-bs-toggle="modal" href="#delete-{{ $pid }}"><i class="fa-regular fa-trash-can"></i> {{ fs_lang('delete') }}</a></li>
     @endif
 
     {{-- Follow --}}
-    @if ($interaction['followSetting'])
+    @if ($interaction['followEnabled'])
         <li>
             @component('components.post.mark.follow', [
                 'pid' => $pid,
@@ -26,7 +26,7 @@
     @endif
 
     {{-- Block --}}
-    @if ($interaction['blockSetting'])
+    @if ($interaction['blockEnabled'])
         <li>
             @component('components.post.mark.block', [
                 'pid' => $pid,
@@ -59,7 +59,7 @@
 </ul>
 
 {{-- Delete Secondary Confirmation --}}
-@if ($editControls['isMe'] && $editControls['canDelete'])
+@if ($editControls['isAuthor'] && $editControls['canDelete'])
     <div class="modal fade" id="delete-{{ $pid }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="delete-{{ $pid }}Label" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">

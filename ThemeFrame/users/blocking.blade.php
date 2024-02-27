@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_block_users'))
+@section('title', fs_config('channel_blocking_users_name'))
 
 @section('content')
     <main class="container-fluid">

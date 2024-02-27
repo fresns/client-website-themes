@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_follow_groups'))
+@section('title', fs_config('channel_following_groups_name'))
 
 @section('content')
     {{-- Navigation --}}

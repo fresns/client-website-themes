@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_follow_hashtags'))
+@section('title', fs_config('channel_following_hashtags_name'))
 
 @section('content')
     <main class="container-fluid">

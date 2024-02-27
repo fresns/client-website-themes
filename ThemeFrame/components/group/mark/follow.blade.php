@@ -28,7 +28,7 @@
                 data-scene="follow"
                 data-post-message-key="fresnsFollow"
                 data-gid="{{ $gid }}"
-                data-title="{{ $interaction['followName'] }}: {{ $gname }}"
+                data-title="{{ $interaction['followName'] }}: {{ $name }}"
                 data-url="{{ $followUrl }}">
                 <i class="bi bi-person-check"></i>
                 {{ $interaction['followName'] }}

@@ -139,8 +139,8 @@
                             </div>
 
                             <div class="form-check ms-3">
-                                <input class="form-check-input" type="checkbox" name="postIsCommentPrivate" value="1" id="postIsCommentPrivate" {{ $draft['detail']['isCommentPrivate'] ? 'checked' : '' }}>
-                                <label class="form-check-label" for="postIsCommentPrivate">
+                                <input class="form-check-input" type="checkbox" name="commentPrivate" value="1" id="commentPrivate" {{ $draft['detail']['isPrivate'] ? 'checked' : '' }}>
+                                <label class="form-check-label" for="commentPrivate">
                                     {{ fs_lang('editorCommentPrivate') }}
                                 </label>
                             </div>
