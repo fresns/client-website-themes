@@ -743,8 +743,14 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             success: function (res) {
                 if (res.code == 0) {
                     if (fsid) {
-                        if ($('#' + fsid).next().prop('nodeName') === 'HR') {
-                            $('#' + fsid).next().remove();
+                        if (
+                            $('#' + fsid)
+                                .next()
+                                .prop('nodeName') === 'HR'
+                        ) {
+                            $('#' + fsid)
+                                .next()
+                                .remove();
                         }
                         $('#' + fsid).remove();
 
@@ -802,7 +808,10 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             value = button.data('value') ?? '';
 
         $(this).find('.modal-title').empty().html(label);
-        $(this).find('.modal-footer button[type="submit"]').data('targe-type', type ?? 'input').data('targe-name', name);
+        $(this)
+            .find('.modal-footer button[type="submit"]')
+            .data('targe-type', type ?? 'input')
+            .data('targe-name', name);
 
         let html = '';
         switch (type) {
