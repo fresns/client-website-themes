@@ -36,7 +36,7 @@
 {{-- Digest Posts --}}
 <aside class="fs-list-group rounded mb-3">
     <h4 class="fs-5 px-3 pb-1 pt-3">{{ fs_lang('contentHotList') }}</h4>
-    @foreach(fs_list('posts') as $topPost)
+    @foreach(fs_content_list('post', 'list') as $topPost)
         <a href="{{ fs_route(route('fresns.post.detail', ['pid' => $topPost['pid']])) }}" class="list-group-item list-group-item-action text-break px-3 py-2">
             <i class="fa-solid fa-arrow-trend-up me-1 text-primary"></i>
             {{ $topPost['title'] ?? Str::limit(strip_tags($topPost['content']), 80) }}
@@ -47,7 +47,7 @@
 {{-- Recommend Users --}}
 <aside class="fs-list-group rounded mb-3">
     <h4 class="fs-5 px-3 pb-1 pt-3">{{ fs_lang('contentRecommend') }}</h4>
-    @foreach(fs_index_list('users') as $topUser)
+    @foreach(fs_content_list('user', 'home') as $topUser)
         @component('components.user.sidebar-list', compact('topUser'))@endcomponent
     @endforeach
 </aside>

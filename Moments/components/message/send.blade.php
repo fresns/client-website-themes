@@ -1,6 +1,6 @@
 @if (fs_config('conversation_status'))
     @if ($user['conversation']['status'])
-        <form action="{{ route('fresns.api.message.send') }}" method="post" class="api-request-form">
+        <form action="{{ route('fresns.api.post', ['path' => '/api/fresns/v1/conversation/message']) }}" method="post" class="api-request-form">
             @csrf
             <input type="hidden" name="uidOrUsername" value="{{ $user['fsid'] }}"/>
 
@@ -15,64 +15,44 @@
                         <li><label class="dropdown-item" for="messageImage" style="cursor:pointer;"><i class="fa-regular fa-image"></i> {{ fs_lang('image') }}</label></li>
                         <input id="messageImage" class="sendFile" hidden="hidden" type="file"
                             name="messageImage"
-                            accept="{{ fs_user_overview('fileAccept.images') }}"
-                            data-upload-action="{{ route('fresns.api.upload.file') }}"
+                            accept="{{ fs_post_editor('image.inputAccept') }}"
                             data-type="image"
-                            data-usagetype="6"
-                            data-tablename="conversation_messages"
-                            data-tablecolumn="message_file_id"
-                            data-tablekey="{{ $user['fsid'] }}"
-                            data-uploadmode="file"
-                            data-send-action="{{ route('fresns.api.message.send') }}"
-                            data-send-uidorusername="{{ $user['fsid'] }}">
+                            data-upload-action="{{ route('fresns.api.post', ['path' => '/api/fresns/common/v1/file/uploads']) }}"
+                            data-send-action="{{ route('fresns.api.post', ['path' => '/api/fresns/v1/conversation/message']) }}"
+                            data-user-fsid="{{ $user['fsid'] }}">
                     @endif
 
                     @if (in_array('video', fs_config('conversation_files', [])))
                         <li><label class="dropdown-item" for="messageVideo" style="cursor:pointer;"><i class="fa-solid fa-video"></i> {{ fs_lang('video') }}</label></li>
                         <input id="messageVideo" class="sendFile" hidden="hidden" type="file"
                             name="messageVideo"
-                            accept="{{ fs_user_overview('fileAccept.videos') }}"
-                            data-upload-action="{{ route('fresns.api.upload.file') }}"
+                            accept="{{ fs_post_editor('video.inputAccept') }}"
                             data-type="video"
-                            data-usagetype="6"
-                            data-tablename="conversation_messages"
-                            data-tablecolumn="message_file_id"
-                            data-tablekey="{{ $user['fsid'] }}"
-                            data-uploadmode="file"
-                            data-send-action="{{ route('fresns.api.message.send') }}"
-                            data-send-uidorusername="{{ $user['fsid'] }}">
+                            data-upload-action="{{ route('fresns.api.post', ['path' => '/api/fresns/common/v1/file/uploads']) }}"
+                            data-send-action="{{ route('fresns.api.post', ['path' => '/api/fresns/v1/conversation/message']) }}"
+                            data-user-fsid="{{ $user['fsid'] }}">
                     @endif
 
                     @if (in_array('audio', fs_config('conversation_files', [])))
                         <li><label class="dropdown-item" for="messageAudio" style="cursor:pointer;"><i class="fa-solid fa-music"></i> {{ fs_lang('audio') }}</label></li>
                         <input id="messageAudio" class="sendFile" hidden="hidden" type="file"
                             name="messageAudio"
-                            accept="{{ fs_user_overview('fileAccept.audios') }}"
-                            data-upload-action="{{ route('fresns.api.upload.file') }}"
+                            accept="{{ fs_post_editor('audio.inputAccept') }}"
                             data-type="audio"
-                            data-usagetype="6"
-                            data-tablename="conversation_messages"
-                            data-tablecolumn="message_file_id"
-                            data-tablekey="{{ $user['fsid'] }}"
-                            data-uploadmode="file"
-                            data-send-action="{{ route('fresns.api.message.send') }}"
-                            data-send-uidorusername="{{ $user['fsid'] }}">
+                            data-upload-action="{{ route('fresns.api.post', ['path' => '/api/fresns/common/v1/file/uploads']) }}"
+                            data-send-action="{{ route('fresns.api.post', ['path' => '/api/fresns/v1/conversation/message']) }}"
+                            data-user-fsid="{{ $user['fsid'] }}">
                     @endif
 
                     @if (in_array('document', fs_config('conversation_files', [])))
                         <li><label class="dropdown-item" for="messageDocument" style="cursor:pointer;"><i class="fa-solid fa-box-archive"></i> {{ fs_lang('document') }}</label></li>
                         <input id="messageDocument" class="sendFile" hidden="hidden" type="file"
                             name="messageDocument"
-                            accept="{{ fs_user_overview('fileAccept.documents') }}"
-                            data-upload-action="{{ route('fresns.api.upload.file') }}"
+                            accept="{{ fs_post_editor('document.inputAccept') }}"
                             data-type="document"
-                            data-usagetype="6"
-                            data-tablename="conversation_messages"
-                            data-tablecolumn="message_file_id"
-                            data-tablekey="{{ $user['fsid'] }}"
-                            data-uploadmode="file"
-                            data-send-action="{{ route('fresns.api.message.send') }}"
-                            data-send-uidorusername="{{ $user['fsid'] }}">
+                            data-upload-action="{{ route('fresns.api.post', ['path' => '/api/fresns/common/v1/file/uploads']) }}"
+                            data-send-action="{{ route('fresns.api.post', ['path' => '/api/fresns/v1/conversation/message']) }}"
+                            data-user-fsid="{{ $user['fsid'] }}">
                     @endif
                 </ul>
 

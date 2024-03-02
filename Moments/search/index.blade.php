@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_search'))
+@section('title', fs_config('channel_search_name'))
 
 @section('content')
     <div class="d-flex mx-3">
@@ -9,7 +9,7 @@
                 <a class="btn btn-outline-secondary border-0 rounded-circle" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
             </span>
         @enddesktop
-        <h1 class="fs-5 my-3">{{ fs_config('menu_search') }}</h1>
+        <h1 class="fs-5 my-3">{{ fs_config('channel_search_name') }}</h1>
     </div>
 
     {{-- Search Results --}}

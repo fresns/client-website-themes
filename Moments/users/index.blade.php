@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('channel_user_seo')['title'])
+@section('title', fs_config('channel_user_seo')['title'] ?: fs_config('channel_user_name'))
 @section('keywords', fs_config('channel_user_seo')['keywords'])
 @section('description', fs_config('channel_user_seo')['description'])
 
@@ -15,14 +15,14 @@
     </div>
 
     {{-- User List --}}
-    <div class="clearfix border-top" @if (fs_config('menu_user_query_state') != 1) id="fresns-list-container" @endif>
+    <div class="clearfix border-top" @if (fs_config('channel_user_query_state') != 1) id="fresns-list-container" @endif>
         @foreach($users as $user)
             @component('components.user.list', compact('user'))@endcomponent
         @endforeach
     </div>
 
     {{-- Pagination --}}
-    @if (fs_config('menu_user_query_state') != 1)
+    @if (fs_config('channel_user_query_state') != 1)
         <div class="px-3 me-3 me-lg-0 mt-4 table-responsive d-none">
             {{ $users->links() }}
         </div>

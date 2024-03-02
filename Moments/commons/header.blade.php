@@ -5,9 +5,9 @@
             'fresns.home',
             'fresns.portal',
             'fresns.post.index',
-            'fresns.post.nearby',
+            'fresns.nearby.posts',
             'fresns.group.index',
-            'fresns.follow.all.posts',
+            'fresns.timeline.posts',
             'fresns.me.index',
         ]) && request()->url() != fs_route(route('fresns.custom.page', ['name' => 'channels'])))
             <a class="btn btn-outline-secondary border-0 rounded-circle d-block d-sm-none" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
@@ -26,16 +26,16 @@
             'fresns.*.list',
             'fresns.*.location',
             'fresns.*.nearby',
-            'fresns.follow.*',
+            'fresns.timeline.*',
             'fresns.group.detail',
         ]) && ! Route::is([
-            'fresns.notifications.index',
-            'fresns.messages.index',
+            'fresns.notification.index',
+            'fresns.conversation.index',
         ]) || request()->url() == fs_route(route('fresns.custom.page', ['name' => 'channels'])))
             @if (fs_config('fs_theme_quick_publish'))
                 <button class="btn btn-warning text-white rounded-pill d-lg-none fs-create fs-6" type="button" data-bs-toggle="modal" data-bs-target="#createModal">{{ fs_config('publish_post_name') }}</button>
             @else
-                <a class="btn btn-warning text-white rounded-pill d-lg-none fs-create fs-6" href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}">{{ fs_config('publish_post_name') }}</a>
+                <a class="btn btn-warning text-white rounded-pill d-lg-none fs-create fs-6" href="{{ fs_route(route('fresns.editor.post')) }}">{{ fs_config('publish_post_name') }}</a>
             @endif
         @else
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,9 +90,9 @@
                 @if (fs_user()->check())
                     {{-- Notifications --}}
                     <li class="nav-item mt-1">
-                        <a class="nav-link rounded-pill d-inline-flex {{ Route::is(['fresns.notifications.index']) ? 'active' : '' }}" href="{{ fs_route(route('fresns.notifications.index')) }}">
-                            {!! Route::is(['fresns.notifications.index']) ? '<i class="fa-solid fa-fw fa-bell mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-bell mx-2 mt-1"></i>' !!}
-                            <span class="me-2">{{ fs_config('menu_notifications') }}</span>
+                        <a class="nav-link rounded-pill d-inline-flex {{ Route::is(['fresns.notification.index']) ? 'active' : '' }}" href="{{ fs_route(route('fresns.notification.index')) }}">
+                            {!! Route::is(['fresns.notification.index']) ? '<i class="fa-solid fa-fw fa-bell mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-bell mx-2 mt-1"></i>' !!}
+                            <span class="me-2">{{ fs_config('channel_notifications_name') }}</span>
 
                             @if (fs_user_overview('unreadNotifications.all') > 0)
                                 <span class="badge bg-danger rounded-pill">{{ fs_user_overview('unreadNotifications.all') }}</span>
@@ -102,9 +102,9 @@
                     {{-- Messages --}}
                     @if (fs_config('conversation_status'))
                         <li class="nav-item mt-1">
-                            <a class="nav-link rounded-pill d-inline-flex {{ Route::is(['fresns.messages.index', 'fresns.messages.conversation']) ? 'active' : '' }}" href="{{ fs_route(route('fresns.messages.index')) }}">
-                                {!! Route::is(['fresns.messages.index', 'fresns.messages.conversation']) ? '<i class="fa-solid fa-fw fa-envelope mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-envelope mx-2 mt-1"></i>' !!}
-                                <span class="me-2">{{ fs_config('menu_conversations') }}</span>
+                            <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.conversation.*') ? 'active' : '' }}" href="{{ fs_route(route('fresns.conversation.index')) }}">
+                                {!! Route::is('fresns.conversation.*') ? '<i class="fa-solid fa-fw fa-envelope mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-envelope mx-2 mt-1"></i>' !!}
+                                <span class="me-2">{{ fs_config('channel_conversations_name') }}</span>
 
                                 @if (fs_user_overview('conversations.unreadMessages') > 0)
                                     <span class="badge bg-danger rounded-pill">{{ fs_user_overview('conversations.unreadMessages') }}</span>
@@ -116,7 +116,7 @@
                     <li class="nav-item mt-1">
                         <a class="nav-link rounded-pill d-inline-flex {{ Route::is('fresns.me.*') ? 'active' : '' }}" href="{{ fs_route(route('fresns.me.index')) }}">
                             {!! Route::is('fresns.me.*') ? '<i class="fa-solid fa-fw fa-user mx-2 mt-1"></i>' : '<i class="fa-regular fa-fw fa-user mx-2 mt-1"></i>' !!}
-                            {{ fs_config('menu_account') }}
+                            {{ fs_config('channel_me_name') }}
                         </a>
                     </li>
                     {{-- Publish --}}
@@ -125,7 +125,7 @@
                             @if (fs_config('fs_theme_quick_publish'))
                                 <button class="btn btn-warning text-white rounded-pill fs-create" type="button" data-bs-toggle="modal" data-bs-target="#createModal">{{ fs_config('publish_post_name') }}</button>
                             @else
-                                <a class="btn btn-warning text-white rounded-pill fs-create" href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}">{{ fs_config('publish_post_name') }}</a>
+                                <a class="btn btn-warning text-white rounded-pill fs-create" href="{{ fs_route(route('fresns.editor.post')) }}">{{ fs_config('publish_post_name') }}</a>
                             @endif
                         </div>
                     </li>
@@ -172,11 +172,11 @@
                     <ul class="dropdown-menu">
                         {{-- Switch Languages --}}
                         @if (fs_config('language_status'))
-                            <li><a class="dropdown-item py-3" href="#translate" data-bs-toggle="modal"><i class="fa-solid fa-fw fa-language me-2"></i> {{ fs_lang('optionLanguage') }}</a></li>
+                            <li><a class="dropdown-item py-3" href="#translate" data-bs-toggle="modal"><i class="fa-solid fa-fw fa-language me-2"></i> {{ fs_lang('switchLanguage') }}</a></li>
                         @endif
                         {{-- Switch Users --}}
                         @if (count(fs_account('detail.users')) > 1)
-                            <li><a class="dropdown-item py-3" href="#userAuth" id="switch-user" data-bs-toggle="modal"><i class="fa-solid fa-fw fa-users me-2"></i> {{ fs_lang('optionUser') }}</a></li>
+                            <li><a class="dropdown-item py-3" href="#userAuth" id="switch-user" data-bs-toggle="modal"><i class="fa-solid fa-fw fa-users me-2"></i> {{ fs_lang('switchUser') }}</a></li>
                         @endif
                         {{-- Logout --}}
                         <li><a class="dropdown-item py-3" href="{{ fs_route(route('fresns.me.logout', ['redirectURL' => request()->fullUrl()])) }}"><i class="fa-solid fa-fw fa-arrow-right-from-bracket me-2"></i> {{ fs_lang('accountLogout') }}</a></li>

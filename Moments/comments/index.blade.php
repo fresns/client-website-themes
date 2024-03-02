@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('channel_comment_seo')['title'])
+@section('title', fs_config('channel_comment_seo')['title'] ?: fs_config('channel_comment_name'))
 @section('keywords', fs_config('channel_comment_seo')['keywords'])
 @section('description', fs_config('channel_comment_seo')['description'])
 
@@ -15,7 +15,7 @@
     </div>
 
     {{-- Comment List --}}
-    <div class="clearfix border-top" @if (fs_config('menu_comment_query_state') != 1) id="fresns-list-container" @endif>
+    <div class="clearfix border-top" @if (fs_config('channel_comment_query_state') != 1) id="fresns-list-container" @endif>
         @foreach($comments as $comment)
             @component('components.comment.list', [
                 'comment' => $comment,
@@ -26,7 +26,7 @@
     </div>
 
     {{-- Pagination --}}
-    @if (fs_config('menu_comment_query_state') != 1)
+    @if (fs_config('channel_comment_query_state') != 1)
         <div class="px-3 me-3 me-lg-0 mt-4 table-responsive d-none">
             {{ $comments->links() }}
         </div>

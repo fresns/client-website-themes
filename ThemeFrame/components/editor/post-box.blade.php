@@ -5,18 +5,18 @@
             <div class="modal-header">
                 <h5 class="modal-title">
                     {{ fs_config('publish_post_name') }}
-                    <a href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}" target="_blank" class="fs-7">
+                    <a href="{{ fs_route(route('fresns.editor.post')) }}" target="_blank" class="fs-7">
                         <i class="bi bi-box-arrow-up-right"></i>
-                        {{ fs_lang('editorFullFunctions') }}
+                        {{ fs_lang('editorGoTo') }}
                     </a>
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form class="form-post-box" action="{{ route('fresns.api.editor.quick.publish', ['type' => 'post']) }}" method="post" enctype="multipart/form-data">
+                <form class="form-quick-publish" action="{{ route('fresns.api.post', ['path' => '/api/fresns/v1/editor/post/publish']) }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="postGid" value="{{ fs_config('post_editor_group') ? $group ? $group['gid'] : '' : '' }}">
-                    @if (fs_config('post_editor_group'))
+                    <input type="hidden" name="postGid" value="{{ fs_post_editor('group.status') ? $group ? $group['gid'] : '' : '' }}">
+                    @if (fs_post_editor('group.status'))
                         <div class="shadow-sm">
                             <div class="d-grid">
                                 <button class="rounded-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center p-2" style="background-color: aliceblue;" type="button" data-bs-toggle="modal" data-bs-target="#post-box-fresns-group">
@@ -32,13 +32,13 @@
                     {{-- Content Start --}}
                     <div class="p-3">
                         {{-- Title --}}
-                        @if (fs_config('post_editor_title'))
-                            <div class="collapse @if (fs_config('post_editor_title_view') == 1) show @endif" id="quickTitleCollapse">
+                        @if (fs_post_editor('title.status'))
+                            <div class="collapse @if (fs_post_editor('title.show')) show @endif" id="quickTitleCollapse">
                                 <input type="text" class="form-control form-control-lg rounded-0 border-0 ps-2"
                                     name="postTitle"
-                                    placeholder="{{ fs_lang('editorTitle') }} (@if (fs_config('post_editor_title_required')) {{ fs_lang('editorRequired') }} @else {{ fs_lang('editorOptional') }} @endif)"
-                                    maxlength="{{ fs_config('post_editor_title_length') }}"
-                                    @if (fs_config('post_editor_title_required')) required @endif >
+                                    placeholder="{{ fs_lang('editorTitle') }} (@if (fs_post_editor('title.required')) {{ fs_lang('required') }} @else {{ fs_lang('optional') }} @endif)"
+                                    maxlength="{{ fs_post_editor('title.length') }}"
+                                    @if (fs_post_editor('title.required')) required @endif >
                                 <hr>
                             </div>
                         @endif
@@ -49,12 +49,12 @@
                         {{-- Function Buttons --}}
                         <div class="d-flex mt-2">
                             {{-- Title --}}
-                            @if (fs_config('post_editor_title') && fs_config('post_editor_title_view') == 2)
+                            @if (fs_post_editor('title.status') && ! fs_post_editor('title.show'))
                                 <button type="button" class="btn btn-outline-secondary me-2" data-bs-toggle="collapse" href="#quickTitleCollapse" aria-expanded="false" aria-controls="quickTitleCollapse"><i class="bi bi-textarea-t"></i></button>
                             @endif
 
                             {{-- Sticker --}}
-                            @if (fs_config('post_editor_sticker'))
+                            @if (fs_post_editor('sticker'))
                                 <div class="me-2">
                                     <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                         <i class="bi bi-emoji-smile"></i>
@@ -85,10 +85,10 @@
                             @endif
 
                             {{-- Upload Image --}}
-                            @if (fs_config('post_editor_image'))
+                            @if (fs_post_editor('image.status'))
                                 <div class="input-group">
                                     <label class="input-group-text" for="post-file">{{ fs_lang('editorImages') }}</label>
-                                    <input type="file" class="form-control" accept="{{ fs_user_overview('fileAccept.images') ?? null }}" name="image" id="post-file">
+                                    <input type="file" class="form-control" accept="{{ fs_post_editor('image.inputAccept') ?? null }}" name="image" id="post-file">
                                 </div>
                             @endif
                         </div>
@@ -99,7 +99,7 @@
                             <div class="bd-highlight me-auto">
                                 <button type="submit" class="btn btn-success btn-lg">{{ fs_config('publish_post_name') }}</button>
                             </div>
-                            @if (fs_config('post_editor_anonymous'))
+                            @if (fs_post_editor('anonymous'))
                                 <div class="bd-highlight">
                                     <div class="form-check">
                                         <input class="form-check-input" name="isAnonymous" type="checkbox" value="1" id="isAnonymous">
@@ -128,7 +128,7 @@
                 {{-- Group List --}}
                 <div class="d-flex align-items-start">
                     <div class="nav flex-column nav-pills me-3" id="v-pills-post-box-tab" role="tablist" aria-orientation="vertical">
-                        @if (! fs_config('post_editor_group_required'))
+                        @if (! fs_post_editor('group.required'))
                             <button type="button" id="post-box-not-select-group" class="btn btn-outline-secondary btn-sm mb-2 modal-close" data-bs-target="#createModal" data-bs-toggle="modal" aria-label="Close">{{ fs_lang('editorNoGroup') }}</button>
                         @endif
                         {{-- Group Categories --}}

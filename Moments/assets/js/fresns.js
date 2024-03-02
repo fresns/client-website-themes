@@ -128,7 +128,7 @@ function copyToClipboard(element) {
     $temp.val($(element).text()).select();
     document.execCommand('copy');
     $temp.remove();
-    window.tips(fs_lang('copySuccess'));
+    tips(fs_lang('copySuccess'));
 }
 
 // send Timer
@@ -304,34 +304,6 @@ window.progress = {
     },
 };
 
-// build form and submit
-window.buildFormAndSubmit = function (url, method, body) {
-    const form = document.createElement('form');
-    form.style = 'display:none;';
-    form.method = 'POST';
-    form.action = url;
-    let e1 = document.createElement('input');
-    e1.name = '_method';
-    e1.value = method;
-    form.appendChild(e1);
-    let e2 = document.createElement('input');
-    e2.name = '_token';
-    e2.value = $('meta[name="csrf-token"]').attr('content');
-    form.appendChild(e2);
-
-    for (const k in body) {
-        let e = document.createElement('input');
-        e.name = k;
-        if (body.hasOwnProperty(k)) {
-            e.value = body[k];
-        }
-        form.appendChild(e);
-    }
-
-    document.body.appendChild(form);
-    form.submit();
-};
-
 // build ajax and submit
 window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallback, completeCallback = null) {
     $.ajax({
@@ -443,7 +415,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
     $('.fresns-file-users').on('click', function () {
         var fid = $(this).data('fid');
         if (!fid) {
-            window.tips(fs_lang('errorNoInfo'));
+            tips(fs_lang('errorNoInfo'));
             return;
         }
 
@@ -454,10 +426,10 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
 
         $.ajax({
             method: 'get',
-            url: `/api/web-engine/content/file/${fid}/users`,
+            url: `/api/theme/actions/api/fresns/v1/common/file/${fid}/users`,
             success: function (res) {
                 if (res.code != 0) {
-                    window.tips(res.message, res.code);
+                    tips(res.message, res.code);
 
                     return;
                 }
@@ -501,7 +473,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             url: url,
             success: function (res) {
                 if (res.code != 0) {
-                    window.tips(res.message, res.code);
+                    tips(res.message, res.code);
 
                     return;
                 }
@@ -509,7 +481,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                 downloadFile(res.data.originalUrl, name, mime);
             },
             complete: function (e) {
-                window.tips(e.responseJSON.message, e.responseJSON.code);
+                tips(e.responseJSON.message, e.responseJSON.code);
 
                 button.prop('disabled', false);
                 button.find('.spinner-border').remove();
@@ -531,46 +503,18 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         btn.children('.spinner-border').removeClass('d-none');
     });
 
-    // post box
-    $('.form-post-box').submit(function (e) {
+    // quick publish
+    $('.form-quick-publish').submit(function (e) {
         e.preventDefault();
-        let form = $(this),
+
+        const actionUrl = $(this).attr('action'),
+            methodType = $(this).attr('method') || 'POST',
             data = new FormData($(this)[0]),
-            btn = $(this).find('button[type="submit"]'),
-            actionUrl = $(this).attr('action');
+            btn = $(this).find('button[type="submit"]');
 
         $.ajax({
-            type: 'POST',
             url: actionUrl,
-            data: data, // serializes the form's elements.
-            processData: false,
-            cache: false,
-            contentType: false,
-            success: function (res) {
-                tips(res.message, res.code);
-                if (res.code != 0) {
-                    return;
-                }
-                window.location.reload();
-            },
-            complete: function (e) {
-                btn.prop('disabled', false);
-                btn.find('.spinner-border').remove();
-            },
-        });
-    });
-
-    // comment box
-    $('.form-comment-box').submit(function (e) {
-        e.preventDefault();
-        let form = $(this),
-            data = new FormData($(this)[0]),
-            btn = $(this).find('button[type="submit"]'),
-            actionUrl = $(this).attr('action');
-
-        $.ajax({
-            type: 'POST',
-            url: actionUrl,
+            type: methodType,
             data: data, // serializes the form's elements.
             processData: false,
             cache: false,
@@ -600,7 +544,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
 
         const url = form.attr('action'),
             body = form.serialize(),
-            interactionType = form.find('input[name="interactionType"]').val(),
+            markType = form.find('input[name="markType"]').val(),
             count = obj.find('.show-count').text(),
             text = obj.find('.show-text'),
             id = obj.data('id'),
@@ -620,7 +564,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             body,
             function (e) {
                 if (e.code != 0) {
-                    window.tips(e.message, e.code);
+                    tips(e.message, e.code);
                     return;
                 }
 
@@ -648,7 +592,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                 }
 
                 if (text) {
-                    const isFollowOrBlock = interactionType === 'follow' || interactionType === 'block';
+                    const isFollowOrBlock = markType === 'follow' || markType === 'block';
 
                     if (isFollowOrBlock && interactionActive) {
                         markBtn.find('.show-text').text(markBtn.data('name'));
@@ -672,13 +616,13 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     }
                 }
 
-                interactionType === 'like' ? markBtn.addClass('btn-pre') : markBtn.removeClass('btn-pre');
+                markType === 'like' ? markBtn.addClass('btn-pre') : markBtn.removeClass('btn-pre');
 
                 if (collapseId) {
                     $('#' + collapseId).collapse('hide');
                 }
 
-                if (interactionType == 'like') {
+                if (markType == 'like') {
                     let formObj = form.parent().find('form')[1];
                     let likeOrDislikeObj;
                     if (formObj && formObj !== form[0]) {
@@ -721,7 +665,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                                 : likeOrDislikeObj.removeClass('text-success');
                         }
                     }
-                } else if (interactionType == 'dislike') {
+                } else if (markType == 'dislike') {
                     let formObj = form.parent().find('form')[0];
                     let likeOrDislikeObj;
                     if (formObj && formObj !== form[0]) {
@@ -766,31 +710,16 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
                     }
                 }
 
-                window.tips(e.message, e.code);
+                tips(e.message, e.code);
             },
             function (e) {
-                window.tips(e.responseJSON.message, e.responseJSON.code);
+                tips(e.responseJSON.message, e.responseJSON.code);
             },
             function (e) {
                 obj.prop('disabled', false);
                 obj.children('.spinner-border').remove();
             }
         );
-    });
-
-    // web request link
-    $(document).on('click', '.web-request-link', function (e) {
-        e.preventDefault();
-        $(this).prop('disabled', true);
-        $(this).prepend(
-            '<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> '
-        );
-
-        const url = $(this).data('action'),
-            method = $(this).data('method') || 'POST',
-            body = $(this).data('body') || {};
-
-        window.buildFormAndSubmit(url, method, body);
     });
 
     // api request link
@@ -801,35 +730,31 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             '<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> '
         );
 
-        const url = $(this).data('action'),
-            type = $(this).data('method') || 'POST',
-            id = $(this).data('id'),
+        const actionUrl = $(this).data('action'),
+            methodType = $(this).data('method') || 'POST',
+            fsid = $(this).data('fsid'),
             data = $(this).data('body') || {},
             btn = $(this);
+
         $.ajax({
-            url,
-            type,
-            data,
+            url: actionUrl,
+            type: methodType,
+            data: data,
             success: function (res) {
-                if (res.code === 0) {
-                    if (id) {
-                        if (
-                            $('#' + id)
-                                .next()
-                                .prop('nodeName') === 'HR'
-                        ) {
-                            $('#' + id)
-                                .next()
-                                .remove();
+                if (res.code == 0) {
+                    if (fsid) {
+                        if ($('#' + fsid).next().prop('nodeName') === 'HR') {
+                            $('#' + fsid).next().remove();
                         }
-                        $('#' + id).remove();
-                    } else {
-                        tips(res.message, res.code);
-                        window.location.reload();
+                        $('#' + fsid).remove();
+
+                        return;
                     }
-                } else {
-                    tips(res.message, res.code);
+
+                    window.location.reload();
                 }
+
+                tips(res.message, res.code);
             },
             complete: function (e) {
                 btn.prop('disabled', false);
@@ -844,21 +769,19 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         let form = $(this),
             btn = $(this).find('button[type="submit"]');
 
-        const url = form.attr('action'),
-            type = form.attr('method') || 'POST',
+        const actionUrl = form.attr('action'),
+            methodType = form.attr('method') || 'POST',
             data = form.serialize();
 
         $.ajax({
-            url,
-            type,
-            data,
+            url: actionUrl,
+            type: methodType,
+            data: data,
             success: function (res) {
                 tips(res.message, res.code);
-                if (res.code != 0) {
-                    window.tips(res.message, res.code);
-                    return;
+                if (res.code == 0) {
+                    window.location.reload();
                 }
-                window.location.reload();
             },
             complete: function (e) {
                 btn.prop('disabled', false);
@@ -876,15 +799,10 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             type = button.data('type'),
             inputTips = button.data('input-tips'),
             option = button.data('option'),
-            action = button.data('action'),
             value = button.data('value') ?? '';
 
         $(this).find('.modal-title').empty().html(label);
-        $(this).find('form').attr('action', action);
-        $(this)
-            .find('.modal-footer button[type="submit"]')
-            .data('targe-type', type ?? 'input')
-            .data('targe-name', name);
+        $(this).find('.modal-footer button[type="submit"]').data('targe-type', type ?? 'input').data('targe-name', name);
 
         let html = '';
         switch (type) {
@@ -930,160 +848,13 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         atwho();
     });
 
-    // Account Edit
-    $("#editModal.user-edit form button[type='submit']").on('click', function (e) {
-        e.preventDefault();
-        let obj = $(this),
-            targeType = obj.data('targe-type'),
-            targeName = obj.data('targe-name'),
-            form = obj.closest('form'),
-            exit = false;
-
-        targeType = targeType === 'date' ? 'input' : targeType;
-        let targeObj = form.find(targeType + '[name=' + targeName + ']');
-
-        obj.parent()
-            .prev()
-            .find('input, textarea, select')
-            .each(function (k, v) {
-                if (
-                    !$(v).val() &&
-                    !$(v).is(':disabled') &&
-                    (!$(v).parent().parent().hasClass('collapse') || $(v).parent().parent().hasClass('show'))
-                ) {
-                    let text = $(v).prev().text(),
-                        message = fs_lang('pleaseEnter') + text + '!';
-
-                    if (!$(v).hasClass('is-invalid')) {
-                        $(v).addClass('is-invalid');
-
-                        if (
-                            $(v).parent().hasClass('d-none') &&
-                            $(v).parent().parent().find('input[name="verifyCode"]').length
-                        ) {
-                            form.find('.modal-body .invalid-feedback').length
-                                ? form.find('.modal-body .invalid-feedback').text(fs_lang('settingCheckError'))
-                                : form.find('.modal-body').append(
-                                      `<div class="invalid-feedback d-block">
-                                            ${fs_lang('settingCheckError')}
-                                        </div>`
-                                  );
-                        } else if ($(v).next().length) {
-                            $(v)
-                                .parent()
-                                .append(`<div class="invalid-feedback d-block">` + message + `</div>`);
-                        } else {
-                            $(v).after(`<div class="invalid-feedback d-block">` + message + `</div>`);
-                        }
-                    } else {
-                        $(v).parent().find('.invalid-feedback').text(message);
-                    }
-                    exit = true;
-                    return;
-                } else {
-                    $(v).removeClass('is-invalid');
-                    $(v).parent().find('.invalid-feedback').remove();
-                }
-            });
-
-        if (exit) {
-            return;
-        }
-
-        obj.prop('disabled', true);
-        obj.prepend('<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> ');
-
-        let url = form.attr('action'),
-            body = form.serializeArray();
-
-        for (let i = 0; i < body.length; i++) {
-            if (
-                body[i].name === 'currentPassword' ||
-                body[i].name === 'currentWalletPassword' ||
-                body[i].name === 'newPassword'
-            ) {
-                body[i].value = Base64.encode(body[i].value);
-            }
-        }
-
-        let result = [];
-        jQuery.each(body, function (i, field) {
-            result[field.name] = field.value;
-        });
-
-        let bodyArr = [];
-
-        for (i in result) {
-            let item = `${i}=${result[i]}`;
-
-            bodyArr.push(item);
-        }
-
-        body = bodyArr.join('&');
-
-        window.buildAjaxAndSubmit(
-            url,
-            body,
-            function (res) {
-                window.tips(res.message, res.code);
-                if (res.code != 0) {
-                    return;
-                }
-
-                obj.prev().trigger('click');
-                let editedVal = targeObj.val(),
-                    editedText = editedVal,
-                    showSiteObj = $('#' + targeType + '-' + targeName);
-
-                // if targe button type select
-                if (targeType === 'select') {
-                    $(showSiteObj.next().data('option')).each(function (k, v) {
-                        if (v.id == editedVal) {
-                            editedText = v.text;
-                        }
-                    });
-                }
-                if (targeName === 'newWalletPassword' || targeName === 'newPassword') {
-                    editedText = fs_lang('settingAlready');
-                    editedVal = true;
-                }
-
-                showSiteObj.text(editedText);
-                showSiteObj.next().data('value', editedVal);
-            },
-            function (e) {
-                if (!targeObj.length) {
-                    form.find('.modal-body').append(
-                        `<div class="invalid-feedback d-block">` + e.responseJSON.message + `</div>`
-                    );
-                } else {
-                    if (!targeObj.hasClass('is-invalid')) {
-                        targeObj.addClass('is-invalid');
-                        targeObj.parent().append(`<div class="invalid-feedback">` + e.responseJSON.message + `</div>`);
-                    } else {
-                        targeObj.parent().find('.invalid-feedback').text(e.responseJSON.message, e.status);
-                    }
-                }
-            },
-            function (e) {
-                obj.prop('disabled', false);
-                obj.children('.spinner-border').remove();
-            }
-        );
-    });
-
     // Upload Avatar
     $('#uploadAvatar').on('change', function (e) {
         let formData = new FormData(),
-            uploadAction = $(this).data('upload-action'),
             token = $('meta[name="csrf-token"]').attr('content'),
             obj = $(this),
-            type = obj.data('type'),
-            usageType = obj.data('usagetype'),
-            tableName = obj.data('tablename'),
-            tableColumn = obj.data('tablecolumn'),
-            tableKey = obj.data('tablekey'),
-            uploadMode = obj.data('uploadmode');
+            uploadAction = $(this).data('upload-action'),
+            uidOrUsername = $(this).data('user-fsid');
 
         obj.prop('disabled', true);
         obj.prev().prepend(
@@ -1092,12 +863,10 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
 
         formData.append('file', obj[0].files[0]);
         formData.append('_token', token);
-        formData.append('type', type);
-        formData.append('usageType', usageType);
-        formData.append('tableName', tableName);
-        formData.append('tableColumn', tableColumn);
-        formData.append('tableKey', tableKey);
-        formData.append('uploadMode', uploadMode);
+        formData.append('usageType', 'userAvatar');
+        formData.append('usageFsid', uidOrUsername);
+        formData.append('type', 'image');
+        formData.append('uploadMode', 'file');
 
         $.ajax({
             url: uploadAction,
@@ -1108,14 +877,14 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             contentType: false,
             success: function (res) {
                 if (res.code !== 0) {
-                    window.tips(res.message, res.code);
+                    tips(res.message, res.code);
                     return;
                 }
 
                 window.location.reload();
             },
             error: function (e) {
-                window.tips(e.responseJSON.message, e.status);
+                tips(e.responseJSON.message, e.status);
             },
         });
     });
@@ -1123,17 +892,12 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
     // Send File Message
     $('.sendFile').on('change', function (e) {
         let formData = new FormData(),
-            uploadAction = $(this).data('upload-action'),
             token = $('meta[name="csrf-token"]').attr('content'),
             obj = $(this),
             type = obj.data('type'),
-            usageType = obj.data('usagetype'),
-            tableName = obj.data('tablename'),
-            tableColumn = obj.data('tablecolumn'),
-            tableKey = obj.data('tablekey'),
-            uploadMode = obj.data('uploadmode'),
+            uploadAction = $(this).data('upload-action'),
             sendAction = $(this).data('send-action'),
-            sendUidOrUsername = $(this).data('send-uidorusername');
+            uidOrUsername = $(this).data('user-fsid');
 
         $('.send-file-btn').prop('disabled', true);
         $('.send-file-btn').prepend(
@@ -1142,12 +906,10 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
 
         formData.append('file', obj[0].files[0]);
         formData.append('_token', token);
+        formData.append('usageType', 'conversation');
+        formData.append('usageFsid', uidOrUsername);
         formData.append('type', type);
-        formData.append('usageType', usageType);
-        formData.append('tableName', tableName);
-        formData.append('tableColumn', tableColumn);
-        formData.append('tableKey', tableKey);
-        formData.append('uploadMode', uploadMode);
+        formData.append('uploadMode', 'file');
 
         $.ajax({
             url: uploadAction,
@@ -1157,28 +919,16 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             processData: false,
             contentType: false,
             success: function (res) {
-                if (res.code !== 0) {
-                    window.tips(res.message, res.code);
+                if (res.code == 0) {
+                    tips(res.message, res.code);
+                    window.location.reload();
                     return;
                 }
 
-                if (res.data.fid) {
-                    let data = { uidOrUsername: sendUidOrUsername, fid: res.data.fid };
-                    window.buildAjaxAndSubmit(
-                        sendAction,
-                        data,
-                        function (res) {
-                            window.tips(res.message, res.code);
-                            window.location.reload();
-                        },
-                        function (e) {
-                            window.tips(e.responseJSON.message, e.status);
-                        }
-                    );
-                }
+                tips(res.message, res.code);
             },
             error: function (e) {
-                window.tips(e.responseJSON.message, e.status);
+                tips(e.responseJSON.message, e.status);
             },
         });
     });
@@ -1291,7 +1041,7 @@ $(document).ready(function () {
     window.locale = $('html').attr('lang');
     if (window.locale) {
         $.ajax({
-            url: '/api/web-engine/js/' + window.locale + '/translations',
+            url: '/api/theme/actions/api/fresns/v1/global/language-pack',
             method: 'get',
             success(response) {
                 if (response.data) {
@@ -1322,7 +1072,7 @@ window.onmessage = function (event) {
 
     if (fresnsCallback.code != 0) {
         if (fresnsCallback.message) {
-            window.tips(fresnsCallback.message, fresnsCallback.code);
+            tips(fresnsCallback.message, fresnsCallback.code);
         }
         return;
     }
@@ -1351,7 +1101,7 @@ window.onmessage = function (event) {
                 },
                 success: function (res) {
                     if (res.code !== 0) {
-                        window.tips(res.message, res.code);
+                        tips(res.message, res.code);
 
                         return;
                     }

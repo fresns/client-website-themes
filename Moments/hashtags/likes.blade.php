@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- Navigation --}}
-    @include('account.tabs-likes')
+    @include('me.tabs-likes')
 
     {{-- Hashtag List --}}
     <div class="clearfix border-top" id="fresns-list-container">

@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_account_wallet'))
+@section('title', fs_config('channel_me_wallet_name'))
 
 @section('content')
     <div class="card border-0 hstack p-3">
@@ -9,7 +9,7 @@
                 <a class="btn btn-outline-secondary border-0 rounded-circle" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
             </div>
         @enddesktop
-        <div class="fs-5">{{ fs_config('menu_account_wallet') }}</div>
+        <div class="fs-5">{{ fs_config('channel_me_wallet_name') }}</div>
         <div class="vr mx-3"></div>
         <div class="">{{ fs_account('detail.wallet.currencyCode') }} {{ fs_account('detail.wallet.balance') }}</div>
         <div class="vr mx-3"></div>

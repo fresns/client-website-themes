@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('channel_group_list_seo')['title'])
+@section('title', fs_config('channel_group_list_seo')['title'] ?: fs_config('channel_group_list_name'))
 @section('keywords', fs_config('channel_group_list_seo')['keywords'])
 @section('description', fs_config('channel_group_list_seo')['description'])
 
@@ -15,7 +15,7 @@
             {{-- Middle --}}
             <div class="col-sm-6">
                 {{-- Group List --}}
-                <article class="card clearfix py-4" @if (fs_config('menu_group_list_query_state') != 1) id="fresns-list-container" @endif>
+                <article class="card clearfix py-4" @if (fs_config('channel_group_list_query_state') != 1) id="fresns-list-container" @endif>
                     @foreach($groups as $group)
                         @component('components.group.list', compact('group'))@endcomponent
                         @if (! $loop->last)
@@ -25,7 +25,7 @@
                 </article>
 
                 {{-- Pagination --}}
-                @if (fs_config('menu_group_list_query_state') != 1)
+                @if (fs_config('channel_group_list_query_state') != 1)
                     <div class="my-3 table-responsive">
                         {{ $groups->links() }}
                     </div>

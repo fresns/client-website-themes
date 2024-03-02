@@ -1,10 +1,10 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_conversations'))
+@section('title', fs_config('channel_conversations_name'))
 
 @section('content')
     <div class="d-flex mx-3">
-        <h1 class="fs-5 my-3">{{ fs_config('menu_conversations') }}</h1>
+        <h1 class="fs-5 my-3">{{ fs_config('channel_conversations_name') }}</h1>
     </div>
 
     {{-- Conversation List --}}

@@ -1,13 +1,13 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_conversations').' - '.$conversation['user']['nickname'])
+@section('title', fs_config('channel_conversations_name').' - '.$conversation['detail']['user']['nickname'])
 
 @section('content')
     <main class="container-fluid">
         <div class="row mt-5 pt-5">
             {{-- Left Sidebar --}}
             <div class="col-sm-3">
-                @include('account.sidebar')
+                @include('me.sidebar')
             </div>
 
             {{-- Conversation --}}
@@ -15,11 +15,11 @@
                 <div class="card">
                     {{-- Conversation User --}}
                     <div class="card-header">
-                        @if ($conversation['user'])
-                            <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $conversation['user']['fsid']])) }}" target="_blank" class="text-decoration-none">
-                                <img src="{{ $conversation['user']['avatar'] }}" loading="lazy" alt="{{ $conversation['user']['nickname'] }}" class="rounded-circle conversation-avatar">
-                                <span class="ms-2 fs-5">{{ $conversation['user']['nickname'] }}</span>
-                                <span class="ms-2 conversation-user-name text-secondary">{{ '@'.$conversation['user']['fsid'] }}</span>
+                        @if ($conversation['detail']['user'])
+                            <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $conversation['detail']['user']['fsid']])) }}" target="_blank" class="text-decoration-none">
+                                <img src="{{ $conversation['detail']['user']['avatar'] }}" loading="lazy" alt="{{ $conversation['detail']['user']['nickname'] }}" class="rounded-circle conversation-avatar">
+                                <span class="ms-2 fs-5">{{ $conversation['detail']['user']['nickname'] }}</span>
+                                <span class="ms-2 conversation-user-name text-secondary">{{ '@'.$conversation['detail']['user']['fsid'] }}</span>
                             </a>
                         @else
                             <img src="{{ fs_config('deactivate_avatar') }}" loading="lazy" alt="{{ fs_lang('userDeactivate') }}" class="rounded-circle conversation-avatar">
@@ -41,7 +41,8 @@
                     {{-- Send Box --}}
                     <div class="card-footer">
                         @component('components.message.send', [
-                            'user' => $conversation['user'],
+                            'configs' => $conversation['configs'],
+                            'user' => $conversation['detail']['user'],
                         ])@endcomponent
                     </div>
                 </div>

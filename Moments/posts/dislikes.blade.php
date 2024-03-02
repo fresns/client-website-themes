@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- Navigation --}}
-    @include('account.tabs-dislikes')
+    @include('me.tabs-dislikes')
 
     {{-- Post List --}}
     <div class="clearfix border-top" id="fresns-list-container">

@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_search').': '.fs_config('user_name'))
+@section('title', fs_config('channel_search_name').': '.fs_config('user_name'))
 
 @section('content')
     <main class="container-fluid">

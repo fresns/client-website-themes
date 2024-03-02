@@ -126,7 +126,7 @@
                         </p>
                         <p class="text-center">
                             <button type="button" class="btn btn-outline-success fresns-file-download"
-                                data-url="{{ route('fresns.api.content.file.link', ['fid' => $document['fid'], 'type' => 'post', 'fsid' => $pid]) }}"
+                                data-url="{{ route('fresns.api.get', ['path' => "/api/fresns/v1/common/file/{$document['fid']}/link?type=post&fsid={$pid}"]) }}"
                                 data-name="{{ $document['name'] }}"
                                 data-mime="{{ $document['mime'] }}">
                                 <i class="bi bi-download"></i> {{ fs_lang('contentFileDownload') }}

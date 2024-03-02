@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- Navigation --}}
-    @include('account.tabs-following')
+    @include('me.tabs-following')
 
     {{-- Comment List --}}
     <div class="clearfix border-top" id="fresns-list-container">

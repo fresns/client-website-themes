@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('channel_user_seo')['title'])
+@section('title', fs_config('channel_user_seo')['title'] ?: fs_config('channel_user_name'))
 @section('keywords', fs_config('channel_user_seo')['keywords'])
 @section('description', fs_config('channel_user_seo')['description'])
 
@@ -15,7 +15,7 @@
             {{-- Middle --}}
             <div class="col-sm-6">
                 {{-- User List --}}
-                <article class="card clearfix" @if (fs_config('menu_user_query_state') != 1) id="fresns-list-container" @endif>
+                <article class="card clearfix" @if (fs_config('channel_user_query_state') != 1) id="fresns-list-container" @endif>
                     @foreach($users as $user)
                         @component('components.user.list', compact('user'))@endcomponent
                         @if (! $loop->last)
@@ -25,7 +25,7 @@
                 </article>
 
                 {{-- Pagination --}}
-                @if (fs_config('menu_user_query_state') != 1)
+                @if (fs_config('channel_user_query_state') != 1)
                     <div class="my-3 table-responsive">
                         {{ $users->links() }}
                     </div>

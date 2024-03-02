@@ -11,12 +11,12 @@
         @endif
     </p>
 
-    <p class="mb-2">&copy; {{fs_config('site_copyright_years')}} {{fs_config('site_copyright')}} | Powered by <a href="https://fresns.org" target="_blank" class="link-secondary">Fresns</a></p>
+    <p class="mb-2">&copy; {{ fs_config('site_copyright_years') }} {{ fs_config('site_copyright_name') }} | Powered by <a href="https://fresns.org" target="_blank" class="link-secondary">Fresns</a></p>
 
     @if (fs_config('site_china_mode'))
         @if (fs_config('china_icp_filing'))
             <p class="mb-0">
-                <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow" class="link-secondary">{{fs_config('china_icp_filing')}}</a>
+                <a href="https://beian.miit.gov.cn/" target="_blank" rel="nofollow" class="link-secondary">{{ fs_config('china_icp_filing') }}</a>
             </p>
         @endif
 

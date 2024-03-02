@@ -21,7 +21,7 @@
                 {{-- Group List --}}
                 <div class="d-flex align-items-start">
                     <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        @if (! fs_config('post_editor_group_required'))
+                        @if (! fs_post_editor('group.required'))
                             <button type="button" id="not-select-group" class="btn btn-outline-secondary btn-sm mb-2 modal-close" data-bs-dismiss="modal" aria-label="Close">{{ fs_lang('editorNoGroup') }}</button>
                         @endif
                         {{-- Group Categories --}}

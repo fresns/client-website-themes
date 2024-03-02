@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('channel_group_seo')['title'])
+@section('title', fs_config('channel_group_seo')['title'] ?: fs_config('channel_group_name'))
 @section('keywords', fs_config('channel_group_seo')['keywords'])
 @section('description', fs_config('channel_group_seo')['description'])
 
@@ -14,7 +14,7 @@
 
             {{-- Middle --}}
             <div class="col-sm-6">
-                @if (fs_config('menu_group_type') == 'tree')
+                @if (fs_config('channel_group_type') == 'tree')
                     {{-- Group Tree --}}
                     @foreach($groupTree ?? [] as $tree)
                         <h3 class="fs-5">{{ $tree['name'] }}</h3>
@@ -29,7 +29,7 @@
                     @endforeach
                 @else
                     {{-- Group List --}}
-                    <div class="card mb-5 py-4" @if (fs_config('menu_group_query_state') != 1) id="fresns-list-container" @endif>
+                    <div class="card mb-5 py-4" @if (fs_config('channel_group_query_state') != 1) id="fresns-list-container" @endif>
                         @foreach($groups ?? [] as $group)
                             @component('components.group.list', compact('group'))@endcomponent
                             @if (! $loop->last)
@@ -39,7 +39,7 @@
                     </div>
 
                     {{-- Pagination --}}
-                    @if (fs_config('menu_group_query_state') != 1)
+                    @if (fs_config('channel_group_query_state') != 1)
                         <div class="my-3 table-responsive">
                             {{ $groups->links() }}
                         </div>

@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_account_users'))
+@section('title', fs_config('channel_me_users_name'))
 
 @section('content')
     <div class="d-flex mx-3">
@@ -35,10 +35,10 @@
                 @if (fs_user('detail.uid') == $item['uid'])
                     <button type="submit" class="btn btn-outline-secondary btn-sm my-2" disabled>{{ fs_lang('userCurrent') }}</button>
                 @else
-                    <form action="{{ route('fresns.api.user.auth') }}" method="post">
+                    <form action="{{ route('fresns.api.post', ['path' => '/api/fresns/v1/user/auth-token']) }}" method="post">
                         @csrf
                         <input type="hidden" name="uidOrUsername" value="{{ $item['uid'] }}">
-                        @if ($item['hasPassword'])
+                        @if ($item['hasPin'])
                             <a data-bs-target="#userPwdLogin" data-uid="{{ $item['uid'] }}" data-nickname="{{ $item['nickname'] }}" data-bs-toggle="modal" data-bs-dismiss="modal" class="btn btn-outline-secondary btn-sm my-2" onclick="$('#userPwdLoginLabel').text($(this).data('nickname'));$('#userPwdLogin input[name=uidOrUsername]').val($(this).data('uid'))">{{ fs_lang('userPassword') }}</a>
                         @else
                             <button type="submit" class="btn btn-outline-secondary btn-sm my-2">{{ fs_lang('select') }}</button>

@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_editor_drafts'))
+@section('title', fs_config('channel_me_drafts_name'))
 
 @section('content')
     <div class="card border-0">
@@ -12,7 +12,7 @@
                         <a class="btn btn-outline-secondary border-0 rounded-circle" href="javascript:goBack()" role="button"><i class="fa-solid fa-arrow-left"></i></a>
                     </span>
                 @enddesktop
-                <h1 class="fs-5 mt-2">{{ fs_config('menu_editor_drafts') }}</h1>
+                <h1 class="fs-5 mt-2">{{ fs_config('channel_me_drafts_name') }}</h1>
             </div>
             <ul class="nav nav-tabs card-header-tabs">
                 {{-- posts --}}

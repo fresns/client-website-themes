@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_editor_functions'))
+@section('title', fs_lang('editor'))
 
 @section('content')
     <div class="container-fluid">
@@ -65,7 +65,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ fs_config('menu_editor_drafts') }}</h5>
+                    <h5 class="modal-title">{{ fs_config('channel_me_drafts_name') }}</h5>
                 </div>
 
                 {{-- Draft List --}}

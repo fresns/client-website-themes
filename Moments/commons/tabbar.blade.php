@@ -2,9 +2,9 @@
     'fresns.home',
     'fresns.portal',
     'fresns.post.index',
-    'fresns.post.nearby',
+    'fresns.nearby.posts',
     'fresns.group.index',
-    'fresns.follow.all.posts',
+    'fresns.timeline.posts',
     'fresns.me.index',
 ]) || request()->url() == fs_route(route('fresns.custom.page', ['name' => 'channels'])))
     <div class="clearfix py-5 d-lg-none"></div>

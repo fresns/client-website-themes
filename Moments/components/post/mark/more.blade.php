@@ -2,7 +2,7 @@
     {{-- Edit --}}
     @if ($editControls['isAuthor'] && $editControls['canEdit'])
         <li>
-            <a class="dropdown-item py-2 web-request-link" href="#" data-action="{{ fs_route(route('fresns.editor.store', ['type' => 'post', 'fsid' => $pid])) }}">
+            <a class="dropdown-item py-2" href="#" data-action="{{ fs_route(route('fresns.editor.post', ['pid' => $pid, 'redirectURL' => url()->current()])) }}">
                 <i class="fa-regular fa-pen-to-square"></i>
                 {{ fs_lang('edit') }}
             </a>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ fs_lang('cancel') }}</button>
-                    <a class="btn btn-danger api-request-link" href="#" role="button" data-method="DELETE" data-id="{{ $pid }}" data-action="{{ route('fresns.api.content.delete',  ['type' => 'post', 'fsid' => $pid]) }}" data-bs-dismiss="modal">{{ fs_lang('delete') }}</a>
+                    <a class="btn btn-danger api-request-link" href="#" role="button" data-method="DELETE" data-fsid="{{ $pid }}" data-action="{{ route('fresns.api.delete', ['path' => "/api/fresns/v1/post/{$pid}"]) }}" data-bs-dismiss="modal">{{ fs_lang('delete') }}</a>
                 </div>
             </div>
         </div>

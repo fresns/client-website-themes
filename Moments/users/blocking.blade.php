@@ -4,7 +4,7 @@
 
 @section('content')
     {{-- Navigation --}}
-    @include('account.tabs-blocking')
+    @include('me.tabs-blocking')
 
     {{-- List --}}
     <div class="clearfix border-top" id="fresns-list-container">

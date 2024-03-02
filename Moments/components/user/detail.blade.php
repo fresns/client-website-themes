@@ -106,7 +106,7 @@
     @endif
 </section>
 
-@if (fs_config('it_followers_you_follow') && $followersYouFollow)
+@if (fs_config('profile_followers_you_follow_enabled') && $followersYouFollow)
     <section class="text-center mb-3">
         <a href="{{ fs_route(route('fresns.profile.followers.you.follow', ['uidOrUsername' => $user['fsid']])) }}" class="text-muted fs-7 text-decoration-none">
             @foreach($followersYouFollow as $friend)
@@ -120,7 +120,7 @@
 <section class="d-flex justify-content-center overflow-hidden mb-4">
     {{-- Conversation --}}
     @if (fs_config('conversation_status') && $user['conversation']['status'])
-        <button type="button" class="btn btn-outline-info btn-sm me-2" data-bs-toggle="modal" data-bs-target="#conversationModal-{{ $user['fsid'] }}">{{ fs_config('menu_conversations') }}</button>
+        <button type="button" class="btn btn-outline-info btn-sm me-2" data-bs-toggle="modal" data-bs-target="#conversationModal-{{ $user['fsid'] }}">{{ fs_config('channel_conversations_name') }}</button>
     @endif
 
     {{-- Like --}}
@@ -174,7 +174,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="conversationModalLabel">
-                        <a href="{{ fs_route(route('fresns.messages.index')) }}" target="_blank" class="text-decoration-none"><i class="fa-regular fa-envelope"></i> {{ fs_config('menu_conversations') }}</a>
+                        <a href="{{ fs_route(route('fresns.conversation.index')) }}" target="_blank" class="text-decoration-none"><i class="fa-regular fa-envelope"></i> {{ fs_config('channel_conversations_name') }}</a>
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>

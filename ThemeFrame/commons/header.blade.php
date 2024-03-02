@@ -120,13 +120,13 @@
                         {{-- Logged In --}}
                         <a class="btn" href="{{ fs_route(route('fresns.me.index')) }}" role="button"><img src="{{ fs_user('detail.avatar') }}" loading="lazy" class="nav-avatar rounded-circle"> {{ fs_user('detail.nickname') }}</a>
 
-                        @if (fs_config('webframe_quick_publish'))
+                        @if (fs_config('fs_theme_quick_publish'))
                             <button type="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" data-bs-toggle="modal" data-bs-target="#createModal"><i class="bi bi-plus-lg"></i></button>
                         @else
-                            <a class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" href="{{ fs_route(route('fresns.editor.index', ['type' => 'post'])) }}"><i class="bi bi-plus-lg"></i></a>
+                            <a class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" href="{{ fs_route(route('fresns.editor.post')) }}"><i class="bi bi-plus-lg"></i></a>
                         @endif
 
-                        <a href="{{ fs_route(route('fresns.notifications.index')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
+                        <a href="{{ fs_route(route('fresns.notification.index')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
                             <i class="bi bi-bell"></i>
                             @if (fs_user_overview('unreadNotifications.all') > 0)
                                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ fs_user_overview('unreadNotifications.all') }}</span>
@@ -134,7 +134,7 @@
                         </a>
 
                         @if (fs_config('conversation_status'))
-                            <a href="{{ fs_route(route('fresns.messages.index')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
+                            <a href="{{ fs_route(route('fresns.conversation.index')) }}"role="button" class="btn btn-outline-secondary btn-nav ms-2 rounded-circle position-relative">
                                 <i class="bi bi-envelope"></i>
                                 @if (fs_user_overview('conversations.unreadMessages') > 0)
                                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">{{ fs_user_overview('conversations.unreadMessages') }}</span>
@@ -147,13 +147,13 @@
                             <button class="btn btn-outline-secondary btn-nav ms-2 rounded-circle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-caret-down-fill"></i></button>
                             <ul class="dropdown-menu dropdown-menu-end">
                                 {{-- User Center --}}
-                                <li><a class="dropdown-item" href="{{ fs_route(route('fresns.me.index')) }}"><i class="bi bi-person-fill"></i> {{ fs_config('menu_account') }}</a></li>
+                                <li><a class="dropdown-item" href="{{ fs_route(route('fresns.me.index')) }}"><i class="bi bi-person-fill"></i> {{ fs_config('channel_me_name') }}</a></li>
 
                                 {{-- Notifications --}}
                                 <li>
-                                    <a class="dropdown-item" href="{{ fs_route(route('fresns.notifications.index')) }}">
+                                    <a class="dropdown-item" href="{{ fs_route(route('fresns.notification.index')) }}">
                                         <i class="bi bi-bell"></i>
-                                        {{ fs_config('menu_notifications') }}
+                                        {{ fs_config('channel_notifications_name') }}
 
                                         @if (fs_user_overview('unreadNotifications.all') > 0)
                                             <span class="badge bg-danger">{{ fs_user_overview('unreadNotifications.all') }}</span>
@@ -164,9 +164,9 @@
                                 {{-- Conversations --}}
                                 @if (fs_config('conversation_status'))
                                     <li>
-                                        <a class="dropdown-item" href="{{ fs_route(route('fresns.messages.index')) }}">
+                                        <a class="dropdown-item" href="{{ fs_route(route('fresns.conversation.index')) }}">
                                             <i class="bi bi-envelope"></i>
-                                            {{ fs_config('menu_conversations') }}
+                                            {{ fs_config('channel_conversations_name') }}
 
                                             @if (fs_user_overview('conversations.unreadMessages') > 0)
                                                 <span class="badge bg-danger">{{ fs_user_overview('conversations.unreadMessages') }}</span>
@@ -177,9 +177,9 @@
 
                                 {{-- Drafts --}}
                                 <li>
-                                    <a class="dropdown-item" href="{{ fs_route(route('fresns.me.drafts', ['type' => 'posts'])) }}">
+                                    <a class="dropdown-item" href="{{ fs_route(route('fresns.me.drafts')) }}">
                                         <i class="bi bi-file-earmark-text"></i>
-                                        {{ fs_config('menu_editor_drafts') }}
+                                        {{ fs_config('channel_me_drafts_name') }}
 
                                         @if (array_sum(fs_user_overview('draftCount')) > 0)
                                             <span class="badge bg-primary">{{ array_sum(fs_user_overview('draftCount')) }}</span>
@@ -189,26 +189,26 @@
 
                                 {{-- Wallet --}}
                                 @if (fs_config('wallet_status'))
-                                    <li><a class="dropdown-item" href="{{ fs_route(route('fresns.me.wallet')) }}"><i class="bi bi-wallet"></i> {{ fs_config('menu_account_wallet') }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ fs_route(route('fresns.me.wallet')) }}"><i class="bi bi-wallet"></i> {{ fs_config('channel_me_wallet_name') }}</a></li>
                                 @endif
 
                                 {{-- Users of this account --}}
                                 @if (fs_user_overview('multiUser.status') || count(fs_account('detail.users')) > 1)
-                                    <li><a class="dropdown-item" href="{{ fs_route(route('fresns.me.users')) }}"><i class="bi bi-people"></i> {{ fs_config('menu_account_users') }}</a></li>
+                                    <li><a class="dropdown-item" href="{{ fs_route(route('fresns.me.users')) }}"><i class="bi bi-people"></i> {{ fs_config('channel_me_users_name') }}</a></li>
                                 @endif
 
                                 {{-- Settings --}}
-                                <li><a class="dropdown-item" href="{{ fs_route(route('fresns.me.settings')) }}"><i class="bi bi-gear"></i> {{ fs_config('menu_account_settings') }}</a></li>
+                                <li><a class="dropdown-item" href="{{ fs_route(route('fresns.me.settings')) }}"><i class="bi bi-gear"></i> {{ fs_config('channel_me_settings_name') }}</a></li>
                                 <li><hr class="dropdown-divider"></li>
 
                                 {{-- Switch Languages --}}
                                 @if (fs_config('language_status'))
-                                    <li><a class="dropdown-item" href="#translate" data-bs-toggle="modal"><i class="bi bi-translate"></i> {{ fs_lang('optionLanguage') }}</a></li>
+                                    <li><a class="dropdown-item" href="#translate" data-bs-toggle="modal"><i class="bi bi-translate"></i> {{ fs_lang('switchLanguage') }}</a></li>
                                 @endif
 
                                 {{-- Switch Users --}}
                                 @if (count(fs_account('detail.users')) > 1)
-                                    <li><a class="dropdown-item" href="#userAuth" id="switch-user" data-bs-toggle="modal"><i class="bi bi-people"></i> {{ fs_lang('optionUser') }}</a></li>
+                                    <li><a class="dropdown-item" href="#userAuth" id="switch-user" data-bs-toggle="modal"><i class="bi bi-people"></i> {{ fs_lang('switchUser') }}</a></li>
                                 @endif
 
                                 {{-- Logout --}}

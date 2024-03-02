@@ -25,7 +25,7 @@
 
 {{-- Document --}}
 @if ($file['type'] == 4)
-    <a href="{{ route('fresns.api.content.file.link', ['fid' => $file['fid'], 'type' => 'conversation', 'fsid' => $messageId]) }}" data-loading="false" data-name="{{ $file['name'] }}" data-mime="{{ $file['mime'] }}" class="btn document-box fresns-file-download" role="button">
+    <a href="{{ route('fresns.api.get', ['path' => "/api/fresns/v1/common/file/{$file['fid']}/link?type=conversation&fsid={$cmid}"]) }}" data-loading="false" data-name="{{ $file['name'] }}" data-mime="{{ $file['mime'] }}" class="btn document-box fresns-file-download" role="button">
         <span class="document-icon">
             @if ($file['extension'] == 'doc' || $file['extension'] == 'docx' || $file['extension'] == 'pages')
                 <i class="fa-regular fa-file-word"></i>

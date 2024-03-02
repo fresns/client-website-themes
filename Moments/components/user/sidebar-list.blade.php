@@ -25,10 +25,10 @@
 
     <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $user['fsid']])) }}" class="stretched-link"></a>
 
-    <form action="{{ route('fresns.api.user.mark') }}" method="post" class="position-absolute top-50 end-0 translate-middle-y fresns_link">
+    <form action="{{ route('fresns.api.post', ['path' => '/api/fresns/v1/user/mark']) }}" method="post" class="position-absolute top-50 end-0 translate-middle-y fresns_link">
         @csrf
-        <input type="hidden" name="interactionType" value="follow"/>
-        <input type="hidden" name="markType" value="user"/>
+        <input type="hidden" name="markType" value="follow"/>
+        <input type="hidden" name="type" value="user"/>
         <input type="hidden" name="forgetCache" value=1 />
         <input type="hidden" name="fsid" value="{{ $user['fsid'] }}"/>
         @if ($user['interaction']['followStatus'])

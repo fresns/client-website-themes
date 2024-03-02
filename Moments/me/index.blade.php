@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_account'))
+@section('title', fs_config('channel_me_name'))
 
 @section('content')
     <div class="bg-body d-flex flex-row">
@@ -71,8 +71,8 @@
     @mobile
         <div class="list-group rounded-0 my-3">
             {{-- Conversation --}}
-            <a href="{{ fs_route(route('fresns.notifications.index')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                <span class="py-2"><i class="fa-regular fa-bell me-2"></i> {{ fs_config('menu_notifications') }}</span>
+            <a href="{{ fs_route(route('fresns.notification.index')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                <span class="py-2"><i class="fa-regular fa-bell me-2"></i> {{ fs_config('channel_notifications_name') }}</span>
                 <span class="py-2 text-black-50">
                     @if (fs_user_overview('unreadNotifications.all') > 0)
                         <span class="badge bg-danger rounded-pill">{{ fs_user_overview('unreadNotifications.all') }}</span>
@@ -82,8 +82,8 @@
             </a>
             @if (fs_config('conversation_status'))
                     {{-- Conversation --}}
-                    <a href="{{ fs_route(route('fresns.messages.index')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                        <span class="py-2"><i class="fa-regular fa-envelope me-2"></i> {{ fs_config('menu_conversations') }}</span>
+                    <a href="{{ fs_route(route('fresns.conversation.index')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                        <span class="py-2"><i class="fa-regular fa-envelope me-2"></i> {{ fs_config('channel_conversations_name') }}</span>
                         <span class="py-2 text-black-50">
                             @if (fs_user_overview('conversations.unreadMessages') > 0)
                                 <span class="badge bg-danger rounded-pill">{{ fs_user_overview('conversations.unreadMessages') }}</span>
@@ -148,13 +148,13 @@
         {{-- Wallet --}}
         @if (fs_config('wallet_status'))
             <a href="{{ fs_route(route('fresns.me.wallet')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                <span class="py-2"><i class="fa-solid fa-fw fa-wallet me-2"></i> {{ fs_config('menu_account_wallet') }}</span>
+                <span class="py-2"><i class="fa-solid fa-fw fa-wallet me-2"></i> {{ fs_config('channel_me_wallet_name') }}</span>
                 <span class="py-2 text-black-50">{{ fs_account('detail.wallet.balance') }} <i class="fa-solid fa-chevron-right"></i></span>
             </a>
         @endif
         {{-- Draft Box --}}
-        <a href="{{ fs_route(route('fresns.me.drafts', ['type' => 'posts'])) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-            <span class="py-2"><i class="fa-solid fa-fw fa-envelope-open-text me-2"></i> {{ fs_config('menu_editor_drafts') }}</span>
+        <a href="{{ fs_route(route('fresns.me.drafts')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+            <span class="py-2"><i class="fa-solid fa-fw fa-envelope-open-text me-2"></i> {{ fs_config('channel_me_drafts_name') }}</span>
             <span class="py-2 text-black-50">
                 @if (array_sum(fs_user_overview('draftCount')) > 0)
                     <span class="badge bg-success rounded-pill">{{ array_sum(fs_user_overview('draftCount')) }}</span>
@@ -177,26 +177,26 @@
     <div class="list-group rounded-0 my-3">
         {{-- Settings --}}
         <a href="{{ fs_route(route('fresns.me.settings')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-            <span class="py-2"><i class="fa-solid fa-fw fa-gear me-2"></i> {{ fs_config('menu_account_settings') }}</span>
+            <span class="py-2"><i class="fa-solid fa-fw fa-gear me-2"></i> {{ fs_config('channel_me_settings_name') }}</span>
             <span class="py-2 text-black-50"><i class="fa-solid fa-chevron-right"></i></span>
         </a>
         {{-- Manage Users --}}
         @if (fs_user_overview('multiUser.status') || count(fs_account('detail.users')) > 1)
             {{-- User Page --}}
             <a href="{{ fs_route(route('fresns.me.users')) }}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                <span class="py-2"><i class="fa-solid fa-fw fa-user-gear me-2"></i> {{ fs_config('menu_account_users') }}</span>
+                <span class="py-2"><i class="fa-solid fa-fw fa-user-gear me-2"></i> {{ fs_config('channel_me_users_name') }}</span>
                 <span class="py-2 text-black-50"><i class="fa-solid fa-chevron-right"></i></span>
             </a>
             {{-- Switch Users --}}
             <a href="#userAuth" id="switch-user" data-bs-toggle="modal" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                <span class="py-2"><i class="fa-solid fa-fw fa-users me-2"></i> {{ fs_lang('optionUser') }}</span>
+                <span class="py-2"><i class="fa-solid fa-fw fa-users me-2"></i> {{ fs_lang('switchUser') }}</span>
                 <span class="py-2 text-black-50"><i class="fa-solid fa-chevron-right"></i></span>
             </a>
         @endif
         {{-- Switch Languages --}}
         @if (fs_config('language_status'))
             <a href="#translate" data-bs-toggle="modal" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
-                <span class="py-2"><i class="fa-solid fa-fw fa-language me-2"></i> {{ fs_lang('optionLanguage') }}</span>
+                <span class="py-2"><i class="fa-solid fa-fw fa-language me-2"></i> {{ fs_lang('switchLanguage') }}</span>
                 <span class="py-2 text-black-50"><i class="fa-solid fa-chevron-right"></i></span>
             </a>
         @endif

@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light py-lg-0 mb-4 mx-3 mx-lg-0">
-    <span class="navbar-brand mb-0 h1 d-lg-none ms-3">{{ fs_config('menu_search') }}</span>
+    <span class="navbar-brand mb-0 h1 d-lg-none ms-3">{{ fs_config('channel_search_name') }}</span>
     <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#fresnsMenus" aria-controls="fresnsMenus" aria-expanded="false" aria-label="Toggle navigation">
         <i class="bi bi-signpost-2"></i>
     </button>

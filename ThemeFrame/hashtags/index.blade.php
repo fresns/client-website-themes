@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('channel_hashtag_seo')['title'])
+@section('title', fs_config('channel_hashtag_seo')['title'] ?: fs_config('channel_hashtag_name'))
 @section('keywords', fs_config('channel_hashtag_seo')['keywords'])
 @section('description', fs_config('channel_hashtag_seo')['description'])
 
@@ -15,7 +15,7 @@
             {{-- Middle --}}
             <div class="col-sm-6">
                 {{-- Hashtag List --}}
-                <article class="card clearfix py-4" @if (fs_config('menu_hashtag_query_state') != 1) id="fresns-list-container" @endif>
+                <article class="card clearfix py-4" @if (fs_config('channel_hashtag_query_state') != 1) id="fresns-list-container" @endif>
                     @foreach($hashtags as $hashtag)
                         @component('components.hashtag.list', compact('hashtag'))@endcomponent
                         @if (! $loop->last)
@@ -25,7 +25,7 @@
                 </article>
 
                 {{-- Pagination --}}
-                @if (fs_config('menu_hashtag_query_state') != 1)
+                @if (fs_config('channel_hashtag_query_state') != 1)
                     <div class="my-3 table-responsive">
                         {{ $hashtags->links() }}
                     </div>

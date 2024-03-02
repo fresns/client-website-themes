@@ -37,8 +37,6 @@
                     @component('components.group.mark.follow', [
                         'gid' => $group['gid'],
                         'name' => $group['name'],
-                        'followType' => $group['followType'],
-                        'followUrl' => $group['followUrl'],
                         'interaction' => $group['interaction'],
                         'count' => $group['followCount'],
                     ])@endcomponent
@@ -62,13 +60,6 @@
 
         <section class="fs-7 mt-1 text-secondary">{{ $group['description'] }}</section>
 
-        @if ($group['admins'])
-            <section class="fs-7 mt-2">
-                {{ fs_lang('groupAdmin') }}:
-                @foreach($group['admins'] as $admin)
-                    <a href="{{ fs_route(route('fresns.profile.index', ['uidOrUsername' => $admin['fsid']])) }}" target="_blank" class="link-primary fs-7 me-3">{{ $admin['nickname'] }}</a>
-                @endforeach
-            </section>
-        @endif
+        <section class="fs-7 mt-2" id="admins"></section>
     </div>
 </article>

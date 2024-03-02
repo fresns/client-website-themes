@@ -41,8 +41,6 @@
                     @component('components.group.mark.follow', [
                         'gid' => $group['gid'],
                         'name' => $group['name'],
-                        'followType' => $group['followType'],
-                        'followUrl' => $group['followUrl'],
                         'interaction' => $group['interaction'],
                         'count' => $group['followCount'],
                     ])@endcomponent

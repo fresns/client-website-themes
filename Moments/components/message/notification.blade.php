@@ -1,7 +1,7 @@
-<li class="list-group-item d-flex justify-content-start align-items-center ps-0" data-id="{{ $notification['id'] }}" data-type="{{ $notification['type'] }}" data-status="{{ $notification['readStatus'] }}">
+<li class="list-group-item d-flex justify-content-start align-items-center ps-0" data-id="{{ $notification['nmid'] }}" data-type="{{ $notification['type'] }}" data-status="{{ $notification['readStatus'] }}">
     {{-- Read Status --}}
     @if (! $notification['readStatus'])
-        <span class="p-1 ms-2 bg-danger border border-light rounded-circle" id="badge-{{ $notification['id'] }}"></span>
+        <span class="p-1 ms-2 bg-danger border border-light rounded-circle" id="badge-{{ $notification['nmid'] }}"></span>
     @endif
 
     {{-- User Avatar --}}
@@ -52,11 +52,11 @@
             <p class="mb-0 w-100">
                 @switch($notification['type'])
                     @case(1)
-                        <span class="badge bg-danger me-1">{{ fs_config('menu_notifications_systems') }}</span>
+                        <span class="badge bg-danger me-1">{{ fs_config('channel_notifications_systems_name') }}</span>
                     @break
 
                     @case(2)
-                        <span class="badge bg-danger me-1">{{ fs_config('menu_notifications_recommends') }}</span>
+                        <span class="badge bg-danger me-1">{{ fs_config('channel_notifications_recommends_name') }}</span>
                     @break
 
                     @default
@@ -67,27 +67,27 @@
                 <span class="badge bg-primary">
                     @switch($notification['type'])
                         @case(3)
-                            {{ fs_lang('notificationLike') }}:
+                            {{ fs_lang('notificationLiked') }}:
                         @break
 
                         @case(4)
-                            {{ fs_lang('notificationDislike') }}:
+                            {{ fs_lang('notificationDisliked') }}:
                         @break
 
                         @case(5)
-                            {{ fs_lang('notificationFollow') }}:
+                            {{ fs_lang('notificationFollowed') }}:
                         @break
 
                         @case(6)
-                            {{ fs_lang('notificationBlock') }}:
+                            {{ fs_lang('notificationBlocked') }}:
                         @break
 
                         @case(7)
-                            {{ fs_lang('notificationMention') }}:
+                            {{ fs_lang('notificationMentioned') }}:
                         @break
 
                         @case(8)
-                            {{ fs_lang('notificationComment') }}:
+                            {{ fs_lang('notificationCommented') }}:
                         @break
 
                         @default
@@ -95,7 +95,7 @@
                         @break
                     @endswitch
 
-                    @switch($notification['actionObject'])
+                    @switch($notification['actionTarget'])
                         @case(1)
                             {{ fs_config('user_name') }}
                         @break
@@ -121,7 +121,7 @@
                         @break
                     @endswitch
 
-                    @if ($notification['isAuthorntion'])
+                    @if ($notification['isMention'])
                         ({{ fs_lang('notificationFromContentMentionYou') }})
                     @endif
 
@@ -178,7 +178,7 @@
 
         {{-- Content of the trigger notification --}}
         @if ($notification['actionInfo'])
-            @switch($notification['actionObject'])
+            @switch($notification['actionTarget'])
                 @case(2)
                     <div class="content-group mt-2">
                         <a href="{{ fs_route(route('fresns.group.detail', ['gid' => $notification['actionInfo']['gid']])) }}" class="badge rounded-pill text-decoration-none">

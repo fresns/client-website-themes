@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('channel_group_list_seo')['title'])
+@section('title', fs_config('channel_group_list_seo')['title'] ?: fs_config('channel_group_list_name'))
 @section('keywords', fs_config('channel_group_list_seo')['keywords'])
 @section('description', fs_config('channel_group_list_seo')['description'])
 
@@ -15,14 +15,14 @@
     </div>
 
     {{-- Group List --}}
-    <div class="clearfix border-top" @if (fs_config('menu_group_list_query_state') != 1) id="fresns-list-container" @endif>
+    <div class="clearfix border-top" @if (fs_config('channel_group_list_query_state') != 1) id="fresns-list-container" @endif>
         @foreach($groups ?? [] as $group)
             @component('components.group.list', compact('group'))@endcomponent
         @endforeach
     </div>
 
     {{-- Pagination --}}
-    @if (fs_config('menu_group_list_query_state') != 1)
+    @if (fs_config('channel_group_list_query_state') != 1)
         <div class="px-3 me-3 me-lg-0 mt-4 table-responsive d-none">
             {{ $groups->links() }}
         </div>

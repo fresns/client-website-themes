@@ -8,10 +8,10 @@
             <div class="card mx-auto" style="max-width:800px;">
                 <div class="card-body p-5">
                     <h3 class="card-title">{{ fs_config('site_name') }}</h3>
-                    <p>{{ fs_lang('sitePrivateDesc') }}</p>
+                    <div>{{ fs_lang('sitePrivateDesc') }}</div>
 
-                    {{-- Go to login --}}
-                    <p class="mt-4">
+                    <div class="mt-4">
+                        {{-- Go to login --}}
                         <button class="btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                             data-type="account"
                             data-scene="sign"
@@ -20,12 +20,10 @@
                             data-url="{{ fs_config('account_login_service') }}">
                             {{ fs_lang('accountLogin') }}
                         </button>
-                    </p>
 
-                    {{-- Join --}}
-                    @if (fs_config('site_private_status') && fs_config('site_private_service'))
-                        <p class="mt-4">
-                            <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                        {{-- Join --}}
+                        @if (fs_config('site_private_status') && fs_config('site_private_service'))
+                            <button class="btn btn-success ms-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                                 data-type="account"
                                 data-scene="sign"
                                 data-post-message-key="fresnsAccountSign"
@@ -33,8 +31,17 @@
                                 data-url="{{ fs_config('site_private_service') }}">
                                 {{ fs_lang('accountJoin') }}
                             </button>
-                        </p>
-                    @endif
+                        @elseif (fs_config('account_register_status'))
+                            <button class="btn btn-success ms-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                                data-type="account"
+                                data-scene="sign"
+                                data-post-message-key="fresnsAccountSign"
+                                data-title="{{ fs_lang('accountRegister') }}"
+                                data-url="{{ fs_config('account_register_service') }}">
+                                {{ fs_lang('accountRegister') }}
+                            </button>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

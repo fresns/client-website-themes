@@ -7,7 +7,7 @@
 function accessToken() {
     let accessToken;
     $.ajaxSettings.async = false;
-    $.get('/api/theme/access-token', false, function (res) {
+    $.post('/api/theme/access-token', {}, function (res) {
         accessToken = res.data.accessToken;
     });
     $.ajaxSettings.async = true;

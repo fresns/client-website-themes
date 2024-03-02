@@ -1,19 +1,19 @@
-<form action="{{ route('fresns.api.user.mark') }}" method="post" class="float-start me-2">
+<form action="{{ route('fresns.api.post', ['path' => '/api/fresns/v1/user/mark']) }}" method="post" class="float-start me-2">
     @csrf
-    <input type="hidden" name="interactionType" value="block"/>
-    <input type="hidden" name="markType" value="hashtag"/>
+    <input type="hidden" name="markType" value="block"/>
+    <input type="hidden" name="type" value="hashtag"/>
     <input type="hidden" name="fsid" value="{{ $htid }}"/>
     @if ($interaction['blockStatus'])
         <a class="btn btn-success btn-sm fs-mark" data-interaction-active="{{ $interaction['blockStatus'] }}" data-bi="bi-x-octagon">
             <i class="bi bi-x-octagon-fill"></i>
-            @if (fs_config('hashtag_blocker_count') && $count)
+            @if ($interaction['blockPublicCount'] && $count)
                 <span class="show-count">{{ $count }}</span>
             @endif
         </a>
     @else
         <a class="btn btn-outline-success btn-sm" id="fs-mark-block-{{ $htid }}" data-bs-toggle="collapse" href="#collapse-{{ $htid }}" aria-expanded="false" aria-controls="collapse-{{ $htid }}">
             <i class="bi bi-x-octagon"></i>
-            @if (fs_config('hashtag_blocker_count') && $count)
+            @if ($interaction['blockPublicCount'] && $count)
                 <span class="show-count">{{ $count }}</span>
             @endif
         </a>

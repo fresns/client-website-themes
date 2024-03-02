@@ -13,7 +13,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form class="form-comment-box" action="{{ route('fresns.api.editor.quick.publish', ['type' => 'comment']) }}" method="post" enctype="multipart/form-data">
+                    <form class="form-quick-publish" action="{{ route('fresns.api.post', ['path' => '/api/fresns/v1/editor/comment/publish']) }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="editor-content">
                             <input type="hidden" name="commentPid" value="{{ $pid }}">
@@ -78,7 +78,7 @@
                                 @if (fs_config('comment_editor_image'))
                                     <div class="input-group">
                                         <label class="input-group-text" for="modal-comment-file-{{ $pid.$cid }}">{{ fs_lang('editorImages') }}</label>
-                                        <input type="file" class="form-control" accept="{{ fs_user_overview('fileAccept.images') }}" name="image" id="modal-comment-file-{{ $pid.$cid }}">
+                                        <input type="file" class="form-control" accept="{{ fs_post_editor('image.inputAccept') }}" name="image" id="modal-comment-file-{{ $pid.$cid }}">
                                     </div>
                                 @endif
                             </div>

@@ -1,12 +1,12 @@
-@if ($message['isAuthor'])
+@if ($message['isMe'])
     <div class="d-flex justify-content-end mt-3">
         <div class="text-end">
             <p class="bg-success bg-gradient text-white rounded p-2 mb-0">
-                @if ($message['type'] == 1)
+                @if ($message['type'] == 'text')
                     {{ $message['content'] }}
                 @else
                     @component('components.message.message-file', [
-                        'messageId' => $message['id'],
+                        'cmid' => $message['cmid'],
                         'file' => $message['file'],
                     ])@endcomponent
                 @endif
@@ -24,11 +24,11 @@
         </div>
         <div class="text-start">
             <p class="bg-secondary bg-gradient bg-opacity-25 text-break rounded p-2 mb-0">
-                @if ($message['type'] == 1)
+                @if ($message['type'] == 'text')
                     {{ $message['content'] }}
                 @else
                     @component('components.message.message-file', [
-                        'messageId' => $message['id'],
+                        'cmid' => $message['cmid'],
                         'file' => $message['file'],
                     ])@endcomponent
                 @endif

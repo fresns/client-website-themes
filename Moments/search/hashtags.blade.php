@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_search').': '.fs_config('hashtag_name'))
+@section('title', fs_config('channel_search_name').': '.fs_config('hashtag_name'))
 
 @section('content')
     <div class="d-flex mx-3">
@@ -10,7 +10,7 @@
             </span>
         @enddesktop
         <h1 class="fs-5 my-3">
-            {{ fs_config('menu_search') }}: {{ fs_config('hashtag_name') }}
+            {{ fs_config('channel_search_name') }}: {{ fs_config('hashtag_name') }}
             <span class="badge bg-secondary ms-3">{{ request('searchKey') }}</span>
         </h1>
     </div>

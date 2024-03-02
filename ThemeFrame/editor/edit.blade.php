@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_editor_functions'))
+@section('title', fs_lang('editor'))
 
 @section('content')
     <div class="container-fluid">

@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('channel_comment_list_seo')['title'])
+@section('title', fs_config('channel_comment_list_seo')['title'] ?: fs_config('channel_comment_list_name'))
 @section('keywords', fs_config('channel_comment_list_seo')['keywords'])
 @section('description', fs_config('channel_comment_list_seo')['description'])
 
@@ -15,7 +15,7 @@
             {{-- Middle --}}
             <div class="col-sm-6">
                 {{-- Comment List --}}
-                <article class="card clearfix" @if (fs_config('menu_comment_list_query_state') != 1) id="fresns-list-container" @endif>
+                <article class="card clearfix" @if (fs_config('channel_comment_list_query_state') != 1) id="fresns-list-container" @endif>
                     @foreach($comments as $comment)
                         @component('components.comment.list', [
                             'comment' => $comment,
@@ -30,7 +30,7 @@
                 </article>
 
                 {{-- Pagination --}}
-                @if (fs_config('menu_comment_list_query_state') != 1)
+                @if (fs_config('channel_comment_list_query_state') != 1)
                     <div class="my-3 table-responsive">
                         {{ $comments->links() }}
                     </div>

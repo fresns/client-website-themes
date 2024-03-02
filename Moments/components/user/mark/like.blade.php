@@ -1,19 +1,19 @@
-<form action="{{ route('fresns.api.user.mark') }}" method="post" class="float-start me-2">
+<form action="{{ route('fresns.api.post', ['path' => '/api/fresns/v1/user/mark']) }}" method="post" class="float-start me-2">
     @csrf
-    <input type="hidden" name="interactionType" value="like"/>
-    <input type="hidden" name="markType" value="user"/>
+    <input type="hidden" name="markType" value="like"/>
+    <input type="hidden" name="type" value="user"/>
     <input type="hidden" name="fsid" value="{{ $uid }}"/>
     @if ($interaction['likeStatus'])
         <a class="btn btn-success btn-sm fs-mark" data-interaction-active="{{ $interaction['likeStatus'] }}" data-bi="fa-regular fa-thumbs-up" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ fs_lang('cancel') }}">
             <i class="fa-solid fa-thumbs-up"></i>
-            @if (fs_config('user_liker_count') && $count)
+            @if ($interaction['likePublicCount'] != 1 && $count)
                 <span class="show-count">{{ $count }}</span>
             @endif
         </a>
     @else
         <a class="btn btn-outline-success btn-sm fs-mark" data-bi="fa-solid fa-thumbs-up" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $interaction['likeName'] }}">
             <i class="fa-regular fa-thumbs-up"></i>
-            @if (fs_config('user_liker_count') && $count)
+            @if ($interaction['likePublicCount'] != 1 && $count)
                 <span class="show-count">{{ $count }}</span>
             @endif
         </a>

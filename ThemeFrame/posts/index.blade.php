@@ -1,6 +1,6 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('channel_post_seo')['title'])
+@section('title', fs_config('channel_post_seo')['title'] ?: fs_config('channel_post_name'))
 @section('keywords', fs_config('channel_post_seo')['keywords'])
 @section('description', fs_config('channel_post_seo')['description'])
 
@@ -24,7 +24,7 @@
                 @endif
 
                 {{-- Post List --}}
-                <article class="card clearfix" @if (fs_config('menu_post_query_state') != 1) id="fresns-list-container" @endif>
+                <article class="card clearfix" @if (fs_config('channel_post_query_state') != 1) id="fresns-list-container" @endif>
                     @foreach($posts as $post)
                         @component('components.post.list', compact('post'))@endcomponent
                         @if (! $loop->last)
@@ -34,7 +34,7 @@
                 </article>
 
                 {{-- Pagination --}}
-                @if (fs_config('menu_post_query_state') != 1)
+                @if (fs_config('channel_post_query_state') != 1)
                     <div class="my-3 table-responsive">
                         {{ $posts->links() }}
                     </div>

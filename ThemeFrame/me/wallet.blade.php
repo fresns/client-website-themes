@@ -1,13 +1,13 @@
 @extends('commons.fresns')
 
-@section('title', fs_config('menu_account_wallet'))
+@section('title', fs_config('channel_me_wallet_name'))
 
 @section('content')
     <main class="container-fluid">
         <div class="row mt-5 pt-5">
             {{-- Left Sidebar --}}
             <div class="col-sm-3">
-                @include('account.sidebar')
+                @include('me.sidebar')
             </div>
 
             {{-- Account Main --}}
