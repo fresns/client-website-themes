@@ -298,7 +298,7 @@
 
         {{-- Comment Box --}}
         @if (fs_user()->check())
-            @component('components.editor.comment-box', [
+            @component('components.editor.quick-publish-comment', [
                 'nickname' => $comment['author']['nickname'],
                 'pid' => $comment['replyToPost']['pid'] ?? null,
                 'cid' => $comment['cid'],

@@ -1,6 +1,5 @@
 @if ($interaction['followType'] == 1)
     <form action="{{ route('fresns.api.post', ['path' => '/api/fresns/v1/user/mark']) }}" method="post" class="float-start me-2">
-        @csrf
         <input type="hidden" name="markType" value="follow"/>
         <input type="hidden" name="type" value="group"/>
         <input type="hidden" name="fsid" value="{{ $gid }}"/>

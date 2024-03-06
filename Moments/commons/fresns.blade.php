@@ -146,8 +146,8 @@
     </div>
 
     {{-- Quick Post Box --}}
-    @if (fs_user()->check())
-        @component('components.editor.post-box', [
+    @if (fs_user()->check() && ! Route::is('fresns.editor.*'))
+        @component('components.editor.quick-publish-post', [
             'group' => $group ?? null
         ])@endcomponent
     @endif

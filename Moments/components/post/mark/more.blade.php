@@ -47,7 +47,7 @@
                     data-pid="{{ $pid }}"
                     data-uid="{{ $uid }}"
                     data-title="{{ $plugin['name'] }}"
-                    data-url="{{ $plugin['url'] }}">
+                    data-url="{{ $plugin['appUrl'] }}">
                     @if ($plugin['icon'])
                         <img src="{{ $plugin['icon'] }}" loading="lazy" width="20" height="20">
                     @endif

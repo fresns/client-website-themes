@@ -5,22 +5,20 @@
 @section('content')
     <div class="container-fluid">
         <div class="fresns-editor">
-            <form action="{{ fs_route(route('fresns.editor.publish', [$type, $draft['detail']['id']])) }}" method="post">
-                @csrf
-                @method("post")
+            <form action="{{ route('fresns.api.post', ['path' => "/api/fresns/v1/editor/{$type}/draft/{$draft['detail']['did']}"]) }}" method="post">
                 <input type="hidden" name="type" value="{{ $type ?? '' }}" />
-                <input type="hidden" name="postGid" value="{{ $draft['detail']['group']['gid'] ?? '' }}" />
+                <input type="hidden" name="gid" id="editor-group-gid" value="{{ $draft['detail']['group']['gid'] ?? '' }}" />
                 {{-- Tip: Publish Permissions --}}
-                @if ($config['publish']['limit']['status'] && $config['publish']['limit']['isInTime'])
+                @if ($configs['publish']['limit']['status'] && $configs['publish']['limit']['isInTime'])
                     @component('components.editor.tip.publish', [
-                        'config' => $config['publish'],
+                        'publishConfig' => $configs['publish'],
                     ])@endcomponent
                 @endif
 
                 {{-- Tip: Edit Controls --}}
                 @if ($draft['editControls']['isEditDraft'] && ! in_array($draft['detail']['state'], [2, 3]))
                     @component('components.editor.tip.edit', [
-                        'config' => $draft['editControls'],
+                        'editControls' => $draft['editControls'],
                     ])@endcomponent
                 @endif
 
@@ -32,29 +30,25 @@
                 @endif
 
                 {{-- Group --}}
-                @if ($config['editor']['features']['group']['status'])
+                @if ($configs['editor']['group']['status'])
                     @component('components.editor.section.group', [
-                        'draftId' => $draft['detail']['id'],
-                        'config' => $config['editor']['features']['group'],
+                        'groupConfig' => $configs['editor']['group'],
+                        'did' => $draft['detail']['did'],
                         'group' => $draft['detail']['group'],
                     ])@endcomponent
                 @endif
 
                 {{-- Toolbar --}}
                 @component('components.editor.section.toolbar', [
-                    'type' => $type,
-                    'plid' => $plid,
-                    'clid' => $clid,
-                    'config' => $config['editor']['toolbar'],
-                    'uploadInfo' => $uploadInfo,
+                    'editorConfig' => $configs['editor'],
                 ])@endcomponent
 
                 {{-- Content Start --}}
                 <div class="editor-content p-3">
                     {{-- Title --}}
-                    @if ($config['editor']['toolbar']['title']['status'] || optional($draft['detail'])['title'])
+                    @if ($configs['editor']['title']['status'] || optional($draft['detail'])['title'])
                         @component('components.editor.section.title', [
-                            'config' => $config['editor']['toolbar']['title'],
+                            'titleConfig' => $configs['editor']['title'],
                             'title' => $draft['detail']['title'] ?? '',
                         ])@endcomponent
                     @endif
@@ -64,45 +58,38 @@
 
                     {{-- Files --}}
                     @component('components.editor.section.files', [
-                        'type' => $type,
                         'files' => $draft['detail']['files'],
                     ])@endcomponent
 
                     {{-- Extends --}}
                     @component('components.editor.section.extends', [
-                        'type' => $type,
-                        'plid' => $plid,
-                        'clid' => $clid,
                         'extends' => $draft['detail']['extends'],
                     ])@endcomponent
 
-                    {{-- readJson --}}
-                    @if ($draft['detail']['readJson'])
-                        @component('components.editor.section.read', [
+                    {{-- readConfig --}}
+                    @if ($draft['detail']['permissions']['readConfig'] ?? null)
+                        @component('components.editor.section.config-read', [
                             'type' => $type,
-                            'plid' => $plid,
-                            'clid' => $clid,
-                            'readConfig' => $draft['detail']['readJson'],
+                            'did' => $draft['detail']['did'],
+                            'readConfig' => $draft['detail']['permissions']['readConfig'],
                         ])@endcomponent
                     @endif
 
-                    {{-- commentBtnJson --}}
-                    @if ($draft['detail']['commentBtnJson'])
-                        @component('components.editor.section.comment-btn', [
+                    {{-- commentConfig --}}
+                    @if ($draft['detail']['permissions']['commentConfig']['action'] ?? null)
+                        @component('components.editor.section.config-action-button', [
                             'type' => $type,
-                            'plid' => $plid,
-                            'clid' => $clid,
-                            'commentBtn' => $draft['detail']['commentBtnJson'],
+                            'did' => $draft['detail']['did'],
+                            'actionButton' => $draft['detail']['permissions']['commentConfig']['action'],
                         ])@endcomponent
                     @endif
 
-                    {{-- userListJson --}}
-                    @if ($draft['detail']['userListJson'])
-                        @component('components.editor.section.user-list', [
+                    {{-- associatedUserListConfig --}}
+                    @if ($draft['detail']['permissions']['associatedUserListConfig'] ?? null)
+                        @component('components.editor.section.config-associated-user-list', [
                             'type' => $type,
-                            'plid' => $plid,
-                            'clid' => $clid,
-                            'userList' => $draft['detail']['userListJson'],
+                            'did' => $draft['detail']['did'],
+                            'associatedUserListConfig' => $draft['detail']['permissions']['associatedUserListConfig'],
                         ])@endcomponent
                     @endif
 
@@ -111,33 +98,25 @@
                     {{-- Location and Anonymous: Start --}}
                     <div class="d-flex justify-content-between">
                         {{-- Location --}}
-                        @if ($config['editor']['features']['location']['status'])
+                        @if ($configs['editor']['location']['status'])
                             @component('components.editor.section.location', [
                                 'type' => $type,
-                                'plid' => $plid,
-                                'clid' => $clid,
-                                'config' => $config['editor']['features']['location'],
-                                'location' => $draft['detail']['mapJson'],
+                                'did' => $draft['detail']['did'],
+                                'locationConfig' => $configs['editor']['location'],
+                                'locationInfo' => $draft['detail']['locationInfo'],
+                                'geotag' => $draft['detail']['geotag'],
                             ])@endcomponent
                         @endif
 
                         {{-- Anonymous --}}
-                        @if ($config['editor']['features']['anonymous'])
+                        @if ($configs['editor']['anonymous'])
                             @component('components.editor.section.anonymous', [
-                                'type' => $type,
                                 'isAnonymous' => $draft['detail']['isAnonymous'],
                             ])@endcomponent
                         @endif
 
-                        {{-- comment disable and private --}}
+                        {{-- comment private --}}
                         @if ($type == 'post')
-                            <div class="form-check ms-3">
-                                <input class="form-check-input" type="checkbox" name="postIsCommentDisabled" value="1" id="postIsCommentDisabled" {{ $draft['detail']['isCommentDisabled'] ? 'checked' : '' }}>
-                                <label class="form-check-label" for="postIsCommentDisabled">
-                                    {{ fs_lang('editorCommentDisable') }}
-                                </label>
-                            </div>
-
                             <div class="form-check ms-3">
                                 <input class="form-check-input" type="checkbox" name="commentPrivate" value="1" id="commentPrivate" {{ $draft['detail']['isPrivate'] ? 'checked' : '' }}>
                                 <label class="form-check-label" for="commentPrivate">
@@ -153,6 +132,20 @@
                         </div>
                     </div>
                     {{-- Location and Anonymous: End --}}
+
+                    @if ($type == 'post')
+                        {{-- comment policy --}}
+                        <div class="input-group my-3">
+                            <label class="input-group-text">{{ fs_lang('whoCanReply') }}</label>
+                            <select class="form-select" name="commentPolicy">
+                                <option value="1" {{ $draft['detail']['permissions']['commentConfig']['policy'] == 1 ? 'selected' : ''}}>{{ fs_lang('optionEveryone') }}</option>
+                                <option value="2" {{ $draft['detail']['permissions']['commentConfig']['policy'] == 2 ? 'selected' : ''}}>{{ fs_lang('optionPeopleYouFollow') }}</option>
+                                <option value="3" {{ $draft['detail']['permissions']['commentConfig']['policy'] == 3 ? 'selected' : ''}}>{{ fs_lang('optionPeopleYouFollowOrVerified') }}</option>
+                                <option value="4" {{ $draft['detail']['permissions']['commentConfig']['policy'] == 4 ? 'selected' : ''}}>{{ fs_lang('optionNoOneIsAllowed') }}</option>
+                                <option value="5" {{ $draft['detail']['permissions']['commentConfig']['policy'] == 5 ? 'selected' : ''}}>{{ fs_lang('optionOnlyUsersYouMention') }}</option>
+                            </select>
+                        </div>
+                    @endif
                 </div>
                 {{-- Content End --}}
 
@@ -281,20 +274,24 @@
         function deleteFile(obj) {
             let fid = $(obj).data('fid');
 
-            $.post("{{ route('fresns.api.editor.update', ['type' => $type, 'draftId' => $draft['detail']['id']]) }}", {
-                'deleteFile': fid
-            }, function (data){
-                console.log(data)
-            })
+            $.ajax({
+                url: "{{ route('fresns.api.patch', ['path' => '/api/fresns/v1/editor/'.$type.'/draft/'.$draft['detail']['did']]) }}",
+                type: "PATCH",
+                data: {
+                    'deleteFile': fid,
+                }
+            });
 
             $(obj).parent().parent().remove();
         }
 
-        function deleteMap() {
-            $.post("{{ route('fresns.api.editor.update', ['type' => $type, 'draftId' => $draft['detail']['id']]) }}", {
-                'deleteMap': 1
-            }, function (data){
-                console.log(data)
+        function deleteLocation() {
+            $.ajax({
+                url: "{{ route('fresns.api.patch', ['path' => '/api/fresns/v1/editor/'.$type.'/draft/'.$draft['detail']['did']]) }}",
+                type: "PATCH",
+                data: {
+                    'deleteLocation': 1,
+                }
             });
 
             $('#location-info').hide();
@@ -375,7 +372,7 @@
                 progress.init().setParentElement(obj.next('.progress').removeClass('d-none')).work();
 
                 $.ajax({
-                    url: "{{ route('fresns.api.editor.upload.file') }}",
+                    url: "{{ route('fresns.api.post', ['path' => '/api/fresns/v1/common/file/uploads']) }}",
                     type: "POST",
                     data: form,
                     timeout: 600000,
@@ -403,15 +400,23 @@
 
             // update draft
             const updateDraft = function (title, content, fid = ''){
-                $.post("{{ route('fresns.api.editor.update', ['type' => $type, 'draftId' => $draft['detail']['id']]) }}", {
-                    'postTitle' : title,
-                    'content':  content,
-                }, function(data) {
-                    console.log(data);
+                $.ajax({
+                    url: "{{ route('fresns.api.patch', ['path' => '/api/fresns/v1/editor/'.$type.'/draft/'.$draft['detail']['did']]) }}",
+                    type: "PATCH",
+                    data: {
+                        'title' : title,
+                        'content':  content,
+                    },
+                    success: function(data) {
+                        console.log(data);
 
-                    // If the 'code' value in the returned JSON is not 0, stop the interval loop
-                    if (data.code != 0) {
-                        clearInterval(intervalId);
+                        // If the 'code' value in the returned JSON is not 0, stop the interval loop
+                        if (data.code != 0) {
+                            clearInterval(intervalId);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
                     }
                 });
             };

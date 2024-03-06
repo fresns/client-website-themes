@@ -6,27 +6,23 @@
     <div class="container-fluid">
         <div class="fresns-editor ms-lg-5">
             {{-- Tip: Publish Permissions --}}
-            @if ($config['publish']['limit']['status'] && $config['publish']['limit']['isInTime'])
+            @if ($configs['publish']['limit']['status'] && $configs['publish']['limit']['isInTime'])
                 @component('components.editor.tip.publish', [
-                    'config' => $config['publish'],
+                    'publishConfig' => $configs['publish'],
                 ])@endcomponent
             @endif
 
             {{-- Toolbar --}}
             @component('components.editor.section.toolbar', [
-                'type' => $type,
-                'plid' => null,
-                'clid' => null,
-                'config' => $config['editor']['toolbar'],
-                'uploadInfo' => $uploadInfo,
+                'editorConfig' => $configs['editor'],
             ])@endcomponent
 
             {{-- Content Start --}}
             <div class="editor-content py-3">
                 {{-- Title --}}
-                @if ($config['editor']['toolbar']['title']['status'])
+                @if ($configs['editor']['title']['status'])
                     @component('components.editor.section.title', [
-                        'config' => $config['editor']['toolbar']['title'],
+                        'titleConfig' => $configs['editor']['title'],
                         'title' => '',
                     ])@endcomponent
                 @endif
@@ -48,14 +44,7 @@
 
             {{-- Button --}}
             <div class="editor-submit d-grid">
-                <button type="submit" class="btn btn-success btn-lg my-5 mx-3">
-                    @if ($type == 'post')
-                        {{ fs_config('publish_post_name') }}
-                    @endif
-                    @if ($type == 'comment')
-                        {{ fs_config('publish_comment_name') }}
-                    @endif
-                </button>
+                <button type="button" class="btn btn-success btn-lg my-5 mx-3">{{ fs_config('publish_post_name') }}</button>
             </div>
         </div>
     </div>
@@ -65,7 +54,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ fs_config('channel_me_drafts_name') }}</h5>
+                    <h5 class="modal-title">{{ fs_lang('editorDraftSelect') }}</h5>
                 </div>
 
                 {{-- Draft List --}}
@@ -78,10 +67,7 @@
 
                 <div class="modal-footer">
                     <a class="btn btn-secondary" href="{{ fs_route(route('fresns.post.index')) }}" role="button">{{ fs_lang('return') }}</a>
-                    <form action="{{ fs_route(route('fresns.editor.store', ['type' => $type])) }}" method="post">
-                        @csrf
-                        <button type="submit" class="btn btn-primary">{{ fs_lang('editorDraftCreate') }}</button>
-                    </form>
+                    <a class="btn btn-primary" href="{{ fs_route(route('fresns.editor.post', ['skipDrafts' => true])) }}" role="button">{{ fs_lang('editorDraftCreate') }}</a>
                 </div>
             </div>
         </div>

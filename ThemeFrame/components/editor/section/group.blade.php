@@ -1,49 +1,38 @@
 <div class="editor-group">
     <div class="d-grid">
-        <button class="rounded-0 border-0 d-flex justify-content-between p-3" type="button" data-bs-toggle="modal" data-bs-target="#fresns-group">
+        <button class="rounded-0 border-0 d-flex justify-content-between p-3" type="button" data-bs-toggle="modal" data-bs-target="#editor-groups-modal" data-initialized="0" id="editor-group">
             <span>
                 <i class="bi bi-archive-fill me-2"></i>
-                <span id="group">@if (!empty($group)) {{ $group['name'] }} @else {{ fs_config('group_name') }}: {{ fs_lang('editorNoSelectGroup') }} @endif</span>
+                <span id="editor-group-name">@if ($group) {{ $group['name'] }} @else {{ fs_config('group_name') }}: {{ fs_lang('editorNoSelectGroup') }} @endif</span>
             </span>
             <i class="bi bi-chevron-right"></i>
         </button>
     </div>
 </div>
 
-<div class="modal fade" id="fresns-group" tabindex="-1" aria-labelledby="fresns-group" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable">
+{{-- Group Modal --}}
+<div class="modal fade" id="editor-groups-modal" tabindex="-1" aria-labelledby="editor-groups-modal" aria-hidden="true">
+    <div class="modal-dialog modal-sm modal-dialog-scrollable" id="editor-groups-modal-class">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{ fs_config('group_name') }}</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-target="#createModal" data-bs-toggle="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body d-flex justify-content-start">
                 {{-- Group List --}}
-                <div class="d-flex align-items-start">
-                    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        @if (! fs_post_editor('group.required'))
-                            <button type="button" id="not-select-group" class="btn btn-outline-secondary btn-sm mb-2 modal-close" data-bs-dismiss="modal" aria-label="Close">{{ fs_lang('editorNoGroup') }}</button>
-                        @endif
-                        {{-- Group Categories --}}
-                        @foreach(fs_groups('categories') as $groupCategory)
-                            <button class="nav-link group-categories" data-page-size="15" data-page="1" data-action="{{ route('fresns.api.sub.groups', ['gid' => $groupCategory['gid']]) }}" id="v-pills-{{ $groupCategory['gid'] }}-tab" data-bs-toggle="pill" data-bs-target="#v-pills-{{ $groupCategory['gid'] }}" type="button" role="tab" aria-controls="v-pills-{{ $groupCategory['gid'] }}" aria-selected="false">
-                                @if ($groupCategory['cover'])
-                                    <img src="{{ $groupCategory['cover'] }}" loading="lazy" height="20">
-                                @endif
-                                {{ $groupCategory['name'] }}
-                            </button>
-                        @endforeach
-                    </div>
-
-                    <div class="tab-content" id="v-pills-tabContent" style="width:70%;">
-                        {{-- Groups --}}
-                        <div id="fresns-editor-groups">
-                            <div class="list-group"></div>
-                            <div class="list-group-addmore text-center my-3 fs-7"></div>
-                        </div>
-                    </div>
+                <div id="editor-top-groups">
+                    @if (! fs_post_editor('group.required'))
+                        <button type="button" id="post-box-not-select-group" class="btn btn-outline-secondary btn-sm mb-2 w-100 modal-close" data-bs-target="#createModal" data-bs-toggle="modal" aria-label="Close">{{ fs_lang('editorNoGroup') }}</button>
+                    @endif
+                    <div class="list-group"></div>
+                    <div class="list-group-addmore text-center mb-2 fs-7 text-secondary"></div>
                 </div>
+
+                <div id="group-list-1" class="d-flex justify-content-start"></div>
                 {{-- Group List --}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-bs-target="#createModal" data-bs-toggle="modal" aria-label="Close" id="editor-group-confirm" onclick="editorGroup.editorGroupConfirm(this)" data-gid="" data-name="" data-view="editor" data-view="editor" disabled>{{ fs_lang('confirm') }}</button>
             </div>
         </div>
     </div>
@@ -51,90 +40,14 @@
 
 @push('script')
     <script>
-        const changeGid = function (gid = '') {
-            $.post("{{ route('fresns.api.editor.update', ['type' => 'post', 'draftId' => $draftId]) }}", {
-                'postGid' : gid,
-            })
+        function editorChangeGid(gid = '') {
+            $.ajax({
+                url: "{{ route('fresns.api.patch', ['path' => '/api/fresns/v1/editor/post/draft/'.$did]) }}",
+                type: "PATCH",
+                data: {
+                    'gid': gid,
+                }
+            });
         };
-
-        function selectGroup(obj) {
-            let gid = $(obj).data('gid'),
-                gname = $(obj).text();
-            $('#fresns-group .modal-close').trigger('click');
-            $('.fresns-editor .editor-group #group').text(gname);
-            $(".fresns-editor input[name='postGid']").val(gid);
-            changeGid(gid);
-        }
-
-        function ajaxGetGroupList(action, pageSize = 15, page = 1) {
-            let html = '';
-
-            $('#fresns-editor-groups .list-group').append('<div class="text-center mt-4 group-spinners"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>');
-
-            $('#fresns-editor-groups .list-group-addmore').empty().append("{{ fs_lang('loading') }}");
-
-            $.get(action + "?page=" + page + "&pageSize=" + pageSize, function (data){
-                let lists = data.list
-                page = page + 1
-                if (lists.length > 0) {
-                    $.each(lists, function (i, list){
-                        html += '<a href="javascript:void(0)" data-gid="'+ list.gid +'" onclick="selectGroup(this)" class="list-group-item list-group-item-action';
-                        if (list.publishRule.allowPost) {
-                            html += '">';
-                        } else {
-                            html += ' disabled opacity-75">';
-                        }
-                        if (list.cover) {
-                            html += '<img src="' + list.cover + '" height="20" class="me-1">';
-                        }
-                        html += list.name + '</a>'
-                    });
-                }
-                if (data.pagination.currentPage === 1){
-                    $('#fresns-group .list-group').each(function (){
-                        $(this).empty();
-                        $(this).next().empty();
-                    });
-                }
-
-                $('#fresns-editor-groups .list-group .group-spinners').remove();
-                $('#fresns-editor-groups .list-group').append(html);
-
-                $('#fresns-editor-groups .list-group-addmore').empty();
-                if (data.pagination.currentPage < data.pagination.lastPage) {
-                    let addMoreHtml = `<a href="javascript:void(0)"  class="add-more" onclick="ajaxGetGroupList('${action}', ${pageSize}, ${page})">{{ fs_lang('clickToLoadMore') }}</a>`;
-                    $('#fresns-editor-groups .list-group-addmore').append(addMoreHtml);
-                }
-
-                $("#fresns-group .group-categories").each(function (){
-                    $(this).attr('disabled', false)
-                })
-            })
-        }
-
-        $(function (){
-            $("#fresns-group .group-categories").on('click', function () {
-                let obj = $(this),
-                    pageSize = obj.data('page-size'),
-                    page = obj.data('page'),
-                    action = obj.data('action')
-
-                $("#fresns-group .group-categories").each(function (){
-                    $(this).attr('disabled', true)
-                })
-
-                $('#fresns-group .list-group').each(function (){
-                    $(this).empty();
-                    $(this).next().empty();
-                });
-                ajaxGetGroupList(action, pageSize, page)
-            })
-
-            $("#not-select-group").on('click', function () {
-                $('.fresns-editor .editor-group #group').text("{{ fs_lang('editorNoSelectGroup') }}");
-                $(".fresns-editor input[name='postGid']").val("");
-                changeGid();
-            })
-        })
     </script>
 @endpush

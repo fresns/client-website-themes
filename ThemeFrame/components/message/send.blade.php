@@ -1,7 +1,6 @@
 @if (fs_config('conversation_status'))
     @if ($user['conversation']['status'])
         <form action="{{ route('fresns.api.post', ['path' => '/api/fresns/v1/conversation/message']) }}" method="post" class="api-request-form">
-            @csrf
             <input type="hidden" name="uidOrUsername" value="{{ $user['fsid'] }}"/>
 
             <div id="send-box" class="input-group">

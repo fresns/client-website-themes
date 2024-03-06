@@ -222,7 +222,7 @@
         </div>
 
         {{-- Comment Box --}}
-        @component('components.editor.comment-box', [
+        @component('components.editor.quick-publish-comment', [
             'nickname' => $comment['author']['nickname'],
             'pid' => $comment['replyToPost']['pid'] ?? null,
             'cid' => $comment['cid'],

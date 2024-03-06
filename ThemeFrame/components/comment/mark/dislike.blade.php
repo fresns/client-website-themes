@@ -11,7 +11,6 @@
 @endif
 
 <form action="{{ route('fresns.api.post', ['path' => '/api/fresns/v1/user/mark']) }}" method="post">
-    @csrf
     <input type="hidden" name="markType" value="dislike"/>
     <input type="hidden" name="type" value="comment"/>
     <input type="hidden" name="fsid" value="{{ $cid }}"/>

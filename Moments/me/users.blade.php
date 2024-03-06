@@ -39,7 +39,28 @@
                         @csrf
                         <input type="hidden" name="uidOrUsername" value="{{ $item['uid'] }}">
                         @if ($item['hasPin'])
-                            <a data-bs-target="#userPwdLogin" data-uid="{{ $item['uid'] }}" data-nickname="{{ $item['nickname'] }}" data-bs-toggle="modal" data-bs-dismiss="modal" class="btn btn-outline-secondary btn-sm my-2" onclick="$('#userPwdLoginLabel').text($(this).data('nickname'));$('#userPwdLogin input[name=uidOrUsername]').val($(this).data('uid'))">{{ fs_lang('userPassword') }}</a>
+                            <div class="btn-group my-2">
+                                <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-toggle="modal" data-bs-dismiss="modal" data-bs-target="#userPinLogin" data-uid="{{ $item['uid'] }}" data-nickname="{{ $item['nickname'] }}" onclick="$('#userPinLoginLabel').text($(this).data('nickname'));$('#userPinLogin input[name=uidOrUsername]').val($(this).data('uid'))">
+                                    {{ fs_lang('userPinLogin') }}
+                                </button>
+                                @if (fs_config('account_users_service'))
+                                    <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split btn-sm" data-bs-toggle="dropdown" aria-expanded="false" data-bs-reference="parent">
+                                        <span class="visually-hidden">Toggle Dropdown</span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                                                data-type="account"
+                                                data-scene="resetPin"
+                                                data-post-message-key="reload"
+                                                data-title="{{ fs_lang('userPinReset') }}"
+                                                data-url="{{ fs_config('account_users_service') }}">
+                                                {{ fs_lang('userPinReset') }}
+                                            </button>
+                                        </li>
+                                    </ul>
+                                @endif
+                            </div>
                         @else
                             <button type="submit" class="btn btn-outline-secondary btn-sm my-2">{{ fs_lang('select') }}</button>
                         @endif

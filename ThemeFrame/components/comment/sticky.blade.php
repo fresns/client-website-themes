@@ -233,7 +233,7 @@
         </div>
 
         {{-- Comment Box --}}
-        @component('components.editor.comment-box', [
+        @component('components.editor.quick-publish-comment', [
             'nickname' => $sticky['author']['nickname'],
             'pid' => $sticky['replyToPost']['pid'],
             'cid' => $sticky['cid'],

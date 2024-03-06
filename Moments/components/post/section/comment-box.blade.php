@@ -7,7 +7,6 @@
         @endphp
         {{-- Comment Box --}}
         <form class="form-quick-publish" action="{{ route('fresns.api.post', ['path' => '/api/fresns/v1/editor/comment/publish']) }}" method="post" enctype="multipart/form-data">
-            @csrf
             <div class="editor-content">
                 <input type="hidden" name="commentPid" value="{{ $pid }}">
 
@@ -27,7 +26,7 @@
                     {{-- Sticker and Upload --}}
                     <div class="float-lg-start @desktop w-65 @enddesktop">
                         <div class="d-flex">
-                            @if (fs_config('comment_editor_sticker'))
+                            @if (fs_comment_editor('sticker'))
                                 <div class="stickers me-2">
                                     <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                                         <i class="fa-regular fa-face-smile"></i>
@@ -57,10 +56,10 @@
                                 </div>
                             @endif
 
-                            @if (fs_config('comment_editor_image'))
+                            @if (fs_comment_editor('image.status'))
                                 <div class="input-group">
                                     <label class="input-group-text" for="comment-file-{{ $pid.$cid }}">{{ fs_lang('editorImages') }}</label>
-                                    <input type="file" class="form-control" accept="{{ fs_post_editor('image.inputAccept') }}" name="image" id="comment-file-{{ $pid.$cid }}">
+                                    <input type="file" class="form-control" accept="{{ fs_comment_editor('image.inputAccept') }}" name="image" id="comment-file-{{ $pid.$cid }}">
                                 </div>
                             @endif
                         </div>
@@ -75,7 +74,7 @@
                             </div>
 
                             {{-- Anonymous Option --}}
-                            @if (fs_config('comment_editor_anonymous'))
+                            @if (fs_comment_editor('anonymous'))
                                 <div class="bd-highlight ms-3">
                                     <div class="form-check">
                                         <input class="form-check-input" name="isAnonymous" type="checkbox" value="1" id="{{ $pid.'isAnonymous' }}">

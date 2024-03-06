@@ -254,7 +254,6 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <form class="api-request-form" action="{{ route('fresns.api.patch', ['path' => '/api/fresns/v1/user/profile']) }}" method="patch" autocomplete="off">
-                    @csrf
                     <div class="modal-header">
                         <h5 class="modal-title" id="editModalLabel">{{ fs_lang('errorUnavailable') }}</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

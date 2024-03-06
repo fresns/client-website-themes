@@ -187,7 +187,7 @@
                 @if ($post['group'])
                     <div class="content-group me-2">
                         <a href="{{ fs_route(route('fresns.group.detail', ['gid' => $post['group']['gid']])) }}" class="badge rounded-pill text-decoration-none">
-                            @if (!empty($post['group']['cover']))
+                            @if ($post['group']['cover'])
                                 <img src="{{ $post['group']['cover'] }}" loading="lazy" alt="$post['group']['name']" class="rounded">
                             @endif
                             {{ $post['group']['name'] }}
@@ -307,7 +307,7 @@
 
         {{-- Comment Box --}}
         @if (fs_user()->check())
-            @component('components.editor.comment-box', [
+            @component('components.editor.quick-publish-comment', [
                 'nickname' => $post['author']['nickname'],
                 'pid' => $post['pid'],
             ])@endcomponent

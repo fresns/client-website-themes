@@ -1,6 +1,6 @@
 <div class="editor-toolbar d-flex flex-wrap shadow-sm">
     {{-- Sticker --}}
-    @if ($config['sticker'])
+    @if ($editorConfig['sticker'])
         <div class="stickers">
             <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                 <div class="d-flex flex-column">
@@ -34,14 +34,14 @@
     @endif
 
     {{-- Image --}}
-    @if ($config['image']['status'])
-        @if ($config['image']['uploadForm'] == 'fresns')
+    @if ($editorConfig['image']['status'])
+        @if ($editorConfig['image']['uploadType'] == 'api')
             <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresns-upload"
                 data-type="image"
-                data-accept="{{ $config['image']['inputAccept'] }}"
-                data-extensions="{{ $config['image']['extensions'] }}"
-                data-maxsize="{{ $config['image']['maxSize'] }}"
-                data-maxnumber="{{ $config['image']['uploadNumber'] }}">
+                data-accept="{{ $editorConfig['image']['inputAccept'] }}"
+                data-extensions="{{ $editorConfig['image']['extensions'] }}"
+                data-maxsize="{{ $editorConfig['image']['maxSize'] }}"
+                data-maxnumber="{{ $editorConfig['image']['uploadNumber'] }}">
                 <div class="d-flex flex-column">
                     <i class="bi bi-image"></i>
                     <span>{{ fs_lang('editorImages') }}</span>
@@ -52,14 +52,9 @@
                 data-type="editor"
                 data-scene="{{ $type.'Editor' }}"
                 data-post-message-key="fresnsEditorUpload"
-                @if ($type == 'post')
-                    data-plid="{{ $plid }}"
-                @else
-                    data-clid="{{ $clid }}"
-                @endif
-                data-upload-info="{{ urlencode(base64_encode(json_encode($uploadInfo['image']))) }}"
+                data-did="{{ $did }}"
                 data-title="{{ fs_lang('editorUpload') }}"
-                data-url="{{ $config['image']['uploadUrl'] }}">
+                data-url="{{ $editorConfig['image']['uploadUrl'] }}">
                 <div class="d-flex flex-column">
                     <i class="bi bi-image"></i>
                     <span>{{ fs_lang('editorImages') }}</span>
@@ -69,15 +64,15 @@
     @endif
 
     {{-- Video --}}
-    @if ($config['video']['status'])
-        @if ($config['video']['uploadForm'] == 'fresns')
+    @if ($editorConfig['video']['status'])
+        @if ($editorConfig['video']['uploadType'] == 'api')
             <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresns-upload"
                 data-type="video"
-                data-accept="{{ $config['video']['inputAccept'] }}"
-                data-extensions="{{ $config['video']['extensions'] }}"
-                data-maxsize="{{ $config['video']['maxSize'] }}"
-                data-maxtime="{{ $config['video']['maxTime'] }}"
-                data-maxnumber="{{ $config['video']['uploadNumber'] }}">
+                data-accept="{{ $editorConfig['video']['inputAccept'] }}"
+                data-extensions="{{ $editorConfig['video']['extensions'] }}"
+                data-maxsize="{{ $editorConfig['video']['maxSize'] }}"
+                data-maxtime="{{ $editorConfig['video']['maxTime'] }}"
+                data-maxnumber="{{ $editorConfig['video']['uploadNumber'] }}">
                     <div class="d-flex flex-column">
                     <i class="bi bi-film"></i>
                     <span>{{ fs_lang('editorVideos') }}</span>
@@ -88,14 +83,9 @@
                 data-type="editor"
                 data-scene="{{ $type.'Editor' }}"
                 data-post-message-key="fresnsEditorUpload"
-                @if ($type == 'post')
-                    data-plid="{{ $plid }}"
-                @else
-                    data-clid="{{ $clid }}"
-                @endif
-                data-upload-info="{{ urlencode(base64_encode(json_encode($uploadInfo['video']))) }}"
+                data-did="{{ $did }}"
                 data-title="{{ fs_lang('editorUpload') }}"
-                data-url="{{ $config['video']['uploadUrl'] }}">
+                data-url="{{ $editorConfig['video']['uploadUrl'] }}">
                 <div class="d-flex flex-column">
                     <i class="bi bi-film"></i>
                     <span>{{ fs_lang('editorVideos') }}</span>
@@ -105,15 +95,15 @@
     @endif
 
     {{-- Audio --}}
-    @if ($config['audio']['status'])
-        @if ($config['audio']['uploadForm'] == 'fresns')
+    @if ($editorConfig['audio']['status'])
+        @if ($editorConfig['audio']['uploadType'] == 'api')
             <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresns-upload"
                 data-type="audio"
-                data-accept="{{ $config['audio']['inputAccept'] }}"
-                data-extensions="{{ $config['audio']['extensions'] }}"
-                data-maxsize="{{ $config['audio']['maxSize'] }}"
-                data-maxtime="{{ $config['audio']['maxTime'] }}"
-                data-maxnumber="{{ $config['audio']['uploadNumber'] }}">
+                data-accept="{{ $editorConfig['audio']['inputAccept'] }}"
+                data-extensions="{{ $editorConfig['audio']['extensions'] }}"
+                data-maxsize="{{ $editorConfig['audio']['maxSize'] }}"
+                data-maxtime="{{ $editorConfig['audio']['maxTime'] }}"
+                data-maxnumber="{{ $editorConfig['audio']['uploadNumber'] }}">
                 <div class="d-flex flex-column">
                     <i class="bi bi-music-note-beamed"></i>
                     <span>{{ fs_lang('editorAudios') }}</span>
@@ -124,14 +114,9 @@
                 data-type="editor"
                 data-scene="{{ $type.'Editor' }}"
                 data-post-message-key="fresnsEditorUpload"
-                @if ($type == 'post')
-                    data-plid="{{ $plid }}"
-                @else
-                    data-clid="{{ $clid }}"
-                @endif
-                data-upload-info="{{ urlencode(base64_encode(json_encode($uploadInfo['audio']))) }}"
+                data-did="{{ $did }}"
                 data-title="{{ fs_lang('editorUpload') }}"
-                data-url="{{ $config['audio']['uploadUrl'] }}">
+                data-url="{{ $editorConfig['audio']['uploadUrl'] }}">
                 <div class="d-flex flex-column">
                     <i class="bi bi-music-note-beamed"></i>
                     <span>{{ fs_lang('editorAudios') }}</span>
@@ -141,14 +126,14 @@
     @endif
 
     {{-- Document --}}
-    @if ($config['document']['status'])
-        @if ($config['document']['uploadForm'] == 'fresns')
+    @if ($editorConfig['document']['status'])
+        @if ($editorConfig['document']['uploadType'] == 'api')
             <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresns-upload"
                 data-type="document"
-                data-accept="{{ $config['document']['inputAccept'] }}"
-                data-extensions="{{ $config['document']['extensions'] }}"
-                data-maxsize="{{ $config['document']['maxSize'] }}"
-                data-maxnumber="{{ $config['document']['uploadNumber'] }}">
+                data-accept="{{ $editorConfig['document']['inputAccept'] }}"
+                data-extensions="{{ $editorConfig['document']['extensions'] }}"
+                data-maxsize="{{ $editorConfig['document']['maxSize'] }}"
+                data-maxnumber="{{ $editorConfig['document']['uploadNumber'] }}">
                 <div class="d-flex flex-column">
                     <i class="bi bi-file-earmark-text"></i>
                     <span>{{ fs_lang('editorDocuments') }}</span>
@@ -159,14 +144,9 @@
                 data-type="editor"
                 data-scene="{{ $type.'Editor' }}"
                 data-post-message-key="fresnsEditorUpload"
-                @if ($type == 'post')
-                    data-plid="{{ $plid }}"
-                @else
-                    data-clid="{{ $clid }}"
-                @endif
-                data-upload-info="{{ urlencode(base64_encode(json_encode($uploadInfo['document']))) }}"
+                data-did="{{ $did }}"
                 data-title="{{ fs_lang('editorUpload') }}"
-                data-url="{{ $config['document']['uploadUrl'] }}">
+                data-url="{{ $editorConfig['document']['uploadUrl'] }}">
                 <div class="d-flex flex-column">
                     <i class="bi bi-file-earmark-text"></i>
                     <span>{{ fs_lang('editorDocuments') }}</span>
@@ -176,7 +156,7 @@
     @endif
 
     {{-- Title --}}
-    @if ($config['title']['status'])
+    @if ($editorConfig['title']['status'])
         <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="collapse" href="#titleCollapse" aria-expanded="false" aria-controls="titleCollapse">
             <div class="d-flex flex-column">
                 <i class="bi bi-textarea-t"></i>
@@ -186,7 +166,7 @@
     @endif
 
     {{-- Mention --}}
-    @if ($config['mention']['status'] && $config['mention']['display'])
+    @if ($editorConfig['mention']['status'] && $editorConfig['mention']['display'])
         <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresns-mention">
             <div class="d-flex flex-column">
                 <i class="bi bi-at"></i>
@@ -196,7 +176,7 @@
     @endif
 
     {{-- Hashtag --}}
-    @if ($config['hashtag']['status'] && $config['hashtag']['display'])
+    @if ($editorConfig['hashtag']['status'] && $editorConfig['hashtag']['display'])
         <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresns-hashtag">
             <div class="d-flex flex-column">
                 <i class="bi bi-hash"></i>
@@ -206,18 +186,14 @@
     @endif
 
     {{-- Toolbar Extends --}}
-    @if ($config['extend']['list'])
-        @foreach($config['extend']['list'] as $extend)
+    @if ($editorConfig['extend']['list'])
+        @foreach($editorConfig['extend']['list'] as $extend)
             @if ($extend['editorToolbar'])
                 <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                     data-type="editor"
                     data-scene="{{ $type.'Editor' }}"
                     data-post-message-key="fresnsEditorExtension"
-                    @if ($type == 'post')
-                        data-plid="{{ $plid }}"
-                    @else
-                        data-clid="{{ $clid }}"
-                    @endif
+                    data-did="{{ $did }}"
                     data-title="{{ $extend['name'] }}"
                     data-url="{{ $extend['url'] }}">
                     <div class="d-flex flex-column">
@@ -230,7 +206,7 @@
     @endif
 
     {{-- Extend Menus --}}
-    @if ($config['extend']['status'] && $config['extend']['list'])
+    @if ($editorConfig['extend']['status'] && $editorConfig['extend']['list'])
         <div class="dropdown">
             <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="d-flex flex-column">
@@ -241,18 +217,14 @@
 
             {{-- Extend List --}}
             <ul class="dropdown-menu rounded-0" aria-labelledby="expands">
-                @foreach($config['extend']['list'] as $extend)
+                @foreach($editorConfig['extend']['list'] as $extend)
                     @if (! $extend['editorToolbar'])
                         <li>
                             <a class="dropdown-item" role="button" data-bs-toggle="modal" href="#fresnsModal"
                                 data-type="editor"
                                 data-scene="{{ $type.'Editor' }}"
                                 data-post-message-key="fresnsEditorExtension"
-                                @if ($type == 'post')
-                                    data-plid="{{ $plid }}"
-                                @else
-                                    data-clid="{{ $clid }}"
-                                @endif
+                                data-did="{{ $did }}"
                                 data-title="{{ $extend['name'] }}"
                                 data-url="{{ $extend['url'] }}">
                                 <img src="{{ $extend['icon'] }}" loading="lazy" width="20" height="20">
@@ -267,7 +239,7 @@
 </div>
 
 {{-- Mention Modal --}}
-@if ($config['mention']['status'] && $config['mention']['display'])
+@if ($editorConfig['mention']['status'] && $editorConfig['mention']['display'])
     <div class="modal fade" id="fresns-mention" tabindex="-1" aria-labelledby="fresns-mention" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -287,7 +259,7 @@
 @endif
 
 {{-- Hashtag Modal --}}
-@if ($config['hashtag']['status'] && $config['hashtag']['display'])
+@if ($editorConfig['hashtag']['status'] && $editorConfig['hashtag']['display'])
     <div class="modal fade" id="fresns-hashtag" tabindex="-1" aria-labelledby="fresns-hashtag" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -309,11 +281,11 @@
 @push('script')
     <script>
         $(function (){
-            @if ($config['mention']['status'])
+            @if ($editorConfig['mention']['status'])
                 $("#atUser").on('input propertychange change', function (){
                     let query = $(this).val().trim();
                     if (query) {
-                        $.get("{{ route('fresns.api.input.tips') }}", {"type": 'user', "key": query}, function (data) {
+                        $.get("{{ route('fresns.api.get', ['path' => '/api/fresns/v1/common/input-tips']) }}", {"type": 'user', "key": query}, function (data) {
                             let html = "";
                             $.each(data, function (k,v){
                                 html += "<option value='" + v.fsid + "'>" + v.name + " " + "@" + v.fsid + "</option>"
@@ -336,11 +308,11 @@
                 });
             @endif
 
-            @if ($config['hashtag']['status'])
+            @if ($editorConfig['hashtag']['status'])
                 $("#atHashtag").on('input propertychange change', function (){
                     let query = $(this).val().trim();
                     if (query) {
-                        $.get("{{ route('fresns.api.input.tips') }}", {"type": 'hashtag', "key": query}, function (data) {
+                        $.get("{{ route('fresns.api.get', ['path' => '/api/fresns/v1/common/input-tips']) }}", {"type": 'hashtag', "key": query}, function (data) {
                             let html = "";
                             $.each(data, function (k,v){
                                 html += "<option value='" + v.name +"'>"+ v.name +"</option>"

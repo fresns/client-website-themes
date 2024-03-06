@@ -1,16 +1,16 @@
-<div class="editor-file-image editor-file-image-{{ count($files['images']) }} mt-3 clearfix">
-    @if ($files['images'] ?? null)
+@if ($files['images'])
+    <div class="editor-file-image editor-file-image-{{ count($files['images']) }} mt-3 clearfix">
         @foreach($files['images'] as $image)
             <div class="position-relative">
                 <img src="{{ $image['imageSquareUrl'] }}" loading="lazy" class="img-fluid">
                 <div class="position-absolute top-0 end-0 editor-btn-delete"><button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0" title="{{ fs_lang('delete') }}" data-fid="{{ $image['fid'] }}" onclick="deleteFile(this)"><i class="fa-regular fa-trash-can"></i></button></div>
             </div>
         @endforeach
-    @endif
-</div>
+    </div>
+@endif
 
-<div class="editor-file-video mt-3 clearfix">
-    @if ($files['videos'] ?? null)
+@if ($files['videos'])
+    <div class="editor-file-video mt-3 clearfix">
         @foreach($files['videos'] as $video)
             <div class="position-relative">
                 @if ($video['videoPosterUrl'])
@@ -30,11 +30,11 @@
                 </div>
             </div>
         @endforeach
-    @endif
-</div>
+    </div>
+@endif
 
-<div class="editor-file-audio mt-3 clearfix">
-    @if ($files['audios'] ?? null)
+@if ($files['audios'])
+    <div class="editor-file-audio mt-3 clearfix">
         @foreach($files['audios'] as $audio)
             <div class="position-relative">
                 <audio src="{{ $audio['audioUrl'] }}" controls="controls" preload="meta" controlsList="nodownload" oncontextmenu="return false">
@@ -43,11 +43,11 @@
                 <div class="position-absolute top-0 end-0 editor-btn-delete"><button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0"  data-fid="{{ $audio['fid'] }}" onclick="deleteFile(this)" title="{{ fs_lang('delete') }}"><i class="fa-regular fa-trash-can"></i></button></div>
             </div>
         @endforeach
-    @endif
-</div>
+    </div>
+@endif
 
-<div class="editor-file-document mt-3 clearfix">
-    @if ($files['documents'] ?? null)
+@if ($files['documents'])
+    <div class="editor-file-document mt-3 clearfix">
         @foreach($files['documents'] as $doc)
             <div class="position-relative">
                 <div class="editor-document-box">
@@ -57,5 +57,5 @@
                 <div class="position-absolute top-0 end-0 editor-btn-delete"><button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0" data-fid="{{ $doc['fid'] }}" onclick="deleteFile(this)" title="{{ fs_lang('delete') }}"><i class="fa-regular fa-trash-can"></i></button></div>
             </div>
         @endforeach
-    @endif
-</div>
+    </div>
+@endif

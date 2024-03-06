@@ -31,6 +31,7 @@
         ]) && ! Route::is([
             'fresns.notification.index',
             'fresns.conversation.index',
+            'fresns.editor.*',
         ]) || request()->url() == fs_route(route('fresns.custom.page', ['name' => 'channels'])))
             @if (fs_config('fs_theme_quick_publish'))
                 <button class="btn btn-warning text-white rounded-pill d-lg-none fs-create fs-6" type="button" data-bs-toggle="modal" data-bs-target="#createModal">{{ fs_config('publish_post_name') }}</button>
@@ -120,15 +121,17 @@
                         </a>
                     </li>
                     {{-- Publish --}}
-                    <li class="nav-item mt-4">
-                        <div class="d-grid gap-2">
-                            @if (fs_config('fs_theme_quick_publish'))
-                                <button class="btn btn-warning text-white rounded-pill fs-create" type="button" data-bs-toggle="modal" data-bs-target="#createModal">{{ fs_config('publish_post_name') }}</button>
-                            @else
-                                <a class="btn btn-warning text-white rounded-pill fs-create" href="{{ fs_route(route('fresns.editor.post')) }}">{{ fs_config('publish_post_name') }}</a>
-                            @endif
-                        </div>
-                    </li>
+                    @if (! Route::is('fresns.editor.*'))
+                        <li class="nav-item mt-4">
+                            <div class="d-grid gap-2">
+                                @if (fs_config('fs_theme_quick_publish'))
+                                    <button class="btn btn-warning text-white rounded-pill fs-create" type="button" data-bs-toggle="modal" data-bs-target="#createModal">{{ fs_config('publish_post_name') }}</button>
+                                @else
+                                    <a class="btn btn-warning text-white rounded-pill fs-create" href="{{ fs_route(route('fresns.editor.post')) }}">{{ fs_config('publish_post_name') }}</a>
+                                @endif
+                            </div>
+                        </li>
+                    @endif
                 @else
                     {{-- Switch Languages --}}
                     @if (fs_config('language_status'))
