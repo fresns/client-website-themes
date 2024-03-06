@@ -954,7 +954,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
     });
 
     // top groups
-    $("#editor-group").on('click', function (obj) {
+    $('#editor-group').on('click', function (obj) {
         var initialized = $(this).attr('data-initialized');
 
         console.log('initialized', initialized);
@@ -977,7 +977,7 @@ var editorGroup = {
 
         console.log('editorGroupConfirm', gid, name);
 
-        $("#editor-group-gid").val(gid);
+        $('#editor-group-gid').val(gid);
         $('#editor-group-name').text(name);
 
         if (view == 'editor') {
@@ -1019,78 +1019,100 @@ var editorGroup = {
         editorGroup.editorGroupModalSize(level, subgroupCount);
 
         if (subgroupCount) {
-            editorGroup.editorAjaxGetGroupList(level, gid, page = 1);
+            editorGroup.editorAjaxGetGroupList(level, gid, (page = 1));
         }
     },
 
     // editorAjaxGetTopGroups
     editorAjaxGetTopGroups: function (topGroupsPage = 1) {
-        $('#editor-top-groups .list-group').append('<div class="text-center group-spinners mt-2"><div class="spinner-border spinner-border-sm text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>');
+        $('#editor-top-groups .list-group').append(
+            '<div class="text-center group-spinners mt-2"><div class="spinner-border spinner-border-sm text-primary" role="status"><span class="visually-hidden">Loading...</span></div></div>'
+        );
         $('#editor-top-groups .list-group-addmore').empty().append(fs_lang('loading'));
 
         let html = '';
 
-        $.get('/api/theme/actions/api/fresns/v1/group/list?topGroups=1&pageSize=30&page=' + topGroupsPage, function (data) {
-            let apiData = data.data;
+        $.get(
+            '/api/theme/actions/api/fresns/v1/group/list?topGroups=1&pageSize=30&page=' + topGroupsPage,
+            function (data) {
+                let apiData = data.data;
 
-            let groups = apiData.list;
+                let groups = apiData.list;
 
-            topGroupsPage = topGroupsPage + 1;
+                topGroupsPage = topGroupsPage + 1;
 
-            if (groups.length > 0) {
-                $.each(groups, function (i, group){
-                    html += '<a href="javascript:void(0)" data-gid="' + group.gid + '" data-level="1" data-subgroup-count="'+ group.subgroupCount + '" onclick="editorGroup.editorGroupSelect(this)" class="list-group-item list-group-item-action group-list-' + group.gid + '"';
+                if (groups.length > 0) {
+                    $.each(groups, function (i, group) {
+                        html +=
+                            '<a href="javascript:void(0)" data-gid="' +
+                            group.gid +
+                            '" data-level="1" data-subgroup-count="' +
+                            group.subgroupCount +
+                            '" onclick="editorGroup.editorGroupSelect(this)" class="list-group-item list-group-item-action group-list-' +
+                            group.gid +
+                            '"';
 
-                    if (group.publishRule.canPublish && group.publishRule.allowPost) {
-                        html += ' data-publish="1">';
-                    } else {
-                        html += ' data-publish="0">';
-                    }
+                        if (group.publishRule.canPublish && group.publishRule.allowPost) {
+                            html += ' data-publish="1">';
+                        } else {
+                            html += ' data-publish="0">';
+                        }
 
-                    if (group.cover) {
-                        html += '<img src="' + group.cover + '" height="20" class="me-1">';
-                    }
+                        if (group.cover) {
+                            html += '<img src="' + group.cover + '" height="20" class="me-1">';
+                        }
 
-                    html += group.name + '</a>';
-                });
+                        html += group.name + '</a>';
+                    });
+                }
+
+                if (apiData.pagination.currentPage == 1) {
+                    $('#editor-top-groups .list-group').each(function () {
+                        $(this).empty();
+                        $(this).next().empty();
+                    });
+                }
+
+                $('#editor-top-groups .list-group .group-spinners').remove();
+                $('#editor-top-groups .list-group').append(html);
+
+                $('#editor-top-groups .list-group-addmore').empty();
+                if (apiData.pagination.currentPage < apiData.pagination.lastPage) {
+                    let addMoreHtml = `<a href="javascript:void(0)"  class="add-more mt-3" onclick="editorGroup.editorAjaxGetTopGroups(${topGroupsPage})">${fs_lang(
+                        'clickToLoadMore'
+                    )}</a>`;
+                    $('#editor-top-groups .list-group-addmore').append(addMoreHtml);
+                }
+
+                $('#editor-group').attr('data-initialized', 1);
             }
-
-            if (apiData.pagination.currentPage == 1) {
-                $('#editor-top-groups .list-group').each(function (){
-                    $(this).empty();
-                    $(this).next().empty();
-                });
-            }
-
-            $('#editor-top-groups .list-group .group-spinners').remove();
-            $('#editor-top-groups .list-group').append(html);
-
-            $('#editor-top-groups .list-group-addmore').empty();
-            if (apiData.pagination.currentPage < apiData.pagination.lastPage) {
-                let addMoreHtml = `<a href="javascript:void(0)"  class="add-more mt-3" onclick="editorGroup.editorAjaxGetTopGroups(${topGroupsPage})">${fs_lang('clickToLoadMore')}</a>`;
-                $('#editor-top-groups .list-group-addmore').append(addMoreHtml);
-            }
-
-            $('#editor-group').attr('data-initialized', 1);
-        });
+        );
     },
 
     // editorAjaxGetGroupList
     editorAjaxGetGroupList: function (level, gid, page = 1) {
-        var parentTargetId = 'group-list-'+ level;
+        var parentTargetId = 'group-list-' + level;
         level = level + 1;
 
-        var targetId = 'group-list-'+ level;
+        var targetId = 'group-list-' + level;
         var targetElement = $('#' + targetId);
 
         if (targetElement.length > 0) {
             targetElement.empty().append('<div class="list-group"></div>');
         } else {
-            $('#' + parentTargetId).append('<div id="' + targetId + '" class="d-flex justify-content-start ms-4"><div class="list-group"></div></div>');
+            $('#' + parentTargetId).append(
+                '<div id="' +
+                    targetId +
+                    '" class="d-flex justify-content-start ms-4"><div class="list-group"></div></div>'
+            );
         }
 
-        $('#' + targetId + ' .list-group').append('<div class="text-center group-spinners mt-2"><div class="spinner-border spinner-border-sm text-primary" role="status"><span class="visually-hidden">Loading...</span></div><div class="list-group-addmore text-center mb-2 fs-7 text-secondary"></div></div>');
-        $('#' + targetId + ' .list-group-addmore').empty().append(fs_lang('loading'));
+        $('#' + targetId + ' .list-group').append(
+            '<div class="text-center group-spinners mt-2"><div class="spinner-border spinner-border-sm text-primary" role="status"><span class="visually-hidden">Loading...</span></div><div class="list-group-addmore text-center mb-2 fs-7 text-secondary"></div></div>'
+        );
+        $('#' + targetId + ' .list-group-addmore')
+            .empty()
+            .append(fs_lang('loading'));
 
         let html = '';
 
@@ -1102,8 +1124,17 @@ var editorGroup = {
             page = page + 1;
 
             if (groups.length > 0) {
-                $.each(groups, function (i, group){
-                    html += '<a href="javascript:void(0)" data-gid="' + group.gid + '" data-level="' + level + '" data-subgroup-count="'+ group.subgroupCount + '" onclick="editorGroup.editorGroupSelect(this)" class="list-group-item list-group-item-action group-list-' + group.gid + '"';
+                $.each(groups, function (i, group) {
+                    html +=
+                        '<a href="javascript:void(0)" data-gid="' +
+                        group.gid +
+                        '" data-level="' +
+                        level +
+                        '" data-subgroup-count="' +
+                        group.subgroupCount +
+                        '" onclick="editorGroup.editorGroupSelect(this)" class="list-group-item list-group-item-action group-list-' +
+                        group.gid +
+                        '"';
 
                     if (group.publishRule.canPublish && group.publishRule.allowPost) {
                         html += ' data-publish="1">';
@@ -1120,7 +1151,7 @@ var editorGroup = {
             }
 
             if (apiData.pagination.currentPage == 1) {
-                $('#' + targetId + ' .list-group').each(function (){
+                $('#' + targetId + ' .list-group').each(function () {
                     $(this).empty();
                     $(this).next().empty();
                 });
@@ -1131,7 +1162,9 @@ var editorGroup = {
 
             $('#' + targetId + ' .list-group-addmore').empty();
             if (apiData.pagination.currentPage < apiData.pagination.lastPage) {
-                let addMoreHtml = `<a href="javascript:void(0)"  class="add-more mt-3" onclick="editorGroup.editorAjaxGetTopGroups(${topGroupsPage})">${fs_lang('clickToLoadMore')}</a>`;
+                let addMoreHtml = `<a href="javascript:void(0)"  class="add-more mt-3" onclick="editorGroup.editorAjaxGetTopGroups(${topGroupsPage})">${fs_lang(
+                    'clickToLoadMore'
+                )}</a>`;
                 $('#' + targetId + ' .list-group-addmore').append(addMoreHtml);
             }
 
@@ -1141,7 +1174,7 @@ var editorGroup = {
 
     // editorRemoveGroupBox
     editorRemoveGroupBox: function (level) {
-        var targetId = 'group-list-'+ level;
+        var targetId = 'group-list-' + level;
         var targetElement = $('#' + targetId);
 
         console.log('editorRemoveGroupBox', targetId);
@@ -1178,7 +1211,7 @@ var editorGroup = {
             $('#editor-groups-modal-class').addClass('modal-xl');
         }
     },
-}
+};
 
 // List: ajax get
 $(function () {
