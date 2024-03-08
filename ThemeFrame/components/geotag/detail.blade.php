@@ -56,5 +56,21 @@
         @if ($geotag['description'])
             <section class="fs-7 mt-1 text-secondary">{{ $geotag['description'] }}</section>
         @endif
+
+        {{-- interaction --}}
+        <section class="fs-7 mt-2">
+            @if ($geotag['interaction']['likePublicRecord'])
+                <a href="{{ fs_route(route('fresns.geotag.detail.likers', ['gid' => $geotag['gid']])) }}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover me-3">{{ $geotag['interaction']['likeUserTitle'] }}: {{ $geotag['likeCount'] }}</a>
+            @endif
+            @if ($geotag['interaction']['dislikePublicRecord'])
+                <a href="{{ fs_route(route('fresns.geotag.detail.dislikers', ['gid' => $geotag['gid']])) }}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover me-3">{{ $geotag['interaction']['dislikeUserTitle'] }}: {{ $geotag['dislikeCount'] }}</a>
+            @endif
+            @if ($geotag['interaction']['followPublicRecord'])
+                <a href="{{ fs_route(route('fresns.geotag.detail.followers', ['gid' => $geotag['gid']])) }}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover me-3">{{ $geotag['interaction']['followUserTitle'] }}: {{ $geotag['followCount'] }}</a>
+            @endif
+            @if ($geotag['interaction']['blockPublicRecord'])
+                <a href="{{ fs_route(route('fresns.geotag.detail.blockers', ['gid' => $geotag['gid']])) }}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">{{ $geotag['interaction']['blockUserTitle'] }}: {{ $geotag['blockCount'] }}</a>
+            @endif
+        </section>
     </div>
 </article>

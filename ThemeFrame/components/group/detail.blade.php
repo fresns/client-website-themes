@@ -60,6 +60,22 @@
 
         <section class="fs-7 mt-1 text-secondary">{{ $group['description'] }}</section>
 
+        {{-- interaction --}}
+        <section class="fs-7 mt-2">
+            @if ($group['interaction']['likePublicRecord'])
+                <a href="{{ fs_route(route('fresns.group.detail.likers', ['gid' => $group['gid']])) }}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover me-3">{{ $group['interaction']['likeUserTitle'] }}: {{ $group['likeCount'] }}</a>
+            @endif
+            @if ($group['interaction']['dislikePublicRecord'])
+                <a href="{{ fs_route(route('fresns.group.detail.dislikers', ['gid' => $group['gid']])) }}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover me-3">{{ $group['interaction']['dislikeUserTitle'] }}: {{ $group['dislikeCount'] }}</a>
+            @endif
+            @if ($group['interaction']['followPublicRecord'])
+                <a href="{{ fs_route(route('fresns.group.detail.followers', ['gid' => $group['gid']])) }}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover me-3">{{ $group['interaction']['followUserTitle'] }}: {{ $group['followCount'] }}</a>
+            @endif
+            @if ($group['interaction']['blockPublicRecord'])
+                <a href="{{ fs_route(route('fresns.group.detail.blockers', ['gid' => $group['gid']])) }}" class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">{{ $group['interaction']['blockUserTitle'] }}: {{ $group['blockCount'] }}</a>
+            @endif
+        </section>
+
         <section class="fs-7 mt-2" id="admins"></section>
     </div>
 </article>
