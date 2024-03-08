@@ -53,7 +53,7 @@
                 data-scene="{{ $type.'Editor' }}"
                 data-post-message-key="fresnsEditorUpload"
                 data-did="{{ $did }}"
-                data-title="{{ fs_lang('editorUpload') }}"
+                data-title="{{ fs_lang('editorUploadTip') }}"
                 data-url="{{ $editorConfig['image']['uploadUrl'] }}">
                 <div class="d-flex flex-column">
                     <i class="fa-regular fa-image"></i>
@@ -84,7 +84,7 @@
                 data-scene="{{ $type.'Editor' }}"
                 data-post-message-key="fresnsEditorUpload"
                 data-did="{{ $did }}"
-                data-title="{{ fs_lang('editorUpload') }}"
+                data-title="{{ fs_lang('editorUploadTip') }}"
                 data-url="{{ $editorConfig['video']['uploadUrl'] }}">
                 <div class="d-flex flex-column">
                     <i class="fa-solid fa-video"></i>
@@ -115,7 +115,7 @@
                 data-scene="{{ $type.'Editor' }}"
                 data-post-message-key="fresnsEditorUpload"
                 data-did="{{ $did }}"
-                data-title="{{ fs_lang('editorUpload') }}"
+                data-title="{{ fs_lang('editorUploadTip') }}"
                 data-url="{{ $editorConfig['audio']['uploadUrl'] }}">
                 <div class="d-flex flex-column">
                     <i class="fa-solid fa-music"></i>
@@ -145,7 +145,7 @@
                 data-scene="{{ $type.'Editor' }}"
                 data-post-message-key="fresnsEditorUpload"
                 data-did="{{ $did }}"
-                data-title="{{ fs_lang('editorUpload') }}"
+                data-title="{{ fs_lang('editorUploadTip') }}"
                 data-url="{{ $editorConfig['document']['uploadUrl'] }}">
                 <div class="d-flex flex-column">
                     <i class="fa-solid fa-box-archive"></i>

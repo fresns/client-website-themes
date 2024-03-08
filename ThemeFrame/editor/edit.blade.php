@@ -152,12 +152,7 @@
                 {{-- Button --}}
                 <div class="editor-submit d-grid">
                     <button type="submit" class="btn btn-success btn-lg my-5 mx-3" {{ in_array($draft['detail']['state'], [2, 3]) ? 'disabled' : ''}}>
-                        @if ($type == 'post')
-                            {{ fs_config('publish_post_name') }}
-                        @endif
-                        @if ($type == 'comment')
-                            {{ fs_config('publish_comment_name') }}
-                        @endif
+                        {{ fs_config("publish_{$type}_name") }}
                     </button>
                 </div>
             </form>
@@ -169,7 +164,7 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">{{ fs_lang('editorUpload') }}</h5>
+                    <h5 class="modal-title">{{ fs_lang('editorUploadTip') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -181,10 +176,10 @@
                         <input type="hidden" name="uploadMode" value="file">
                         <input type="hidden" name="type">
                         <input class="form-control" type="file" id="formFile">
-                        <label class="form-label mt-3 ms-1 text-secondary text-break fs-7 d-block">{{ fs_lang('editorUploadExtensions') }}: <span id="extensions"></span></label>
-                        <label class="form-label mt-1 ms-1 text-secondary text-break fs-7 d-block">{{ fs_lang('editorUploadMaxSize') }}: <span id="maxSize"></span> MB</label>
-                        <label class="form-label mt-1 ms-1 text-secondary text-break fs-7 d-block" id="maxTimeDiv">{{ fs_lang('editorUploadMaxTime') }}: <span id="maxTime"></span> {{ fs_lang('unitSecond') }}</label>
-                        <label class="form-label mt-1 ms-1 text-secondary text-break fs-7 d-block">{{ fs_lang('editorUploadNumber') }}: <span id="maxNumber"></span></label>
+                        <label class="form-label mt-3 ms-1 text-secondary text-break fs-7 d-block">{{ fs_lang('editorUploadTipExtensions') }}: <span id="extensions"></span></label>
+                        <label class="form-label mt-1 ms-1 text-secondary text-break fs-7 d-block">{{ fs_lang('editorUploadTipMaxSize') }}: <span id="maxSize"></span> MB</label>
+                        <label class="form-label mt-1 ms-1 text-secondary text-break fs-7 d-block" id="maxTimeDiv">{{ fs_lang('editorUploadTipMaxTime') }}: <span id="maxTime"></span> {{ fs_lang('unitSecond') }}</label>
+                        <label class="form-label mt-1 ms-1 text-secondary text-break fs-7 d-block">{{ fs_lang('editorUploadTipNumber') }}: <span id="maxNumber"></span></label>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -349,7 +344,7 @@
 
                 for (let i = 0; i < files.length; i++) {
                     if (files[i].size > maxSize  * 1024 * 1024) {
-                        alert("{{ fs_lang('editorUploadMaxSize') }}: " + $("#maxSize").text() + "MB");
+                        alert("{{ fs_lang('editorUploadTipMaxSize') }}: " + $("#maxSize").text() + "MB");
                         return;
                     }
 

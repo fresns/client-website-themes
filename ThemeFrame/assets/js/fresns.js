@@ -973,14 +973,14 @@ var editorGroup = {
     editorGroupConfirm: function (obj) {
         var gid = $(obj).attr('data-gid');
         var name = $(obj).attr('data-name');
-        var view = $(obj).attr('data-view');
+        var webPage = $(obj).attr('data-web-page');
 
-        console.log('editorGroupConfirm', gid, name);
+        console.log('editorGroupConfirm', gid, name, webPage);
 
         $('#editor-group-gid').val(gid);
         $('#editor-group-name').text(name);
 
-        if (view == 'editor') {
+        if (webPage == 'editor') {
             editorChangeGid(gid);
         }
     },

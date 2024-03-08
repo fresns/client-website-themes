@@ -16,13 +16,15 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">{{ fs_config('group_name') }}</h5>
-                <button type="button" class="btn-close" data-bs-target="#createModal" data-bs-toggle="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body d-flex justify-content-start">
                 {{-- Group List --}}
                 <div id="editor-top-groups">
                     @if (! fs_post_editor('group.required'))
-                        <button type="button" id="post-box-not-select-group" class="btn btn-outline-secondary btn-sm mb-2 w-100 modal-close" data-bs-target="#createModal" data-bs-toggle="modal" aria-label="Close">{{ fs_lang('editorNoGroup') }}</button>
+                        <button type="button" class="btn btn-outline-secondary btn-sm mb-2 w-100" data-bs-dismiss="modal" onclick="editorGroup.editorGroupConfirm(this)" data-gid="" data-name="{{ fs_config('group_name') }}: {{ fs_lang('editorNoSelectGroup') }}" data-web-page="editor">
+                            {{ fs_lang('editorNoGroup') }}
+                        </button>
                     @endif
                     <div class="list-group"></div>
                     <div class="list-group-addmore text-center mb-2 fs-7 text-secondary"></div>
@@ -32,7 +34,9 @@
                 {{-- Group List --}}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-target="#createModal" data-bs-toggle="modal" aria-label="Close" id="editor-group-confirm" onclick="editorGroup.editorGroupConfirm(this)" data-gid="" data-name="" data-view="editor" disabled>{{ fs_lang('confirm') }}</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  id="editor-group-confirm" onclick="editorGroup.editorGroupConfirm(this)" data-gid="" data-name="" data-web-page="editor" disabled>
+                    {{ fs_lang('confirm') }}
+                </button>
             </div>
         </div>
     </div>
