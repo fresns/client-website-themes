@@ -19,7 +19,7 @@
                             <input type="hidden" name="commentCid" value="{{ $cid }}">
 
                             {{-- Content --}}
-                            <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="{{ 'modal-quick-publish-comment-content'.$pid.$cid }}" rows="5" placeholder="{{ fs_lang('editorContent') }}"></textarea>
+                            <textarea class="form-control rounded-0 border-0 editor-content" name="content" id="{{ 'modal-quick-publish-comment-content'.$pid.$cid }}" rows="5" placeholder="{{ fs_lang('editorContent') }}"></textarea>
 
                             {{-- Content is Markdown --}}
                             @if (fs_config('moments_editor_markdown')['commentBox'] ?? false)

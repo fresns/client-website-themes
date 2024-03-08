@@ -80,7 +80,7 @@
                                 data-label="{{ fs_config('user_bio_name') }}"
                                 data-type="textarea"
                                 @if (fs_config('bio_support_mention') || fs_config('bio_support_hashtag'))
-                                    data-input-tips="fresns-content"
+                                    data-input-tips="editor-content"
                                 @endif
                                 data-name="bio"
                                 data-value="{{ fs_user('detail.bio') }}"

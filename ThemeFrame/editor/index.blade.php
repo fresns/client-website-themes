@@ -14,6 +14,8 @@
 
             {{-- Toolbar --}}
             @component('components.editor.section.toolbar', [
+                'type' => $type,
+                'did' => '',
                 'editorConfig' => $configs['editor'],
             ])@endcomponent
 

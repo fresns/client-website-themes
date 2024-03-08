@@ -205,7 +205,7 @@ function showReply(fresnsReply) {
 // at and hashtag
 function atwho() {
     if (window.mentionStatus) {
-        $('.fresns-content').atwho({
+        $('.editor-content').atwho({
             at: '@',
             displayTpl:
                 '<li><img src="${image}" height="20" width="20"/> ${name} <small class="text-muted">@${fsid}</small></li>',
@@ -230,7 +230,7 @@ function atwho() {
     }
 
     if (window.hashtagStatus) {
-        $('.fresns-content').atwho({
+        $('.editor-content').atwho({
             at: '#',
             displayTpl: '<li> ${name} </li>',
             insertTpl: window.hashtagFormat == 1 ? '${atwho-at}${name}' : '${atwho-at}${name}${atwho-at}',
@@ -1350,12 +1350,6 @@ window.onmessage = function (event) {
             window.location.reload();
             break;
 
-        case 'fresnsConnect':
-            if (fresnsCallback.action.dataHandler == 'reload') {
-                window.location.href = `/${langTag}/account/settings#account-tab`;
-            }
-            break;
-
         case 'fresnsAccountSign':
             let params = new URLSearchParams(window.location.search.slice(1));
 
@@ -1396,8 +1390,8 @@ window.onmessage = function (event) {
 
         case 'fresnsEditorUpload':
             if (fresnsCallback.action.dataHandler == 'add') {
-                fresnsCallback.data.forEach((fileinfo) => {
-                    addEditorAttachment(fileinfo);
+                fresnsCallback.data.forEach((fileInfo) => {
+                    addEditorFile(fileInfo);
                 });
 
                 $('#fresnsModal').modal('hide');

@@ -15,7 +15,7 @@
                     <input type="hidden" name="commentPid" value="{{ $pid }}">
                     <input type="hidden" name="commentCid" value="{{ $cid }}">
 
-                    <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="{{ 'quick-publish-comment-content'.$pid.$cid }}" rows="5" placeholder="{{ fs_lang('editorContent') }}"></textarea>
+                    <textarea class="form-control rounded-0 border-0 editor-content" name="content" id="{{ 'quick-publish-comment-content'.$pid.$cid }}" rows="5" placeholder="{{ fs_lang('editorContent') }}"></textarea>
 
                     {{-- Sticker and Upload --}}
                     <div class="d-flex mt-2">

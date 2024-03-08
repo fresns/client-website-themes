@@ -45,7 +45,7 @@
                         @endif
 
                         {{-- Content --}}
-                        <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="quick-publish-post-content" rows="10" placeholder="{{ fs_lang('editorContent') }}"></textarea>
+                        <textarea class="form-control rounded-0 border-0 editor-content" name="content" id="quick-publish-post-content" rows="10" placeholder="{{ fs_lang('editorContent') }}"></textarea>
 
                         {{-- Function Buttons --}}
                         <div class="d-flex mt-2">

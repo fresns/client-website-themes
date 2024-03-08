@@ -5,7 +5,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="fresns-editor">
-            <form action="{{ route('fresns.api.post', ['path' => "/api/fresns/v1/editor/{$type}/draft/{$draft['detail']['did']}"]) }}" method="post">
+            <form action="{{ route('fresns.api.post', ['path' => "/api/fresns/v1/editor/{$type}/draft/{$draft['detail']['did']}"]) }}" method="post" id="fresns-editor">
                 <input type="hidden" name="type" value="{{ $type ?? '' }}" />
                 <input type="hidden" name="gid" id="editor-group-gid" value="{{ $draft['detail']['group']['gid'] ?? '' }}" />
                 {{-- Tip: Publish Permissions --}}
@@ -40,6 +40,8 @@
 
                 {{-- Toolbar --}}
                 @component('components.editor.section.toolbar', [
+                    'type' => $type,
+                    'did' => $draft['detail']['did'],
                     'editorConfig' => $configs['editor'],
                 ])@endcomponent
 
@@ -54,7 +56,7 @@
                     @endif
 
                     {{-- Content --}}
-                    <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="content" rows="15" placeholder="{{ fs_lang('editorContent') }}">{{ $draft['detail']['content'] }}</textarea>
+                    <textarea class="form-control rounded-0 border-0 editor-content" name="content" id="content" rows="15" placeholder="{{ fs_lang('editorContent') }}">{{ $draft['detail']['content'] }}</textarea>
 
                     {{-- Files --}}
                     @component('components.editor.section.files', [
@@ -110,24 +112,23 @@
 
                         {{-- Anonymous --}}
                         @if ($configs['editor']['anonymous'])
-                            @component('components.editor.section.anonymous', [
-                                'isAnonymous' => $draft['detail']['isAnonymous'],
-                            ])@endcomponent
+                            <div class="form-check">
+                                <input class="form-check-input editor-checkbox" type="checkbox" name="isAnonymous" value="1" id="isAnonymous" {{ $draft['detail']['isAnonymous'] ? 'checked' : '' }}>
+                                <label class="form-check-label" for="isAnonymous">{{ fs_lang('editorAnonymous') }}</label>
+                            </div>
                         @endif
 
                         {{-- comment private --}}
                         @if ($type == 'post')
                             <div class="form-check ms-3">
-                                <input class="form-check-input" type="checkbox" name="commentPrivate" value="1" id="commentPrivate" {{ $draft['detail']['isPrivate'] ? 'checked' : '' }}>
-                                <label class="form-check-label" for="commentPrivate">
-                                    {{ fs_lang('editorCommentPrivate') }}
-                                </label>
+                                <input class="form-check-input editor-checkbox" type="checkbox" name="commentPrivate" value="1" id="commentPrivate" {{ $draft['detail']['isPrivate'] ? 'checked' : '' }}>
+                                <label class="form-check-label" for="commentPrivate">{{ fs_lang('editorCommentPrivate') }}</label>
                             </div>
                         @endif
 
                         {{-- Markdown --}}
                         <div class="form-check ms-3">
-                            <input class="form-check-input" type="checkbox" name="isMarkdown" value="1" id="isMarkdown" {{ $draft['detail']['isMarkdown'] ? 'checked' : '' }}>
+                            <input class="form-check-input editor-checkbox" type="checkbox" name="isMarkdown" value="1" id="isMarkdown" {{ $draft['detail']['isMarkdown'] ? 'checked' : '' }}>
                             <label class="form-check-label" for="isMarkdown">{{ fs_lang('editorContentMarkdown') }}</label>
                         </div>
                     </div>
@@ -137,7 +138,7 @@
                         {{-- comment policy --}}
                         <div class="input-group my-3">
                             <label class="input-group-text">{{ fs_lang('whoCanReply') }}</label>
-                            <select class="form-select" name="commentPolicy">
+                            <select class="form-select editor-select" name="commentPolicy">
                                 <option value="1" {{ $draft['detail']['permissions']['commentConfig']['policy'] == 1 ? 'selected' : ''}}>{{ fs_lang('optionEveryone') }}</option>
                                 <option value="2" {{ $draft['detail']['permissions']['commentConfig']['policy'] == 2 ? 'selected' : ''}}>{{ fs_lang('optionPeopleYouFollow') }}</option>
                                 <option value="3" {{ $draft['detail']['permissions']['commentConfig']['policy'] == 3 ? 'selected' : ''}}>{{ fs_lang('optionPeopleYouFollowOrVerified') }}</option>
@@ -169,10 +170,8 @@
                 </div>
                 <div class="modal-body">
                     <form class="mt-2" method="post" id="upload-form" multiple="true" enctype="multipart/form-data">
-                        <input type="hidden" name="usageType" @if ($type === 'post') value="7" @elseif($type === "comment") value="8" @endif>
-                        <input type="hidden" name="tableName" @if ($type === 'post') value="post_logs" @elseif($type === "comment") value="comment_logs" @endif>
-                        <input type="hidden" name="tableColumn" value="id">
-                        <input type="hidden" name="tableId" value="{{ $draft['detail']['id'] ?? '' }}">
+                        <input type="hidden" name="usageType" @if ($type === 'post') value="postDraft" @elseif($type === "comment") value="commentDraft" @endif>
+                        <input type="hidden" name="usageFsid" value="{{ $draft['detail']['did'] }}">
                         <input type="hidden" name="uploadMode" value="file">
                         <input type="hidden" name="type">
                         <input class="form-control" type="file" id="formFile">
@@ -193,15 +192,61 @@
 
 @push('script')
     <script>
-        function addEditorAttachment(fileinfo) {
+        $(document).ready(function() {
+            var updateTimer;
+
+            function updateDraft() {
+                var jsonData = {};
+
+                $('#fresns-editor').find('input, select, textarea').each(function() {
+                    var name = $(this).attr('name');
+                    var value = $(this).val();
+
+                    if ($(this).attr('type') === 'checkbox') {
+                        value = $(this).is(':checked') ? value : 0;
+                    }
+
+                    jsonData[name] = value;
+                });
+
+                $.ajax({
+                    url: "{{ route('fresns.api.patch', ['path' => '/api/fresns/v1/editor/'.$type.'/draft/'.$draft['detail']['did']]) }}",
+                    type: "PATCH",
+                    data: JSON.stringify(jsonData),
+                    contentType: "application/json",
+                    error: function(xhr, status, error) {
+                        console.error('Failed to update draft', xhr, status, error);
+                    }
+                });
+            };
+
+            function startOrUpdateTimer() {
+                if (updateTimer) {
+                    clearTimeout(updateTimer);
+                }
+                updateTimer = setTimeout(function() {
+                    updateDraft();
+                }, 10000);
+            }
+
+            $('#fresns-editor').find('input, textarea').on('input', function() {
+                startOrUpdateTimer();
+            });
+
+            $('.editor-checkbox, .editor-select').on('click change', function() {
+                updateDraft();
+            });
+        });
+
+        function addEditorFile(fileInfo) {
             let html;
 
-            if (fileinfo.type === 1) {
+            if (fileInfo.type === 1) {
                 html = `
                 <div class="position-relative">
-                    <img src="${fileinfo.imageSquareUrl}" class="img-fluid">
+                    <img src="${fileInfo.imageSquareUrl}" class="img-fluid">
                     <div class="position-absolute top-0 end-0 editor-btn-delete">
-                        <button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0" data-fid="${fileinfo.fid}" onclick="deleteFile(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ fs_lang('delete') }}" title="{{ fs_lang('delete') }}">
+                        <button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0" data-fid="${fileInfo.fid}" onclick="deleteFile(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ fs_lang('delete') }}" title="{{ fs_lang('delete') }}">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>
@@ -211,10 +256,10 @@
                 let imgLength = $(".editor-file-image").find(".position-relative").length
                 $(".editor-file-image").removeClass().addClass("editor-file-image editor-file-image-"+ imgLength +" mt-3 clearfix")
             }
-            if (fileinfo.type === 2) {
+            if (fileInfo.type === 2) {
                 var videoImage = ''
-                if (fileinfo.videoPosterUrl) {
-                    videoImage = `<img src="${fileinfo.videoPosterUrl}" class="img-fluid">`
+                if (fileInfo.videoPosterUrl) {
+                    videoImage = `<img src="${fileInfo.videoPosterUrl}" class="img-fluid">`
                 } else {
                     videoImage = `<svg class="bd-placeholder-img rounded" xmlns="http://www.w3.org/2000/svg" role="img" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect></svg>`
                 }
@@ -222,7 +267,7 @@
                 <div class="position-relative">
                     ${videoImage}
                     <div class="position-absolute top-0 end-0 editor-btn-delete">
-                        <button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0" data-fid="${fileinfo.fid}" onclick="deleteFile(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ fs_lang('delete') }}" title="{{ fs_lang('delete') }}">
+                        <button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0" data-fid="${fileInfo.fid}" onclick="deleteFile(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ fs_lang('delete') }}" title="{{ fs_lang('delete') }}">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>
@@ -234,30 +279,30 @@
                 </div>`
                 $(".editor-file-video").append(html);
             }
-            if (fileinfo.type === 3) {
+            if (fileInfo.type === 3) {
                 html = `
                 <div class="position-relative">
-                    <audio src="${fileinfo.audioUrl}" controls="controls" preload="meta" controlsList="nodownload" oncontextmenu="return false">
+                    <audio src="${fileInfo.audioUrl}" controls="controls" preload="meta" controlsList="nodownload" oncontextmenu="return false">
                         Your browser does not support the audio element.
                     </audio>
                     <div class="position-absolute top-0 end-0 editor-btn-delete">
-                        <button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0" data-fid="${fileinfo.fid}" onclick="deleteFile(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ fs_lang('delete') }}" title="{{ fs_lang('delete') }}">
+                        <button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0" data-fid="${fileInfo.fid}" onclick="deleteFile(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ fs_lang('delete') }}" title="{{ fs_lang('delete') }}">
                             <i class="bi bi-trash"></i>
                         </button></div>
                 </div>`
                 $('.editor-file-audio').append(html);
             }
-            if(fileinfo.type === 4) {
+            if(fileInfo.type === 4) {
                 html = `
                 <div class="position-relative">
                     <div class="editor-document-box">
                         <div class="editor-document-icon">
                             <i class="bi bi-file-earmark"></i>
                         </div>
-                        <div class="editor-document-name text-nowrap overflow-hidden">${fileinfo.name}</div>
+                        <div class="editor-document-name text-nowrap overflow-hidden">${fileInfo.name}</div>
                     </div>
                     <div class="position-absolute top-0 end-0 editor-btn-delete">
-                        <button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0" data-fid="${fileinfo.fid}" onclick="deleteFile(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ fs_lang('delete') }}" title="{{ fs_lang('delete') }}">
+                        <button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0" data-fid="${fileInfo.fid}" onclick="deleteFile(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ fs_lang('delete') }}" title="{{ fs_lang('delete') }}">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>
@@ -334,29 +379,19 @@
                 $(this).find("#upload-progress").addClass('d-none').empty();
             })
 
-            $("#ajax-upload").on('click', function (event){
+            $("#ajax-upload").on('click', function (event) {
                 event.preventDefault();
                 let obj = $(this),
                     maxSize = $("#maxSize").text() || 0,
-                    form = new FormData(document.getElementById("upload-form"))
-
-                let files = $('#formFile').prop('files');
-
-                for (let i = 0; i < files.length; i++) {
-                    if (files[i].size > maxSize  * 1024 * 1024) {
-                        alert("{{ fs_lang('editorUploadTipMaxSize') }}: " + $("#maxSize").text() + "MB");
-                        return;
-                    }
-
-                    form.append('files[]', files[i])
-                    maxSize += files[i].size;
-                }
+                    form = document.getElementById("upload-form"),
+                    files = $('#formFile').prop('files');
 
                 if (obj.is(":disabled")) {
                     return;
                 }
-                if (!$("#formFile").val()) {
-                    alert("{{ fs_lang('editorUploadInfo') }}");
+
+                if (!files.length) {
+                    alert("{{ fs_lang('editorUploadTip') }}");
                     return;
                 }
 
@@ -366,71 +401,44 @@
                 // set progress
                 progress.init().setParentElement(obj.next('.progress').removeClass('d-none')).work();
 
-                $.ajax({
-                    url: "{{ route('fresns.api.post', ['path' => '/api/fresns/v1/common/file/uploads']) }}",
-                    type: "POST",
-                    data: form,
-                    timeout: 600000,
-                    processData: false,
-                    contentType: false,
-                    enctype: 'multipart/form-data',
-                    success: function(resp) {
-                        progress.done();
-                        if (resp.code === 0) {
-                            resp.data.forEach(function (res){
-                                addEditorAttachment(res);
-                            })
-                        } else {
-                            tips(resp.message, resp.code)
-                        }
-                        $("#fresns-upload .btn-close").trigger('click');
-                    },
-                    error: function(e) {
-                        progress.exit();
-                        tips(e.responseJSON.message)
-                        $("#fresns-upload .btn-close").trigger('click');
-                    },
-                });
-            })
-
-            // update draft
-            const updateDraft = function (title, content, fid = ''){
-                $.ajax({
-                    url: "{{ route('fresns.api.patch', ['path' => '/api/fresns/v1/editor/'.$type.'/draft/'.$draft['detail']['did']]) }}",
-                    type: "PATCH",
-                    data: {
-                        'title' : title,
-                        'content':  content,
-                    },
-                    success: function(data) {
-                        console.log(data);
-
-                        // If the 'code' value in the returned JSON is not 0, stop the interval loop
-                        if (data.code != 0) {
-                            clearInterval(intervalId);
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(error);
+                $.each(files, function (index, file) {
+                    if (file.size > maxSize * 1024 * 1024) {
+                        alert("{{ fs_lang('editorUploadTipMaxSize') }}: " + maxSize + "MB");
+                        return false;
                     }
-                });
-            };
 
-            let content, title;
-            let intervalId;
+                    let individualForm = new FormData(form);
+                    individualForm.append('file', file);
 
-            // Start the interval loop
-            intervalId = setInterval(function() {
-                content = $("#content").val();
-                title = $("#title").val();
-                updateDraft(title, content);
-            }, 10000);
+                    $.ajax({
+                        url: "{{ route('fresns.api.post', ['path' => '/api/fresns/v1/common/file/uploads']) }}",
+                        type: "POST",
+                        data: individualForm,
+                        timeout: 600000,
+                        processData: false,
+                        contentType: false,
+                        enctype: 'multipart/form-data',
+                        success: function (resp) {
+                            if (resp.code === 0) {
+                                addEditorFile(resp.data);
+                            } else {
+                                tips(resp.message, resp.code);
+                            }
 
-            // Add a click event listener to the submit button
-            $(document).ready(function() {
-                $("button[type='submit']").on('click', function(event) {
-                    // Stop the interval loop
-                    clearInterval(intervalId);
+                            if (index === files.length - 1) {
+                                progress.done();
+                                $("#fresns-upload .btn-close").trigger('click');
+                                obj.removeAttr('disabled').show();
+                            }
+                        },
+                        error: function (e) {
+                            progress.exit();
+                            tips(e.responseJSON.message);
+                            $("#fresns-upload .btn-close").trigger('click');
+                            obj.removeAttr('disabled').show();
+                            return false;
+                        },
+                    });
                 });
             });
         })(jQuery);

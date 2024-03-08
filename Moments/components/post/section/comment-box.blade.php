@@ -10,7 +10,7 @@
             <div class="editor-content">
                 <input type="hidden" name="commentPid" value="{{ $pid }}">
 
-                <textarea class="form-control rounded-0 border-0 fresns-content" name="content" id="{{ 'quick-publish-comment-content'.$pid }}" rows="4" placeholder="{{ fs_lang('editorContent') }}"></textarea>
+                <textarea class="form-control rounded-0 border-0 editor-content" name="content" id="{{ 'quick-publish-comment-content'.$pid }}" rows="4" placeholder="{{ fs_lang('editorContent') }}"></textarea>
 
                 {{-- Content is Markdown --}}
                 @if (fs_config('moments_editor_markdown')['commentBox'] ?? false)
