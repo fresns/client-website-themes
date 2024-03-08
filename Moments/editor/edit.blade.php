@@ -47,7 +47,7 @@
                 ])@endcomponent
 
                 {{-- Content Start --}}
-                <div class="editor-content py-3">
+                <div class="editor-box py-3">
                     {{-- Title --}}
                     @if ($configs['editor']['title']['status'] || optional($draft['detail'])['title'])
                         @component('components.editor.section.title', [
@@ -212,7 +212,7 @@
                 }, 10000);
             }
 
-            $('#fresns-editor').find('input, textarea').on('input', function() {
+            $('.editor-title, .editor-content').on('input', function() {
                 startOrUpdateTimer();
             });
 

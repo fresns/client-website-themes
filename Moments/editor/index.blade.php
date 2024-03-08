@@ -20,7 +20,7 @@
             ])@endcomponent
 
             {{-- Content Start --}}
-            <div class="editor-content py-3">
+            <div class="editor-box py-3">
                 {{-- Title --}}
                 @if ($configs['editor']['title']['status'])
                     @component('components.editor.section.title', [

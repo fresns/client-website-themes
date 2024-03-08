@@ -195,7 +195,7 @@
                     data-post-message-key="fresnsEditorExtension"
                     data-did="{{ $did }}"
                     data-title="{{ $extend['name'] }}"
-                    data-url="{{ $extend['url'] }}">
+                    data-url="{{ $extend['appUrl']  }}">
                     <div class="d-flex flex-column">
                         <img src="{{ $extend['icon'] }}" loading="lazy" width="20" height="20">
                         <span>{{ $extend['name'] }}</span>
@@ -226,7 +226,7 @@
                                 data-post-message-key="fresnsEditorExtension"
                                 data-did="{{ $did }}"
                                 data-title="{{ $extend['name'] }}"
-                                data-url="{{ $extend['url'] }}">
+                                data-url="{{ $extend['appUrl']  }}">
                                 <img src="{{ $extend['icon'] }}" loading="lazy" width="20" height="20">
                                 {{ $extend['name'] }}
                             </a>
@@ -246,7 +246,7 @@
                 <div class="modal-body">
                     <div class="input-group">
                         <span class="input-group-text" id="basic-addon1">@</span>
-                        <input type="text" list="memberLists" class="form-control" id="atUser" placeholder="{{ fs_config('user_name_name') }} {{ fs_lang('modifierOr') }} {{ fs_config('user_nickname_name') }}">
+                        <input type="text" list="memberLists" class="form-control" id="atUser" placeholder="{{ fs_config('user_username_name') }} {{ fs_lang('modifierOr') }} {{ fs_config('user_nickname_name') }}">
                         <button class="btn btn-outline-secondary" type="button" id="button-addon2" data-bs-dismiss="modal" aria-label="Close">✓</button>
                     </div>
                     <datalist id="memberLists">
@@ -287,7 +287,7 @@
                     if (query) {
                         $.get("{{ route('fresns.api.get', ['path' => '/api/fresns/v1/common/input-tips']) }}", {"type": 'user', "key": query}, function (data) {
                             let html = "";
-                            $.each(data, function (k,v){
+                            $.each(data.data, function (k,v){
                                 html += "<option value='" + v.fsid + "'>" + v.name + " " + "@" + v.fsid + "</option>"
                             })
                             $("#memberLists").empty().html(html);
@@ -314,7 +314,7 @@
                     if (query) {
                         $.get("{{ route('fresns.api.get', ['path' => '/api/fresns/v1/common/input-tips']) }}", {"type": 'hashtag', "key": query}, function (data) {
                             let html = "";
-                            $.each(data, function (k,v){
+                            $.each(data.data, function (k,v){
                                 html += "<option value='" + v.name +"'>"+ v.name +"</option>"
                             })
                             $("#hashtagLists").empty().html(html);

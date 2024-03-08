@@ -215,7 +215,7 @@ function atwho() {
                 remoteFilter: function (query, callback) {
                     if (query) {
                         $.get(
-                            '/api/web-engine/input-tips',
+                            '/api/theme/actions/api/fresns/v1/common/input-tips',
                             { type: 'user', key: query },
                             function (data) {
                                 data.map((item) => (item.searchQuery = item.name + item.fsid));
@@ -238,7 +238,7 @@ function atwho() {
                 remoteFilter: function (query, callback) {
                     if (query) {
                         $.get(
-                            '/api/web-engine/input-tips',
+                            '/api/theme/actions/api/fresns/v1/common/input-tips',
                             { type: 'hashtag', key: query },
                             function (data) {
                                 callback(data);
