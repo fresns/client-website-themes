@@ -103,11 +103,9 @@
                     @endif
 
                     <button class="btn btn-primary btn-sm ms-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                        data-type="account"
-                        data-scene="renewal"
-                        data-post-message-key="fresnsRenewal"
                         data-title="{{ fs_lang('renewal') }}"
-                        data-url="{{ fs_config('site_public_service') }}">
+                        data-url="{{ fs_config('site_public_service') }}"
+                        data-post-message-key="fresnsRenewal">
                         {{ fs_lang('renewal') }}
                     </button>
                 </div>
@@ -208,21 +206,17 @@
                         <p class="mt-2 mb-4 text-secondary">{{ fs_lang('errorNoLogin') }}</p>
 
                         <button class="btn btn-outline-success me-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                            data-type="account"
-                            data-scene="sign"
-                            data-post-message-key="fresnsAccountSign"
                             data-title="{{ fs_lang('accountLogin') }}"
-                            data-url="{{ fs_config('account_login_service') }}">
+                            data-url="{{ fs_config('account_login_service') }}"
+                            data-post-message-key="fresnsAccountSign">
                             {{ fs_lang('accountLogin') }}
                         </button>
 
                         @if (fs_config('account_register_status'))
                             <button class="btn btn-success me-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                data-type="account"
-                                data-scene="sign"
-                                data-post-message-key="fresnsAccountSign"
                                 data-title="{{ fs_lang('accountRegister') }}"
-                                data-url="{{ fs_config('account_register_service') }}">
+                                data-url="{{ fs_config('account_register_service') }}"
+                                data-post-message-key="fresnsAccountSign">
                                 {{ fs_lang('accountRegister') }}
                             </button>
                         @endif
@@ -259,7 +253,7 @@
             }
         };
     </script>
-    <script src="{{ fs_theme('assets') }}js/fresns-iframe.js?v={{ fs_theme('version') }}"></script>
+    <script src="{{ fs_theme('assets') }}js/fresns-extensions.js?v={{ fs_theme('version') }}"></script>
     <script src="{{ fs_theme('assets') }}js/jquery.caret.min.js?v={{ fs_theme('version') }}"></script>
     <script src="{{ fs_theme('assets') }}js/atwho.min.js?v={{ fs_theme('version') }}"></script>
     <script src="{{ fs_theme('assets') }}js/prism.min.js?v={{ fs_theme('version') }}"></script>

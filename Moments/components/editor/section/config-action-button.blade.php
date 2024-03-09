@@ -4,12 +4,11 @@
             <div class="bd-highlight">{{ fs_lang('editorCommentButtonTitle') }}:</div>
             <div class="bd-highlight">
                 <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                    data-type="editor"
-                    data-scene="{{ $type.'Editor' }}"
-                    data-post-message-key="fresnsEditorActionButton"
-                    data-did="{{ $did }}"
                     data-title="{{ fs_lang('editorCommentButtonTitle') }}"
-                    data-url="{{ $actionButton['buttonUrl'] }}">
+                    data-url="{{ $actionButton['buttonUrl'] }}"
+                    data-draft-type="{{ $type }}"
+                    data-did="{{ $did }}"
+                    data-post-message-key="fresnsEditorActionButton">
                     {{ fs_lang('modify') }}
                 </button>
             </div>

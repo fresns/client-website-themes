@@ -17,11 +17,9 @@
                     @foreach(fs_user_overview('features') as $feature)
                         <div class="float-start mt-3" style="width:20%">
                             <a class="text-decoration-none" data-bs-toggle="modal" href="#fresnsModal"
-                                data-type="account"
-                                data-scene="featureExtension"
-                                data-post-message-key="fresnsFeatureExtension"
                                 data-title="{{ $feature['name'] }}"
-                                data-url="{{ $feature['url'] }}">
+                                data-url="{{ $feature['url'] }}"
+                                data-post-message-key="fresnsFeatureExtension">
                                 <div class="position-relative mx-auto" style="width:52px">
                                     <img src="{{ $feature['icon'] }}" loading="lazy" class="rounded" height="52">
                                     @if ($feature['badgeType'])

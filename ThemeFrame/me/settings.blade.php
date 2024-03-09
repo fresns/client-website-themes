@@ -19,11 +19,9 @@
                         <p>{{ fs_lang('executionDate') }}: {{ fs_account('detail.waitDeleteDateTime') }}</p>
                         <hr>
                         <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                            data-type="account"
-                            data-scene="settings"
-                            data-post-message-key="reload"
                             data-title="{{ fs_lang('accountRecallDelete') }}"
-                            data-url="{{ fs_config('account_center_service') }}">
+                            data-url="{{ fs_config('account_center_service') }}"
+                            data-post-message-key="reload">
                             {{ fs_lang('accountRecallDelete') }}
                         </button>
                     </div>
@@ -200,11 +198,9 @@
                                 </span>
                                 <span class="form-control"></span>
                                 <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                    data-type="account"
-                                    data-scene="profileExtension"
-                                    data-post-message-key="fresnsProfileExtension"
                                     data-title="{{ $profile['name'] }}"
-                                    data-url="{{ $profile['url'] }}">
+                                    data-url="{{ $profile['url'] }}"
+                                    data-post-message-key="fresnsProfileExtension">
                                     {{ fs_lang('setting') }}
                                 </button>
                             </div>
@@ -217,15 +213,13 @@
                         {{-- Account KYC --}}
                         @if (fs_config('account_kyc_service'))
                             <div class="input-group mb-3">
-                                <span class="input-group-text">{{ fs_lang('accountRealName') }}</span>
+                                <span class="input-group-text">{{ fs_lang('accountKyc') }}</span>
                                 <span class="form-control">{{ fs_account('detail.verifyStatus') ? fs_lang('success') : fs_lang('settingNot') }}</span>
                                 <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                    data-type="account"
-                                    data-scene="realName"
-                                    data-post-message-key="fresnsRealName"
-                                    data-title="{{ fs_lang('accountRealName') }}"
-                                    data-url="{{ fs_config('account_kyc_service') }}">
-                                    {{ fs_lang('accountRealName') }}
+                                    data-title="{{ fs_lang('accountKyc') }}"
+                                    data-url="{{ fs_config('account_kyc_service') }}"
+                                    data-post-message-key="fresnsAccountKYC">
+                                    {{ fs_lang('accountKyc') }}
                                 </button>
                             </div>
                         @endif
@@ -234,11 +228,9 @@
                             <span class="input-group-text">{{ fs_lang('settingAccount') }}</span>
                             <span class="form-control"></span>
                             <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                data-type="account"
-                                data-scene="settings"
-                                data-post-message-key="reload"
                                 data-title="{{ fs_lang('accountCenter') }}"
-                                data-url="{{ fs_config('account_center_service') }}">
+                                data-url="{{ fs_config('account_center_service') }}"
+                                data-post-message-key="reload">
                                 {{ fs_lang('setting') }}
                             </button>
                         </div>

@@ -74,15 +74,11 @@
     @if (fs_channels())
         <div class="list-group rounded-0 my-3">
             @foreach(fs_channels() as $channel)
-                <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-start"
-                    data-bs-toggle="modal"
-                    data-fs-height="100%"
-                    href="#fresnsModal"
-                    data-type="portal"
-                    data-scene="fresnsChannel"
-                    data-post-message-key="fresnsChannel"
+                <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" data-bs-toggle="modal" href="#fresnsModal"
+                    data-modal-height="100%"
                     data-title="{{ $channel['name'] }}"
-                    data-url="{{ $channel['url'] }}">
+                    data-url="{{ $channel['url'] }}"
+                    data-post-message-key="fresnsChannel">
                     <span class="py-2">
                         @if ($channel['icon'])
                             <img src="{{ $channel['icon'] }}" loading="lazy" class="rounded me-1" height="24">

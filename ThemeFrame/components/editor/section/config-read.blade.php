@@ -4,12 +4,11 @@
             <div class="bd-highlight">{{ fs_lang('editorReadConfigTitle') }}:</div>
             <div class="bd-highlight">
                 <button type="button" class="btn btn-warning btn-sm me-2" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                    data-type="editor"
-                    data-scene="{{ $type.'Editor' }}"
-                    data-post-message-key="fresnsEditorReadConfig"
-                    data-did="{{ $did }}"
                     data-title="{{ fs_lang('editorReadConfigTitle') }}"
-                    data-url="{{ $readConfig['buttonUrl'] }}">
+                    data-url="{{ $readConfig['buttonUrl'] }}"
+                    data-draft-type="{{ $type }}"
+                    data-did="{{ $did }}"
+                    data-post-message-key="fresnsEditorReadConfig">
                     {{ fs_lang('modify') }}
                 </button>
             </div>

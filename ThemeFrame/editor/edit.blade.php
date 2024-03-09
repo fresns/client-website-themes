@@ -211,9 +211,9 @@
 
                 $.ajax({
                     url: "{{ route('fresns.api.patch', ['path' => '/api/fresns/v1/editor/'.$type.'/draft/'.$draft['detail']['did']]) }}",
-                    type: "PATCH",
+                    type: 'PATCH',
                     data: JSON.stringify(jsonData),
-                    contentType: "application/json",
+                    contentType: 'application/json',
                     error: function(xhr, status, error) {
                         console.error('Failed to update draft', xhr, status, error);
                     }

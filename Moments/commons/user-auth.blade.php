@@ -29,11 +29,9 @@
                                                 <ul class="dropdown-menu">
                                                     <li>
                                                         <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                                            data-type="account"
-                                                            data-scene="resetPin"
-                                                            data-post-message-key="reload"
                                                             data-title="{{ fs_lang('userPinReset') }}"
-                                                            data-url="{{ fs_config('account_users_service') }}">
+                                                            data-url="{{ fs_config('account_users_service') }}"
+                                                            data-post-message-key="reload">
                                                             {{ fs_lang('userPinReset') }}
                                                         </button>
                                                     </li>

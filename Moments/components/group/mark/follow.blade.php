@@ -23,12 +23,10 @@
     @if (! $interaction['followStatus'])
         <form class="float-start me-2">
             <button type="button" class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                data-type="group"
-                data-scene="follow"
-                data-post-message-key="fresnsFollow"
-                data-gid="{{ $gid }}"
                 data-title="{{ $interaction['followName'] }}: {{ $name }}"
-                data-url="{{ $interaction['followUrl'] }}">
+                data-url="{{ $interaction['followUrl'] }}"
+                data-gid="{{ $gid }}"
+                data-post-message-key="fresnsFollow">
                 <i class="fa-regular fa-flag"></i>
                 {{ $interaction['followName'] }}
                 @if ($interaction['followPublicCount'] && $count)

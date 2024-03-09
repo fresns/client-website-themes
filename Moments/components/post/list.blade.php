@@ -128,13 +128,11 @@
             <div class="text-center">
                 <p class="text-secondary mb-2">{{ fs_lang('contentPreReadInfo') }} {{ $post['readConfig']['previewPercentage'] }}%</p>
                 <button type="button" class="btn btn-outline-info btn-lg w-50" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                    data-type="post"
-                    data-scene="postAuthBtn"
-                    data-post-message-key="fresnsPostAuthBtn"
+                    data-title="{{ $post['readConfig']['buttonName'] }}"
+                    data-url="{{ $post['readConfig']['buttonUrl'] }}"
                     data-pid="{{ $post['pid'] }}"
                     data-uid="{{ $post['author']['uid'] }}"
-                    data-title="{{ $post['readConfig']['buttonName'] }}"
-                    data-url="{{ $post['readConfig']['buttonUrl'] }}">
+                    data-post-message-key="fresnsPostAuthBtn">
                     {{ $post['readConfig']['buttonName'] }}
                 </button>
             </div>
@@ -206,13 +204,11 @@
             @if ($post['associatedUserListConfig']['hasUserList'])
                 <div class="content-user-list">
                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                        data-type="post"
-                        data-scene="postUserList"
-                        data-post-message-key="fresnsPostUserList"
+                        data-title="{{ $post['associatedUserListConfig']['userListName'] }}"
+                        data-url="{{ $post['associatedUserListConfig']['userListUrl'] }}"
                         data-pid="{{ $post['pid'] }}"
                         data-uid="{{ $post['author']['uid'] }}"
-                        data-title="{{ $post['associatedUserListConfig']['userListName'] }}"
-                        data-url="{{ $post['associatedUserListConfig']['userListUrl'] }}">
+                        data-post-message-key="fresnsPostUserList">
                         {{ $post['associatedUserListConfig']['userListName'] }}
                         <span class="badge bg-light text-dark">{{ $post['associatedUserListConfig']['userListCount'] }}</span>
                     </button>

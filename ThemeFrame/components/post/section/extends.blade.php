@@ -8,13 +8,11 @@
             {{-- Page Type --}}
             @if ($extend['appUrl'])
                 <a class="text-decoration-none stretched-link" data-bs-toggle="modal" href="#fresnsModal"
-                    data-type="post"
-                    data-scene="extendBox"
-                    data-post-message-key="fresnsPostExtendBox"
+                    data-title="{{ $extend['title'] ?? '' }}"
+                    data-url="{{ $extend['appUrl'] }}"
                     data-pid="{{ $pid }}"
                     data-uid="{{ $author['uid'] }}"
-                    data-title="{{ $extend['title'] ?? '' }}"
-                    data-url="{{ $extend['appUrl'] }}">
+                    data-post-message-key="fresnsPostExtendBox">
                 </a>
             @endif
         </div>
@@ -54,13 +52,11 @@
 
             @if ($extend['appUrl'])
                 <a class="text-decoration-none stretched-link" data-bs-toggle="modal" href="#fresnsModal"
-                    data-type="post"
-                    data-scene="extendBox"
-                    data-post-message-key="fresnsPostExtendBox"
+                    data-title="{{ $extend['title'] ?? '' }}"
+                    data-url="{{ $extend['appUrl'] }}"
                     data-pid="{{ $pid }}"
                     data-uid="{{ $author['uid'] }}"
-                    data-title="{{ $extend['title'] ?? '' }}"
-                    data-url="{{ $extend['appUrl'] }}">
+                    data-post-message-key="fresnsPostExtendBox">
                 </a>
             @endif
         </div>

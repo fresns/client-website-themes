@@ -49,12 +49,11 @@
             </button>
         @else
             <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                data-type="editor"
-                data-scene="{{ $type.'Editor' }}"
-                data-post-message-key="fresnsEditorUpload"
-                data-did="{{ $did }}"
                 data-title="{{ fs_lang('editorUploadTip') }}"
-                data-url="{{ $editorConfig['image']['uploadUrl'] }}">
+                data-url="{{ $editorConfig['image']['uploadUrl'] }}"
+                data-draft-type="{{ $type }}"
+                data-did="{{ $did }}"
+                data-post-message-key="fresnsEditorUpload">
                 <div class="d-flex flex-column">
                     <i class="fa-regular fa-image"></i>
                     <span>{{ fs_lang('editorImages') }}</span>
@@ -73,19 +72,18 @@
                 data-maxsize="{{ $editorConfig['video']['maxSize'] }}"
                 data-maxtime="{{ $editorConfig['video']['maxTime'] }}"
                 data-maxnumber="{{ $editorConfig['video']['uploadNumber'] }}">
-                    <div class="d-flex flex-column">
+                <div class="d-flex flex-column">
                     <i class="fa-solid fa-video"></i>
                     <span>{{ fs_lang('editorVideos') }}</span>
                 </div>
             </button>
         @else
             <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                data-type="editor"
-                data-scene="{{ $type.'Editor' }}"
-                data-post-message-key="fresnsEditorUpload"
-                data-did="{{ $did }}"
                 data-title="{{ fs_lang('editorUploadTip') }}"
-                data-url="{{ $editorConfig['video']['uploadUrl'] }}">
+                data-url="{{ $editorConfig['video']['uploadUrl'] }}"
+                data-draft-type="{{ $type }}"
+                data-did="{{ $did }}"
+                data-post-message-key="fresnsEditorUpload">
                 <div class="d-flex flex-column">
                     <i class="fa-solid fa-video"></i>
                     <span>{{ fs_lang('editorVideos') }}</span>
@@ -111,12 +109,11 @@
             </button>
         @else
             <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                data-type="editor"
-                data-scene="{{ $type.'Editor' }}"
-                data-post-message-key="fresnsEditorUpload"
-                data-did="{{ $did }}"
                 data-title="{{ fs_lang('editorUploadTip') }}"
-                data-url="{{ $editorConfig['audio']['uploadUrl'] }}">
+                data-url="{{ $editorConfig['audio']['uploadUrl'] }}"
+                data-draft-type="{{ $type }}"
+                data-did="{{ $did }}"
+                data-post-message-key="fresnsEditorUpload">
                 <div class="d-flex flex-column">
                     <i class="fa-solid fa-music"></i>
                     <span>{{ fs_lang('editorAudios') }}</span>
@@ -141,12 +138,11 @@
             </button>
         @else
             <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                data-type="editor"
-                data-scene="{{ $type.'Editor' }}"
-                data-post-message-key="fresnsEditorUpload"
-                data-did="{{ $did }}"
                 data-title="{{ fs_lang('editorUploadTip') }}"
-                data-url="{{ $editorConfig['document']['uploadUrl'] }}">
+                data-url="{{ $editorConfig['document']['uploadUrl'] }}"
+                data-draft-type="{{ $type }}"
+                data-did="{{ $did }}"
+                data-post-message-key="fresnsEditorUpload">
                 <div class="d-flex flex-column">
                     <i class="fa-solid fa-box-archive"></i>
                     <span>{{ fs_lang('editorDocuments') }}</span>
@@ -190,12 +186,11 @@
         @foreach($editorConfig['extend']['list'] as $extend)
             @if ($extend['editorToolbar'])
                 <button type="button" class="btn btn-outline-secondary rounded-0 border-0" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                    data-type="editor"
-                    data-scene="{{ $type.'Editor' }}"
-                    data-post-message-key="fresnsEditorExtension"
-                    data-did="{{ $did }}"
                     data-title="{{ $extend['name'] }}"
-                    data-url="{{ $extend['appUrl']  }}">
+                    data-url="{{ $extend['appUrl']  }}"
+                    data-draft-type="{{ $type }}"
+                    data-did="{{ $did }}"
+                    data-post-message-key="fresnsEditorExtension">
                     <div class="d-flex flex-column">
                         <img src="{{ $extend['icon'] }}" loading="lazy" width="20" height="20">
                         <span>{{ $extend['name'] }}</span>
@@ -221,12 +216,11 @@
                     @if (! $extend['editorToolbar'])
                         <li>
                             <a class="dropdown-item" role="button" data-bs-toggle="modal" href="#fresnsModal"
-                                data-type="editor"
-                                data-scene="{{ $type.'Editor' }}"
-                                data-post-message-key="fresnsEditorExtension"
-                                data-did="{{ $did }}"
                                 data-title="{{ $extend['name'] }}"
-                                data-url="{{ $extend['appUrl']  }}">
+                                data-url="{{ $extend['appUrl']  }}"
+                                data-draft-type="{{ $type }}"
+                                data-did="{{ $did }}"
+                                data-post-message-key="fresnsEditorExtension">
                                 <img src="{{ $extend['icon'] }}" loading="lazy" width="20" height="20">
                                 {{ $extend['name'] }}
                             </a>

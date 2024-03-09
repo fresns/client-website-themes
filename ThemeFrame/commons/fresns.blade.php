@@ -44,11 +44,9 @@
                 @endif
 
                 <button class="btn btn-primary btn-sm ms-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                    data-type="account"
-                    data-scene="renewal"
-                    data-post-message-key="fresnsRenewal"
                     data-title="{{ fs_lang('renewal') }}"
-                    data-url="{{ fs_config('site_public_service') }}">
+                    data-url="{{ fs_config('site_public_service') }}"
+                    data-post-message-key="fresnsRenewal">
                     {{ fs_lang('renewal') }}
                 </button>
             </div>
@@ -153,7 +151,7 @@
         window.hashtagStatus = {{ fs_config('hashtag_status') ? 1 : 0 }};
         window.hashtagFormat = {{ fs_config('hashtag_format') }};
     </script>
-    <script src="{{ fs_theme('assets') }}js/fresns-iframe.js?v={{ fs_theme('version') }}"></script>
+    <script src="{{ fs_theme('assets') }}js/fresns-extensions.js?v={{ fs_theme('version') }}"></script>
     <script src="{{ fs_theme('assets') }}js/jquery.caret.min.js?v={{ fs_theme('version') }}"></script>
     <script src="{{ fs_theme('assets') }}js/atwho.min.js?v={{ fs_theme('version') }}"></script>
     <script src="{{ fs_theme('assets') }}js/prism.min.js?v={{ fs_theme('version') }}"></script>

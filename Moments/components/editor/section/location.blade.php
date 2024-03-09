@@ -1,6 +1,7 @@
 @if ($geotag || $locationInfo)
     @php
         $name = ($geotag['name'] ?: '') ?? $locationInfo['name'];
+        $locationInfo = ($geotag ? $geotag['mapId'].','.$geotag['latitude'].','.$geotag['longitude'] : '') ?? $locationInfo['mapId'].','.$locationInfo['latitude'].','.$locationInfo['longitude'];
     @endphp
 
     <div class="dropup me-auto" id="location-info">
@@ -10,13 +11,12 @@
         <ul class="dropdown-menu" aria-labelledby="location">
             <li data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ $locationConfig['mapUrl'] ? '' : fs_lang('errorUnavailable') }}">
                 <a class="dropdown-item py-2 {{ $locationConfig['mapUrl'] ? '' : 'disabled' }}" role="button" data-bs-toggle="modal" href="#fresnsModal"
-                    data-type="editor"
-                    data-scene="{{ $type.'Editor' }}"
-                    data-post-message-key="fresnsEditorLocation"
-                    data-did="{{ $did }}"
                     data-title="{{ fs_lang('editorLocation') }}"
-                    data-location-info="{{ ($geotag['latitude'] && $geotag['longitude']) ? $geotag['mapId'].','.$geotag['latitude'].','.$geotag['longitude'].','.$geotag['scale'] : '' }}"
-                    data-url="{{ $locationConfig['mapUrl'] }}">
+                    data-url="{{ $locationConfig['mapUrl'] }}"
+                    data-draft-type="{{ $type }}"
+                    data-did="{{ $did }}"
+                    data-location-info="{{ $locationInfo }}"
+                    data-post-message-key="fresnsEditorLocation">
                     {{ fs_lang('reselect') }}
                 </a>
             </li>
@@ -25,16 +25,13 @@
     </div>
 @else
     @if ($locationConfig['mapUrl'])
-        <button class="btn btn-outline-dark btn-sm" type="button" id="location-btn"
-            data-bs-toggle="modal"
-            data-bs-target="#fresnsModal"
-            data-type="editor"
-            data-scene="{{ $type.'Editor' }}"
-            data-post-message-key="fresnsEditorLocation"
-            data-did="{{ $did }}"
+        <button class="btn btn-outline-dark btn-sm" type="button" id="location-btn" data-bs-toggle="modal" data-bs-target="#fresnsModal"
             data-title="{{ fs_lang('editorLocation') }}"
+            data-url="{{ $locationConfig['mapUrl'] }}"
+            data-draft-type="{{ $type }}"
+            data-did="{{ $did }}"
             data-location-info=""
-            data-url="{{ $locationConfig['mapUrl'] }}">
+            data-post-message-key="fresnsEditorLocation">
             <i class="bi bi-geo-alt-fill"></i> {{ fs_lang('editorLocation') }}
         </button>
     @endif

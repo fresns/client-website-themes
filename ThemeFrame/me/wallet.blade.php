@@ -22,13 +22,11 @@
                                 @foreach(fs_account('items.walletRecharges') as $item)
                                     <li>
                                         <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                            data-type="account"
-                                            data-scene="walletRecharge"
-                                            data-post-message-key="fresnsWalletRecharge"
+                                            data-title="{{ $item['name'] }}"
+                                            data-url="{{ $item['url'] }}"
                                             data-aid="{{ fs_account('detail.aid') }}"
                                             data-uid="{{ fs_user('detail.uid') }}"
-                                            data-title="{{ $item['name'] }}"
-                                            data-url="{{ $item['url'] }}">
+                                            data-post-message-key="fresnsWalletRecharge">
                                             {{ $item['name'] }}
                                         </button>
                                     </li>
@@ -46,13 +44,11 @@
                                 @foreach(fs_account('items.walletWithdraws') as $item)
                                     <li>
                                         <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                                            data-type="account"
-                                            data-scene="walletWithdraw"
-                                            data-post-message-key="fresnsWalletWithdraw"
+                                            data-title="{{ $item['name'] }}"
+                                            data-url="{{ $item['url'] }}"
                                             data-aid="{{ fs_account('detail.aid') }}"
                                             data-uid="{{ fs_user('detail.uid') }}"
-                                            data-title="{{ $item['name'] }}"
-                                            data-url="{{ $item['url'] }}">
+                                            data-post-message-key="fresnsWalletWithdraw">
                                             {{ $item['name'] }}
                                         </button>
                                     </li>

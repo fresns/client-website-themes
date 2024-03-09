@@ -41,13 +41,11 @@
         @foreach($manages as $plugin)
             <li>
                 <a class="dropdown-item py-2" data-bs-toggle="modal" href="#fresnsModal"
-                    data-type="comment"
-                    data-scene="manage"
-                    data-post-message-key="fresnsCommentManage"
+                    data-title="{{ $plugin['name'] }}"
+                    data-url="{{ $plugin['appUrl'] }}"
                     data-cid="{{ $cid }}"
                     data-uid="{{ $uid }}"
-                    data-title="{{ $plugin['name'] }}"
-                    data-url="{{ $plugin['appUrl'] }}">
+                    data-post-message-key="fresnsCommentManage">
                     @if ($plugin['icon'])
                         <img src="{{ $plugin['icon'] }}" loading="lazy" width="20" height="20">
                     @endif
