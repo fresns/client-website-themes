@@ -27,7 +27,7 @@
             @endif
 
             {{-- Editor Form --}}
-            <form action="{{ route('fresns.api.post', ['path' => "/api/fresns/v1/editor/{$type}/draft/{$draft['detail']['did']}"]) }}" method="post">
+            <form action="{{ route('fresns.api.post', ['path' => "/api/fresns/v1/editor/{$type}/draft/{$draft['detail']['did']}"]) }}" method="post" id="fresns-editor">
                 <input type="hidden" name="type" value="{{ $type ?? '' }}" />
                 <input type="hidden" name="gid" id="editor-group-gid" value="{{ $draft['detail']['group']['gid'] ?? '' }}" />
                 {{-- Group --}}
@@ -230,8 +230,8 @@
                     <img src="${fileInfo.imageSquareUrl}" class="img-fluid">
                     <div class="position-absolute top-0 end-0 editor-btn-delete">
                         <button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0" data-fid="${fileInfo.fid}" onclick="deleteFile(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ fs_lang('delete') }}" title="{{ fs_lang('delete') }}">
-                            <i class="bi bi-trash"></i>
-                        </button>
+                            <i class="fa-regular fa-trash-can"></i>
+                        </button>x
                     </div>
                 </div>`;
 
@@ -251,12 +251,12 @@
                     ${videoImage}
                     <div class="position-absolute top-0 end-0 editor-btn-delete">
                         <button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0" data-fid="${fileInfo.fid}" onclick="deleteFile(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ fs_lang('delete') }}" title="{{ fs_lang('delete') }}">
-                            <i class="bi bi-trash"></i>
+                            <i class="fa-regular fa-trash-can"></i>
                         </button>
                     </div>
                     <div class="position-absolute top-50 start-50 translate-middle">
                         <button type="button" class="btn btn-light editor-btn-video-play" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ fs_lang('editorVideoPlay') }}" title="{{ fs_lang('editorVideoPlay') }}">
-                            <i class="bi bi-play-fill"></i>
+                            <i class="fa-solid fa-play"></i>
                         </button>
                     </div>
                 </div>`
@@ -270,7 +270,7 @@
                     </audio>
                     <div class="position-absolute top-0 end-0 editor-btn-delete">
                         <button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0" data-fid="${fileInfo.fid}" onclick="deleteFile(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ fs_lang('delete') }}" title="{{ fs_lang('delete') }}">
-                            <i class="bi bi-trash"></i>
+                            <i class="fa-regular fa-trash-can"></i>
                         </button></div>
                 </div>`
                 $('.editor-file-audio').append(html);
@@ -280,13 +280,13 @@
                 <div class="position-relative">
                     <div class="editor-document-box">
                         <div class="editor-document-icon">
-                            <i class="bi bi-file-earmark"></i>
+                            <i class="fa-regular fa-file"></i>
                         </div>
                         <div class="editor-document-name text-nowrap overflow-hidden">${fileInfo.name}</div>
                     </div>
                     <div class="position-absolute top-0 end-0 editor-btn-delete">
                         <button type="button" class="btn btn-outline-dark btn-sm rounded-0 border-0" data-fid="${fileInfo.fid}" onclick="deleteFile(this)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ fs_lang('delete') }}" title="{{ fs_lang('delete') }}">
-                            <i class="bi bi-trash"></i>
+                            <i class="fa-regular fa-trash-can"></i>
                         </button>
                     </div>
                 </div>`

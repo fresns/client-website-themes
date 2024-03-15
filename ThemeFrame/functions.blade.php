@@ -1,4 +1,4 @@
-@extends('FsTheme::layout')
+@extends('ThemeFunctions::layout')
 
 @section('body')
     <header class="border-bottom mb-3 pt-5 ps-5 pb-3">

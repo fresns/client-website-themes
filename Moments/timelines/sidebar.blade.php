@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light py-lg-0 mb-4 mx-3 mx-lg-0">
     <span class="navbar-brand mb-0 h1 d-lg-none ms-3">{{ fs_config('channel_timeline_name') }}</span>
     <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#fresnsMenus" aria-controls="fresnsMenus" aria-expanded="false" aria-label="Toggle navigation">
-        <i class="bi bi-signpost-2"></i>
+        <i class="fa-solid fa-signs-post"></i>
     </button>
     <div class="collapse navbar-collapse list-group mt-2 mt-lg-0" id="fresnsMenus">
         {{-- Post List --}}

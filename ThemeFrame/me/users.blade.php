@@ -52,6 +52,7 @@
                                                             <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                                                                 data-title="{{ fs_lang('userPinReset') }}"
                                                                 data-url="{{ fs_config('account_users_service') }}"
+                                                                data-uid="{{ $item['uid'] }}"
                                                                 data-post-message-key="reload">
                                                                 {{ fs_lang('userPinReset') }}
                                                             </button>

@@ -8,9 +8,7 @@
 const now = new Date();
 const timezoneOffsetInHours = now.getTimezoneOffset() / -60;
 const fresnsTimezone = (timezoneOffsetInHours > 0 ? '+' : '') + timezoneOffsetInHours.toString();
-const expires = new Date();
-expires.setFullYear(expires.getFullYear() + 1);
-document.cookie = `fresns_timezone=${fresnsTimezone}; expires=${expires.toUTCString()}; path=/`;
+Cookies.set('fresns_timezone', fresnsTimezone);
 
 // bootstrap Tooltips
 var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
@@ -40,13 +38,6 @@ $.ajaxSetup({
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
     },
 });
-
-const sleep = (delay = 500) => {
-    let t = Date.now();
-    while (Date.now() - t <= delay) {
-        continue;
-    }
-};
 
 // fs_lang
 window.fs_lang = function (key, replace = {}) {
@@ -84,14 +75,14 @@ window.tips = function (message, code = 200) {
     if (code == 36104) {
         apiMessage = `${message}
             <div class="mt-2 pt-2 border-top">
-                <a class="btn btn-primary btn-sm" href="${langTag}/account/settings#account-tab" role="button">
+                <a class="btn btn-primary btn-sm" href="${langTag}/me/settings" role="button">
                     ${fs_lang('settingAccount')}
                 </a>
             </div>`;
     } else if (code == 38200) {
         apiMessage = `${message}
             <div class="mt-2 pt-2 border-top">
-                <a class="btn btn-primary btn-sm" href="${langTag}/editor/drafts/posts" role="button">
+                <a class="btn btn-primary btn-sm" href="${langTag}/me/drafts" role="button">
                     ${fs_lang('view')}
                 </a>
             </div>`;
@@ -218,8 +209,9 @@ function atwho() {
                             '/api/theme/actions/api/fresns/v1/common/input-tips',
                             { type: 'user', key: query },
                             function (data) {
-                                data.map((item) => (item.searchQuery = item.name + item.fsid));
-                                callback(data);
+                                const list = data.data;
+                                list.map((item) => (item.searchQuery = item.name + item.fsid));
+                                callback(list);
                             },
                             'json'
                         );
@@ -241,7 +233,8 @@ function atwho() {
                             '/api/theme/actions/api/fresns/v1/common/input-tips',
                             { type: 'hashtag', key: query },
                             function (data) {
-                                callback(data);
+                                const list = data.data;
+                                callback(list);
                             },
                             'json'
                         );
@@ -251,6 +244,14 @@ function atwho() {
         });
     }
 }
+
+// progress sleep
+const sleep = (delay = 500) => {
+    let t = Date.now();
+    while (Date.now() - t <= delay) {
+        continue;
+    }
+};
 
 // progress
 window.progress = {
@@ -1321,93 +1322,3 @@ $(document).ready(function () {
         });
     }
 });
-
-// fresns extensions callback
-window.onmessage = function (event) {
-    let fresnsCallback;
-
-    try {
-        fresnsCallback = JSON.parse(event.data);
-    } catch (error) {
-        return;
-    }
-
-    console.log('fresnsCallback', fresnsCallback);
-
-    if (!fresnsCallback) {
-        return;
-    }
-
-    if (fresnsCallback.code != 0) {
-        if (fresnsCallback.message) {
-            tips(fresnsCallback.message, fresnsCallback.code);
-        }
-        return;
-    }
-
-    switch (fresnsCallback.action.postMessageKey) {
-        case 'reload':
-            window.location.reload();
-            break;
-
-        case 'fresnsAccountSign':
-            let params = new URLSearchParams(window.location.search.slice(1));
-
-            $.ajax({
-                url: '/api/web-engine/account/connect-login',
-                type: 'post',
-                dataType: 'json',
-                data: {
-                    apiData: fresnsCallback,
-                    redirectURL: params.get('redirectURL'),
-                },
-                success: function (res) {
-                    if (res.code !== 0) {
-                        tips(res.message, res.code);
-
-                        return;
-                    }
-
-                    if (res.data.redirectURL) {
-                        window.location.href = res.data.redirectURL;
-                        return;
-                    }
-                },
-            });
-            break;
-
-        case 'fresnsUserManage':
-            window.location.reload();
-            break;
-
-        case 'fresnsPostManage':
-            window.location.reload();
-            break;
-
-        case 'fresnsCommentManage':
-            window.location.reload();
-            break;
-
-        case 'fresnsEditorUpload':
-            if (fresnsCallback.action.dataHandler == 'add') {
-                fresnsCallback.data.forEach((fileInfo) => {
-                    addEditorFile(fileInfo);
-                });
-
-                $('#fresnsModal').modal('hide');
-
-                return;
-            }
-            break;
-    }
-
-    if (fresnsCallback.action.windowClose) {
-        $('#fresnsModal').modal('hide');
-    }
-
-    if (fresnsCallback.action.redirectUrl) {
-        window.location.href = fresnsCallback.action.redirectUrl;
-    }
-
-    console.log('fresnsCallback end');
-};

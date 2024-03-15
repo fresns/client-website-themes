@@ -6,7 +6,7 @@
 
     <div class="dropup me-auto" id="location-info">
         <button class="btn btn-outline-dark btn-sm" type="button" id="editorLocation" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-geo-alt-fill"></i> {{ $name }}
+            <i class="fa-solid fa-location-dot"></i> {{ $name }}
         </button>
         <ul class="dropdown-menu" aria-labelledby="location">
             <li data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="{{ $locationConfig['mapUrl'] ? '' : fs_lang('errorUnavailable') }}">
@@ -32,7 +32,7 @@
             data-did="{{ $did }}"
             data-location-info=""
             data-post-message-key="fresnsEditorLocation">
-            <i class="bi bi-geo-alt-fill"></i> {{ fs_lang('editorLocation') }}
+            <i class="fa-solid fa-location-dot"></i> {{ fs_lang('editorLocation') }}
         </button>
     @endif
 @endif

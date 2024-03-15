@@ -109,13 +109,14 @@
         </div>
         {{-- Birthday --}}
         <div class="input-group mb-3">
-            <span class="input-group-text">{{ fs_lang('userBirthday') }}</span>
-            <span class="form-control" id="input-birthday">{{ date(fs_config('current_language_menu')['dateFormat'], strtotime(fs_user('detail.birthday'))) }}</span>
+            <span class="input-group-text">{{ fs_lang('settingBirthdayDisplayType') }}</span>
+            <span class="form-control" id="input-birthday">{{ fs_lang('settingBirthdayDisplayType'.fs_user('detail.birthdayDisplayType')) }}</span>
             <button class="btn btn-outline-secondary"
-                data-label="{{ fs_lang('userBirthday') }}"
-                data-type="date"
-                data-name="birthday"
-                data-value="{{ date(fs_config('current_language_menu')['dateFormat'], strtotime(fs_user('detail.birthday'))) }}"
+                data-label="{{ fs_lang('settingBirthdayDisplayType') }}"
+                data-type="select"
+                data-option='[{"id":1,"text":"{{ fs_lang('settingBirthdayDisplayType1') }}"},{"id":2,"text":"{{ fs_lang('settingBirthdayDisplayType2') }}"},{"id":3,"text":"{{ fs_lang('settingBirthdayDisplayType3') }}"},{"id":4,"text":"{{ fs_lang('settingBirthdayDisplayType4') }}"}]'
+                data-name="birthdayDisplayType"
+                data-value="{{ fs_user('detail.birthdayDisplayType') }}"
                 type="button" data-bs-toggle="modal" data-bs-target="#editModal">{{ fs_lang('modify') }}</button>
         </div>
         {{-- Conversation --}}
@@ -203,28 +204,16 @@
             <span class="input-group-text">{{ fs_lang('account') }} ID</span>
             <span class="form-control">{{ fs_account('detail.aid') }}</span>
         </div> --}}
-        {{-- Account KYC --}}
-        @if (fs_config('account_kyc_service'))
-            <div class="input-group mb-3">
-                <span class="input-group-text">{{ fs_lang('accountKyc') }}</span>
-                <span class="form-control">{{ fs_account('detail.verifyStatus') ? fs_lang('success') : fs_lang('settingNot') }}</span>
-                <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                    data-title="{{ fs_lang('accountKyc') }}"
-                    data-url="{{ fs_config('account_kyc_service') }}"
-                    data-post-message-key="fresnsAccountKYC">
-                    {{ fs_lang('accountKyc') }}
-                </button>
-            </div>
-        @endif
         {{-- Account Center --}}
         <div class="input-group mb-3">
-            <span class="input-group-text">{{ fs_lang('settingAccount') }}</span>
-            <span class="form-control"></span>
+            <span class="input-group-text">{{ fs_lang('accountCenter') }}</span>
+            <span class="form-control">{{ fs_lang('accountCenterDesc') }}</span>
             <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                 data-title="{{ fs_lang('accountCenter') }}"
                 data-url="{{ fs_config('account_center_service') }}"
+                data-redirect-url="{{ request()->url() }}"
                 data-post-message-key="reload">
-                {{ fs_lang('setting') }}
+                {{ fs_lang('accountCenterSeeMore') }}
             </button>
         </div>
     </div>

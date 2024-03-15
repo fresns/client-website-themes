@@ -10,7 +10,7 @@
                 <div class="modal-body">
                     <div class="row">
                         @foreach(fs_account('detail.users') as $item)
-                            <div class="col-sm-3 d-flex flex-column align-items-center">
+                            <div class="col-sm-4 d-flex flex-column align-items-center">
                                 <img src="{{ $item['avatar'] }}" loading="lazy" class="auth-avatar rounded-circle">
                                 <div class="auth-nickname mt-2">{{ $item['nickname'] }}</div>
                                 <div class="text-secondary">{{ '@'.$item['fsid'] }}</div>
@@ -31,6 +31,7 @@
                                                         <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                                                             data-title="{{ fs_lang('userPinReset') }}"
                                                             data-url="{{ fs_config('account_users_service') }}"
+                                                            data-uid="{{ $item['uid'] }}"
                                                             data-post-message-key="reload">
                                                             {{ fs_lang('userPinReset') }}
                                                         </button>

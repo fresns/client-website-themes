@@ -18,11 +18,10 @@
     <link rel="icon" href="{{ fs_config('site_icon') }}">
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="/static/css/fontawesome.min.css">
-    <link rel="stylesheet" href="/static/css/select2.min.css">
-    <link rel="stylesheet" href="{{ fs_theme('assets') }}css/atwho.min.css?v={{ fs_theme('version') }}">
-    <link rel="stylesheet" href="{{ fs_theme('assets') }}css/prism.min.css?v={{ fs_theme('version') }}">
-    <link rel="stylesheet" href="{{ fs_theme('assets') }}css/fancybox.min.css?v={{ fs_theme('version') }}">
-    <link rel="stylesheet" href="{{ fs_theme('assets') }}css/fresns.css?v={{ fs_theme('version') }}">
+    <link rel="stylesheet" href="{{ fs_theme('assets', 'css/atwho.min.css') }}">
+    <link rel="stylesheet" href="{{ fs_theme('assets', 'css/prism.min.css') }}">
+    <link rel="stylesheet" href="{{ fs_theme('assets', 'css/fancybox.min.css') }}">
+    <link rel="stylesheet" href="{{ fs_theme('assets', 'css/fresns.css') }}">
     <script src="/static/js/jquery.min.js"></script>
     @stack('style')
     @if (fs_config('website_stat_position') == 'head')
@@ -231,7 +230,7 @@
         <div style="display:none;">{!! fs_config('website_stat_code') !!}</div>
     @endif
     <script src="/static/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/js/select2.min.js"></script>
+    <script src="/static/js/js-cookie.min.js"></script>
     <script src="/static/js/masonry.pkgd.min.js"></script>
     <script src="/static/js/iframeResizer.min.js"></script>
     <script>
@@ -239,6 +238,7 @@
         window.siteName = "{{ fs_config('site_name') }}";
         window.siteIcon = "{{ fs_config('site_icon') }}";
         window.langTag = "{{ fs_theme('lang') }}";
+        window.cookiePrefix = "{{ fs_config('website_cookie_prefix') }}";
         window.userIdentifier = "{{ fs_config('user_identifier') }}";
         window.mentionStatus = {{ fs_config('mention_status') ? 1 : 0 }};
         window.hashtagStatus = {{ fs_config('hashtag_status') ? 1 : 0 }};
@@ -253,12 +253,12 @@
             }
         };
     </script>
-    <script src="{{ fs_theme('assets') }}js/fresns-extensions.js?v={{ fs_theme('version') }}"></script>
-    <script src="{{ fs_theme('assets') }}js/jquery.caret.min.js?v={{ fs_theme('version') }}"></script>
-    <script src="{{ fs_theme('assets') }}js/atwho.min.js?v={{ fs_theme('version') }}"></script>
-    <script src="{{ fs_theme('assets') }}js/prism.min.js?v={{ fs_theme('version') }}"></script>
-    <script src="{{ fs_theme('assets') }}js/fancybox.umd.min.js?v={{ fs_theme('version') }}"></script>
-    <script src="{{ fs_theme('assets') }}js/fresns.js?v={{ fs_theme('version') }}"></script>
+    <script src="{{ fs_theme('assets', 'js/fresns-extensions.js') }}"></script>
+    <script src="{{ fs_theme('assets', 'js/jquery.caret.min.js') }}"></script>
+    <script src="{{ fs_theme('assets', 'js/atwho.min.js') }}"></script>
+    <script src="{{ fs_theme('assets', 'js/prism.min.js') }}"></script>
+    <script src="{{ fs_theme('assets', 'js/fancybox.umd.min.js') }}"></script>
+    <script src="{{ fs_theme('assets', 'js/fresns.js') }}"></script>
     @stack('script')
 </body>
 

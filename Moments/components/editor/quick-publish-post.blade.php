@@ -6,7 +6,7 @@
                 <h5 class="modal-title">
                     {{ fs_config('publish_post_name') }}
                     <a href="{{ fs_route(route('fresns.editor.post')) }}" target="_blank" class="fs-7">
-                        <i class="bi bi-box-arrow-up-right"></i>
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i>
                         {{ fs_lang('editorGoTo') }}
                     </a>
                 </h5>
@@ -21,10 +21,10 @@
                             <div class="d-grid">
                                 <button class="rounded-0 border-0 list-group-item list-group-item-action d-flex justify-content-between align-items-center p-2" style="background-color: aliceblue;" type="button" data-bs-toggle="modal" data-bs-target="#editor-groups-modal" data-initialized="0" id="editor-group">
                                     <span class="py-2 ms-1">
-                                        <i class="bi bi-archive-fill me-2"></i>
+                                        <i class="fa-solid fa-inbox me-2"></i>
                                         <span id="editor-group-name">@if ($group) {{ $group['name'] }} @else {{ fs_config('group_name') }}: {{ fs_lang('editorNoSelectGroup') }} @endif</span>
                                     </span>
-                                    <span class="py-2"><i class="bi bi-chevron-right"></i></span>
+                                    <span class="py-2"><i class="fa-solid fa-chevron-right"></i></span>
                                 </button>
                             </div>
                         </div>
@@ -51,14 +51,14 @@
                         <div class="d-flex mt-2">
                             {{-- Title --}}
                             @if (fs_post_editor('title.status') && ! fs_post_editor('title.show'))
-                                <button type="button" class="btn btn-outline-secondary me-2" data-bs-toggle="collapse" href="#quickTitleCollapse" aria-expanded="false" aria-controls="quickTitleCollapse"><i class="bi bi-textarea-t"></i></button>
+                                <button type="button" class="btn btn-outline-secondary me-2" data-bs-toggle="collapse" href="#quickTitleCollapse" aria-expanded="false" aria-controls="quickTitleCollapse"><i class="fa-solid fa-heading"></i></button>
                             @endif
 
                             {{-- Sticker --}}
                             @if (fs_post_editor('sticker'))
                                 <div class="me-2">
                                     <button type="button" class="btn btn-outline-secondary" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
-                                        <i class="bi bi-emoji-smile"></i>
+                                        <i class="fa-regular fa-face-smile"></i>
                                     </button>
                                     {{-- Sticker List Start --}}
                                     <div class="dropdown-menu pt-0" aria-labelledby="stickers">
