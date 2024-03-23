@@ -89,13 +89,24 @@ window.onmessage = function (event) {
             break;
 
         case 'fresnsAccountSign':
+            html = `<div class="position-fixed top-50 start-50 translate-middle bg-secondary bg-opacity-75 rounded px-4 py-3" style="z-index:2048;">
+                <div>
+                    <div class="spinner-border text-light" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+                <div class="text-light mt-2">${fs_lang('accountLoggingIn')}</div>
+            </div>`;
+
+            $('.fresns-tips').empty().html(html);
+
             $.ajax({
                 url: '/api/theme/actions/api/fresns/v1/account/auth-token',
                 type: 'POST',
                 contentType: 'application/json',
-                data: {
+                data: JSON.stringify({
                     loginToken: fresnsCallback.data.loginToken,
-                },
+                }),
                 success: function (res) {
                     if (res.code !== 0) {
                         tips(res.message, res.code);
