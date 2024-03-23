@@ -16,11 +16,11 @@
                 <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['loadingConfig'] }}</label>
                 <div class="col-lg-6 mt-2">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="fs_theme_loading" id="loading_true" value="true" {{ $params['fs_theme_loading'] ? 'checked' : '' }}>
+                        <input class="form-check-input" type="radio" name="moments_loading" id="loading_true" value="true" {{ $params['moments_loading'] ? 'checked' : '' }}>
                         <label class="form-check-label" for="loading_true">{{ __('FsLang::panel.option_activate') }}</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="fs_theme_loading" id="loading_false" value="false" {{ ! $params['fs_theme_loading'] ? 'checked' : '' }}>
+                        <input class="form-check-input" type="radio" name="moments_loading" id="loading_false" value="false" {{ ! $params['moments_loading'] ? 'checked' : '' }}>
                         <label class="form-check-label" for="loading_false">{{ __('FsLang::panel.option_deactivate') }}</label>
                     </div>
                 </div>
@@ -31,11 +31,11 @@
                 <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['quickPublishConfig'] }}</label>
                 <div class="col-lg-6 mt-2">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="fs_theme_quick_publish" id="quick_publish_true" value="true" {{ $params['fs_theme_quick_publish'] ? 'checked' : '' }}>
+                        <input class="form-check-input" type="radio" name="moments_quick_publish" id="quick_publish_true" value="true" {{ $params['moments_quick_publish'] ? 'checked' : '' }}>
                         <label class="form-check-label" for="quick_publish_true">{{ __('FsLang::panel.option_activate') }}</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="fs_theme_quick_publish" id="quick_publish_false" value="false" {{ ! $params['fs_theme_quick_publish'] ? 'checked' : '' }}>
+                        <input class="form-check-input" type="radio" name="moments_quick_publish" id="quick_publish_false" value="false" {{ ! $params['moments_quick_publish'] ? 'checked' : '' }}>
                         <label class="form-check-label" for="quick_publish_false">{{ __('FsLang::panel.option_deactivate') }}</label>
                     </div>
                 </div>
@@ -46,15 +46,15 @@
                 <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['contentMarkdownConfig'] }}</label>
                 <div class="col-lg-10 mt-2">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="option_quick_publish" name="fs_theme_editor_markdown[quickPublish]" value="1" {{ ($params['fs_theme_editor_markdown']['quickPublish'] ?? false) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="option_quick_publish" name="moments_editor_markdown[quickPublish]" value="1" {{ ($params['moments_editor_markdown']['quickPublish'] ?? false) ? 'checked' : '' }}>
                         <label class="form-check-label" for="option_quick_publish">{{ $lang['option_quick_publish'] }}</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="option_editor" name="fs_theme_editor_markdown[editor]" value="1" {{ ($params['fs_theme_editor_markdown']['editor'] ?? false) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="option_editor" name="moments_editor_markdown[editor]" value="1" {{ ($params['moments_editor_markdown']['editor'] ?? false) ? 'checked' : '' }}>
                         <label class="form-check-label" for="option_editor">{{ $lang['option_editor'] }}</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="option_comment_box" name="fs_theme_editor_markdown[commentBox]" value="1" {{ ($params['fs_theme_editor_markdown']['commentBox'] ?? false) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="option_comment_box" name="moments_editor_markdown[commentBox]" value="1" {{ ($params['moments_editor_markdown']['commentBox'] ?? false) ? 'checked' : '' }}>
                         <label class="form-check-label" for="option_comment_box">{{ $lang['option_comment_box'] }}</label>
                     </div>
                 </div>
@@ -65,39 +65,39 @@
                 <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['notificationConfig'] }}</label>
                 <div class="col-lg-10 mt-2">
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="notification_systems" name="fs_theme_notifications[]" value="systems" {{ in_array('systems', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="notification_systems" name="moments_notifications[]" value="systems" {{ in_array('systems', $params['moments_notifications']) ? 'checked' : '' }}>
                         <label class="form-check-label" for="notification_systems">{{ $lang['notification_systems'] }}</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="notification_recommends" name="fs_theme_notifications[]" value="recommends" {{ in_array('recommends', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="notification_recommends" name="moments_notifications[]" value="recommends" {{ in_array('recommends', $params['moments_notifications']) ? 'checked' : '' }}>
                         <label class="form-check-label" for="notification_recommends">{{ $lang['notification_recommends'] }}</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="notification_likes" name="fs_theme_notifications[]" value="likes" {{ in_array('likes', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="notification_likes" name="moments_notifications[]" value="likes" {{ in_array('likes', $params['moments_notifications']) ? 'checked' : '' }}>
                         <label class="form-check-label" for="notification_likes">{{ $lang['notification_likes'] }}</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="notification_dislikes" name="fs_theme_notifications[]" value="dislikes" {{ in_array('dislikes', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="notification_dislikes" name="moments_notifications[]" value="dislikes" {{ in_array('dislikes', $params['moments_notifications']) ? 'checked' : '' }}>
                         <label class="form-check-label" for="notification_dislikes">{{ $lang['notification_dislikes'] }}</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="notification_follows" name="fs_theme_notifications[]" value="follows" {{ in_array('follows', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="notification_follows" name="moments_notifications[]" value="follows" {{ in_array('follows', $params['moments_notifications']) ? 'checked' : '' }}>
                         <label class="form-check-label" for="notification_follows">{{ $lang['notification_follows'] }}</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="notification_blocks" name="fs_theme_notifications[]" value="blocks" {{ in_array('blocks', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="notification_blocks" name="moments_notifications[]" value="blocks" {{ in_array('blocks', $params['moments_notifications']) ? 'checked' : '' }}>
                         <label class="form-check-label" for="notification_blocks">{{ $lang['notification_blocks'] }}</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="notification_mentions" name="fs_theme_notifications[]" value="mentions" {{ in_array('mentions', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="notification_mentions" name="moments_notifications[]" value="mentions" {{ in_array('mentions', $params['moments_notifications']) ? 'checked' : '' }}>
                         <label class="form-check-label" for="notification_mentions">{{ $lang['notification_mentions'] }}</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="notification_comments" name="fs_theme_notifications[]" value="comments" {{ in_array('comments', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="notification_comments" name="moments_notifications[]" value="comments" {{ in_array('comments', $params['moments_notifications']) ? 'checked' : '' }}>
                         <label class="form-check-label" for="notification_comments">{{ $lang['notification_comments'] }}</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="checkbox" id="notification_quotes" name="fs_theme_notifications[]" value="quotes" {{ in_array('quotes', $params['fs_theme_notifications']) ? 'checked' : '' }}>
+                        <input class="form-check-input" type="checkbox" id="notification_quotes" name="moments_notifications[]" value="quotes" {{ in_array('quotes', $params['moments_notifications']) ? 'checked' : '' }}>
                         <label class="form-check-label" for="notification_quotes">{{ $lang['notification_quotes'] }}</label>
                     </div>
                 </div>
@@ -107,9 +107,9 @@
             <div class="row mb-4">
                 <label class="col-lg-2 col-form-label text-lg-end">{{ $lang['search_method'] }}</label>
                 <div class="col-lg-6">
-                    <select class="form-select" name="fs_search_method">
-                        <option value="" {{ ! $params['fs_search_method'] ? 'selected' : '' }}>Fresns API</option>
-                        <option value="google" {{ $params['fs_search_method'] == 'google' ? 'selected' : '' }}>Google</option>
+                    <select class="form-select" name="moments_search_method">
+                        <option value="" {{ ! $params['moments_search_method'] ? 'selected' : '' }}>Fresns API</option>
+                        <option value="google" {{ $params['moments_search_method'] == 'google' ? 'selected' : '' }}>Google</option>
                     </select>
                 </div>
             </div>

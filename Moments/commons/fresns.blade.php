@@ -155,7 +155,7 @@
     </div>
 
     {{-- Loading --}}
-    @if (fs_config('fs_theme_loading'))
+    @if (fs_config('moments_loading'))
         <div id="loading" class="position-fixed top-50 start-50 translate-middle bg-light bg-opacity-75 rounded pt-4 pb-5 px-5" style="z-index:2048;display:none;">
             <div class="loader"></div>
         </div>

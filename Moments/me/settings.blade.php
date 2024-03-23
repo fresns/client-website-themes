@@ -10,17 +10,17 @@
         <h1 class="fs-5 my-3">{{ fs_config('channel_me_settings_name') }}</h1>
     </div>
 
-    {{-- Recall Delete --}}
+    {{-- Revoke Delete --}}
     @if (fs_account('detail.waitDelete'))
         <div class="alert alert-danger" role="alert">
             <h4 class="alert-heading">{{ fs_lang('accountWaitDelete') }}</h4>
             <p>{{ fs_lang('executionDate') }}: {{ fs_account('detail.waitDeleteDateTime') }}</p>
             <hr>
             <button class="btn btn-outline-danger" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
-                data-title="{{ fs_lang('accountRecallDelete') }}"
+                data-title="{{ fs_lang('accountRevokeDelete') }}"
                 data-url="{{ fs_config('account_center_service') }}"
                 data-post-message-key="reload">
-                {{ fs_lang('accountRecallDelete') }}
+                {{ fs_lang('accountRevokeDelete') }}
             </button>
         </div>
     @endif

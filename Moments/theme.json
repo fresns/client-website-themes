@@ -8,27 +8,27 @@
     "functions": true,
     "functionItems": [
         {
-            "itemKey": "fs_theme_loading",
+            "itemKey": "moments_loading",
             "itemType": "boolean",
             "isMultilingual": false
         },
         {
-            "itemKey": "fs_theme_quick_publish",
+            "itemKey": "moments_quick_publish",
             "itemType": "boolean",
             "isMultilingual": false
         },
         {
-            "itemKey": "fs_theme_editor_markdown",
+            "itemKey": "moments_editor_markdown",
             "itemType": "array",
             "isMultilingual": false
         },
         {
-            "itemKey": "fs_theme_notifications",
+            "itemKey": "moments_notifications",
             "itemType": "array",
             "isMultilingual": false
         },
         {
-            "itemKey": "fs_search_method",
+            "itemKey": "moments_search_method",
             "itemType": "string",
             "isMultilingual": false
         },
