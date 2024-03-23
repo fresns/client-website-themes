@@ -179,27 +179,36 @@
             var updateTimer;
 
             function updateDraft() {
-                var jsonData = {};
+                return new Promise((resolve, reject) => {
+                    var jsonData = {};
 
-                $('#fresns-editor').find('input, select, textarea').each(function() {
-                    var name = $(this).attr('name');
-                    var value = $(this).val();
+                    $('#fresns-editor').find('input, select, textarea').each(function() {
+                        var name = $(this).attr('name');
+                        var value = $(this).val();
 
-                    if ($(this).attr('type') === 'checkbox') {
-                        value = $(this).is(':checked') ? value : 0;
-                    }
+                        if ($(this).attr('type') === 'checkbox') {
+                            value = $(this).is(':checked') ? value : 0;
+                        }
 
-                    jsonData[name] = value;
-                });
+                        jsonData[name] = value;
+                    });
 
-                $.ajax({
-                    url: "{{ route('fresns.api.patch', ['path' => '/api/fresns/v1/editor/'.$type.'/draft/'.$draft['detail']['did']]) }}",
-                    type: 'PATCH',
-                    data: JSON.stringify(jsonData),
-                    contentType: 'application/json',
-                    error: function(xhr, status, error) {
-                        console.error('Failed to update draft', xhr, status, error);
-                    }
+                    $.ajax({
+                        url: "{{ route('fresns.api.patch', ['path' => '/api/fresns/v1/editor/'.$type.'/draft/'.$draft['detail']['did']]) }}",
+                        type: 'PATCH',
+                        data: JSON.stringify(jsonData),
+                        contentType: 'application/json',
+                        success: function (res) {
+                            if (res.code != 0) {
+                                tips(res.message, res.code);
+                            }
+                            resolve(res);
+                        },
+                        error: function (xhr, status, error) {
+                            tips(error, xhr.status);
+                            reject(error);
+                        },
+                    });
                 });
             };
 
@@ -216,8 +225,46 @@
                 startOrUpdateTimer();
             });
 
-            $('.editor-checkbox, .editor-select').on('click change', function() {
+            $('.editor-checkbox, .editor-select').on('change', function() {
                 updateDraft();
+            });
+
+            $('#fresns-editor').submit(function (e) {
+                e.preventDefault();
+
+                updateDraft().then(() => {
+                    let form = $(this),
+                        btn = form.find('button[type="submit"]'),
+                        actionUrl = form.attr('action'),
+                        methodType = form.attr('method') || 'POST',
+                        type = "{{ $type }}",
+                        detailURLTemplate = "{{ fs_route(route('fresns.post.detail', ['pid' => 'FresnsPlaceholder'])) }}";
+
+                    if (type == 'comment') {
+                        detailURLTemplate = "{{ fs_route(route('fresns.comment.detail', ['cid' => 'FresnsPlaceholder'])) }}";
+                    }
+
+                    $.ajax({
+                        url: actionUrl,
+                        type: methodType,
+                        success: function (res) {
+                            tips(res.message, res.code);
+
+                            if (res.code == 0) {
+                                let fsid = res.data.fsid;
+                                let detailURL = detailURLTemplate.replace('FresnsPlaceholder', fsid);
+
+                                window.location.href = detailURL;
+                            }
+                        },
+                        complete: function (e) {
+                            btn.prop('disabled', false);
+                            btn.find('.spinner-border').remove();
+                        },
+                    });
+                }).catch((error) => {
+                    console.error('Failed to update draft', error);
+                });
             });
         });
 

@@ -122,31 +122,6 @@ function copyToClipboard(element) {
     tips(fs_lang('copySuccess'));
 }
 
-// send Timer
-var countdown = 60;
-function setSendCodeTime(obj, stop) {
-    if (stop) {
-        obj.attr('disabled', false);
-        obj.text(fs_lang('sendVerifyCode'));
-        countdown = 60;
-        return;
-    }
-
-    if (countdown == 0) {
-        obj.attr('disabled', false);
-        obj.text(fs_lang('sendVerifyCode'));
-        countdown = 60;
-        return;
-    } else {
-        obj.attr('disabled', true);
-        obj.text(fs_lang('resendVerifyCode') + '(' + countdown + ')');
-        countdown--;
-    }
-    setTimeout(function () {
-        setSendCodeTime(obj);
-    }, 1000);
-}
-
 // download file
 function downloadFile(url, fileName, mimeType) {
     const currentDomain = window.location.origin;
@@ -496,7 +471,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
     $(document).on('submit', 'form', function () {
         var btn = $(this).find('button[type="submit"]');
         btn.prop('disabled', true);
-        if (0 === btn.children('.spinner-border').length) {
+        if (btn.children('.spinner-border').length == 0) {
             btn.prepend(
                 '<span class="spinner-border spinner-border-sm mg-r-5 d-none" role="status" aria-hidden="true"></span> '
             );
@@ -906,7 +881,6 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             obj = $(this),
             type = obj.data('type'),
             uploadAction = $(this).data('upload-action'),
-            sendAction = $(this).data('send-action'),
             uidOrUsername = $(this).data('user-fsid');
 
         $('.send-file-btn').prop('disabled', true);
