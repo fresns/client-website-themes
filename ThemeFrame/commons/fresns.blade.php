@@ -138,7 +138,6 @@
     @endif
     <script src="/static/js/bootstrap.bundle.min.js"></script>
     <script src="/static/js/js-cookie.min.js"></script>
-    <script src="/static/js/masonry.pkgd.min.js"></script>
     <script src="/static/js/iframeResizer.min.js"></script>
     <script>
         window.ajaxGetList = false;
@@ -153,6 +152,7 @@
     </script>
     <script src="{{ fs_theme('assets', 'js/fresns-extensions.js') }}"></script>
     <script src="{{ fs_theme('assets', 'js/jquery.caret.min.js') }}"></script>
+    <script src="{{ fs_theme('assets', 'js/masonry.pkgd.min.js') }}"></script>
     <script src="{{ fs_theme('assets', 'js/atwho.min.js') }}"></script>
     <script src="{{ fs_theme('assets', 'js/prism.min.js') }}"></script>
     <script src="{{ fs_theme('assets', 'js/fresns.js') }}"></script>

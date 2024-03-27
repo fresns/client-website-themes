@@ -49,7 +49,7 @@
             <div class="float-start mt-3" style="width:20%">
                 <a class="text-decoration-none" data-bs-toggle="modal" href="#fresnsModal"
                     data-title="{{ $feature['name'] }}"
-                    data-url="{{ $feature['url'] }}"
+                    data-url="{{ $feature['appUrl'] }}"
                     data-post-message-key="fresnsFeatureExtension">
                     <div class="position-relative mx-auto" style="width:52px">
                         <img src="{{ $feature['icon'] }}" loading="lazy" class="rounded" height="52">

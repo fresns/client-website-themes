@@ -21,7 +21,7 @@
                         <li>
                             <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                                 data-title="{{ $item['name'] }}"
-                                data-url="{{ $item['url'] }}"
+                                data-url="{{ $item['appUrl'] }}"
                                 data-aid="{{ fs_account('detail.aid') }}"
                                 data-uid="{{ fs_user('detail.uid') }}"
                                 data-post-message-key="fresnsWalletRecharge">
@@ -43,7 +43,7 @@
                         <li>
                             <button class="dropdown-item" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                                 data-title="{{ $item['name'] }}"
-                                data-url="{{ $item['url'] }}"
+                                data-url="{{ $item['appUrl'] }}"
                                 data-aid="{{ fs_account('detail.aid') }}"
                                 data-uid="{{ fs_user('detail.uid') }}"
                                 data-post-message-key="fresnsWalletWithdraw">

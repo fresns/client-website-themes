@@ -24,7 +24,7 @@
                         <div class="float-start mb-3" style="width:20%">
                             <a class="text-decoration-none" data-bs-toggle="modal" href="#fresnsModal"
                                 data-title="{{ $extension['name'] }}"
-                                data-url="{{ $extension['url'] }}"
+                                data-url="{{ $extension['appUrl'] }}"
                                 data-post-message-key="fresnsGroupExtension">
                                 <div class="position-relative mx-auto" style="width:52px">
                                     <img src="{{ $extension['icon'] }}" loading="lazy" class="rounded" height="52">

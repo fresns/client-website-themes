@@ -23,7 +23,7 @@
     <div class="mt-3 clearfix">
         @foreach($extends['infos'] as $info)
             <div class="position-relative">
-                <div class="editor-frame-info clearfix editor-info-{{ $info['typeString'] }}">
+                <div class="editor-frame-info clearfix editor-info-{{ $info['viewTypeString'] }}">
                     <div class="editor-info-img"><img src="{{ $info['cover'] }}" loading="lazy"></div>
                     <div class="editor-info-body">
                         <div class="editor-info-title" @if ($info['titleColor']) style="color:{{ $info['titleColor'] }};" @endif>{{ $info['title'] }}</div>

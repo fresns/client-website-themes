@@ -53,6 +53,7 @@
                 data-url="{{ $editorConfig['image']['uploadUrl'] }}"
                 data-draft-type="{{ $type }}"
                 data-did="{{ $did }}"
+                data-upload-info="{{ $type.'Draft,'.$did.',image' }}"
                 data-post-message-key="fresnsEditorUpload">
                 <div class="d-flex flex-column">
                     <i class="bi bi-image"></i>
@@ -83,6 +84,7 @@
                 data-url="{{ $editorConfig['video']['uploadUrl'] }}"
                 data-draft-type="{{ $type }}"
                 data-did="{{ $did }}"
+                data-upload-info="{{ $type.'Draft,'.$did.',video' }}"
                 data-post-message-key="fresnsEditorUpload">
                 <div class="d-flex flex-column">
                     <i class="bi bi-film"></i>
@@ -113,6 +115,7 @@
                 data-url="{{ $editorConfig['audio']['uploadUrl'] }}"
                 data-draft-type="{{ $type }}"
                 data-did="{{ $did }}"
+                data-upload-info="{{ $type.'Draft,'.$did.',audio' }}"
                 data-post-message-key="fresnsEditorUpload">
                 <div class="d-flex flex-column">
                     <i class="bi bi-music-note-beamed"></i>
@@ -142,6 +145,7 @@
                 data-url="{{ $editorConfig['document']['uploadUrl'] }}"
                 data-draft-type="{{ $type }}"
                 data-did="{{ $did }}"
+                data-upload-info="{{ $type.'Draft,'.$did.',document' }}"
                 data-post-message-key="fresnsEditorUpload">
                 <div class="d-flex flex-column">
                     <i class="bi bi-file-earmark-text"></i>

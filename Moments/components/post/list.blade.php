@@ -21,30 +21,37 @@
         $iconLike = fs_helpers('Arr', 'pull', $post['operations']['buttonIcons'], [
             'key' => 'code',
             'values' => 'like',
+            'asArray' => false,
         ]);
         $iconDislike = fs_helpers('Arr', 'pull', $post['operations']['buttonIcons'], [
             'key' => 'code',
             'values' => 'dislike',
+            'asArray' => false,
         ]);
         $iconFollow = fs_helpers('Arr', 'pull', $post['operations']['buttonIcons'], [
             'key' => 'code',
             'values' => 'follow',
+            'asArray' => false,
         ]);
         $iconBlock = fs_helpers('Arr', 'pull', $post['operations']['buttonIcons'], [
             'key' => 'code',
             'values' => 'block',
+            'asArray' => false,
         ]);
         $iconComment = fs_helpers('Arr', 'pull', $post['operations']['buttonIcons'], [
             'key' => 'code',
             'values' => 'comment',
+            'asArray' => false,
         ]);
         $iconShare = fs_helpers('Arr', 'pull', $post['operations']['buttonIcons'], [
             'key' => 'code',
             'values' => 'share',
+            'asArray' => false,
         ]);
         $iconMore = fs_helpers('Arr', 'pull', $post['operations']['buttonIcons'], [
             'key' => 'code',
             'values' => 'more',
+            'asArray' => false,
         ]);
     @endphp
 @endif
@@ -54,10 +61,12 @@
         $title = fs_helpers('Arr', 'pull', $post['operations']['diversifyImages'], [
             'key' => 'code',
             'values' => 'title',
+            'asArray' => false,
         ]);
         $decorate = fs_helpers('Arr', 'pull', $post['operations']['diversifyImages'], [
             'key' => 'code',
             'values' => 'decorate',
+            'asArray' => false,
         ]);
     @endphp
 @endif
@@ -142,7 +151,7 @@
     {{-- Post Decorate --}}
     @if ($decorate)
         <div class="position-absolute top-0 end-0">
-            <img src="{{ $decorate['imageUrl'] }}" loading="lazy" alt="{{ $decorate['name'] }}" height="88rem">
+            <img src="{{ $decorate['image'] }}" loading="lazy" alt="{{ $decorate['name'] }}" height="88rem">
         </div>
     @endif
 
@@ -195,7 +204,7 @@
                 {{-- Title Icon --}}
                 @if ($title)
                     <div class="me-2 mt-1">
-                        <img src="{{ $title['imageUrl'] }}" loading="lazy" alt="{{ $title['name'] }}" height="26">
+                        <img src="{{ $title['image'] }}" loading="lazy" alt="{{ $title['name'] }}" height="26">
                     </div>
                 @endif
             </div>
@@ -257,7 +266,7 @@
             <div class="interaction-box">
                 <button class="btn btn-inter" type="button" data-bs-toggle="modal" @if (fs_user()->check()) data-bs-target="#commentModal-{{ $post['pid'] }}" @else data-bs-target="#commentTipModal" @endif>
                     @if ($iconComment)
-                        <img src="{{ $iconComment['imageUrl'] }}" loading="lazy">
+                        <img src="{{ $iconComment['image'] }}" loading="lazy">
                     @else
                         <img src="{{ fs_theme('assets') }}images/icon-comment.png">
                     @endif
@@ -269,7 +278,7 @@
             <div class="interaction-box dropup">
                 <button class="btn btn-inter" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     @if ($iconShare)
-                        <img src="{{ $iconShare['imageUrl'] }}" loading="lazy">
+                        <img src="{{ $iconShare['image'] }}" loading="lazy">
                     @else
                         <img src="{{ fs_theme('assets') }}images/icon-share.png" loading="lazy">
                     @endif
@@ -284,7 +293,7 @@
             <div class="ms-auto dropup text-end">
                 <button class="btn btn-inter" type="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="false">
                     @if ($iconMore)
-                        <img src="{{ $iconMore['imageUrl'] }}" loading="lazy">
+                        <img src="{{ $iconMore['image'] }}" loading="lazy">
                     @else
                         <img src="{{ fs_theme('assets') }}images/icon-more.png" loading="lazy">
                     @endif

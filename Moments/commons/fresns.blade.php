@@ -213,6 +213,7 @@
 
                         @if (fs_config('account_register_status'))
                             <button class="btn btn-success me-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                                data-modal-height="700"
                                 data-title="{{ fs_lang('accountRegister') }}"
                                 data-url="{{ fs_config('account_register_service') }}"
                                 data-post-message-key="fresnsAccountSign">
@@ -231,7 +232,6 @@
     @endif
     <script src="/static/js/bootstrap.bundle.min.js"></script>
     <script src="/static/js/js-cookie.min.js"></script>
-    <script src="/static/js/masonry.pkgd.min.js"></script>
     <script src="/static/js/iframeResizer.min.js"></script>
     <script>
         window.ajaxGetList = true;
@@ -255,6 +255,7 @@
     </script>
     <script src="{{ fs_theme('assets', 'js/fresns-extensions.js') }}"></script>
     <script src="{{ fs_theme('assets', 'js/jquery.caret.min.js') }}"></script>
+    <script src="{{ fs_theme('assets', 'js/masonry.pkgd.min.js') }}"></script>
     <script src="{{ fs_theme('assets', 'js/atwho.min.js') }}"></script>
     <script src="{{ fs_theme('assets', 'js/prism.min.js') }}"></script>
     <script src="{{ fs_theme('assets', 'js/fancybox.umd.min.js') }}"></script>

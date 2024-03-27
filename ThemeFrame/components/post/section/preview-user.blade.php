@@ -4,7 +4,7 @@
 
 @if ($icon)
     @php
-        $btnIconActive = $icon['imageActiveUrl'];
+        $btnIconActive = $icon['activeImage'];
     @endphp
 @endif
 

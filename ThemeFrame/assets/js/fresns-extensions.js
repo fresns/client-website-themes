@@ -16,49 +16,47 @@ function makeAccessToken() {
     return accessToken;
 }
 
-(function ($) {
-    $('#fresnsModal.fresnsExtensions').on('show.bs.modal', function (e) {
-        let button = $(e.relatedTarget),
-            modalHeight = button.data('modal-height'),
-            modalWidth = button.data('modal-width'),
-            title = button.data('title'),
-            reg = /\{[^\}]+\}/g,
-            url = button.data('url'),
-            replaceJson = button.data(),
-            searchArr = url.match(reg);
+$('#fresnsModal.fresnsExtensions').on('show.bs.modal', function (e) {
+    let button = $(e.relatedTarget),
+        modalHeight = button.data('modal-height'),
+        modalWidth = button.data('modal-width'),
+        title = button.data('title'),
+        reg = /\{[^\}]+\}/g,
+        url = button.data('url'),
+        replaceJson = button.data(),
+        searchArr = url.match(reg);
 
-        if (searchArr) {
-            searchArr.forEach(function (v) {
-                let attr = v.substring(1, v.length - 1);
-                if (replaceJson[attr]) {
-                    url = url.replace(v, replaceJson[attr]);
+    if (searchArr) {
+        searchArr.forEach(function (v) {
+            let attr = v.substring(1, v.length - 1);
+            if (replaceJson[attr]) {
+                url = url.replace(v, replaceJson[attr]);
+            } else {
+                if (v === '{accessToken}') {
+                    url = url.replace('{accessToken}', makeAccessToken());
                 } else {
-                    if (v === '{accessToken}') {
-                        url = url.replace('{accessToken}', makeAccessToken());
-                    } else {
-                        url = url.replace(v, '');
-                    }
+                    url = url.replace(v, '');
                 }
-            });
-        }
+            }
+        });
+    }
 
-        $(this).find('.modal-title').empty().html(title);
-        let inputHtml = `<iframe src="` + url + `" class="iframe-modal"></iframe>`;
-        $(this).find('.modal-body').empty().html(inputHtml);
+    $(this).find('.modal-title').empty().html(title);
+    let inputHtml = `<iframe src="` + url + `" class="iframe-modal"></iframe>`;
+    $(this).find('.modal-body').empty().html(inputHtml);
 
-        // iFrame Resizer V4
-        // https://github.com/davidjbradshaw/iframe-resizer
-        let isOldIE = navigator.userAgent.indexOf('MSIE') !== -1;
-        $('#fresnsModal.fresnsExtensions iframe').on('load', function () {
-            $(this).iFrameResize({
-                autoResize: true,
-                minHeight: modalHeight ? modalHeight : 500,
-                heightCalculationMethod: isOldIE ? 'max' : 'lowestElement',
-                scrolling: true,
-            });
+    // iFrame Resizer V4
+    // https://github.com/davidjbradshaw/iframe-resizer
+    let isOldIE = navigator.userAgent.indexOf('MSIE') !== -1;
+    $('#fresnsModal.fresnsExtensions iframe').on('load', function () {
+        $(this).iFrameResize({
+            autoResize: true,
+            minHeight: modalHeight ? modalHeight : 500,
+            heightCalculationMethod: isOldIE ? 'max' : 'lowestElement',
+            scrolling: true,
         });
     });
-})(jQuery);
+});
 
 // fresns extensions callback
 window.onmessage = function (event) {

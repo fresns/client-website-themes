@@ -72,7 +72,7 @@
                             @endif
                         @endif
                     </div>
-                    <div class="fs-8 pb-2">{{ fs_lang('userMy') }}</div>
+                    <div class="fs-8 pb-2">{{ fs_lang('me') }}</div>
                 </a>
             </div>
         </div>

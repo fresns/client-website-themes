@@ -193,7 +193,7 @@
                 <span class="form-control"></span>
                 <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#fresnsModal"
                     data-title="{{ $profile['name'] }}"
-                    data-url="{{ $profile['url'] }}"
+                    data-url="{{ $profile['appUrl'] }}"
                     data-post-message-key="fresnsProfileExtension">
                     {{ fs_lang('setting') }}
                 </button>

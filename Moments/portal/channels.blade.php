@@ -77,7 +77,7 @@
                 <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-start" data-bs-toggle="modal" href="#fresnsModal"
                     data-modal-height="100%"
                     data-title="{{ $channel['name'] }}"
-                    data-url="{{ $channel['url'] }}"
+                    data-url="{{ $channel['appUrl'] }}"
                     data-post-message-key="fresnsChannel">
                     <span class="py-2">
                         @if ($channel['icon'])

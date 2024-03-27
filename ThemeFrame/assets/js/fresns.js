@@ -440,7 +440,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
 
         button.prop('disabled', true);
         button.prepend(
-            '<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> '
+            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> '
         );
 
         $.ajax({
@@ -472,7 +472,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         btn.prop('disabled', true);
         if (btn.children('.spinner-border').length == 0) {
             btn.prepend(
-                '<span class="spinner-border spinner-border-sm mg-r-5 d-none" role="status" aria-hidden="true"></span> '
+                '<span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span> '
             );
         }
         btn.children('.spinner-border').removeClass('d-none');
@@ -513,7 +513,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         e.preventDefault();
         let obj = $(this);
         obj.prop('disabled', true);
-        obj.prepend('<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> ');
+        obj.prepend('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ');
 
         let form = obj.closest('form');
 
@@ -714,7 +714,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
         e.preventDefault();
         $(this).prop('disabled', true);
         $(this).prepend(
-            '<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> '
+            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> '
         );
 
         const actionUrl = $(this).data('action'),
@@ -854,7 +854,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
 
         obj.prop('disabled', true);
         obj.prev().prepend(
-            '<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> '
+            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> '
         );
 
         formData.append('file', obj[0].files[0]);
@@ -896,7 +896,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
 
         $('.send-file-btn').prop('disabled', true);
         $('.send-file-btn').prepend(
-            '<span class="spinner-border spinner-border-sm mg-r-5" role="status" aria-hidden="true"></span> '
+            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> '
         );
 
         formData.append('file', obj[0].files[0]);

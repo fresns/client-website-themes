@@ -8,7 +8,7 @@
 
 # Introduction
 
-This is a client program developed with a plugin mechanism, running by being installed in the main program through a plugin method, and it references the Composer [web-engine](https://github.com/fresns/web-engine) extension package. Essentially, it is a plugin that, in addition to the default encapsulated functions, can develop any function according to the plugin mechanism.
+This is a client program developed with a plugin mechanism, running by being installed in the main program through a plugin method, and it references the Composer [website-engine](https://github.com/fresns/website-engine) extension package. Essentially, it is a plugin that, in addition to the default encapsulated functions, can develop any function according to the plugin mechanism.
 
 The following view and configuration function development are all pre-encapsulated functions that can be used directly.
 

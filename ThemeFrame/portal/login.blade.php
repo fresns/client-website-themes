@@ -29,6 +29,7 @@
                             </button>
                         @elseif (fs_config('account_register_status'))
                             <button class="btn btn-success ms-3" type="button" data-bs-toggle="modal" data-bs-target="#fresnsModal"
+                                data-modal-height="700"
                                 data-title="{{ fs_lang('accountRegister') }}"
                                 data-url="{{ fs_config('account_register_service') }}"
                                 data-post-message-key="fresnsAccountSign">

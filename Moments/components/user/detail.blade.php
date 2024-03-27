@@ -51,7 +51,7 @@
     @if ($user['operations']['diversifyImages'])
         <div class="text-center mb-3">
             @foreach($user['operations']['diversifyImages'] as $icon)
-                <img src="{{ $icon['imageUrl'] }}" loading="lazy" alt="{{ $icon['name'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $icon['name'] }}" style="height:2rem">
+                <img src="{{ $icon['image'] }}" loading="lazy" alt="{{ $icon['name'] }}" data-bs-toggle="tooltip" data-bs-placement="top" title="{{ $icon['name'] }}" style="height:2rem">
             @endforeach
         </div>
     @endif
