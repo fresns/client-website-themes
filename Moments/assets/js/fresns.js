@@ -440,9 +440,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             mime = button.data('mime');
 
         button.prop('disabled', true);
-        button.prepend(
-            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> '
-        );
+        button.prepend('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ');
 
         $.ajax({
             method: 'get',
@@ -702,9 +700,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
     $(document).on('click', '.api-request-link', function (e) {
         e.preventDefault();
         $(this).prop('disabled', true);
-        $(this).prepend(
-            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> '
-        );
+        $(this).prepend('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ');
 
         const actionUrl = $(this).data('action'),
             methodType = $(this).data('method') || 'POST',
@@ -842,9 +838,7 @@ window.buildAjaxAndSubmit = function (url, body, succeededCallback, failedCallba
             uidOrUsername = $(this).data('user-fsid');
 
         obj.prop('disabled', true);
-        obj.prev().prepend(
-            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> '
-        );
+        obj.prev().prepend('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> ');
 
         formData.append('file', obj[0].files[0]);
         formData.append('_token', token);
