@@ -110,7 +110,7 @@
 
         {{-- Content --}}
         <div class="content-article">
-            @if ($comment['privacy'] == 'private')
+            @if ($sticky['privacy'] == 'private')
                 <div class="alert alert-warning" role="alert">
                     <i class="bi bi-info-circle"></i> {{ fs_lang('editorCommentPrivate') }}
                 </div>
@@ -237,6 +237,7 @@
                     'followCount' => $sticky['followCount'],
                     'blockCount' => $sticky['blockCount'],
                     'manages' => $sticky['manages'],
+                    'viewType' => 'list',
                 ])@endcomponent
             </div>
         </div>
@@ -244,7 +245,7 @@
         {{-- Comment Box --}}
         @component('components.editor.quick-publish-comment', [
             'nickname' => $sticky['author']['nickname'],
-            'pid' => $sticky['replyToPost']['pid'],
+            'pid' => $sticky['replyToPost']['pid'] ?? null,
             'cid' => $sticky['cid'],
         ])@endcomponent
     </section>

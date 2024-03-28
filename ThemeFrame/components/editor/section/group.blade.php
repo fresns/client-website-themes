@@ -34,7 +34,7 @@
                 {{-- Group List --}}
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"  id="editor-group-confirm" onclick="editorGroup.editorGroupConfirm(this)" data-gid="" data-name="" data-web-page="editor" disabled>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="editor-group-confirm" onclick="editorGroup.editorGroupConfirm(this)" data-gid="" data-name="" data-web-page="editor" disabled>
                     {{ fs_lang('confirm') }}
                 </button>
             </div>

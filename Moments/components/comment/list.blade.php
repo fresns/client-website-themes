@@ -301,6 +301,7 @@
                     'followCount' => $comment['followCount'],
                     'blockCount' => $comment['blockCount'],
                     'manages' => $comment['manages'],
+                    'viewType' => 'list',
                 ])@endcomponent
             </div>
         </div>

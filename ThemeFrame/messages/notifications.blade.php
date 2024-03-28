@@ -149,7 +149,7 @@
                             {{-- Read Button --}}
                             @if ($types)
                                 <div class="border-bottom text-center py-3">
-                                    <form class="api-request-form" action="{{ route('fresns.api.patch', ['path' => '/api/fresns/v1/notification/read-status']) }}" method="put">
+                                    <form class="api-request-form" action="{{ route('fresns.api.patch', ['path' => '/api/fresns/v1/notification/read-status']) }}" method="patch">
                                         <input type="hidden" name="type" value="all"/>
                                         <input type="hidden" name="notificationType" value="{{ $types }}"/>
                                         <input type="hidden" name="notificationIds" value=""/>
@@ -205,7 +205,7 @@
 
                 $.ajax({
                     url: "{{ route('fresns.api.patch', ['path' => '/api/fresns/v1/notification/read-status']) }}",
-                    type: "PUT",
+                    type: "PATCH",
                     data: {
                         type: "choose",
                         notificationType: type,

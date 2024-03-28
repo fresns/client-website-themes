@@ -306,6 +306,7 @@
                     'followCount' => $post['followCount'],
                     'blockCount' => $post['blockCount'],
                     'manages' => $post['manages'],
+                    'viewType' => 'list',
                 ])@endcomponent
             </div>
         </div>

@@ -45,6 +45,7 @@
                     data-url="{{ $plugin['appUrl'] }}"
                     data-cid="{{ $cid }}"
                     data-uid="{{ $uid }}"
+                    data-view-type="{{ $viewType }}"
                     data-post-message-key="fresnsCommentManage">
                     @if ($plugin['icon'])
                         <img src="{{ $plugin['icon'] }}" loading="lazy" width="20" height="20">
