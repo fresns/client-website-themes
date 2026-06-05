@@ -116,9 +116,9 @@
                 </div>
             @else
                 @if ($sticky['isMarkdown'])
-                    {!! Str::markdown($sticky['content']) !!}
+                    {!! Str::markdown(e($sticky['content'])) !!}
                 @else
-                    {!! nl2br($sticky['content']) !!}
+                    {!! nl2br(e($sticky['content'])) !!}
                 @endif
 
                 {{-- Detail Link --}}

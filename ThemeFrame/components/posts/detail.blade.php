@@ -124,9 +124,9 @@
                         '"></audio>',
                     ];
                 @endphp
-                {!! str_replace($searchArr, $replaceArr, Str::markdown($post['content'])) !!}
+                {!! str_replace($searchArr, $replaceArr, Str::markdown(e($post['content']))) !!}
             @else
-                {!! nl2br($post['content']) !!}
+                {!! nl2br(e($post['content'])) !!}
             @endif
         </div>
     </section>
@@ -192,7 +192,7 @@
                     <div class="content-group me-2">
                         <a href="{{ route('fresns.group.detail', ['gid' => $post['group']['gid']]) }}" class="badge rounded-pill text-decoration-none">
                             @if ($post['group']['cover'])
-                                <img src="{{ $post['group']['cover'] }}" loading="lazy" alt="$post['group']['name']" class="rounded">
+                                <img src="{{ $post['group']['cover'] }}" loading="lazy" alt="{{ $post['group']['name'] }}" class="rounded">
                             @endif
                             {{ $post['group']['name'] }}
                         </a>

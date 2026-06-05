@@ -140,9 +140,9 @@
                         </div>
                         <div class="modal-body">
                             @if ($comment['replyToComment']['isMarkdown'])
-                                {!! Str::markdown($comment['replyToComment']['content']) !!}
+                                {!! Str::markdown(e($comment['replyToComment']['content'])) !!}
                             @else
-                                {!! nl2br($comment['replyToComment']['content']) !!}
+                                {!! nl2br(e($comment['replyToComment']['content'])) !!}
                             @endif
                         </div>
                     </div>
@@ -178,9 +178,9 @@
                 </div>
             @else
                 @if ($comment['isMarkdown'])
-                    {!! Str::markdown($comment['content']) !!}
+                    {!! Str::markdown(e($comment['content'])) !!}
                 @else
-                    {!! nl2br($comment['content']) !!}
+                    {!! nl2br(e($comment['content'])) !!}
                 @endif
 
                 {{-- Detail Link --}}

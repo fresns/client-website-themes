@@ -133,9 +133,9 @@
                             '"></audio>',
                         ];
                     @endphp
-                    {!! str_replace($searchArr, $replaceArr, Str::markdown($comment['content'])) !!}
+                    {!! str_replace($searchArr, $replaceArr, Str::markdown(e($comment['content']))) !!}
                 @else
-                    {!! nl2br($comment['content']) !!}
+                    {!! nl2br(e($comment['content'])) !!}
                 @endif
             @endif
         </div>

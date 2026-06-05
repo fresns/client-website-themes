@@ -116,9 +116,9 @@
                 </div>
             @else
                     @if ($comment['isMarkdown'])
-                        {!! Str::markdown($comment['content']) !!}
+                        {!! Str::markdown(e($comment['content'])) !!}
                     @else
-                        {!! nl2br($comment['content']) !!}
+                        {!! nl2br(e($comment['content'])) !!}
                     @endif
 
                     {{-- Detail Link --}}
